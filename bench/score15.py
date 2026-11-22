@@ -30,7 +30,7 @@ for mk in MODELS:
         mat[(mk, a)] = (o, n, t)
         row.append("%2d/%2d %5d" % (o, n, t / max(o, 1) if o else -1))
     print("%-5s %s" % (mk, "  ".join(row)))
-print("  (格式: succès / tokens-par-juste ; -1 = 0 succès)")
+print("  (forme: succès / tokens-par-juste ; -1 = 0 succès)")
 
 print("\n=== statuts des prédictions gelées ===")
 # G1 : S >= tous les autres bras, sur chaque modèle
