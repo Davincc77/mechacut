@@ -1,0 +1,24 @@
+{
+ "body": {
+  "currency": "USD",
+  "routes": [
+   {
+    "cash_price": "600",
+    "name": "cash",
+    "points": "60000"
+   },
+   {
+    "cash_price": "900",
+    "name": "portal",
+    "points": "60000"
+   },
+   {
+    "cash_price": "480",
+    "name": "gift",
+    "points": "60000"
+   }
+  ]
+ },
+ "name": "money_points_switchwize_rank_spread",
+ "path": "/api/v1/money/points"
+}

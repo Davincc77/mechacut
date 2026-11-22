@@ -1,0 +1,15 @@
+{
+ "body": {
+  "currency": "USD",
+  "routes": [
+   {
+    "cash_price": "450",
+    "cash_still_paid": "35",
+    "name": "award",
+    "points": "25000"
+   }
+  ]
+ },
+ "name": "money_points_card_savvy_166",
+ "path": "/api/v1/money/points"
+}

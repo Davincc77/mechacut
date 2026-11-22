@@ -228,6 +228,18 @@ TABLE = (
      "transition pep495 fold heure changement d heure doublon heure "
      "inexistante deux fois fuseau crontab horario de verao hora "
      "inexistente duplo fuso horario duas ocorrencias transicao"),
+    ("date_tz_anchor", "/api/v1/date/tz_anchor", "dates",
+     "Une heure murale ECRITE dans la zone du job, ANCREE par la "
+     "machine dans sa zone : chaque instant UTC candidat, la derive "
+     "SIGNEE en minutes (positif = en retard), les deux horloges "
+     "relues ; l'offset gagne (resolution Composio #4148) ; single/"
+     "fold/gap rendus par l'engine date/tz_ambiguity APPELE, jamais "
+     "duplique",
+     "naive timestamp scheduler server anchored utc drift late early "
+     "wrong fire time hour hours config machine clock mismatch "
+     "stripped misread wrote write force offset assumed anchor reminder "
+     "meant off murale decalage serveur ecrit relue dispara atraso "
+     "adiantado servidor escrito hora clocks vraiment"),
     ("money_flight_comp", "/api/v1/money/flight_comp", "numbers",
      "Date de vol = TABLE de compensation : 261/2004 + Sturgeon/Nelson "
      "avant 2027-10-23, (UE) 2026/2202 codifié APRÈS (seuil « EXCEEDING "
@@ -716,6 +728,17 @@ TABLE = (
      "abonnement fixe mensuel journalier quelle consommation "
      "compensação tarifa qual mais barata ponto de equivalência kwh "
      "assinatura mensalidade taxa de adesão"),
+    ("money_points", "/api/v1/money/points", "numbers",
+     "Combien vaut un POINT : cpp = (prix cash - reste cash - "
+     "rewards forgoes) / points x 100 en FRACTION EXACTE (1081/725 "
+     "la ou la presse dit 1.49) ; voies cote a cote triees, egalites "
+     "nommees, verdict contre FLOOR fourni, solde x cpp, retour "
+     "effectif pts/$ x cpp ; jamais de table de valorisation "
+     "embarquee",
+     "points worth redeem redemption cents cpp award travel portal "
+     "statement credit gift card balance value taxes earning rate "
+     "return dollar vale resgate ponto saldo centimes vaut fracao "
+     "voies"),
     ("csv_excel_display", "/api/v1/csv/excel_display", "repair",
      "Ce qu'Excel AFFICHE d'une valeur STOCKÉE sous un code numFmt : "
      "la virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → "

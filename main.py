@@ -224,6 +224,8 @@ import bagkit
 import damagekit
 import crosskit
 import displaykit
+import anchorkit
+import pointskit
 import auditor
 import sayings
 import verdict
@@ -317,7 +319,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.84.0",
+    version="0.85.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4625,6 +4627,58 @@ def api_csv_excel_display(req: CsvExcelDisplayRequest):
     body, err = run_csv_excel_display(req.dict())
     return err if err else body
 
+
+class DateTzAnchorRequest(BaseModel):
+    stamp: Optional[str] = None
+    meant_in: Optional[str] = None
+    run_in: Optional[str] = None
+    stamped_offset: Optional[str] = None
+
+
+def run_date_tz_anchor(args: dict):
+    try:
+        out = anchorkit.run_anchor(args)
+    except anchorkit.AnchorError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/tz_anchor")
+def api_date_tz_anchor(req: DateTzAnchorRequest):
+    body, err = run_date_tz_anchor(req.dict())
+    return err if err else body
+
+
+class MoneyPointsRequest(BaseModel):
+    currency: Optional[str] = None
+    routes: Optional[List[Dict[str, Any]]] = None
+    floor: Optional[str] = None
+    baseline: Optional[str] = None
+    ceiling: Optional[str] = None
+    points_balance: Optional[str] = None
+    valued_at: Optional[str] = None
+    points_per_dollar: Optional[str] = None
+
+
+def run_money_points(args: dict):
+    try:
+        out = pointskit.run_points(args)
+    except pointskit.PointsError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/points")
+def api_money_points(req: MoneyPointsRequest):
+    body, err = run_money_points(req.dict())
+    return err if err else body
+
 # ------------------------------ bundle 0: task router + named recipes
 
 @app.get("/route")
@@ -4954,6 +5008,8 @@ TOOL_RUN = {
            "csv_excel_damage": run_csv_excel_damage,
            "money_crossover": run_money_crossover,
            "csv_excel_display": run_csv_excel_display,
+           "date_tz_anchor": run_date_tz_anchor,
+           "money_points": run_money_points,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -6321,6 +6377,109 @@ MCP_TOOLS = [
             "locale": {"type": "string",
                        "description": "display locale for separators "
                                       "(closed table), default en-US"}}}},
+    {
+        "name": "date_tz_anchor",
+        "description": "One wall clock, TWO clocks reading it: a naive "
+                       "timestamp WRITTEN against one zone (the job's/"
+                       "config's) and ANCHORED by a machine in another "
+                       "(usually a UTC box). Six production bugs "
+                       "measured in November 2026 share this shape: "
+                       "PraisonAI #4732 (naive at: silently stamped UTC, "
+                       "'an hour or more off'; the fix itself used the "
+                       "offset in force NOW — an hour wrong across a DST "
+                       "change), Composio #4148 (offset + timezone both "
+                       "passed: event created shifted, never rejected), "
+                       "hermes-agent #1729, evoila/meho #2339 ('different "
+                       "but plausibly equivalent', 2 h in CEST), nanobot "
+                       "#408 (tz field never read). Feed stamp + "
+                       "meant_in + run_in: every candidate UTC instant, "
+                       "a SIGNED drift in minutes (positive = fires "
+                       "LATE), both wall clocks read back, single/fold/"
+                       "gap per zone DELEGATED to date/tz_ambiguity's "
+                       "engine (called, not copied). An offset in the "
+                       "stamp WINS (Composio's published resolution) and "
+                       "the naive re-anchor ships as the bug's shape, "
+                       "not the answer. stamped_offset replays the "
+                       "'offset in force NOW' bug against the offset IN "
+                       "FORCE ON THAT DATE. Zones never guessed (both "
+                       "required for naive stamps), epoch refused by "
+                       "name, no clock read: the stamp IS the date. "
+                       "IANA via zoneinfo, past and future. Free.",
+        "inputSchema": {"type": "object", "properties": {
+            "stamp": {"type": "string",
+                      "description": "naive wall clock '2026-11-02 "
+                                     "09:00' or absolute '...T09:00:00Z' "
+                                     "/ '+05:30'"},
+            "meant_in": {"type": "string",
+                         "description": "IANA zone the wall clock was "
+                                        "written against (required for "
+                                        "naive stamps)"},
+            "run_in": {"type": "string",
+                       "description": "IANA zone of the machine "
+                                      "anchoring it (UTC is normal — "
+                                      "that's the bug)"},
+            "stamped_offset": {"type": "string",
+                               "description": "the '+HH:MM' your code "
+                                              "stamped at write time — "
+                                              "audited against the "
+                                              "offset in force on the "
+                                              "DATE"}}}},
+    {
+        "name": "money_points",
+        "description": "What a reward point is actually worth, EXACT. "
+                       "cpp = (cash price - cash still paid - rewards "
+                       "forgone) / points x 100 — the formula six "
+                       "published pages agree on while contradicting on "
+                       "arithmetic: cardcompass prints 1.49 where the "
+                       "exact value is 1081/725 = 1.491034..., "
+                       "milesbuyer prints '13x' where 8/0.6 = 40/3. The "
+                       "fraction ships beside the decimal. Subtract "
+                       "BEFORE dividing is the trap: 450/25000 = 1.80 "
+                       "is what you get by FORGETTING the 35 of taxes; "
+                       "the answer is 83/50 = 1.66 (card-savvy's own "
+                       "worked example). Multi-path redemptions rank "
+                       "side by side (cash/gift/portal/transfer — "
+                       "SwitchWize's five), ties named, best/worst "
+                       "spread as an exact ratio. The valuation verdict "
+                       "runs against YOUR supplied floor — card-savvy's "
+                       "Bilt rule (0.55 below 1.00 -> 'pay with cash') "
+                       "replayed; program valuations are ARGUMENTS, "
+                       "never an embedded table (they rot when "
+                       "'programs make material changes'). Also: "
+                       "balance x cpp (100 000 x 0.6 = 600.00 — "
+                       "milesbuyer's arithmetic) and effective return = "
+                       "points per dollar x cpp (3 x 1.5 = 9/2 %). The "
+                       "break-even between a points card and cashback "
+                       "is two-tariff math: money/crossover, named in "
+                       "the answer. Free.",
+        "inputSchema": {"type": "object", "properties": {
+            "currency": {"type": "string",
+                         "description": "ISO code (USD, EUR, GBP, BRL"
+                                        "...)"},
+            "routes": {"type": "array",
+                       "items": {"type": "object",
+                                 "properties": {
+                                     "name": {"type": "string"},
+                                     "points": {"type": "string"},
+                                     "cash_price": {"type": "string"},
+                                     "cash_still_paid":
+                                         {"type": "string"},
+                                     "rewards_forgone":
+                                         {"type": "string"}},
+                                 "required": ["name", "points",
+                                              "cash_price"]},
+                       "description": "one entry per redemption path, "
+                                      "all values decimal STRINGS"},
+            "floor": {"type": "string",
+                      "description": "your cpp floor — never a table "
+                                     "we embed"},
+            "baseline": {"type": "string"},
+            "ceiling": {"type": "string"},
+            "points_balance": {"type": "string"},
+            "valued_at": {"type": "string",
+                          "description": "a route name or an explicit "
+                                         "cpp — never guessed"},
+            "points_per_dollar": {"type": "string"}}}},
     {
         "name": "table_sql_dump",
         "description": "CSV/JSON rows into executable CREATE TABLE + "
@@ -7700,7 +7859,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.84.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.85.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":

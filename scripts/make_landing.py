@@ -278,7 +278,7 @@ TR = {
                  "line into ANY agent, even the smallest — it becomes "
                  "the full manual:",
     "everyday.h2": "For the rest of us",
-  "everyday.intro": "No code, no jargon. Twelve things a normal person "
+  "everyday.intro": "No code, no jargon. Thirteen things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -339,6 +339,14 @@ TR = {
                       "4,623\u2153 kWh where the article says \u201cabout "
                       "4,623\u201d. \u201cNever\u201d is also an answer, "
                       "named, when one plan wins on both parts.",
+  "everyday.e13.name": "What a point is really worth",
+  "everyday.e13.say": "\u201c29,000 points for a $438 flight minus "
+                      "$5.60 taxes — how much is a point, really?\u201d "
+                      "cpp = (cash − taxes) ÷ points × 100: the "
+                      "printed 1.49 hides the exact 1081/725 = "
+                      "1.491034…, subtracted BEFORE dividing. And the "
+                      "floor that says take-it-or-pay-cash is yours, "
+                      "never a stale table.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -571,7 +579,7 @@ TR = {
                  "dans n'importe quel agent, m\u00eame le plus petit "
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour le commun des mortels",
-  "everyday.intro": "Pas de code, pas de jargon. Douze choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Treize choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
                     "réelle du serveur, pas une maquette.",
@@ -637,6 +645,14 @@ TR = {
                       "« environ 4 623 ». « Jamais » est aussi une "
                       "réponse, nommée, quand un plan gagne sur les "
                       "deux composantes.",
+  "everyday.e13.name": "Ce que vaut vraiment un point",
+  "everyday.e13.say": "« 29 000 points pour un vol à 438 € moins "
+                      "5,60 € de taxes — ça fait combien le point ? » "
+                      "(438 − 5,60) ÷ 29 000 × 100 : le 1,49 affiché "
+                      "cache l'exact 1081/725 = 1,491034… La "
+                      "soustraction passe AVANT la division, et c'est "
+                      "VOTRE plancher qui dit « on prend » ou « payez "
+                      "cash ».",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -867,7 +883,7 @@ TR = {
   "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para o cidad\u00e3o comum",
-  "everyday.intro": "Sem código, sem jargão. Doze coisas que "
+  "everyday.intro": "Sem código, sem jargão. Treze coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -929,6 +945,13 @@ TR = {
                       "4.623⅓ kWh onde o artigo diz “cerca de "
                       "4.623”. “Nunca” também é resposta, nomeada, "
                       "quando um plano vence nos dois componentes.",
+  "everyday.e13.name": "Quanto vale um ponto de verdade",
+  "everyday.e13.say": "“29 000 pontos por um voo de R$ 438 menos R$ "
+                      "5,60 de taxas — quanto vale o ponto?” (438 − "
+                      "5,60) ÷ 29 000 × 100: o 1,49 impresso esconde o "
+                      "exato 1081/725 = 1,491034… Subtraia ANTES de "
+                      "dividir; é o SEU piso que diz “resgate” ou "
+                      "“pague em dinheiro”.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -1537,7 +1560,9 @@ W = {
              "overhead: the law sets NO size",
       "cross": "\u2192 the two tariffs flip at %s kWh a month (%s a "
                "year) \u00b7 exact \u2014 web calculators round the "
-               "fixed part first"},
+               "fixed part first",
+      "points": "\u2192 %s \u00a2/point, exactly %s \u00b7 above your "
+                "floor %s \u2192 redeem"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -1560,7 +1585,9 @@ W = {
              ": la loi ne fixe RIEN",
       "cross": "\u2192 les deux tarifs s'inversent à %s kWh par mois "
                "(%s par an) \u00b7 exact — la presse arrondit le fixe "
-               "avant de diviser"},
+               "avant de diviser",
+      "points": "\u2192 %s centime par point, exactement %s \u00b7 "
+                "au-dessus du plancher %s \u2192 on prend"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -1584,6 +1611,8 @@ W = {
       "cross": "→ os dois planos se invertem a %s kWh por mês (%s por "
                "ano) · exato — as calculadoras da web arredondam o "
                "fixo antes",
+      "points": "→ %s centavo por ponto, exato %s · acima do piso %s "
+                "→ resgate",
     },
 }
 
@@ -1666,6 +1695,19 @@ _EVERYDAY_CALLS = [
              d["crossover"]["per_month"]),
          {"en": lambda s: "3,000", "fr": lambda s: "3 000",
           "pt": lambda s: "3.000"}[L](d["crossover"]["per_year"]))),
+    ("/api/v1/money/points",
+     {"currency": "%CUR%", "floor": "1.0", "routes": [
+         {"name": "flight", "points": "29000", "cash_price": "438",
+          "cash_still_paid": "5.60"}]},
+     "points", lambda d, L: (
+         {"en": lambda s: s, "fr": lambda s: s.replace(".", ","),
+          "pt": lambda s: s.replace(".", ",")}[L](
+             d["routes"][0]["cpp_press_2dp"]),
+         "%s/%s" % (d["routes"][0]["cpp_exact"]["numerator"],
+                    d["routes"][0]["cpp_exact"]["denominator"]),
+         {"en": lambda s: s, "fr": lambda s: s.replace(".", ","),
+          "pt": lambda s: s.replace(".", ",")}[L](
+             d["routes"][0]["vs_floor"]["floor"]))),
 ]
 
 

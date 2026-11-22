@@ -1,0 +1,15 @@
+{
+ "body": {
+  "currency": "USD",
+  "floor": "1.0",
+  "routes": [
+   {
+    "cash_price": "55",
+    "name": "rent",
+    "points": "10000"
+   }
+  ]
+ },
+ "name": "money_points_bilt_below_floor",
+ "path": "/api/v1/money/points"
+}

@@ -1,0 +1,9 @@
+{
+ "body": {
+  "meant_in": "America/New_York",
+  "run_in": "UTC",
+  "stamp": "2026-11-01 01:30"
+ },
+ "name": "date_tz_anchor_ny_fold_two_drifts",
+ "path": "/api/v1/date/tz_anchor"
+}

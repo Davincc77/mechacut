@@ -559,6 +559,62 @@
   },
   {
    "body": {
+    "meant_in": "Europe/London",
+    "run_in": "Europe/London",
+    "stamp": "2026-09-02T22:30:00Z"
+   },
+   "name": "date_tz_anchor_composio_offset_wins",
+   "path": "/api/v1/date/tz_anchor",
+   "sha256": "9d3a2cc91e81a8d2baacd2ea74f1479263609065d3c38f59a7fd7b62027f1121",
+   "status": 200
+  },
+  {
+   "body": {
+    "meant_in": "America/New_York",
+    "run_in": "UTC",
+    "stamp": "2026-11-01 01:30"
+   },
+   "name": "date_tz_anchor_ny_fold_two_drifts",
+   "path": "/api/v1/date/tz_anchor",
+   "sha256": "995bbf487ca4fe4c2b77ac9fa3933618c89fee9c985b4413d1765037157ba48d",
+   "status": 200
+  },
+  {
+   "body": {
+    "meant_in": "America/New_York",
+    "run_in": "UTC",
+    "stamp": "2026-03-08 02:30"
+   },
+   "name": "date_tz_anchor_ny_gap_named",
+   "path": "/api/v1/date/tz_anchor",
+   "sha256": "2359746d0023fc795eaffd252a12e644df690a78b52adb4122456aeb71996262",
+   "status": 200
+  },
+  {
+   "body": {
+    "meant_in": "Europe/Paris",
+    "run_in": "UTC",
+    "stamp": "2026-11-02 09:00"
+   },
+   "name": "date_tz_anchor_paris_utc_60_late",
+   "path": "/api/v1/date/tz_anchor",
+   "sha256": "6cbdda80dd40c51496a28d6de2183240b1af7a1b0eea0bb846b6f668f08f7a6b",
+   "status": 200
+  },
+  {
+   "body": {
+    "meant_in": "America/New_York",
+    "run_in": "America/New_York",
+    "stamp": "2026-03-15 09:00",
+    "stamped_offset": "-05:00"
+   },
+   "name": "date_tz_anchor_praisonai_stamped_bug",
+   "path": "/api/v1/date/tz_anchor",
+   "sha256": "b26f56e4194bea57bb4d7444dd46572115390e0c57ef8321fe8ad8ff3ddfe632",
+   "status": 200
+  },
+  {
+   "body": {
     "at": "02:30",
     "datetime": "2026-03-29",
     "source": "UTC",
@@ -1475,6 +1531,83 @@
    "name": "money_flight_comp_uk_official_row",
    "path": "/api/v1/money/flight_comp",
    "sha256": "46f82a750de5f446df7e19304cc2d37f2ffcd9319c80d73b3239c8ce40113dc2",
+   "status": 200
+  },
+  {
+   "body": {
+    "currency": "USD",
+    "floor": "1.0",
+    "routes": [
+     {
+      "cash_price": "55",
+      "name": "rent",
+      "points": "10000"
+     }
+    ]
+   },
+   "name": "money_points_bilt_below_floor",
+   "path": "/api/v1/money/points",
+   "sha256": "cd0fc60f9665ded9f1610de6cc774ae5f64a22c55b3b4e610068ca5962b2bda5",
+   "status": 200
+  },
+  {
+   "body": {
+    "currency": "USD",
+    "routes": [
+     {
+      "cash_price": "450",
+      "cash_still_paid": "35",
+      "name": "award",
+      "points": "25000"
+     }
+    ]
+   },
+   "name": "money_points_card_savvy_166",
+   "path": "/api/v1/money/points",
+   "sha256": "aab3d167b662ff4177b90e38b84cf9cefd180efb022bd25ba83231defdacfc02",
+   "status": 200
+  },
+  {
+   "body": {
+    "currency": "USD",
+    "routes": [
+     {
+      "cash_price": "438",
+      "cash_still_paid": "5.60",
+      "name": "flight",
+      "points": "29000"
+     }
+    ]
+   },
+   "name": "money_points_cardcompass_1081_725",
+   "path": "/api/v1/money/points",
+   "sha256": "2f6b509cd1d169066fe432172a8395a0fbee7d19b3027b952f76f39564777186",
+   "status": 200
+  },
+  {
+   "body": {
+    "currency": "USD",
+    "routes": [
+     {
+      "cash_price": "600",
+      "name": "cash",
+      "points": "60000"
+     },
+     {
+      "cash_price": "900",
+      "name": "portal",
+      "points": "60000"
+     },
+     {
+      "cash_price": "480",
+      "name": "gift",
+      "points": "60000"
+     }
+    ]
+   },
+   "name": "money_points_switchwize_rank_spread",
+   "path": "/api/v1/money/points",
+   "sha256": "a5ca7077a707e9c5f15a181b8eb2eb19fae90f2db06339de93296030170052cc",
    "status": 200
   },
   {

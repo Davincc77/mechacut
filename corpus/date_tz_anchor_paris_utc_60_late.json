@@ -1,0 +1,9 @@
+{
+ "body": {
+  "meant_in": "Europe/Paris",
+  "run_in": "UTC",
+  "stamp": "2026-11-02 09:00"
+ },
+ "name": "date_tz_anchor_paris_utc_60_late",
+ "path": "/api/v1/date/tz_anchor"
+}

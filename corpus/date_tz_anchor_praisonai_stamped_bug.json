@@ -1,0 +1,10 @@
+{
+ "body": {
+  "meant_in": "America/New_York",
+  "run_in": "America/New_York",
+  "stamp": "2026-03-15 09:00",
+  "stamped_offset": "-05:00"
+ },
+ "name": "date_tz_anchor_praisonai_stamped_bug",
+ "path": "/api/v1/date/tz_anchor"
+}

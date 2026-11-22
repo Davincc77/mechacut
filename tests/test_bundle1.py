@@ -288,7 +288,7 @@ def test_mcp_exposes_bundle1():
                       'id_ulid', 'pkg_name', 'net_ip', 'net_cidr',
                       'file_encoding', 'schedule_overlap', 'cron_validate',
                       'integrity_verify', 'math_calc', 'money_discount',
-                      'formula_catalog', 'intent_reflect', 'date_recurrence', 'units_shoe_size', 'net_sri', 'date_tz_ambiguity', 'money_flight_comp', 'date_week', 'money_baggage', 'csv_excel_damage', 'money_crossover', 'csv_excel_display', 'table_sql_dump', 'table_scale', 'check_format',
+                      'formula_catalog', 'intent_reflect', 'date_recurrence', 'units_shoe_size', 'net_sri', 'date_tz_ambiguity', 'money_flight_comp', 'date_week', 'money_baggage', 'csv_excel_damage', 'money_crossover', 'csv_excel_display', 'date_tz_anchor', 'money_points', 'table_sql_dump', 'table_scale', 'check_format',
                       'csv_money_columns', 'date_relative', 'text_url_canonical', 'xml_to_json',
                       'web_cert', 'id_checkdigit', 'image_rightsize',
                       'money_rates', 'doc_text', 'money_amortize',

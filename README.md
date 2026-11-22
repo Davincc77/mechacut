@@ -5,16 +5,26 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 138 transforms + 9 named recipes as of v0.83.0, each with its tool card
+— 140 transforms + 9 named recipes as of v0.85.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 153 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 172 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money/crossover` (two tariffs
+is the truth of today. Recent highlights: `date/tz_anchor` (one wall
+clock, two clocks reading it — six production bugs measured in November
+2026 share the shape: a naive timestamp written against the job's zone,
+anchored by a UTC box; every candidate instant, the drift SIGNED in
+minutes, both wall clocks read back, the offset-wins arbitration Composio
+published, and the PraisonAI "offset in force NOW" fix-bug replayed by
+name); `money/points` (what a reward point is actually worth: cpp =
+(cash − taxes − forgone) ÷ points × 100 in an EXACT fraction — the web
+prints 1.49 where 1081/725 = 1.491034… lives, paths ranked side by side
+against YOUR supplied floor, never an embedded valuation table);
+`money/crossover` (two tariffs
 with a unit rate and a recurring fixed: the web's seven published
 calculators all ROUND THE FIXED DELTA FIRST and contradict each other —
 4,623 where the exact answer is 4,623⅓ kWh; here the crossover ships as

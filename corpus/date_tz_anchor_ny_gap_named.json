@@ -1,0 +1,9 @@
+{
+ "body": {
+  "meant_in": "America/New_York",
+  "run_in": "UTC",
+  "stamp": "2026-03-08 02:30"
+ },
+ "name": "date_tz_anchor_ny_gap_named",
+ "path": "/api/v1/date/tz_anchor"
+}

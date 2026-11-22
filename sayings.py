@@ -177,6 +177,21 @@ SAY = {
               "l'humain voit 1 000 $ — rends ce qu'Excel affiche",
         "pt": "o openpyxl lê 1000000 na célula do orçamento mas o "
               "chefe vê US$ 1.000 — mostre o que o Excel exibe"},
+    "/api/v1/date/tz_anchor": {
+        "en": "my cron says 9:00 Paris and the box is UTC — how "
+              "late does it actually fire",
+        "fr": "le job est écrit à 9 h heure de Paris, le serveur "
+              "est en UTC — il part vraiment à quelle heure",
+        "pt": "meu agendador é UTC mas escrevi 09:00 no horário de "
+              "São Paulo — com quantos minutos de atraso dispara"},
+    "/api/v1/money/points": {
+        "en": "60,000 points for a $438 flight minus $5.60 taxes — "
+              "what is a point really worth",
+        "fr": "29 000 points pour un vol à 438 € moins 5,60 € de "
+              "taxes, ça vaut combien de centimes le point "
+              "exactement",
+        "pt": "29 000 pontos por um voo de R$ 438 menos R$ 5,60 de "
+              "taxas — quantos centavos vale cada ponto"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",

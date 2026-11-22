@@ -1,0 +1,15 @@
+{
+ "body": {
+  "currency": "USD",
+  "routes": [
+   {
+    "cash_price": "438",
+    "cash_still_paid": "5.60",
+    "name": "flight",
+    "points": "29000"
+   }
+  ]
+ },
+ "name": "money_points_cardcompass_1081_725",
+ "path": "/api/v1/money/points"
+}
