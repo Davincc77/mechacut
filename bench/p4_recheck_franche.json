@@ -1,0 +1,34 @@
+[
+ {
+  "model": "7b",
+  "i": 14,
+  "f5": "REFUS-2",
+  "rejoue": "REFUS",
+  "got": null,
+  "classe_identique": true
+ },
+ {
+  "model": "1.5b",
+  "i": 2,
+  "f5": "REFUS-2",
+  "rejoue": "OK",
+  "got": "382.90",
+  "classe_identique": false
+ },
+ {
+  "model": "1.5b",
+  "i": 14,
+  "f5": "FAUX",
+  "rejoue": "FAUX",
+  "got": "2115.36",
+  "classe_identique": true
+ },
+ {
+  "model": "1.5b",
+  "i": 18,
+  "f5": "OK",
+  "rejoue": "OK",
+  "got": "225",
+  "classe_identique": true
+ }
+]

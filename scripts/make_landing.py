@@ -234,6 +234,11 @@ TR = {
                         "chains: {v24_sil}/{v24_days} days of empty answers after "
                         "8,192 reasoning tokens, {v24_ok} right, billed ${v24_usd}. "
                         "The machine: {v24_m_ok} at $0.00.",
+        "bench.f7.sum": "EN/PT copies of the seven chains: {f7_wins}/{f7_cells} — "
+                        "criterion ≥19 passed; {f7_rep} of them won by the named "
+                        "refusal. PT copy at 4/7 vs FR's 0/7 on the 0.5B: the "
+                        "reading ceiling belongs to model × language × form.",
+        "bench.f7.foot": "Raw: bench/results_f7_accept.jsonl · frozen criterion: bench/FINDINGS-F7.md",
         "bench.v24.foot": "Raw: bench/results_v24_lfm3_30days.jsonl · the amendment "
                         "lives in git history (run24 amendé)",
         "bench.v19.sum": "{v19_wins}/{v19_days} attempts right for the models — "
@@ -619,6 +624,11 @@ TR = {
                         "chaînes : {v24_sil}/{v24_days} jours de réponse vide après "
                         "8 192 tokens de raisonnement, {v24_ok} justes, facturés "
                         "${v24_usd}. La machine : {v24_m_ok} à 0,00 $.",
+        "bench.f7.sum": "Les sept chaînes recopiées EN/PT : {f7_wins}/{f7_cells} — "
+                        "critère ≥19 PASSÉ ; {f7_rep} gagnées par le refus nommé. "
+                        "Le 0.5b copie 4/7 en PT là où le FR le mettait à 0/7 : le "
+                        "plafond de lecture est du modèle × langue × forme.",
+        "bench.f7.foot": "Brut : bench/results_f7_accept.jsonl · critère gelé : bench/FINDINGS-F7.md",
         "bench.v24.foot": "Brut : bench/results_v24_lfm3_30days.jsonl · l'amendement "
                         "est dans l'historique git (run24 amendé)",
         "bench.v19.sum": "{v19_wins}/{v19_days} tentatives justes pour les modèles — "
@@ -1016,6 +1026,11 @@ TR = {
                         "{v24_sil}/{v24_days} dias de resposta vazia após 8.192 "
                         "tokens de raciocínio, {v24_ok} certas, faturados "
                         "${v24_usd}. A máquina: {v24_m_ok} a $0,00.",
+        "bench.f7.sum": "As sete cadeias copiadas EN/PT: {f7_wins}/{f7_cells} — "
+                        "critério ≥19 APROVADO; {f7_rep} ganhas pela recusa "
+                        "nomeada. O 0.5b copia 4/7 em PT onde o FR o punha a 0/7: o "
+                        "teto de leitura é do modelo × língua × forma.",
+        "bench.f7.foot": "Bruto: bench/results_f7_accept.jsonl · critério gelado: bench/FINDINGS-F7.md",
         "bench.v24.foot": "Bruto: bench/results_v24_lfm3_30days.jsonl · a emenda está "
                         "no histórico git (run24 amendado)",
         "bench.v19.sum": "{v19_wins}/{v19_days} tentativas corretas para os modelos "
@@ -1585,6 +1600,12 @@ TEMPLATE = """<!DOCTYPE html>
         <summary><span class="bv">F5</span>{{bench.f5.sum}}</summary>
         <div class="bbody">
           <p class="tiers" style="color: var(--muted);">{{bench.f5.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">F7</span>{{bench.f7.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.f7.foot}}</p>
         </div>
       </details>
           <details class="bcard" open>
@@ -2454,6 +2475,13 @@ def compute_hub():
     h["v24_usd"] = "%.4f" % sum(r["usd"] for r in n24)
     h["v24_m_ok"] = "%d/%d" % (sum(1 for r in mm24 if r["ok"]),
                                len(mm24))
+    # ---------------- F7 : EN/PT sur les mêmes maths (56 cellules)
+    m7 = _rows_of("results_f7_accept.jsonl")
+    m7 = [r for r in m7 if r["harness"] == "f7-accept"]
+    h["f7_wins"] = sum(1 for r in m7 if r["verdict"] == "OK")
+    h["f7_cells"] = len(m7)
+    h["f7_rep"] = sum(1 for r in m7 if r["verdict"] == "OK"
+                      and r["repairs"] > 0)
     return h
 
 

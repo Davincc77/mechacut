@@ -323,7 +323,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.87.0",
+    version="0.88.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -8147,7 +8147,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.87.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.88.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":

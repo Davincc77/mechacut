@@ -1,0 +1,70 @@
+{"harness": "f7-accept", "lang": "en", "model": "0.5b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 0, "toks": 135, "verdict": "PARSE"}
+{"harness": "f7-accept", "lang": "en", "model": "0.5b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 0, "toks": 482, "verdict": "PARSE"}
+{"harness": "f7-accept", "lang": "en", "model": "0.5b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 0, "toks": 135, "verdict": "PARSE"}
+{"harness": "f7-accept", "lang": "en", "model": "0.5b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 0, "toks": 533, "verdict": "PARSE"}
+{"harness": "f7-accept", "lang": "en", "model": "0.5b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 0, "toks": 135, "verdict": "PARSE"}
+{"harness": "f7-accept", "lang": "en", "model": "0.5b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 0, "toks": 486, "verdict": "PARSE"}
+{"harness": "f7-accept", "lang": "en", "model": "0.5b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 0, "toks": 135, "verdict": "PARSE"}
+{"harness": "f7-accept", "lang": "en", "model": "1.5b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 368, "got": "240", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "1.5b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 0, "toks": 158, "got": "382.90", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "1.5b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 368, "got": "120", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "1.5b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 370, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "en", "model": "1.5b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 367, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "en", "model": "1.5b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 372, "got": "2115.36", "verdict": "FAUX"}
+{"harness": "f7-accept", "lang": "en", "model": "1.5b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 367, "got": "225", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "7b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 338, "got": "240", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "7b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 1, "toks": 369, "got": "382.90", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "7b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 338, "got": "120", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "7b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 369, "got": "776.60", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "7b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 338, "got": "300", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "7b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 378, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "en", "model": "7b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 339, "got": "225", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "8b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 297, "got": "240", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "en", "model": "8b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 1, "toks": 308, "verdict": "ERREUR:rate_limited"}
+{"harness": "f7-accept", "lang": "en", "model": "8b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 0, "toks": 121, "verdict": "ERREUR:rate_limited"}
+{"harness": "f7-accept", "lang": "en", "model": "8b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 308, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "en", "model": "8b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 297, "got": "360", "verdict": "FAUX"}
+{"harness": "f7-accept", "lang": "en", "model": "8b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 308, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "en", "model": "8b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 303, "got": "225", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "0.5b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 0, "toks": 334, "got": "240", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "0.5b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 1, "toks": 380, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "0.5b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 0, "toks": 309, "got": "120", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "0.5b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 380, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "0.5b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 0, "toks": 161, "got": "300", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "0.5b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 380, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "0.5b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 0, "toks": 41091, "got": "225", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "1.5b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 0, "toks": 171, "got": "240", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "1.5b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 1, "toks": 415, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "1.5b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 396, "got": "120", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "1.5b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 415, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "1.5b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 0, "toks": 171, "got": "300", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "1.5b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 0, "toks": 0, "verdict": "CRASH:timeout"}
+{"harness": "f7-accept", "lang": "pt", "model": "1.5b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 0, "toks": 171, "got": "225", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "7b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 370, "got": "240", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "7b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 0, "toks": 158, "got": "382.90", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "7b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 370, "got": "120", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "7b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 0, "toks": 158, "got": "776.60", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "7b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 370, "got": "300", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "7b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 386, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "7b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 370, "got": "180", "verdict": "FAUX"}
+{"harness": "f7-accept", "lang": "pt", "model": "8b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 319, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "8b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 1, "toks": 381, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "8b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 321, "got": "120", "verdict": "OK"}
+{"harness": "f7-accept", "lang": "pt", "model": "8b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 347, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "8b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 324, "got": "360", "verdict": "FAUX"}
+{"harness": "f7-accept", "lang": "pt", "model": "8b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 344, "verdict": "ERREUR:invalid_input"}
+{"harness": "f7-accept", "lang": "pt", "model": "8b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 324, "got": "225", "verdict": "OK"}
+{"harness": "f7-p4", "model": "7b", "i": 0, "repairs": 1, "toks": 334, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "7b", "i": 2, "repairs": 1, "toks": 360, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "7b", "i": 6, "repairs": 1, "toks": 334, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "7b", "i": 8, "repairs": 1, "toks": 360, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "7b", "i": 12, "repairs": 1, "toks": 334, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "7b", "i": 14, "repairs": 1, "toks": 355, "verdict": "ERREUR:invalid_input", "f5_verdict": "REFUS-2", "degage": true}
+{"harness": "f7-p4", "model": "7b", "i": 18, "repairs": 1, "toks": 335, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "1.5b", "i": 0, "repairs": 0, "toks": 158, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "1.5b", "i": 2, "repairs": 1, "toks": 372, "verdict": "ERREUR:rate_limited", "f5_verdict": "REFUS-2", "degage": true}
+{"harness": "f7-p4", "model": "1.5b", "i": 6, "repairs": 1, "toks": 349, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "1.5b", "i": 8, "repairs": 0, "toks": 173, "verdict": "PARSE", "f5_verdict": "PARSE", "degage": false}
+{"harness": "f7-p4", "model": "1.5b", "i": 12, "repairs": 1, "toks": 349, "verdict": "OK", "f5_verdict": "OK", "degage": false}
+{"harness": "f7-p4", "model": "1.5b", "i": 14, "repairs": 1, "toks": 367, "verdict": "ERREUR:rate_limited", "f5_verdict": "FAUX", "degage": true}
+{"harness": "f7-p4", "model": "1.5b", "i": 18, "repairs": 1, "toks": 350, "verdict": "ERREUR:rate_limited", "f5_verdict": "OK", "degage": true}

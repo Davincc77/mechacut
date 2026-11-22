@@ -27,7 +27,7 @@ def test_collapsible_bench_cards_grouped_by_thesis():
                        r'<summary><span class="bv">([vF][0-9b]+)'
                        r'</span>', HTML)
     assert cards == ["v6", "v9", "v10", "v11", "v12",          # exécution
-                     "v15", "v17", "F5", "v23",                # forme
+                     "v15", "v17", "F5", "F7", "v23",          # forme
                      "v16", "v20", "v22", "v22b",              # doute+forme payante
                      "v13", "v14",                              # lecture
                      "v19", "v24"], cards                       # régime réel
@@ -157,3 +157,12 @@ def test_v11_f5_v24_summary_match_raw():
     assert ("%d/%d days of empty answers after 8,192 reasoning "
             "tokens, %d right, billed $%.4f"
             % (sil, len(n24), okc, usd) in HTML)
+
+
+def test_f7_summary_matches_raw():
+    r = _rows("results_f7_accept.jsonl")
+    r = [x for x in r if x["harness"] == "f7-accept"]
+    wins = sum(1 for x in r if x["verdict"] == "OK")
+    rep = sum(1 for x in r if x["verdict"] == "OK" and x["repairs"] > 0)
+    assert ("%d/%d — criterion ≥19 passed; %d of them won by the "
+            "named refusal" % (wins, len(r), rep)) in HTML
