@@ -210,7 +210,7 @@ def main():
         # seul, le last-write-wins faisait ressortir un NO_MATCH
         # ancien comme « REGRESSION » (artefact mesuré 22-11 21h57,
         # ligne PT loja).
-        prev = {(r["text"], r.get("want")): r["verdict"]
+        prev = {(r["text"], r.get("want"), r.get("via")): r["verdict"]
                 for r in json.load(open(latest))["rows"]}
     stamp = scan["ts"].replace(":", "-").replace(" ", "_")
     with open(os.path.join(RADAR_DIR, "scan-%s.json" % stamp),
@@ -220,13 +220,15 @@ def main():
         json.dump(scan, fh, ensure_ascii=False, indent=1)
     new_pain = [r for r in rows
                 if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
-                and prev.get((r["text"], r.get("want"))) == "ok"]
+                and prev.get((r["text"], r.get("want"),
+                              r.get("via"))) == "ok"]
     fresh = [r for r in rows
              if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
-             and (r["text"], r.get("want")) not in prev]
+             and (r["text"], r.get("want"), r.get("via"))
+             not in prev]
     healed = [k for k, v in prev.items()
               if v not in ("ok", "leurre-ok", "plan-skip")
-              and any((r["text"], r.get("want")) == k
+              and any((r["text"], r.get("want"), r.get("via")) == k
                       and r["verdict"] in
                       ("ok", "leurre-ok") for r in rows)]
     print("# RADAR ROUTEUR — %s" % scan["ts"])
@@ -241,6 +243,7 @@ def main():
                                           it["verdict"]))
             else:
                 print("- GUERIE : %r (want %r)" % (it[0][:70], it[1]))
+
     print("(brut : docs/RADAR/scan-%s.json — local-only)" % stamp)
 
 
