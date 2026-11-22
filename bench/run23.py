@@ -74,7 +74,11 @@ P_NUDE = ('Solve this. Reply with EXACTLY one JSON object:\n'
 
 def api(msgs):
     """Même règle que v22 : temp 0 d'abord ; si l'API rejette temp,
-    UN seul retry aux paramètres du fournisseur, marqué."""
+    UN seul retry aux paramètres du fournisseur, marqué. Plus : la
+    route LFM3 est instable (le scan lui-même dit « back on our
+    list » — premier ping a fait un 404 froid). Retry transitoire
+    404/429/5xx : 3 tentatives, 10 s puis 20 s — résilience infra,
+    gelée avant la première cellule, pas une prédiction."""
     def call(temp):
         body = {"model": MODEL, "messages": msgs, "stream": False}
         if temp:
@@ -85,15 +89,22 @@ def api(msgs):
                      "Authorization": "Bearer " + key()})
         return json.loads(urllib.request.urlopen(req, timeout=180).read())
     mark = "0"
-    try:
-        r = call(True)
-    except urllib.error.HTTPError as e:
-        txt = e.read().decode(errors="replace")
-        if "temperature" in txt.lower():
-            mark = "provider-default"
-            r = call(False)
-        else:
-            raise
+    tries, wait = 0, 10
+    while True:
+        try:
+            r = call(True)
+            break
+        except urllib.error.HTTPError as e:
+            txt = e.read().decode(errors="replace")
+            if "temperature" in txt.lower():
+                mark = "provider-default"
+                r = call(False)
+                break
+            tries += 1
+            if e.code not in (404, 429, 500, 502, 503) or tries > 3:
+                raise
+            time.sleep(wait)
+            wait *= 2
     u = r.get("usage", {})
     return (r["choices"][0]["message"]["content"] or "",
             int(u.get("prompt_tokens", 0)),
