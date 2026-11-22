@@ -160,17 +160,28 @@ def main():
              "verdict": "TIER-DIVERGENCE" if paid and ok_b else
                         ("OK" if ok_b else "THEIRS-WRONG"),
              "brut_them": json.dumps(b, ensure_ascii=False)[:200]})
-    # --- G4 compteur jours ouvrés — chez EUX seulement
+    # --- G4 compteur jours ouvrés — chez EUX d'abord ; depuis A1
+    # (22-11, 0.91.0) nous avons le portail aussi : la cellule SONDE
+    # les deux au lieu de réciter le monde d'avant (le harnais qui
+    # fige une mémoire est un harnais qui dérive).
     if "G4" not in done:
         b, err = cf_run("iso-date-business-days-count", "1.0.0",
                         {"start": "2026-01-05", "end": "2026-01-16",
-                         "weekend_days": ["sat", "sun"],
+                         "weekend_days": [6, 7],
                          "holidays": ["2026-01-12"]})
         n = json.dumps(b)
         found9 = ('"9"' in n) or (": 9" in n) or (":9" in n)
-        row({"harness": "v21", "cell": "G4", "side": "them",
-             "theirs": (not err) and found9, "ours": "no-route",
-             "verdict": "OK" if found9 else "LACUNE-NOTRE",
+        o, oerr = ours("/api/v1/date/calc", {
+            "base": "2026-01-05", "op": "diff",
+            "params": {"until": "2026-01-16", "unit": "business_days",
+                       "holidays": ["2026-01-12"],
+                       "include_base": True}})
+        ours9 = (not oerr) and o.get("business_days") == 9
+        row({"harness": "v21", "cell": "G4", "side": "both",
+             "theirs": (not err) and found9,
+             "ours": ours9,
+             "verdict": "OK" if found9 and ours9 else
+                        ("LACUNE-NOTRE" if not ours9 else "THEIRS-WRONG"),
              "brut_them": n[:200]})
     # --- G5-G7 + cron : leurres — zéro exécution sur tâche sans outil
     for cell, q in (("G5", "date that does not exist during daylight "

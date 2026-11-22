@@ -55,3 +55,52 @@ A3. Publier la convergence : « sur les tâches où les deux suites
     MÊMES bytes » — c'est la meilleure preuve que le déterminisme
     n'est pas une secte mais une physique. Un post court, deux
     captures, pas de guerre de liens.
+
+## ADDENDUM — même nuit, après A1 + A2 (0.91.0 en prod)
+
+L'humain a tranché, le banc rejoue. Deux lignes de l'original
+étaient en avance sur leurs preuves — c'est ici que ça se publie :
+
+1. **G4, la confession du juge** : la matrice ci-dessus écrivait
+   « eux : 9 (correct) » alors que la première passe ne l'avait
+   JAMAIS vérifié — le payload du harnais disait
+   `weekend_days:["sat","sun"]` et leur grammaire fermée (entiers
+   1-7, Monday=1) avait répondu un REFUS NOMMÉ, consigné dans le
+   brut (`results_v21.jsonl.avant-a1-a2`). La cellule était une
+   ATTENTE recopiée en fait. Rejoué avec le payload conforme :
+   **eux 9, nous 9 — accord exact**, et leur refus était
+   l'énoncé même de notre doctrine. Deux conventions notées :
+   weekend 1-7 chez eux, 0-6 chez nous ; le même monde, deux
+   grammaires, chacune nommée dans ses contrats.
+2. **G3, la tier-divergence a cessé par décision** : validate/iban
+   est devenu gratuit (0.91.0 — « même byte chez le voisin gratuit,
+   portefeuille chez nous » n'était pas tenable). Rejoué :
+   `ours: free-and-right`, même sha, plus de 402. La pin FR garde
+   son empreinte d'origine — le middleware ne touche jamais le corps.
+3. **A1 livré** : `diff unit=business_days` reçoit `include_base`
+   (fenêtre [base..until], les deux bouts comptés ; fenêtre nulle =
+   le jour compte 1 s'il est ouvré ; fenêtre arrière = refus nommé).
+   La convention historique reste épinglée, intacte, sha d'origine.
+   Découverte consignée par le propre test : l'arrière historique
+   n'est PAS le miroir de l'avant (base exclue → [05..16) = 9
+   ouvrés contre (05..16] = 8) — première version du test clamait
+   -8 par symétrie conjecturée ; le pin figeait -9 ; le produit
+   avait raison, le test s'incline et documente. C'est précisément
+   ce pourquoi `include_base` refuse l'arrière au lieu de le
+   deviner.
+
+Matrice corrigée des deux branches :
+
+| cellule | eux | nous | verdict final |
+|---|---|---|---|
+| G1 sha256 | == gold | == gold | accord byte à byte |
+| G2 dedupe | == gold | == gold | accord |
+| G3 IBAN | valide, gratuit | valide, **gratuit (0.91.0)** | **accord intégral** |
+| G4 ouvrés [05→16, férié 12] | 9 | 9 (`include_base`) | **accord** |
+| G5-G8 leurres | 4/4 abstention | 4/4 exacts | leur honnêteté vérifiée |
+
+P2 amendée : VRAIE, mais seulement à partir du rejouement — le
+banc d'hier soir affirmait le 9 d'eux sans l'avoir jamais reçu.
+P4 amendée : la lacune est close (A1), épinglée à 196 pins.
+Le reste de l'original tient.
+
