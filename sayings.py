@@ -161,6 +161,22 @@ SAY = {
               "perdront en silence leurs zéros, identifiants et dates",
         "pt": "antes de abrir este CSV no Excel — quais colunas "
               "perderão em silêncio os zeros, IDs e datas"},
+    "/api/v1/money/crossover": {
+        "en": "plan A is 24.5p a kWh plus 60p a day, plan B 26.32p "
+              "plus 54.83p — above how many kWh does A actually win?",
+        "fr": "tarif A 0,25 €/kWh + 60 centes d'abonnement par jour, "
+              "B 0,27 € + 45 — à partir de combien de kWh A gagne "
+              "vraiment",
+        "pt": "plano A R$ 0,30 por kWh mais R$ 12 por mês, plano B "
+              "R$ 0,26 mais R$ 22 — a partir de quantos kWh o B "
+              "passa a ganhar"},
+    "/api/v1/csv/excel_display": {
+        "en": "openpyxl read 1000000 from the budget cell but the "
+              "human saw $1,000 — render what Excel displays",
+        "fr": "openpyxl lit 1 000 000 dans la cellule du budget mais "
+              "l'humain voit 1 000 $ — rends ce qu'Excel affiche",
+        "pt": "o openpyxl lê 1000000 na célula do orçamento mas o "
+              "chefe vê US$ 1.000 — mostre o que o Excel exibe"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",

@@ -1,0 +1,8 @@
+{
+ "body": {
+  "format": "#.0,,",
+  "value": "12200000"
+ },
+ "name": "csv_excel_display_million_scale",
+ "path": "/api/v1/csv/excel_display"
+}

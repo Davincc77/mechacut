@@ -1,0 +1,15 @@
+{
+ "body": {
+  "a_fixed": "0.60",
+  "a_fixed_per": "day",
+  "a_unit_per": "kWh",
+  "a_unit_rate": "0.25",
+  "b_fixed": "0.45",
+  "b_fixed_per": "day",
+  "b_unit_per": "kWh",
+  "b_unit_rate": "0.27",
+  "currency": "GBP"
+ },
+ "name": "money_crossover_uxtaxdrag_2737_5",
+ "path": "/api/v1/money/crossover"
+}

@@ -1,0 +1,16 @@
+{
+ "body": {
+  "a_fixed": "12",
+  "a_fixed_per": "month",
+  "a_unit_per": "kWh",
+  "a_unit_rate": "0.30",
+  "b_fixed": "22",
+  "b_fixed_per": "month",
+  "b_unit_per": "kWh",
+  "b_unit_rate": "0.26",
+  "currency": "EUR",
+  "km_per_unit": "6"
+ },
+ "name": "money_crossover_numbivo_3000_plus_km",
+ "path": "/api/v1/money/crossover"
+}

@@ -1,0 +1,18 @@
+{
+ "body": {
+  "a_fixed": "12",
+  "a_fixed_per": "month",
+  "a_unit_per": "kWh",
+  "a_unit_rate": "0.30",
+  "b_fixed": "22",
+  "b_fixed_per": "month",
+  "b_unit_per": "kWh",
+  "b_unit_rate": "0.26",
+  "currency": "EUR",
+  "exit_fee_a": "60",
+  "usage_per_period": "3600",
+  "usage_period": "year"
+ },
+ "name": "money_crossover_payback_30_months",
+ "path": "/api/v1/money/crossover"
+}

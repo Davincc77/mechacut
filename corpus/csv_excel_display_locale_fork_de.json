@@ -1,0 +1,9 @@
+{
+ "body": {
+  "format": "#,##0.00",
+  "locale": "de-DE",
+  "value": "1234567.891"
+ },
+ "name": "csv_excel_display_locale_fork_de",
+ "path": "/api/v1/csv/excel_display"
+}

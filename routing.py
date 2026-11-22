@@ -700,6 +700,38 @@ TABLE = (
      "conversion date mise en forme import texte colonnes planilha "
      "csv excel zeros à esquerda notação científica corrupção ao "
      "abrir datas forçadas"),
+    ("money_crossover", "/api/v1/money/crossover", "numbers",
+     "Prix de reviens de DEUX tarifs à composantes (unitaire + fixe) : "
+     "la bascule en FRACTION EXACTE — les sept calculateurs publiés "
+     "arrondissent le Δ fixe avant de diviser et se contredisent ; "
+     "conventions de jours NOMMÉES (mensuel ×12 exact, jamais 30 "
+     "jours ; journalier ×365 ou 366 bissextile fourni ; « semaine » "
+     "refusée) ; DOMINATION rendue « never » nommée ; km si "
+     "consommation FOURNIE ; frais one-off en mois de payback, "
+     "séparés de la bascule structurelle",
+     "energy tariff comparison break-even kWh standing charge unit "
+     "rate which is cheaper crossover fixed plus variable saas seats "
+     "per user monthly annual leap year ev charging cost per km domi "
+     "nation breakeven tarif comparaison prix de reviens bascule kwh "
+     "abonnement fixe mensuel journalier quelle consommation "
+     "compensação tarifa qual mais barata ponto de equivalência kwh "
+     "assinatura mensalidade taxa de adesão"),
+    ("csv_excel_display", "/api/v1/csv/excel_display", "repair",
+     "Ce qu'Excel AFFICHE d'une valeur STOCKÉE sous un code numFmt : "
+     "la virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → "
+     "$1,000 — l'attaque mesurée arXiv 2611.05806, six extracteurs "
+     "python aveugles) ; exemples de la table Microsoft rejoués "
+     "(« #.0,, »→12.2, « (000) »→(012), « 0% »→50%) ; arrondi de "
+     "display demi-vers-le-large dit ; locale en ARGUMENT (les "
+     "séparateurs du fichier sont des symboles — ingénieur Micro"
+     "soft) ; General/dates/couleurs refusés PAR LE NOM ; rendu de "
+     "style, la prédiction d'import est une autre route",
+     "excel numfmt styles xlsx stored rendered diverge scale "
+     "thousands trailing comma markitdown openpyxl pandas wrong "
+     "budget cell shows extractor misled mise en forme affichée "
+     "valeur stockée rendu format nombre affichage cellule styles "
+     "xml visual formato número exibido célula render estilo de "
+     "número valor estocado"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)

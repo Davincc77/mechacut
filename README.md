@@ -5,7 +5,7 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 136 transforms + 6 named recipes as of v0.81.0, each with its tool card
+— 138 transforms + 9 named recipes as of v0.83.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
@@ -14,7 +14,16 @@ written to be followed literally by a 0.5B. Prove-the-determinism checklist:
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money/baggage` (cabin-baggage
+is the truth of today. Recent highlights: `money/crossover` (two tariffs
+with a unit rate and a recurring fixed: the web's seven published
+calculators all ROUND THE FIXED DELTA FIRST and contradict each other —
+4,623 where the exact answer is 4,623⅓ kWh; here the crossover ships as
+an exact fraction, the day convention is NAMED (×12 for monthly, never
+30-day months), and a plan that wins on both components gets the honest
+verdict "never"); `csv/excel_display` (what Excel DISPLAYS from a stored
+value under a numFmt code — arXiv 2611.05806 measured it: '$#,##0,'
+turns 1,000,000 into $1,000 and six python extractors never said so);
+`money/baggage` (cabin-baggage
 verdict keyed by the FLIGHT DATE — Regulation (EU) 2026/2202 applies only
 FROM 2027-10-23 and until then no EU size rule exists at all; from it,
 exactly one legal edge: the 40×30×15 under-seat item must ride FREE, while

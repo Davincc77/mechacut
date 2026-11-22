@@ -411,6 +411,37 @@
   },
   {
    "body": {
+    "format": "$#,##0,",
+    "value": "1000000"
+   },
+   "name": "csv_excel_display_b9_thousand_scale",
+   "path": "/api/v1/csv/excel_display",
+   "sha256": "73bb12b19c74358412fd8df4e219d0dcb11cb9f3caa4a746962926e843d042ea",
+   "status": 200
+  },
+  {
+   "body": {
+    "format": "#,##0.00",
+    "locale": "de-DE",
+    "value": "1234567.891"
+   },
+   "name": "csv_excel_display_locale_fork_de",
+   "path": "/api/v1/csv/excel_display",
+   "sha256": "0ee43aa12102a53a911394d8bc9f94fe5fa4fe38b01e124fca1dc744e550cd00",
+   "status": 200
+  },
+  {
+   "body": {
+    "format": "#.0,,",
+    "value": "12200000"
+   },
+   "name": "csv_excel_display_million_scale",
+   "path": "/api/v1/csv/excel_display",
+   "sha256": "b6ba5ebcaa689bf0f0f299bca3259366af7fe22c409786513383e66b910a72b8",
+   "status": 200
+  },
+  {
+   "body": {
     "csv": "facture\n1,234.56\n1.234\n2,000.00\n42.50"
    },
    "name": "csv_money_columns_conventions",
@@ -1284,6 +1315,78 @@
    "name": "money_baggage_rotation_vs_sizer",
    "path": "/api/v1/money/baggage",
    "sha256": "3c5d24385fed7da0eeff4707724b959abed1adb431a09f29f383aea4b3f15eec",
+   "status": 200
+  },
+  {
+   "body": {
+    "a_fixed": "10",
+    "a_fixed_per": "month",
+    "a_unit_per": "kWh",
+    "a_unit_rate": "0.24",
+    "b_fixed": "12",
+    "b_fixed_per": "month",
+    "b_unit_per": "kWh",
+    "b_unit_rate": "0.26",
+    "currency": "EUR"
+   },
+   "name": "money_crossover_domination_never",
+   "path": "/api/v1/money/crossover",
+   "sha256": "58aa637aed1a7ec3e7e59f9701a8fc11e0e95f0d1abb3f2381cd16037122bbc3",
+   "status": 200
+  },
+  {
+   "body": {
+    "a_fixed": "12",
+    "a_fixed_per": "month",
+    "a_unit_per": "kWh",
+    "a_unit_rate": "0.30",
+    "b_fixed": "22",
+    "b_fixed_per": "month",
+    "b_unit_per": "kWh",
+    "b_unit_rate": "0.26",
+    "currency": "EUR",
+    "km_per_unit": "6"
+   },
+   "name": "money_crossover_numbivo_3000_plus_km",
+   "path": "/api/v1/money/crossover",
+   "sha256": "30797873e39310dc2de79614c7f64aa0387c6f267b0e17828151ec10569c5807",
+   "status": 200
+  },
+  {
+   "body": {
+    "a_fixed": "12",
+    "a_fixed_per": "month",
+    "a_unit_per": "kWh",
+    "a_unit_rate": "0.30",
+    "b_fixed": "22",
+    "b_fixed_per": "month",
+    "b_unit_per": "kWh",
+    "b_unit_rate": "0.26",
+    "currency": "EUR",
+    "exit_fee_a": "60",
+    "usage_per_period": "3600",
+    "usage_period": "year"
+   },
+   "name": "money_crossover_payback_30_months",
+   "path": "/api/v1/money/crossover",
+   "sha256": "ef7c4375e051d9a61d10453c0bf7b16145132d6ca444e45351578efa361bc69b",
+   "status": 200
+  },
+  {
+   "body": {
+    "a_fixed": "0.60",
+    "a_fixed_per": "day",
+    "a_unit_per": "kWh",
+    "a_unit_rate": "0.25",
+    "b_fixed": "0.45",
+    "b_fixed_per": "day",
+    "b_unit_per": "kWh",
+    "b_unit_rate": "0.27",
+    "currency": "GBP"
+   },
+   "name": "money_crossover_uxtaxdrag_2737_5",
+   "path": "/api/v1/money/crossover",
+   "sha256": "865d0dc5486b8c040d2e9e480b3ec659f0e9c1c29c3e3a10d02273443e4d70f5",
    "status": 200
   },
   {

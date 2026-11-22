@@ -275,7 +275,7 @@ TR = {
                  "line into ANY agent, even the smallest — it becomes "
                  "the full manual:",
     "everyday.h2": "For the rest of us",
-  "everyday.intro": "No code, no jargon. Eleven things a normal person "
+  "everyday.intro": "No code, no jargon. Twelve things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -327,6 +327,15 @@ TR = {
                       "under-seat item at 40\u00d730\u00d715, nothing "
                       "before it. Rotation counts \u2014 faces sorted, "
                       "never the order you typed.",
+  "everyday.e12.name": "The two tariffs, one honest number",
+  "everyday.e12.say": "\u201cPlan A is cheaper per kWh, plan B is "
+                      "cheaper per month \u2014 when does A really "
+                      "win?\u201d The crossover is (fixed gap \u00d7 "
+                      "days) \u00f7 (rate gap) \u2014 and the exact "
+                      "fraction, not the web's rounded intermediate: "
+                      "4,623\u2153 kWh where the article says \u201cabout "
+                      "4,623\u201d. \u201cNever\u201d is also an answer, "
+                      "named, when one plan wins on both parts.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -556,7 +565,7 @@ TR = {
                  "dans n'importe quel agent, m\u00eame le plus petit "
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour le commun des mortels",
-  "everyday.intro": "Pas de code, pas de jargon. Onze choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Douze choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
                     "réelle du serveur, pas une maquette.",
@@ -613,6 +622,15 @@ TR = {
                       "l'article sous-siège à 40×30×15, avant elle "
                       "rien n'est fixé. La rotation compte — faces "
                       "triées, jamais l'ordre tapé.",
+  "everyday.e12.name": "Deux tarifs, un seul chiffre honnête",
+  "everyday.e12.say": "« Le tarif A est moins cher du kWh, le B "
+                      "moins cher par mois — quand est-ce que A "
+                      "gagne vraiment ? » La bascule = (écart de "
+                      "fixe × jours) ÷ (écart de prix), en fraction "
+                      "EXACTE : 4 623\u2153 kWh là où l'article écrit "
+                      "« environ 4 623 ». « Jamais » est aussi une "
+                      "réponse, nommée, quand un plan gagne sur les "
+                      "deux composantes.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -840,7 +858,7 @@ TR = {
   "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para o cidad\u00e3o comum",
-  "everyday.intro": "Sem código, sem jargão. Onze coisas que "
+  "everyday.intro": "Sem código, sem jargão. Doze coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -894,6 +912,14 @@ TR = {
                       "assento a 40×30×15; antes dela, nada é fixo. "
                       "Rotação conta — faces ordenadas, nunca a ordem "
                       "digitada.",
+  "everyday.e12.name": "Dois planos, um número honesto",
+  "everyday.e12.say": "“O plano A é mais barato por kWh, o B mais "
+                      "barato por mês — quando o A ganha de fato?” A "
+                      "virada = (diferença de fixo × dias) ÷ "
+                      "(diferença de preço), em fração EXATA: "
+                      "4.623⅓ kWh onde o artigo diz “cerca de "
+                      "4.623”. “Nunca” também é resposta, nomeada, "
+                      "quando um plano vence nos dois componentes.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -1492,7 +1518,10 @@ W = {
               "old rules: a different answer",
       "bag": "\u2192 %s under the seat by the 2027 LAW \u00b7 carrier "
              "gauge 40\u00d730\u00d720: %s once faces are sorted \u00b7 "
-             "overhead: the law sets NO size"},
+             "overhead: the law sets NO size",
+      "cross": "\u2192 the two tariffs flip at %s kWh a month (%s a "
+               "year) \u00b7 exact \u2014 web calculators round the "
+               "fixed part first"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -1512,7 +1541,10 @@ W = {
               "le 23 oct. 2027 : autre réponse",
       "bag": "\u2192 %s sous le siège par la LOI 2027 \u00b7 gabarit "
              "compagnie 40\u00d730\u00d720 : %s faces triées \u00b7 casier "
-             ": la loi ne fixe RIEN"},
+             ": la loi ne fixe RIEN",
+      "cross": "\u2192 les deux tarifs s'inversent à %s kWh par mois "
+               "(%s par an) \u00b7 exact — la presse arrondit le fixe "
+               "avant de diviser"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -1532,7 +1564,11 @@ W = {
               "não calculada aqui",
       "bag": "→ %s sob o assento pela LEI 2027 · gabarito da cia "
              "40×30×20: %s com faces ordenadas · bagageiro: a lei "
-             "não fixa NADA"},
+             "não fixa NADA",
+      "cross": "→ os dois planos se invertem a %s kWh por mês (%s por "
+               "ano) · exato — as calculadoras da web arredondam o "
+               "fixo antes",
+    },
 }
 
 
@@ -1603,6 +1639,17 @@ _EVERYDAY_CALLS = [
          {"en": "fits", "fr": "passe", "pt": "cabe"}[L]
          if d["carrier"]["personal_vs_sizer"]["fits"]
          else {"en": "over", "fr": "dépassé", "pt": "estoura"}[L])),
+    ("/api/v1/money/crossover",
+     {"a_unit_rate": "0.30", "a_unit_per": "kWh", "a_fixed": "12",
+      "a_fixed_per": "month", "b_unit_rate": "0.26",
+      "b_unit_per": "kWh", "b_fixed": "22", "b_fixed_per": "month",
+      "currency": "EUR"},
+     "cross", lambda d, L: (
+         {"en": lambda s: s, "fr": lambda s: s.replace(".", ","),
+          "pt": lambda s: s.replace(".", ",")}[L](
+             d["crossover"]["per_month"]),
+         {"en": lambda s: "3,000", "fr": lambda s: "3 000",
+          "pt": lambda s: "3.000"}[L](d["crossover"]["per_year"]))),
 ]
 
 
@@ -1618,7 +1665,7 @@ BUILDER_CONSUMED = {"everyday.h2", "everyday.intro"} | {
 def everyday_html(lang, cat):
     from fastapi.testclient import TestClient
     import main as _m
-    _m.RATE_LIMIT = 10**9  # build harness: 11 cards x 3 langs > 30/min,
+    _m.RATE_LIMIT = 10**9  # build harness: 12 cards x 3 langs > 30/min,
     # the last pt chips used to bake as "?" silently (22-11)
     cli = TestClient(_m.app)
     cur = {"en": "USD", "fr": "EUR", "pt": "BRL"}[lang]

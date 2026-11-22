@@ -47,6 +47,10 @@ POST /api/v1/money/baggage      flight date keys LAW vs carrier gauge;       (fr
                                 40x30x15 underseat free from 2027-10-23
 POST /api/v1/csv/excel_damage   what Excel DESTROYS on double-click,         (free)
                                 per column, published vectors, import said
+POST /api/v1/money/crossover    two-component tariffs: EXACT crossover,      (free)
+                                named day convention, domination says never
+POST /api/v1/csv/excel_display  stored value + numFmt code -> what the       (free)
+                                human SEES (the $1,000-vs-1000000 split)
 
 Bundle 4.1 — numbers & money (TOOLS-50 #24-26):
 POST /api/v1/num/format       value + closed locale/currency tables -> text
@@ -216,6 +220,8 @@ import compkit
 import weekkit
 import bagkit
 import damagekit
+import crosskit
+import displaykit
 import auditor
 import sayings
 import verdict
@@ -309,7 +315,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.82.0",
+    version="0.83.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4492,6 +4498,68 @@ def api_csv_excel_damage(req: CsvExcelDamageRequest):
     body, err = run_csv_excel_damage(req.dict())
     return err if err else body
 
+
+# ---------------- bundle 52: money/crossover + csv/excel_display
+
+class MoneyCrossoverRequest(BaseModel):
+    currency: Optional[str] = None
+    a_unit_rate: Optional[str] = None
+    a_unit_per: Optional[str] = None
+    a_fixed: Optional[str] = None
+    a_fixed_per: Optional[str] = None
+    b_unit_rate: Optional[str] = None
+    b_unit_per: Optional[str] = None
+    b_fixed: Optional[str] = None
+    b_fixed_per: Optional[str] = None
+    days_per_year: Optional[str] = None
+    usage_per_period: Optional[str] = None
+    usage_period: Optional[str] = None
+    km_per_unit: Optional[str] = None
+    exit_fee_a: Optional[str] = None
+    exit_fee_b: Optional[str] = None
+    sign_up_a: Optional[str] = None
+    sign_up_b: Optional[str] = None
+
+
+def run_money_crossover(args: dict):
+    try:
+        out = crosskit.run_crossover(args)
+    except crosskit.CrossError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/crossover")
+def api_money_crossover(req: MoneyCrossoverRequest):
+    body, err = run_money_crossover(req.dict())
+    return err if err else body
+
+
+class CsvExcelDisplayRequest(BaseModel):
+    value: Optional[str] = None
+    format: Optional[str] = None
+    locale: Optional[str] = None
+
+
+def run_csv_excel_display(args: dict):
+    try:
+        out = displaykit.run_display(args)
+    except displaykit.DisplayError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/csv/excel_display")
+def api_csv_excel_display(req: CsvExcelDisplayRequest):
+    body, err = run_csv_excel_display(req.dict())
+    return err if err else body
+
 # ------------------------------ bundle 0: task router + named recipes
 
 @app.get("/route")
@@ -4819,6 +4887,8 @@ TOOL_RUN = {
            "date_week": run_date_week,
            "money_baggage": run_money_baggage,
            "csv_excel_damage": run_csv_excel_damage,
+           "money_crossover": run_money_crossover,
+           "csv_excel_display": run_csv_excel_display,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -6082,6 +6152,110 @@ MCP_TOOLS = [
             "as_of": {"type": "string",
                       "description": "YYYY-MM-DD freezing the year "
                                      "Excel implies for '3/4'"}}}},
+    {
+        "name": "money_crossover",
+        "description": "Two-component tariffs (unit rate + recurring "
+                       "fixed): WHERE they cross, exact. The formula "
+                       "is published by seven web calculators that "
+                       "contradict each other on ROUNDING: they round "
+                       "the fixed delta first (19.42/0.0042 = 'about "
+                       "4,623') where the exact answer is 4,623 1/3 "
+                       "kWh. Here Decimal never quantizes before the "
+                       "last step: the crossover ships as an EXACT "
+                       "fraction plus its decimal. DAY CONVENTIONS are "
+                       "named, never melted: monthly fixeds annualize "
+                       "by x12 exact (not 30-day months = x360), "
+                       "daily by x365 or a supplied 366 leap year; "
+                       "'week' is REFUSED (no exact conversion). "
+                       "DOMINATION is a rendered answer: when one plan "
+                       "wins on BOTH components, 'never' comes back "
+                       "named with the reason. Also: equal fixeds "
+                       "(immediate crossover at zero), equal rates "
+                       "(no tradeoff), distance conversion when km "
+                       "per unit is SUPPLIED (EV), costs at your "
+                       "usage, and one-off exit/signup fees rendered "
+                       "as PAYBACK months — separate from the "
+                       "structural crossover (uktaxdrag's own "
+                       "distinction). Electricity, EV charging, SaaS "
+                       "seats, mobile data: one kernel. Zero fetch, "
+                       "no tariff advice. Free.",
+        "inputSchema": {"type": "object", "properties": {
+            "currency": {"type": "string",
+                         "description": "ISO code (EUR, GBP, USD, "
+                                        "BRL...)"},
+            "a_unit_rate": {"type": "string",
+                            "description": "plan A price per unit, "
+                                           "major units: '0.30'"},
+            "a_unit_per": {"type": "string",
+                           "description": "kWh / Wh / MWh, or any "
+                                          "unit matching plan B"},
+            "a_fixed": {"type": "string",
+                        "description": "plan A recurring fixed, '12'"},
+            "a_fixed_per": {"type": "string", "enum": ["day", "month",
+                                                        "year"],
+                            "description": "the CONVENTION is explicit "
+                                           "— 'week' refused"},
+            "b_unit_rate": {"type": "string"},
+            "b_unit_per": {"type": "string"},
+            "b_fixed": {"type": "string"},
+            "b_fixed_per": {"type": "string", "enum": ["day", "month",
+                                                        "year"]},
+            "days_per_year": {"type": "string",
+                              "description": "'365' default, '366' "
+                                             "named leap year"},
+            "usage_per_period": {"type": "string",
+                                 "description": "your consumption to "
+                                                "compare costs at"},
+            "usage_period": {"type": "string", "enum": ["month",
+                                                         "year"]},
+            "km_per_unit": {"type": "string",
+                            "description": "supplied efficiency, e.g. "
+                                           "'6' km/kWh → crossover in km"},
+            "exit_fee_a": {"type": "string"},
+            "exit_fee_b": {"type": "string"},
+            "sign_up_a": {"type": "string"},
+            "sign_up_b": {"type": "string"}}}},
+    {
+        "name": "csv_excel_display",
+        "description": "What Excel DISPLAYS from a STORED value under "
+                       "a numFmt code — the render, not the damage. "
+                       "arXiv 2611.05806 measured it: cell B9 stores "
+                       "1,000,000 under '$#,##0,' (the TRAILING COMMA "
+                       "SCALES by a thousand) and Excel shows $1,000; "
+                       "six python extractors (markitdown, openpyxl, "
+                       "pandas, unstructured, calamine, Docling) all "
+                       "emit the stored value — every chat assistant "
+                       "and 3 of 4 coding agents tested got budget-"
+                       "approved numbers the human never saw. Feed "
+                       "the stored value (what your extractor gave "
+                       "you) plus the format code (styles.xml); get "
+                       "the display string + the rules said. Closed "
+                       "subset from Microsoft's OWN symbol table with "
+                       "its resolved examples replayed: '#.0,,' + "
+                       "12200000 -> '12.2'; '(000)' + 12 -> '(012)'; "
+                       "'0%' + 0.5 -> '50%'; '0.00 \"dollars\"' + 1.23 "
+                       "-> '1.23 dollars'; '#.##' + 8.9 -> '8.9'; "
+                       "display rounding half-away-from-zero (2.5 "
+                       "under '0' -> 3) — and the stored value NEVER "
+                       "changes, only the display. Separators are "
+                       "SYMBOLS in the file (Microsoft states content "
+                       "is locale-invariant): pass the locale you "
+                       "display in and '1234567.891' under '#,##0.00' "
+                       "becomes 1.234.567,89 in de-DE. REFUSED by "
+                       "name: General (column-width dependent), "
+                       "E-notation, date/time codes, [Red], [<] "
+                       "conditions, * fill, _ skip, @ text. Free.",
+        "inputSchema": {"type": "object", "properties": {
+            "value": {"type": "string",
+                      "description": "the STORED number as extracted, "
+                                     "e.g. '1000000' or "
+                                     "'25604.880000000001'"},
+            "format": {"type": "string",
+                       "description": "the numFmt code, e.g. "
+                                      "'$#,##0,' or '#,##0.00'"},
+            "locale": {"type": "string",
+                       "description": "display locale for separators "
+                                      "(closed table), default en-US"}}}},
     {
         "name": "table_sql_dump",
         "description": "CSV/JSON rows into executable CREATE TABLE + "
@@ -7461,7 +7635,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.82.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.83.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":
@@ -7522,6 +7696,8 @@ def build_listing_text():
             "  POST /api/v1/date/week          ISO week <-> date, %Y-W%V trap shown, does W53 exist?",
             "  POST /api/v1/money/baggage      does my bag pass: law by FLIGHT DATE vs gauges you supply, rotation fit",
             "  POST /api/v1/csv/excel_damage   predict Excel's silent CSV damage BEFORE the double-click, per column",
+            "  POST /api/v1/money/crossover    two tariffs with fixed+unit parts: exact crossover, 'never' when one dominates",
+            "  POST /api/v1/csv/excel_display  stored value + numFmt code -> what the human sees ($#,##0, scales by 1000)",
         "  POST /api/v1/check/*      the output gates: agree/redlines/refs",
         "",
         "PAYLOAD (one line, honest): mechacut.studio — %d deterministic"
@@ -7666,7 +7842,9 @@ def index(request: Request):
             "/api/v1/money/flight_comp": "POST (regime EU|UK, flight_date, event, distance_km, delay_min|notice_days+reroute) -> EC261/UK261 compensation with the table chosen BY FLIGHT DATE: old text + Sturgeon/Nelson case-law before 2027-10-23, (EU) 2026/2202 codified rules after ('EXCEEDING three hours' strict), UK261 £220/£350/£520 with the official under-4h £260 band, intra-Union EUR 400 cap named, 50%/25 % reductions as named MAY-options, nine-month claim deadline as an exact date, refusals named, zero fetch, zero legal promises (free)",
             "/api/v1/date/week": "POST (date | iso YYYY-Www-d | year) -> ISO 8601 week round-trip: iso_week/iso_year split out of the calendar year, week bounds, W53 existence by THEOREM (53 Thursdays — zero tables), nonexistent weeks refused naming the artifact, %Y-W%V vs %G-W%V shown on the requested date, Excel/US conventions beside ISO (free)",
             "/api/v1/money/baggage": "POST (flight_date regime bag [bag_unit|weight_kg|personal_sizer|cabin_sizer|cabin_sum_limit|cabin_weight_max]) -> cabin-baggage verdict: EU law keyed by FLIGHT DATE (silent before 2027-10-23, 40x30x15 underseat safe-harbour after, NO overhead size in law), carrier gauges as SUPPLIED arguments compared PER DIMENSION with rotation allowed, the press '100 cm combined / 7 kg' reading rendered as a tested press claim never a legal rule, weight named per source, zero fetch, not legal advice (free)",
-            "/api/v1/csv/excel_damage": "POST (csv locale en|eu as_of) -> what Excel silently REWRITES at open, per column with published vectors (02134->2134, 4111111111111111->4111111111111110, 1E5->100000, SEPT2/MARCH1->dates, '3-4' = March 4 in en / April 3 in eu), Microsoft's three Automatic Data Conversion toggles named, formula shapes and full-width digits flagged, column-as-Text import prescribed, unrecoverability stated; detection lot — numFmt display rendering is the queued M part (free)",
+            "/api/v1/csv/excel_damage": "POST (csv locale en|eu as_of) -> what Excel silently REWRITES at open, per column with published vectors (02134->2134, 4111111111111111->4111111111111110, 1E5->100000, SEPT2/MARCH1->dates, '3-4' = March 4 in en / April 3 in eu), Microsoft's three Automatic Data Conversion toggles named, formula shapes and full-width digits flagged, column-as-Text import prescribed, unrecoverability stated; detection lot — the numFmt RENDER lives at /api/v1/csv/excel_display (free)",
+            "/api/v1/money/crossover": "POST (currency a_unit_rate a_unit_per a_fixed a_fixed_per b_* [+ days_per_year usage_per_period usage_period km_per_unit exit_fee_a exit_fee_b sign_up_a sign_up_b]) -> EXACT crossover of two fixed+unit tariffs as a Fraction plus decimal, day convention NAMED (x12 for monthly, never 30-day months; x365 or 366), domination rendered as 'never' with reason, immediate-crossover when fixeds tie, costs at your usage, fees as payback months separate from the crossover, EV km only if efficiency supplied, zero fetch, no tariff advice (free)",
+            "/api/v1/csv/excel_display": "POST (value format [locale]) -> what Excel DISPLAYS from the stored value under a numFmt code, the arXiv-2611.05806 divergence closed: '$#,##0,' scales by 1000 (B9: stored 1000000 shows $1,000), Microsoft symbol-table examples replayed ('#.0,,' 12200000 -> 12.2, '(000)' 12 -> (012), '0%' 0.5 -> 50%, '#.##' 8.9 -> 8.9, '0.00 \"dollars\"'), display rounding half-away-from-zero said, locale as SYMBOLS argument (de-DE renders 1.234.567,89), General/E-notation/date-codes/colours/fill/text refused BY NAME, stored value never changes (free)",
             "/api/v1/table/sql_dump": "POST (csv|rows table dialect types) -> CREATE TABLE + INSERT with types DEDUCED and DIT (type+reason+sample), dialect-exact quoting, identifiers outside closed grammar refused by name, sqlite round-trip verified (🟡 above 32 KB)",
             "/api/v1/table/scale": "POST (items factor|servings) -> recipe scaling with THREE answers per line: exact fraction, measurable amount at the class rounding step (rule named), delta — silent rounding impossible, pinch refused by name (free)",
             "/api/v1/check/format": "POST (payload formats) -> closed-set format validation for fields JSON Schema cannot describe (free)",
