@@ -11,7 +11,8 @@
     {
       "id": "chaine-shop-reste",
       "symptome": "deux ventes successives dont une en % DU RESTE ; « combien reste-t-il »",
-      "mots_cles": ["reste", "restant", "après-midi", "du reste"],
+      "mots_cles": ["magasin", "vendus", "après-midi", "restants",
+                    "combien restent"],
       "classe": "chaine",
       "prescription": {
         "fiche": "shop-reste",

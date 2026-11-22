@@ -74,6 +74,24 @@ def test_trouver_ne_devine_pas():
     assert e is None and s == 0
 
 
+def test_trouver_plie_les_accents():
+    """Incident live 22-11 : « recoit » sans accent faisait perdre
+    l'entrée partage au profit de mots-clés génériques."""
+    d = annuaire.load()
+    e, _ = annuaire.trouver(
+        "On partage 800 euros : la premiere recoit 1/4, la seconde "
+        "1/3 DU RESTE.", d)
+    assert e and e["prescription"]["fiche"] == "partage-reste"
+
+
+def test_trouver_egalite_pas_de_match():
+    """Deux entrées au même score = le texte est réellement ambigu :
+    aucun départage à l'ordre des lignes, pas de match (R3)."""
+    d = annuaire.load()
+    e, s = annuaire.trouver("Le magasin partage la marchandise.", d)
+    assert e is None and s == 1
+
+
 # ------------------------------------------- S2/S3 : plan + apply (R1/R3)
 # V16_SHOP/V16_SOLDES : textes verbatim des gabarits v16 (bench/
 # gen16.py), golds publiés FINDINGS-V16/F5. V16_PARTAGE : INSTANCE

@@ -57,17 +57,30 @@ def load(path=ANNUAIRE, strict=True):
 
 
 def trouver(texte, d=None):
-    """Le mot le plus spécifique gagne ; pas de score flottant,
-    pas d'approximation — ce qui ne matche pas reçoit une
-    prescription vide (= on ne devine pas)."""
+    """Le mot le plus spécifique gagne. Les accents sont pliés
+    (l'incident live 22-11 : « recoit » sans accent perdait la
+    bataille contre « du reste » partagé). ÉGALITÉ = PAS DE MATCH :
+    un lien d'annuaire qu'on départagerait par l'ordre des lignes
+    est une devinette, et on ne devine pas (R3)."""
+    import unicodedata
     d = d or load()
-    meilleur, score = None, 0
-    t = (texte or "").lower()
+
+    def fold(s):
+        return "".join(c for c in unicodedata.normalize("NFD", s.lower())
+                       if unicodedata.category(c) != "Mn")
+
+    t = fold(texte or "")
+    scores = []
     for e in d["entrees"]:
-        s = sum(1 for m in e["mots_cles"] if m in t)
-        if s > score:
-            meilleur, score = e, s
-    return (meilleur, score) if score else (None, 0)
+        s = sum(1 for m in e["mots_cles"] if fold(m) in t)
+        scores.append((e, s))
+    best = max(s for _, s in scores) if scores else 0
+    if best == 0:
+        return None, 0
+    vainqueurs = [e for e, s in scores if s == best]
+    if len(vainqueurs) > 1:
+        return None, best          # égalité : on ne départage pas à l'ordre
+    return vainqueurs[0], best
 
 
 if __name__ == "__main__":
