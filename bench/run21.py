@@ -67,16 +67,20 @@ WORDS_GOLD = "mille huit cent quatre-vingt-dix-neuf"
 
 
 def ours(route, payload):
+    """-> (json, erreur) : erreur = vrai si le HTTP n'était pas 2xx."""
     req = urllib.request.Request(OURS + route,
                                  data=json.dumps(payload).encode(),
-                                 headers=dict(UA))
+                                 headers={k: v for k, v in UA.items()
+                                          if k != "Accept"})
     try:
-        return json.loads(urllib.request.urlopen(req, timeout=30).read())
+        return json.loads(urllib.request.urlopen(req, timeout=30).read()), False
     except urllib.error.HTTPError as e:
         try:
-            return json.loads(e.read().decode())
+            return json.loads(e.read().decode()), True
         except Exception:
-            return {"error": "http"}
+            return {"error": "http"}, True
+    except Exception as e:
+        return {"error": str(e)[:80]}, True
 
 
 def theirs(args):
@@ -139,16 +143,22 @@ def main():
              "ours": keep(sa), "theirs": (not err) and keep(sb),
              "verdict": "OK", "brut_them": sb[:200],
              "note": "verdict affiné au scoreur, pas à chaud"})
-    # --- G3 IBAN — commune
+    # --- G3 IBAN — PAID CHEZ NOUS : le face-à-face est un banc
+    # gratuit ; le côté payé est facté 402, pas 400. Le banc ne
+    # contourne PAS son propre mur de prix — c'est le tiers qui est
+    # mesuré ici, et il est publié : sur l'IBAN gratuit vs payant,
+    # la frontière concurrente gagne l'appel sans portefeuille.
     if "G3" not in done:
         a, _ = ours("/api/v1/validate/iban", {"iban": IBAN_IN})
+        paid = ("x402" in json.dumps(a)
+                or "X-PAYMENT" in json.dumps(a))
         b, err = cf_run("iban-validate", "1.0.0", {"iban": IBAN_IN})
-        ok_a = '"valid":true' in json.dumps(a).replace(" ", "") or \
-            "true" in json.dumps(a).lower()
         ok_b = (not err) and "true" in json.dumps(b).lower()
-        row({"harness": "v21", "cell": "G3", "side": "both",
-             "ours": ok_a, "theirs": ok_b,
-             "verdict": "OK" if ok_a and ok_b else "DIVERGENCE",
+        row({"harness": "v21", "cell": "G3", "side": "tier",
+             "ours": "paid-tier" if paid else "free-and-right",
+             "theirs": ok_b,
+             "verdict": "TIER-DIVERGENCE" if paid and ok_b else
+                        ("OK" if ok_b else "THEIRS-WRONG"),
              "brut_them": json.dumps(b, ensure_ascii=False)[:200]})
     # --- G4 compteur jours ouvrés — chez EUX seulement
     if "G4" not in done:

@@ -1,0 +1,1 @@
+{"harness": "v21", "cell": "G3", "side": "both", "ours": false, "theirs": true, "verdict": "DIVERGENCE", "brut_them": "{\"result\": {\"electronic\": \"FR7630006000011234567890189\", \"print\": \"FR76 3000 6000 0112 3456 7890 189\", \"data_version\": \"swift-iban-registry-103-2026-09.subset-80\", \"valid\": true, \"reason\": null, \"coun"}
