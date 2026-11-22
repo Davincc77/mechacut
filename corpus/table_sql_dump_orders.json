@@ -1,0 +1,1 @@
+{"name": "table_sql_dump_orders", "path": "/api/v1/table/sql_dump", "body": {"csv": "id,name,qty,price,note\n1,O'Brien,3,1.50,hello\n2,caf\u00e9,007,10,\n3,x,12,2.5,\n", "table": "orders", "dialect": "sqlite", "rows_per_statement": 2}}

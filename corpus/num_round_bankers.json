@@ -1,0 +1,8 @@
+{
+  "name": "num_round_bankers",
+  "path": "/api/v1/num/round",
+  "body": {
+    "value": "0.145",
+    "places": 2
+  }
+}

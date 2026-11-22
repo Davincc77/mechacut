@@ -1,0 +1,6 @@
+{"name": "recipe_invoice_fr",
+ "path": "/api/v1/recipe/invoice",
+ "body": {"line_items": [{"desc": "Développement", "qty": 12, "unit_price": "85.00"},
+                          {"desc": "Hébergement", "qty": 1, "unit_price": "4.90"}],
+          "currency": "EUR", "vat_percent": "20", "date": "2026-11-21",
+          "due_days": 30, "words_lang": "fr"}}

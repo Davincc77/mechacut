@@ -1,0 +1,1 @@
+{"name": "digit_repair_ean13", "path": "/api/v1/id/checkdigit", "body": {"mode": "repair", "value": "4006381333941", "scheme": "ean13"}}

@@ -1,0 +1,9 @@
+{
+  "name": "units_temp_f_to_k",
+  "path": "/api/v1/units/convert",
+  "body": {
+    "value": 212,
+    "from": "F",
+    "to": "K"
+  }
+}

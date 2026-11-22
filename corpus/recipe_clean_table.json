@@ -1,0 +1,7 @@
+{
+  "name": "recipe_clean_table",
+  "path": "/api/v1/recipe/clean-table",
+  "body": {
+    "csv": "name,amount\r\nAlpha,1\r\nAlpha,1\r\nbeta, 2.5\r\nAlpha,1\r\n"
+  }
+}

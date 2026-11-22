@@ -1,0 +1,3 @@
+{"name": "eth_selector_transfer",
+ "path": "/api/v1/eth/selector",
+ "body": {"signature": "transfer(address,uint256)"}}

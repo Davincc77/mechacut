@@ -1,0 +1,7 @@
+{
+  "name": "hash_sha256_abc",
+  "path": "/api/v1/hash/digest",
+  "body": {
+    "data": "abc"
+  }
+}

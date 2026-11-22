@@ -1,0 +1,11 @@
+{
+ "body": {
+  "delay_min": "239",
+  "distance_km": "5550",
+  "event": "delay",
+  "flight_date": "2026-11-05",
+  "regime": "UK"
+ },
+ "name": "money_flight_comp_uk_official_row",
+ "path": "/api/v1/money/flight_comp"
+}

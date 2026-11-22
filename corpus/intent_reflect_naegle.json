@@ -1,0 +1,10 @@
+{
+ "name": "intent_reflect_naegle",
+ "path": "/api/v1/intent/reflect",
+ "body": {
+  "formula": "naegle_due_date",
+  "args": {
+   "lmp": "2026-01-01"
+  }
+ }
+}

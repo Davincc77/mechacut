@@ -1,0 +1,8 @@
+{
+  "name": "md_render_kitchen_sink",
+  "path": "/api/v1/md/render",
+  "body": {
+    "markdown": "# Notes\n\n- un\n- deux\n\n| A | B |\n|---|---|\n| 1 | 2 |\n",
+    "heading_ids": true
+  }
+}

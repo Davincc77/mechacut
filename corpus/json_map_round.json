@@ -1,0 +1,5 @@
+{
+  "name": "json_map_round",
+  "path": "/api/v1/json/map",
+  "body": {"items": [1.005, 2.675, "1.45"], "ops": [{"op": "str"}, {"op": "round", "places": 2}]}
+}

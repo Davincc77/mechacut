@@ -1,0 +1,7 @@
+{
+ "body": {
+  "date": "2027-01-01"
+ },
+ "name": "date_week_2027_artifact",
+ "path": "/api/v1/date/week"
+}

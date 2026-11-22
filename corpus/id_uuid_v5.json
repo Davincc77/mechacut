@@ -1,0 +1,8 @@
+{
+  "name": "id_uuid_v5",
+  "path": "/api/v1/id/uuid",
+  "body": {
+    "op": "v5",
+    "name": "https://mechacut.studio"
+  }
+}

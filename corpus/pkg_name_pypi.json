@@ -1,0 +1,5 @@
+{
+  "name": "pkg_name_pypi",
+  "path": "/api/v1/pkg/name",
+  "body": {"name": "Django_REST--framework", "kind": "pypi"}
+}

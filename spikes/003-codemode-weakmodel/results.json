@@ -1,0 +1,40 @@
+[
+ {
+  "model": "1.5b",
+  "harness": "003",
+  "B": {
+   "keys": null,
+   "valid_json": false,
+   "tokens": 1147
+  },
+  "C": {
+   "keys": null,
+   "parsed": false,
+   "exec_ok": false,
+   "exec_err": "extract_facts is not defined",
+   "net_calls": 0,
+   "tokens": 963,
+   "repairs": 0,
+   "raw_head": "async () => {\n  const facts = await extract_facts({text: NOTE});\n  const amounts_usd = facts\n    .filter(({kind}) => kind === \"money\")\n    .map(({value}) => parseFloat(value.replace(\"$\", \"\").replace(\"%\", \"\")))\n    .sort((a, b) => a - b)\n    .reduce((acc, curr) => acc + curr, 0);\n  const percentages "
+  }
+ },
+ {
+  "model": "7b",
+  "harness": "003",
+  "B": {
+   "keys": 5,
+   "valid_json": true,
+   "tokens": 1164
+  },
+  "C": {
+   "keys": null,
+   "parsed": false,
+   "exec_ok": false,
+   "exec_err": "Cannot read properties of undefined (reading 'filter')",
+   "net_calls": 0,
+   "tokens": 793,
+   "repairs": 0,
+   "raw_head": "async () => { const facts = await codemode.extract_facts({text: NOTE}).facts; const amounts_usd = facts.filter(f => f.kind === \"money\").map(f => f.value.replace(/\\$/g, '')); const percentages = facts.filter(f => f.kind === \"percent\").map(f => f.value.replace(/%/g, '')); const dates_utc = facts.filte"
+  }
+ }
+]

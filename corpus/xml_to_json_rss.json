@@ -1,0 +1,1 @@
+{"name": "xml_to_json_rss", "path": "/api/v1/xml/to_json", "body": {"xml": "<rss version=\"2.0\"><channel><title>Canard deterministe</title><item><title>Un</title></item></channel></rss>", "force_array": ["rss/channel/item"]}}

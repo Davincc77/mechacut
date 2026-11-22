@@ -1,0 +1,14 @@
+{
+  "name": "chart_histogram",
+  "path": "/api/v1/chart",
+  "body": {
+    "kind": "histogram",
+    "x": "revenue",
+    "format": "spec",
+    "data": [
+      {"revenue": 1200}, {"revenue": 1810}, {"revenue": 940},
+      {"revenue": 1310}, {"revenue": 1150}, {"revenue": 1620},
+      {"revenue": 990}, {"revenue": 1440}
+    ]
+  }
+}

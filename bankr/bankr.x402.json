@@ -1,0 +1,265 @@
+{
+  "network": "base",
+  "currency": "USDC",
+  "services": {
+    "chart_from_data": {
+      "description": "mechacut.studio chart: deterministic Vega-Lite + PNG chart from records or CSV. Use when you must PLOT data, draw a price/line/bar/pie/histogram chart, make a graph from json or csv, visualize token price, wallet PnL or DEX flow, render a chart image to post, or say 'chart this'. Same request -> same sha256, never reorders your data.",
+      "category": "data",
+      "tags": [
+        "chart",
+        "graph",
+        "plot",
+        "csv",
+        "json",
+        "visualization",
+        "mechacut"
+      ],
+      "price": "0.001",
+      "methods": [
+        "POST"
+      ],
+      "schema": {
+        "input": {
+          "type": "object",
+          "required": [
+            "x"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "bar",
+                "line",
+                "area",
+                "point",
+                "step",
+                "histogram",
+                "pie"
+              ],
+              "default": "bar"
+            },
+            "x": {
+              "type": "string",
+              "description": "category or numeric column"
+            },
+            "y": {
+              "type": "string",
+              "description": "value column; required unless kind is histogram"
+            },
+            "series": {
+              "type": "string",
+              "description": "grouping column"
+            },
+            "title": {
+              "type": "string"
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "description": "records; or send csv"
+            },
+            "csv": {
+              "type": "string",
+              "description": "CSV text, header row required"
+            },
+            "width": {
+              "type": "integer",
+              "default": 640
+            },
+            "height": {
+              "type": "integer",
+              "default": 400
+            }
+          }
+        },
+        "output": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string",
+              "description": "hash of the spec — same request → same hash"
+            },
+            "vega": {
+              "type": "object",
+              "description": "embeddable Vega-Lite spec"
+            }
+          }
+        }
+      }
+    },
+    "reshape_json": {
+      "description": "mechacut.studio reshape: JSON to JSON with a declarative mapping (path, cast, default, required, each) + output schema gate. Use when you need to restructure json, flatten a nested api response, map fields, rename keys, pick values from an array of objects, turn a payload into records, or 'shape this json' without an LLM guessing every call.",
+      "category": "data",
+      "tags": [
+        "json",
+        "reshape",
+        "transform",
+        "mapping",
+        "flatten",
+        "mechacut"
+      ],
+      "price": "0.0005",
+      "methods": [
+        "POST"
+      ],
+      "schema": {
+        "input": {
+          "type": "object",
+          "required": [
+            "input",
+            "mapping"
+          ],
+          "properties": {
+            "input": {
+              "description": "any JSON payload"
+            },
+            "mapping": {
+              "type": "object",
+              "required": [
+                "fields"
+              ],
+              "properties": {
+                "fields": {
+                  "type": "object"
+                }
+              },
+              "description": "fields: {outKey: {path, cast?, default?, required?, each?} | {const}}"
+            },
+            "outputSchema": {
+              "type": "object",
+              "description": "JSON Schema draft 2020-12 the output must satisfy"
+            }
+          }
+        },
+        "output": {
+          "type": "object",
+          "properties": {
+            "output": {
+              "description": "the reshaped JSON"
+            },
+            "sha256": {
+              "type": "string"
+            },
+            "defaults_used": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "validate_json": {
+      "description": "mechacut.studio validate: JSON Schema draft 2020-12 gate. Use when you need to check json is valid, verify agent output before acting, schema check, lint json against a contract, or get precise errors with exact paths. valid true, or errors[] you can fix.",
+      "category": "data",
+      "tags": [
+        "json",
+        "schema",
+        "validate",
+        "lint",
+        "gate",
+        "mechacut"
+      ],
+      "price": "0.0005",
+      "methods": [
+        "POST"
+      ],
+      "schema": {
+        "input": {
+          "type": "object",
+          "required": [
+            "payload",
+            "schema"
+          ],
+          "properties": {
+            "payload": {
+              "description": "any JSON"
+            },
+            "schema": {
+              "type": "object",
+              "description": "JSON Schema draft 2020-12"
+            }
+          }
+        },
+        "output": {
+          "type": "object",
+          "properties": {
+            "valid": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "csv_join": {
+      "description": "mechacut.studio csv/json join: merge two tables on a key (inner/left/right/outer), deterministic row order, left wins on overlap, counts report exactly what matched. Use when you need to merge csvs, join datasets, combine two json arrays on a column, vlookup without excel, or 'match rows by id' — no pandas, no LLM arithmetic.",
+      "category": "data",
+      "tags": [
+        "csv",
+        "json",
+        "join",
+        "merge",
+        "vlookup",
+        "mechacut"
+      ],
+      "price": "0.0005",
+      "methods": [
+        "POST"
+      ],
+      "schema": {
+        "input": {
+          "type": "object",
+          "required": [
+            "left",
+            "right",
+            "on"
+          ],
+          "properties": {
+            "left": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "description": "records; left wins on overlapping columns"
+            },
+            "right": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "on": {
+              "description": "\"col\" | [\"lcol\",\"rcol\"] | {\"left\":\"lcol\",\"right\":\"rcol\"}"
+            },
+            "how": {
+              "type": "string",
+              "enum": [
+                "inner",
+                "left",
+                "right",
+                "outer"
+              ],
+              "default": "inner"
+            }
+          }
+        },
+        "output": {
+          "type": "object",
+          "properties": {
+            "output": {
+              "type": "array",
+              "description": "joined rows, deterministic order"
+            },
+            "counts": {
+              "type": "object",
+              "description": "left_rows, right_rows, matched, output_rows"
+            },
+            "sha256": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+ "name": "net_sri_audit",
+ "path": "/api/v1/net/sri",
+ "body": {
+  "integrity_attr": "sha1-QLdDLCKNV2dzTor5xv1IutPqfA="
+ }
+}

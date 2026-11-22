@@ -1,0 +1,5 @@
+{"name": "check_refs_unknown",
+ "path": "/api/v1/check/refs",
+ "body": {"text": "Sales grew 42% per https://acme.io/report; insider note at https://leak.example/x",
+          "sources": ["https://acme.io/report: growth 42%"],
+          "kinds": ["urls", "numbers"]}}

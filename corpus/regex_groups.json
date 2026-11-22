@@ -1,0 +1,9 @@
+{
+  "name": "regex_groups",
+  "path": "/api/v1/regex/test",
+  "body": {
+    "pattern": "(?P<k>\\w+)=(?P<v>\\d+)",
+    "text": "a=1 bb=22",
+    "mode": "groups"
+  }
+}

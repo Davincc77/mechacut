@@ -1,0 +1,7 @@
+{
+  "name": "validate_iban_fr",
+  "path": "/api/v1/validate/iban",
+  "body": {
+    "iban": "FR76 3000 4000 0312 3456 7890 143"
+  }
+}

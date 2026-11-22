@@ -1,0 +1,5 @@
+{
+  "name": "gzip_deterministic",
+  "path": "/api/v1/gzip/roundtrip",
+  "body": {"payload_b64": "bWVjaGFjdXQ=", "mode": "compress", "level": 9}
+}

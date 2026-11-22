@@ -1,0 +1,5 @@
+{
+  "name": "qr_generate_deterministic",
+  "path": "/api/v1/qr/generate",
+  "body": {"text": "https://mechacut.studio", "ecl": "M", "format": "matrix"}
+}

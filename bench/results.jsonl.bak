@@ -1,0 +1,17 @@
+{"model": "0.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 6.85, "seed": 42, "temp": 0}
+{"model": "0.5b", "arm": "B", "tokens_in": 2887, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 7.14, "seed": 42, "temp": 0}
+{"model": "1.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 11.4, "seed": 42, "temp": 0}
+{"model": "1.5b", "arm": "B", "tokens_in": 2887, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 12.62, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "A", "tokens_in": 1020, "tokens_out": 751, "tool_calls": 0, "success": false, "seconds": 20.21, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "B", "tokens_in": 2887, "tokens_out": 1170, "tool_calls": 0, "success": false, "seconds": 35.71, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "B", "tokens_in": 8098, "tokens_out": 1869, "tool_calls": 3, "success": false, "seconds": 51.48, "seed": 42, "temp": 0}
+{"model": "0.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 6.6, "seed": 42, "temp": 0}
+{"model": "0.5b", "arm": "B", "tokens_in": 6019, "tokens_out": 44, "tool_calls": 1, "success": false, "seconds": 0.79, "seed": 42, "temp": 0}
+{"model": "1.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 11.62, "seed": 42, "temp": 0}
+{"model": "1.5b", "arm": "B", "tokens_in": 17548, "tokens_out": 1809, "tool_calls": 3, "success": false, "seconds": 16.77, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "A", "tokens_in": 1020, "tokens_out": 751, "tool_calls": 0, "success": false, "seconds": 20.03, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "B", "tokens_in": 7288, "tokens_out": 732, "tool_calls": 1, "success": false, "seconds": 30.24, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "B", "tokens_in": 2967, "tokens_out": 995, "tool_calls": 0, "success": false, "seconds": 30.67, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "B", "tokens_in": 2999, "tokens_out": 995, "tool_calls": 0, "success": false, "seconds": 22.42, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "B", "tokens_in": 3306, "tokens_out": 1170, "tool_calls": 0, "success": false, "seconds": 28.2, "seed": 42, "temp": 0}
+{"model": "1.5b", "arm": "B", "tokens_in": 3016, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 25.54, "seed": 42, "temp": 0, "harness": "v3"}

@@ -1,0 +1,17 @@
+{
+  "name": "chart_bar_series",
+  "path": "/api/v1/chart",
+  "body": {
+    "kind": "bar",
+    "x": "month",
+    "y": "revenue",
+    "series": "product",
+    "title": "Revenue by product",
+    "data": [
+      {"month": "Jan", "revenue": 1200, "product": "klickd"},
+      {"month": "Feb", "revenue": 1810, "product": "klickd"},
+      {"month": "Jan", "revenue": 940, "product": "ponte"},
+      {"month": "Feb", "revenue": 1310, "product": "ponte"}
+    ]
+  }
+}

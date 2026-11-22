@@ -1,0 +1,5 @@
+{
+  "name": "cron_weekdays",
+  "path": "/api/v1/cron/validate",
+  "body": {"expr": "0 9 * * 1-5", "at": "2026-11-21T10:00", "count": 3}
+}

@@ -1,0 +1,11 @@
+{
+  "name": "env_interp_defaults",
+  "path": "/api/v1/env/interpolate",
+  "body": {
+    "template": "$APP listens on ${PORT:-8080} (${MISSING})",
+    "vars": {
+      "APP": "mechacut"
+    },
+    "strict": false
+  }
+}

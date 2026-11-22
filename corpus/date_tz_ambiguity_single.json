@@ -1,0 +1,8 @@
+{
+ "body": {
+  "local": "2026-11-22 09:00",
+  "zone": "Europe/Luxembourg"
+ },
+ "name": "date_tz_ambiguity_single",
+ "path": "/api/v1/date/tz_ambiguity"
+}

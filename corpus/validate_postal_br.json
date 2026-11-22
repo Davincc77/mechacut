@@ -1,0 +1,5 @@
+{
+  "name": "validate_postal_br",
+  "path": "/api/v1/validate/postal",
+  "body": {"code": "01310100", "country": "BR"}
+}

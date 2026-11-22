@@ -1,0 +1,1 @@
+{"name": "money_discount_double", "path": "/api/v1/money/discount", "body": {"price": "89.90", "currency": "EUR", "steps": [{"type": "percent", "value": "30"}, {"type": "percent", "value": "20"}]}}

@@ -1,0 +1,5 @@
+{
+  "name": "date_parse_rfc",
+  "path": "/api/v1/date/parse",
+  "body": {"text": "Sun, 29 Mar 2026 02:30:00 GMT"}
+}

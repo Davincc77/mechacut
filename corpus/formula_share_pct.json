@@ -1,0 +1,11 @@
+{
+ "name": "formula_share_pct",
+ "path": "/api/v1/formula",
+ "body": {
+  "formula": "share_pct",
+  "args": {
+   "part": 184,
+   "whole": 460
+  }
+ }
+}

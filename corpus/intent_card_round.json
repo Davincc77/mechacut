@@ -1,0 +1,5 @@
+{
+  "name": "intent_card_round",
+  "path": "/api/v1/intent/card",
+  "body": {"utterance": "round 1234.5678 to 2 places"}
+}

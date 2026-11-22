@@ -1,0 +1,5 @@
+{
+  "name": "id_ulid_seed",
+  "path": "/api/v1/id/ulid",
+  "body": {"mode": "make", "timestamp_ms": 1234567890123, "seed": "order-42"}
+}

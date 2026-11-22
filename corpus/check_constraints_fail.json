@@ -1,0 +1,4 @@
+{"name": "check_constraints_fail",
+ "path": "/api/v1/check/constraints",
+ "body": {"text": "- only one\n- and two",
+          "constraints": {"points": 3, "must_contain": ["total"], "no_markdown": true}}}

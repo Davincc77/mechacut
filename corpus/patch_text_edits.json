@@ -1,0 +1,17 @@
+{
+  "name": "patch_text_edits",
+  "path": "/api/v1/text/patch",
+  "body": {
+    "text": "def f():\n    return old_value()\n",
+    "edits": [
+      {
+        "find": "old_value()",
+        "replace": "new_value()"
+      },
+      {
+        "find": "def f",
+        "replace": "def g"
+      }
+    ]
+  }
+}

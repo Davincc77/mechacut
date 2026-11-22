@@ -1,0 +1,12 @@
+{
+  "name": "money_split_three",
+  "path": "/api/v1/money/split",
+  "body": {
+    "total": "100.00",
+    "participants": [
+      "a",
+      "b",
+      "c"
+    ]
+  }
+}

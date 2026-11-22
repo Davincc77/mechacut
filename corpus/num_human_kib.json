@@ -1,0 +1,3 @@
+{"name": "num_human_kib",
+ "path": "/api/v1/num/human",
+ "body": {"value": 1536, "kind": "bytes"}}

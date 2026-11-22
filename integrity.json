@@ -1,0 +1,2107 @@
+{
+ "canonicalization": "sha256(json.dumps(response, sort_keys=True, separators=(',',':'), ensure_ascii=False).encode())",
+ "how_to_verify": "POST path+body to mechacut.studio (free pins as-is; paid pins need one x402 call), canon the response, compare sha256. Additions-only history: every pin ever written stays.",
+ "pins": [
+  {
+   "body": {
+    "diff": "--- before\n+++ after\n@@ -1,3 +1,3 @@\n l1\n-l2\n+X\n l3\n",
+    "text": "l1\nl2\nl3\nl4\n"
+   },
+   "name": "apply_diff_strict",
+   "path": "/api/v1/text/apply-diff",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "530b5744e1c9a322dd77fcbf3328c32b22bdccc14ea37ac6a02f20a8cb81e3b8",
+   "status": 200
+  },
+  {
+   "body": {
+    "payloads": [
+     {
+      "mode": "half_even",
+      "places": 0,
+      "value": "2.5"
+     },
+     {
+      "mode": "half_even",
+      "places": 0,
+      "value": "3.5"
+     }
+    ],
+    "tool": "num_round"
+   },
+   "name": "batch_round",
+   "path": "/api/v1/batch",
+   "sha256": "ee8d0ca6207575562198060f7d844e1d96d3b1ea5ea861c684da4083773c10bc",
+   "status": 200
+  },
+  {
+   "body": {
+    "value": "eip155:8453"
+   },
+   "name": "caip_base",
+   "path": "/api/v1/caip/parse",
+   "sha256": "50fdadcd15ae3afe15791392538806a6fae5d567da34dd07b8cffaf653785e94",
+   "status": 200
+  },
+  {
+   "body": {
+    "base": "2026-12-23",
+    "op": "business_days",
+    "params": {
+     "holidays": [
+      "2026-12-25"
+     ],
+     "n": 5
+    }
+   },
+   "name": "calc_business_year_end",
+   "path": "/api/v1/date/calc",
+   "sha256": "16db443d8982ef9cd0c06696ed0b48088473b25d0fd09c374827a2890701e4f1",
+   "status": 200
+  },
+  {
+   "body": {
+    "input": {
+     "a": {
+      "c": "\u00e9",
+      "d": [
+       3,
+       2
+      ]
+     },
+     "b": 1
+    },
+    "style": "pretty"
+   },
+   "name": "canonical_pretty",
+   "path": "/api/v1/json/canonical",
+   "sha256": "eb5e2948a054ec7332b3688e40fb814ea3abc7ec8e6428c7a9932e1740eb19c5",
+   "status": 200
+  },
+  {
+   "body": {
+    "data": [
+     {
+      "month": "Jan",
+      "product": "klickd",
+      "revenue": 1200
+     },
+     {
+      "month": "Feb",
+      "product": "klickd",
+      "revenue": 1810
+     },
+     {
+      "month": "Jan",
+      "product": "ponte",
+      "revenue": 940
+     },
+     {
+      "month": "Feb",
+      "product": "ponte",
+      "revenue": 1310
+     }
+    ],
+    "kind": "bar",
+    "series": "product",
+    "title": "Revenue by product",
+    "x": "month",
+    "y": "revenue"
+   },
+   "name": "chart_bar_series",
+   "path": "/api/v1/chart",
+   "price_atomic": "1000",
+   "requires_payment": true,
+   "sha256": "79c854bff8a1e55840af33e9022680aa21ef71fd1138fe329f0e3ba21e996eb7",
+   "status": 200
+  },
+  {
+   "body": {
+    "data": [
+     {
+      "revenue": 1200
+     },
+     {
+      "revenue": 1810
+     },
+     {
+      "revenue": 940
+     },
+     {
+      "revenue": 1310
+     },
+     {
+      "revenue": 1150
+     },
+     {
+      "revenue": 1620
+     },
+     {
+      "revenue": 990
+     },
+     {
+      "revenue": 1440
+     }
+    ],
+    "format": "spec",
+    "kind": "histogram",
+    "x": "revenue"
+   },
+   "name": "chart_histogram",
+   "path": "/api/v1/chart",
+   "price_atomic": "1000",
+   "requires_payment": true,
+   "sha256": "612a35c2efda8868349a05b4ccb26b42ec3fd8741c457837605158a0b27cc957",
+   "status": 200
+  },
+  {
+   "body": {
+    "csv": "month,revenue,product\nJan,1200,klickd\nFeb,1810,klickd\nJan,940,ponte\nFeb,1310,ponte\n",
+    "kind": "pie",
+    "title": "Share",
+    "x": "product",
+    "y": "revenue"
+   },
+   "name": "chart_pie_csv",
+   "path": "/api/v1/chart",
+   "price_atomic": "1000",
+   "requires_payment": true,
+   "sha256": "dc7a43fee233cd42184220b6ac374183a3280051d663d74b800b9aa0b6ee8dfa",
+   "status": 200
+  },
+  {
+   "body": {
+    "payloads": [
+     {
+      "deal": {
+       "usd": 4250.0,
+       "vat": "20%"
+      },
+      "signed": true
+     },
+     {
+      "deal": {
+       "usd": 4250,
+       "vat": "20.5%"
+      },
+      "signed": true
+     }
+    ]
+   },
+   "name": "check_agreement_deal",
+   "path": "/api/v1/check/agreement",
+   "sha256": "7182884227e55f4d09c2587a4b93b1dc42d030a31c6a5b90853891d4bafb897d",
+   "status": 200
+  },
+  {
+   "body": {
+    "constraints": {
+     "must_contain": [
+      "total"
+     ],
+     "no_markdown": true,
+     "points": 3
+    },
+    "text": "- only one\n- and two"
+   },
+   "name": "check_constraints_fail",
+   "path": "/api/v1/check/constraints",
+   "sha256": "53669ba4105290f80d4a51cbce2982a49919621d2343a9cb1c70585f7141d74b",
+   "status": 200
+  },
+  {
+   "body": {
+    "constraints": {
+     "contains_date": true,
+     "contains_number": true,
+     "max_words": 20,
+     "points": 2
+    },
+    "text": "1. sha256 of the row is stable\n2. 42 records matched on 2026-11-21"
+   },
+   "name": "check_constraints_ok",
+   "path": "/api/v1/check/constraints",
+   "sha256": "a8b7115346052907ed9650e5123b8044b80fb531b4eae9bc321e3566e147a706",
+   "status": 200
+  },
+  {
+   "body": {
+    "formats": {
+     "$.due": "date-iso",
+     "$.sent": "datetime-iso",
+     "$.total": "decimal-string"
+    },
+    "payload": {
+     "due": "2026-02-30",
+     "sent": "2026-11-21T10:00:00Z",
+     "total": "1,234.56"
+    }
+   },
+   "name": "check_format_invoice",
+   "path": "/api/v1/check/format",
+   "sha256": "061a3fb4d6694252d3ee5490ecaacb2b3b698001636c0febb447d82db677c439",
+   "status": 200
+  },
+  {
+   "body": {
+    "rules": {
+     "forbid_shapes": [
+      "card",
+      "email"
+     ]
+    },
+    "text": "Ref 4111 1111 1111 1111 \u2014 customer jane@acme.dev"
+   },
+   "name": "check_redlines_pii",
+   "path": "/api/v1/check/redlines",
+   "sha256": "566335f0455f97bf7fb717dd49526e07261e649bc5486b48479fe1ff388f9f76",
+   "status": 200
+  },
+  {
+   "body": {
+    "kinds": [
+     "urls",
+     "numbers"
+    ],
+    "sources": [
+     "https://acme.io/report: growth 42%"
+    ],
+    "text": "Sales grew 42% per https://acme.io/report; insider note at https://leak.example/x"
+   },
+   "name": "check_refs_unknown",
+   "path": "/api/v1/check/refs",
+   "sha256": "4bb0e66121818ed1c5a4df34c41f787ea8636291596969610b7125647519a2cb",
+   "status": 200
+  },
+  {
+   "body": {
+    "against": "#ffffff",
+    "color": "#767676"
+   },
+   "name": "color_check_wcag",
+   "path": "/api/v1/color/check",
+   "sha256": "a8ba4b815e8abd928d89d68560a585b0cacedbe4ae69d3a012fa77c4c532e68b",
+   "status": 200
+  },
+  {
+   "body": {
+    "color": "#6d28d9",
+    "scheme": "triad",
+    "steps": 5
+   },
+   "name": "color_palette_triad",
+   "path": "/api/v1/color/palette",
+   "sha256": "f5cadff478955407be3a3fa3e8093135b1ea9c8324eb2393fe547e4098c2bf13",
+   "status": 200
+  },
+  {
+   "body": {
+    "from": "yaml",
+    "input": "a: 1\nb: [1, 2]\nc: \u00e9\n",
+    "to": "json"
+   },
+   "name": "convert_yaml_to_json",
+   "path": "/api/v1/format/convert",
+   "sha256": "db638bc56405be46ca2315cdd9e3b2c201c82e16c6fe543ac16c594183b3d341",
+   "status": 200
+  },
+  {
+   "body": {
+    "expression": "*/15 9-17 * * 1-5"
+   },
+   "name": "cron_humanize_quarter",
+   "path": "/api/v1/cron/humanize",
+   "sha256": "18dc064a5d3868a97d93b1e4b2a8441ad69730892c8a84fd3dc64ab3f520e4e8",
+   "status": 200
+  },
+  {
+   "body": {
+    "after": "2026-11-20T12:00:00Z",
+    "count": 3,
+    "expression": "0 9 * * 1-5",
+    "tz": "Europe/Paris"
+   },
+   "name": "cron_next_pinned",
+   "path": "/api/v1/cron/next",
+   "sha256": "6d88c48e4e6c0566c2248fda0f8f013cba8e068e142c10b48ae91fdf8fd7453f",
+   "status": 200
+  },
+  {
+   "body": {
+    "at": "2026-11-21T10:00",
+    "count": 3,
+    "expr": "0 9 * * 1-5"
+   },
+   "name": "cron_weekdays",
+   "path": "/api/v1/cron/validate",
+   "sha256": "b0e55579ff44a155c36bbaa0b9de0aa8a54935a3378908a2e25b254f34ecb0f0",
+   "status": 200
+  },
+  {
+   "body": {
+    "address": "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4"
+   },
+   "name": "crypto_address_bech32",
+   "path": "/api/v1/crypto/address",
+   "sha256": "7003618be15180e6b26b18087343a5ddc3a6f5fef9078d098020b29db0bdf1fd",
+   "status": 200
+  },
+  {
+   "body": {
+    "key": "id",
+    "left": [
+     {
+      "id": "1",
+      "v": "a"
+     },
+     {
+      "id": "2",
+      "v": "b"
+     }
+    ],
+    "right": [
+     {
+      "id": "2",
+      "v": "B"
+     },
+     {
+      "id": "3",
+      "v": "c"
+     }
+    ]
+   },
+   "name": "csv_diff_shape",
+   "path": "/api/v1/csv/diff",
+   "sha256": "ccfd5947afe396c8b4acb4f69794b0b69eb229879c5d064726bf3cc8c74c6120",
+   "status": 200
+  },
+  {
+   "body": {
+    "csv": "facture\n1,234.56\n1.234\n2,000.00\n42.50"
+   },
+   "name": "csv_money_columns_conventions",
+   "path": "/api/v1/csv/money_columns",
+   "sha256": "db3587176abe84afdc2f7fc72b26b73d72d4b26ee3b92019cc04a17946689ca0",
+   "status": 200
+  },
+  {
+   "body": {
+    "csv": "\ufeffname;name;age\r\nBob;X;42\r\nAnn\r\n\r\n"
+   },
+   "name": "csvfix_dirty",
+   "path": "/api/v1/csv/fix",
+   "sha256": "66480852c396669a466530171cecbb26dcfa4fcbec6dec937d7dacbf36ef7de8",
+   "status": 200
+  },
+  {
+   "body": {
+    "csv": "age,price,active,born,nick\n34,1.5,true,2020-02-29,\n7,10,false,2021-01-01,n/a"
+   },
+   "name": "csvtypes_mixed",
+   "path": "/api/v1/csv/types",
+   "sha256": "537d63b56075edeaf3306508c9dd037fd176ab16866044383c5de4ec74b16b04",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "Sun, 29 Mar 2026 02:30:00 GMT"
+   },
+   "name": "date_parse_rfc",
+   "path": "/api/v1/date/parse",
+   "sha256": "7d786b3daf863e83f18d6835a34da07e419307007f963f3d3da67514cfe1880b",
+   "status": 200
+  },
+  {
+   "body": {
+    "dtstart": "1997-09-02T09:00:00",
+    "rrule": "FREQ=WEEKLY;INTERVAL=2;COUNT=8;WKST=SU;BYDAY=TU,TH"
+   },
+   "name": "date_recurrence_biweekly",
+   "path": "/api/v1/date/recurrence",
+   "sha256": "72a8a62d4283bb854e72938d32652a5df4b58382e142c8093522f2da59f85c92",
+   "status": 200
+  },
+  {
+   "body": {
+    "dtstart": "1997-09-02T09:00:00",
+    "max_count": 3,
+    "rrule": "FREQ=MONTHLY;BYDAY=FR;BYMONTHDAY=13"
+   },
+   "name": "date_recurrence_friday13",
+   "path": "/api/v1/date/recurrence",
+   "sha256": "7a02d391a590bf5fadd76e59b909c01baf4376b01f06f5bb6346e5a6d81945ae",
+   "status": 200
+  },
+  {
+   "body": {
+    "dtstart": "2026-01-31",
+    "rrule": "FREQ=MONTHLY;COUNT=7"
+   },
+   "name": "date_recurrence_monthly31",
+   "path": "/api/v1/date/recurrence",
+   "sha256": "bf80ad42f68dd6eed1777f2f7a03090989a764b83bda5f1314cef9ed134280de",
+   "status": 200
+  },
+  {
+   "body": {
+    "now": "2026-11-21T10:00:00+00:00",
+    "phrase": "proxima sexta da manha"
+   },
+   "name": "date_relative_anchor",
+   "path": "/api/v1/date/relative",
+   "sha256": "91d91d16dc70d0a48b41b1a7a34a848d8dcf3897afae831e89926210857c0948",
+   "status": 200
+  },
+  {
+   "body": {
+    "local": "2026-11-01 01:30",
+    "zone": "America/New_York"
+   },
+   "name": "date_tz_ambiguity_ny_fold",
+   "path": "/api/v1/date/tz_ambiguity",
+   "sha256": "d902e337dc1b5cd85774b1f6d9db6ae0b54d645dbf350858b5b18ee3e98dc6aa",
+   "status": 200
+  },
+  {
+   "body": {
+    "local": "2027-03-14 02:30",
+    "zone": "America/New_York"
+   },
+   "name": "date_tz_ambiguity_ny_gap",
+   "path": "/api/v1/date/tz_ambiguity",
+   "sha256": "72adf509e00def6f2336d6c043e3d51ed0e88a8e41754a10eb7eb5026a9e419d",
+   "status": 200
+  },
+  {
+   "body": {
+    "local": "2026-10-25 02:30",
+    "zone": "Europe/Paris"
+   },
+   "name": "date_tz_ambiguity_paris_fold",
+   "path": "/api/v1/date/tz_ambiguity",
+   "sha256": "432114022571a4c2e0b6fa0504cad322cad0ff22ce562a6152d824dc98a81095",
+   "status": 200
+  },
+  {
+   "body": {
+    "local": "2026-11-22 09:00",
+    "zone": "Europe/Luxembourg"
+   },
+   "name": "date_tz_ambiguity_single",
+   "path": "/api/v1/date/tz_ambiguity",
+   "sha256": "9599a9e8682544c2617763d37486470a101c6119ccb12980d275b286a37d4f53",
+   "status": 200
+  },
+  {
+   "body": {
+    "at": "02:30",
+    "datetime": "2026-03-29",
+    "source": "UTC",
+    "targets": [
+     "Europe/Paris",
+     "America/New_York"
+    ]
+   },
+   "name": "date_tz_dst",
+   "path": "/api/v1/date/tz",
+   "sha256": "c38d60ec40be7f1c9ad3ed3fbc0de928d44ed41d7bbff6fb697cdb187a5a18a1",
+   "status": 200
+  },
+  {
+   "body": {
+    "date": "2027-01-01"
+   },
+   "name": "date_week_2027_artifact",
+   "path": "/api/v1/date/week",
+   "sha256": "f0d0f041f04d106f661ea4ab93e6f495b4b7d69fbc90de113575bee2251d27cd",
+   "status": 200
+  },
+  {
+   "body": {
+    "iso": "2027-W53"
+   },
+   "name": "date_week_refused_artifact",
+   "path": "/api/v1/date/week",
+   "sha256": "479a906413bec89f59adc86621121ec26fc9f5d3f0f0319cfee6228054478748",
+   "status": 400
+  },
+  {
+   "body": {
+    "iso": "2026-W01-3"
+   },
+   "name": "date_week_w01_inverse",
+   "path": "/api/v1/date/week",
+   "sha256": "02aad35473fa5187b97131c6e5f0de1591407cabee0520f56f8d8db03d17d908",
+   "status": 200
+  },
+  {
+   "body": {
+    "year": "2026"
+   },
+   "name": "date_week_year_53",
+   "path": "/api/v1/date/week",
+   "sha256": "3aa3c4e2f42fcd7d2c3c9531f12489dcd0d4a8ffd50254e18d20bfe535291275",
+   "status": 200
+  },
+  {
+   "body": {
+    "items": [
+     "https://A.com/x/",
+     "https://a.com/x",
+     "http://B.com:80/",
+     "https://a.com/x#frag",
+     "https://a.com/x?b=2&a=1"
+    ],
+    "mode": "url"
+   },
+   "name": "dedupe_urls",
+   "path": "/api/v1/list/dedupe",
+   "sha256": "64505855c1e0508997cb354acb156504f20de62a1903592e9bdce0031b2f084f",
+   "status": 200
+  },
+  {
+   "body": {
+    "a": {
+     "gone": true,
+     "x": 1,
+     "y": {
+      "z": [
+       1,
+       2
+      ]
+     }
+    },
+    "b": {
+     "new": "n",
+     "x": 2,
+     "y": {
+      "z": [
+       1,
+       2,
+       3
+      ]
+     }
+    }
+   },
+   "name": "diff_pointers",
+   "path": "/api/v1/json/diff",
+   "sha256": "cd0e23d2613c4de8e019598a24e068be1d1feb05a9705720371bbdf3cfbe9e1e",
+   "status": 200
+  },
+  {
+   "body": {
+    "a": "l1\nl2\nl3\nl4\nl5\nl6\nl7\n",
+    "b": "l1\nl2\nX\nl4\nl5\nl6\nl7\nl8\n",
+    "context": 1
+   },
+   "name": "diff_two_versions",
+   "path": "/api/v1/text/diff",
+   "sha256": "33c07880307a0e9b3101f3711d6521e789634472c86100acc834fe0bdea0c31a",
+   "status": 200
+  },
+  {
+   "body": {
+    "value": "978-0-306-40615-7"
+   },
+   "name": "digit_check_bookland",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "8f2d14f465c5ed09d343f3c743d371848741c4aba19d31e809d737bd6122ab9e",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "repair",
+    "scheme": "ean13",
+    "value": "4006381333941"
+   },
+   "name": "digit_repair_ean13",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "d7a21e15d52d2576ef753ccb2e9803b5ab2f81cb43613d18c4c8679eae027c44",
+   "status": 200
+  },
+  {
+   "body": {
+    "pdf_b64": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggNTMgPj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiAoZG9jL3RleHQgcGluKSBUaiBUKiAodG90YWwgNDIuMDApIFRqIEVUCmVuZHN0cmVhbQplbmRvYmoKdHJhaWxlciA8PCAvUm9vdCAxIDAgUiA+PgolJUVPRgo="
+   },
+   "name": "doc_text_pin",
+   "path": "/api/v1/doc/text",
+   "sha256": "6691b3a85b079c634b436dba21f1a2e605e2c1ca7f279aa0afdba4a97af034d7",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "mecha-cut determinism",
+    "variant": "base64url"
+   },
+   "name": "enc_b64_hello",
+   "path": "/api/v1/enc/base64",
+   "sha256": "ad6f14e4319ff5ce617710db77c08b4a6a29d6777279d8e57f2a76d6109ead32",
+   "status": 200
+  },
+  {
+   "body": {
+    "strict": false,
+    "template": "$APP listens on ${PORT:-8080} (${MISSING})",
+    "vars": {
+     "APP": "mechacut"
+    }
+   },
+   "name": "env_interp_defaults",
+   "path": "/api/v1/env/interpolate",
+   "sha256": "9837339c6ec7ef7f2409da4119f0026d6197b23f1985b5a4f4d4ca9e9b67abf1",
+   "status": 200
+  },
+  {
+   "body": {
+    "types": [
+     "address",
+     "uint256"
+    ],
+    "values": [
+     "0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed",
+     "1000"
+    ]
+   },
+   "name": "eth_abi_encode_transfer",
+   "path": "/api/v1/eth/abi-encode",
+   "sha256": "f3821dc02cb03243d5fbf7cefec6f65fe900ab764b7f1d3a919ce8e2abc12c42",
+   "status": 200
+  },
+  {
+   "body": {
+    "address": "0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed",
+    "allowlist": [
+     "0x00f04a2a505116daf3b88eae17445d85bed4fbac"
+    ]
+   },
+   "name": "eth_address_eip55",
+   "path": "/api/v1/eth/address",
+   "sha256": "291e9ff855946ab30bfc6f78f4bb0f64bddc4211ea79c5331722a2182ca86074",
+   "status": 200
+  },
+  {
+   "body": {
+    "domain": {
+     "chainId": 1,
+     "name": "Ether Mail",
+     "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC",
+     "version": "1"
+    },
+    "message": {
+     "contents": "Hello, Bob!",
+     "from": {
+      "name": "Cow",
+      "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"
+     },
+     "to": {
+      "name": "Bob",
+      "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"
+     }
+    },
+    "primaryType": "Mail",
+    "types": {
+     "EIP712Domain": [
+      {
+       "name": "name",
+       "type": "string"
+      },
+      {
+       "name": "version",
+       "type": "string"
+      },
+      {
+       "name": "chainId",
+       "type": "uint256"
+      },
+      {
+       "name": "verifyingContract",
+       "type": "address"
+      }
+     ],
+     "Mail": [
+      {
+       "name": "from",
+       "type": "Person"
+      },
+      {
+       "name": "to",
+       "type": "Person"
+      },
+      {
+       "name": "contents",
+       "type": "string"
+      }
+     ],
+     "Person": [
+      {
+       "name": "name",
+       "type": "string"
+      },
+      {
+       "name": "wallet",
+       "type": "address"
+      }
+     ]
+    }
+   },
+   "name": "eth_eip712_mail",
+   "path": "/api/v1/eth/eip712",
+   "sha256": "6c87166b0853a5f541d34ca655f674ed44be1ff877ca412df5174974211e29c4",
+   "status": 200
+  },
+  {
+   "body": {
+    "signature": "transfer(address,uint256)"
+   },
+   "name": "eth_selector_transfer",
+   "path": "/api/v1/eth/selector",
+   "sha256": "e7552cba4546fdb642e191b1910509d26ba1dc7478e8933df72f36e1904244cf",
+   "status": 200
+  },
+  {
+   "body": {
+    "unit": "ether",
+    "value": "1.5"
+   },
+   "name": "eth_units_15ether",
+   "path": "/api/v1/eth/units",
+   "sha256": "6a7d38f8bbcf863bcb20a3117b9b877111b6c77cd4f65baade30b6ee57f8dd65",
+   "status": 200
+  },
+  {
+   "body": {
+    "context_chars": 8,
+    "text": "Invoice INV-2026-114 due 2026-12-05 total $1,200.50 plus 20% VAT, wire FR76 1234 5678 9012 3456 7890 1234, info@acme.io, https://acme.io/inv"
+   },
+   "name": "extract_facts_invoice",
+   "path": "/api/v1/extract/facts",
+   "sha256": "32a40a4fa8f476ba3098cd541b80abaa730bbac291b98cf09c7cbdf4f67fdc58",
+   "status": 200
+  },
+  {
+   "body": {
+    "blob": "Y2Fm6Q=="
+   },
+   "name": "file_encoding_cp1252",
+   "path": "/api/v1/file/encoding",
+   "sha256": "e116ce1fae4eb98592b1fdc4dc084bec29d6e7ab9a49140554606d531be35a50",
+   "status": 200
+  },
+  {
+   "body": {
+    "blob": "iVBORw0KGgoAAAANSUhEUg=="
+   },
+   "name": "file_identify_png",
+   "path": "/api/v1/file/identify",
+   "sha256": "0c608853e64037e1b6a3aa93fe51de87cee3e500e1b5d38f4029d732ae16f72b",
+   "status": 200
+  },
+  {
+   "body": {
+    "value": {
+     "a": [
+      1,
+      2
+     ],
+     "b": 1,
+     "z": {
+      "y": null
+     }
+    }
+   },
+   "name": "fingerprint_json",
+   "path": "/api/v1/fingerprint",
+   "sha256": "a206dedca00bdb4711a32d01dbce3f9f375ae372a8b0eff3ece3ab499a1cbf44",
+   "status": 200
+  },
+  {
+   "body": {
+    "args": {
+     "a": 3,
+     "b": "4.50",
+     "c": 7
+    },
+    "formula": "rule_of_three"
+   },
+   "name": "formula_rule_of_three",
+   "path": "/api/v1/formula",
+   "sha256": "93fa43ab8fc0b0a3a4253b2f46f61dfc11dd9bdfec8abe491bbb850cff7f3568",
+   "status": 200
+  },
+  {
+   "body": {
+    "args": {
+     "part": 184,
+     "whole": 460
+    },
+    "formula": "share_pct"
+   },
+   "name": "formula_share_pct",
+   "path": "/api/v1/formula",
+   "sha256": "36aa5fc8d7ce9c63ed88d4118c5a8265d40937a3bce229d7ddfb36de9e5a05bd",
+   "status": 200
+  },
+  {
+   "body": {
+    "lat": 42.6,
+    "lon": -5.6,
+    "precision": 5
+   },
+   "name": "geo_geohash_ezs42",
+   "path": "/api/v1/geo/geohash",
+   "sha256": "b0376cb820a5a0568968794101d13c0c3abb550393bb8e344091c99e8a413abe",
+   "status": 200
+  },
+  {
+   "body": {
+    "paths": [
+     "src/a/test_x.py",
+     "src/test_y.py",
+     "src/a/x.py",
+     "src/a/b/test_z.py",
+     "tests/test_w.py"
+    ],
+    "pattern": "src/**/test_*.py"
+   },
+   "name": "glob_tests",
+   "path": "/api/v1/glob/match",
+   "sha256": "d7c757aa07033fca3884d9085281db2019c666f64abcea2bcf053fc3a1ce9f8b",
+   "status": 200
+  },
+  {
+   "body": {
+    "level": 9,
+    "mode": "compress",
+    "payload_b64": "bWVjaGFjdXQ="
+   },
+   "name": "gzip_deterministic",
+   "path": "/api/v1/gzip/roundtrip",
+   "sha256": "5c79df11cd171790032c49e6334878ef736f44839e8ec8446c8ab37cde9799ec",
+   "status": 200
+  },
+  {
+   "body": {
+    "algo": "sha256",
+    "key": "Jefe",
+    "message": "what do ya want for nothing?"
+   },
+   "name": "hash_hmac_rfc4231",
+   "path": "/api/v1/hash/hmac",
+   "sha256": "20404f253faa015cefc88830295b2fcd36b2150012d0415a7c0f30a94c012b4b",
+   "status": 200
+  },
+  {
+   "body": {
+    "data": "abc"
+   },
+   "name": "hash_sha256_abc",
+   "path": "/api/v1/hash/digest",
+   "sha256": "6d495267cf42052f27d011d052d8c68a4faa0b0939e35ada8f7ddb0abad230fb",
+   "status": 200
+  },
+  {
+   "body": {
+    "html": "<h1>Title</h1><p>Some   text with <b>markup</b> and <script>hidden()</script></p><ul><li>a</li><li>b</li></ul>",
+    "keep_links": false
+   },
+   "name": "html_text_page",
+   "path": "/api/v1/html/text",
+   "price_atomic": "1000",
+   "requires_payment": true,
+   "sha256": "c52c7d65accb037ea1a82b553c59b4f18d68c6956e77e601d7c63cf37ce36c56",
+   "status": 200
+  },
+  {
+   "body": {
+    "events": [
+     {
+      "duration": "PT1H30M",
+      "start": "2026-12-01T09:00:00Z",
+      "summary": "R\u00e9union; planning"
+     },
+     {
+      "end": "2026-12-26",
+      "start": "2026-12-24",
+      "summary": "No\u00ebl"
+     }
+    ]
+   },
+   "name": "ics_generate_mixed",
+   "path": "/api/v1/ics/generate",
+   "sha256": "68189cdfea79702f31fe2c36d6ee53f26d839695be26f515c645503a14a8c0c5",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//mechacut//test//FR\r\nBEGIN:VEVENT\r\nUID:20260101-a@mechacut.studio\r\nDTSTAMP:20251121T120000Z\r\nDTSTART;TZID=Europe/Paris:20260101T090000\r\nDTEND;TZID=Europe/Paris:20260101T100000\r\nSUMMARY:retour\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
+   },
+   "name": "ics_validate_ok",
+   "path": "/api/v1/ics/validate",
+   "sha256": "32d2d20ba8a86602569f45b93018470ee4ca3a4e9463e25ddd38f0022587263e",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "Caf\u00e9 Cr\u00e8me \u2014 2026 !"
+   },
+   "name": "id_slug_cafe",
+   "path": "/api/v1/id/slug",
+   "sha256": "5b305f4e38e2fad0a2954031e5a9405c2a6c07dbb3573992bd7cfbdccb1759b4",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "make",
+    "seed": "order-42",
+    "timestamp_ms": 1234567890123
+   },
+   "name": "id_ulid_seed",
+   "path": "/api/v1/id/ulid",
+   "sha256": "0ab5b84dcbcb892b1327a49a7e0effbcb7465d6900e77df58a968c350b5b2baa",
+   "status": 200
+  },
+  {
+   "body": {
+    "name": "https://mechacut.studio",
+    "op": "v5"
+   },
+   "name": "id_uuid_v5",
+   "path": "/api/v1/id/uuid",
+   "sha256": "3e229eab819597045176fbb0940ae0ec968886e22a84119117826f0c9079d9f6",
+   "status": 200
+  },
+  {
+   "body": {
+    "data_b64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAA/0lEQVR42hXMoXEgIQAAwCvhTTw6ig5CCYgUgI2jggwlMJMGTkbSQGYogUkFuLd08L8n1u51Xe3fHwKRRKZQaXRuBpPF5nBdLwICkUSmUGl0bgaTxea8PMGrgEAkkSlUGp2bwWSxOa9P8CYgEElkCpVG52YwWWzO2xO8CwhEEplCpdG5GUwWm/P+BB8CApFEplBpdG4Gk8XmfDzBp4BAJJEpVBqdm8FksTmfT/AlIBBJZAqVRudmMFlsztcTfAsIRBKZQqXRuRlMFpvz/QQ/AgKRRKZQaXRuBpPF5vw8wa+AQCSRKVQanZvBZLE5v0/wV0AgksgUKo3OzWCy2Bz+A5hez/AZLJbhAAAAAElFTkSuQmCC",
+    "mode": "fit",
+    "resample": "box",
+    "width": 8
+   },
+   "name": "image_rightsize_box",
+   "path": "/api/v1/image/rightsize",
+   "sha256": "8fe7f10681c434f6ee37098bc14849c357a5fa5cdaedf2b06a1a9a44dfc0bfa2",
+   "status": 200
+  },
+  {
+   "body": {
+    "utterance": "round 1234.5678 to 2 places"
+   },
+   "name": "intent_card_round",
+   "path": "/api/v1/intent/card",
+   "sha256": "25d60ae83eca3b47db17271ca6d307f2735fe1f455cdbe43789c8b70f21faa88",
+   "status": 200
+  },
+  {
+   "body": {
+    "args": {
+     "algo": "sha256",
+     "data": "mechacut"
+    },
+    "tool": "hash_digest"
+   },
+   "name": "intent_check_hash",
+   "path": "/api/v1/intent/check",
+   "sha256": "4a44959b6e2e69a29cc7330eaaefbc1ac1b8b674129f46a12ebcd8f0e6a3ac72",
+   "status": 200
+  },
+  {
+   "body": {
+    "args": {
+     "lmp": "2026-01-01"
+    },
+    "formula": "naegle_due_date"
+   },
+   "name": "intent_reflect_naegle",
+   "path": "/api/v1/intent/reflect",
+   "sha256": "0d2eb9f9e04fbdaa11b5faad83e8d5ea3dbb94fc235d0f3cf87a7a77d45b1b6a",
+   "status": 200
+  },
+  {
+   "body": {
+    "how": "outer",
+    "left": [
+     {
+      "id": 1,
+      "n": "a"
+     },
+     {
+      "id": 2,
+      "n": "b"
+     }
+    ],
+    "on": "id",
+    "right": [
+     {
+      "id": 1,
+      "t": "x"
+     },
+     {
+      "id": 3,
+      "t": "y"
+     }
+    ]
+   },
+   "name": "join_outer",
+   "path": "/api/v1/csv/join",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "99eec24c5409c7f3a5c3de8a90321fc84f248c07f7acf5f3410bfac7db7f54e0",
+   "status": 200
+  },
+  {
+   "body": {
+    "items": [
+     1.005,
+     2.675,
+     "1.45"
+    ],
+    "ops": [
+     {
+      "op": "str"
+     },
+     {
+      "op": "round",
+      "places": 2
+     }
+    ]
+   },
+   "name": "json_map_round",
+   "path": "/api/v1/json/map",
+   "sha256": "bf0905840845f844b8d0083d70c0f71d6883f064fdd0aa0adcc5dba8843a9777",
+   "status": 200
+  },
+  {
+   "body": {
+    "data": {
+     "users": [
+      {
+       "email": "a@x.io",
+       "vip": true
+      },
+      {
+       "email": "b@x.io",
+       "vip": false
+      }
+     ]
+    },
+    "path": "$.users[*].email"
+   },
+   "name": "json_query_emails",
+   "path": "/api/v1/json/query",
+   "sha256": "35f8cdeb40c6abf68b417252e03f50621c13fdb2c037faab4355ac78d8455bed",
+   "status": 200
+  },
+  {
+   "body": {
+    "facts": {
+     "amount": 1200,
+     "country": "FR",
+     "tags": [
+      "eu"
+     ]
+    },
+    "rules": [
+     {
+      "name": "sepa-limit",
+      "require": {
+       "fact": "amount",
+       "op": "lte",
+       "value": 10000
+      },
+      "when": {
+       "fact": "country",
+       "op": "eq",
+       "value": "FR"
+      }
+     },
+     {
+      "name": "stamp",
+      "set": {
+       "checked": true
+      }
+     }
+    ]
+   },
+   "name": "logic_rules_sepa",
+   "path": "/api/v1/logic/rules",
+   "sha256": "dee41eba91b36fb382bd2e96e378538c7f39bc8bcda13048ff91e0d4b4c11708",
+   "status": 200
+  },
+  {
+   "body": {
+    "expr": "7834*9217"
+   },
+   "name": "math_calc_product",
+   "path": "/api/v1/math/calc",
+   "sha256": "38ea56decda4b0819cebd8160f8f9ee3b1be610962fd97e51fc125b8d4c17eb2",
+   "status": 200
+  },
+  {
+   "body": {
+    "digits": 2,
+    "expr": "2349.77*1.07*1.04*0.89"
+   },
+   "name": "math_calc_rounded_chain",
+   "path": "/api/v1/math/calc",
+   "sha256": "f6ecacf4034cac10aa616b115b557fd2be472f59a426af926afbe39fd8ff5c3d",
+   "status": 200
+  },
+  {
+   "body": {
+    "heading_ids": true,
+    "markdown": "# Notes\n\n- un\n- deux\n\n| A | B |\n|---|---|\n| 1 | 2 |\n"
+   },
+   "name": "md_render_kitchen_sink",
+   "path": "/api/v1/md/render",
+   "sha256": "9dfbdadcc4a2851a1a1bea3c7882b2d6101d07d20b54c172b51bcb3c4ae3028a",
+   "status": 200
+  },
+  {
+   "body": {
+    "annual_rate_pct": 12,
+    "months": 3,
+    "principal": 1000
+   },
+   "name": "money_amortize_small",
+   "path": "/api/v1/money/amortize",
+   "sha256": "dbca0e22c950aa6202e5cfc68489221e0f89aeb353874faffbeb1672fbc3df93",
+   "status": 200
+  },
+  {
+   "body": {
+    "currency": "EUR",
+    "price": "89.90",
+    "steps": [
+     {
+      "type": "percent",
+      "value": "30"
+     },
+     {
+      "type": "percent",
+      "value": "20"
+     }
+    ]
+   },
+   "name": "money_discount_double",
+   "path": "/api/v1/money/discount",
+   "sha256": "f7ad97c791b65c74b38faf313ddd5348d96135a46b6b322bf58f73e2845e8f20",
+   "status": 200
+  },
+  {
+   "body": {
+    "delay_min": "180",
+    "distance_km": "6000",
+    "event": "delay",
+    "flight_date": "2027-06-15",
+    "intra_eu": "no",
+    "regime": "EU"
+   },
+   "name": "money_flight_comp_caselaw_edge_a",
+   "path": "/api/v1/money/flight_comp",
+   "sha256": "efa981662d126421f50c837455c39ac499fe8befd757414be827093d86d0485a",
+   "status": 200
+  },
+  {
+   "body": {
+    "delay_min": "250",
+    "distance_km": "7000",
+    "event": "delay",
+    "flight_date": "2027-11-05",
+    "intra_eu": "yes",
+    "regime": "EU"
+   },
+   "name": "money_flight_comp_intra_cap",
+   "path": "/api/v1/money/flight_comp",
+   "sha256": "788bab00efae5130c68370aaed191f545cf6b1bb4744dca3258ebe760aa91db2",
+   "status": 200
+  },
+  {
+   "body": {
+    "distance_km": "900",
+    "event": "cancellation",
+    "flight_date": "2027-12-31",
+    "notice_days": "2",
+    "regime": "EU"
+   },
+   "name": "money_flight_comp_nine_month_clamp",
+   "path": "/api/v1/money/flight_comp",
+   "sha256": "0125d1b835dfe01a1242588593bce367f9fc8214d5896fde0c169489cf59fe60",
+   "status": 200
+  },
+  {
+   "body": {
+    "delay_min": "180",
+    "distance_km": "6000",
+    "event": "delay",
+    "flight_date": "2027-11-01",
+    "intra_eu": "no",
+    "regime": "EU"
+   },
+   "name": "money_flight_comp_strict_edge_b",
+   "path": "/api/v1/money/flight_comp",
+   "sha256": "1dccfd09ee0a2575fd7b1e7650021511c04e05bd5ce87a618f9a9ebef1ccb1b3",
+   "status": 200
+  },
+  {
+   "body": {
+    "delay_min": "239",
+    "distance_km": "5550",
+    "event": "delay",
+    "flight_date": "2026-11-05",
+    "regime": "UK"
+   },
+   "name": "money_flight_comp_uk_official_row",
+   "path": "/api/v1/money/flight_comp",
+   "sha256": "46f82a750de5f446df7e19304cc2d37f2ffcd9319c80d73b3239c8ce40113dc2",
+   "status": 200
+  },
+  {
+   "body": {
+    "amount": "100.00",
+    "cycle_end": "2026-11-30",
+    "cycle_start": "2026-11-01",
+    "service_end": "2026-11-19",
+    "service_start": "2026-11-10"
+   },
+   "name": "money_prorate_nov",
+   "path": "/api/v1/money/prorate",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "a9ba97f060b8f3d72dbc688d88d86d3da50b5059545cdd2179eba2a61476bb90",
+   "status": 200
+  },
+  {
+   "method": "GET",
+   "name": "money_rates_archive",
+   "path": "/api/v1/money/rates",
+   "query": {
+    "amount": "100",
+    "date": "2026-11-06",
+    "from": "USD",
+    "to": "BRL"
+   },
+   "sha256": "1528f6e925204e5401cd885d2e86e153ba53b994727fa9f752444c532a97a210",
+   "status": 200
+  },
+  {
+   "body": {
+    "participants": [
+     "a",
+     "b",
+     "c"
+    ],
+    "total": "100.00"
+   },
+   "name": "money_split_three",
+   "path": "/api/v1/money/split",
+   "sha256": "31d8e289a23984e14e04b2aa10199eb8be694588b6f2ebd1ec972bc1160bfa65",
+   "status": 200
+  },
+  {
+   "body": {
+    "cidr": "10.0.0.0/8",
+    "split_into": 2
+   },
+   "name": "net_cidr_split",
+   "path": "/api/v1/net/cidr",
+   "sha256": "7f2fd82620534fcc15915e0a291e4813b96d67090ea7d9d905be9e66ef116469",
+   "status": 200
+  },
+  {
+   "body": {
+    "integrity_attr": "sha1-QLdDLCKNV2dzTor5xv1IutPqfA="
+   },
+   "name": "net_sri_audit",
+   "path": "/api/v1/net/sri",
+   "sha256": "06a6a9765ee8ae97226e4eee468ff0adb0623ca42f1b3a96336488daba415a53",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "mechacut sri pin \u2014 deterministic octets 2026"
+   },
+   "name": "net_sri_text",
+   "path": "/api/v1/net/sri",
+   "sha256": "4a0282cc10dda2a418f37783743a76880732dc4839d8d5abeebf011e8a5c3aed",
+   "status": 200
+  },
+  {
+   "body": {
+    "currency": "EUR",
+    "locale": "fr-FR",
+    "style": "currency",
+    "value": 1234.567
+   },
+   "name": "num_format_fr_eur",
+   "path": "/api/v1/num/format",
+   "sha256": "1b1f88d4f99e45e5452d4dc890a2d94b9b6e4a4c596cbf69b40077797d20d947",
+   "status": 200
+  },
+  {
+   "body": {
+    "amount": "100.00",
+    "rate": "5.0825",
+    "to": "BRL"
+   },
+   "name": "num_fx_brl",
+   "path": "/api/v1/num/fx",
+   "sha256": "1c31b37108e246f77330c6da2dbe7b88c3c4fb03bed6ac667f8ad1d441a18592",
+   "status": 200
+  },
+  {
+   "body": {
+    "kind": "bytes",
+    "value": 1536
+   },
+   "name": "num_human_kib",
+   "path": "/api/v1/num/human",
+   "sha256": "535b143e33cb566924762408bf2eb1a58febb6144c149ebe42b34499956c6a46",
+   "status": 200
+  },
+  {
+   "body": {
+    "prefer": "group",
+    "text": "1,234"
+   },
+   "name": "num_parse_ambiguous_ok",
+   "path": "/api/v1/num/parse",
+   "sha256": "a8c8341cf6e99c71cbdbc83570e277c44886d26d3a2a15e57e43182c7c5c5e2f",
+   "status": 200
+  },
+  {
+   "body": {
+    "places": 2,
+    "value": "0.145"
+   },
+   "name": "num_round_bankers",
+   "path": "/api/v1/num/round",
+   "sha256": "79dd30b28290e0b5003fcf244e6b2eb76fdd0b887ebd9b1bdba1692d36e5b681",
+   "status": 200
+  },
+  {
+   "body": {
+    "places": 2,
+    "value": 1234.5678
+   },
+   "name": "num_round_plain",
+   "path": "/api/v1/num/round",
+   "sha256": "4c02e7fb3d72561756f30cd34c5aeddade9e3891896a83e4c2816cb6f13ae842",
+   "status": 200
+  },
+  {
+   "body": {
+    "currency": "EUR",
+    "lang": "fr",
+    "value": "1234.56"
+   },
+   "name": "number_spell_fr_eur",
+   "path": "/api/v1/number/spell",
+   "sha256": "12f5aa968275160c78308ea63886fdeb2bc08fbac2425ed2cfa47fa33711b40b",
+   "status": 200
+  },
+  {
+   "body": {
+    "document": {
+     "a": {
+      "b": [
+       1,
+       2
+      ]
+     }
+    },
+    "patch": [
+     {
+      "op": "add",
+      "path": "/a/c",
+      "value": "x"
+     },
+     {
+      "op": "replace",
+      "path": "/a/c",
+      "value": "y"
+     },
+     {
+      "from": "/a/c",
+      "op": "move",
+      "path": "/a/m"
+     },
+     {
+      "from": "/a/m",
+      "op": "copy",
+      "path": "/a/m2"
+     },
+     {
+      "op": "test",
+      "path": "/a/m2",
+      "value": "y"
+     },
+     {
+      "op": "remove",
+      "path": "/a/b/0"
+     }
+    ]
+   },
+   "name": "patch_move_copy",
+   "path": "/api/v1/json/patch",
+   "sha256": "c5c3e17bae89a73381cddeb4f1e338dda1b4101d628b131a102b4084a8b143ac",
+   "status": 200
+  },
+  {
+   "body": {
+    "edits": [
+     {
+      "find": "old_value()",
+      "replace": "new_value()"
+     },
+     {
+      "find": "def f",
+      "replace": "def g"
+     }
+    ],
+    "text": "def f():\n    return old_value()\n"
+   },
+   "name": "patch_text_edits",
+   "path": "/api/v1/text/patch",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "d966e57ee0280f32ee301675a4f9acc560140f8bca54bea09738cfc73786b6bf",
+   "status": 200
+  },
+  {
+   "body": {
+    "case": "lower",
+    "os": "windows",
+    "path": "C:\\\\Users\\\\Dev\\\\..\\\\src\\\\App.JS"
+   },
+   "name": "path_windows_mess",
+   "path": "/api/v1/path/normalize",
+   "sha256": "8f68f20541e83b09f080843af1bcc07371677c5ac6b98da66cc5e386775294b4",
+   "status": 200
+  },
+  {
+   "body": {
+    "agg": "sum",
+    "columns": "region",
+    "data": [
+     {
+      "month": "Jan",
+      "region": "E",
+      "units": "10"
+     },
+     {
+      "month": "Jan",
+      "region": "W",
+      "units": "5"
+     },
+     {
+      "month": "Feb",
+      "region": "E",
+      "units": "7"
+     }
+    ],
+    "index": "month",
+    "values": "units"
+   },
+   "name": "pivot_sum",
+   "path": "/api/v1/table/pivot",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "c458064c59614f1ec45abccadd001471e5be074b4d320e77dfedbeed2d719e3c",
+   "status": 200
+  },
+  {
+   "body": {
+    "kind": "pypi",
+    "name": "Django_REST--framework"
+   },
+   "name": "pkg_name_pypi",
+   "path": "/api/v1/pkg/name",
+   "sha256": "91aad50fa3b1be3517ef423c8761b6f62d2ea7e4d013f89994df3284c09bae56",
+   "status": 200
+  },
+  {
+   "body": {
+    "ecl": "M",
+    "format": "matrix",
+    "text": "https://mechacut.studio"
+   },
+   "name": "qr_generate_deterministic",
+   "path": "/api/v1/qr/generate",
+   "sha256": "dbff71748633003f3e907e5de7dbf37ab0802c895e5a785fc5f397a47bffb358",
+   "status": 200
+  },
+  {
+   "body": {
+    "csv": "name,amount\r\nAlpha,1\r\nAlpha,1\r\nbeta, 2.5\r\nAlpha,1\r\n"
+   },
+   "name": "recipe_clean_table",
+   "path": "/api/v1/recipe/clean-table",
+   "sha256": "2440b52337b873059d5943afd0921c1d4064ee4fdaba34bd3ab971281bae6f37",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "INCIDENT 2026-11-18 14:05 UTC \u2014 checkout degraded. api-gateway p99 rose to 2140ms. 6.2% of requests timed out on https://api.pay.eu/v1/checkout; roll back scheduled 2026-11-19 03:00 UTC; SLA credit $4,300.00 (payments), $910.50 (search-api), retry window 2026-11-25, 12.5% retried, 3.1% dropped, ops@pay.eu notified, 1,842 failed checkouts."
+   },
+   "name": "recipe_facts_incident",
+   "path": "/api/v1/recipe/facts",
+   "sha256": "1307da9ea91a66019c3e9501a3cc3f36d51d9cb61b835a22e0bbfa52a50d2fad",
+   "status": 200
+  },
+  {
+   "body": {
+    "currency": "EUR",
+    "date": "2026-11-21",
+    "due_days": 30,
+    "line_items": [
+     {
+      "desc": "D\u00e9veloppement",
+      "qty": 12,
+      "unit_price": "85.00"
+     },
+     {
+      "desc": "H\u00e9bergement",
+      "qty": 1,
+      "unit_price": "4.90"
+     }
+    ],
+    "vat_percent": "20",
+    "words_lang": "fr"
+   },
+   "name": "recipe_invoice_fr",
+   "path": "/api/v1/recipe/invoice",
+   "sha256": "57c56145c1722c0b524f372888d3708bf7a1666dc250ca17da1a8b0d85f69d12",
+   "status": 200
+  },
+  {
+   "body": {
+    "count": 3,
+    "cron": "0 10 * * 1",
+    "duration_minutes": 45,
+    "start": "2026-11-23T00:00:00",
+    "summary": "Standup",
+    "timezone": "Europe/Paris"
+   },
+   "name": "recipe_schedule_mon",
+   "path": "/api/v1/recipe/schedule",
+   "sha256": "f148b3688ad1f4d9d3442113a30a26490dcc2aa127366267492d2ab85f7a9a02",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "groups",
+    "pattern": "(?P<k>\\w+)=(?P<v>\\d+)",
+    "text": "a=1 bb=22"
+   },
+   "name": "regex_groups",
+   "path": "/api/v1/regex/test",
+   "sha256": "1d735846bb3ee346205a10d3c299ff06fb5e9588fc794cfc228fed7af6e11892",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "```json\n{ name: \"Ren\u00e9\", 'age': 44, tags: [\"a\", \"b\",], /* c */ ok: True, bad: None }\n```"
+   },
+   "name": "repair_all_classes",
+   "path": "/api/v1/json/repair",
+   "sha256": "5991350b4075fa30b02812f1e35c57f2e2742d5eb48bad811c459d618bf32d97",
+   "status": 200
+  },
+  {
+   "body": {
+    "input": {
+     "a": 1
+    },
+    "mapping": {
+     "fields": {
+      "x": {
+       "path": "b.c"
+      },
+      "y": {
+       "cast": "int",
+       "path": "a"
+      },
+      "z": {
+       "each": {
+        "fields": {
+         "q": {
+          "path": "w"
+         }
+        }
+       },
+       "path": "a"
+      }
+     }
+    }
+   },
+   "name": "reshape_missing",
+   "path": "/api/v1/reshape",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "fcdfdcb1c01e674b043c289bdbc3d645c1e3fecc851682713a749dae02fc4c8d",
+   "status": 400
+  },
+  {
+   "body": {
+    "input": {
+     "person": {
+      "age": "44",
+      "name": "Davincc",
+      "tags": [
+       {
+        "t": "a",
+        "v": "1"
+       },
+       {
+        "t": "b",
+        "v": "2"
+       }
+      ]
+     }
+    },
+    "mapping": {
+     "fields": {
+      "age": {
+       "cast": "int",
+       "path": "person.age"
+      },
+      "name": {
+       "path": "person.name"
+      },
+      "nick": {
+       "default": "anon",
+       "path": "person.nickname"
+      },
+      "tags": {
+       "each": {
+        "fields": {
+         "key": {
+          "path": "t"
+         },
+         "val": {
+          "cast": "int",
+          "path": "v"
+         }
+        }
+       },
+       "path": "person.tags"
+      },
+      "upper": {
+       "cast": "upper",
+       "path": "person.name"
+      }
+     }
+    }
+   },
+   "name": "reshape_ok",
+   "path": "/api/v1/reshape",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "90a877b806bb828bf0f06d32f6ff0238a00ab874e00d85e4ab5d6c06f6ff954a",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "FR",
+    "year": 2026
+   },
+   "name": "schedule_holidays_fr2026",
+   "path": "/api/v1/schedule/holidays",
+   "sha256": "e42cf0372838aa06c9d6da5f8b00339ffb1dea894d2fb10a19338a5664e00d01",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "pay with 4111 1111 1111 1111 now"
+   },
+   "name": "secret_scan_luhn",
+   "path": "/api/v1/secret/scan",
+   "sha256": "5a4f00e408b79088943f970ac6997b9506e344b5679bf20cbb0be905a9263f1e",
+   "status": 200
+  },
+  {
+   "body": {
+    "versions": [
+     "1.0.0",
+     "1.0.0-rc.1",
+     "10.0.0",
+     "2.0.0",
+     "1.0.0-alpha.beta",
+     "1.0.0-beta.11"
+    ]
+   },
+   "name": "semver_sort_chain",
+   "path": "/api/v1/semver/sort",
+   "sha256": "e5db741e8dd3285ac3927028b4587d1346dca0de20eff21a869f5eff727b8a7a",
+   "status": 200
+  },
+  {
+   "body": {
+    "by": [
+     {
+      "dir": "desc",
+      "key": "p"
+     },
+     {
+      "key": "n"
+     }
+    ],
+    "rows": [
+     {
+      "n": "b",
+      "p": 2
+     },
+     {
+      "n": "a",
+      "p": 2
+     },
+     {
+      "n": "c",
+      "p": 1
+     }
+    ]
+   },
+   "name": "sort_multi_rank",
+   "path": "/api/v1/sort/multi",
+   "sha256": "0a2d059cb8242790ecd0e7987f2880b1e3a9ef404da25dcea607aa2a2985c94d",
+   "status": 200
+  },
+  {
+   "body": {
+    "items": [
+     "file10.txt",
+     "file2.txt",
+     "file1.txt",
+     "File20.txt"
+    ]
+   },
+   "name": "sort_natural_files",
+   "path": "/api/v1/sort/natural",
+   "sha256": "e6f5c80948e1115aa2dacf9d2c91061ba85b770b060f3472b73d600cc2dc6f94",
+   "status": 200
+  },
+  {
+   "body": {
+    "line": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA mechacut@test"
+   },
+   "name": "ssh_fingerprint_ed25519",
+   "path": "/api/v1/ssh/fingerprint",
+   "sha256": "f0ea52d5248fdad1cc0bdba4d66cb85457c9168bad135ada3626a5a26be597de",
+   "status": 200
+  },
+  {
+   "body": {
+    "factor": "1/2",
+    "items": [
+     {
+      "class": "egg",
+      "name": "eggs",
+      "qty": "5",
+      "unit": "piece"
+     },
+     {
+      "class": "base",
+      "name": "butter",
+      "qty": "1/2",
+      "unit": "cup"
+     }
+    ]
+   },
+   "name": "table_scale_eggs_halved",
+   "path": "/api/v1/table/scale",
+   "sha256": "8ff9c7a8da6b8e63a5bd00c37192bfb04e6ee886819f24cc3a5c74c7e6a30fd0",
+   "status": 200
+  },
+  {
+   "body": {
+    "items": [
+     {
+      "name": "flour",
+      "qty": "400",
+      "unit": "g"
+     },
+     {
+      "name": "sugar",
+      "qty": "3/4",
+      "unit": "cup"
+     },
+     {
+      "class": "salt",
+      "name": "salt",
+      "qty": "1/4",
+      "unit": "tsp"
+     }
+    ],
+    "servings_from": "6",
+    "servings_to": "2"
+   },
+   "name": "table_scale_third",
+   "path": "/api/v1/table/scale",
+   "sha256": "fcaa4c00e3c7466423b47a2d6ee54900077142f3c01562382f6b3d73c181def2",
+   "status": 200
+  },
+  {
+   "body": {
+    "csv": "id,name,qty,price,note\n1,O'Brien,3,1.50,hello\n2,caf\u00e9,007,10,\n3,x,12,2.5,\n",
+    "dialect": "sqlite",
+    "rows_per_statement": 2,
+    "table": "orders"
+   },
+   "name": "table_sql_dump_orders",
+   "path": "/api/v1/table/sql_dump",
+   "sha256": "8166d6567d918c1192d9e527aa06cbf53ac29c36d0a5be7e6435f297ceff1ad9",
+   "status": 200
+  },
+  {
+   "body": {
+    "budget": 30,
+    "text": "Le d\u00e9terminisme est un contrat. Chaque requ\u00eate identique produit des octets identiques. Mechacut r\u00e9pond une fois, pour toujours."
+   },
+   "name": "text_chunk_determinism",
+   "path": "/api/v1/text/chunk",
+   "price_atomic": "1000",
+   "requires_payment": true,
+   "sha256": "6932c29de1393895a4795a541b60de6d7bb88f2fc7e2d82f65ceec2cd04a2ab0",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "Bonjour le monde. \u00c7a va ?\n\nDeuxi\u00e8me ligne."
+   },
+   "name": "text_count_mixed",
+   "path": "/api/v1/text/count",
+   "sha256": "693a48ee93ff9bfa42380519951063350b94a1033d77d15e6339278da66a2d02",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "Caf\u00c3\u00a9 d\u00c3\u00a9j\u00c3  \u00e2\u0080\u0093 propre"
+   },
+   "name": "text_decode_cafe",
+   "path": "/api/v1/text/decode",
+   "sha256": "bbb7d72e20b38db11d6204d0b680f82eb001e22ab55df125b0aae50b225b4132",
+   "status": 200
+  },
+  {
+   "body": {
+    "dialects": [
+     "sql",
+     "shell",
+     "html"
+    ],
+    "value": "O'Brien; DROP TABLE--"
+   },
+   "name": "text_escape_sql",
+   "path": "/api/v1/text/escape",
+   "sha256": "73696064b3a9704a3e52ceb6633e99186ebb4470179914bbb026141a7dc6e873",
+   "status": 200
+  },
+  {
+   "body": {
+    "domain": "m\u00fcnchen.de"
+   },
+   "name": "text_punycode_munich",
+   "path": "/api/v1/text/punycode",
+   "sha256": "63f63c6067d954071b0047944f6b2137636294ae5bfb6ff8859e677862d6918e",
+   "status": 200
+  },
+  {
+   "body": {
+    "name": "CON.txt"
+   },
+   "name": "text_sanitize_reserved",
+   "path": "/api/v1/text/sanitize",
+   "sha256": "2dbc3dfe6a4b8d7a5b2ae8d00d7f8209ee950b7e73b22a54de87d3ecdd538876",
+   "status": 200
+  },
+  {
+   "body": {
+    "chunks": [
+     "quarterly revenue grew 12 percent",
+     "the office moved floors",
+     "growth in revenue was broad-based"
+    ],
+    "k": 2,
+    "query": "revenue growth"
+   },
+   "name": "text_select_growth",
+   "path": "/api/v1/text/select",
+   "sha256": "b7422517b9ed9ea75c48e9c9a900e1c079cc027becb8a333f4a288bb94ccf9ed",
+   "status": 200
+  },
+  {
+   "body": {
+    "max": 3,
+    "text": "Un deux trois quatre cinq",
+    "unit": "words"
+   },
+   "name": "text_truncate_words",
+   "path": "/api/v1/text/truncate",
+   "sha256": "fe550142db088cdf0e9dcaf99b1f2b5343fb4529caee13d7a2b871e9d44afb1c",
+   "status": 200
+  },
+  {
+   "body": {
+    "url": "HTTP://www.Example.COM:80/a/../b/%7Euser?utm_source=n&id=42#%61"
+   },
+   "name": "text_url_canonical_rfc",
+   "path": "/api/v1/text/url_canonical",
+   "sha256": "43ced4fdcd55d70b62fd9f9886554f369795941a9a4d4215b69a421aac84d43d",
+   "status": 200
+  },
+  {
+   "body": {
+    "from": "km",
+    "to": "mi",
+    "value": 100
+   },
+   "name": "units_km_to_mi",
+   "path": "/api/v1/units/convert",
+   "sha256": "52cdab9e46573596e4d60689134a9030333cca3b7549aac4341b76ae00665d53",
+   "status": 200
+  },
+  {
+   "body": {
+    "size": "42",
+    "system": "eu"
+   },
+   "name": "units_shoe_size_eu42",
+   "path": "/api/v1/units/shoe_size",
+   "sha256": "32f623685e54e2ab7672704453ce8e6ccfd80cf23449239a7659bc9a800a9ac3",
+   "status": 200
+  },
+  {
+   "body": {
+    "foot_mm": "271"
+   },
+   "name": "units_shoe_size_foot271",
+   "path": "/api/v1/units/shoe_size",
+   "sha256": "3625e2819899ce990eea92acae5265844c67168275fdd671ce14818053411867",
+   "status": 200
+  },
+  {
+   "body": {
+    "from": "F",
+    "to": "K",
+    "value": 212
+   },
+   "name": "units_temp_f_to_k",
+   "path": "/api/v1/units/convert",
+   "sha256": "eccc3ca8d912323605f469c6ca6e6eea26ed4bae31c34b51f6354720931ccfb7",
+   "status": 200
+  },
+  {
+   "body": {
+    "payload": {
+     "age": "young"
+    },
+    "schema": {
+     "properties": {
+      "age": {
+       "type": "integer"
+      }
+     },
+     "required": [
+      "age"
+     ],
+     "type": "object"
+    }
+   },
+   "name": "validate_bad",
+   "path": "/api/v1/validate",
+   "sha256": "23ef0086e32d5660e98c566282fc3ccfcbf17b57a53bb268f65f1c30127050df",
+   "status": 400
+  },
+  {
+   "body": {
+    "code": "FR"
+   },
+   "name": "validate_country_fr",
+   "path": "/api/v1/validate/country",
+   "sha256": "54b5dbc796ebd753567e78fe1da5100f52334996fefd39ab530dfceb383835e9",
+   "status": 200
+  },
+  {
+   "body": {
+    "iban": "FR76 3000 4000 0312 3456 7890 143"
+   },
+   "name": "validate_iban_fr",
+   "path": "/api/v1/validate/iban",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "4ea5295b62bfe5f2c15ecab9c20130e103bf5283b555dbd45b34fafd6f8cca0c",
+   "status": 200
+  },
+  {
+   "body": {
+    "default_country": "FR",
+    "phone": "01 23 45 67 89"
+   },
+   "name": "validate_phone_national",
+   "path": "/api/v1/validate/phone",
+   "sha256": "241cbdc859dbddccd42f55745c809a28742739974d581509402eea1f5f974b7b",
+   "status": 200
+  },
+  {
+   "body": {
+    "code": "01310100",
+    "country": "BR"
+   },
+   "name": "validate_postal_br",
+   "path": "/api/v1/validate/postal",
+   "sha256": "ddeed7dc504ffc7b351eaa32914a98280f7c4044cbd14cc906fec7595cf321e4",
+   "status": 200
+  },
+  {
+   "body": {
+    "kind": "cnpj",
+    "value": "11.222.333/0001-81"
+   },
+   "name": "validate_taxid_cnpj",
+   "path": "/api/v1/validate/taxid",
+   "sha256": "a67be4ae814ba3e72182ba0913d12d4ca108c5ba88c376ffd7140b851e202531",
+   "status": 200
+  },
+  {
+   "body": {
+    "url": "https://caf\u00e9.fr/tea"
+   },
+   "name": "validate_url_idn",
+   "path": "/api/v1/validate/url",
+   "sha256": "b6dc6acdd69e6c1b76692afba39d5e8741fc1274b39c339f00d828167f56bec7",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-12-01",
+    "pem": "-----BEGIN CERTIFICATE-----\nMIIDMDCCAhigAwIBAgIJAIq6uot/rlt4MA0GCSqGSIb3DQEBCwUAMDoxCzAJBgNV\nBAYTAkxVMREwDwYDVQQKDAhNZWNoYWN1dDEYMBYGA1UEAwwPbWVjaGFjdXQuc3R1\nZGlvMB4XDTI2MTEyMTIxMzEyNloXDTI2MTIyMTIxMzEyNlowOjELMAkGA1UEBhMC\nTFUxETAPBgNVBAoMCE1lY2hhY3V0MRgwFgYDVQQDDA9tZWNoYWN1dC5zdHVkaW8w\nggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCya/8AIN5Km2EM5gAVgw/Q\nX42ikAi0+tUSPhC6fkPyMREMcWz3Ugx1r6IpwWJ+ILv2pmCEIw74cY+nGvmMcjMq\ngJax1PgW4PTnwuZpjEq/pj7smsdp29F+KgDc/WatnnDfhUwqMQQF0PUMTbowkCB8\nNI3lj29BLa6zlHiq9lmd48/RC4NzRQnfNz18uPhvbe26M4xzAYkv6t1+nebzO1N1\nfPe0dmTbimT6txsITEyEUD677h3InNGWWRn6aku8xCaBIXzhpVLykC29ef05ZQsy\np8y4PJSsPLj3V/enEgW0Bp+juWc+JCW01zbn4hFVqSbtSxeoEUf8BzzuULQxFcJn\nAgMBAAGjOTA3MDUGA1UdEQQuMCyCD21lY2hhY3V0LnN0dWRpb4ITd3d3Lm1lY2hh\nY3V0LnN0dWRpb4cEywBxBzANBgkqhkiG9w0BAQsFAAOCAQEAnoMAyNhbIsEyFjf2\nit6ieARiAdZzTc5ubv1DzzZmS+I0O3uBTQGptA6/QNiYrqgwjxm5CV156xIWxsrs\nh1DD7QQFmkrzz7H9cw1AeiYiJhiIg1/vrXg644s1DTT9kD9WI1NgGFLKJ/xjR9ix\nWIYdIbYNmVlioDcjn9DzUaoI7K02slXDnfqLwVBW2PKDNVFVhfXE522US/CVxx1b\npeOtBRUZylTL6frl3RD3/W8izsonfLo0byu3lZF7pFfUN+74cQBLqNWFuCtxacrt\n56k36dwcO1Dtuemuz8wERTE0PMN2Zg8oO+swgyjAKsthu2C4DZx6/EhUNO3CYEDG\nKAkqkA==\n-----END CERTIFICATE-----\n"
+   },
+   "name": "web_cert_leaf",
+   "path": "/api/v1/web/cert",
+   "sha256": "4984d20c746ff61b7e19d5fbc2af08e0babafe891296662ed418b96becb0c6c5",
+   "status": 200
+  },
+  {
+   "body": {
+    "force_array": [
+     "rss/channel/item"
+    ],
+    "xml": "<rss version=\"2.0\"><channel><title>Canard deterministe</title><item><title>Un</title></item></channel></rss>"
+   },
+   "name": "xml_to_json_rss",
+   "path": "/api/v1/xml/to_json",
+   "sha256": "79666b450af6179297b88b6aad05d2c3cca0457a7c0ad443f93683b56b9b6728",
+   "status": 200
+  },
+  {
+   "body": {
+    "blob_b64": "UEsDBBQAAAAIAAAAIQCK/qr5CwAAAAkAAAAIAAAAbm90ZS50eHTLTU3OSEwuLeECAFBLAQIUAxQAAAAIAAAAIQCK/qr5CwAAAAkAAAAIAAAAAAAAAAAAAACkAQAAAABub3RlLnR4dFBLBQYAAAAAAQABADYAAAAxAAAAAAA="
+   },
+   "name": "zip_verify_ok",
+   "path": "/api/v1/zip/verify",
+   "sha256": "6c7aeaa7c4a0ac30c3a5afe4d5c9d70cdaecf87d9f35b147441bcb8d828c1371",
+   "status": 200
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "dedupe_urls",
+  "path": "/api/v1/list/dedupe",
+  "body": {
+    "mode": "url",
+    "items": [
+      "https://A.com/x/",
+      "https://a.com/x",
+      "http://B.com:80/",
+      "https://a.com/x#frag",
+      "https://a.com/x?b=2&a=1"
+    ]
+  }
+}

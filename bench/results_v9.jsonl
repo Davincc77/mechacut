@@ -1,0 +1,9 @@
+{"harness": "v9-intake", "model": "0.5b", "arm": "naked", "keys": 0, "of": 6, "tokens": 366, "seed": 42, "temp": 0, "server": "mechacut.studio (absent by design)"}
+{"harness": "v9-intake", "model": "0.5b", "arm": "intake", "keys": 6, "of": 6, "tokens": 320, "seed": 42, "temp": 0, "server": "mechacut.studio", "answer_from_server": true, "card": "ready/recipe_facts"}
+{"harness": "v9-intake", "model": "0.5b", "arm": "intake-pass2", "keys": 6, "of": 6, "tokens": null, "seed": 42, "temp": 0, "server": "mechacut.studio", "note": "independent second run reproduced 0/6 -> 6/6"}
+{"harness": "v9-intake", "model": "1.5b", "arm": "naked", "keys": 5, "of": 6, "tokens": 346, "seed": 42, "temp": 0}
+{"harness": "v9-intake", "model": "1.5b", "arm": "intake", "keys": 6, "of": 6, "tokens": 462, "seed": 42, "temp": 0, "server": "mechacut.studio", "answer_from_server": true, "card": "ready/recipe_facts"}
+{"harness": "v9-intake", "model": "7b", "arm": "naked", "keys": 4, "of": 6, "tokens": 449, "seed": 42, "temp": 0}
+{"harness": "v9-intake", "model": "7b", "arm": "intake", "keys": 6, "of": 6, "tokens": 452, "seed": 42, "temp": 0, "server": "mechacut.studio", "answer_from_server": true, "card": "ready/recipe_facts"}
+{"harness": "v9-intake", "model": "7b", "arm": "autonomous-v8-strict", "keys": 6, "of": 6, "tokens": 575, "seed": 42, "temp": 0, "server": "mechacut.studio", "answer_from_server": true, "note": "model chose recipe_facts itself from the tool list (no card played by harness)"}
+{"harness": "v9-intake", "note": "task: French sentence, 6 required answer fields; expectations hand-computed before any run; 3 identical live calls -> single sha256 669e008e5fd9e383..."}

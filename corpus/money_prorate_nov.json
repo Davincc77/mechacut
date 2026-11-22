@@ -1,0 +1,11 @@
+{
+  "name": "money_prorate_nov",
+  "path": "/api/v1/money/prorate",
+  "body": {
+    "amount": "100.00",
+    "cycle_start": "2026-11-01",
+    "cycle_end": "2026-11-30",
+    "service_start": "2026-11-10",
+    "service_end": "2026-11-19"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "repair_all_classes",
+  "path": "/api/v1/json/repair",
+  "body": {
+    "text": "```json\n{ name: \"René\", 'age': 44, tags: [\"a\", \"b\",], /* c */ ok: True, bad: None }\n```"
+  }
+}

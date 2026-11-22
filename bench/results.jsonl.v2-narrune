@@ -1,0 +1,6 @@
+{"model": "0.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 6.74, "seed": 42, "temp": 0}
+{"model": "0.5b", "arm": "B", "tokens_in": 2847, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 6.39, "seed": 42, "temp": 0}
+{"model": "1.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 10.87, "seed": 42, "temp": 0}
+{"model": "1.5b", "arm": "B", "tokens_in": 2847, "tokens_out": 1500, "tool_calls": 0, "success": false, "seconds": 11.45, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "A", "tokens_in": 1020, "tokens_out": 751, "tool_calls": 0, "success": false, "seconds": 18.86, "seed": 42, "temp": 0}
+{"model": "7b", "arm": "B", "tokens_in": 2847, "tokens_out": 1170, "tool_calls": 0, "success": false, "seconds": 29.03, "seed": 42, "temp": 0}

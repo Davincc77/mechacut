@@ -1,0 +1,15 @@
+{
+  "name": "patch_move_copy",
+  "path": "/api/v1/json/patch",
+  "body": {
+    "document": {"a": {"b": [1, 2]}},
+    "patch": [
+      {"op": "add", "path": "/a/c", "value": "x"},
+      {"op": "replace", "path": "/a/c", "value": "y"},
+      {"op": "move", "from": "/a/c", "path": "/a/m"},
+      {"op": "copy", "from": "/a/m", "path": "/a/m2"},
+      {"op": "test", "path": "/a/m2", "value": "y"},
+      {"op": "remove", "path": "/a/b/0"}
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "num_parse_ambiguous_ok",
+  "path": "/api/v1/num/parse",
+  "body": {
+    "text": "1,234",
+    "prefer": "group"
+  }
+}

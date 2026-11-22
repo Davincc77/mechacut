@@ -1,0 +1,7 @@
+{
+ "name": "units_shoe_size_foot271",
+ "path": "/api/v1/units/shoe_size",
+ "body": {
+  "foot_mm": "271"
+ }
+}

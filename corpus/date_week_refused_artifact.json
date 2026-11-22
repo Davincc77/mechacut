@@ -1,0 +1,7 @@
+{
+ "body": {
+  "iso": "2027-W53"
+ },
+ "name": "date_week_refused_artifact",
+ "path": "/api/v1/date/week"
+}

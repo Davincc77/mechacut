@@ -1,0 +1,5 @@
+{
+  "name": "cron_humanize_quarter",
+  "path": "/api/v1/cron/humanize",
+  "body": {"expression": "*/15 9-17 * * 1-5"}
+}

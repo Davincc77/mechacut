@@ -1,0 +1,7 @@
+{
+  "name": "validate_url_idn",
+  "path": "/api/v1/validate/url",
+  "body": {
+    "url": "https://café.fr/tea"
+  }
+}

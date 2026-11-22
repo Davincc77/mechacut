@@ -1,0 +1,4 @@
+{"name": "json_query_emails",
+ "path": "/api/v1/json/query",
+ "body": {"data": {"users": [{"email": "a@x.io", "vip": true}, {"email": "b@x.io", "vip": false}]},
+          "path": "$.users[*].email"}}

@@ -1,0 +1,6 @@
+{"name": "logic_rules_sepa",
+ "path": "/api/v1/logic/rules",
+ "body": {"facts": {"amount": 1200, "country": "FR", "tags": ["eu"]},
+          "rules": [{"name": "sepa-limit", "when": {"fact": "country", "op": "eq", "value": "FR"},
+                     "require": {"fact": "amount", "op": "lte", "value": 10000}},
+                    {"name": "stamp", "set": {"checked": true}}]}}

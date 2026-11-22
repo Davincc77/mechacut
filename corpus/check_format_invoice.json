@@ -1,0 +1,1 @@
+{"name": "check_format_invoice", "path": "/api/v1/check/format", "body": {"payload": {"due": "2026-02-30", "sent": "2026-11-21T10:00:00Z", "total": "1,234.56"}, "formats": {"$.due": "date-iso", "$.sent": "datetime-iso", "$.total": "decimal-string"}}}

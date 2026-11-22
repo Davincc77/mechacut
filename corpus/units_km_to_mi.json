@@ -1,0 +1,9 @@
+{
+  "name": "units_km_to_mi",
+  "path": "/api/v1/units/convert",
+  "body": {
+    "value": 100,
+    "from": "km",
+    "to": "mi"
+  }
+}

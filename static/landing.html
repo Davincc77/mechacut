@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta.title}}</title>
+<meta name="description" content="{{meta.desc}}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23141414'/><path d='M20 70 L40 45 L55 55 L80 25' stroke='%23d4af37' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a; --fg: #ececec; --muted: #8f8f8f;
+    --gold: #d4af37; --line: #232323; --card: #121212;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+  header.top { display: flex; align-items: center; justify-content: space-between;
+    padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 12px;
+    font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -.3px; }
+  .brand svg { display: block; }
+  nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px;
+    margin-left: 18px; transition: color .15s; }
+  nav a:hover { color: var(--fg); }
+  nav .lang { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 1px; }
+  nav .lang.cur { color: var(--gold); }
+  main { padding: 70px 0 60px; }
+  h1 { font-family: "Space Grotesk", sans-serif; font-weight: 700;
+    font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -.5px;
+    margin-bottom: 22px; }
+  h1 .dim { color: var(--muted); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 680px; margin-bottom: 52px; }
+  .lede strong { color: var(--fg); font-weight: 500; }
+  .catbar { display: flex; gap: 14px; align-items: baseline;
+    flex-wrap: wrap; margin-bottom: 14px; }
+  #catsearch { flex: 1 1 240px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 10px; color: var(--fg);
+    font: inherit; font-size: 14px; padding: 10px 14px; }
+  #catsearch:focus { outline: 1px solid var(--gold); }
+  .cathits { font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    color: var(--muted); white-space: nowrap; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .chip { font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    color: var(--muted); border: 1px solid var(--line);
+    background: var(--card); border-radius: 999px; padding: 5px 11px;
+    cursor: pointer; }
+  .chip.on { color: var(--gold); border-color: #3a3320; background: #14110a; }
+  .tierlegend { font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+    color: var(--muted); margin: -6px 0 14px; line-height: 1.8; }
+  .tierlegend .lg { white-space: nowrap; }
+  @media (max-width: 640px) { .tierlegend .lg { white-space: normal; } }
+  .catgrid { display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; max-height: 30rem; overflow-y: auto; padding-right: 6px;
+    scrollbar-width: thin; scrollbar-color: #333 transparent; }
+  .tcard { text-align: left; background: var(--card);
+    border: 1px solid var(--line); border-radius: 11px;
+    padding: 12px 13px; color: var(--fg); font: inherit; cursor: pointer;
+    display: flex; flex-direction: column; gap: 5px; }
+  .tcard:hover, .tcard:focus-visible { border-color: #3a3320; }
+  .tcard code { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  .tcard .tp { font-size: 12px; color: var(--muted);
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden; }
+  .tcard .tierdot { font-size: 10px; }
+  .tcard.hide { display: none; }
+  #tptry { margin: 0 0 10px; }
+  #tptry .tsay { font-size: 14px; margin: 0 0 6px; color: var(--fg); }
+  #tptry .tsay b { color: var(--muted); font-weight: 500; font-size: 12px;
+                   display: block; text-transform: uppercase;
+                   letter-spacing: .06em; }
+  #tptry .treq, #tptry .tgot { font: 12px/1.5 ui-monospace,
+      SFMono-Regular, Menlo, monospace; background: var(--codebg, #0d1117);
+      border-radius: 8px; padding: 8px 10px; overflow-x: auto;
+      white-space: pre-wrap; word-break: break-all; margin: 0 0 6px; }
+  #tptry .tgot { max-height: 9rem; overflow-y: auto; color: #9fd6a2; }
+  .packlinks { margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .packlinks a { color: var(--gold); text-decoration: none; }
+  .tpanel { position: fixed; top: 0; right: 0; width: 430px;
+    max-width: 94vw; height: 100dvh; background: #101010;
+    border-left: 1px solid var(--line); z-index: 60; padding: 20px 22px;
+    overflow-y: auto; box-shadow: -18px 0 40px rgba(0, 0, 0, .5); }
+  .tpanel[hidden] { display: none; }
+  .tphead { display: flex; gap: 10px; align-items: center;
+    flex-wrap: wrap; margin-bottom: 12px; }
+  .tphead code { font-family: "IBM Plex Mono", monospace;
+    color: var(--gold); font-size: 14px; }
+  .tphead button { font: inherit; font-size: 12.5px;
+    background: var(--card); color: var(--fg);
+    border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
+    cursor: pointer; }
+  .tphead .sp { flex: 1; }
+  .tblwrap { overflow-x: auto; }
+  .navbtn { display: none; font: inherit; font-size: 20px;
+    background: none; border: 1px solid var(--line); border-radius: 8px;
+    color: var(--fg); padding: 2px 10px; cursor: pointer; }
+  @media (max-width: 1100px) { .catgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) {
+    .catgrid { grid-template-columns: 1fr; }
+    .navbtn { display: block; }
+    header.top nav { display: none; position: fixed; inset: 0;
+      background: rgba(8, 8, 8, .97); flex-direction: column;
+      align-items: flex-start; gap: 18px; padding: 84px 28px; z-index: 50; }
+    header.top nav.open { display: flex; }
+    .tpanel { width: 100vw; max-width: 100vw; border-left: none; }
+  }
+  h2 { font-family: "Space Grotesk", sans-serif; font-size: 30px;
+    font-weight: 700; letter-spacing: -.3px; margin-bottom: 18px; }
+  .section { margin-bottom: 80px; }
+  .vision p { color: var(--muted); max-width: 720px; margin-bottom: 16px; font-size: 16.5px; }
+  .vision p strong { color: var(--fg); font-weight: 500; }
+  .playgrid { display: grid; grid-template-columns: repeat(auto-fit,
+                minmax(250px, 1fr)); gap: 16px; margin-top: 26px; }
+  .play { border: 1px solid var(--line); border-radius: 12px;
+          padding: 18px 18px 14px; background: var(--bg2, transparent); }
+  .play h3 { margin: 0 0 10px; font-size: 16px; }
+  .playsay { font-size: 15px; margin: 0 0 12px; color: var(--fg); }
+  .playgot { font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+             background: var(--codebg, #0d1117); border-radius: 8px;
+             padding: 10px 12px; overflow-x: auto; margin: 0 0 12px; }
+  .playwhy { font-size: 13.5px; color: var(--muted); margin: 0; }
+  .connect { margin-top: 26px; }
+  .connect #connectcmd { user-select: all; }
+  .copybtn { margin-top: 8px; background: none; border: 1px solid
+             var(--line); color: var(--muted); border-radius: 8px;
+             padding: 8px 14px; font-size: 12.5px; min-height: 40px;
+             cursor: pointer; }
+  .copybtn:hover, .copybtn:focus-visible { color: var(--fg);
+             border-color: #3a3320; }
+  .vision p code, .tiers p code, .x402 p code { font-family: "IBM Plex Mono", monospace;
+    font-size: 14px; color: var(--fg); background: #1c1c1c; padding: 1px 6px; border-radius: 5px; }
+  .vision .quote, .quote { border-left: 2px solid var(--gold); padding-left: 20px;
+    margin: 30px 0; font-size: 18px; color: var(--fg);
+    font-family: "Space Grotesk", sans-serif; }
+  ul.contract { list-style: none; display: grid;
+    grid-template-columns: repeat(2, 1fr); gap: 12px 30px; max-width: 760px; }
+  @media (max-width: 640px) { ul.contract { grid-template-columns: 1fr; } }
+  ul.contract li { color: var(--muted); font-size: 15px; display: flex; gap: 10px; }
+  ul.contract li::before { content: "\2192"; color: var(--gold); flex-shrink: 0; }
+  table.bench { border-collapse: collapse; width: 100%; max-width: 760px;
+    font-family: "IBM Plex Mono", monospace; font-size: 14px; }
+  table.bench th { text-align: left; color: var(--muted); font-weight: 400;
+    font-size: 12px; letter-spacing: .5px; padding: 8px 18px 8px 0;
+    border-bottom: 1px solid var(--line); }
+  table.bench td { padding: 10px 18px 10px 0; border-bottom: 1px solid var(--line); }
+  td.yes { color: #7fd47f; } td.no { color: #d47f7f; }
+  td.num { color: var(--muted); }
+  .tiers p, .x402 p { color: var(--muted); max-width: 720px; margin-bottom: 14px; font-size: 15.5px; }
+  .tiers p a, .x402 p a { color: var(--gold); }
+  pre { background: #0d0d0d; border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px 24px; overflow-x: auto; font-family: "IBM Plex Mono",
+    monospace; font-size: 13px; line-height: 1.7; color: #d8d8d8; margin: 20px 0; }
+  footer { border-top: 1px solid var(--line); padding: 34px 0 48px;
+    color: var(--muted); font-size: 13.5px; }
+  footer .row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--fg); }
+  .pill { display: inline-block; font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid #3a3320; background: #14110a;
+    padding: 5px 12px; border-radius: 999px; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="18" fill="#141414"/><path d="M20 70 L40 45 L55 55 L80 25" stroke="#d4af37" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      MechaCut
+    </div>
+    <nav>
+      <a href="#bundles">{{nav.tools}}</a>
+      <a href="#bench">{{nav.numbers}}</a>
+      <a href="#build">{{nav.build}}</a>
+      <a href="#vision">{{nav.vision}}</a>
+      <a href="#contract">{{nav.api}}</a>
+      <a href="/agent/manifest">manifest</a>
+      <a class="lang{{cur.en}}" href="?lang=en">EN</a>
+      <a class="lang{{cur.fr}}" href="?lang=fr">FR</a>
+      <a class="lang{{cur.pt}}" href="?lang=pt">PT</a>
+    </nav>
+    <button class="navbtn" id="navbtn" aria-label="{{nav.menu}}">&#9776;</button>
+  </header>
+
+  <main>
+    <section>
+      <div class="pill">{{pill}}</div>
+      <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
+      <p class="lede">{{lede}}</p>
+    </section>
+
+    <section class="section" id="bundles">
+      <h2>{{bundles.h2}}</h2>
+      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{bundles.intro}}</p>
+      <div class="catbar">
+        <input id="catsearch" type="search" placeholder="{{cat.search}}" aria-label="{{cat.search}}">
+        <span class="cathits" id="cathits" data-tpl="{{cat.hits}}"></span>
+      </div>
+      <div id="cattray">
+{{bundles_grid}}
+      </div>
+    </section>
+    <aside class="tpanel" id="tpanel" hidden>
+      <div class="tphead">
+        <code id="tpname"></code><span class="sp"></span>
+        <button id="tpcopy" data-copied="{{panel.copied}}">{{panel.copy}}</button>
+        <button id="tpclose">{{panel.close}} &#10005;</button>
+      </div>
+      <div id="tptry" hidden></div>
+      <pre id="tpbody"></pre>
+    </aside>
+
+    <section class="section tiers" id="tiers">
+      <h2>{{tiers.h2}}</h2>
+      <p>{{tiers.intro}}</p>
+    </section>
+
+    <section class="section" id="bench">
+      <h2>{{bench.h2}}</h2>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
+      <div class="tblwrap"><table class="bench">
+        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench_rows}}
+      </table></div>
+      <p class="tiers" style="margin-top: 18px;">{{bench.foot}}</p>
+      <h3 style="margin-top: 42px;">{{bench9.h2}}</h3>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench9.intro}}</p>
+      <div class="tblwrap"><table class="bench">
+        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench9.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench9_rows}}
+      </table></div>
+      <p class="tiers" style="margin-top: 18px;">{{bench9.foot}}</p>
+      <h3 style="margin-top: 42px;">{{bench10.h2}}</h3>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench10.intro}}</p>
+      <div class="tblwrap"><table class="bench">
+        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench10.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench10_rows}}
+      </table></div>
+      <p class="tiers" style="margin-top: 18px;">{{bench10.foot}}</p>
+      <h3 style="margin-top: 42px;">{{bench12.h2}}</h3>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench12.intro}}</p>
+      <div class="tblwrap"><table class="bench">
+        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench12.code}}</th><th>{{bench12.relay}}</th></tr>
+{{bench12_rows}}
+      </table></div>
+      <p class="tiers" style="margin-top: 18px;">{{bench12.foot}}</p>
+    </section>
+
+    <section class="section build" id="build">
+      <h2>{{build.h2}}</h2>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{build.intro}}</p>
+      <div class="playgrid">
+        <div class="play"><h3>{{build.r1.name}}</h3>
+          <p class="playsay">{{build.r1.say}}</p>
+          <pre class="playgot">{{build.r1.got}}</pre>
+          <p class="playwhy">{{build.r1.why}}</p></div>
+        <div class="play"><h3>{{build.r2.name}}</h3>
+          <p class="playsay">{{build.r2.say}}</p>
+          <pre class="playgot">{{build.r2.got}}</pre>
+          <p class="playwhy">{{build.r2.why}}</p></div>
+        <div class="play"><h3>{{build.r3.name}}</h3>
+          <p class="playsay">{{build.r3.say}}</p>
+          <pre class="playgot">{{build.r3.got}}</pre>
+          <p class="playwhy">{{build.r3.why}}</p></div>
+      </div>
+      <div class="connect">
+        <p class="playwhy">{{build.connect}}</p>
+        <pre class="playgot" id="connectcmd">Read https://mechacut.studio/SKILL-MINI.md and follow it before any mechanical task.</pre>
+        <button class="copybtn" data-for="connectcmd" data-copied="{{panel.copied}}">{{panel.copy}}</button>
+      </div>
+    </section>
+
+    {{everyday_grid}}
+
+    <section class="section x402" id="x402">
+      <h2>{{x402.h2}}</h2>
+      <p>{{x402.p1}}</p>
+      <p>{{x402.p2}}</p>
+      <p>{{x402.bankr}}</p>
+    </section>
+
+    <section class="section vision" id="vision">
+      <h2>{{vision.h2}}</h2>
+      <p>{{vision.p1}}</p>
+      <p>{{vision.p2}}</p>
+      <div class="quote">{{vision.quote}}</div>
+      <p>{{vision.p3}}</p>
+    </section>
+
+    <section class="section" id="contract">
+      <h2>{{contract.h2}}</h2>
+      <ul class="contract">
+        <li>{{contract.li1}}</li>
+        <li>{{contract.li2}}</li>
+        <li>{{contract.li3}}</li>
+        <li>{{contract.li4}}</li>
+        <li>{{contract.li5}}</li>
+        <li>{{contract.li6}}</li>
+      </ul>
+      <div class="quote" style="margin: 30px 0 0 0;">{{agents.line}}</div>
+      <p style="color: var(--muted); font-size: 15px; margin-top: 18px;">
+        {{agents.hint}} — <a href="/mcp">/mcp</a> · <a href="/SKILL.md">/SKILL.md</a> · <a href="/openapi.json">/openapi.json</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="row">
+      <div>{{footer.family}}</div>
+      <div><a href="/misses.json">/misses.json</a> · <a href="/route?q=dirty%20csv%20into%20yaml">/route</a> · <a href="/api/v1/recipes">/recipes</a></div>
+      <div><a href="https://github.com/Davincc77/mechacut" rel="me">GitHub</a> · <a href="https://x.com/Davincc" rel="me">Follow on X</a></div>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".tcard"));
+  var hits = document.getElementById("cathits");
+  var search = document.getElementById("catsearch");
+  var tray = document.getElementById("cattray");
+  var panel = document.getElementById("tpanel");
+  var pname = document.getElementById("tpname");
+  var pbody = document.getElementById("tpbody");
+  var trybox = document.getElementById("tptry");
+  var trycmd = "";
+  var LBL = {say: "{{panel.say}}", got: "{{panel.got}}"};
+  var copyb = document.getElementById("tpcopy");
+  var closeb = document.getElementById("tpclose");
+  var pack = "all", tier = "all", w = "", last = null;
+  function ok(c) {
+    return (pack === "all" || c.dataset.pack === pack) &&
+           (tier === "all" || c.dataset.tier === tier) &&
+           (!w || c.dataset.hay.indexOf(w) >= 0);
+  }
+  function apply() {
+    var n = 0;
+    cards.forEach(function (c) {
+      var v = ok(c); c.classList.toggle("hide", !v); if (v) n++;
+    });
+    if (hits) hits.textContent =
+      hits.dataset.tpl.replace("~n~", n).replace("~t~", cards.length);
+  }
+  if (tray) tray.addEventListener("click", function (e) {
+    var chip = e.target.closest(".chip");
+    if (chip) {
+      var kv = chip.dataset.f.split("=");
+      if (kv[0] === "x") { pack = "all"; tier = "all"; }
+      else if (kv[0] === "pack") { pack = kv[1]; }
+      else { tier = kv[1]; }
+      tray.querySelectorAll(".chip").forEach(function (c) {
+        var k2 = c.dataset.f.split("=");
+        var on = k2[0] === "x" ? (pack === "all" && tier === "all")
+             : k2[0] === "pack" ? (pack === k2[1]) : (tier === k2[1]);
+        c.classList.toggle("on", on);
+      });
+      apply();
+      return;
+    }
+    var card = e.target.closest(".tcard");
+    if (card) {
+      last = card;
+      pname.textContent = card.dataset.tool;
+      pbody.textContent = "…";
+      trybox.hidden = true; trybox.innerHTML = ""; trycmd = "";
+      panel.hidden = false;
+      fetch("/tools/" + card.dataset.tool + ".json")
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          pbody.textContent = JSON.stringify(j, null, 2);
+          if (j && j.try) {
+            var t = j.try, esc = function (x) {
+              return String(x).replace(/&/g, "&amp;")
+                              .replace(/</g, "&lt;"); };
+            var h = "";
+            var sv = t.say;
+            if (sv && typeof sv === "object") {
+              var L = (document.documentElement.lang || "en")
+                      .slice(0, 2);
+              sv = sv[L] || sv.en;
+            }
+            if (sv) h += '<p class="tsay"><b>' + LBL.say +
+                         '</b>' + esc(sv) + "</p>";
+            if (t.request && t.request.body !== null &&
+                t.request.body !== undefined) {
+              var body = JSON.stringify(t.request.body);
+              trycmd = "curl -s -X POST https://" + location.host +
+                       t.request.path +
+                       " -H 'content-type: application/json' -d '" +
+                       body.replace(/'/g, "'\''") + "'";
+              h += '<pre class="treq">POST ' + t.request.path + "\n" +
+                   esc(body) + "</pre>";
+            }
+            if (t.response) h += '<p class="tsay"><b>' + LBL.got +
+                                '</b></p><pre class="tgot">' +
+                                esc(t.response) + "</pre>";
+            trybox.innerHTML = h;
+            trybox.hidden = false;
+          }
+        })
+        .catch(function () { pbody.textContent = "schema unavailable"; });
+      closeb.focus();
+    }
+  });
+  function closep() { panel.hidden = true; if (last) last.focus(); }
+  if (copyb) copyb.addEventListener("click", function () {
+    var cmd = trycmd || "curl -s https://" + location.host + "/tools/" +
+              pname.textContent + ".json";
+    if (navigator.clipboard) navigator.clipboard.writeText(cmd).then(
+      function () { copyb.textContent = copyb.dataset.copied; });
+  });
+  if (closeb) closeb.addEventListener("click", closep);
+  document.querySelectorAll(".copybtn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = document.getElementById(b.dataset.for);
+      if (!t || !navigator.clipboard) { return; }
+      navigator.clipboard.writeText(t.textContent.trim()).then(
+        function () { var o = b.textContent; b.textContent =
+          b.dataset.copied || "copied";
+          setTimeout(function () { b.textContent = o; }, 1600); });
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel && !panel.hidden) closep();
+  });
+  if (search) search.addEventListener("input", function () {
+    w = search.value.trim().toLowerCase(); apply();
+  });
+  var navbtn = document.getElementById("navbtn");
+  if (navbtn) navbtn.addEventListener("click", function () {
+    document.querySelector("header.top nav").classList.toggle("open");
+  });
+  document.querySelectorAll("header.top nav a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      document.querySelector("header.top nav").classList.remove("open");
+    });
+  });
+  apply();
+})();
+</script>
+</body>
+</html>

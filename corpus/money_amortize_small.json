@@ -1,0 +1,5 @@
+{
+  "name": "money_amortize_small",
+  "path": "/api/v1/money/amortize",
+  "body": {"principal": 1000, "annual_rate_pct": 12, "months": 3}
+}

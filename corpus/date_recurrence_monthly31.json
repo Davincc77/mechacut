@@ -1,0 +1,8 @@
+{
+ "name": "date_recurrence_monthly31",
+ "path": "/api/v1/date/recurrence",
+ "body": {
+  "dtstart": "2026-01-31",
+  "rrule": "FREQ=MONTHLY;COUNT=7"
+ }
+}

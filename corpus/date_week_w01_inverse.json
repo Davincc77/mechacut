@@ -1,0 +1,7 @@
+{
+ "body": {
+  "iso": "2026-W01-3"
+ },
+ "name": "date_week_w01_inverse",
+ "path": "/api/v1/date/week"
+}

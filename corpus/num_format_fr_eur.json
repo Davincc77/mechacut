@@ -1,0 +1,10 @@
+{
+  "name": "num_format_fr_eur",
+  "path": "/api/v1/num/format",
+  "body": {
+    "value": 1234.567,
+    "locale": "fr-FR",
+    "style": "currency",
+    "currency": "EUR"
+  }
+}

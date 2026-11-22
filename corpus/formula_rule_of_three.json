@@ -1,0 +1,12 @@
+{
+ "name": "formula_rule_of_three",
+ "path": "/api/v1/formula",
+ "body": {
+  "formula": "rule_of_three",
+  "args": {
+   "a": 3,
+   "b": "4.50",
+   "c": 7
+  }
+ }
+}

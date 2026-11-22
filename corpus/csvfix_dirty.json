@@ -1,0 +1,5 @@
+{
+  "name": "csvfix_dirty",
+  "path": "/api/v1/csv/fix",
+  "body": {"csv": "\ufeffname;name;age\r\nBob;X;42\r\nAnn\r\n\r\n"}
+}

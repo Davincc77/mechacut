@@ -1,0 +1,5 @@
+{
+  "name": "num_fx_brl",
+  "path": "/api/v1/num/fx",
+  "body": {"amount": "100.00", "rate": "5.0825", "to": "BRL"}
+}

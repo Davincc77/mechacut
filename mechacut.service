@@ -1,0 +1,24 @@
+[Unit]
+Description=MechaCut - deterministic data transforms (chart, reshape, validate)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/mechacut
+# x402 per-call payments (unset = keyless rate limit only, no payments)
+# Environment=MECHACUT_PAY_TO=0xYourReceivingAddressOnBase
+# Environment=MECHACUT_NETWORK=base
+# --proxy-headers + forwarded-allow-ips: trust the reverse proxy (Caddy) on the
+# same box, so request.client.host is the real visitor IP behind Cloudflare
+# and the rate limit counts people, not Cloudflare edges.
+ExecStart=/opt/mechacut/.venv/bin/uvicorn main:app --host 127.0.0.1 --port 8898 --proxy-headers --forwarded-allow-ips "127.0.0.1"
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/mechacut
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,5 @@
+{
+  "name": "file_identify_png",
+  "path": "/api/v1/file/identify",
+  "body": {"blob": "iVBORw0KGgoAAAANSUhEUg=="}
+}

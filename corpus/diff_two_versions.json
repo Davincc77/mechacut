@@ -1,0 +1,9 @@
+{
+  "name": "diff_two_versions",
+  "path": "/api/v1/text/diff",
+  "body": {
+    "a": "l1\nl2\nl3\nl4\nl5\nl6\nl7\n",
+    "b": "l1\nl2\nX\nl4\nl5\nl6\nl7\nl8\n",
+    "context": 1
+  }
+}

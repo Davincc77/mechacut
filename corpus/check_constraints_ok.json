@@ -1,0 +1,4 @@
+{"name": "check_constraints_ok",
+ "path": "/api/v1/check/constraints",
+ "body": {"text": "1. sha256 of the row is stable\n2. 42 records matched on 2026-11-21",
+          "constraints": {"points": 2, "max_words": 20, "contains_number": true, "contains_date": true}}}

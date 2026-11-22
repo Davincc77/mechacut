@@ -1,0 +1,7 @@
+{
+  "name": "recipe_facts_incident",
+  "path": "/api/v1/recipe/facts",
+  "body": {
+    "text": "INCIDENT 2026-11-18 14:05 UTC — checkout degraded. api-gateway p99 rose to 2140ms. 6.2% of requests timed out on https://api.pay.eu/v1/checkout; roll back scheduled 2026-11-19 03:00 UTC; SLA credit $4,300.00 (payments), $910.50 (search-api), retry window 2026-11-25, 12.5% retried, 3.1% dropped, ops@pay.eu notified, 1,842 failed checkouts."
+  }
+}

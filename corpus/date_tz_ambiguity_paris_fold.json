@@ -1,0 +1,8 @@
+{
+ "body": {
+  "local": "2026-10-25 02:30",
+  "zone": "Europe/Paris"
+ },
+ "name": "date_tz_ambiguity_paris_fold",
+ "path": "/api/v1/date/tz_ambiguity"
+}

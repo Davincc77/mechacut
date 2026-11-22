@@ -1,0 +1,7 @@
+{
+  "name": "csvtypes_mixed",
+  "path": "/api/v1/csv/types",
+  "body": {
+    "csv": "age,price,active,born,nick\n34,1.5,true,2020-02-29,\n7,10,false,2021-01-01,n/a"
+  }
+}

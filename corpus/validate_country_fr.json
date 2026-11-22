@@ -1,0 +1,5 @@
+{
+  "name": "validate_country_fr",
+  "path": "/api/v1/validate/country",
+  "body": {"code": "FR"}
+}

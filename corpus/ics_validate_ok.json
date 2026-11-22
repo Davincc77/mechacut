@@ -1,0 +1,5 @@
+{
+  "name": "ics_validate_ok",
+  "path": "/api/v1/ics/validate",
+  "body": {"text": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//mechacut//test//FR\r\nBEGIN:VEVENT\r\nUID:20260101-a@mechacut.studio\r\nDTSTAMP:20251121T120000Z\r\nDTSTART;TZID=Europe/Paris:20260101T090000\r\nDTEND;TZID=Europe/Paris:20260101T100000\r\nSUMMARY:retour\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"}
+}

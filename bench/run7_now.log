@@ -1,0 +1,7 @@
+{'model': '0.5b', 'arm': 'A', 'keys_ok': {}, 'tokens': 2367, 'tool_calls': 0, 'success': False, 'seconds': 8.58, 'seed': 42, 'temp': 0, 'harness': 'v7'}
+{'model': '0.5b', 'arm': 'B', 'keys_ok': {}, 'tokens': 6432, 'tool_calls': 2, 'success': False, 'seconds': 9.46, 'seed': 42, 'temp': 0, 'harness': 'v7'}
+{'model': '1.5b', 'arm': 'A', 'keys_ok': {}, 'tokens': 455, 'tool_calls': 0, 'success': False, 'seconds': 1.36, 'seed': 42, 'temp': 0, 'harness': 'v7'}
+{'model': '1.5b', 'arm': 'B', 'keys_ok': {'amounts_usd': True, 'percentages': False, 'dates_utc': True, 'services': False, 'failed_checkouts': True}, 'tokens': 2419, 'tool_calls': 2, 'success': False, 'seconds': 1.68, 'seed': 42, 'temp': 0, 'harness': 'v7'}
+{'model': '7b', 'arm': 'A', 'keys_ok': {'amounts_usd': True, 'percentages': True, 'dates_utc': True, 'services': True, 'failed_checkouts': True}, 'tokens': 477, 'tool_calls': 0, 'success': True, 'seconds': 4.38, 'seed': 42, 'temp': 0, 'harness': 'v7'}
+{'model': '7b', 'arm': 'B', 'keys_ok': {'amounts_usd': True, 'percentages': True, 'dates_utc': True, 'services': True, 'failed_checkouts': True}, 'tokens': 1164, 'tool_calls': 1, 'success': True, 'seconds': 4.18, 'seed': 42, 'temp': 0, 'harness': 'v7'}
+DONE rc=0

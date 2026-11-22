@@ -1,0 +1,4 @@
+{"name": "recipe_schedule_mon",
+ "path": "/api/v1/recipe/schedule",
+ "body": {"cron": "0 10 * * 1", "start": "2026-11-23T00:00:00", "count": 3,
+          "timezone": "Europe/Paris", "duration_minutes": 45, "summary": "Standup"}}

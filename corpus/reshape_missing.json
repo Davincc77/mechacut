@@ -1,0 +1,14 @@
+{
+  "name": "reshape_missing",
+  "path": "/api/v1/reshape",
+  "body": {
+    "input": {"a": 1},
+    "mapping": {
+      "fields": {
+        "x": {"path": "b.c"},
+        "y": {"path": "a", "cast": "int"},
+        "z": {"path": "a", "each": {"fields": {"q": {"path": "w"}}}}
+      }
+    }
+  }
+}

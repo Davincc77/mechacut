@@ -1,0 +1,8 @@
+{
+  "name": "text_chunk_determinism",
+  "path": "/api/v1/text/chunk",
+  "body": {
+    "text": "Le déterminisme est un contrat. Chaque requête identique produit des octets identiques. Mechacut répond une fois, pour toujours.",
+    "budget": 30
+  }
+}

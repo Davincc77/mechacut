@@ -1,0 +1,5 @@
+{"name": "batch_round",
+ "path": "/api/v1/batch",
+ "body": {"tool": "num_round",
+          "payloads": [{"value": "2.5", "mode": "half_even", "places": 0},
+                       {"value": "3.5", "mode": "half_even", "places": 0}]}}

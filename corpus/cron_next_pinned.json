@@ -1,0 +1,6 @@
+{
+  "name": "cron_next_pinned",
+  "path": "/api/v1/cron/next",
+  "body": {"expression": "0 9 * * 1-5", "count": 3,
+           "after": "2026-11-20T12:00:00Z", "tz": "Europe/Paris"}
+}

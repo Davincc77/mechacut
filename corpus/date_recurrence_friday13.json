@@ -1,0 +1,9 @@
+{
+ "name": "date_recurrence_friday13",
+ "path": "/api/v1/date/recurrence",
+ "body": {
+  "dtstart": "1997-09-02T09:00:00",
+  "rrule": "FREQ=MONTHLY;BYDAY=FR;BYMONTHDAY=13",
+  "max_count": 3
+ }
+}

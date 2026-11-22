@@ -1,0 +1,9 @@
+{
+  "name": "number_spell_fr_eur",
+  "path": "/api/v1/number/spell",
+  "body": {
+    "value": "1234.56",
+    "lang": "fr",
+    "currency": "EUR"
+  }
+}

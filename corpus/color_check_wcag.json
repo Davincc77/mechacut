@@ -1,0 +1,8 @@
+{
+  "name": "color_check_wcag",
+  "path": "/api/v1/color/check",
+  "body": {
+    "color": "#767676",
+    "against": "#ffffff"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "name": "check_agreement_deal",
+  "path": "/api/v1/check/agreement",
+  "body": {"payloads": [{"deal": {"usd": 4250.0, "vat": "20%"}, "signed": true}, {"deal": {"usd": 4250, "vat": "20.5%"}, "signed": true}]}
+}

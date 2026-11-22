@@ -1,0 +1,1 @@
+{"name": "table_scale_third", "path": "/api/v1/table/scale", "body": {"items": [{"name": "flour", "qty": "400", "unit": "g"}, {"name": "sugar", "qty": "3/4", "unit": "cup"}, {"name": "salt", "qty": "1/4", "unit": "tsp", "class": "salt"}], "servings_from": "6", "servings_to": "2"}}

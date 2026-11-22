@@ -1,0 +1,11 @@
+{
+ "body": {
+  "distance_km": "900",
+  "event": "cancellation",
+  "flight_date": "2027-12-31",
+  "notice_days": "2",
+  "regime": "EU"
+ },
+ "name": "money_flight_comp_nine_month_clamp",
+ "path": "/api/v1/money/flight_comp"
+}

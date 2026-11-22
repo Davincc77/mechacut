@@ -1,0 +1,1 @@
+{"name": "text_url_canonical_rfc", "path": "/api/v1/text/url_canonical", "body": {"url": "HTTP://www.Example.COM:80/a/../b/%7Euser?utm_source=n&id=42#%61"}}

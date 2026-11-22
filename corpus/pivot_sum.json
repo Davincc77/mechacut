@@ -1,0 +1,15 @@
+{
+  "name": "pivot_sum",
+  "path": "/api/v1/table/pivot",
+  "body": {
+    "data": [
+      {"month": "Jan", "region": "E", "units": "10"},
+      {"month": "Jan", "region": "W", "units": "5"},
+      {"month": "Feb", "region": "E", "units": "7"}
+    ],
+    "index": "month",
+    "columns": "region",
+    "values": "units",
+    "agg": "sum"
+  }
+}

@@ -1,0 +1,1 @@
+{"name": "table_scale_eggs_halved", "path": "/api/v1/table/scale", "body": {"items": [{"name": "eggs", "qty": "5", "unit": "piece", "class": "egg"}, {"name": "butter", "qty": "1/2", "unit": "cup", "class": "base"}], "factor": "1/2"}}

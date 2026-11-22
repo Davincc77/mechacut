@@ -1,0 +1,6 @@
+{
+  "name": "calc_business_year_end",
+  "path": "/api/v1/date/calc",
+  "body": {"base": "2026-12-23", "op": "business_days",
+           "params": {"n": 5, "holidays": ["2026-12-25"]}}
+}

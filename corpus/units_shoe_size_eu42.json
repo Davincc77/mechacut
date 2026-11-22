@@ -1,0 +1,8 @@
+{
+ "name": "units_shoe_size_eu42",
+ "path": "/api/v1/units/shoe_size",
+ "body": {
+  "size": "42",
+  "system": "eu"
+ }
+}

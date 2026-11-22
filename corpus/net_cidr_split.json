@@ -1,0 +1,5 @@
+{
+  "name": "net_cidr_split",
+  "path": "/api/v1/net/cidr",
+  "body": {"cidr": "10.0.0.0/8", "split_into": 2}
+}

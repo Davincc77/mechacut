@@ -1,0 +1,5 @@
+{
+  "name": "semver_sort_chain",
+  "path": "/api/v1/semver/sort",
+  "body": {"versions": ["1.0.0", "1.0.0-rc.1", "10.0.0", "2.0.0", "1.0.0-alpha.beta", "1.0.0-beta.11"]}
+}

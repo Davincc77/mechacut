@@ -1,0 +1,7 @@
+{
+  "name": "money_rates_archive",
+  "path": "/api/v1/money/rates",
+  "method": "GET",
+  "query": {"date": "2026-11-06", "from": "USD", "to": "BRL",
+            "amount": "100"}
+}

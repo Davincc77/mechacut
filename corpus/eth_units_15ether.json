@@ -1,0 +1,3 @@
+{"name": "eth_units_15ether",
+ "path": "/api/v1/eth/units",
+ "body": {"value": "1.5", "unit": "ether"}}

@@ -1,0 +1,5 @@
+{
+  "name": "check_redlines_pii",
+  "path": "/api/v1/check/redlines",
+  "body": {"text": "Ref 4111 1111 1111 1111 — customer jane@acme.dev", "rules": {"forbid_shapes": ["card", "email"]}}
+}

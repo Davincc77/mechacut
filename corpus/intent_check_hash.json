@@ -1,0 +1,5 @@
+{
+  "name": "intent_check_hash",
+  "path": "/api/v1/intent/check",
+  "body": {"tool": "hash_digest", "args": {"data": "mechacut", "algo": "sha256"}}
+}

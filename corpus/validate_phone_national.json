@@ -1,0 +1,8 @@
+{
+  "name": "validate_phone_national",
+  "path": "/api/v1/validate/phone",
+  "body": {
+    "phone": "01 23 45 67 89",
+    "default_country": "FR"
+  }
+}

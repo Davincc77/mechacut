@@ -1,0 +1,1 @@
+{"name": "math_calc_rounded_chain", "path": "/api/v1/math/calc", "body": {"expr": "2349.77*1.07*1.04*0.89", "digits": 2}}

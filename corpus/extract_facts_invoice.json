@@ -1,0 +1,4 @@
+{"name": "extract_facts_invoice",
+ "path": "/api/v1/extract/facts",
+ "body": {"text": "Invoice INV-2026-114 due 2026-12-05 total $1,200.50 plus 20% VAT, wire FR76 1234 5678 9012 3456 7890 1234, info@acme.io, https://acme.io/inv",
+          "context_chars": 8}}

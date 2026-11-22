@@ -1,0 +1,7 @@
+{
+ "name": "net_sri_text",
+ "path": "/api/v1/net/sri",
+ "body": {
+  "text": "mechacut sri pin — deterministic octets 2026"
+ }
+}

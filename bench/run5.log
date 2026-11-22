@@ -1,0 +1,6 @@
+{'model': '0.5b', 'arm': 'A', 'tokens_in': 1020, 'tokens_out': 3000, 'tool_calls': 0, 'success': False, 'seconds': 13.52, 'seed': 42, 'temp': 0, 'harness': 'v5'}
+{'model': '0.5b', 'arm': 'B', 'tokens_in': 15273, 'tokens_out': 1435, 'tool_calls': 5, 'success': False, 'seconds': 6.41, 'seed': 42, 'temp': 0, 'harness': 'v5'}
+{'model': '1.5b', 'arm': 'A', 'tokens_in': 1020, 'tokens_out': 3000, 'tool_calls': 0, 'success': False, 'seconds': 21.96, 'seed': 42, 'temp': 0, 'harness': 'v5'}
+{'model': '1.5b', 'arm': 'B', 'tokens_in': 11673, 'tokens_out': 970, 'tool_calls': 5, 'success': False, 'seconds': 7.63, 'seed': 42, 'temp': 0, 'harness': 'v5'}
+{'model': '7b', 'arm': 'A', 'tokens_in': 1020, 'tokens_out': 751, 'tool_calls': 0, 'success': False, 'seconds': 19.76, 'seed': 42, 'temp': 0, 'harness': 'v5'}
+{'model': '7b', 'arm': 'B', 'tokens_in': 10713, 'tokens_out': 439, 'tool_calls': 6, 'success': False, 'seconds': 14.91, 'seed': 42, 'temp': 0, 'harness': 'v5'}

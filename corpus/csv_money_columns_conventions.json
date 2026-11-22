@@ -1,0 +1,1 @@
+{"name": "csv_money_columns_conventions", "path": "/api/v1/csv/money_columns", "body": {"csv": "facture\n1,234.56\n1.234\n2,000.00\n42.50"}}

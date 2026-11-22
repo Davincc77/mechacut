@@ -1,0 +1,12 @@
+{
+ "body": {
+  "delay_min": "180",
+  "distance_km": "6000",
+  "event": "delay",
+  "flight_date": "2027-11-01",
+  "intra_eu": "no",
+  "regime": "EU"
+ },
+ "name": "money_flight_comp_strict_edge_b",
+ "path": "/api/v1/money/flight_comp"
+}

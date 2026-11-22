@@ -1,0 +1,5 @@
+{
+  "name": "caip_base",
+  "path": "/api/v1/caip/parse",
+  "body": {"value": "eip155:8453"}
+}

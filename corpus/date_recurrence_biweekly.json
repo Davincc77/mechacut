@@ -1,0 +1,8 @@
+{
+ "name": "date_recurrence_biweekly",
+ "path": "/api/v1/date/recurrence",
+ "body": {
+  "dtstart": "1997-09-02T09:00:00",
+  "rrule": "FREQ=WEEKLY;INTERVAL=2;COUNT=8;WKST=SU;BYDAY=TU,TH"
+ }
+}

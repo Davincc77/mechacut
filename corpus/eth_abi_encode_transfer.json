@@ -1,0 +1,4 @@
+{"name": "eth_abi_encode_transfer",
+ "path": "/api/v1/eth/abi-encode",
+ "body": {"types": ["address", "uint256"],
+          "values": ["0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed", "1000"]}}

@@ -1,0 +1,5 @@
+{
+  "name": "text_sanitize_reserved",
+  "path": "/api/v1/text/sanitize",
+  "body": {"name": "CON.txt"}
+}

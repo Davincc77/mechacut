@@ -1,0 +1,5 @@
+{
+  "name": "hash_hmac_rfc4231",
+  "path": "/api/v1/hash/hmac",
+  "body": {"message": "what do ya want for nothing?", "key": "Jefe", "algo": "sha256"}
+}

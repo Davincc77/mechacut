@@ -1,0 +1,7 @@
+{
+  "name": "text_count_mixed",
+  "path": "/api/v1/text/count",
+  "body": {
+    "text": "Bonjour le monde. Ça va ?\n\nDeuxième ligne."
+  }
+}

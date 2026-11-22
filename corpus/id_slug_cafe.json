@@ -1,0 +1,7 @@
+{
+  "name": "id_slug_cafe",
+  "path": "/api/v1/id/slug",
+  "body": {
+    "text": "Café Crème — 2026 !"
+  }
+}

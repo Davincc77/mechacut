@@ -1,0 +1,9 @@
+{
+  "name": "text_truncate_words",
+  "path": "/api/v1/text/truncate",
+  "body": {
+    "text": "Un deux trois quatre cinq",
+    "max": 3,
+    "unit": "words"
+  }
+}

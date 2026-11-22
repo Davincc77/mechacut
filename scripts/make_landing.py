@@ -1,0 +1,1641 @@
+#!/usr/bin/env python3
+"""Generate the human landing page FROM the final code (rule 7).
+
+Run after every bundle: python scripts/make_landing.py && pytest -q
+Writes: static/landing.html (template with {{keys}}), locales/{en,fr,pt}.json
+Everything measurable is read from main.py / payments.py / bench results;
+everything human is translated here, in the three voices of the family.
+"""
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "bench"))
+
+import payments                    # noqa: E402
+import routing                     # noqa: E402
+
+# ------------------------------- measured facts (single source: code)
+
+NAMES = [n for n, _p, _k, _u, _t in routing.TABLE]
+TOOLS = [e for e in routing.TABLE if not e[0].startswith("recipe_")]
+RECIPES = [e for e in routing.TABLE if e[0].startswith("recipe_")]
+PAID = sorted(payments.PRICES)
+CAP = sorted(payments.CAP_ROUTES)
+path_tier = {}
+for name, path, pack, purpose, tags in routing.TABLE:
+    if path in payments.PRICES:
+        path_tier[name] = "paid"
+    elif path in payments.CAP_ROUTES:
+        path_tier[name] = "cap"
+    else:
+        path_tier[name] = "free"
+# the lede's breakdown must sum to the number it announces: count the
+# TIERS OVER TOOLS ONLY (91+18+11=120) — the 6 recipes are all free and
+# get their own clause, not a silent +6 in the green bucket.
+_TOOLS_TIER = {k: v for k, v in path_tier.items()
+               if not k.startswith("recipe_")}
+N_FREE = sum(1 for v in _TOOLS_TIER.values() if v == "free")
+N_CAP = sum(1 for v in _TOOLS_TIER.values() if v == "cap")
+N_PAID = sum(1 for v in _TOOLS_TIER.values() if v == "paid")
+assert N_FREE + N_CAP + N_PAID == len(TOOLS), \
+    "lede tiers must sum to n_tools"
+
+
+def bench_rows():
+    """Latest v6 row per (model, arm)."""
+    latest = {}
+    with open(ROOT / "bench" / "results.jsonl", encoding="utf-8") as f:
+        for line in f:
+            try:
+                r = json.loads(line)
+            except Exception:
+                continue
+            # the table documents the v6 task only; v7 (harder, partial
+            # results) lives in bench/FINDINGS.md — mixing harnesses would
+            # silently change what the published ✅ means
+            if r.get("harness") == "v6":
+                latest[(r["model"], r["arm"])] = r
+    rows = []
+    for m in ("0.5b", "1.5b", "7b"):
+        a = latest.get((m, "A"))
+        b = latest.get((m, "B"))
+        if a and b:
+            rows.append((m, a["success"], b["success"],
+                         a["tokens_in"] + a["tokens_out"],
+                         b["tokens_in"] + b["tokens_out"]))
+    return rows
+
+
+BENCH = bench_rows()
+assert BENCH, "no v6 bench rows yet — run the matrix first"
+BENCH_ALL = all(b for _m, _a, b, _x, _y in BENCH)  # used for copy truth
+
+# ------------------------------- translations
+
+PACK_TITLE = {
+    "en": {"core": "Core transforms", "repair": "Data repair & cleaning",
+           "code": "Code editing", "dates": "Dates, cron & ICS",
+           "numbers": "Numbers, units & money",
+           "identity": "Hashes & identity", "checks": "Validators",
+           "text": "Context & text", "design": "Color & design",
+           "extract": "Extraction & selection", "logic": "Logic & ordering"},
+    "fr": {"core": "Transforms de base", "repair": "Réparation de données",
+           "code": "Édition de code", "dates": "Dates, cron & ICS",
+           "numbers": "Nombres, unités & argent",
+           "identity": "Hachage & identité", "checks": "Validateurs",
+           "text": "Contexte & texte", "design": "Couleur & design",
+           "extract": "Extraction & sélection", "logic": "Logique & ordre"},
+    "pt": {"core": "Transformações centrais",
+           "repair": "Reparação de dados", "code": "Edição de código",
+           "dates": "Datas, cron & ICS",
+           "numbers": "Números, unidades & dinheiro",
+           "identity": "Hash & identidade", "checks": "Validadores",
+           "text": "Contexto & texto", "design": "Cor & design",
+           "extract": "Extração e seleção", "logic": "Lógica e ordem"},
+}
+
+TR = {
+ "en": {
+  "meta.title": "Mechacut — same request, same bytes",
+  "meta.desc": "Deterministic transforms for AI agents: 53 tools, three "
+               "tiers, machine payments. No signup, no key, no storage.",
+  "nav.tools": "Bundles", "nav.numbers": "Proof", "nav.vision": "Vision",
+  "nav.api": "Contract",
+  "pill": "v{ver} · {n_tools} transforms · {n_recipes} recipes",
+  "hero1": "Meaning is learned.",
+  "hero2": "Mechanics are known.",
+  "lede": "A suite of <strong>{n_tools} deterministic transforms</strong> "
+          "for AI agents — {n_free} free forever, {n_cap} free under "
+          "32 KB then pay-per-call, {n_paid} machine-payable — plus "
+          "{n_recipes} one-call recipes, free. The model stops guessing "
+          "what a checksum can prove.",
+  "bundles.h2": "The catalogue",
+  "cat.search": "search a tool or your problem…",
+  "cat.hits": "~n~ of ~t~ tools",
+  "panel.copy": "copy curl",
+  "panel.copied": "copied",
+  "panel.close": "close",
+  "panel.say": "dis to your agent:",
+  "panel.got": "the server answered:",
+  "nav.menu": "menu",
+  "bundles.intro": "Same request, same bytes — every response carries its "
+                   "own sha256. Install one pack, or read the 500-token "
+                   "manifest and let <code>GET /route</code> pick.",
+  "tiers.h2": "Three tiers, no accounts",
+  "tiers.intro": "Agents do not read pricing pages — so the price is in "
+                 "the protocol: a free route answers keyless, a capped "
+                 "route answers free under 32 KB, anything else gets an "
+                 "honest <code>402</code> with an x402 USDC-on-Base "
+                 "challenge, settled by a facilitator. Between a server "
+                 "and a robot, only prices and receipts exist.",
+  "bench.h2": "Measured, not promised",
+  "bench9.h2": "Or: the model never has to be smart",
+  "bench9.intro": "One deliberately vague French sentence, six required "
+                  "fields — money sorted to 2 decimals, percents, unique "
+                  "dates, URL, email, total. Expectations hand-computed "
+                  "before any run. The server builds the card "
+                  "(/intent/card); the model relays one line and the "
+                  "answer never passes through it.",
+  "bench9.with": "with the intake card",
+  "bench9.foot": "The 0.5B row reproduced on an independent second pass. "
+                 "Three identical live calls returned one sha256. The "
+                 "autonomous variant (the model picks the tool itself, no "
+                 "card played by the harness) also scores 6/6. Seeds, "
+                 "scripts, failures: bench/results_v9.jsonl.\n",
+  "bench10.h2": "Or: it was never about being smart — bench v10",
+  "bench10.intro": "Eighteen tasks with ONE right answer each — GS1 check "
+                   "digits, a SHA-256, chained discounts, a money column "
+                   "that proves its own decimal comma. Two free LOCAL "
+                   "models, no API spend: the harness asserts every route "
+                   "it calls is free. Golds were computed from the "
+                   "published specs before any model ran.",
+  "bench10.with": "with one relay call",
+  "bench10.foot": "Naked failures reproduce on an independent second "
+                  "pass, 18/18 verdicts identical — at temp 0 a retry "
+                  "never converges, it repeats. Raw runs: "
+                  "bench/results_v10.jsonl, method: "
+                  "bench/FINDINGS-V10.md.\n",
+  "bench12.h2": "Bench v12 — the zero becomes the hero",
+  "bench12.intro": "Ten exact calculations (7834×9217, 0.1+0.2, chained "
+                   "percentages…) × four FREE local models × three arms: "
+                   "answering naked, writing Python, or relaying one "
+                   "expression to math/calc. Scores shown; the code arm's "
+                   "answers are float, the relay's are exact — same "
+                   "table, different physics.",
+  "bench12.code": "writes Python",
+  "bench12.relay": "relays to Mechacut",
+  "bench12.foot": "The 8B fails RELAY on protocol babble, not math — "
+                  "which is why the intake card writes the line for it. "
+                  "The 0.5B invented 89000098 naked and posts 9/10 "
+                  "relayed at 0.2 s median. Raw: bench/results_v12.jsonl, "
+                  "method: bench/FINDINGS-V12.md.\n",
+  "bench.intro": "A frozen task (seed 20261120): dirty CSV + broken JSON + "
+                 "URL list → one canonical YAML, expected answer pinned by "
+                 "sha256. Same weak local model (Qwen 2.5, temperature 0), "
+                 "one arm alone, one arm driving Mechacut. We publish the "
+                 "failures too — the 0.5B fails both arms, and a "
+                 "capability ceiling is a result.",
+  "bench.model": "model", "bench.alone": "alone", "bench.with": "with "
+                 "mechacut", "bench.tokens": "tokens consumed",
+  "bench.foot": "The 7B goes from 0 % to 100 % in a single pipeline call. "
+                "Every run, every token, is in bench/results.jsonl.",
+    "nav.build": "Build",
+  "build.h2": "What you can build tonight",
+  "build.intro": "You have a free small model on your machine. Here are "
+                 "three things to make it do — the quoted lines are what "
+                 "you say to your agent, the answers below are what the "
+                 "server really returned. No account, no card, no prayer.",
+  "build.r1.name": "The tax-ID gate",
+  "build.r1.say": "\u201cIs my client\u2019s VAT number FR40303265045 "
+                  "valid for the invoice?\u201d",
+  "build.r1.got": "{{ \"valid\": true, \"algorithm\": \"EU VAT "
+                  "check-digit rule for FR (published)\" }}",
+  "build.r1.why": "Alone, a 0.5B model computes check digits — and gets "
+                  "them wrong. Here the digits decide, so the invoice "
+                  "does not die at the accountant\u2019s. Every country\u2019s "
+                  "flavour lives on its own page: CNPJ for Brazil, SIREN "
+                  "and TVA for France.",
+  "build.r2.name": "The leak guard",
+  "build.r2.say": "\u201cScan this log before I paste it into a "
+                  "chatbot.\u201d",
+  "build.r2.got": "2 findings \u2192 seed [SEED_PHRASE] and key "
+                  "[OPENAI_KEY_1]",
+  "build.r2.why": "The scan answers with positions, never the value; the "
+                  "mask never returns the key. The secret came here for "
+                  "safekeeping — it stays safe from us too.",
+  "build.r3.name": "The incident relay",
+  "build.r3.say": "\u201crel\u00e8ve les montants et dates de cette note "
+                  "d\u2019incident\u201d \u2014 said in French, to a "
+                  "0.5B.",
+  "build.r3.got": "money [3200.00, 12450.75] \u00b7 6/6 keys in 320 "
+                  "tokens (alone: 0/6)",
+  "build.r3.why": "That is bench v9 verbatim: same task, same model, one "
+                  "relay line. Every run is in bench/results_v9.jsonl — "
+                  "replay it yourself.",
+  "build.connect": "Or skip the story and wire it now: paste this ONE "
+                 "line into ANY agent, even the smallest — it becomes "
+                 "the full manual:",
+    "everyday.h2": "For the rest of us",
+  "everyday.intro": "No code, no jargon. Ten things a normal person "
+                    "asks an agent on a Tuesday — every answer below is "
+                    "the server's real output, not a mockup.",
+  "everyday.e1.name": "Guest Wi-Fi, one scan",
+  "everyday.e1.say": "\u201cTurn our Wi-Fi into a QR so guests stop "
+                    "asking the password.\u201d",
+  "everyday.e2.name": "The check, in words",
+  "everyday.e2.say": "\u201cWrite $1,234.56 in words for the check — "
+                    "the bank rejects typos.\u201d",
+  "everyday.e3.name": "IBAN before the wire",
+  "everyday.e3.say": "\u201cDid I copy this IBAN right? A bounced "
+                    "wire costs $45.\u201d",
+  "everyday.e4.name": "Recipe to printable page",
+  "everyday.e4.say": "\u201cMake my recipe notes a clean page \u2014 "
+                    "I want a PDF for the fridge.\u201d",
+  "everyday.e5.name": "Counting the days",
+  "everyday.e5.say": "\u201cHow many days until our trip?\u201d",
+  "everyday.e6.name": "Sale math the register will not do",
+  "everyday.e6.say": "\u201cMinus 30 %, then another 20 % \u2014 that "
+                     "is 50 % off, right?\u201d It is 44 %.",
+  "everyday.e7.name": "A third of the cake, nothing rounded in the dark",
+  "everyday.e7.say": "\u201cThis 6-serving cake, I want it for 2 \u2014 "
+                     "400 g flour, 5 eggs?\u201d 400 \u00d7 1/3 = 133 1/3 g "
+                     "exact, 135 g to weigh. The eggs are stated, not "
+                     "guessed.",
+  "everyday.e8.name": "Every other Tuesday, on the dot",
+  "everyday.e8.say": "\u201cBook club every other Tuesday at 7 \u2014 "
+                     "the next four dates?\u201d Nov 3, 17, Dec 1, 15: "
+                     "every two weeks means SKIPPING the weeks between \u2014 "
+                     "and the skipped weeks are named, not guessed.",
+  "everyday.e9.name": "One foot, three right answers",
+  "everyday.e9.say": "\u201cEU 42 2/3 or 42.5 \u2014 which one am I?\u201d "
+                     "Both charts round: the millimetre is exact, the "
+                     "half-size and third-size candidates are all "
+                     "printed, and the drift between systems is a "
+                     "stated number. Never one confident size.",
+  "everyday.e10.name": "Delayed flight — who owes me what",
+  "everyday.e10.say": "\u201cMy flight landed 3 h 20 late \u2014 what "
+                      "am I actually owed?\u201d The FLIGHT DATE picks "
+                      "the rule: before 2027-10-23 the old EC261 + "
+                      "case-law; on or after it, the new codified "
+                      "\u2018EXCEEDING three hours\u2019 table. Same "
+                      "facts either side of that line can pay "
+                      "differently. \u20ac or \u00a3, with the claim "
+                      "deadline as a real date.",
+"x402.h2": "Machine payments",
+  "x402.p1": "The paying path is four bytes of protocol: the server "
+             "answers <code>402</code> with requirements; the agent signs "
+             "an EIP-3009 USDC transfer; a facilitator verifies and "
+             "settles; the response replays proof in "
+             "<code>X-PAYMENT-RESPONSE</code>. The server holds no keys.",
+  "x402.p2": "Replayed payments are refused. Errors on paid routes stay "
+             "free. The ledger of every refusal is public: "
+             "<a href=\"/misses.json\">/misses.json</a>.",
+  "x402.bankr": "Same endpoints, second home: four paid transforms are also deployed on <a href=\"https://bankr.bot\">Bankr</a> x402 Cloud \u2014 identical code paths, identical sha256, paid through the Bankr rails: <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data\">chart</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json\">reshape</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json\">validate</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join\">csv-join</a>. The other 68 live only here, free tier included.",
+  "vision.h2": "Why determinism, why now",
+  "vision.p1": "A large language model is a machine that approximates. "
+               "Ask it what <code>sha256(\"abc\")</code> is and it will "
+               "answer confidently, fluently, and wrong. Ask it to "
+               "re-clean the same CSV every day and it will bill you in "
+               "tokens to re-derive what a function returns in "
+               "milliseconds — with the same bytes every time.",
+  "vision.p2": "The Apollo guidance computer had 4 KB of RAM. It landed "
+               "humans because the math was never asked to improvise: "
+               "constants were computed once, on the ground, in cold "
+               "blood, then frozen into core rope memory.",
+  "vision.quote": "Determinism was coded the first time to send us to the "
+                  "moon. Determinism will send AI to work.",
+  "vision.p3": "Mechacut is that frozen math for agents: closed "
+               "vocabularies, contracts that refuse what is outside the "
+               "table, errors that name the expected shape — the error is "
+               "the repair prompt. Meaning stays with the model. "
+               "Mechanics move here.",
+  "contract.h2": "The contract",
+  "contract.li1": "Same request → same bytes, sha256 on every response",
+  "contract.li2": "No signup, no API key, no rate wall below 30 req/min",
+  "contract.li3": "No storage: the only state is a 1-minute window, a "
+                  "60-minute ledger and a payment-nonce replay set",
+  "contract.li4": "Closed vocabularies — everything outside the table is "
+                  "refused, named, pointed at its expected shape",
+  "contract.li5": "Errors that repair: field, message, expected, always",
+  "contract.li6": "x402 machine payments: USDC on Base, facilitator "
+                  "verified, zero human in the loop",
+  "agents.line": "Speak agent: MCP tools, GET /agent/manifest (~500 "
+                 "tokens for the whole suite), GET /route?q=…, "
+                 "POST /api/v1/pipeline.",
+  "agents.hint": "install one pack",
+  "footer.family": "Mechacut is part of the Cirilli family — .klickd, "
+                   "moovicut, Ponte.",
+ },
+ "fr": {
+  "meta.title": "Mechacut — même requête, mêmes octets",
+  "meta.desc": "Transformations déterministes pour agents IA : 53 outils, "
+               "trois paliers, paiements machine. Sans inscription, sans "
+               "clé, sans stockage.",
+  "nav.tools": "Bundles", "nav.numbers": "Preuves", "nav.vision":
+  "Vision", "nav.api": "Contrat",
+  "pill": "v{ver} · {n_tools} transformations · {n_recipes} recettes",
+  "hero1": "Le sens s'apprend.",
+  "hero2": "La mécanique se sait.",
+  "lede": "Une suite de <strong>{n_tools} transformations "
+          "déterministes</strong> pour agents IA — {n_free} gratuites à "
+          "jamais, {n_cap} gratuites sous 32 Ko puis payables à l\u2019appel, "
+          "{n_paid} payables par machine — plus {n_recipes} recettes "
+          "prêtes à l\u2019appel unique, gratuites. Le modèle arrête de "
+          "deviner ce qu\u2019une somme de contrôle peut prouver.",
+  "bundles.h2": "Le catalogue",
+  "cat.search": "chercher un outil ou votre problème…",
+  "cat.hits": "~n~ outils sur ~t~",
+  "panel.copy": "copier curl",
+  "panel.copied": "copié",
+  "panel.close": "fermer",
+  "panel.say": "dis à ton agent :",
+  "panel.got": "le serveur a répondu :",
+  "nav.menu": "menu",
+  "bundles.intro": "Même requête, mêmes octets — chaque réponse porte son "
+                   "sha256. Installez un pack, ou lisez le manifeste de "
+                   "500 tokens et laissez <code>GET /route</code> choisir.",
+  "tiers.h2": "Trois paliers, zéro compte",
+  "tiers.intro": "Les agents ne lisent pas les pages de tarifs — donc le "
+                 "prix est dans le protocole : une route gratuite répond "
+                 "sans clé, une route plafonnée répond gratuitement sous "
+                 "32 Ko, toute autre reçoit un <code>402</code> honnête "
+                 "avec défi x402 USDC sur Base, réglé par un "
+                 "facilitateur. Entre un serveur et un robot, il n'existe "
+                 "que des prix et des reçus.",
+  "bench.h2": "Mesuré, pas promis",
+  "bench9.h2": "Ou : le modèle n'a plus besoin d'être intelligent",
+  "bench9.intro": "Une phrase française volontairement floue, six champs "
+                  "requis — montants triés à 2 décimales, pourcentages, "
+                  "dates uniques, URL, email, total. Attentes calculées à "
+                  "la main avant toute exécution. Le serveur construit la "
+                  "fiche (/intent/card) ; le modèle relais une ligne et la "
+                  "réponse ne le traverse jamais.",
+  "bench9.with": "avec la fiche d'intention",
+  "bench9.foot": "La ligne 0.5B reproduite lors d'un second passage "
+                 "indépendant. Trois appels live identiques → un seul "
+                 "sha256. La variante autonome (le modèle choisit l'outil "
+                 "lui-même) marque aussi 6/6. Graines, scripts, échecs : "
+                 "bench/results_v9.jsonl.\n",
+  "bench10.h2": "Ou : le problème n'a jamais été d'être intelligent — bench v10",
+  "bench10.intro": "Dix-huit tâches à réponse UNIQUE — chiffres de "
+                   "contrôle GS1, un SHA-256, remises en cascade, une "
+                   "colonne de montants qui prouve elle-même sa virgule. "
+                   "Deux modèles gratuits et LOCAUX, zéro dépense d'API : "
+                   "le harnais vérifie que chaque route appelée est "
+                   "gratuite. Les réponses justes ont été calculées à "
+                   "partir des specs publiées AVANT tout appel modèle.",
+  "bench10.with": "avec un seul appel-relais",
+  "bench10.foot": "Les échecs nus se reproduisent à l'identique lors "
+                  "d'un second passage indépendant : 18/18 verdicts "
+                  "inchangés — à temp 0, recommencer ne converge pas, "
+                  "ça répète. Exécutions brutes : "
+                  "bench/results_v10.jsonl, méthode : "
+                  "bench/FINDINGS-V10.md.\n",
+  "bench12.h2": "Bench v12 — le zéro devient héros",
+  "bench12.intro": "Dix calculs exacts (7834×9217, 0.1+0.2, pourcentages "
+                   "en chaîne…) × quatre modèles locaux GRATUITS × trois "
+                   "bras : répondre nu, écrire du Python, ou relayer une "
+                   "expression vers math/calc. Même tableau, deux "
+                   "physiques : le bras code rend du flottant, le relais "
+                   "rend de l'exact.",
+  "bench12.code": "écrit du Python",
+  "bench12.relay": "relais Mechacut",
+  "bench12.foot": "Le 8B échoue au RELAIS sur le babil protocole, pas "
+                  "sur les maths — c'est pourquoi la fiche d'intention "
+                  "écrit la ligne à sa place. Nu, le 0.5B inventait "
+                  "89000098 ; relayé, il sort 9/10 en 0,2 s médian. "
+                  "Brut : bench/results_v12.jsonl, méthode : "
+                  "bench/FINDINGS-V12.md.\n",
+  "bench.intro": "Une tâche gelée (seed 20261120) : CSV sale + JSON cassé "
+                 "+ liste d'URLs → un YAML canonique, réponse attendue "
+                 "épinglée par sha256. Même modèle local faible (Qwen "
+                 "2.5, température 0), un bras seul, un bras avec "
+                 "Mechacut. On publie aussi les échecs — le 0.5B échoue "
+                 "aux deux bras, et un plafond de capacité est un "
+                 "résultat.",
+  "bench.model": "modèle", "bench.alone": "seul", "bench.with": "avec "
+                 "mechacut", "bench.tokens": "tokens consommés",
+  "bench.foot": "Le 7B passe de 0 % à 100 % en un seul appel pipeline. "
+                "Chaque exécution, chaque token, est dans "
+                "bench/results.jsonl.",
+    "nav.build": "Construire",
+  "build.h2": "Ce que tu peux construire ce soir",
+  "build.intro": "Tu as un petit mod\u00e8le gratuit sur ta machine. "
+                 "Voici trois choses \u00e0 lui faire faire — les phrases "
+                 "cit\u00e9es sont celles que tu dis \u00e0 l\u2019agent, "
+                 "les r\u00e9ponses sont celles que le serveur a vraiment "
+                 "rendues. Pas de compte, pas de carte, pas de pri\u00e8re.",
+  "build.r1.name": "Le contr\u00f4le de TVA (France)",
+  "build.r1.say": "\u00ab Le num\u00e9ro de TVA de mon client, "
+                  "FR40303265045, est-il valide pour la facture ? \u00bb",
+  "build.r1.got": "{{ \"valid\": true, \"algorithm\": \"EU VAT "
+                  "check-digit rule for FR (published)\" }}",
+  "build.r1.why": "Seul, un 0.5B \u00ab calcule \u00bb la cl\u00e9 de "
+                  "contr\u00f4le \u2014 et se trompe. Ici ce sont les "
+                  "chiffres qui d\u00e9cident : la facture ne meurt pas "
+                  "chez le comptable.",
+"build.r2.name": "Le garde-fuite",
+  "build.r2.say": "\u00ab Scanne ce log avant que je le colle dans un "
+                  "chatbot. \u00bb",
+  "build.r2.got": "2 findings \u2192 graine [SEED_PHRASE] et cl\u00e9 "
+                  "[OPENAI_KEY_1]",
+  "build.r2.why": "Le scan r\u00e9pond des positions, jamais la valeur ; "
+                  "le masque ne renvoie jamais la cl\u00e9. Le secret est "
+                  "venu ici — et il reste prot\u00e9g\u00e9 m\u00eame de "
+                  "nous.",
+  "build.r3.name": "Le relai d\u2019incident",
+  "build.r3.say": "\u00ab rel\u00e8ve les montants et dates de cette note "
+                  "d\u2019incident \u00bb \u2014 dit en fran\u00e7ais,\u00e0 un 0.5B.",
+  "build.r3.got": "money [3200.00, 12450.75] \u00b7 6/6 en 320 tokens "
+                  "(seul : 0/6)",
+  "build.r3.why": "C\u2019est le bench v9, \u00e0 l\u2019identique : "
+                  "m\u00eame t\u00e2che, m\u00eame mod\u00e8le, une "
+                  "ligne de relai. Toutes les ex\u00e9cutions sont dans "
+                  "bench/results_v9.jsonl — rejoue-les.",
+  "build.connect": "Ou branche-le tout de suite : colle CETTE ligne "
+                 "dans n'importe quel agent, m\u00eame le plus petit "
+                 "\u2014 elle devient le manuel complet :",
+    "everyday.h2": "Pour le commun des mortels",
+  "everyday.intro": "Pas de code, pas de jargon. Dix choses qu'un humain "
+                    "demande à son agent un mardi après-midi "
+                    "\u2014 chaque réponse ci-dessous est la sortie "
+                    "réelle du serveur, pas une maquette.",
+  "everyday.e1.name": "Wi-Fi invit\u00e9s, un scan",
+  "everyday.e1.say": "\u00ab Transforme le Wi-Fi en QR pour que les "
+                     "invit\u00e9s arr\u00eatent de demander le mot de "
+                     "passe. \u00bb",
+  "everyday.e2.name": "Le ch\u00e8que, en lettres",
+  "everyday.e2.say": "\u00ab \u00c9cris 1 234,56 \u20ac en toutes "
+                     "lettres pour le ch\u00e8que \u2014 la banque "
+                     "refuse les approximations. \u00bb",
+  "everyday.e3.name": "IBAN avant le virement",
+  "everyday.e3.say": "\u00ab J'ai bien recopi\u00e9 cet IBAN ? 60 \u20ac "
+                     "de frais si le virement rebondit. \u00bb",
+  "everyday.e4.name": "Recette en page imprimable",
+  "everyday.e4.say": "\u00ab Mets mes notes de recette en page propre "
+                     "\u2014 je veux un PDF pour le frigo. \u00bb",
+  "everyday.e5.name": "Compter les jours",
+  "everyday.e5.say": "\u00ab Combien de jours avant les "
+                     "vacances ? \u00bb",
+  "everyday.e6.name": "Le compte que la caisse ne fera pas",
+  "everyday.e6.say": "\u00ab -30 % puis -20 %, \u00e7a fait -50 %, "
+                     "non ? \u00bb En fait -44 %.",
+  "everyday.e7.name": "Un tiers du g\u00e2teau, sans arrondi cach\u00e9",
+  "everyday.e7.say": "\u00ab Mon g\u00e2teau pour 6, je le veux pour 2 "
+                     "\u2014 400 g de farine, 5 \u0153ufs ? \u00bb 400 "
+                     "\u00d7 1/3 = 133 1/3 g exacts, 135 g \u00e0 la "
+                     "balance. Les \u0153ufs sont dits, pas devin\u00e9s.",
+  "everyday.e8.name": "Un mardi sur deux, à l'heure",
+  "everyday.e8.say": "« Club de lecture un mardi sur deux à 19 h — "
+                     "les quatre prochaines dates ? » 3 et 17 nov., "
+                     "1er et 15 déc. : tous les quinze jours veut dire "
+                     "SAUTER les semaines du milieu, et le moteur les "
+                     "nomme.",
+  "everyday.e9.name": "Un pied, trois bonnes réponses",
+  "everyday.e9.say": "« EU 42⅔ ou 42,5 — c'est quoi ma pointure ? » "
+                     "Les deux tableaux arrondissent : le millimètre "
+                     "est exact, les candidats demi et tiers sont "
+                     "écrits, et la dérive entre systèmes est un "
+                     "nombre dit. Jamais un seul numéro confiant.",
+  "everyday.e10.name": "Vol retardé — qui me doit quoi",
+  "everyday.e10.say": "« Mon vol est arrivé avec 3 h 20 de retard — "
+                      "combien me doit-on vraiment ? » La DATE DU VOL "
+                      "choisit la règle : avant le 23 oct. 2027 "
+                      "l'ancien EC261 + jurisprudence, après la "
+                      "nouvelle table codifiée « PLUS DE trois heures ». "
+                      "Mêmes faits de part et d'autre de cette ligne, "
+                      "réponses différentes. € ou £, avec le délai de "
+                      "recours en vraie date.",
+"x402.h2": "Paiements machine",
+  "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
+             "serveur répond <code>402</code> avec ses exigences ; "
+             "l'agent signe un transfert USDC EIP-3009 ; un facilitateur "
+             "vérifie et règle ; la réponse rejoue la preuve dans "
+             "<code>X-PAYMENT-RESPONSE</code>. Le serveur ne détient "
+             "aucune clé.",
+  "x402.p2": "Les paiements rejoués sont refusés. Les erreurs sur routes "
+             "payantes restent gratuites. Le registre de chaque refus est "
+             "public : <a href=\"/misses.json\">/misses.json</a>.",
+  "x402.bankr": "M\u00eames endpoints, second domicile : quatre transforms payants sont aussi d\u00e9ploy\u00e9s sur le x402 Cloud de <a href=\"https://bankr.bot\">Bankr</a> \u2014 m\u00eames chemins de code, m\u00eames sha256, pay\u00e9s via les rails Bankr : <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data\">chart</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json\">reshape</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json\">validate</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join\">csv-join</a>. Les 68 autres vivent ici seulement, palier gratuit compris.",
+  "vision.h2": "Pourquoi le déterminisme, pourquoi maintenant",
+  "vision.p1": "Un grand modèle de langage est une machine qui "
+               "approxime. Demandez-lui <code>sha256(\"abc\")</code> : il "
+               "répondra avec assurance, élégance, et faux. Demandez-lui "
+               "de nettoyer le même CSV tous les jours : il vous facturera "
+               "des tokens pour redériver ce qu'une fonction rend en "
+               "millisecondes — avec les mêmes octets, chaque fois.",
+  "vision.p2": "L'ordinateur de guidage Apollo avait 4 Ko de RAM. Il a "
+               "posé des humains sur la Lune parce que les maths n'ont "
+               "jamais eu à improviser : chaque constante a été calculée "
+               "une fois, au sol, à froid, puis gelée dans la mémoire à "
+               "cordes tressées.",
+  "vision.quote": "Le déterminisme a été codé la première fois pour nous "
+                  "envoyer sur la Lune. Le déterminisme enverra l'IA au "
+                  "travail.",
+  "vision.p3": "Mechacut est cette math gelée pour les agents : vocabu-"
+               "laires fermés, contrats qui refusent ce qui sort de la "
+               "table, erreurs qui nomment la forme attendue — l'erreur "
+               "est le prompt qui répare. Le sens reste avec le modèle. "
+               "La mécanique déménage ici.",
+  "contract.h2": "Le contrat",
+  "contract.li1": "Même requête → mêmes octets, sha256 sur chaque réponse",
+  "contract.li2": "Sans inscription, sans clé, sans mur de débit sous "
+                  "30 req/min",
+  "contract.li3": "Zéro stockage : le seul état est une fenêtre d'une "
+                  "minute, un registre de 60 minutes et un jeu de nonces "
+                  "de paiement",
+  "contract.li4": "Vocabulaires fermés — tout ce qui sort de la table est "
+                  "refusé, nommé, renvoyé à sa forme attendue",
+  "contract.li5": "Des erreurs qui réparent : champ, message, attendu, "
+                  "toujours",
+  "contract.li6": "Paiements machine x402 : USDC sur Base, vérifiés par "
+                  "facilitateur, zéro humain dans la boucle",
+  "agents.line": "Parlez agent : outils MCP, GET /agent/manifest (~500 "
+                 "tokens pour toute la suite), GET /route?q=…, "
+                 "POST /api/v1/pipeline.",
+  "agents.hint": "installez un pack",
+  "footer.family": "Mechacut fait partie de la famille Cirilli — .klickd, "
+                   "moovicut, Ponte.",
+ },
+ "pt": {
+  "meta.title": "Mechacut — mesma requisição, mesmos bytes",
+  "meta.desc": "Transformações determinísticas para agentes de IA: 53 "
+               "ferramentas, três níveis, pagamentos entre máquinas. Sem "
+               "cadastro, sem chave, sem armazenamento.",
+  "nav.tools": "Bundles", "nav.numbers": "Provas", "nav.vision": "Visão",
+  "nav.api": "Contrato",
+  "pill": "v{ver} · {n_tools} transformações · {n_recipes} receitas",
+  "hero1": "Significado se aprende.",
+  "hero2": "Mecânica se conhece.",
+  "lede": "Uma suíte de <strong>{n_tools} transformações "
+          "determinísticas</strong> para agentes de IA — {n_free} grátis "
+          "para sempre, {n_cap} grátis abaixo de 32 KB e depois pagas "
+          "por chamada, {n_paid} pagáveis por máquina — mais "
+          "{n_recipes} receitas de chamada única, grátis. O modelo para "
+          "de adivinhar o que um checksum pode provar.",
+  "bundles.h2": "O catálogo",
+  "cat.search": "busque uma ferramenta ou seu problema…",
+  "cat.hits": "~n~ ferramentas de ~t~",
+  "panel.copy": "copiar curl",
+  "panel.copied": "copiado",
+  "panel.close": "fechar",
+  "panel.say": "diga ao seu agente:",
+  "panel.got": "o servidor respondeu:",
+  "nav.menu": "menu",
+  "bundles.intro": "Mesma requisição, mesmos bytes — cada resposta carrega "
+                   "seu sha256. Instale um pack, ou leia o manifesto de "
+                   "500 tokens e deixe <code>GET /route</code> escolher.",
+  "tiers.h2": "Três níveis, zero contas",
+  "tiers.intro": "Agentes não leem páginas de preço — então o preço está "
+                 "no protocolo: uma rota grátis responde sem chave, uma "
+                 "rota com teto responde grátis abaixo de 32 KB, qualquer "
+                 "outra recebe um <code>402</code> honesto com desafio "
+                 "x402 USDC na Base, liquidado por um facilitador. Entre "
+                 "um servidor e um robô, só existem preços e recibos.",
+  "bench.h2": "Medido, não prometido",
+  "bench9.h2": "Ou: o modelo nunca precisa ser inteligente",
+  "bench9.intro": "Uma frase vaga (em francês), seis campos obrigatórios — "
+                  "valores com 2 decimais, percentuais, datas únicas, URL, "
+                  "e-mail, total. Expectativas calculadas à mão antes de "
+                  "rodar. O servidor monta o cartão (/intent/card); o "
+                  "modelo repassa uma linha e a resposta nunca passa por "
+                  "ele.",
+  "bench9.with": "com o cartão de intenção",
+  "bench9.foot": "A linha 0.5B reproduziu em uma segunda rodada "
+                 "independente. Três chamadas iguais → um único sha256. A "
+                 "variante autônoma (o modelo escolhe a ferramenta) também "
+                 "marca 6/6. Sementes, scripts, falhas: "
+                 "bench/results_v9.jsonl.\n",
+  "bench10.h2": "Ou: nunca foi sobre ser inteligente — bench v10",
+  "bench10.intro": "Dezoito tarefas com UMA resposta certa cada — "
+                   "dígitos de controle GS1, um SHA-256, descontos em "
+                   "cascata, uma coluna de valores que prova o próprio "
+                   "ponto decimal. Dois modelos gratuitos e LOCAIS, "
+                   "zero gasto de API: o harness verifica que cada "
+                   "rota chamada é gratuita. Os gabaritos saíram das "
+                   "specs publicadas ANTES de qualquer modelo rodar.",
+  "bench10.with": "com uma chamada-relé",
+  "bench10.foot": "As falhas nuas se reproduzem num segundo passe "
+                  "independente: 18/18 vereditos idênticos — a temp 0, "
+                  "repetir não converge, repete. Execuções brutas: "
+                  "bench/results_v10.jsonl, método: "
+                  "bench/FINDINGS-V10.md.\n",
+  "bench12.h2": "Bench v12 — o zero vira herói",
+  "bench12.intro": "Dez cálculos exatos (7834×9217, 0.1+0.2, porcentagens "
+                   "em cadeia…) × quatro modelos locais GRATUITOS × três "
+                   "braços: responder nu, escrever Python, ou repassar uma "
+                   "expressão ao math/calc. Mesmo quadro, duas físicas: o "
+                   "braço código devolve float, o relé devolve exato.",
+  "bench12.code": "escreve Python",
+  "bench12.relay": "relé Mechacut",
+  "bench12.foot": "O 8B falha no RELÉ por tagarelice de protocolo, não "
+                  "por matemática — por isso a ficha de intenção escreve a "
+                  "linha por ele. Nu, o 0.5B inventou 89000098; em relé, "
+                  "9/10 com mediana de 0,2 s. Bruto: bench/"
+                  "results_v12.jsonl, método: bench/FINDINGS-V12.md.\n",
+  "bench.intro": "Uma tarefa congelada (seed 20261120): CSV sujo + JSON "
+                 "quebrado + lista de URLs → um YAML canônico, resposta "
+                 "espera fixada por sha256. O mesmo modelo local fraco "
+                 "(Qwen 2.5, temperatura 0), um braço sozinho, um braço "
+                 "guiando o Mechacut. Publicamos também os fracassos — o "
+                 "0.5B falha nos dois braços, e um teto de capacidade é "
+                 "um resultado.",
+  "bench.model": "modelo", "bench.alone": "sozinho", "bench.with": "com "
+                 "mechacut", "bench.tokens": "tokens consumidos",
+  "bench.foot": "O 7B vai de 0 % a 100 % em uma única chamada de "
+                "pipeline. Cada execução, cada token, está em "
+                "bench/results.jsonl.",
+    "nav.build": "Construir",
+  "build.h2": "O que voc\u00ea pode construir hoje",
+  "build.intro": "Voc\u00ea tem um modelo pequeno e gratuito na sua "
+                 "m\u00e1quina. Tr\u00eas coisas para fazer com ele — as "
+                 "frases citadas s\u00e3o o que voc\u00ea diz ao agente, "
+                 "as respostas s\u00e3o o que o servidor realmente "
+                 "devolveu. Sem conta, sem cart\u00e3o, sem reza.",
+  "build.r1.name": "A portaria da nota (Brasil)",
+  "build.r1.say": "\u201cO CNPJ 11.222.333/0001-81 do meu cliente \u00e9 "
+                  "v\u00e1lido para a nota?\u201d",
+  "build.r1.got": "{{ \"valid\": true, \"algorithm\": \"mod-11 double "
+                  "DV (Receita Federal)\" }}",
+  "build.r1.why": "Sozinho, um 0.5B \u201ccalcula\u201d d\u00edgitos de "
+                  "confer\u00eancia — e erra. Aqui os d\u00edgitos "
+                  "decidem: a nota n\u00e3o morre no contador.",
+  "build.r2.name": "O guarda-vazamento",
+  "build.r2.say": "\u201cEscaneie este log antes de eu colar num "
+                  "chatbot.\u201d",
+  "build.r2.got": "2 achados \u2192 semente [SEED_PHRASE] e chave "
+                  "[OPENAI_KEY_1]",
+  "build.r2.why": "O scan devolve posi\u00e7\u00f5es, nunca o valor; a "
+                  "m\u00e1scara nunca devolve a chave. O segredo veio "
+                  "guardar-se aqui — proteg\u00e9o at\u00e9 de n\u00f3s.",
+  "build.r3.name": "O r\u00e9lay do incidente",
+  "build.r3.say": "\u201crel\u00e8ve les montants et dates de cette note "
+                  "d\u2019incident\u201d \u2014 em franc\u00eas, para um "
+                  "0.5B.",
+  "build.r3.got": "money [3200.00, 12450.75] \u00b7 6/6 em 320 tokens "
+                  "(sozinho: 0/6)",
+  "build.r3.why": "\u00c9 o bench v9, igual: mesma tarefa, mesmo modelo, "
+                  "uma linha de relay. Cada execu\u00e7\u00e3o est\u00e1 "
+                  "em bench/results_v9.jsonl — reproduza voc\u00ea mesmo.",
+  "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
+                 "at\u00e9 o menor \u2014 ela vira o manual completo:",
+    "everyday.h2": "Para o cidad\u00e3o comum",
+  "everyday.intro": "Sem código, sem jargão. Dez coisas que "
+                    "uma pessoa pede ao agente numa terça — cada "
+                    "resposta abaixo é a saída real do servidor, "
+                    "não uma maquete.",
+  "everyday.e1.name": "Wi-Fi de visitas, um scan",
+  "everyday.e1.say": "\u201cColoca o Wi-Fi num QR para as pararem de "
+                     "perguntar a senha.\u201d",
+  "everyday.e2.name": "O cheque, por extenso",
+  "everyday.e2.say": "\u201cEscreva R$ 1.234,56 por extenso no cheque "
+                     "\u2014 o banco recusa erro.\u201d",
+  "everyday.e3.name": "IBAN antes da transfer\u00eancia",
+  "everyday.e3.say": "\u201cCopiei certo este IBAN? Se voltar, pago "
+                     "tarifa.\u201d",
+  "everyday.e4.name": "Receita em p\u00e1gina imprim\u00edvel",
+  "everyday.e4.say": "\u201cTransforma minhas anota\u00e7\u00f5es da "
+                     "receita numa p\u00e1gina limpa \u2014 quero o PDF "
+                     "para a geladeira.\u201d",
+  "everyday.e5.name": "Contando os dias",
+  "everyday.e5.say": "\u201cQuantos dias at\u00e9 a "
+                     "viagem?\u201d",
+  "everyday.e6.name": "A conta que o caixa não fará",
+  "everyday.e6.say": "\u201c-30 % e depois -20 % é -50 %, "
+                     "certo?\u201d \u00c9 -44 %.",
+  "everyday.e7.name": "Um terço do bolo, sem arredondar escondido",
+  "everyday.e7.say": "\u201cMeu bolo de 6 porções, quero para 2 — "
+                     "400 g de farinha, 5 ovos?\u201d 400 × 1/3 = "
+                     "133 1/3 g exato, 135 g na balança. Os ovos são "
+                     "ditos, não adivinhados.",
+  "everyday.e8.name": "Uma terça sim, outra não",
+  "everyday.e8.say": "“Clube do livro a cada duas terças às 19h — "
+                     "as próximas quatro datas?” 3 e 17 de nov., 1º e "
+                     "15 de dez.: quinzenal é PULAR as semanas do meio "
+                     "— e o motor nomeia os pulos.",
+  "everyday.e9.name": "Um pé, três respostas certas",
+  "everyday.e9.say": "“EU 42⅔ ou 42,5 — qual é o meu número?” As duas "
+                     "tabelas arredondam: o milímetro é exato, os "
+                     "candidatos de meia e de terço aparecem escritos, "
+                     "e a deriva entre sistemas é um número dito. "
+                     "Nunca um número único confiante.",
+  "everyday.e10.name": "Voo atrasado — quem me deve quanto",
+  "everyday.e10.say": "“Meu voo chegou 3h20 atrasado — quanto me "
+                      "devem de fato?” A DATA DO VOO escolhe a regra: "
+                      "antes de 23 out. 2027 o antigo EC261 + "
+                      "jurisprudência; depois, a nova tabela codificada "
+                      "“ACIMA DE três horas”. Mesmos fatos de cada lado "
+                      "dessa linha pagam diferente. € ou £, com o prazo "
+                      "de reclamar em data real.",
+"x402.h2": "Pagamentos entre máquinas",
+  "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
+             "servidor responde <code>402</code> com os requisitos; o "
+             "agente assina uma transferência USDC EIP-3009; um "
+             "facilitador verifica e liquida; a resposta reproduz a prova "
+             "em <code>X-PAYMENT-RESPONSE</code>. O servidor não guarda "
+             "chaves.",
+  "x402.p2": "Pagamentos repetidos são recusados. Erros em rotas pagas "
+             "continuam grátis. O registro de cada recusa é público: "
+             "<a href=\"/misses.json\">/misses.json</a>.",
+  "x402.bankr": "Mesmos endpoints, segunda casa: quatro transforms pagos tamb\u00e9m est\u00e3o no x402 Cloud do <a href=\"https://bankr.bot\">Bankr</a> \u2014 mesmos caminhos de c\u00f3digo, mesmos sha256, pagos pelos trilhos Bankr: <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data\">chart</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json\">reshape</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json\">validate</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join\">csv-join</a>. Os outros 68 vivem s\u00f3 aqui, tier gratuito incluso.",
+  "vision.h2": "Por que determinismo, por que agora",
+  "vision.p1": "Um grande modelo de linguagem é uma máquina de aproximar. "
+               "Pergunte <code>sha256(\"abc\")</code> e ele responderá "
+               "com confiança, elegância e erro. Peça para limpar o mesmo "
+               "CSV todo dia e ele cobrará tokens para re-derivar o que "
+               "uma função entrega em milissegundos — com os mesmos "
+               "bytes, sempre.",
+  "vision.p2": "O computador de navegação Apollo tinha 4 KB de RAM. Pousou "
+               "humanos na Lua porque a matemática nunca precisou "
+               "improvisar: cada constante foi calculada uma vez, no solo, "
+               "a frio, e congelada na memória de corda.",
+  "vision.quote": "O determinismo foi codificado a primeira vez para nos "
+                  "levar à Lua. O determinismo levará a IA ao trabalho.",
+  "vision.p3": "Mechacut é essa matemática congelada para agentes: "
+               "vocabulários fechados, contratos que recusam o que está "
+               "fora da tabela, erros que nomeiam a forma esperada — o "
+               "erro é o prompt que conserta. O significado fica com o "
+               "modelo. A mecânica se muda para cá.",
+  "contract.h2": "O contrato",
+  "contract.li1": "Mesma requisição → mesmos bytes, sha256 em cada "
+                  "resposta",
+  "contract.li2": "Sem cadastro, sem chave, sem muro de taxa abaixo de "
+                  "30 req/min",
+  "contract.li3": "Zero armazenamento: o único estado é uma janela de 1 "
+                  "minuto, um registro de 60 minutos e um conjunto de "
+                  "nonces de pagamento",
+  "contract.li4": "Vocabulários fechados — tudo fora da tabela é recusado, "
+                  "nomeado, apontado à forma esperada",
+  "contract.li5": "Erros que consertam: campo, mensagem, esperado, sempre",
+  "contract.li6": "Pagamentos x402 entre máquinas: USDC na Base, "
+                  "verificados por facilitador, zero humano no circuito",
+  "agents.line": "Fale agente: ferramentas MCP, GET /agent/manifest "
+                 "(~500 tokens para a suíte inteira), GET /route?q=…, "
+                 "POST /api/v1/pipeline.",
+  "agents.hint": "instale um pack",
+  "footer.family": "Mechacut faz parte da família Cirilli — .klickd, "
+                   "moovicut, Ponte.",
+ },
+}
+
+BADGE = {"free": "\U0001f7e2", "cap": "\U0001f7e1", "paid": "\U0001f534"}
+# A bare coloured square means nothing to a human (mobile review, 2026-11-21):
+# the chip carries the word, the legend carries the rule, the dot carries
+# a tooltip. Legend text is composed from these two tables — one source.
+TIER_CHIP = {
+    "en": {"free": "free", "cap": "free \u2264 32 KB", "paid": "paid"},
+    "fr": {"free": "gratuit", "cap": "gratuit \u2264 32 Ko", "paid": "payant"},
+    "pt": {"free": "gr\u00e1tis", "cap": "gr\u00e1tis \u2264 32 KB",
+           "paid": "pago"},
+}
+TIER_RULE = {
+    "en": {"free": "no key, no account",
+           "cap": "402 above the cap",
+           "paid": "HTTP 402 + x402 USDC on Base"},
+    "fr": {"free": "sans cl\u00e9, sans compte",
+           "cap": "402 au-del\u00e0 du plafond",
+           "paid": "HTTP 402 + x402 USDC sur Base"},
+    "pt": {"free": "sem chave, sem conta",
+           "cap": "402 acima do teto",
+           "paid": "HTTP 402 + x402 USDC na Base"},
+}
+
+TEMPLATE = """<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta.title}}</title>
+<meta name="description" content="{{meta.desc}}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23141414'/><path d='M20 70 L40 45 L55 55 L80 25' stroke='%23d4af37' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a; --fg: #ececec; --muted: #8f8f8f;
+    --gold: #d4af37; --line: #232323; --card: #121212;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+  header.top { display: flex; align-items: center; justify-content: space-between;
+    padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 12px;
+    font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -.3px; }
+  .brand svg { display: block; }
+  nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px;
+    margin-left: 18px; transition: color .15s; }
+  nav a:hover { color: var(--fg); }
+  nav .lang { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 1px; }
+  nav .lang.cur { color: var(--gold); }
+  main { padding: 70px 0 60px; }
+  h1 { font-family: "Space Grotesk", sans-serif; font-weight: 700;
+    font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -.5px;
+    margin-bottom: 22px; }
+  h1 .dim { color: var(--muted); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 680px; margin-bottom: 52px; }
+  .lede strong { color: var(--fg); font-weight: 500; }
+  .catbar { display: flex; gap: 14px; align-items: baseline;
+    flex-wrap: wrap; margin-bottom: 14px; }
+  #catsearch { flex: 1 1 240px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 10px; color: var(--fg);
+    font: inherit; font-size: 14px; padding: 10px 14px; }
+  #catsearch:focus { outline: 1px solid var(--gold); }
+  .cathits { font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    color: var(--muted); white-space: nowrap; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .chip { font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    color: var(--muted); border: 1px solid var(--line);
+    background: var(--card); border-radius: 999px; padding: 5px 11px;
+    cursor: pointer; }
+  .chip.on { color: var(--gold); border-color: #3a3320; background: #14110a; }
+  .tierlegend { font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+    color: var(--muted); margin: -6px 0 14px; line-height: 1.8; }
+  .tierlegend .lg { white-space: nowrap; }
+  @media (max-width: 640px) { .tierlegend .lg { white-space: normal; } }
+  .catgrid { display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; max-height: 30rem; overflow-y: auto; padding-right: 6px;
+    scrollbar-width: thin; scrollbar-color: #333 transparent; }
+  .tcard { text-align: left; background: var(--card);
+    border: 1px solid var(--line); border-radius: 11px;
+    padding: 12px 13px; color: var(--fg); font: inherit; cursor: pointer;
+    display: flex; flex-direction: column; gap: 5px; }
+  .tcard:hover, .tcard:focus-visible { border-color: #3a3320; }
+  .tcard code { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  .tcard .tp { font-size: 12px; color: var(--muted);
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden; }
+  .tcard .tierdot { font-size: 10px; }
+  .tcard.hide { display: none; }
+  #tptry { margin: 0 0 10px; }
+  #tptry .tsay { font-size: 14px; margin: 0 0 6px; color: var(--fg); }
+  #tptry .tsay b { color: var(--muted); font-weight: 500; font-size: 12px;
+                   display: block; text-transform: uppercase;
+                   letter-spacing: .06em; }
+  #tptry .treq, #tptry .tgot { font: 12px/1.5 ui-monospace,
+      SFMono-Regular, Menlo, monospace; background: var(--codebg, #0d1117);
+      border-radius: 8px; padding: 8px 10px; overflow-x: auto;
+      white-space: pre-wrap; word-break: break-all; margin: 0 0 6px; }
+  #tptry .tgot { max-height: 9rem; overflow-y: auto; color: #9fd6a2; }
+  .packlinks { margin-top: 14px; font-size: 13px; color: var(--muted); }
+  .packlinks a { color: var(--gold); text-decoration: none; }
+  .tpanel { position: fixed; top: 0; right: 0; width: 430px;
+    max-width: 94vw; height: 100dvh; background: #101010;
+    border-left: 1px solid var(--line); z-index: 60; padding: 20px 22px;
+    overflow-y: auto; box-shadow: -18px 0 40px rgba(0, 0, 0, .5); }
+  .tpanel[hidden] { display: none; }
+  .tphead { display: flex; gap: 10px; align-items: center;
+    flex-wrap: wrap; margin-bottom: 12px; }
+  .tphead code { font-family: "IBM Plex Mono", monospace;
+    color: var(--gold); font-size: 14px; }
+  .tphead button { font: inherit; font-size: 12.5px;
+    background: var(--card); color: var(--fg);
+    border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
+    cursor: pointer; }
+  .tphead .sp { flex: 1; }
+  .tblwrap { overflow-x: auto; }
+  .navbtn { display: none; font: inherit; font-size: 20px;
+    background: none; border: 1px solid var(--line); border-radius: 8px;
+    color: var(--fg); padding: 2px 10px; cursor: pointer; }
+  @media (max-width: 1100px) { .catgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) {
+    .catgrid { grid-template-columns: 1fr; }
+    .navbtn { display: block; }
+    header.top nav { display: none; position: fixed; inset: 0;
+      background: rgba(8, 8, 8, .97); flex-direction: column;
+      align-items: flex-start; gap: 18px; padding: 84px 28px; z-index: 50; }
+    header.top nav.open { display: flex; }
+    .tpanel { width: 100vw; max-width: 100vw; border-left: none; }
+  }
+  h2 { font-family: "Space Grotesk", sans-serif; font-size: 30px;
+    font-weight: 700; letter-spacing: -.3px; margin-bottom: 18px; }
+  .section { margin-bottom: 80px; }
+  .vision p { color: var(--muted); max-width: 720px; margin-bottom: 16px; font-size: 16.5px; }
+  .vision p strong { color: var(--fg); font-weight: 500; }
+  .playgrid { display: grid; grid-template-columns: repeat(auto-fit,
+                minmax(250px, 1fr)); gap: 16px; margin-top: 26px; }
+  .play { border: 1px solid var(--line); border-radius: 12px;
+          padding: 18px 18px 14px; background: var(--bg2, transparent); }
+  .play h3 { margin: 0 0 10px; font-size: 16px; }
+  .playsay { font-size: 15px; margin: 0 0 12px; color: var(--fg); }
+  .playgot { font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+             background: var(--codebg, #0d1117); border-radius: 8px;
+             padding: 10px 12px; overflow-x: auto; margin: 0 0 12px; }
+  .playwhy { font-size: 13.5px; color: var(--muted); margin: 0; }
+  .connect { margin-top: 26px; }
+  .connect #connectcmd { user-select: all; }
+  .copybtn { margin-top: 8px; background: none; border: 1px solid
+             var(--line); color: var(--muted); border-radius: 8px;
+             padding: 8px 14px; font-size: 12.5px; min-height: 40px;
+             cursor: pointer; }
+  .copybtn:hover, .copybtn:focus-visible { color: var(--fg);
+             border-color: #3a3320; }
+  .vision p code, .tiers p code, .x402 p code { font-family: "IBM Plex Mono", monospace;
+    font-size: 14px; color: var(--fg); background: #1c1c1c; padding: 1px 6px; border-radius: 5px; }
+  .vision .quote, .quote { border-left: 2px solid var(--gold); padding-left: 20px;
+    margin: 30px 0; font-size: 18px; color: var(--fg);
+    font-family: "Space Grotesk", sans-serif; }
+  ul.contract { list-style: none; display: grid;
+    grid-template-columns: repeat(2, 1fr); gap: 12px 30px; max-width: 760px; }
+  @media (max-width: 640px) { ul.contract { grid-template-columns: 1fr; } }
+  ul.contract li { color: var(--muted); font-size: 15px; display: flex; gap: 10px; }
+  ul.contract li::before { content: "\\2192"; color: var(--gold); flex-shrink: 0; }
+  table.bench { border-collapse: collapse; width: 100%; max-width: 760px;
+    font-family: "IBM Plex Mono", monospace; font-size: 14px; }
+  table.bench th { text-align: left; color: var(--muted); font-weight: 400;
+    font-size: 12px; letter-spacing: .5px; padding: 8px 18px 8px 0;
+    border-bottom: 1px solid var(--line); }
+  table.bench td { padding: 10px 18px 10px 0; border-bottom: 1px solid var(--line); }
+  td.yes { color: #7fd47f; } td.no { color: #d47f7f; }
+  td.num { color: var(--muted); }
+  .tiers p, .x402 p { color: var(--muted); max-width: 720px; margin-bottom: 14px; font-size: 15.5px; }
+  .tiers p a, .x402 p a { color: var(--gold); }
+  pre { background: #0d0d0d; border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px 24px; overflow-x: auto; font-family: "IBM Plex Mono",
+    monospace; font-size: 13px; line-height: 1.7; color: #d8d8d8; margin: 20px 0; }
+  footer { border-top: 1px solid var(--line); padding: 34px 0 48px;
+    color: var(--muted); font-size: 13.5px; }
+  footer .row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--fg); }
+  .pill { display: inline-block; font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid #3a3320; background: #14110a;
+    padding: 5px 12px; border-radius: 999px; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="18" fill="#141414"/><path d="M20 70 L40 45 L55 55 L80 25" stroke="#d4af37" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      MechaCut
+    </div>
+    <nav>
+      <a href="#bundles">{{nav.tools}}</a>
+      <a href="#bench">{{nav.numbers}}</a>
+      <a href="#build">{{nav.build}}</a>
+      <a href="#vision">{{nav.vision}}</a>
+      <a href="#contract">{{nav.api}}</a>
+      <a href="/agent/manifest">manifest</a>
+      <a class="lang{{cur.en}}" href="?lang=en">EN</a>
+      <a class="lang{{cur.fr}}" href="?lang=fr">FR</a>
+      <a class="lang{{cur.pt}}" href="?lang=pt">PT</a>
+    </nav>
+    <button class="navbtn" id="navbtn" aria-label="{{nav.menu}}">&#9776;</button>
+  </header>
+
+  <main>
+    <section>
+      <div class="pill">{{pill}}</div>
+      <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
+      <p class="lede">{{lede}}</p>
+    </section>
+
+    <section class="section" id="bundles">
+      <h2>{{bundles.h2}}</h2>
+      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{bundles.intro}}</p>
+      <div class="catbar">
+        <input id="catsearch" type="search" placeholder="{{cat.search}}" aria-label="{{cat.search}}">
+        <span class="cathits" id="cathits" data-tpl="{{cat.hits}}"></span>
+      </div>
+      <div id="cattray">
+{{bundles_grid}}
+      </div>
+    </section>
+    <aside class="tpanel" id="tpanel" hidden>
+      <div class="tphead">
+        <code id="tpname"></code><span class="sp"></span>
+        <button id="tpcopy" data-copied="{{panel.copied}}">{{panel.copy}}</button>
+        <button id="tpclose">{{panel.close}} &#10005;</button>
+      </div>
+      <div id="tptry" hidden></div>
+      <pre id="tpbody"></pre>
+    </aside>
+
+    <section class="section tiers" id="tiers">
+      <h2>{{tiers.h2}}</h2>
+      <p>{{tiers.intro}}</p>
+    </section>
+
+    <section class="section" id="bench">
+      <h2>{{bench.h2}}</h2>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
+      <div class="tblwrap"><table class="bench">
+        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench_rows}}
+      </table></div>
+      <p class="tiers" style="margin-top: 18px;">{{bench.foot}}</p>
+      <h3 style="margin-top: 42px;">{{bench9.h2}}</h3>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench9.intro}}</p>
+      <div class="tblwrap"><table class="bench">
+        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench9.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench9_rows}}
+      </table></div>
+      <p class="tiers" style="margin-top: 18px;">{{bench9.foot}}</p>
+      <h3 style="margin-top: 42px;">{{bench10.h2}}</h3>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench10.intro}}</p>
+      <div class="tblwrap"><table class="bench">
+        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench10.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench10_rows}}
+      </table></div>
+      <p class="tiers" style="margin-top: 18px;">{{bench10.foot}}</p>
+      <h3 style="margin-top: 42px;">{{bench12.h2}}</h3>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench12.intro}}</p>
+      <div class="tblwrap"><table class="bench">
+        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench12.code}}</th><th>{{bench12.relay}}</th></tr>
+{{bench12_rows}}
+      </table></div>
+      <p class="tiers" style="margin-top: 18px;">{{bench12.foot}}</p>
+    </section>
+
+    <section class="section build" id="build">
+      <h2>{{build.h2}}</h2>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{build.intro}}</p>
+      <div class="playgrid">
+        <div class="play"><h3>{{build.r1.name}}</h3>
+          <p class="playsay">{{build.r1.say}}</p>
+          <pre class="playgot">{{build.r1.got}}</pre>
+          <p class="playwhy">{{build.r1.why}}</p></div>
+        <div class="play"><h3>{{build.r2.name}}</h3>
+          <p class="playsay">{{build.r2.say}}</p>
+          <pre class="playgot">{{build.r2.got}}</pre>
+          <p class="playwhy">{{build.r2.why}}</p></div>
+        <div class="play"><h3>{{build.r3.name}}</h3>
+          <p class="playsay">{{build.r3.say}}</p>
+          <pre class="playgot">{{build.r3.got}}</pre>
+          <p class="playwhy">{{build.r3.why}}</p></div>
+      </div>
+      <div class="connect">
+        <p class="playwhy">{{build.connect}}</p>
+        <pre class="playgot" id="connectcmd">Read https://mechacut.studio/SKILL-MINI.md and follow it before any mechanical task.</pre>
+        <button class="copybtn" data-for="connectcmd" data-copied="{{panel.copied}}">{{panel.copy}}</button>
+      </div>
+    </section>
+
+    {{everyday_grid}}
+
+    <section class="section x402" id="x402">
+      <h2>{{x402.h2}}</h2>
+      <p>{{x402.p1}}</p>
+      <p>{{x402.p2}}</p>
+      <p>{{x402.bankr}}</p>
+    </section>
+
+    <section class="section vision" id="vision">
+      <h2>{{vision.h2}}</h2>
+      <p>{{vision.p1}}</p>
+      <p>{{vision.p2}}</p>
+      <div class="quote">{{vision.quote}}</div>
+      <p>{{vision.p3}}</p>
+    </section>
+
+    <section class="section" id="contract">
+      <h2>{{contract.h2}}</h2>
+      <ul class="contract">
+        <li>{{contract.li1}}</li>
+        <li>{{contract.li2}}</li>
+        <li>{{contract.li3}}</li>
+        <li>{{contract.li4}}</li>
+        <li>{{contract.li5}}</li>
+        <li>{{contract.li6}}</li>
+      </ul>
+      <div class="quote" style="margin: 30px 0 0 0;">{{agents.line}}</div>
+      <p style="color: var(--muted); font-size: 15px; margin-top: 18px;">
+        {{agents.hint}} — <a href="/mcp">/mcp</a> · <a href="/SKILL.md">/SKILL.md</a> · <a href="/openapi.json">/openapi.json</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="row">
+      <div>{{footer.family}}</div>
+      <div><a href="/misses.json">/misses.json</a> · <a href="/route?q=dirty%20csv%20into%20yaml">/route</a> · <a href="/api/v1/recipes">/recipes</a></div>
+      <div><a href="https://github.com/Davincc77/mechacut" rel="me">GitHub</a> · <a href="https://x.com/Davincc" rel="me">Follow on X</a></div>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".tcard"));
+  var hits = document.getElementById("cathits");
+  var search = document.getElementById("catsearch");
+  var tray = document.getElementById("cattray");
+  var panel = document.getElementById("tpanel");
+  var pname = document.getElementById("tpname");
+  var pbody = document.getElementById("tpbody");
+  var trybox = document.getElementById("tptry");
+  var trycmd = "";
+  var LBL = {say: "{{panel.say}}", got: "{{panel.got}}"};
+  var copyb = document.getElementById("tpcopy");
+  var closeb = document.getElementById("tpclose");
+  var pack = "all", tier = "all", w = "", last = null;
+  function ok(c) {
+    return (pack === "all" || c.dataset.pack === pack) &&
+           (tier === "all" || c.dataset.tier === tier) &&
+           (!w || c.dataset.hay.indexOf(w) >= 0);
+  }
+  function apply() {
+    var n = 0;
+    cards.forEach(function (c) {
+      var v = ok(c); c.classList.toggle("hide", !v); if (v) n++;
+    });
+    if (hits) hits.textContent =
+      hits.dataset.tpl.replace("~n~", n).replace("~t~", cards.length);
+  }
+  if (tray) tray.addEventListener("click", function (e) {
+    var chip = e.target.closest(".chip");
+    if (chip) {
+      var kv = chip.dataset.f.split("=");
+      if (kv[0] === "x") { pack = "all"; tier = "all"; }
+      else if (kv[0] === "pack") { pack = kv[1]; }
+      else { tier = kv[1]; }
+      tray.querySelectorAll(".chip").forEach(function (c) {
+        var k2 = c.dataset.f.split("=");
+        var on = k2[0] === "x" ? (pack === "all" && tier === "all")
+             : k2[0] === "pack" ? (pack === k2[1]) : (tier === k2[1]);
+        c.classList.toggle("on", on);
+      });
+      apply();
+      return;
+    }
+    var card = e.target.closest(".tcard");
+    if (card) {
+      last = card;
+      pname.textContent = card.dataset.tool;
+      pbody.textContent = "\u2026";
+      trybox.hidden = true; trybox.innerHTML = ""; trycmd = "";
+      panel.hidden = false;
+      fetch("/tools/" + card.dataset.tool + ".json")
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          pbody.textContent = JSON.stringify(j, null, 2);
+          if (j && j.try) {
+            var t = j.try, esc = function (x) {
+              return String(x).replace(/&/g, "&amp;")
+                              .replace(/</g, "&lt;"); };
+            var h = "";
+            var sv = t.say;
+            if (sv && typeof sv === "object") {
+              var L = (document.documentElement.lang || "en")
+                      .slice(0, 2);
+              sv = sv[L] || sv.en;
+            }
+            if (sv) h += '<p class="tsay"><b>' + LBL.say +
+                         '</b>' + esc(sv) + "</p>";
+            if (t.request && t.request.body !== null &&
+                t.request.body !== undefined) {
+              var body = JSON.stringify(t.request.body);
+              trycmd = "curl -s -X POST https://" + location.host +
+                       t.request.path +
+                       " -H 'content-type: application/json' -d '" +
+                       body.replace(/'/g, "'\\''") + "'";
+              h += '<pre class="treq">POST ' + t.request.path + "\\n" +
+                   esc(body) + "</pre>";
+            }
+            if (t.response) h += '<p class="tsay"><b>' + LBL.got +
+                                '</b></p><pre class="tgot">' +
+                                esc(t.response) + "</pre>";
+            trybox.innerHTML = h;
+            trybox.hidden = false;
+          }
+        })
+        .catch(function () { pbody.textContent = "schema unavailable"; });
+      closeb.focus();
+    }
+  });
+  function closep() { panel.hidden = true; if (last) last.focus(); }
+  if (copyb) copyb.addEventListener("click", function () {
+    var cmd = trycmd || "curl -s https://" + location.host + "/tools/" +
+              pname.textContent + ".json";
+    if (navigator.clipboard) navigator.clipboard.writeText(cmd).then(
+      function () { copyb.textContent = copyb.dataset.copied; });
+  });
+  if (closeb) closeb.addEventListener("click", closep);
+  document.querySelectorAll(".copybtn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = document.getElementById(b.dataset.for);
+      if (!t || !navigator.clipboard) { return; }
+      navigator.clipboard.writeText(t.textContent.trim()).then(
+        function () { var o = b.textContent; b.textContent =
+          b.dataset.copied || "copied";
+          setTimeout(function () { b.textContent = o; }, 1600); });
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel && !panel.hidden) closep();
+  });
+  if (search) search.addEventListener("input", function () {
+    w = search.value.trim().toLowerCase(); apply();
+  });
+  var navbtn = document.getElementById("navbtn");
+  if (navbtn) navbtn.addEventListener("click", function () {
+    document.querySelector("header.top nav").classList.toggle("open");
+  });
+  document.querySelectorAll("header.top nav a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      document.querySelector("header.top nav").classList.remove("open");
+    });
+  });
+  apply();
+})();
+</script>
+</body>
+</html>
+"""
+
+
+PACK_LABEL_EXTRA = {"en": "skill packs:", "fr": "packs de compétences :",
+                    "pt": "pacotes de skills:"}
+CAT_ALL = {"en": "all", "fr": "tout", "pt": "tudo"}
+
+
+
+# ── everyday cards: real answers, captured by asking the app itself ──
+W = {
+    "en": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 printable SVG, "
+                 "deterministic",
+           "word": "\u2192 \u201c%s\u201d",
+           "iban": "\u2192 check digit valid \u00b7 %s",
+           "page": "\u2192 standalone page (%s bytes) \u00b7 Ctrl-P = PDF",
+           "days": "\u2192 %s days to go",
+      "sale": "\u2192 $%s — really -%s %%, not -50%%",
+      "scale": "\u2192 flour %s exact, weigh %s \u00b7 eggs stated, "
+               "not guessed",
+      "recur": "\u2192 %s then %s \u00b7 biweekly SKIPS weeks \u2014 "
+               "named, not guessed",
+      "shoe": "\u2192 %s mm exact \u00b7 EU position %s \u2014 half-grid "
+              "%s, third-grid %s \u00b7 never one number",
+      "comp": "\u2192 %s owed under the NEW table (\u22652027-10-23) \u00b7 "
+              "carrier MAY pay %s \u00b7 claim by %s \u00b7 or \u00a3220/"
+              "\u00a3350/\u00a3520 under UK261 \u00b7 same flight date, "
+              "old rules: a different answer"},
+    "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
+                 "d\u00e9terministe",
+           "word": "\u2192 \u00ab %s \u00bb",
+           "iban": "\u2192 cl\u00e9 de contr\u00f4le valide \u00b7 %s",
+           "page": "\u2192 page autonome (%s octets) \u00b7 Ctrl-P = PDF",
+           "days": "\u2192 %s jours \u00e0 tenir",
+      "sale": "\u2192 %s € — en vrai -%s %%, pas -50 %%",
+      "scale": "\u2192 farine %s exacte, peser %s \u00b7 les \u0153ufs "
+               "sont dits, pas devin\u00e9s",
+      "recur": "\u2192 %s puis %s \u00b7 bimensuel SAUTE des semaines \u2014 "
+               "c'est dit",
+      "shoe": "\u2192 %s mm exacts \u00b7 position EU %s \u2014 demi-"
+              "grille %s, tiers %s \u2014 jamais un seul numéro",
+      "comp": "\u2192 %s dus sous la NOUVELLE table (\u226523 oct. 2027) \u00b7 "
+              "le transporteur PEUT payer %s \u00b7 réclamation avant le %s \u00b7 "
+              "ou \u00a3220/\u00a3350/\u00a3520 sous UK261 \u00b7 même vol avant "
+              "le 23 oct. 2027 : autre réponse"},
+    "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
+                 "impress\u00edvel, determin\u00edstico",
+           "word": "\u2192 \u201c%s\u201d",
+           "iban": "\u2192 d\u00edgito verificador v\u00e1lido \u00b7 %s",
+           "page": "\u2192 p\u00e1gina aut\u00f4noma (%s bytes) \u00b7 "
+                   "Ctrl-P = PDF",
+           "days": "\u2192 %s dias restantes",
+      "sale": "→ R$ %s — na prática -%s %%, não -50%%",
+      "scale": "→ farinha %s exata, pesar %s · ovos ditos, não "
+               "adivinhados",
+      "recur": "→ %s e %s · quinzenal PULA semanas — declarado",
+      "shoe": "→ %s mm exatos · posição EU %s — meia grade %s, "
+              "terços %s · nunca um número só",
+      "comp": "→ %s devidos pela NOVA tabela (≥23 out. 2027) · a "
+              "companhia PODE pagar %s · reclamar até %s · ou "
+              "£220/£350/£520 sob UK261 · ANAC/R$ é outra tabela, "
+              "não calculada aqui"},
+}
+
+
+_EVERYDAY_CALLS = [
+    ("/api/v1/qr/generate",
+     {"text": "WIFI:S:Box-Convives;T:WPA;P:soiree2026;;", "ecl": "Q",
+      "format": "matrix"},
+     "qr", lambda d, L: (str(d["version"]), str(d["size"]),
+                         str(d["size"]))),
+    ("/api/v1/number/spell",
+     {"value": "1234.56", "lang": "%LANG%", "currency": "%CUR%"},
+     "word", lambda d, L: (d.get("words", "?"),)),
+    ("/api/v1/validate/iban",
+     {"iban": "FR76 3000 4000 0312 3456 7890 143"},
+     "iban", lambda d, L: (d.get("country", ""),)),
+    ("/api/v1/md/render",
+     {"markdown": "# Soupe du\n\ndimanche\n\n- 3 carottes\n- 2 pommes "
+                  "de\nterre\n\n*feu doux, 40 min*",
+      "document": True},
+     "page", lambda d, L: (str(len(d["html"])),)),
+    ("/api/v1/date/calc",
+     {"base": "2026-11-21", "op": "diff",
+      "params": {"until": "2027-07-14", "unit": "days"}},
+     "days", lambda d, L: (str(d.get("days", "?")),)),
+    ("/api/v1/money/discount",
+     {"price": "89.90", "currency": "%CUR%",
+      "steps": [{"type": "percent", "value": "30"},
+                {"type": "percent", "value": "20"}]},
+     "sale", lambda d, L: (("%.2f" % float(d["final_total"])).replace(
+         ".", ",") if L != "en" else d["final_total"],
+         ("%.2f" % float(d["effective_discount_pct"])).replace(
+             ".", ",") if L != "en" else d["effective_discount_pct"])),
+    ("/api/v1/table/scale",
+     {"items": [{"name": "flour", "qty": "400", "unit": "g"},
+                {"name": "eggs", "qty": "5", "unit": "piece",
+                 "class": "egg"}],
+      "servings_from": "6", "servings_to": "2"},
+     "scale", lambda d, L: (d["items"][0]["exact"]["fraction"],
+                             d["items"][0]["measurable"]["value"])),
+    ("/api/v1/date/recurrence",
+     {"dtstart": "2026-11-03T19:00:00",
+      "rrule": "FREQ=WEEKLY;INTERVAL=2;BYDAY=TU;COUNT=4"},
+     "recur", lambda d, L: (d["occurrences"][1]["iso"][5:10],
+                             d["occurrences"][2]["iso"][5:10])),
+    ("/api/v1/units/shoe_size", {"foot_mm": "271"}, "shoe",
+     lambda d, L: (
+         d["foot_mm"]["decimal_mm"].rstrip("0").rstrip("."),
+         d["systems"]["eu"]["position"]["decimal"].replace(
+             ".", ",") if L != "en"
+         else d["systems"]["eu"]["position"]["decimal"],
+         d["systems"]["eu"]["candidates"]["grid_1/2"][0],
+         d["systems"]["eu"]["candidates"]["grid_1/3"][1])),
+    ("/api/v1/money/flight_comp",
+     {"regime": "EU", "flight_date": "2027-11-01", "event": "delay",
+      "distance_km": "5800", "intra_eu": "no", "delay_min": "210"},
+     "comp", lambda d, L: (
+         d["owed"]["display"],
+         d["reductions_may"][0]["amount"] if d["reductions_may"] else "?",
+         d["deadlines"]["claim_by"])),
+]
+
+
+# keys that live in the locale dicts but are consumed HERE at build
+# time (baked into everyday_grid), not as {{tokens}} in TEMPLATE —
+# test_i18n checks parity against this list, not against luck.
+BUILDER_CONSUMED = {"everyday.h2", "everyday.intro"} | {
+    "everyday.e%d.%s" % (i, f)
+    for i in range(1, len(_EVERYDAY_CALLS) + 1)
+    for f in ("name", "say")}
+
+
+def everyday_html(lang, cat):
+    from fastapi.testclient import TestClient
+    import main as _m
+    cli = TestClient(_m.app)
+    cur = {"en": "USD", "fr": "EUR", "pt": "BRL"}[lang]
+
+    def sub(v):
+        if isinstance(v, str):
+            return v.replace("%LANG%", lang).replace("%CUR%", cur)
+        if isinstance(v, dict):
+            return {k: sub(x) for k, x in v.items()}
+        return v
+
+    cells = []
+    for i, (path, body, wkey, argf) in enumerate(_EVERYDAY_CALLS, 1):
+        try:
+            r = cli.post(path, json=sub(body))
+            chip = (W[lang][wkey] % argf(r.json(), lang)
+                    if r.status_code == 200 else "?")
+        except Exception:
+            chip = "?"
+        key = "e%d" % i
+        cells.append(
+            '<div class="play"><h3>%s</h3>'
+            '<p class="playsay">%s</p>'
+            '<pre class="playgot">%s</pre></div>'
+            % (cat["everyday.%s.name" % key],
+               cat["everyday.%s.say" % key],
+               chip.replace("<", "&lt;")))
+    return ('<section class="section" id="everyday">\n'
+            '      <h2>%s</h2>\n'
+            '      <p class="tiers" style="color: var(--muted); '
+            'max-width: 720px;">%s</p>\n'
+            '      <div class="playgrid">%s</div>\n    </section>'
+            % (cat["everyday.h2"], cat["everyday.intro"],
+               "".join(cells)))
+
+
+def catalog_grid(lang):
+    """Click-first catalogue: chips (pack x tier) + search + compact cards.
+    The grid has a fixed max-height, so the page budget cannot grow with
+    len(TABLE): 90 tools fit the same three screens as 53. All text is
+    baked server-side — the runtime substitution is a single pass."""
+    chips = ['<span class="chip on" data-f="x=all">%s</span>'
+             % CAT_ALL[lang]]
+    for pk in routing.PACKS:
+        chips.append('<span class="chip" data-f="pack=%s">%s</span>'
+                     % (pk, PACK_TITLE[lang].get(pk, pk)))
+    for t in ("free", "cap", "paid"):
+        word = TIER_CHIP[lang][t]
+        chips.append('<span class="chip" data-f="tier=%s" title="%s %s — %s">'
+                     '%s %s</span>'
+                     % (t, BADGE[t], word, TIER_RULE[lang][t], BADGE[t], word))
+    legend = " · ".join('<span class="lg">%s %s — %s</span>'
+                        % (BADGE[t], TIER_CHIP[lang][t], TIER_RULE[lang][t])
+                        for t in ("free", "cap", "paid"))
+    cards = []
+    for name, path, pack, purpose, tags in routing.TABLE:
+        tier = path_tier[name]
+        hay = " ".join((name, purpose, tags)).lower()
+        hay = hay.replace("&", "&amp;").replace('"', "&quot;")
+        purp = purpose.replace("&", "&amp;").replace("<", "&lt;")
+        cards.append(
+            '<button class="tcard" data-pack="%s" data-tier="%s" '
+            'data-tool="%s" data-hay="%s"><span class="tierdot" '
+            'title="%s %s — %s">%s'
+            '</span> <code>%s</code><span class="tp">%s</span></button>'
+            % (pack, tier, name, hay, BADGE[tier], TIER_CHIP[lang][tier],
+               TIER_RULE[lang][tier], BADGE[tier], name, purp))
+    packs = " · ".join('<a href="/SKILL-%s.md">%s</a>' % (pk, pk)
+                       for pk in routing.PACKS)
+    return (
+        '<div class="chips">%s</div>\n'
+        '<p class="tierlegend">%s</p>\n'
+        '<div class="catgrid">%s</div>\n'
+        '<p class="packlinks">%s %s</p>'
+        % ("".join(chips), legend, "".join(cards),
+           PACK_LABEL_EXTRA[lang], packs))
+
+
+def bench_rows_html():
+    out = []
+    for m, a_ok, b_ok, a_tok, b_tok in BENCH:
+        out.append(
+            '        <tr><td>Qwen 2.5 %s</td>'
+            '<td class="%s">%s</td><td class="%s">%s</td>'
+            '<td class="num">%d → %d</td></tr>'
+            % (m, "yes" if a_ok else "no", "✓" if a_ok else "✗",
+               "yes" if b_ok else "no", "✓" if b_ok else "✗", a_tok, b_tok))
+    return "\n".join(out)
+
+
+def bench9_rows():
+    """Latest v9-intake row per (model, arm). Separate file ON PURPOSE:
+    a card-relay run must never overwrite what the v6 ✅ means."""
+    latest = {}
+    f = ROOT / "bench" / "results_v9.jsonl"
+    if not f.exists():
+        return []
+    with open(f, encoding="utf-8") as fh:
+      for line in fh:
+        try:
+            r = json.loads(line)
+        except Exception:
+            continue
+        if r.get("harness") != "v9-intake":
+            continue
+        if r.get("arm") in ("naked", "intake"):
+            latest[(r["model"], r["arm"])] = r
+    rows = []
+    for m in ("0.5b", "1.5b", "7b"):
+        a = latest.get((m, "naked"))
+        b = latest.get((m, "intake"))
+        if a and b:
+            rows.append((m, a["keys"], b["keys"], a["tokens"], b["tokens"]))
+    return rows
+
+
+BENCH9 = bench9_rows()
+
+
+def bench10_rows():
+    """Latest v10 row per (model, arm, task) from results_v10.jsonl —
+    exact-answer tasks, two free LOCAL models, cost $0 audited by the
+    harness itself. Its own file on purpose: a v10 ✅ must never change
+    what the v6 or v9 rows mean."""
+    latest = {}
+    f = ROOT / "bench" / "results_v10.jsonl"
+    if not f.exists():
+        return []
+    with open(f, encoding="utf-8") as fh:
+      for line in fh:
+        try:
+            r = json.loads(line)
+        except Exception:
+            continue
+        if r.get("harness") != "v10":
+            continue
+        latest[(r["model"], r["arm"], r["task"])] = r
+    rows = []
+    for m in ("7b", "8b"):
+        tasks = sorted({t for (mm, arm, t) in latest if mm == m})
+        if not tasks:
+            continue
+        n = len(tasks)
+        a_ok = sum(1 for t in tasks
+                   if latest.get((m, "naked", t), {}).get("ok"))
+        b_ok = sum(1 for t in tasks
+                   if latest.get((m, "relay", t), {}).get("ok"))
+        a_tok = sum(latest[(m, "naked", t)].get("tokens", 0)
+                    for t in tasks if (m, "naked", t) in latest)
+        b_tok = sum(latest[(m, "relay", t)].get("tokens", 0)
+                    for t in tasks if (m, "relay", t) in latest)
+        rows.append((m, a_ok, b_ok, n, a_tok, b_tok))
+    return rows
+
+
+BENCH10 = bench10_rows()
+
+
+def bench12_rows():
+    """v12 : 4 modèles gratuits locaux × 3 bras (nu/code/relais) sur
+    10 calculs exacts. Lu depuis results_v12.jsonl — le générateur ne
+    peut pas inventer un ✅."""
+    f = ROOT / "bench" / "results_v12.jsonl"
+    if not f.exists():
+        return []
+    agg = {}
+    with open(f, encoding="utf-8") as fh:
+      for line in fh:
+        try:
+            r = json.loads(line)
+        except Exception:
+            continue
+        if r.get("harness") != "v12":
+            continue
+        k = (r["model"], r["arm"])
+        a = agg.setdefault(k, [0, 0])
+        a[1] += 1
+        a[0] += 1 if r["ok"] else 0
+    rows = []
+    for m in ("0.5b", "1.5b", "7b", "8b"):
+        cells = [tuple(agg.get((m, arm), (0, 10)))
+                 for arm in ("naked", "code", "relay")]
+        if any(t for _, t in cells):
+            rows.append((m, cells))
+    return rows
+
+
+BENCH12 = bench12_rows()
+assert BENCH12, "no v12 rows — run bench/run12.py first"
+
+LABEL12 = {"0.5b": "qwen2.5:0.5b", "1.5b": "qwen2.5:1.5b",
+           "7b": "qwen2.5:7b-q4", "8b": "llama3.1:8b"}
+
+
+def bench12_rows_html():
+    out = []
+    for m, (nk, cd, rl) in BENCH12:
+        cells = ""
+        for ok, tot in (nk, cd, rl):
+            cls = "yes" if ok == 10 else ("no" if ok <= 2 else "")
+            cells += '<td class="%s">%d/10</td>' % (cls, ok)
+        out.append("        <tr><td>%s</td>%s</tr>"
+                   % (LABEL12.get(m, m), cells))
+    return "\n".join(out)
+assert BENCH10, "no v10 bench rows — run bench/run10.py first"
+
+
+MODEL_LABEL = {"7b": "qwen2.5:7b-q4 (local)",
+               "8b": "llama3.1:8b (local)"}
+
+
+def bench10_rows_html():
+    out = []
+    for m, ak, bk, n, at, bt in BENCH10:
+        out.append(
+            '        <tr><td>%s</td>'
+            '<td class="%s">%d/%d</td><td class="%s">%d/%d</td>'
+            '<td class="num">%s → %s</td></tr>'
+            % (MODEL_LABEL[m], "yes" if ak == n else "no", ak, n,
+               "yes" if bk == n else "no", bk, n, at, bt))
+    return "\n".join(out)
+
+
+def bench9_rows_html():
+    out = []
+    for m, ak, bk, at, bt in BENCH9:
+        out.append(
+            '        <tr><td>Qwen 2.5 %s</td>'
+            '<td class="%s">%d/6</td><td class="%s">%d/6</td>'
+            '<td class="num">%s → %s</td></tr>'
+            % (m, "yes" if ak == 6 else "no", ak,
+               "yes" if bk == 6 else "no", bk,
+               at if at is not None else "—",
+               bt if bt is not None else "—"))
+    return "\n".join(out)
+
+
+def main():
+    import main as app_mod  # after everything else, cheap sanity
+    ver = app_mod.app.version
+    fmt = dict(ver=ver, n_tools=len(TOOLS), n_recipes=len(RECIPES),
+               n_free=N_FREE, n_cap=N_CAP, n_paid=N_PAID)
+    for lang, cat in TR.items():
+        cat = {k: (v.format(**fmt) if "{" in v else v)
+               for k, v in cat.items()}
+        cat["bundles_grid"] = catalog_grid(lang)
+        cat["everyday_grid"] = everyday_html(lang, cat)
+        cat["bench_rows"] = bench_rows_html()
+        cat["bench9_rows"] = bench9_rows_html()
+        cat["bench10_rows"] = bench10_rows_html()
+        cat["bench12_rows"] = bench12_rows_html()
+        (ROOT / "locales" / ("%s.json" % lang)).write_text(
+            json.dumps(cat, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8")
+    (ROOT / "static" / "landing.html").write_text(TEMPLATE,
+                                                  encoding="utf-8")
+    # parity: every {{key}} in the template exists in every locale
+    keys = set(re.findall(r"\{\{([a-zA-Z0-9_.]+)\}\}", TEMPLATE))
+    keys -= {"LANG"}
+    keys -= {k for k in keys if k.startswith("cur.")}
+    for lang in TR:
+        have = set(json.loads((ROOT / "locales" / f"{lang}.json")
+                              .read_text(encoding="utf-8")))
+        missing = keys - have
+        assert not missing, "%s missing %s" % (lang, sorted(missing))
+    print("landing generated: %d keys x 3 languages, template %d bytes, "
+          "bench rows: %d, v9 rows: %d"
+          % (len(keys), len(TEMPLATE), len(BENCH), len(BENCH9)))
+
+
+if __name__ == "__main__":
+    main()

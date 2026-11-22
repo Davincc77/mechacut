@@ -1,0 +1,5 @@
+{
+  "name": "canonical_pretty",
+  "path": "/api/v1/json/canonical",
+  "body": {"input": {"b": 1, "a": {"d": [3, 2], "c": "é"}}, "style": "pretty"}
+}

@@ -1,0 +1,25 @@
+{
+  "name": "reshape_ok",
+  "path": "/api/v1/reshape",
+  "body": {
+    "input": {
+      "person": {
+        "name": "Davincc",
+        "age": "44",
+        "tags": [{"t": "a", "v": "1"}, {"t": "b", "v": "2"}]
+      }
+    },
+    "mapping": {
+      "fields": {
+        "name": {"path": "person.name"},
+        "age": {"path": "person.age", "cast": "int"},
+        "upper": {"path": "person.name", "cast": "upper"},
+        "nick": {"path": "person.nickname", "default": "anon"},
+        "tags": {
+          "path": "person.tags",
+          "each": {"fields": {"key": {"path": "t"}, "val": {"path": "v", "cast": "int"}}}
+        }
+      }
+    }
+  }
+}

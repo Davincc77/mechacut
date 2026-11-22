@@ -1,0 +1,16 @@
+{
+  "name": "fingerprint_json",
+  "path": "/api/v1/fingerprint",
+  "body": {
+    "value": {
+      "b": 1,
+      "a": [
+        1,
+        2
+      ],
+      "z": {
+        "y": null
+      }
+    }
+  }
+}

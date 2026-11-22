@@ -1,0 +1,9 @@
+{
+  "name": "ics_generate_mixed",
+  "path": "/api/v1/ics/generate",
+  "body": {"events": [
+    {"summary": "Réunion; planning", "start": "2026-12-01T09:00:00Z",
+     "duration": "PT1H30M"},
+    {"summary": "Noël", "start": "2026-12-24", "end": "2026-12-26"}
+  ]}
+}

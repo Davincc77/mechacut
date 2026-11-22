@@ -1,0 +1,80 @@
+{"model": "0.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 13.43, "seed": 42, "temp": 0, "harness": "v3b"}
+{"model": "0.5b", "arm": "B", "tokens_in": 83912, "tokens_out": 24000, "tool_calls": 0, "success": false, "seconds": 240.47, "seed": 42, "temp": 0, "harness": "v3b"}
+{"model": "1.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 50.2, "seed": 42, "temp": 0, "harness": "v3b"}
+{"model": "1.5b", "arm": "B", "tokens_in": 84404, "tokens_out": 24000, "tool_calls": 0, "success": false, "seconds": 371.16, "seed": 42, "temp": 0, "harness": "v3b"}
+{"model": "0.5b", "arm": "B", "tokens_in": 47065, "tokens_out": 3766, "tool_calls": 7, "success": false, "seconds": 22.43, "seed": 42, "temp": 0, "harness": "v3b"}
+{"model": "0.5b", "arm": "B", "tokens_in": 13937, "tokens_out": 1319, "tool_calls": 3, "success": false, "seconds": 6.04, "seed": 42, "temp": 0, "harness": "v3c"}
+{"model": "1.5b", "arm": "B", "tokens_in": 15191, "tokens_out": 1850, "tool_calls": 5, "success": false, "seconds": 14.09, "seed": 42, "temp": 0, "harness": "v3c"}
+{"model": "0.5b", "arm": "B", "tokens_in": 14111, "tokens_out": 1319, "tool_calls": 3, "success": false, "seconds": 6.1, "seed": 42, "temp": 0, "harness": "v3d"}
+{"model": "1.5b", "arm": "B", "tokens_in": 3723, "tokens_out": 1323, "tool_calls": 1, "success": false, "seconds": 24.37, "seed": 42, "temp": 0, "harness": "v3d"}
+{"model": "llama3.1:8b", "arm": "A", "tokens_in": 874, "tokens_out": 859, "tool_calls": 0, "success": false, "seconds": 30.2, "seed": 42, "temp": 0, "harness": "v3c+llama"}
+{"model": "llama3.1:8b", "arm": "B", "tokens_in": 14017, "tokens_out": 2020, "tool_calls": 5, "success": false, "seconds": 97.51, "seed": 42, "temp": 0, "harness": "v3c+llama"}
+{"model": "7b", "arm": "B", "tokens_in": 22055, "tokens_out": 5310, "tool_calls": 0, "success": false, "seconds": 216.07, "seed": 42, "temp": 0, "harness": "v3d"}
+{"model": "7b", "arm": "B", "tokens_in": 10842, "tokens_out": 822, "tool_calls": 6, "success": false, "seconds": 30.11, "seed": 42, "temp": 0, "harness": "v3e"}
+{"model": "1.5b", "arm": "B", "tokens_in": 16076, "tokens_out": 1606, "tool_calls": 5, "success": false, "seconds": 14.48, "seed": 42, "temp": 0, "harness": "v3e"}
+{"model": "0.5b", "arm": "B", "tokens_in": 10407, "tokens_out": 414, "tool_calls": 6, "success": false, "seconds": 2.81, "seed": 42, "temp": 0, "harness": "v3e"}
+{"model": "7b", "arm": "B", "tokens_in": 12739, "tokens_out": 1016, "tool_calls": 6, "success": false, "seconds": 26.78, "seed": 42, "temp": 0, "harness": "v3f"}
+{"model": "7b", "arm": "B", "tokens_in": 12305, "tokens_out": 699, "tool_calls": 6, "success": false, "seconds": 20.08, "seed": 42, "temp": 0, "harness": "v4"}
+{"model": "0.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 13.52, "seed": 42, "temp": 0, "harness": "v5"}
+{"model": "0.5b", "arm": "B", "tokens_in": 15273, "tokens_out": 1435, "tool_calls": 5, "success": false, "seconds": 6.41, "seed": 42, "temp": 0, "harness": "v5"}
+{"model": "1.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 21.96, "seed": 42, "temp": 0, "harness": "v5"}
+{"model": "1.5b", "arm": "B", "tokens_in": 11673, "tokens_out": 970, "tool_calls": 5, "success": false, "seconds": 7.63, "seed": 42, "temp": 0, "harness": "v5"}
+{"model": "7b", "arm": "A", "tokens_in": 1020, "tokens_out": 751, "tool_calls": 0, "success": false, "seconds": 19.76, "seed": 42, "temp": 0, "harness": "v5"}
+{"model": "7b", "arm": "B", "tokens_in": 10713, "tokens_out": 439, "tool_calls": 6, "success": false, "seconds": 14.91, "seed": 42, "temp": 0, "harness": "v5"}
+{"model": "7b", "arm": "B", "tokens_in": 1376, "tokens_out": 837, "tool_calls": 1, "success": true, "seconds": 22.45, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "0.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 12.49, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "0.5b", "arm": "B", "tokens_in": 25406, "tokens_out": 4884, "tool_calls": 2, "success": false, "seconds": 20.62, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "1.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 21.72, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "1.5b", "arm": "B", "tokens_in": 7437, "tokens_out": 2907, "tool_calls": 1, "success": true, "seconds": 21.2, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "7b", "arm": "A", "tokens_in": 1020, "tokens_out": 751, "tool_calls": 0, "success": false, "seconds": 19.31, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "7b", "arm": "B", "tokens_in": 1376, "tokens_out": 837, "tool_calls": 1, "success": true, "seconds": 18.18, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "0.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 13.57, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "0.5b", "arm": "B", "tokens_in": 1379, "tokens_out": 34, "tool_calls": 1, "success": false, "seconds": 0.4, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "1.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 23.41, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "1.5b", "arm": "B", "tokens_in": 26559, "tokens_out": 7200, "tool_calls": 0, "success": false, "seconds": 57.84, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "7b", "arm": "A", "tokens_in": 1020, "tokens_out": 751, "tool_calls": 0, "success": false, "seconds": 24.14, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "7b", "arm": "B", "tokens_in": 1379, "tokens_out": 519, "tool_calls": 1, "success": true, "seconds": 15.87, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "1.5b", "arm": "A", "tokens": 499, "tool_calls": 0, "success": false, "seconds": 1.06, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "B", "tokens": 594, "tool_calls": 0, "success": false, "seconds": 0.99, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "A", "tokens": 527, "tool_calls": 0, "success": false, "seconds": 5.73, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "B", "tokens": 640, "tool_calls": 0, "success": false, "seconds": 4.25, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "A", "tokens": 516, "tool_calls": 0, "success": false, "seconds": 1.0, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "B", "tokens": 2464, "tool_calls": 0, "success": false, "seconds": 8.27, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "A", "keys_ok": {"amounts_usd": false, "percentages": true, "dates_utc": false, "services": true, "failed_checkouts": true}, "tokens": 499, "tool_calls": 0, "success": false, "seconds": 1.13, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "B", "keys_ok": {"amounts_usd": false, "percentages": true, "dates_utc": false, "services": true, "failed_checkouts": true}, "tokens": 1694, "tool_calls": 0, "success": false, "seconds": 1.22, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "A", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": false, "services": true, "failed_checkouts": true}, "tokens": 527, "tool_calls": 0, "success": false, "seconds": 3.97, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "B", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": false, "services": true, "failed_checkouts": true}, "tokens": 1832, "tool_calls": 0, "success": false, "seconds": 8.0, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "A", "keys_ok": {"amounts_usd": false, "percentages": false, "dates_utc": false, "services": false, "failed_checkouts": false}, "tokens": 516, "tool_calls": 0, "success": false, "seconds": 0.82, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "B", "keys_ok": {}, "tokens": 2639, "tool_calls": 0, "success": false, "seconds": 4.5, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "A", "keys_ok": {"amounts_usd": false, "percentages": false, "dates_utc": false, "services": false, "failed_checkouts": true}, "tokens": 455, "tool_calls": 0, "success": false, "seconds": 0.81, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "B", "keys_ok": {}, "tokens": 1742, "tool_calls": 1, "success": false, "seconds": 1.47, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "A", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 477, "tool_calls": 0, "success": true, "seconds": 3.24, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "B", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": false, "services": true, "failed_checkouts": true}, "tokens": 1794, "tool_calls": 1, "success": false, "seconds": 6.85, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "A", "keys_ok": {}, "tokens": 2367, "tool_calls": 0, "success": false, "seconds": 8.3, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "B", "keys_ok": {}, "tokens": 2655, "tool_calls": 1, "success": false, "seconds": 4.47, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "A", "tokens_in": 1020, "tokens_out": 3000, "tool_calls": 0, "success": false, "seconds": 23.68, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "1.5b", "arm": "B", "tokens_in": 26559, "tokens_out": 7200, "tool_calls": 0, "success": false, "seconds": 59.29, "seed": 42, "temp": 0, "harness": "v6"}
+{"model": "1.5b", "arm": "A", "keys_ok": {"amounts_usd": false, "percentages": false, "dates_utc": false, "services": false, "failed_checkouts": true}, "tokens": 455, "tool_calls": 0, "success": false, "seconds": 1.39, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "B", "keys_ok": {}, "tokens": 1147, "tool_calls": 1, "success": false, "seconds": 1.05, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "A", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 477, "tool_calls": 0, "success": true, "seconds": 2.47, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "B", "keys_ok": {"amounts_usd": false, "percentages": true, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 1164, "tool_calls": 1, "success": false, "seconds": 4.31, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "A", "keys_ok": {}, "tokens": 2367, "tool_calls": 0, "success": false, "seconds": 8.44, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "B", "keys_ok": {}, "tokens": 3058, "tool_calls": 1, "success": false, "seconds": 8.73, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "A", "keys_ok": {}, "tokens": 455, "tool_calls": 0, "success": false, "seconds": 0.63, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "B", "keys_ok": {}, "tokens": 1147, "tool_calls": 1, "success": false, "seconds": 1.04, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "A", "keys_ok": {"amounts_usd": false, "percentages": false, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 477, "tool_calls": 0, "success": true, "seconds": 2.43, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "B", "keys_ok": {"amounts_usd": false, "percentages": false, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 1164, "tool_calls": 1, "success": true, "seconds": 4.25, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "A", "keys_ok": {}, "tokens": 2367, "tool_calls": 0, "success": false, "seconds": 8.36, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "B", "keys_ok": {}, "tokens": 3058, "tool_calls": 1, "success": false, "seconds": 8.67, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "A", "keys_ok": {}, "tokens": 455, "tool_calls": 0, "success": false, "seconds": 0.63, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "B", "keys_ok": {"amounts_usd": true, "percentages": false, "dates_utc": true, "services": false, "failed_checkouts": true}, "tokens": 2419, "tool_calls": 2, "success": false, "seconds": 1.71, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "A", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 477, "tool_calls": 0, "success": true, "seconds": 2.43, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "B", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 1164, "tool_calls": 1, "success": true, "seconds": 4.26, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "A", "keys_ok": {}, "tokens": 2367, "tool_calls": 0, "success": false, "seconds": 8.31, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "B", "keys_ok": {}, "tokens": 6432, "tool_calls": 2, "success": false, "seconds": 9.77, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "A", "keys_ok": {}, "tokens": 2367, "tool_calls": 0, "success": false, "seconds": 8.58, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "0.5b", "arm": "B", "keys_ok": {}, "tokens": 6432, "tool_calls": 2, "success": false, "seconds": 9.46, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "A", "keys_ok": {}, "tokens": 455, "tool_calls": 0, "success": false, "seconds": 1.36, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "1.5b", "arm": "B", "keys_ok": {"amounts_usd": true, "percentages": false, "dates_utc": true, "services": false, "failed_checkouts": true}, "tokens": 2419, "tool_calls": 2, "success": false, "seconds": 1.68, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "A", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 477, "tool_calls": 0, "success": true, "seconds": 4.38, "seed": 42, "temp": 0, "harness": "v7"}
+{"model": "7b", "arm": "B", "keys_ok": {"amounts_usd": true, "percentages": true, "dates_utc": true, "services": true, "failed_checkouts": true}, "tokens": 1164, "tool_calls": 1, "success": true, "seconds": 4.18, "seed": 42, "temp": 0, "harness": "v7"}

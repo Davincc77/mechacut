@@ -1,0 +1,8 @@
+{
+  "name": "enc_b64_hello",
+  "path": "/api/v1/enc/base64",
+  "body": {
+    "text": "mecha-cut determinism",
+    "variant": "base64url"
+  }
+}

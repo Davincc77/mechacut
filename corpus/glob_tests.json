@@ -1,0 +1,14 @@
+{
+  "name": "glob_tests",
+  "path": "/api/v1/glob/match",
+  "body": {
+    "pattern": "src/**/test_*.py",
+    "paths": [
+      "src/a/test_x.py",
+      "src/test_y.py",
+      "src/a/x.py",
+      "src/a/b/test_z.py",
+      "tests/test_w.py"
+    ]
+  }
+}

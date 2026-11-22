@@ -1,0 +1,4 @@
+{"name": "text_select_growth",
+ "path": "/api/v1/text/select",
+ "body": {"chunks": ["quarterly revenue grew 12 percent", "the office moved floors", "growth in revenue was broad-based"],
+          "query": "revenue growth", "k": 2}}

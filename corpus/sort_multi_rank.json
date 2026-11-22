@@ -1,0 +1,4 @@
+{"name": "sort_multi_rank",
+ "path": "/api/v1/sort/multi",
+ "body": {"rows": [{"n": "b", "p": 2}, {"n": "a", "p": 2}, {"n": "c", "p": 1}],
+          "by": [{"key": "p", "dir": "desc"}, {"key": "n"}]}}

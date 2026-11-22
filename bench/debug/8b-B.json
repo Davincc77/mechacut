@@ -1,0 +1,58 @@
+[
+ {
+  "role": "system",
+  "content": "Mechacut is a deterministic tool server. Your ONLY job: answer with ONLY a JSON object {\"steps\": [...]} that chains mechacut tools to solve the user's task, and nothing else.\nRules:\n- each step: {\"tool\": name, \"args\": {...}}\n- later steps read earlier outputs: {\"$from\": [step_index, \"output\"]}\n- task data is referenced by placeholder, NEVER copied: {\"$fill\": \"csv\"}, {\"$fill\": \"json\"}, {\"$fill\": \"urls\"}\n- $fill and $from REPLACE a whole value: \"items\": {\"$fill\": \"urls\"} — never mix them beside other keys\n- your final answer text is ONLY that JSON (no prose, no fences)\nTools you may chain, with exact arg shapes:\n  csv_fix {csv}\n  csv_types {csv}\n  list_dedupe {items, mode: \"exact\"|\"url\"}\n  json_repair {text}\n  format_convert {input, from: \"json\", to: \"yaml\"}\nA correct first step for 'clean the CSV' would be {\"tool\": \"csv_fix\", \"args\": {\"csv\": {\"$fill\": \"csv\"}}}\n"
+ },
+ {
+  "role": "user",
+  "content": "You will get three pieces of raw data. Produce ONE final YAML document and nothing else.\n\nSteps:\n1. Clean this CSV (CRLF and padding noise), keep first occurrence of duplicate rows,\ntypes: id=int, name=string, score=float.\nCSV_START\nid,name,score\r\n3,Mia,29.78 \r\n34,Yara, 45.98\r\n20,Rene,40.34\r\n7,Omar,95.05 \r\n14,Yara, 65.42\r\n11,Kofi,46.77 \r\n5, Ivo , 14.63\r\n10,Lena, 22.32\r\n22,Luc, 68.6\r\n33, Sven , 82.24\r\n24,Zoe,77.05\r\n35,Tomas,97.66 \r\n36,Ines,27.73\r\n39,Dario,57.43 \r\n1, Ana , 44.46\r\n2,Luc, 51.88\r\n16,Ines,30.31\r\n9, Piotr , 13.37\r\n26,Nina, 35.61\r\n23,Mia,37.12 \r\n40,Rene,96.35\r\n6,Nina, 11.4\r\n32,Rita,52.36\r\n38,Freya, 1.34\r\n25, Ivo , 58.74\r\n15,Tomas,30.29 \r\n27,Omar,43.43 \r\n37, Milan , 63.6\r\n4,Zoe,21.87\r\n31,Kofi,86.04 \r\n5, Ivo,14.63 \r\n11, Kofi,46.77 \r\n9, Piotr,13.37 \r\n3, Mia,29.78 \r\n2, Luc,51.88 \r\n37, Milan,63.6 \r\n36, Ines,27.73 \r\n6, Nina,11.4 \r\n33, Sven,82.24 \r\n25, Ivo,58.74 \r\n\nCSV_END\n2. Repair this broken JSON (single quotes, trailing commas):\nJSON_START\n{'total': 2684.35, 'currency': 'EUR', 'vendor': 'ACME', 'items': [{'n': 'Rene', 'v': 46.74,}, {'n': 'Ana', 'v': 25.68,}, {'n': 'Luc', 'v': 28.39,}, {'n': 'Mia', 'v': 36.46,}, {'n': 'Zoe', 'v': 16.77,}, {'n': 'Ivo', 'v': 23.69,}, {'n': 'Nina', 'v': 6.11,}, {'n': 'Omar', 'v': 27.42,}, {'n': 'Vera', 'v': 48.79,}, {'n': 'Piotr', 'v': 19.02,}, {'n': 'Lena', 'v': 22.88,}, {'n': 'Kofi', 'v': 12.89,},],}\nJSON_END\n3. Deduplicate these URLs (scheme case ignored, host case-insensitive, a single\ntrailing slash does not change the URL), first occurrence order kept:\n- https://a.io/x\n- https://b.io/\n- https://c.io/y\n- https://d.io/z\n- https://e.io/q\n- https://f.io/r\n- https://g.io/s\n- https://h.io/t\n- https://i.io/u\n- HTTP://A.IO/x\n- https://b.io\n- HTTPS://C.IO/y\n- https://d.io/z/\n- https://e.io/q\n- https://f.io/R\n- https://g.io/s/\n- https://H.IO/t\n- https://i.io/u/\n\nThe final YAML must have exactly the keys:\n  rows:   the cleaned, typed, deduplicated CSV rows (list of objects)\n  totals: the repaired JSON object\n  urls:   the deduplicated URL list\nReply with the YAML document only, no prose, no fences.\n"
+ },
+ {
+  "role": "assistant",
+  "content": "{\n  rows:\n    - id: 3\n      name: Mia\n      score: 29.78\n    - id: 34\n      name: Yara\n      score: 45.98\n    - id: 20\n      name: Rene\n      score: 40.34\n    - id: 7\n      name: Omar\n      score: 95.05\n    - id: 14\n      name: Yara\n      score: 65.42\n    - id: 11\n      name: Kofi\n      score: 46.77\n    - id: 5\n      name: Ivo\n      score: 14.63\n    - id: 10\n      name: Lena\n      score: 22.32\n    - id: 22\n      name: Luc\n      score: 68.6\n    - id: 33\n      name: Sven\n      score: 82.24\n    - id: 24\n      name: Zoe\n      score: 77.05\n    - id: 35\n      name: Tomas\n      score: 97.66\n    - id: 36\n      name: Ines\n      score: 27.73\n    - id: 39\n      name: Dario\n      score: 57.43\n    - id: 1\n      name: Ana\n      score: 44.46\n    - id: 2\n      name: Luc\n      score: 51.88\n    - id: 16\n      name: Ines\n      score: 30.31\n    - id: 9\n      name: Piotr\n      score: 13.37\n    - id: 26\n      name: Nina\n      score: 35.61\n    - id: 23\n      name: Mia\n      score: 37.12\n    - id: 40\n      name: Rene\n      score: 96.35\n    - id: 6\n      name: Nina\n      score: 11.4\n    - id: 32\n      name: Rita\n      score: 52.36\n    - id: 38\n      name: Freya\n      score: 1.34\n    - id: 25\n      name: Ivo\n      score: 58.74\n    - id: 15\n      name: Tomas\n      score: 30.29\n    - id: 27\n      name: Omar\n      score: 43.43\n    - id: 37\n      name: Milan\n      score: 63.6\n    - id: 4\n      name: Zoe\n      score: 21.87\n    - id: 31\n      name: Kofi\n      score: 86.04\n  totals:\n    total: 2684.35\n    currency: EUR\n    vendor: ACME\n    items:\n      - n: Rene\n        v: 46.74\n      - n: Ana\n        v: 25.68\n      - n: Luc\n        v: 28.39\n      - n: Mia\n        v: 36.46\n      - n: Zoe\n        v: 16.77\n      - n: Ivo\n        v: 23.69\n      - n: Nina\n        v: 6.11\n      - n: Omar\n        v: 27.42\n      - n: Vera\n        v: 48.79\n      - n: Piotr\n        v: 19.02\n      - n: Lena\n        v: 22.88\n      - n: Kofi\n        v: 12.89\n  urls:\n    - https://a.io/x\n    - https://b.io\n    - https://c.io/y\n    - https://d.io/z\n    - https://e.io/q\n    - https://f.io/r\n    - https://g.io/s\n    - https://h.io/t\n    - https://i.io/u\n    - HTTPS://C.IO/y\n    - HTTPS://H.IO/t\n}"
+ },
+ {
+  "role": "user",
+  "content": "INVALID: reply with ONLY the JSON object {\"steps\": [...]}."
+ },
+ {
+  "role": "assistant",
+  "content": "{\n  \"steps\": [\n    {\"tool\": \"csv_fix\", \"args\": {\"csv\": {\"$fill\": \"csv\"}}},\n    {\"tool\": \"csv_types\", \"args\": {\"csv\": {\"$from\": [0, \"output\"]}}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [1, \"output\"]}, \"mode\": \"exact\"}},\n    {\"tool\": \"json_repair\", \"args\": {\"text\": {\"$fill\": \"json\"}}},\n    {\"tool\": \"format_convert\", \"args\": {\"input\": {\"$from\": [2, \"output\"]}, \"from\": \"json\", \"to\": \"yaml\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [3, \"output\"]}, \"mode\": \"url\"}}\n  ]\n}"
+ },
+ {
+  "role": "user",
+  "content": "PIPELINE_ERROR: [{\"field\": \"items\", \"message\": \"Input should be a valid list\"}]\nFix ONLY the reported step and reply again with ONLY the full JSON."
+ },
+ {
+  "role": "assistant",
+  "content": "{\n  \"steps\": [\n    {\"tool\": \"csv_fix\", \"args\": {\"csv\": {\"$fill\": \"csv\"}}},\n    {\"tool\": \"csv_types\", \"args\": {\"csv\": {\"$from\": [0, \"output\"]}}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [1, \"output\"]}, \"mode\": \"exact\"}},\n    {\"tool\": \"json_repair\", \"args\": {\"text\": {\"$fill\": \"json\"}}},\n    {\"tool\": \"format_convert\", \"args\": {\"input\": {\"$from\": [2, \"output\"]}, \"from\": \"json\", \"to\": \"yaml\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [3, \"output\"]}, \"mode\": \"url\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [4, \"output\"]}, \"mode\": \"url\"}}\n  ]\n}"
+ },
+ {
+  "role": "user",
+  "content": "PIPELINE_ERROR: [{\"field\": \"items\", \"message\": \"Input should be a valid list\"}]\nFix ONLY the reported step and reply again with ONLY the full JSON."
+ },
+ {
+  "role": "assistant",
+  "content": "{\n  \"steps\": [\n    {\"tool\": \"csv_fix\", \"args\": {\"csv\": {\"$fill\": \"csv\"}}},\n    {\"tool\": \"csv_types\", \"args\": {\"csv\": {\"$from\": [0, \"output\"]}}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [1, \"output\"]}, \"mode\": \"exact\"}},\n    {\"tool\": \"json_repair\", \"args\": {\"text\": {\"$fill\": \"json\"}}},\n    {\"tool\": \"format_convert\", \"args\": {\"input\": {\"$from\": [2, \"output\"]}, \"from\": \"json\", \"to\": \"yaml\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [3, \"output\"]}, \"mode\": \"url\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [4, \"output\"]}, \"mode\": \"url\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [5, \"output\"]}, \"mode\": \"url\"}}\n  ]\n}"
+ },
+ {
+  "role": "user",
+  "content": "PIPELINE_ERROR: [{\"field\": \"items\", \"message\": \"Input should be a valid list\"}]\nFix ONLY the reported step and reply again with ONLY the full JSON."
+ },
+ {
+  "role": "assistant",
+  "content": "{\n  \"steps\": [\n    {\"tool\": \"csv_fix\", \"args\": {\"csv\": {\"$fill\": \"csv\"}}},\n    {\"tool\": \"csv_types\", \"args\": {\"csv\": {\"$from\": [0, \"output\"]}}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [1, \"output\"]}, \"mode\": \"exact\"}},\n    {\"tool\": \"json_repair\", \"args\": {\"text\": {\"$fill\": \"json\"}}},\n    {\"tool\": \"format_convert\", \"args\": {\"input\": {\"$from\": [2, \"output\"]}, \"from\": \"json\", \"to\": \"yaml\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [3, \"output\"]}, \"mode\": \"url\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [4, \"output\"]}, \"mode\": \"url\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [5, \"output\"]}, \"mode\": \"url\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [6, \"output\"]}, \"mode\": \"url\"}}\n  ]\n}"
+ },
+ {
+  "role": "user",
+  "content": "PIPELINE_ERROR: [{\"field\": \"steps\", \"message\": \"1..8 steps\", \"expected\": \"a short chain — longer work belongs in code\"}]\nFix ONLY the reported step and reply again with ONLY the full JSON."
+ },
+ {
+  "role": "assistant",
+  "content": "{\n  \"steps\": [\n    {\"tool\": \"csv_fix\", \"args\": {\"csv\": {\"$fill\": \"csv\"}}},\n    {\"tool\": \"csv_types\", \"args\": {\"csv\": {\"$from\": [0, \"output\"]}}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [1, \"output\"]}, \"mode\": \"exact\"}},\n    {\"tool\": \"json_repair\", \"args\": {\"text\": {\"$fill\": \"json\"}}},\n    {\"tool\": \"format_convert\", \"args\": {\"input\": {\"$from\": [2, \"output\"]}, \"from\": \"json\", \"to\": \"yaml\"}},\n    {\"tool\": \"list_dedupe\", \"args\": {\"items\": {\"$from\": [3, \"output\"]}, \"mode\": \"url\"}}\n  ]\n}"
+ },
+ {
+  "role": "user",
+  "content": "PIPELINE_ERROR: [{\"field\": \"items\", \"message\": \"Input should be a valid list\"}]\nFix ONLY the reported step and reply again with ONLY the full JSON."
+ }
+]

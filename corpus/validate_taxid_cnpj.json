@@ -1,0 +1,5 @@
+{
+  "name": "validate_taxid_cnpj",
+  "path": "/api/v1/validate/taxid",
+  "body": {"value": "11.222.333/0001-81", "kind": "cnpj"}
+}

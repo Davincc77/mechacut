@@ -1,0 +1,10 @@
+{
+  "name": "join_outer",
+  "path": "/api/v1/csv/join",
+  "body": {
+    "how": "outer",
+    "on": "id",
+    "left": [{"id": 1, "n": "a"}, {"id": 2, "n": "b"}],
+    "right": [{"id": 1, "t": "x"}, {"id": 3, "t": "y"}]
+  }
+}

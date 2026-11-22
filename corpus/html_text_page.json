@@ -1,0 +1,8 @@
+{
+  "name": "html_text_page",
+  "path": "/api/v1/html/text",
+  "body": {
+    "html": "<h1>Title</h1><p>Some   text with <b>markup</b> and <script>hidden()</script></p><ul><li>a</li><li>b</li></ul>",
+    "keep_links": false
+  }
+}

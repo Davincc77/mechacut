@@ -1,0 +1,9 @@
+{
+  "name": "path_windows_mess",
+  "path": "/api/v1/path/normalize",
+  "body": {
+    "path": "C:\\\\Users\\\\Dev\\\\..\\\\src\\\\App.JS",
+    "os": "windows",
+    "case": "lower"
+  }
+}

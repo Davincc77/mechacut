@@ -1,0 +1,5 @@
+{
+  "name": "ssh_fingerprint_ed25519",
+  "path": "/api/v1/ssh/fingerprint",
+  "body": {"line": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA mechacut@test"}
+}

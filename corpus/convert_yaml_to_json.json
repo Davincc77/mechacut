@@ -1,0 +1,5 @@
+{
+  "name": "convert_yaml_to_json",
+  "path": "/api/v1/format/convert",
+  "body": {"input": "a: 1\nb: [1, 2]\nc: é\n", "from": "yaml", "to": "json"}
+}

@@ -1,0 +1,5 @@
+{
+  "name": "geo_geohash_ezs42",
+  "path": "/api/v1/geo/geohash",
+  "body": {"lat": 42.6, "lon": -5.6, "precision": 5}
+}

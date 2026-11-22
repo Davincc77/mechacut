@@ -1,0 +1,61 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+body { margin:0; background:#0b0e14; color:#e6edf3;
+  font:14px/1.5 Menlo, monospace; padding:28px 34px; width:1120px; }
+.h { color:#8b949e; font-size:15px; margin-bottom:18px; }
+.h b { color:#e6edf3; }
+.p { border:1px solid #30363d; border-radius:10px; padding:16px 20px;
+  margin-bottom:16px; background:#0d1117; }
+.p h3 { margin:0 0 10px; font-size:15px; }
+.bad h3 { color:#f85149; } .good h3 { color:#3fb950; }
+pre { margin:0; white-space:pre-wrap; color:#c9d1d9; font-size:13px; }
+.score { float:right; font-weight:bold; font-size:16px; }
+.bad .score { color:#f85149; } .good .score { color:#3fb950; }
+.foot { color:#8b949e; font-size:13px; margin-top:14px; }
+.foot b { color:#d29922; }
+</style></head><body>
+<div class="h">mechacut.studio — bench v9 · <b>qwen2.5:0.5b</b> · seed 42, temp 0 · production, free tier</div>
+
+<div class="p bad"><span class="score">0/6</span>
+<h3>✗ naked — ce que le 0.5B a vraiment répondu</h3>
+<pre>```json
+{
+  &quot;money&quot;: [12450.75, 3200.00],
+  &quot;percent&quot;: [8.25, 2.5],
+  &quot;date&quot;: [&quot;2027-01-08&quot;, &quot;2027-01-08&quot;],
+  &quot;url&quot;: [&quot;h&quot;}, &quot;intake&quot;: {&quot;arm&quot;: &quot;intake&quot;, &quot;model&quot;: &quot;qwen2.5:0.5b-instruct&quot;, &quot;card_status&quot;: &quot;ready&quot;, &quot;card_tool&quot;: &quot;recipe_facts&quot;, &quot;steps&quot;: 1, &quot;tool&quot;: &quot;/api/v1/recipe/facts&quot;, &quot;tokens&quot;: 320, &quot;keys&quot;: 6, &quot;of&quot;: 6, &quot;d
+... (réponse longue, tronquée par la vraie vie)</pre></div>
+
+<div class="p good"><span class="score">6/6</span>
+<h3>✓ avec la fiche — tout ce que le modèle a émis (1 ligne, 320 tok)</h3>
+<pre>{&quot;run&quot;: &quot;/api/v1/recipe/facts&quot;, &quot;args&quot;: {&quot;text&quot;: &quot;$utterance&quot;}}</pre>
+<h3 style="margin-top:14px">↓ réponse retournée par le serveur (octets réels)</h3>
+<pre>{
+ &quot;total_money&quot;: &quot;15650.75&quot;,
+ &quot;money&quot;: [
+  &quot;3200.00&quot;,
+  &quot;12450.75&quot;
+ ],
+ &quot;date&quot;: [
+  &quot;2027-01-08&quot;,
+  &quot;2027-01-09&quot;,
+  &quot;2027-01-11&quot;
+ ],
+ &quot;number&quot;: [
+  &quot;09&quot;,
+  &quot;15&quot;,
+  &quot;4213&quot;
+ ],
+ &quot;percent&quot;: [
+  &quot;2.5&quot;,
+  &quot;8.25&quot;
+ ],
+ &quot;url&quot;: [
+  &quot;https://status.acme.dev/base-settlement&quot;
+ ],
+ &quot;email&quot;: [
+  &quot;oncall@acme.dev&quot;
+ ]
+}</pre></div>
+
+<div class="foot">sha256 de la réponse : <b>669e008e5fd9e383acc734e1…</b> · 3 appels identiques → même empreinte · second pass reproduit · échecs publiés, scripts &amp; logs dans le repo — <b>mechacut.studio</b></div>
+</body></html>
