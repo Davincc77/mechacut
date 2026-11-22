@@ -89,7 +89,7 @@ def api(msgs):
                      "Authorization": "Bearer " + key()})
         return json.loads(urllib.request.urlopen(req, timeout=180).read())
     mark = "0"
-    tries, wait = 0, 10
+    tries, wait = 0, 15
     while True:
         try:
             r = call(True)
@@ -101,10 +101,10 @@ def api(msgs):
                 r = call(False)
                 break
             tries += 1
-            if e.code not in (404, 429, 500, 502, 503) or tries > 3:
+            if e.code not in (404, 429, 500, 502, 503) or tries > 6:
                 raise
             time.sleep(wait)
-            wait *= 2
+            wait = min(wait * 2, 75)
     u = r.get("usage", {})
     return (r["choices"][0]["message"]["content"] or "",
             int(u.get("prompt_tokens", 0)),
