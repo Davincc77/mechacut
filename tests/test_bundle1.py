@@ -284,7 +284,7 @@ def test_mcp_exposes_bundle1():
                       'date_parse', 'date_tz', 'date_calc', 'cron_next',
                       'cron_humanize', 'ics_generate', 'ics_parse',
                       'num_format', 'num_parse', 'num_round', 'units_convert',
-                      'money_prorate', 'money_split', 'number_spell',
+                      'money_prorate', 'money_aging', 'money_split', 'number_spell',
                       'id_ulid', 'pkg_name', 'net_ip', 'net_cidr',
                       'file_encoding', 'schedule_overlap', 'cron_validate',
                       'integrity_verify', 'math_calc', 'money_discount',

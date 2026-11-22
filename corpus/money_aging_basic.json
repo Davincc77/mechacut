@@ -1,0 +1,13 @@
+{
+  "name": "money_aging_basic",
+  "path": "/api/v1/money/aging",
+  "body": {
+    "as_of": "2026-11-22",
+    "invoices": [
+      {"due": "2026-10-01", "amount": "100.00", "id": "F1"},
+      {"due": "2026-11-01", "amount": "200.00", "id": "F2"},
+      {"due": "2026-12-01", "amount": "300.00", "id": "F3"},
+      {"due": "2026-09-01", "amount": "50.00", "paid": "50.00", "id": "F4"}
+    ]
+  }
+}

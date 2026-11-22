@@ -171,3 +171,130 @@ def num_fx(amount, rate, to, precision=None):
             "minor_units": int(q.scaleb(dec)),
             "rate_used": format(Decimal(str(rate)), "f"), "exact_before_rounding":
             format(v, "f")[:30]}
+
+
+def _iso_day(text, field):
+    """Strict ISO calendar day — aging windows never accept slashed
+    dates: an ambiguous day would silently move a bucket."""
+    import datetime as _dt
+    import re as _re
+    if not isinstance(text, str) or not _re.fullmatch(
+            r"\d{4}-\d{2}-\d{2}", text.strip()):
+        raise MoneyError("%s must be an ISO calendar date YYYY-MM-DD "
+                         "(slashed forms are refused: an ambiguous "
+                         "day moves a bucket)" % field)
+    try:
+        return _dt.date.fromisoformat(text.strip())
+    except ValueError:
+        raise MoneyError("%s is not a real calendar date" % field)
+
+
+def _dec_plain(text, field):
+    """Plain decimal strings only in the ledger family: '1,234.56' is
+    a LOCALE, not a number — the suite refuses and points to num/parse
+    instead of guessing which grouping the writer meant."""
+    import re as _re
+    if not isinstance(text, str) or not _re.fullmatch(
+            r"[+-]?\d+(\.\d+)?", text.strip()):
+        raise MoneyError("%s must be a plain decimal string ('1234.56'); "
+                         "grouped or locale forms go through num/parse "
+                         "first (got %r)" % (field, text))
+    return _dec(text.strip())
+
+
+def money_aging(invoices, as_of, buckets=None):
+    """Due-date aging of receivables (ROADMAP-FINANCE 1.1, sucked from
+    the Ponte relances/impayés work). Invoices: due ISO day, amount
+    and optional paid as decimal STRINGS. as_of is mandatory — the
+    suite never reads a wall clock into a ledger (the midnight
+    drift is a published lesson). Buckets default [30, 60, 90] ->
+    labels 1-30, 31-60, 61-90, 90+ ; a window is left-open right-
+    closed on days_overdue (30 -> 1-30, 31 -> 31-60). Fully paid ->
+    status paid, excluded from open totals. Overpayment is a
+    REFUSAL, not a negative bucket: reconciliation is another tool
+    (ledger/apply-payments, roadmap 1.2). Rounding: exact Decimal,
+    emitted at 2 places, half_up on the final quantize only."""
+    if buckets is None:
+        buckets = [30, 60, 90]
+    if not isinstance(buckets, list) or not buckets:
+        raise MoneyError("buckets must be a non-empty list of integers")
+    prev = 0
+    for b in buckets:
+        if not isinstance(b, int) or isinstance(b, bool) or b <= prev:
+            raise MoneyError(
+                "buckets must be strictly increasing positive ints "
+                "(got %r after %r) — a window has to start where the "
+                "previous closed" % (b, prev))
+        prev = b
+    base = _iso_day(as_of, "as_of")
+    labels = ["1-%d" % buckets[0]]
+    labels += ["%d-%d" % (buckets[i] + 1, buckets[i + 1])
+               for i in range(len(buckets) - 1)]
+    labels.append("%d+" % buckets[-1])
+    seen_ids = set()
+    rows = []
+    totals = {lab: Decimal(0) for lab in labels}
+    counts = {lab: 0 for lab in labels}
+    current = Decimal(0)
+    current_n = 0
+    paid_total = Decimal(0)
+    paid_n = 0
+    max_od = 0
+    for i, inv in enumerate(invoices):
+        due = _iso_day(inv["due"], "invoices[%d].due" % i)
+        amt = _dec_plain(inv["amount"], "invoices[%d].amount" % i)
+        paid = (_dec_plain(inv["paid"], "invoices[%d].paid" % i)
+                if inv.get("paid") is not None else Decimal(0))
+        if amt < 0:
+            raise MoneyError("invoices[%d].amount is negative — aging "
+                             "of credits is a ledger, not an AR report"
+                             % i)
+        out = amt - paid
+        if out < 0:
+            raise MoneyError(
+                "invoices[%d] is overpaid by %s — reconciliation is "
+                "ledger/apply-payments (roadmap 1.2), aging refuses "
+                "negatives instead of inventing a bucket"
+                % (i, out.copy_abs()))
+        inv_id = inv.get("id")
+        if inv_id is None:
+            inv_id = str(i + 1)
+        if inv_id in seen_ids:
+            raise MoneyError("duplicate invoice id %r — ids are the "
+                             "join key of the relance, not a label"
+                             % inv_id)
+        seen_ids.add(inv_id)
+        days_overdue = (base - due).days
+        if out == 0:
+            status = "paid"
+            paid_total += out
+            paid_n += 1
+        elif days_overdue <= 0:
+            status = "current"
+            current += out
+            current_n += 1
+        else:
+            status = labels[-1]
+            for lab, edge in zip(labels, buckets):
+                if days_overdue <= edge:
+                    status = lab
+                    break
+            totals[status] += out
+            counts[status] += 1
+            if days_overdue > max_od:
+                max_od = days_overdue
+        rows.append({"id": inv_id, "due": due.isoformat(),
+                     "status": status, "days_overdue": days_overdue,
+                     "outstanding": format(out.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP), "f")})
+    q2 = Decimal(1).scaleb(-2)
+    out_buckets = [{"label": "current", "count": current_n,
+                    "total": format(current.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP), "f")}]
+    out_buckets += [{"label": lab, "count": counts[lab],
+                     "total": format(totals[lab].quantize(Decimal("0.01"), rounding=ROUND_HALF_UP), "f")} for lab in labels]
+    res = {"as_of": base.isoformat(), "buckets": out_buckets,
+           "invoices": rows,
+           "open_total": format((current + sum(totals.values())).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP), "f"),
+           "paid_count": paid_n,
+           "max_days_overdue": max_od,
+           "count": len(rows)}
+    return res

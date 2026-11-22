@@ -60,6 +60,7 @@ POST /api/v1/num/round        exact Decimal rounding (banker's, sig digits)
 Bundle 4.2 — units & money (TOOLS-50 #27-29):
 POST /api/v1/units/convert    closed families, exact rational factors
 POST /api/v1/money/prorate    amount x covered/cycle days, rounded last (paid)
+POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/61-90/90+ (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
 Bundle 4.3 — spell-out (TOOLS-50 #30):
@@ -175,7 +176,7 @@ from fastapi import FastAPI, Query, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, Response
 from jsonschema import Draft202012Validator
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 import chart
@@ -324,7 +325,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.91.0",
+    version="0.92.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1440,6 +1441,55 @@ def run_money_prorate(args: dict):
 @app.post("/api/v1/money/prorate")
 def api_money_prorate(req: MoneyProrateRequest):
     body, err = run_money_prorate(req.model_dump())
+    return err if err else body
+
+
+class MoneyAgingInvoice(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    due: str
+    amount: str
+    paid: Optional[str] = None
+    id: Optional[str] = None
+
+
+class MoneyAgingRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    invoices: List[MoneyAgingInvoice]
+    as_of: str
+    buckets: Optional[List[int]] = None
+
+
+def run_money_aging(args: dict):
+    try:
+        req = MoneyAgingRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    if not req.invoices:
+        return None, bad_request(
+            [{"field": "invoices",
+              "message": "empty ledger yields no aging — an empty list "
+                         "is answered as a refusal, not as a table of "
+                         "zeros that a relance script would trust",
+              "expected": "at least one invoice"}])
+    try:
+        out = money.money_aging(
+            [i.model_dump() for i in req.invoices],
+            req.as_of,
+            [int(b) for b in req.buckets] if req.buckets else None)
+    except money.MoneyError as e:
+        return None, bad_request(
+            [{"field": "invoices", "message": str(e),
+              "expected": "due/as_of ISO YYYY-MM-DD; amount/paid plain "
+                          "decimal strings (grouped forms go through "
+                          "num/parse first); buckets strictly "
+                          "increasing positive ints"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/aging")
+def api_money_aging(req: MoneyAgingRequest):
+    body, err = run_money_aging(req.model_dump())
     return err if err else body
 
 
@@ -5972,6 +6022,45 @@ MCP_TOOLS = [
         },
     },
     {
+        "name": "money_aging",
+        "description": (
+            "Due-date aging of receivables: invoices (due ISO day, "
+            "amount and optional paid as decimal strings) + mandatory "
+            "as_of -> buckets 1-30/31-60/61-90/90+ (default [30,60,90], "
+            "left-open right-closed on days_overdue), current, paid. "
+            "The suite never reads a wall clock into a ledger. Overpaid "
+            "invoice is a refusal, not a negative bucket. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["invoices", "as_of"],
+            "properties": {
+                "invoices": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["due", "amount"],
+                        "properties": {
+                            "due": {"type": "string",
+                                    "description": "ISO YYYY-MM-DD"},
+                            "amount": {"type": "string",
+                                       "description": "plain decimal"},
+                            "paid": {"type": "string"},
+                            "id": {"type": "string"},
+                        },
+                    },
+                },
+                "as_of": {"type": "string",
+                          "description": "ISO YYYY-MM-DD, mandatory"},
+                "buckets": {
+                    "type": "array", "items": {"type": "integer"},
+                    "description": "strictly increasing positive "
+                                   "int day edges, default [30,60,90]",
+                },
+            },
+        },
+    },
+    {
         "name": "money_split",
         "description": (
             "Split an amount to the cent with a CLOSED remainder rule: "
@@ -8293,7 +8382,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.91.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.92.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":
@@ -8476,6 +8565,7 @@ def index(request: Request):
             "/api/v1/num/round": "POST value + places/mode -> exact Decimal rounding",
             "/api/v1/units/convert": "POST value + from/to -> closed-family conversion",
             "/api/v1/money/prorate": "POST amount + cycle + window -> prorated (paid)",
+            "/api/v1/money/aging": "POST invoices + as_of -> due-date buckets (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
             "/api/v1/number/spell": "POST amount -> words FR/EN/PT for legal mentions (free < 32 KB)",
             "/api/v1/hash/digest": "POST data + algo -> hex digest (a model cannot hash)",

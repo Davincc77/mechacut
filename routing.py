@@ -142,6 +142,11 @@ TABLE = (
      "exact proration before last rounding",
      "money prorate split invoice tax period days fraction refund "
      "subscription cancel unused prorata"),
+    ("money_aging", "/api/v1/money/aging", "numbers",
+     "due-date aging of receivables into buckets",
+     "aging overdue unpaid receivable invoice due dunning relance "
+     "impayé retard facture echeance echéance balance aged ar "
+     "comptable recouvrement"),
     ("money_split", "/api/v1/money/split", "numbers",
      "cent-exact split, closed remainder rule",
      "money split bill participants cents remainder share friends evenly "

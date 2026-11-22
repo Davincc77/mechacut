@@ -1580,6 +1580,38 @@
   },
   {
    "body": {
+    "as_of": "2026-11-22",
+    "invoices": [
+     {
+      "amount": "100.00",
+      "due": "2026-10-01",
+      "id": "F1"
+     },
+     {
+      "amount": "200.00",
+      "due": "2026-11-01",
+      "id": "F2"
+     },
+     {
+      "amount": "300.00",
+      "due": "2026-12-01",
+      "id": "F3"
+     },
+     {
+      "amount": "50.00",
+      "due": "2026-09-01",
+      "id": "F4",
+      "paid": "50.00"
+     }
+    ]
+   },
+   "name": "money_aging_basic",
+   "path": "/api/v1/money/aging",
+   "sha256": "bdfab1112f6546634274e8d4b182c443511bcbe6b739f0b2d1fd6f686da9cabe",
+   "status": 200
+  },
+  {
+   "body": {
     "annual_rate_pct": 12,
     "months": 3,
     "principal": 1000
