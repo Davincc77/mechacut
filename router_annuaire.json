@@ -5,7 +5,7 @@
     {"id": "T1", "loi": "chaîne → fiche mono-appel ROUTÉE, jamais de choix multiple exposé au LM", "preuve": "bench/FINDINGS-F5.md"},
     {"id": "T2", "loi": "retry interdit SAUF une repasse sur refus nommé (champ+forme donnés)", "preuve": "bench/FINDINGS-V17.md"},
     {"id": "T3", "loi": "multi-tours (protocole steps) réservé aux classes disciplinées mesurées (bras S, v15)", "preuve": "bench/FINDINGS-V15.md"},
-    {"id": "T4", "loi": "la réponse est answer[cible], jamais la dernière valeur de la trace", "preuve": "bench/run22.py (gate machine 22-11 : trace[-1]=leftover ≠ cible)"}
+    {"id": "T4", "loi": "la réponse est answer[cible], jamais la dernière valeur de la trace (gate V22 22-11 : trace[-1]=leftover ≠ cible)", "preuve": "bench/run22.py"}
   ],
   "entrees": [
     {
