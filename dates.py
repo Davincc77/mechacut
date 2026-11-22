@@ -184,6 +184,9 @@ def tz_convert(value, source="UTC", targets=("UTC",), date_at=None):
             "tz": t,
             "iso": conv.isoformat(),
             "weekday": _DOW_CANON[conv.weekday()],
+            # P7 (sonde 22-11) : fraction de JOUR, pas heures —
+            # l'agent lit offset_hhmm pour la forme humaine ;
+            # le nombre brut reste pinné tel quel (doctrine).
             "utc_offset": conv.utcoffset().total_seconds() / 86400,
             "offset_hhmm": _fmt_off(conv.utcoffset()),
             "dst": dst != timedelta(0),
@@ -470,6 +473,27 @@ def cron_next(expression, count=1, after=None, tz="UTC"):
         raise DateError("count must be 1-1000")
     f = parse_cron(expression)
     z = _zone(tz)
+    # P-cron (sonde de contrat 22-11) : un runs: [] muet n'est pas une
+    # réponse. Si le jour du mois est structurelement impossible pour
+    # TOUS les mois de l'expression (31 fevrier), le verdict est nomme
+    # dans le corps — meme runs, mais jamais silence. La projection du
+    # gold (expression, tz, after, count, runs) ne change pas : les
+    # cles sont des FRERES, pas des remplacements.
+    never = None
+    if f["dom_restricted"] and not f["dow_restricted"]:
+        import calendar
+
+        def _cap(m):
+            return 29 if m == 2 else calendar.monthrange(2024, m)[1]
+        bad = sorted(d for d in f["dom"]
+                     if all(d > _cap(m) for m in f["month"]))
+        if bad and len(bad) == len(f["dom"]):
+            never = ("NEVER_FIRES: day-of-month %s cannot occur in "
+                     "month(s) %s — February ends at 29. Widen the "
+                     "month set; this expression is a silence, not a "
+                     "schedule"
+                     % (",".join(str(x) for x in bad),
+                        ",".join(str(x) for x in sorted(f["month"]))))
     if after is None:
         base = datetime.now(z)
     else:
@@ -478,6 +502,7 @@ def cron_next(expression, count=1, after=None, tz="UTC"):
         base = base.astimezone(z) if base.tzinfo else base.replace(tzinfo=z)
     cur = base.replace(second=0, microsecond=0) + timedelta(minutes=1)
     results = []
+    skipped = []
     horizon = cur + timedelta(days=366 * 5)
     dom_or_dow = f["dom_restricted"] and f["dow_restricted"]
     while len(results) < count and cur < horizon:
@@ -506,13 +531,40 @@ def cron_next(expression, count=1, after=None, tz="UTC"):
             cur = cur.replace(minute=0)
             continue
         cur = cur.replace(minute=min(nxtm))
+        # Mur inexistant : l'engine de la maison (le MEME que
+        # date/tz_ambiguity, import tardif — tzambkit importe dates)
+        # est INTERROGE, jamais duplique. Un wall clock dans le trou
+        # DST n'est pas mappe « comme s'il existait » : il est saute,
+        # nomme, avec le premier instant valide apres le saut.
+        if z is not timezone.utc:
+            from tzambkit import TzAmbError, classify
+            try:
+                cl = classify(tz, cur.strftime("%Y-%m-%dT%H:%M:%S"))
+            except TzAmbError:
+                cl = {"kind": "gap",
+                      "verdict": "%s refused: round-trip mismatch"
+                                 % cur.strftime("%Y-%m-%d %H:%M:%S")}
+            if cl["kind"] == "gap":
+                near = (cl.get("nearest") or [{}, {}])[1]
+                skipped.append({
+                    "wall": cur.strftime("%Y-%m-%dT%H:%M"),
+                    "zone": tz,
+                    "verdict": cl["verdict"],
+                    "first_valid_after_jump": near.get("local")})
+                cur = cur + timedelta(minutes=1)
+                continue
         results.append({
             "iso": cur.isoformat(),
             "epoch": int(cur.timestamp()),
             "weekday": _DOW_CANON[cur.weekday()],
         })
         cur = cur + timedelta(minutes=1)
-    return {"expression": expression, "tz": tz, "runs": results}
+    out = {"expression": expression, "tz": tz, "runs": results}
+    if never is not None:
+        out["never_fires"] = never
+    if skipped:
+        out["skipped"] = skipped
+    return out
 
 
 _CRON_LABELS = ("minute", "hour", "day of month", "month", "day of week")

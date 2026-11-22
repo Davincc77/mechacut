@@ -27,7 +27,7 @@ POST /api/v1/env/interpolate  $VAR / ${VAR:-default} expansion
 
 Bundle 3 — dates & scheduling (TOOLS-50 #17-23):
 POST /api/v1/date/parse       human/ISO/RFC2822/epoch -> canonical fields
-POST /api/v1/date/tz          convert instants across IANA zones (DST-correct)
+POST /api/v1/date/tz          convert instants across IANA zones (DST-correct; utc_offset = fraction of a DAY, human form = offset_hhmm)
 POST /api/v1/date/calc        add | business_days | diff | boundary | age
 POST /api/v1/cron/next        next N fire times (wall clock, Vixie OR rule)
 POST /api/v1/cron/humanize    cron -> plain reading + field sets
