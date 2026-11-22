@@ -1,0 +1,33 @@
+{
+ "name": "check_target_v23_rest_collision",
+ "path": "/api/v1/check/target",
+ "body": {
+  "target": "combien restent",
+  "answer": {
+   "name": "RESTE",
+   "value": "300"
+  },
+  "known": [
+   {
+    "name": "total",
+    "value": "435"
+   },
+   {
+    "name": "sold_morning",
+    "value": "35"
+   },
+   {
+    "name": "rest_after_morning",
+    "value": "400"
+   },
+   {
+    "name": "sold_afternoon",
+    "value": "300"
+   },
+   {
+    "name": "remaining",
+    "value": "300"
+   }
+  ]
+ }
+}

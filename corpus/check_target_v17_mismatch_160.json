@@ -1,0 +1,21 @@
+{
+ "name": "check_target_v17_mismatch_160",
+ "path": "/api/v1/check/target",
+ "body": {
+  "target": "remaining",
+  "answer": {
+   "name": "remaining",
+   "value": "160"
+  },
+  "known": [
+   {
+    "name": "remaining",
+    "value": "240"
+   },
+   {
+    "name": "sold_afternoon",
+    "value": "160"
+   }
+  ]
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "name": "check_target_decimal_eq",
+ "path": "/api/v1/check/target",
+ "body": {
+  "target": "remaining",
+  "answer": {
+   "name": "what is left",
+   "value": "240"
+  },
+  "known": [
+   {
+    "name": "remaining",
+    "value": "240.00"
+   }
+  ]
+ }
+}

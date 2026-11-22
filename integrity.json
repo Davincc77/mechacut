@@ -276,6 +276,172 @@
   },
   {
    "body": {
+    "answer": {
+     "name": "rest after morning",
+     "value": "400"
+    },
+    "known": [
+     {
+      "name": "total",
+      "value": "435"
+     },
+     {
+      "name": "sold_morning",
+      "value": "35"
+     },
+     {
+      "name": "rest_after_morning",
+      "value": "400"
+     },
+     {
+      "name": "sold_afternoon",
+      "value": "300"
+     },
+     {
+      "name": "remaining",
+      "value": "300"
+     }
+    ],
+    "target": "combien restent"
+   },
+   "name": "check_target_cible_wrong_quantity",
+   "path": "/api/v1/check/target",
+   "sha256": "df400fbb3fb49880b8d11bc4ecc15f8f5ebad3746b4ffef8610d9407b94bf1fb",
+   "status": 200
+  },
+  {
+   "body": {
+    "answer": {
+     "name": "what is left",
+     "value": "240"
+    },
+    "known": [
+     {
+      "name": "remaining",
+      "value": "240.00"
+     }
+    ],
+    "target": "remaining"
+   },
+   "name": "check_target_decimal_eq",
+   "path": "/api/v1/check/target",
+   "sha256": "63059225f5b40237c4458a9a76e6f6f31997534240d5b915de0a0231e74c0ddc",
+   "status": 200
+  },
+  {
+   "body": {
+    "answer": {
+     "name": "remaining",
+     "value": "160"
+    },
+    "known": [
+     {
+      "name": "remaining",
+      "value": "240"
+     },
+     {
+      "name": "sold_afternoon",
+      "value": "160"
+     }
+    ],
+    "target": "remaining"
+   },
+   "name": "check_target_v17_mismatch_160",
+   "path": "/api/v1/check/target",
+   "sha256": "65008575e05f051e283a9c18a126c56958c44e98965c8fddde572c8a06ddca08",
+   "status": 200
+  },
+  {
+   "body": {
+    "answer": {
+     "name": "RESTE",
+     "value": "300"
+    },
+    "known": [
+     {
+      "name": "total",
+      "value": "435"
+     },
+     {
+      "name": "sold_morning",
+      "value": "35"
+     },
+     {
+      "name": "rest_after_morning",
+      "value": "400"
+     },
+     {
+      "name": "sold_afternoon",
+      "value": "300"
+     },
+     {
+      "name": "remaining",
+      "value": "300"
+     }
+    ],
+    "target": "combien restent"
+   },
+   "name": "check_target_v23_rest_collision",
+   "path": "/api/v1/check/target",
+   "sha256": "3633f8f39079c79c7b4b1ac85c11dd9f3f82a440527d16ef0a4006a0a133ff44",
+   "status": 200
+  },
+  {
+   "body": {
+    "answer": {
+     "name": "prix final",
+     "value": "49.14"
+    },
+    "known": [
+     {
+      "name": "price",
+      "value": "81.90"
+     },
+     {
+      "name": "after_first",
+      "value": "61.425"
+     },
+     {
+      "name": "final",
+      "value": "49.14"
+     }
+    ],
+    "target": "le prix final"
+   },
+   "name": "check_target_v23_synonym_ok",
+   "path": "/api/v1/check/target",
+   "sha256": "c0819c5a43e2eb754ec2666c416c694e1767e56af704cfba67746615a193e64e",
+   "status": 200
+  },
+  {
+   "body": {
+    "answer": {
+     "name": "le resultat",
+     "value": "49.14"
+    },
+    "known": [
+     {
+      "name": "price",
+      "value": "81.90"
+     },
+     {
+      "name": "after_first",
+      "value": "61.425"
+     },
+     {
+      "name": "final",
+      "value": "49.14"
+     }
+    ],
+    "target": "final"
+   },
+   "name": "check_target_vocab_invention",
+   "path": "/api/v1/check/target",
+   "sha256": "b7229fef6da14a4e20266715e031572e520b10cf2dd7df7ef723aaaadcf7d499",
+   "status": 200
+  },
+  {
+   "body": {
     "against": "#ffffff",
     "color": "#767676"
    },

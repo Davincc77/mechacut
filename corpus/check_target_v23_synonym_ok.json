@@ -1,0 +1,25 @@
+{
+ "name": "check_target_v23_synonym_ok",
+ "path": "/api/v1/check/target",
+ "body": {
+  "target": "le prix final",
+  "answer": {
+   "name": "prix final",
+   "value": "49.14"
+  },
+  "known": [
+   {
+    "name": "price",
+    "value": "81.90"
+   },
+   {
+    "name": "after_first",
+    "value": "61.425"
+   },
+   {
+    "name": "final",
+    "value": "49.14"
+   }
+  ]
+ }
+}

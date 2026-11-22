@@ -594,6 +594,11 @@ TABLE = (
      "never include pii leak identifier forbidden privacy redline "
      "ban mention interdit fuite confidential never say confidential "
      "nunca incluir vazio proibido privacidade vazamento"),
+    ("check_target", "/api/v1/check/target", "checks",
+     "is the answer for the RIGHT quantity? target lock: named target, named refusal, closed synonym grammar",
+     "target lock cible verrou answer name quantity refuse prix final reste "
+     "alvo cadeado resposta nome quantidade mauvaise question a cote "
+     "the wrong question right number wrong naming answered beside"),
     ("check_agreement", "/api/v1/check/agreement", "checks",
      "do these payloads describe the same deal? every divergence by pointer",
      "same deal agree divergence mismatch two agents claim signed "

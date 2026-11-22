@@ -111,6 +111,7 @@ GET  /api/v1/formula            the closed catalog of 12, with sources (free)
 POST /api/v1/intent/reflect     your reading, mirrored back before you trust it (free)
 POST /api/v1/intent/check     filled card -> ok or exactly what the human must add (free)
 POST /api/v1/check/agreement  N payloads -> same deal? divergences by pointer (free)
+POST /api/v1/check/target     named target + {name,value} vs known trace -> OK (free)
 POST /api/v1/check/redlines   text vs forbidden words/regex/PII shapes/budget -> first violation (free)
 POST /api/v1/hash/hmac          sign/verify payload with shared key — RFC 4231 vectors (free)
 POST /api/v1/id/ulid            deterministic ULID make/parse/sort (seed -> same id) (free)
@@ -244,6 +245,7 @@ import numfmt
 import payments
 import repair
 import reshape as reshape_mod
+import lockkit
 import routing
 import spell
 import tables
@@ -319,7 +321,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.85.0",
+    version="0.86.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -3836,6 +3838,99 @@ def api_check_agreement(req: CheckAgreementRequest):
     return err if err else body
 
 
+class CheckTargetRequest(BaseModel):
+    target: str
+    answer: Dict[str, Any]
+    known: list
+
+
+REPAIR_NEXT = {
+    "VOCAB": "reply with target = one of vocabulary, same value",
+    "MISMATCH": "your value is another quantity (value_is_actually)"
+                "; send THAT quantity under the expected target, or"
+                " recompute the target",
+    "CIBLE": "you answered a real quantity that is not the question"
+             "'s; send expected_target's value under its name",
+    "NOT_COMPUTED": "the value matches no quantity of the trace"
+                    "; recompute expected_target from the trace",
+    "TARGET_UNKNOWN": "target must be a quantity of the vocabulary"
+                      " (or a registered synonym); pick one",
+}
+
+
+def run_check_target(args: dict):
+    """Le verrou de cible en service (promesse v17, mesuré v20,
+    corrigé v23) : {target, answer{name,value}, known[{name,value}]}
+    -> OK ou refus NOMMÉ réparable en une repasse. Grammaire du nom
+    fermée : normalisation + table de synonymes de la maison, jamais
+    du fuzzy, jamais un LM."""
+    target = args.get("target")
+    answer = args.get("answer")
+    known = args.get("known")
+    errs = []
+    if not isinstance(target, str) or not target.strip():
+        errs.append({"field": "target", "message": "required,"
+                   " non-empty string — what the question asks"})
+    if not isinstance(answer, dict) or not isinstance(
+            answer.get("name"), str) or not str(
+                answer.get("name")).strip():
+        errs.append({"field": "answer.name", "message": "required,"
+                   " non-empty string — the quantity YOU answered"})
+    if not isinstance(answer, dict) or lockkit.dec(
+            answer.get("value", "")) is None:
+        errs.append({"field": "answer.value", "message": "required,"
+                   " plain decimal string ('240', '49.14')",
+                   "expected": "decimal, never prose or code"})
+    voc = {}
+    if not isinstance(known, list) or not known:
+        errs.append({"field": "known", "message": "required, non-empty"
+                   " list of {name, value} — the quantities your"
+                   " trace computed"})
+    else:
+        for k in known:
+            if not isinstance(k, dict) or not isinstance(
+                    k.get("name"), str) or lockkit.dec(
+                        k.get("value")) is None:
+                errs.append({"field": "known[]", "message":
+                             "each entry needs name (string) and"
+                             " value (plain decimal)",
+                             "offending": str(k)[:60]})
+                break
+            if k["name"] in voc:
+                errs.append({"field": "known", "message": "duplicate"
+                             " name '%s' — a quantity names one value"
+                             % k["name"]})
+                break
+            voc[k["name"]] = lockkit.dec(k["value"])
+    if errs:
+        return None, bad_request(errs)
+    answer = answer if isinstance(answer, dict) else {}
+    code, det = lockkit.verdict(target, voc,
+                                str(answer.get("name")),
+                                str(answer.get("value")))
+    out = {"ok": code == "OK", "verdict": code,
+           "expected_target": det.get("expected_target"),
+           "named": det.get("named"),
+           "value_is_actually": det.get("value_is_actually"),
+           "vocabulary": det.get("vocabulary"),
+           "next": None if code == "OK" else REPAIR_NEXT[code]}
+    if code == "OK":
+        out["answer"] = {"target": det["target"], "value":
+                         det["value"]}
+    out["note"] = ("closed name grammar (normalize + house synonym"
+                   " table); unregistered words are refused, not"
+                   " guessed — bench v23: literal locks rejected"
+                   " right answers named 'prix final' or 'RESTE'")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/check/target")
+def api_check_target(req: CheckTargetRequest):
+    body, err = run_check_target(req.model_dump())
+    return err if err else body
+
+
 class IntentCheckRequest(BaseModel):
     tool: str
     args: Dict[str, Any] = {}
@@ -5074,6 +5169,7 @@ TOOL_RUN = {
            "recipe_facts": run_recipe_facts,
            "intent_card": run_intent_card,
            "intent_check": run_intent_check,
+           "check_target": run_check_target,
            "check_agreement": run_check_agreement,
            "check_redlines": run_check_redlines,
            "text_select": run_text_select,
@@ -7708,6 +7804,27 @@ MCP_TOOLS = [
                         "properties": {"text": {"type": "string"},
                                        "rules": {"type": "object"}}}},
     {
+        "name": "check_target",
+        "description": "The target lock, in service: given the "
+                       "question's target, the answer's NAME and "
+                       "VALUE, and the quantities your trace "
+                       "computed (known), the server answers OK or "
+                       "refuses BY NAME (VOCAB/MISMATCH/CIBLE/NOT_"
+                       "COMPUTED) with a one-repair instruction. "
+                       "Closed synonym grammar — measured: literal "
+                       "locks reject right answers named 'prix "
+                       "final' (v23), fuzzy locks lie. Free.",
+        "inputSchema": {"type": "object",
+                        "required": ["target", "answer", "known"],
+                        "properties": {
+                            "target": {"type": "string"},
+                            "answer": {"type": "object",
+                                       "required": ["name", "value"]},
+                            "known": {"type": "array", "minItems": 1,
+                                      "items": {"type": "object",
+                                                "required": ["name",
+                                                             "value"]}}}}},
+    {
         "name": "check_agreement",
         "description": "Do these payloads describe the same deal? "
                        "Recursive pointer diff over N JSON values with "
@@ -7859,7 +7976,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.85.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.86.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":
@@ -8145,6 +8262,7 @@ def index(request: Request):
             "/api/v1/intent/card": "POST a human sentence -> tool choice + pre-filled form or the exact missing-field question (free)",
             "/api/v1/intent/check": "POST tool + filled args -> ok or the exact fields still missing (free)",
             "/api/v1/check/agreement": "POST 2-8 payloads -> do they describe the same deal? every divergence with its pointer (free)",
+            "/api/v1/check/target": "POST target + answer{name,value} + known[{name,value}] -> the target lock: OK or a NAMED refusal with the repair (closed synonym grammar, bench v20/v23) (free)",
             "/api/v1/check/redlines": "POST text + closed rules -> clean, or first violation of forbidden words/regex/PII shapes/budget (free)",
             "/api/v1/text/decode": "POST garbled text -> provable mojibake repair to utf-8 (free)",
             "/api/v1/num/human": "POST value + kind -> human duration/bytes/roman/ordinal (free)",

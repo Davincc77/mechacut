@@ -199,6 +199,13 @@ SAY = {
               "à coller — et audite celui qui bloque en prod",
         "pt": "gere o atributo integrity deste arquivo local pronto "
               "para colar — e audite o que quebra em produção"},
+    "/api/v1/check/target": {
+        "en": "my answer says 49.14 and calls it 'final price' — did "
+              "it hit the question's target or a leftover?",
+        "fr": "ma réponse dit 49,14 et l'appelle « prix final » — "
+              "est-ce la cible de la question ou un reste ?",
+        "pt": "minha resposta diz 49,14 e chama de 'preço final' — "
+              "acertou o alvo da pergunta ou um resto?"},
     "/api/v1/check/format": {
         "en": "check every date and uuid field in this payload against "
               "its real format, not just 'string'",

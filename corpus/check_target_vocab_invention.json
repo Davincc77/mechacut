@@ -1,0 +1,25 @@
+{
+ "name": "check_target_vocab_invention",
+ "path": "/api/v1/check/target",
+ "body": {
+  "target": "final",
+  "answer": {
+   "name": "le resultat",
+   "value": "49.14"
+  },
+  "known": [
+   {
+    "name": "price",
+    "value": "81.90"
+   },
+   {
+    "name": "after_first",
+    "value": "61.425"
+   },
+   {
+    "name": "final",
+    "value": "49.14"
+   }
+  ]
+ }
+}

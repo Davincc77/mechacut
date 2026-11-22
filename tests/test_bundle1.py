@@ -310,7 +310,7 @@ def test_mcp_exposes_bundle1():
                       'eth_address', 'eth_selector', 'eth_units',
                       'text_decode', 'num_human', 'text_escape',
                       'text_normalize', 'batch', 'logic_rules', 'sort_multi',
-                      'json_query', 'check_redlines', 'check_agreement',
+                      'json_query', 'check_redlines', 'check_target', 'check_agreement',
                       'intent_card', 'intent_check', 'extract_facts',
                       'text_select', 'check_constraints', 'check_refs']
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 2,
