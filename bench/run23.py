@@ -62,7 +62,11 @@ import urllib.error
 import urllib.request
 
 API = "https://inference-api.nousresearch.com/v1/chat/completions"
-MODEL = "liquid/lfm3-1.7b"
+MODEL = "liquid/lfm-3-1.7b"           # figé sur la sonde : l'id sans
+                                      # tiret « lfm3 » est un mirage
+                                      # 404 — mon diagnostic « route
+                                      # instable » était faux, publié
+                                      # dans le commit de correction
 PRICE_IN, PRICE_OUT = 0.08, 0.20          # $/M, gelés 22-11 (/v1/models)
 OUT = "/Users/vincenzocirilli/Downloads/mechacut/bench/" \
       "results_v23_lfm3.jsonl"
@@ -101,7 +105,7 @@ def api(msgs):
                 r = call(False)
                 break
             tries += 1
-            if e.code not in (404, 429, 500, 502, 503) or tries > 6:
+            if e.code not in (404, 429, 500, 502, 503) or tries > 2:
                 raise
             time.sleep(wait)
             wait = min(wait * 2, 75)
