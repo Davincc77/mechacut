@@ -1,0 +1,5 @@
+{
+ "name": "food_poultry_thaw_15lb_3_4_days",
+ "path": "/api/v1/food/poultry",
+ "body": {"mode": "thaw", "weight": "15"}
+}

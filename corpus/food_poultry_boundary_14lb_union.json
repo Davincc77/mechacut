@@ -1,0 +1,5 @@
+{
+ "name": "food_poultry_boundary_14lb_union",
+ "path": "/api/v1/food/poultry",
+ "body": {"mode": "cook", "weight": "14"}
+}

@@ -825,6 +825,13 @@ TABLE = (
      "prefixo not found 404 invalid identifier alias catalog annuaire "
      "catalogo erreur config agent nome modelo catalogo "
      "identificador inexistente errado vierge tiret underscore"),
+    ("food_poultry", "/api/v1/food/poultry", "dates",
+     "turkey thaw & roast window, USDA FSIS tables, ISO clock as "
+     "argument — never wall clock, never invented numbers",
+     "turkey poultry thaw defrost freezer fridge roast cook time "
+     "window dinner bird when take out frozen thanksgiving dinde "
+     "volaille congélateur congelateur cuisson four sortir heur "
+     "decongelar assar peru janela hora congelado"),
 
 )
 

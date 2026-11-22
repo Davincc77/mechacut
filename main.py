@@ -233,6 +233,7 @@ import castkit
 import bogokit
 import unitpricekit
 import modelidkit
+import poultrykit
 import auditor
 import sayings
 import verdict
@@ -327,7 +328,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.94.0",
+    version="0.95.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4929,6 +4930,32 @@ def api_agent_modelid(req: AgentModelidRequest):
     return err if err else body
 
 
+class FoodPoultryRequest(BaseModel):
+    mode: Optional[str] = None
+    weight: Optional[Any] = None
+    unit: Optional[str] = None
+    stuffed: Optional[Any] = None
+    oven_at: Optional[Any] = None
+    as_of: Optional[Any] = None
+
+
+def run_food_poultry(args: dict):
+    try:
+        out = poultrykit.run_poultry(args)
+    except poultrykit.PoultryError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/food/poultry")
+def api_food_poultry(req: FoodPoultryRequest):
+    body, err = run_food_poultry(req.model_dump())
+    return err if err else body
+
+
 class JsonCoerceRequest(BaseModel):
     raw: Optional[str] = None
     json_schema: Optional[Dict[str, str]] = Field(default=None,
@@ -5381,6 +5408,7 @@ TOOL_RUN = {
            "money_bogo": run_money_bogo,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
+           "food_poultry": run_food_poultry,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -8485,6 +8513,53 @@ MCP_TOOLS = [
                             "description": "pasted annuaire ids (GET "
                                            "/v1/models output); omit "
                                            "for grammar-only mode"},
+            },
+        },
+    },
+    {
+        "name": "food_poultry",
+        "description": (
+            "Thanksgiving turkey timing as an ISO WINDOW, quoted from "
+            "USDA FSIS tables. The ×8 web calculators of Nov 2026 all "
+            "cite the same FSIS chart and contradict each other: one "
+            "says 12 lb into the fridge by Mon 23, its neighbor says "
+            "use the long end, Sun 22. This tool decides by named "
+            "rule: put_in_refrigerator {by = oven - long end of the "
+            "published day bracket; not_before = by - the 1-2-day "
+            "hold}, cold-water fallback (30 min/lb, cook "
+            "IMMEDIATELY), frozen from scratch (+50%), and done "
+            "is 165 F at the THERMOMETER, never the clock. Boundary "
+            "weights (14 is in '12 to 14' AND '14 to 18') return the "
+            "UNION of both brackets with boundary=true — no silent "
+            "first-winner. Outside the published 4-24 lb whole-bird "
+            "table the tool refuses by name and does not extrapolate. "
+            "The oven time is an ARGUMENT (oven_at, as_of) — no "
+            "wall clock is ever read. Comma decimals refused to "
+            "num/parse; kg/g convert with 1 lb = 453,59237 g (1959). "
+            "Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["weight"],
+            "properties": {
+                "mode": {"type": "string",
+                         "enum": ["plan", "thaw", "cook"],
+                         "default": "plan"},
+                "weight": {"type": "string",
+                           "description": "decimal STRING like "
+                                          "'16'"},
+                "unit": {"type": "string",
+                         "enum": ["lb", "kg", "g"],
+                         "default": "lb"},
+                "stuffed": {"type": "boolean",
+                           "default": False},
+                "oven_at": {"type": "string",
+                            "description": "naive ISO when the bird "
+                                           "goes in the oven, "
+                                           "2026-11-26T10:00"},
+                "as_of": {"type": "string",
+                          "description": "optional naive ISO 'now' "
+                                         "— behind_schedule flags"},
             },
         },
     },

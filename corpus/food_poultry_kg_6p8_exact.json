@@ -1,0 +1,5 @@
+{
+ "name": "food_poultry_kg_6p8_exact",
+ "path": "/api/v1/food/poultry",
+ "body": {"mode": "cook", "weight": "6.8", "unit": "kg"}
+}

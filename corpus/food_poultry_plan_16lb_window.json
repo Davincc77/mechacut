@@ -1,0 +1,5 @@
+{
+ "name": "food_poultry_plan_16lb_window",
+ "path": "/api/v1/food/poultry",
+ "body": {"weight": "16", "oven_at": "2026-11-26T10:00"}
+}

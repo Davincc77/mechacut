@@ -1244,6 +1244,47 @@
   },
   {
    "body": {
+    "mode": "cook",
+    "weight": "14"
+   },
+   "name": "food_poultry_boundary_14lb_union",
+   "path": "/api/v1/food/poultry",
+   "sha256": "e47003c390282ae6e5b41d59bb3a5404dc4718fb23f1f4beb70daca6430abe3d",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "cook",
+    "unit": "kg",
+    "weight": "6.8"
+   },
+   "name": "food_poultry_kg_6p8_exact",
+   "path": "/api/v1/food/poultry",
+   "sha256": "482004e8942b0ff9c7c356130ca45631cb0d367ffb58fe4f94b47ba7b69064f3",
+   "status": 200
+  },
+  {
+   "body": {
+    "oven_at": "2026-11-26T10:00",
+    "weight": "16"
+   },
+   "name": "food_poultry_plan_16lb_window",
+   "path": "/api/v1/food/poultry",
+   "sha256": "38d20edbf922f50450e813a48fd23074c3baf3c8e5d2f63bf6b21b152711598e",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "thaw",
+    "weight": "15"
+   },
+   "name": "food_poultry_thaw_15lb_3_4_days",
+   "path": "/api/v1/food/poultry",
+   "sha256": "04399d0682ce0b4223ac15ad78df1b15fd2b0cf3fabee47554e8470d960f2176",
+   "status": 200
+  },
+  {
+   "body": {
     "args": {
      "a": 3,
      "b": "4.50",

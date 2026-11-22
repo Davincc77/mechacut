@@ -454,6 +454,16 @@ TR = {
                       "jar wins — the bundle pays 40.3509 % more per "
                       "ounce. And \u201c1 lb 4 oz\u201d IS 20 oz: the "
                       "coupon was right, the cashier wasn\u2019t.",
+  "everyday.e17.name": "Thanksgiving Thursday: what time does the turkey leave the freezer",
+  "everyday.e17.say": "Eight calculators of Nov 2026 cite the same "
+                      "USDA table yet disagree: one puts the 16 lb bird "
+                      "in the fridge by Sat 21 10:00, the other says the "
+                      "long end means the 20th? This tool decides by a "
+                      "named rule: put in by = oven minus the long end "
+                      "of the published bracket; not before = minus the "
+                      "1-to-2-day hold. Hours are arguments, never the "
+                      "wall clock. And done is 165\u00b0F at the "
+                      "thermometer \u2014 the real judge.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -872,6 +882,17 @@ TR = {
                       "\u00ab 2 pour 7 $ \u00bb de pots de 15 oz perd "
                       "40,3509 % à l'once contre le pot seul de 24 oz "
                       "— la fraction exacte tranche, pas l'œil.",
+  "everyday.e17.name": "Thanksgiving jeudi : à quelle heure sortir la dinde du congélateur",
+  "everyday.e17.say": "Huit calculateurs de nov. 2026 citent la même "
+                      "table USDA et se contredisent : l'un met la dinde "
+                      "de 16 lb au frais pour samedi 21 10:00, l'autre "
+                      "dit que le bout long signifie le 20 ? Cet outil "
+                      "tranche par règle nommée : au plus tard = four "
+                      "moins le bout long du créneau publié ; pas avant "
+                      "= moins la conservation de 1 à 2 jours. Les "
+                      "heures sont des arguments, jamais l'horloge "
+                      "murale. Et cuit est 165 °F à la sonde — le vrai "
+                      "juge.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -1278,6 +1299,17 @@ TR = {
                       "R$ 7\u201d de potes de 15 oz perde 40,3509 % "
                       "por onça para o pote único de 24 oz — a fração "
                       "exata decide, não o olho.",
+  "everyday.e17.name": "Ação de graça quinta: a que horas tirar o peru do congelador",
+  "everyday.e17.say": "Oito calculadoras de nov. 2026 citam a mesma "
+                      "tabela USDA e se contradizem: uma põe o peru de "
+                      "16 lb na geladeira até sábado 21 10:00, a outra "
+                      "diz que o extremo longo significa o dia 20? Esta "
+                      "ferramenta decide por regra nomeada: ao mais "
+                      "tarde = forno menos o extremo longo do intervalo "
+                      "publicado; nunca antes = menos a conservação de "
+                      "1 a 2 dias. Horas são argumentos, nunca o relógio "
+                      "de parede. E cozido é 165 °F no termômetro — o "
+                      "juiz real.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -1966,7 +1998,9 @@ W = {
              "5 000 vs 6 000, each step named",
       "bogo": "\u2192 sign says 50%%, the pair pays %s — you pay %s of %s",
       "unitprice": "\u2192 500 g to 400 g, same sticker: \u2212%s%% of "
-                   "product, +%s%% per unit \u2014 two denominators"},
+                   "product, +%s%% per unit \u2014 two denominators",
+      "poultry": "\u2192 16-lb bird into the fridge by %s, not "
+                 "before %s"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -1997,7 +2031,9 @@ W = {
       "bogo": "\u2192 l'affiche dit 50%%, la paire paie %s — on r\u00e8gle %s sur %s",
       "unitprice": "\u2192 500 g puis 400 g, m\u00eame \u00e9tiquette : "
                    "\u2212%s%% de produit, +%s%% au kilo \u2014 deux "
-                   "d\u00e9nominateurs"},
+                   "d\u00e9nominateurs",
+      "poultry": "\u2192 dinde 16 lb : cong\u00e9lateur avant %s, "
+                 "jamais avant %s"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -2028,7 +2064,9 @@ W = {
       "bogo": "\u2192 a placa diz 50%%, o par sai por %s — voc\u00ea paga %s de %s",
       "unitprice": "\u2192 500 g viram 400 g, mesmo pre\u00e7o na placa: "
                    "\u2212%s%% de produto, +%s%% por quilo \u2014 dois "
-                   "denominadores"},
+                   "denominadores",
+      "poultry": "\u2192 peru de 16 lb: geladeira at\u00e9 %s, nunca "
+                 "antes de %s"},
 }
 
 
@@ -2152,6 +2190,11 @@ _EVERYDAY_CALLS = [
           "pt": lambda s: s.replace(".", ",")}[L_](
              d["product_change"]["display"] + "|" +
              d["unit_price_change"]["display"]).split("|"))),
+    ("/api/v1/food/poultry",
+     {"weight": "16", "oven_at": "2026-11-26T10:00"},
+     "poultry", lambda d, L_: (
+         d["put_in_refrigerator"]["by"],
+         d["put_in_refrigerator"]["not_before"])),
 ]
 
 
