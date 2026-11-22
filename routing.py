@@ -147,6 +147,18 @@ TABLE = (
      "aging overdue unpaid receivable invoice due dunning relance "
      "impayé retard facture echeance echéance balance aged ar "
      "comptable recouvrement"),
+    ("money_unitprice", "/api/v1/money/unitprice", "numbers",
+     "price per unit + shrinkflation, denominator NAMED (−12.5 % of "
+     "pack ≠ +12.5 % per unit)",
+     "unit price price per ounce per pound cheaper bulk shrinkflation "
+     "smaller package same price cost per kilo compare grocery two for "
+     "seven tag math wrong lb oz quart "
+     "prix au kilo prix a l'once moins cher comparaison course "
+     "paquet paquet grammage arnaque vrai vraiment etiquette "
+     "erreur calcul meme prix moins cher au kilo denominateur "
+     "deux pour sept "
+     "preco por quilo preco por litro mais barato comparacao mercado "
+     "reducao embalagem etiqueta conta errada mesmo preco dois por"),
     ("money_split", "/api/v1/money/split", "numbers",
      "cent-exact split, closed remainder rule",
      "money split bill participants cents remainder share friends evenly "

@@ -37,11 +37,19 @@ FAMILIES = {
         "base": "l",
         "units": {"l": _f(1), "ml": _f(1, 1000), "cl": _f(1, 100),
                   "dl": _f(1, 10), "m3": _f(1000), "cm3": _f(1, 1000),
+                  # NIST SP 811 App. B : gal_us = 231 in^3 =
+                  # 3,785411784 L pile (inch = 2,54 cm pile, accord
+                  # 1959) ; floz = gal/128, qt = gal/4, pt = gal/8,
+                  # cup = gal/16. PUISSANCES DE 10 CORRIGEES 22-11
+                  # (bundle66) : floz_us etait tablé a 2,957 L l'once
+                  # (x100), qt_us/pt_us/cup_us x10 — peche par la
+                  # table croisee qt<->floz de money/unitprice, faute
+                  # de test sur ces unités (garde ajouté bundle66).
                   "gal_us": _f(3785411784, 10**9),
-                  "qt_us": _f(946352946, 10**8),
-                  "pt_us": _f(473176473, 10**8),
-                  "cup_us": _f(2365882365, 10**9),
-                  "floz_us": _f(295735295625, 10**11),
+                  "qt_us": _f(946352946, 10**9),
+                  "pt_us": _f(473176473, 10**9),
+                  "cup_us": _f(2365882365, 10**10),
+                  "floz_us": _f(295735295625, 10**13),
                   "gal_uk": _f(454609, 100000)},
     },
     "area": {

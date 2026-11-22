@@ -1,0 +1,19 @@
+{
+ "name": "money_unitprice_crossfamily_refused",
+ "path": "/api/v1/money/unitprice",
+ "body": {
+  "mode": "compare",
+  "offers": [
+   {
+    "price": "1.00",
+    "qty": "12",
+    "unit": "oz"
+   },
+   {
+    "price": "1.00",
+    "qty": "6",
+    "unit": "each"
+   }
+  ]
+ }
+}

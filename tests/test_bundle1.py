@@ -314,7 +314,8 @@ def test_mcp_exposes_bundle1():
                       'intent_card', 'intent_check', 'extract_facts',
                       'text_select', 'check_constraints', 'check_refs',
                       'ship_dimweight', 'json_coerce',
-                      'money_bogo']  # queue 22-11 20h30 bundle61
+                      'money_bogo',
+                      'money_unitprice']  # queue 22-11 bundle66
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 2,
                                   "method": "tools/call",
                                   "params": {"name": "json_repair",

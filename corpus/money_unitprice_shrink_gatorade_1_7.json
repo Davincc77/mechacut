@@ -1,0 +1,10 @@
+{
+ "name": "money_unitprice_shrink_gatorade_1_7",
+ "path": "/api/v1/money/unitprice",
+ "body": {
+  "mode": "shrink",
+  "unit": "floz",
+  "old_size": "32",
+  "new_size": "28"
+ }
+}

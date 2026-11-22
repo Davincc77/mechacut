@@ -1,0 +1,25 @@
+{
+ "name": "money_unitprice_tag_wrong_aldi",
+ "path": "/api/v1/money/unitprice",
+ "body": {
+  "mode": "compare",
+  "offers": [
+   {
+    "label": "A",
+    "price": "2.69",
+    "qty": "12",
+    "unit": "oz",
+    "tag": {
+     "value": "0.244",
+     "unit": "oz"
+    }
+   },
+   {
+    "label": "B",
+    "price": "2.40",
+    "qty": "11",
+    "unit": "oz"
+   }
+  ]
+ }
+}

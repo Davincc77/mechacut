@@ -1,0 +1,22 @@
+{
+ "name": "money_unitprice_two_for_seven_single_wins",
+ "path": "/api/v1/money/unitprice",
+ "body": {
+  "mode": "compare",
+  "offers": [
+   {
+    "label": "promo",
+    "price": "7.00",
+    "qty": "15",
+    "unit": "oz",
+    "count": "2"
+   },
+   {
+    "label": "single",
+    "price": "3.99",
+    "qty": "24",
+    "unit": "oz"
+   }
+  ]
+ }
+}

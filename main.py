@@ -231,6 +231,7 @@ import pointskit
 import dimkit
 import castkit
 import bogokit
+import unitpricekit
 import auditor
 import sayings
 import verdict
@@ -325,7 +326,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.92.0",
+    version="0.93.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4877,6 +4878,34 @@ def api_money_bogo(req: MoneyBogoRequest):
     return err if err else body
 
 
+class MoneyUnitpriceRequest(BaseModel):
+    mode: Optional[str] = None
+    offers: Optional[List[Dict[str, Any]]] = None
+    basis: Optional[str] = None
+    unit: Optional[str] = None
+    old_size: Optional[str] = None
+    new_size: Optional[str] = None
+    old_price: Optional[str] = None
+    new_price: Optional[str] = None
+
+
+def run_money_unitprice(args: dict):
+    try:
+        out = unitpricekit.run_unitprice(args)
+    except unitpricekit.UnitPriceError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/unitprice")
+def api_money_unitprice(req: MoneyUnitpriceRequest):
+    body, err = run_money_unitprice(req.model_dump())
+    return err if err else body
+
+
 class JsonCoerceRequest(BaseModel):
     raw: Optional[str] = None
     json_schema: Optional[Dict[str, str]] = Field(default=None,
@@ -5327,6 +5356,7 @@ TOOL_RUN = {
            "ship_dimweight": run_ship_dimweight,
            "json_coerce": run_json_coerce,
            "money_bogo": run_money_bogo,
+           "money_unitprice": run_money_unitprice,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -8343,6 +8373,59 @@ MCP_TOOLS = [
                             "second_percent": {"type": "string"},
                             "coupon_percent": {"type": "string"}}},
     },
+    {
+        "name": "money_unitprice",
+        "description": (
+            "Unit price and shrinkflation in exact Decimal with the "
+            "DENOMINATOR NAMED. compare: 2..6 offers {price, qty_str "
+            "'1 lb 4 oz' or qty+unit, count for two-for-$7, optional "
+            "store tag claim AUDITED at its own precision} — cross-unit "
+            "tables (oz vs lb vs qt) resolve on the canonical family "
+            "factor, winner decided by equal fractions never by "
+            "rounded sight (r/aldi 'the tag math is wrong'); deltas "
+            "divide by the WINNER, one denominator per number. shrink: "
+            "old to new size (plus or minus price) returns "
+            "product_change over the OLD size and unit_price_change "
+            "over the NEW — 32 to 28 fl oz is -12.5 % of drink but "
+            "+14.2857 % per ounce (1/7), the published Gatorade "
+            "vector; the single-percentage headline is the lie this "
+            "tool refuses. Exact fraction travels beside every display "
+            "(Consumer Reports 7.75-to-7.8 lesson). Closed: mode "
+            "compare|shrink; comma refused to num/parse; cross-family "
+            "comparison refused with the exit named; factors anchored "
+            "to NIST SP 811. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["mode"],
+            "properties": {
+                "mode": {"type": "string",
+                         "enum": ["compare", "shrink"]},
+                "offers": {
+                    "type": "array", "minItems": 2, "maxItems": 6,
+                    "items": {
+                        "type": "object",
+                        "required": ["price"],
+                        "properties": {
+                            "label": {"type": "string"},
+                            "price": {"type": "string"},
+                            "qty": {"type": "string"},
+                            "unit": {"type": "string"},
+                            "qty_str": {"type": "string"},
+                            "count": {"type": "string"},
+                            "tag": {"type": "object"},
+                        },
+                    },
+                },
+                "basis": {"type": "string"},
+                "unit": {"type": "string"},
+                "old_size": {"type": "string"},
+                "new_size": {"type": "string"},
+                "old_price": {"type": "string"},
+                "new_price": {"type": "string"},
+            },
+        },
+    },
 ]
 
 
@@ -8382,7 +8465,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.92.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.93.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":

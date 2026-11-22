@@ -205,7 +205,12 @@ def main():
     latest = os.path.join(RADAR_DIR, "latest.json")
     prev = {}
     if os.path.exists(latest):
-        prev = {r["text"]: r["verdict"]
+        # clé (texte, want) : le corpus contient des lignes au MEME
+        # texte avec des volontés différentes — indexé sur le texte
+        # seul, le last-write-wins faisait ressortir un NO_MATCH
+        # ancien comme « REGRESSION » (artefact mesuré 22-11 21h57,
+        # ligne PT loja).
+        prev = {(r["text"], r.get("want")): r["verdict"]
                 for r in json.load(open(latest))["rows"]}
     stamp = scan["ts"].replace(":", "-").replace(" ", "_")
     with open(os.path.join(RADAR_DIR, "scan-%s.json" % stamp),
@@ -215,13 +220,14 @@ def main():
         json.dump(scan, fh, ensure_ascii=False, indent=1)
     new_pain = [r for r in rows
                 if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
-                and prev.get(r["text"]) == "ok"]
+                and prev.get((r["text"], r.get("want"))) == "ok"]
     fresh = [r for r in rows
              if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
-             and r["text"] not in prev]
-    healed = [t for t, v in prev.items()
+             and (r["text"], r.get("want")) not in prev]
+    healed = [k for k, v in prev.items()
               if v not in ("ok", "leurre-ok", "plan-skip")
-              and any(r["text"] == t and r["verdict"] in
+              and any((r["text"], r.get("want")) == k
+                      and r["verdict"] in
                       ("ok", "leurre-ok") for r in rows)]
     print("# RADAR ROUTEUR — %s" % scan["ts"])
     print("douleurs actives : %s" % json.dumps(
@@ -234,7 +240,7 @@ def main():
                 print("- %s : %r → %s" % (label, it["text"],
                                           it["verdict"]))
             else:
-                print("- GUERIE : %r" % it[:70])
+                print("- GUERIE : %r (want %r)" % (it[0][:70], it[1]))
     print("(brut : docs/RADAR/scan-%s.json — local-only)" % stamp)
 
 

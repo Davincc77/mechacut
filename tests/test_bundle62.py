@@ -267,5 +267,6 @@ def test_e15_landing_card_baked_three_languages():
         "sur 100,00" in fr["everyday_grid"]
     assert "a placa diz 50%, o par sai por 20,0000 — você paga 80,00 " \
         "de 100,00" in pt["everyday_grid"]
-    for doc, word in ((en, "Fifteen"), (fr, "Quinze"), (pt, "Quinze")):
+    # resize 22-11 bundle66: la grille passe a seize puces
+    for doc, word in ((en, "Sixteen"), (fr, "Seize"), (pt, "Dezesseis")):
         assert word in doc["everyday.intro"]

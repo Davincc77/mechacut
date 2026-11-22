@@ -1,0 +1,22 @@
+{
+ "name": "money_unitprice_quart_ounce_celsius",
+ "path": "/api/v1/money/unitprice",
+ "body": {
+  "mode": "compare",
+  "basis": "floz",
+  "offers": [
+   {
+    "label": "18-pack",
+    "price": "7.99",
+    "qty": "288",
+    "unit": "floz"
+   },
+   {
+    "label": "24-pack",
+    "price": "6.99",
+    "qty": "8.5",
+    "unit": "qt"
+   }
+  ]
+ }
+}

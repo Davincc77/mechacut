@@ -215,6 +215,16 @@ SAY = {
         "pt": "a placa diz compre um e leve o segundo com 50% off — "
               "duas camisetas de R$ 60 e R$ 40: qual é o desconto real "
               "no caixa"},
+    "/api/v1/money/unitprice": {
+        "en": "the 500 g pack became 400 g at the same price — what "
+              "percentage is it really per kilogram, and is two-for-$7 "
+              "cheaper per ounce than the big jar",
+        "fr": "le paquet de 500 g est passé à 400 g au même prix — "
+              "combien ça fait vraiment au kilo, et le 2 pour 7 $ "
+              "bat-il le grand pot à l'once",
+        "pt": "o pacote de 500 g virou 400 g pelo mesmo preço — quanto "
+              "isso dá por quilo de verdade, e o leve 2 por R$ 7 é "
+              "mais barato por grama que o pote grande"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",

@@ -2046,6 +2046,136 @@
   },
   {
    "body": {
+    "mode": "compare",
+    "offers": [
+     {
+      "price": "1.00",
+      "qty": "12",
+      "unit": "oz"
+     },
+     {
+      "price": "1.00",
+      "qty": "6",
+      "unit": "each"
+     }
+    ]
+   },
+   "name": "money_unitprice_crossfamily_refused",
+   "path": "/api/v1/money/unitprice",
+   "sha256": "bf885cbcbed41458839300734b27c1367df11871a38f54ff285f49792c0443cc",
+   "status": 400
+  },
+  {
+   "body": {
+    "mode": "compare",
+    "offers": [
+     {
+      "label": "bread",
+      "price": "3.00",
+      "qty_str": "1 lb 4 oz"
+     },
+     {
+      "label": "coupon",
+      "price": "3.00",
+      "qty": "20",
+      "unit": "oz"
+     }
+    ]
+   },
+   "name": "money_unitprice_lb4oz_is_20oz_tie",
+   "path": "/api/v1/money/unitprice",
+   "sha256": "a94c0b7e44592ade6936a61128536b4dfda9c990cb0f549357ab9c964c8d62bc",
+   "status": 200
+  },
+  {
+   "body": {
+    "basis": "floz",
+    "mode": "compare",
+    "offers": [
+     {
+      "label": "18-pack",
+      "price": "7.99",
+      "qty": "288",
+      "unit": "floz"
+     },
+     {
+      "label": "24-pack",
+      "price": "6.99",
+      "qty": "8.5",
+      "unit": "qt"
+     }
+    ]
+   },
+   "name": "money_unitprice_quart_ounce_celsius",
+   "path": "/api/v1/money/unitprice",
+   "sha256": "bf6c57397bfdebb76ce63e79fa611e0605c17be55643c0e081b955fa6bc99fc5",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "shrink",
+    "new_size": "28",
+    "old_size": "32",
+    "unit": "floz"
+   },
+   "name": "money_unitprice_shrink_gatorade_1_7",
+   "path": "/api/v1/money/unitprice",
+   "sha256": "318ad2cebb8361939229e195dd6b947aa580620ec8150536fd9ab9747f574595",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "compare",
+    "offers": [
+     {
+      "label": "A",
+      "price": "2.69",
+      "qty": "12",
+      "tag": {
+       "unit": "oz",
+       "value": "0.244"
+      },
+      "unit": "oz"
+     },
+     {
+      "label": "B",
+      "price": "2.40",
+      "qty": "11",
+      "unit": "oz"
+     }
+    ]
+   },
+   "name": "money_unitprice_tag_wrong_aldi",
+   "path": "/api/v1/money/unitprice",
+   "sha256": "84a993fb3d11779072adb017ca1106d0a4c70d448913d998359b962fa5cdbf3f",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "compare",
+    "offers": [
+     {
+      "count": "2",
+      "label": "promo",
+      "price": "7.00",
+      "qty": "15",
+      "unit": "oz"
+     },
+     {
+      "label": "single",
+      "price": "3.99",
+      "qty": "24",
+      "unit": "oz"
+     }
+    ]
+   },
+   "name": "money_unitprice_two_for_seven_single_wins",
+   "path": "/api/v1/money/unitprice",
+   "sha256": "0cc3d9f1064f7b1529de0c1f40dbb30e48f7c38f2e5697a514528c802de104f4",
+   "status": 200
+  },
+  {
+   "body": {
     "cidr": "10.0.0.0/8",
     "split_into": 2
    },

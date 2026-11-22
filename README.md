@@ -5,16 +5,25 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 144 transforms + 9 named recipes as of v0.89.0, each with its tool card
+— 146 transforms + 9 named recipes as of v0.93.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 172 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 203 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money/bogo` (what a
+is the truth of today. Recent highlights: `money/unitprice` (unit price and shrinkflation with
+the DENOMINATOR NAMED: 32→28 fl oz at the same sticker is −12.5% of
+product but +14.2857% per ounce — 1/7, never one headline number;
+"two-for-$7" of 15 oz jars pays 40.3509% MORE per ounce than the big
+single jar; "1 lb 4 oz" parses to exactly 20 oz; and the store's own
+per-unit tag is AUDITED at its printed precision — r/LifeProTips
+"Walmart got the math wrong" becomes a named TAG_WRONG. Building it
+caught and fixed a ×10/×100 exponent bug in the site's own US volume
+table, floz_us/qt_us/pt_us/cup_us, NIST SP 811 anchors, regression-
+pinned); `money/bogo` (what a
 "buy one get one 50% off" sign REALLY bills: the percent lands on the
 CHEAPER item of each pair — published retail rule — so $60+$40 pays 80
 of 100 = 20.0000%, neither 25 nor 50; equal prices give 25% on the pair,
