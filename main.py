@@ -188,6 +188,8 @@ import geo
 import leakkit
 import chainkit
 import ficheskit
+import annuaire
+import routeur
 import taxid
 import addrkit
 import timekit
@@ -3659,6 +3661,69 @@ def api_fiche_partage_reste(req: FicheRequest):
 def api_fiche_soldes2(req: FicheRequest):
     body, err = _run_fiche("soldes2", req.model_dump())
     return err if err else body
+
+
+# ---------------- bundle 54 : le routeur-annuaire (docs/ROUTER-SPEC.md)
+class RouterTextRequest(BaseModel):
+    texte: str
+
+
+def _router_out(out: dict):
+    out["sha256"] = canon(out)
+    return out
+
+
+@app.post("/api/v1/router/plan")
+def api_router_plan(req: RouterTextRequest):
+    """Symptôme → prescription mesurée (fiche, créneaux, transport,
+    preuve). Ne calcule rien, ne devine rien."""
+    d = annuaire.load()
+    entree, _ = annuaire.trouver(req.texte, d)
+    out = {"match": entree is not None,
+           "regles_transport": [r["loi"] for r in d["regles_transport"]]}
+    if entree:
+        p = entree["prescription"]
+        out.update(entree=entree["id"], prescription=p,
+                   preuve=list(entree["preuve"]),
+                   prompt_lm=routeur.prompt_routee(p, req.texte))
+    else:
+        out["note"] = ("aucune entrée : le routeur ne devine pas. Une "
+                       "entrée nouvelle exige une ligne de bench (R4). "
+                       "Outil unitaire : /api/v1/intent/card.")
+    return _router_out(out)
+
+
+@app.post("/api/v1/router/apply")
+def api_router_apply(req: RouterTextRequest):
+    """L'annuaire APPELLE et APPLIQUE : grammaire fermée matchée →
+    créneaux extraits verbatim → la fiche tourne, zéro LM. Sinon :
+    refus nommé + prompt à remplir — jamais un nombre inventé."""
+    d = annuaire.load()
+    entree, _ = annuaire.trouver(req.texte, d)
+    if entree is None:
+        return _router_out({"applied": False, "match": False, "note":
+                            "pas d'entrée d'annuaire : aucun nombre "
+                            "sera produit. Outil unitaire : "
+                            "/api/v1/intent/card."})
+    p = entree["prescription"]
+    slots, manques, ambigus = routeur.extraire(p["fiche"], req.texte)
+    if manques or ambigus:
+        return _router_out({
+            "applied": False, "match": True, "entree": entree["id"],
+            "creneaux_manquants": manques, "ambigus": ambigus,
+            "prescription": p,
+            "note": "grammaire fermée : rien n'est deviné. Remplis les "
+                    "créneaux avec le prompt_lm (recopie verbatim), "
+                    "puis POSTe la fiche.",
+            "prompt_lm": routeur.prompt_routee(p, req.texte)})
+    body, err = _run_fiche(p["fiche"].replace("-", "_"), {"slots": slots})
+    if err is not None:
+        return err
+    out = {"applied": True, "entree": entree["id"], "creneaux": slots,
+           "cible": p["cible"],
+           "reponse": (body.get("answer") or {}).get(p["cible"]),
+           "fiche": body}
+    return _router_out(out)
 
 
 class RecipeFactsRequest(BaseModel):
@@ -7915,6 +7980,8 @@ def index(request: Request):
             "/api/v1/fiche/shop-reste": "POST slots (total sold_morning pct_afternoon) -> the rest-after-rest chain traced, exact (free)",
             "/api/v1/fiche/partage-reste": "POST slots (total first_part second_of_rest) -> share-of-the-rest traced, fractions welcome (free)",
             "/api/v1/fiche/soldes2": "POST slots (price pct1 pct2) -> final + the naive-sum lie measured (free)",
+            "/api/v1/router/plan": "POST texte -> prescribed fiche + slots + transport rule, each entry cited to a published bench line; never guesses (free)",
+            "/api/v1/router/apply": "POST texte -> closed-grammar match: the server extracts verbatim slots and RUNS the fiche, zero LM calls; else named refusal + fill-in prompt (free)",
             "/api/v1/recipe/facts": "POST free text -> normalized fact inventory + money total in one call (free)",
             "/api/v1/intent/card": "POST a human sentence -> tool choice + pre-filled form or the exact missing-field question (free)",
             "/api/v1/intent/check": "POST tool + filled args -> ok or the exact fields still missing (free)",

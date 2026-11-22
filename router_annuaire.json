@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "note": "Annuaire de douleurs — chaque entrée porte sa preuve (fichier de bench commité AVANT elle). Spec et lois : docs/ROUTER-SPEC.md. Ce fichier est de la DATA : il se pinne comme les goldens, il ne s'invente pas à chaud.",
+  "regles_transport": [
+    {"id": "T1", "loi": "chaîne → fiche mono-appel ROUTÉE, jamais de choix multiple exposé au LM", "preuve": "bench/FINDINGS-F5.md"},
+    {"id": "T2", "loi": "retry interdit SAUF une repasse sur refus nommé (champ+forme donnés)", "preuve": "bench/FINDINGS-V17.md"},
+    {"id": "T3", "loi": "multi-tours (protocole steps) réservé aux classes disciplinées mesurées (bras S, v15)", "preuve": "bench/FINDINGS-V15.md"},
+    {"id": "T4", "loi": "la réponse est answer[cible], jamais la dernière valeur de la trace", "preuve": "bench/run22.py (gate machine 22-11 : trace[-1]=leftover ≠ cible)"}
+  ],
+  "entrees": [
+    {
+      "id": "chaine-shop-reste",
+      "symptome": "deux ventes successives dont une en % DU RESTE ; « combien reste-t-il »",
+      "mots_cles": ["reste", "restant", "après-midi", "du reste"],
+      "classe": "chaine",
+      "prescription": {
+        "fiche": "shop-reste",
+        "creneaux": ["total", "sold_morning", "pct_afternoon"],
+        "cible": "remaining",
+        "transport": "mono-appel-routé"
+      },
+      "preuve": ["bench/FINDINGS-F5.md", "bench/FINDINGS-V16.md"]
+    },
+    {
+      "id": "chaine-partage-reste",
+      "symptome": "partage en plusieurs parts où une part est une fraction DU RESTE",
+      "mots_cles": ["partage", "reçoit", "du reste", "moitié", "tiers", "quart"],
+      "classe": "chaine",
+      "prescription": {
+        "fiche": "partage-reste",
+        "creneaux": ["total", "first_part", "second_of_rest"],
+        "cible": "second_share",
+        "transport": "mono-appel-routé"
+      },
+      "preuve": ["bench/FINDINGS-F5.md", "bench/FINDINGS-V16.md"]
+    },
+    {
+      "id": "chaine-soldes2",
+      "symptome": "deux réductions successives en % ; la somme des % est un leurre",
+      "mots_cles": ["solde", "soldé", "réduit", "réduction", "remise",
+                    "baisse", "hausse", "successive"],
+      "classe": "chaine",
+      "prescription": {
+        "fiche": "soldes2",
+        "creneaux": ["price", "pct1", "pct2"],
+        "cible": "final",
+        "transport": "mono-appel-routé"
+      },
+      "preuve": ["bench/FINDINGS-V16.md", "bench/FINDINGS-F5.md"]
+    }
+  ]
+}
