@@ -1,0 +1,150 @@
+{"arm": "M", "model": "machine", "day": 0, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 1, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 2, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 3, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 4, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 5, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 6, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 7, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 8, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 9, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 10, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 11, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 12, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 13, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 14, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 15, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 16, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 17, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 18, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 19, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 20, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 21, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 22, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 23, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 24, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 25, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 26, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 27, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 28, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "M", "model": "machine", "day": 29, "correct": true, "sha": "8f56011cb750", "toks": 0}
+{"arm": "N", "model": "1.5b", "day": 0, "correct": false, "calls": 1, "toks": 699, "sha": "03706910f62f"}
+{"arm": "N", "model": "1.5b", "day": 1, "correct": false, "calls": 1, "toks": 708, "sha": "043fe0903eee"}
+{"arm": "N", "model": "1.5b", "day": 2, "correct": false, "calls": 1, "toks": 703, "sha": "1e516ba1eacc"}
+{"arm": "N", "model": "1.5b", "day": 3, "correct": false, "calls": 1, "toks": 703, "sha": "1e516ba1eacc"}
+{"arm": "N", "model": "1.5b", "day": 4, "correct": false, "calls": 1, "toks": 704, "sha": "f672ee53435e"}
+{"arm": "N", "model": "1.5b", "day": 5, "correct": false, "calls": 1, "toks": 709, "sha": "041e2f47fa39"}
+{"arm": "N", "model": "1.5b", "day": 6, "correct": false, "calls": 1, "toks": 712, "sha": "dcad5e717234"}
+{"arm": "N", "model": "1.5b", "day": 7, "correct": false, "calls": 1, "toks": 700, "sha": "73c5c5661507"}
+{"arm": "N", "model": "1.5b", "day": 8, "correct": false, "calls": 1, "toks": 701, "sha": "8dc3ca4a0d81"}
+{"arm": "N", "model": "1.5b", "day": 9, "correct": false, "calls": 1, "toks": 691, "sha": "385e5d0f932e"}
+{"arm": "N", "model": "1.5b", "day": 10, "correct": false, "calls": 1, "toks": 694, "sha": "11d2474a8016"}
+{"arm": "N", "model": "1.5b", "day": 11, "correct": false, "calls": 1, "toks": 698, "sha": "2813fac4a6bf"}
+{"arm": "N", "model": "1.5b", "day": 12, "correct": false, "calls": 1, "toks": 707, "sha": "2344354e861c"}
+{"arm": "N", "model": "1.5b", "day": 13, "correct": false, "calls": 1, "toks": 698, "sha": "5d8c42c5923f"}
+{"arm": "N", "model": "1.5b", "day": 14, "correct": false, "calls": 1, "toks": 694, "sha": "196d60d85e01"}
+{"arm": "N", "model": "1.5b", "day": 15, "correct": false, "calls": 1, "toks": 702, "sha": "2bb1f952a01a"}
+{"arm": "N", "model": "1.5b", "day": 16, "correct": false, "calls": 1, "toks": 709, "sha": "041e2f47fa39"}
+{"arm": "N", "model": "1.5b", "day": 17, "correct": false, "calls": 1, "toks": 694, "sha": "196d60d85e01"}
+{"arm": "N", "model": "1.5b", "day": 18, "correct": false, "calls": 1, "toks": 707, "sha": "a3a7fadc1c2b"}
+{"arm": "N", "model": "1.5b", "day": 19, "correct": false, "calls": 1, "toks": 692, "sha": "d23b77cbdc24"}
+{"arm": "N", "model": "1.5b", "day": 20, "correct": false, "calls": 1, "toks": 703, "sha": "1e516ba1eacc"}
+{"arm": "N", "model": "1.5b", "day": 21, "correct": false, "calls": 1, "toks": 698, "sha": "5a137bcaef43"}
+{"arm": "N", "model": "1.5b", "day": 22, "correct": false, "calls": 1, "toks": 694, "sha": "196d60d85e01"}
+{"arm": "N", "model": "1.5b", "day": 23, "correct": false, "calls": 1, "toks": 702, "sha": "2bb1f952a01a"}
+{"arm": "N", "model": "1.5b", "day": 24, "correct": false, "calls": 1, "toks": 705, "sha": "f7dbb80dd477"}
+{"arm": "N", "model": "1.5b", "day": 25, "correct": false, "calls": 1, "toks": 708, "sha": "043fe0903eee"}
+{"arm": "N", "model": "1.5b", "day": 26, "correct": false, "calls": 1, "toks": 712, "sha": "dcad5e717234"}
+{"arm": "N", "model": "1.5b", "day": 27, "correct": false, "calls": 1, "toks": 696, "sha": "5069d3f96e32"}
+{"arm": "N", "model": "1.5b", "day": 28, "correct": false, "calls": 1, "toks": 698, "sha": "2813fac4a6bf"}
+{"arm": "N", "model": "1.5b", "day": 29, "correct": false, "calls": 1, "toks": 703, "sha": "feb765dd4430"}
+{"arm": "R", "model": "1.5b", "day": 0, "correct": false, "calls": 3, "toks": 2184, "sha": "6e9b752a7703"}
+{"arm": "R", "model": "1.5b", "day": 1, "correct": false, "calls": 3, "toks": 2173, "sha": "16ab6739fa03"}
+{"arm": "R", "model": "1.5b", "day": 2, "correct": false, "calls": 3, "toks": 2176, "sha": "73b4edda2436"}
+{"arm": "R", "model": "1.5b", "day": 3, "correct": false, "calls": 3, "toks": 2185, "sha": "feb765dd4430"}
+{"arm": "R", "model": "1.5b", "day": 4, "correct": false, "calls": 3, "toks": 2190, "sha": "e4e480248886"}
+{"arm": "R", "model": "1.5b", "day": 5, "correct": false, "calls": 3, "toks": 2181, "sha": "dcad5e717234"}
+{"arm": "R", "model": "1.5b", "day": 6, "correct": false, "calls": 3, "toks": 2193, "sha": "2bb1f952a01a"}
+{"arm": "R", "model": "1.5b", "day": 7, "correct": false, "calls": 3, "toks": 2173, "sha": "e0802f1394c9"}
+{"arm": "R", "model": "1.5b", "day": 8, "correct": false, "calls": 3, "toks": 2182, "sha": "16ab6739fa03"}
+{"arm": "R", "model": "1.5b", "day": 9, "correct": false, "calls": 3, "toks": 2179, "sha": "16ab6739fa03"}
+{"arm": "R", "model": "1.5b", "day": 10, "correct": false, "calls": 3, "toks": 2183, "sha": "bee9a662e1cd"}
+{"arm": "R", "model": "1.5b", "day": 11, "correct": false, "calls": 3, "toks": 2215, "sha": "f0ddf8e778c0"}
+{"arm": "R", "model": "1.5b", "day": 12, "correct": false, "calls": 3, "toks": 2181, "sha": "95299bf00000"}
+{"arm": "R", "model": "1.5b", "day": 13, "correct": false, "calls": 3, "toks": 2169, "sha": "12ba4aa42c2a"}
+{"arm": "R", "model": "1.5b", "day": 14, "correct": false, "calls": 3, "toks": 2190, "sha": "2bb1f952a01a"}
+{"arm": "R", "model": "1.5b", "day": 15, "correct": false, "calls": 3, "toks": 2178, "sha": "73c5c5661507"}
+{"arm": "R", "model": "1.5b", "day": 16, "correct": false, "calls": 3, "toks": 2192, "sha": "16ab6739fa03"}
+{"arm": "R", "model": "1.5b", "day": 17, "correct": false, "calls": 3, "toks": 2176, "sha": "38cd97e0e756"}
+{"arm": "R", "model": "1.5b", "day": 18, "correct": false, "calls": 3, "toks": 2205, "sha": "cb8d52389b8d"}
+{"arm": "R", "model": "1.5b", "day": 19, "correct": false, "calls": 3, "toks": 2179, "sha": "1e516ba1eacc"}
+{"arm": "R", "model": "1.5b", "day": 20, "correct": false, "calls": 3, "toks": 2199, "sha": "1ceaf0557823"}
+{"arm": "R", "model": "1.5b", "day": 21, "correct": false, "calls": 3, "toks": 2181, "sha": "feb765dd4430"}
+{"arm": "R", "model": "1.5b", "day": 22, "correct": false, "calls": 3, "toks": 2179, "sha": "1e516ba1eacc"}
+{"arm": "R", "model": "1.5b", "day": 23, "correct": false, "calls": 3, "toks": 2182, "sha": "12ba4aa42c2a"}
+{"arm": "R", "model": "1.5b", "day": 24, "correct": false, "calls": 3, "toks": 2175, "sha": "5516975df4e6"}
+{"arm": "R", "model": "1.5b", "day": 25, "correct": false, "calls": 3, "toks": 2198, "sha": "12ba4aa42c2a"}
+{"arm": "R", "model": "1.5b", "day": 26, "correct": false, "calls": 3, "toks": 2188, "sha": "16ab6739fa03"}
+{"arm": "R", "model": "1.5b", "day": 27, "correct": false, "calls": 3, "toks": 2166, "sha": "8dc3ca4a0d81"}
+{"arm": "R", "model": "1.5b", "day": 28, "correct": false, "calls": 3, "toks": 2165, "sha": "3c7e4fc9858a"}
+{"arm": "R", "model": "1.5b", "day": 29, "correct": false, "calls": 3, "toks": 2181, "sha": "ac1c792691d3"}
+{"arm": "N", "model": "7b", "day": 0, "correct": false, "calls": 1, "toks": 634, "sha": "34ddabd2e75f"}
+{"arm": "N", "model": "7b", "day": 1, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 2, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 3, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 4, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 5, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 6, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 7, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 8, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 9, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 10, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 11, "correct": false, "calls": 1, "toks": 636, "sha": "88b68b14739d"}
+{"arm": "N", "model": "7b", "day": 12, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 13, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 14, "correct": false, "calls": 1, "toks": 609, "sha": "480e18aec238"}
+{"arm": "N", "model": "7b", "day": 15, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 16, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 17, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 18, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 19, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 20, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 21, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 22, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 23, "correct": false, "calls": 1, "toks": 609, "sha": "480e18aec238"}
+{"arm": "N", "model": "7b", "day": 24, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 25, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 26, "correct": false, "calls": 1, "toks": 609, "sha": "480e18aec238"}
+{"arm": "N", "model": "7b", "day": 27, "correct": false, "calls": 1, "toks": 609, "sha": "480e18aec238"}
+{"arm": "N", "model": "7b", "day": 28, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "N", "model": "7b", "day": 29, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 0, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 1, "correct": false, "calls": 3, "toks": 1897, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 2, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 3, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 4, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 5, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 6, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 7, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 8, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 9, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 10, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 11, "correct": false, "calls": 3, "toks": 1897, "sha": "f417bfcda6d0"}
+{"arm": "R", "model": "7b", "day": 12, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 13, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 14, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 15, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 16, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 17, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 18, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 19, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 20, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 21, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 22, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 23, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 24, "correct": false, "calls": 2, "toks": 1253, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 25, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 26, "correct": false, "calls": 3, "toks": 1897, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 27, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 28, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}
+{"arm": "R", "model": "7b", "day": 29, "correct": false, "calls": 1, "toks": 610, "sha": "6daa664ae78d"}

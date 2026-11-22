@@ -1,0 +1,56 @@
+{"harness": "f5-accept", "menu": "A_découverte", "model": "0.5b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 0, "toks": 288, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "0.5b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 0, "toks": 363, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "0.5b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 0, "toks": 329, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "0.5b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 0, "toks": 381, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "0.5b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 0, "toks": 41162, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "0.5b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 0, "toks": 410, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "0.5b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 0, "toks": 369, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "1.5b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 568, "verdict": "ERREUR:KeyError"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "1.5b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 0, "toks": 268, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "1.5b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 565, "verdict": "ERREUR:KeyError"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "1.5b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 0, "toks": 268, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "1.5b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 571, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "1.5b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 0, "toks": 262, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "1.5b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 572, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "7b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 541, "got": "240", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "7b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 1, "toks": 567, "got": "382.90", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "7b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 541, "got": "120", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "7b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 567, "got": "776.60", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "7b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 541, "got": "300", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "7b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 562, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "7b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 542, "got": "225", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "8b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 494, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "8b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 0, "toks": 222, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "8b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 494, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "8b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 497, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "8b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 494, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "8b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 489, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "A_découverte", "model": "8b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 494, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "0.5b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 346, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "0.5b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 0, "toks": 140, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "0.5b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 342, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "0.5b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 361, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "0.5b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 344, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "0.5b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 357, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "0.5b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 0, "toks": 132, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "1.5b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 0, "toks": 158, "got": "240", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "1.5b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 1, "toks": 380, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "1.5b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 354, "got": "120", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "1.5b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 0, "toks": 173, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "1.5b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 354, "got": "300", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "1.5b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 372, "got": "2115.36", "verdict": "FAUX"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "1.5b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 355, "got": "225", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "7b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 1, "toks": 339, "got": "240", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "7b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 1, "toks": 365, "got": "382.90", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "7b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 1, "toks": 339, "got": "120", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "7b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 1, "toks": 365, "got": "776.60", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "7b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 1, "toks": 339, "got": "300", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "7b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 1, "toks": 357, "verdict": "REFUS-2"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "7b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 1, "toks": 340, "got": "225", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "8b", "i": 0, "family": "mix", "gold": "240.00", "repairs": 0, "toks": 136, "got": "240", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "8b", "i": 2, "family": "partage", "gold": "382.90", "repairs": 0, "toks": 114, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "8b", "i": 6, "family": "mix", "gold": "120.00", "repairs": 0, "toks": 136, "got": "120", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "8b", "i": 8, "family": "partage", "gold": "776.60", "repairs": 0, "toks": 114, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "8b", "i": 12, "family": "mix", "gold": "300.00", "repairs": 0, "toks": 136, "got": "300", "verdict": "OK"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "8b", "i": 14, "family": "partage", "gold": "1469.00", "repairs": 0, "toks": 114, "verdict": "PARSE"}
+{"harness": "f5-accept", "menu": "B_routée", "model": "8b", "i": 18, "family": "mix", "gold": "225.00", "repairs": 0, "toks": 136, "got": "225", "verdict": "OK"}
