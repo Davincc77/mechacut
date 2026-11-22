@@ -1,0 +1,6 @@
+{
+ "name": "agent_modelid_punct_solar_one_dash",
+ "path": "/api/v1/agent/modelid",
+ "body": {"ids": ["upstage/solar-pro-4"],
+  "catalog": ["upstage/solar-pro4"]}
+}

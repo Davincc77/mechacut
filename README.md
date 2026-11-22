@@ -5,16 +5,22 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 146 transforms + 9 named recipes as of v0.93.0, each with its tool card
+— 147 transforms + 9 named recipes as of v0.94.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 203 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 209 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money/unitprice` (unit price and shrinkflation with
+is the truth of today. Recent highlights: `agent/modelid` (static audit of
+your agent's model-id strings against a pasted catalog: closed grammar
+`org/name[:variant|#variant]`, named verdicts — PREFIX_KEPT, NO_ORG,
+CASE_DRIFT, PUNCT_DRIFT, VARIANT_DECOR — did-you-mean at a NAMED
+Levenshtein≤3 threshold, and the response itself swears that OK certifies
+shape, never that the GET answers: the V23 incident, written as doctrine
+into the bytes); `money/unitprice` (unit price and shrinkflation with
 the DENOMINATOR NAMED: 32→28 fl oz at the same sticker is −12.5% of
 product but +14.2857% per ounce — 1/7, never one headline number;
 "two-for-$7" of 15 oz jars pays 40.3509% MORE per ounce than the big

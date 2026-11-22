@@ -232,6 +232,7 @@ import dimkit
 import castkit
 import bogokit
 import unitpricekit
+import modelidkit
 import auditor
 import sayings
 import verdict
@@ -326,7 +327,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.93.0",
+    version="0.94.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4906,6 +4907,28 @@ def api_money_unitprice(req: MoneyUnitpriceRequest):
     return err if err else body
 
 
+class AgentModelidRequest(BaseModel):
+    ids: Optional[Any] = None
+    catalog: Optional[Any] = None
+
+
+def run_agent_modelid(args: dict):
+    try:
+        out = modelidkit.run_modelid(args)
+    except modelidkit.ModelIdError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/modelid")
+def api_agent_modelid(req: AgentModelidRequest):
+    body, err = run_agent_modelid(req.model_dump())
+    return err if err else body
+
+
 class JsonCoerceRequest(BaseModel):
     raw: Optional[str] = None
     json_schema: Optional[Dict[str, str]] = Field(default=None,
@@ -5357,6 +5380,7 @@ TOOL_RUN = {
            "json_coerce": run_json_coerce,
            "money_bogo": run_money_bogo,
            "money_unitprice": run_money_unitprice,
+           "agent_modelid": run_agent_modelid,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -8423,6 +8447,44 @@ MCP_TOOLS = [
                 "new_size": {"type": "string"},
                 "old_price": {"type": "string"},
                 "new_price": {"type": "string"},
+            },
+        },
+    },
+    {
+        "name": "agent_modelid",
+        "description": (
+            "Audit a LIST of model ids against a PASTED catalog with "
+            "closed grammar — zero fetch, zero guessing, named "
+            "verdicts. Why this and not 'curl | jq': every gateway "
+            "wants its own script, and a diff teaches nothing — here "
+            "each failure gets a NAME: PREFIX_KEPT (LiteLLM v1.82.3 "
+            "sent its own openrouter/ prefix upstream), NO_ORG (n8n "
+            "stripped the prefix a gateway routes on), CASE_DRIFT, "
+            "PUNCT_DRIFT (upstage/solar-pro-4 vs solar-pro4: one "
+            "dash, dead subagents), VARIANT_DECOR (:free is part of "
+            "the identifier, not a hat), NOT_IN_CATALOG with "
+            "did-you-mean at a NAMED threshold (Levenshtein <= 3 on "
+            "the normalized form) or silence — no invented near-miss. "
+            "V23 doctrine lives IN the response: OK certifies shape "
+            "and the pasted annuaire, NEVER the GET — invocability is "
+            "a ping this grammar refuses to fake. openclaw #20522/"
+            "#45294, litellm #37271/#14807 asked for exactly this by "
+            "name. Free, EN/FR/PT tags, golden sha."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["ids"],
+            "properties": {
+                "ids": {"type": "array", "minItems": 1,
+                        "maxItems": 200,
+                        "items": {"type": "string"},
+                        "description": "model id strings EXACTLY as "
+                                       "sent"},
+                "catalog": {"type": "array", "maxItems": 4000,
+                            "items": {"type": "string"},
+                            "description": "pasted annuaire ids (GET "
+                                           "/v1/models output); omit "
+                                           "for grammar-only mode"},
             },
         },
     },

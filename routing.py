@@ -818,6 +818,13 @@ TABLE = (
      "note bogo compre um leve segundo grátis mais barato par "
      "porcentagem real caixa promoção metade preço cupom desconto "
      "verdadeiro"),
+    ("agent_modelid", "/api/v1/agent/modelid", "code",
+     "audit model ids against a pasted catalog — named verdicts, "
+     "did-you-mean at a named distance, never swears the GET (V23)",
+     "model id modelid litellm openrouter gateway prefix prefixe "
+     "prefixo not found 404 invalid identifier alias catalog annuaire "
+     "catalogo erreur config agent nome modelo catalogo "
+     "identificador inexistente errado vierge tiret underscore"),
 
 )
 

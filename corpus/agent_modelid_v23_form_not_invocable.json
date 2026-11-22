@@ -1,0 +1,6 @@
+{
+ "name": "agent_modelid_v23_form_not_invocable",
+ "path": "/api/v1/agent/modelid",
+ "body": {"ids": ["anthropic/claude-sonnet-5.5:batch"],
+  "catalog": ["anthropic/claude-sonnet-5.5:batch"]}
+}

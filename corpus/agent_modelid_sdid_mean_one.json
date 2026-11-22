@@ -1,0 +1,6 @@
+{
+ "name": "agent_modelid_sdid_mean_one",
+ "path": "/api/v1/agent/modelid",
+ "body": {"ids": ["google/gemini-3.7-flsh"],
+  "catalog": ["google/gemini-3.7-flash"]}
+}

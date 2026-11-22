@@ -1,0 +1,6 @@
+{
+ "name": "agent_modelid_prefix_litellm_openrouter",
+ "path": "/api/v1/agent/modelid",
+ "body": {"ids": ["openrouter/google/gemini-2.5-flash"],
+  "catalog": ["google/gemini-2.5-flash"]}
+}

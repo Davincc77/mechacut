@@ -1,4 +1,10 @@
 {
+  "agent_modelid_no_org_n8n": "200:f0865a2e1ef5ae7c1ae2d3f769445ff21aabcc1e94e5a7c508b0b7202b39e346",
+  "agent_modelid_prefix_litellm_openrouter": "200:36506fd56f28fcde2b92e036243c5952cfbb63a282f5c10e9400c89962fc8a88",
+  "agent_modelid_punct_solar_one_dash": "200:894a28c22ff59ef45e2d8061536ea6a67ba2c74fd0109e50472b8f4f896424b3",
+  "agent_modelid_sdid_mean_one": "200:952ab127cbd1bfefcc9661f8580e07c2c1a35564090d08bc620d4b9355494cb2",
+  "agent_modelid_v23_form_not_invocable": "200:2fae94bb0d47fdd62625687f848d15f824d32dbd70e88f5ab60d82adf5bb0d0f",
+  "agent_modelid_variant_free_is_the_id": "200:18f2da8a4308ec0f417fe9d1753dba25aeb57e42604a15ad36344fec87950090",
   "apply_diff_strict": "200:530b5744e1c9a322dd77fcbf3328c32b22bdccc14ea37ac6a02f20a8cb81e3b8",
   "batch_round": "200:ee8d0ca6207575562198060f7d844e1d96d3b1ea5ea861c684da4083773c10bc",
   "caip_base": "200:50fdadcd15ae3afe15791392538806a6fae5d567da34dd07b8cffaf653785e94",

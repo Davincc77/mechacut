@@ -45,8 +45,8 @@ def test_manifest_token_budget():
     # per tool; the real ceiling is the byte budget + dense fold in the
     # routing module — line count is only a proxy, resized here as the
     # catalogue grows past its original 95-tool shape
-    assert len(lines) < 189   # resize 22-11 bundle66 (+money_unitprice :
-    # 188 lignes, budget octets <9000 tient — seul plafond réel)
+    assert len(lines) < 190   # resize 23-11 bundle68 (+agent_modelid :
+    # 189 lignes, budget octets <9000 tient — seul plafond réel)
     # (resize precedent 22-11 18h : <188, 186 lignes — bundle66
     # money_unitprice porte le catalogue a 188 lignes, le 189 ci-dessus
     # est le nouveau plafond ; le budget octets <9000 tient, seul
@@ -85,7 +85,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 155   # 146 tools + 9 recipes (22-11 bundle66 money_unitprice, resize apres bundle65 aging)
+    assert seen == len(routing.TABLE) == 156   # 147 tools + 9 recipes (23-11 bundle68 agent_modelid, resize apres bundle66 money_unitprice)
 
 
 def test_pack_unknown():

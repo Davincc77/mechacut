@@ -1,0 +1,6 @@
+{
+ "name": "agent_modelid_variant_free_is_the_id",
+ "path": "/api/v1/agent/modelid",
+ "body": {"ids": ["deepseek/deepseek-chat-v3:free"],
+  "catalog": ["deepseek/deepseek-chat-v3"]}
+}
