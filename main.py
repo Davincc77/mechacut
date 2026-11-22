@@ -4884,6 +4884,7 @@ def api_route(q: str = "", top: int = Query(default=5, ge=1, le=10)):
 
 class RecipeCleanTableRequest(BaseModel):
     csv: str
+    dates_format: Optional[str] = None
 
 
 class RecipeCleanJsonRequest(BaseModel):
@@ -4897,20 +4898,100 @@ class RecipeDataTrioRequest(BaseModel):
     urls: List[str]
 
 
+_YMD_SLASH = __import__("re").compile(
+    r"^(\d{4})[/.-](\d{1,2})[/.-](\d{1,2})$")
+_DMY_SLASH = __import__("re").compile(
+    r"^(\d{1,2})[/](\d{1,2})[/](\d{4})$")
+_GROUPS = __import__("re").compile(r"^\d{1,3}(,\d{3})+(\.\d+)?$")
+
+
+def _normalize_clean_cell(v, rule, counters):
+    """P2 (sonde de contrat 22-11, gold B002 fait à la main) : la
+    recette clean-table NORMALISE les valeurs — date ISO, montant sans
+    séparateur de milliers, texte littéral CONSERVÉ (2524.20 rend
+    '2524.20', pas float 2524.2 : le point porte le contrat, F7).
+    Les jours séparés par slash sont lus selon UNE RÈGLE DÉCLARÉE —
+    jamais devinée cellule par cellule ; '25/12/...' est unambiguous
+    et passe dans les deux règles."""
+    import re as _re
+    t = str(v).strip()
+    m = _YMD_SLASH.match(t)
+    if m:
+        y, mo, d = (int(x) for x in m.groups())
+        if 1 <= mo <= 12 and 1 <= d <= 31:
+            counters["dates"] += 1
+            return "%04d-%02d-%02d" % (y, mo, d)
+    m = _DMY_SLASH.match(t)
+    if m:
+        a1, b1, y = (int(x) for x in m.groups())
+        first, second = (a1, b1) if rule == "dmy" else (b1, a1)
+        if 1 <= second <= 12 and 1 <= first <= 31:
+            counters["dates"] += 1
+            return "%04d-%02d-%02d" % (y, second, first)
+        counters["dates_invalid_kept"] += 1
+        return t
+    if _GROUPS.match(t):
+        counters["milliers"] += 1
+        return t.replace(",", "")
+    return t
+
+
 def _recipe_clean_table(req):
+    rule = getattr(req, "dates_format", None)
+    if rule is None:
+        rule = "dmy"
+    if rule not in ("dmy", "mdy"):
+        return None, bad_request([{
+            "field": "dates_format", "observed": rule,
+            "message": "the day/month rule is CLOSED: dmy or mdy — "
+                       "the server never guesses a slash date cell by "
+                       "cell",
+            "expected": "one of: dmy, mdy"}])
     out, err = run_csv_fix({"csv": req.csv})
     if err:
         return None, err
     fixed, notes = out["output"], out["notes"]
+    # normalize BEFORE types: the typed pass would melt "2524.20"
+    # into a float and the gold would be structurally unreachable.
+    _rdr = __import__("csv").DictReader(fixed.splitlines())
+    counters = {"dates": 0, "milliers": 0, "dates_invalid_kept": 0}
+    norm_rows = []
+    for raw in _rdr:
+        norm_rows.append({k: _normalize_clean_cell(v, rule, counters)
+                          for k, v in raw.items() if k is not None})
+    if not norm_rows:
+        # la refusure « produced no rows » vivait dans csv/types ;
+        # la normalisation la précède désormais — elle la dit ELLE-
+        # MÊME, à son nom, avant de re-sérialiser du vide.
+        return None, bad_request([{
+            "field": "csv",
+            "message": "values/normalize: csv produced no rows"}])
+    _w = __import__("io").StringIO()
+    if norm_rows:
+        _wr = __import__("csv").DictWriter(_w, fieldnames=list(
+            norm_rows[0].keys()))
+        _wr.writeheader()
+        _wr.writerows(norm_rows)
+    fixed = _w.getvalue()
+    if counters["dates"]:
+        notes = notes + ["dates_iso_normalized:%d" % counters["dates"],
+                         "dates_rule:%s (default dmy — declare "
+                         "dates_format to override)" % rule]
+    if counters["milliers"]:
+        notes = notes + ["thousands_commas_stripped:%d"
+                         % counters["milliers"]]
     out, err = run_csv_types({"csv": fixed})
     if err:
         return None, err
-    rows, columns = out["output"], out["columns"]
-    out, err = run_list_dedupe({"items": rows, "mode": "exact"})
+    columns = out["columns"]
+    # rows keep the LITERAL normalized text (gold B002: '2524.20' as
+    # a string is a precision claim; the typed melt loses it).
+    out, err = run_list_dedupe({"items": norm_rows, "mode": "exact"})
     if err:
         return None, err
     body = {"recipe": "clean-table",
-            "steps": ["csv/fix", "csv/types", "list/dedupe"],
+            "steps": ["csv/fix", "values/normalize", "csv/types",
+                      "list/dedupe"],
             "fix_notes": notes,
             "columns": columns,
             "rows": out["output"],

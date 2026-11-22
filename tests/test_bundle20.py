@@ -17,7 +17,7 @@ def test_recipe_facts_canonical_inventory():
     d = r.json()
     inv = d["inventory"]
     assert inv["money"] == ["910.50", "4300.00"]          # tri numérique
-    assert inv["percent"] == ["3.1", "6.2", "12.5"]
+    assert inv["percent"] == ["3.1%", "6.2%", "12.5%"]  # gold B003 (fait à la main) — le produit avait tort
     assert inv["date"] == ["2026-11-18", "2026-11-19", "2026-11-25"]
     assert inv["url"] == ["https://api.pay.eu/v1/checkout"]
     assert inv["email"] == ["ops@pay.eu"]

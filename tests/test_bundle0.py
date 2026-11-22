@@ -145,11 +145,13 @@ def test_recipe_clean_table_pipeline():
     r2 = client.post("/api/v1/recipe/clean-table", json={"csv": dirty})
     assert r1.content == r2.content
     b = r1.json()
-    assert b["steps"] == ["csv/fix", "csv/types", "list/dedupe"]
+    assert b["steps"] == ["csv/fix", "values/normalize", "csv/types", "list/dedupe"]
     assert b["fix_notes"] == ["crlf_normalized"]
     assert b["removed_rows"] == 2
-    assert b["rows"] == [{"name": "Alpha", "amount": 1.0},
-                         {"name": "beta", "amount": 2.5}]
+    # bundle 62 / gold B002 : les rows sont du TEXTE LITTÉRAL
+    # normalisé — 2524.20 fondu en float perd la précision affirmée.
+    assert b["rows"] == [{"name": "Alpha", "amount": "1"},
+                         {"name": "beta", "amount": "2.5"}]
     assert b["columns"][1]["type"] == "float"
     assert "sha256" in b
     # a failing step returns its own repair prompt, untouched

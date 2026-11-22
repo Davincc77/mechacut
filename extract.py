@@ -34,9 +34,16 @@ _UUID = re.compile(r"\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-"
                    r"[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b")
 _IBANISH = re.compile(r"\b[A-Z]{2}\d{2}(?:\s?\d[A-Z0-9]){10,30}\b")
 _NUM_TAIL = r"(?:\d[\d.,]*\d|\d)"          # amounts must end on a digit
+_SPACE_GRP = r"\d{1,3}(?:[ \u00a0]\d{3})*(?:[.,]\d{1,2})?"
 _MONEY = re.compile(
     r"(?<![\w.,$€£¥/])(?:[-+]?(?:[$€£¥R$]\s?" + _NUM_TAIL +
-    r"|" + _NUM_TAIL + r"\s?(?:USD|EUR|BRL|GBP|JPY|XOF)))(?![\w])")
+    r"|" + _NUM_TAIL + r"\s?(?:USD|EUR|BRL|GBP|JPY|XOF)" +
+    # P3 (sonde de contrat 22-11) : la note FR disait « 12 450,75 € » —
+    # ni espace-milliers ni devise SUFFIXE n'étaient reconnus ; le
+    # montant tombait dans number et se FRAGMENTAIT. L'espace normale
+    # ET l'U+00A0 (leçon ③ de la sonde : fatal en bytes) sont couverts.
+    r"|" + _SPACE_GRP + r"\s?[$€£¥]" +
+    r"|" + _SPACE_GRP + r"\s?(?:USD|EUR|BRL|GBP|JPY|XOF)))(?![\w])")
 _NUM = re.compile(r"(?<![\w.,$€£¥/-])[-+]?\d+(?:[.,]\d+)*(?=%|\b)"
                   r"(?![-/]\d)")
 _KIND_ORDER = ("money", "date", "number", "percent", "url", "email",
@@ -145,11 +152,26 @@ def select_chunks(chunks, query, k=3, unit="word"):
 # --------------------------------------------- composition (Bundle 20)
 def _canon_money(v):
     from decimal import Decimal, InvalidOperation
+    import re as _re
     t = v.strip()
-    for ch in ("$", "\u20ac", "\u00a3", "\u00a5", " "):
+    for ch in ("$", "\u20ac", "\u00a3", "\u00a5"):
         t = t.replace(ch, "")
     neg = t.startswith("-")
-    t = t.lstrip("-").replace(",", "")
+    t = t.lstrip("-").strip()
+    # P3 : « 250,50 » valait 25050 — le strip naïf de la virgule
+    # détruisait la monnaie FR. Règle de la maison (F7/B010) : le
+    # DERNIER séparateur de chiffre est la décimale ; les virgules
+    # de groupes de trois sont des milliers.
+    t = _re.sub(r"[ \u00a0](?=\d{3}\b)", "", t)
+    if "," in t and "." in t:
+        t = (t.replace(",", "") if t.rfind(",") < t.rfind(".")
+             else t.replace(".", "").replace(",", "."))
+    elif "," in t:
+        t = (t.replace(",", "")
+             if _re.search(r",\d{3}(,\d{3}|$)", t) and
+             not _re.search(r",\d{1,2}$", t) else t.replace(",", "."))
+    else:
+        pass
     # trailing devise textuelle : 1 000 USD / 50 dollars
     for suf in ("USD", "usd", "dollars", "dollar", "EUR", "eur", "euros"):
         if t.endswith(suf):
@@ -158,13 +180,14 @@ def _canon_money(v):
         d = Decimal(t)
     except InvalidOperation:
         return None
-    d = d.quantize(Decimal("0.01")) if d == d.to_integral_value() is False         else d.quantize(Decimal("0.01"))
+    d = d.quantize(Decimal("0.01"))
     return ("-" if neg else "") + format(d, "f")
 
 
 def _canon_percent(v):
-    t = v.strip().rstrip("%").replace(" ", "")
-    return t or None
+    t = v.strip().rstrip("%").replace(" ", "").replace("\u00a0", "")
+    t = t.replace(",", ".")
+    return (t + "%") if t else None
 
 
 def _canon_date(v):
@@ -180,8 +203,13 @@ def _canon_date(v):
 
 
 def _numkey(s):
+    # le canon des pourcents porte un "%" (gold B003 : « 12.5% ») —
+    # sans ce strip le tri retombait en lexicographique et 12,5
+    # passait avant 3,1. Le tri numérique est un contrat, pas un
+    # ornement.
+    t = s.rstrip("%")
     try:
-        return (0, float(s.replace(",", "")))
+        return (0, float(t.replace(",", "")))
     except ValueError:
         return (1, s)
 

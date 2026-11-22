@@ -2233,7 +2233,7 @@
    },
    "name": "recipe_clean_table",
    "path": "/api/v1/recipe/clean-table",
-   "sha256": "2440b52337b873059d5943afd0921c1d4064ee4fdaba34bd3ab971281bae6f37",
+   "sha256": "5567444134b2cecb56f6c949f7d3e1c2b17b464da330a8c60b158050aeb9b4b5",
    "status": 200
   },
   {
@@ -2242,7 +2242,7 @@
    },
    "name": "recipe_facts_incident",
    "path": "/api/v1/recipe/facts",
-   "sha256": "1307da9ea91a66019c3e9501a3cc3f36d51d9cb61b835a22e0bbfa52a50d2fad",
+   "sha256": "f05212080a89655cfa39a78f584c4392a61c188140b406d394e0dceabcea4981",
    "status": 200
   },
   {
