@@ -61,7 +61,12 @@ GOLD_SHA = hashlib.sha256(GOLD_C.encode()).hexdigest()
 
 def api7(temp=0.7):
     """Transport v23 (retry transitoire), temperature 0,7 — régime
-    réel gelé dans l'en-tête."""
+    réel gelé dans l'en-tête. Amendement 22-11 (après 28 jours N,
+    publié dans le commit, sémantique des cellules déjà jouées
+    inchangée) : le contenu seul est LA RÉPONSE — ce que l'agent de
+    prod reçoit. finish_reason et la longueur du reasoning sont
+    enregistrés : le SILENCE (content vide, thinking avalé par la
+    limite 8192) devient une classe mesurée, pas un bug de lecture."""
     def call():
         body = {"model": MODEL,
                 "messages": [{"role": "user", "content": SPEC}],
@@ -84,9 +89,12 @@ def api7(temp=0.7):
             time.sleep(wait)
             wait = min(wait * 2, 120)
     u = r.get("usage", {})
-    return (r["choices"][0]["message"]["content"] or "",
+    m = r["choices"][0]["message"]
+    return (m.get("content") or "",
             int(u.get("prompt_tokens", 0)),
-            int(u.get("completion_tokens", 0)))
+            int(u.get("completion_tokens", 0)),
+            r["choices"][0].get("finish_reason"),
+            len(m.get("reasoning") or ""))
 
 
 def judge(text):
@@ -115,9 +123,11 @@ def cell(arm, day, fh):
     out = ok = shape = False
     sha = ""
     text = ""
+    fin = None
+    rs_l = 0
     budget = 1 if arm == "N" else 3
     for _ in range(budget):
-        text, ti, to = api7()
+        text, ti, to, fin, rs_l = api7()
         calls += 1
         toks_in += ti
         toks_out += to
@@ -127,11 +137,19 @@ def cell(arm, day, fh):
         if shape:
             break
     usd = (toks_in * PRICE_IN + toks_out * PRICE_OUT) / 1e6
+    err = None
+    if not ok:
+        if not (text or "").strip():
+            err = "silence"
+        elif not shape:
+            err = "forme"
+        else:
+            err = "FAUX"
     row = {"harness": "v24-lfm3-30days", "arm": arm, "model": "lfm3",
            "day": day, "ok": bool(ok), "shape": bool(shape),
            "sha": sha, "tok_in": toks_in, "tok_out": toks_out,
            "usd": round(usd, 6), "calls": calls,
-           "err": None if ok else ("forme" if not shape else "FAUX"),
+           "finish": fin, "reasoning_chars": rs_l, "err": err,
            "secs": round(time.time() - t0, 2)}
     fh.write(json.dumps(row, ensure_ascii=False) + "\n")
     fh.flush()
