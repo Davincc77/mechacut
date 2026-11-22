@@ -14,7 +14,14 @@ written to be followed literally by a 0.5B. Prove-the-determinism checklist:
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `ship/dimweight` (what a
+is the truth of today. Recent highlights: `money/bogo` (what a
+"buy one get one 50% off" sign REALLY bills: the percent lands on the
+CHEAPER item of each pair — published retail rule — so $60+$40 pays 80
+of 100 = 20.0000%, neither 25 nor 50; equal prices give 25% on the pair,
+never 50; the odd item pays FULL because pairs are GIVEN, never guessed;
+a −30% coupon stacks as FACTORS — 25 then 30 = 47.5%, never 55 — with
+the per-pair expression and the exact fraction beside the 4-dp display);
+`ship/dimweight` (what a
 parcel is actually BILLED, one step per rounding: two published
 calculators print 35 and 34.5 on the SAME 20×20×12 inches — the exact
 value 4800/139 = 34.5323741007 settles it; gates (>1 ft³), ceilings
