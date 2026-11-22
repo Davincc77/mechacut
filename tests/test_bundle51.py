@@ -123,8 +123,8 @@ def test_computed_quantity_in_share_slot_refused():
 
 
 def test_pct_100_legitimate_not_refused():
-    # 100 % est un pourcentage licite (tout vendu) : la borne est
-    # « ambigu >100 % ? », pas « tout ce qui dépasse 1 en virgule ».
+    # 100 % est un pourcentage licite : tout le reste est vendu, il
+    # reste ZERO — et zéro doit être rendu, pas refusé comme ambigu.
     out = fk.run_fiche("shop_reste", {"total": "50", "sold_morning": "10",
                                       "pct_afternoon": "100%"})
-    assert out["answer"]["remaining"] == "40"
+    assert out["answer"]["remaining"] == "0"

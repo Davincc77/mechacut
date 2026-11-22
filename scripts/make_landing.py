@@ -133,7 +133,6 @@ TR = {
                  "challenge, settled by a facilitator. Between a server "
                  "and a robot, only prices and receipts exist.",
   "bench.h2": "Measured, not promised",
-  "bench9.h2": "Or: the model never has to be smart",
   "bench9.intro": "One deliberately vague French sentence, six required "
                   "fields — money sorted to 2 decimals, percents, unique "
                   "dates, URL, email, total. Expectations hand-computed "
@@ -146,7 +145,6 @@ TR = {
                  "autonomous variant (the model picks the tool itself, no "
                  "card played by the harness) also scores 6/6. Seeds, "
                  "scripts, failures: bench/results_v9.jsonl.\n",
-  "bench10.h2": "Or: it was never about being smart — bench v10",
   "bench10.intro": "Eighteen tasks with ONE right answer each — GS1 check "
                    "digits, a SHA-256, chained discounts, a money column "
                    "that proves its own decimal comma. Two free LOCAL "
@@ -159,7 +157,64 @@ TR = {
                   "never converges, it repeats. Raw runs: "
                   "bench/results_v10.jsonl, method: "
                   "bench/FINDINGS-V10.md.\n",
-  "bench12.h2": "Bench v12 — the zero becomes the hero",
+        "bench.v19.sum": "{v19_wins}/{v19_days} attempts right for the models — "
+                        "machine: {v19_m_ok}/{v19_m_days} days on one identical "
+                        "hash; {v19_drift} different outputs from one model in 30 "
+                        "days.",
+        "bench.v19.intro": "The same dirty CSV cleaned 30 days in a "
+                        "row. Six-rule spec, a gold file written BY "
+                        "HAND before the harness, a retry arm that "
+                        "only ever sees its own format — never the "
+                        "answer. Temperature 0.7: the real regime of "
+                        "agents, disclosed.",
+        "bench.v19.arm": "arm", "bench.v19.right": "right days /30",
+        "bench.v19.distinct": "distinct outputs",
+        "bench.v19.foot": "Raw: bench/results_v19_csv_bill.jsonl · "
+                        "method + dollars: bench/FINDINGS-V19.md · "
+                        "replay: python bench/run19.py",
+        "bench.v17.sum": "Retry ×5 on a systematic miss: "
+                        "{v17_retry_wins}/{v17_retry_cells} chains "
+                        "fixed — the same mistake, ×5 the price.",
+        "bench.v17.intro": "Three arms, the same 20 fresh problems, "
+                        "every token counted: answer naked, retry "
+                        "five times, or hand the calculation to the "
+                        "server. Cells: {v17_cells}.",
+        "bench.v17.nu": "naked", "bench.v17.retry": "retry ×5",
+        "bench.v17.relay": "server does it (ok · tokens/right)",
+        "bench.v17.foot": "Raw: bench/results_v17_tokens.jsonl · "
+                        "bench/FINDINGS-V17.md · replay: python "
+                        "bench/run17.py",
+        "bench.v16.sum": "{v16_wrong} wrong answers in {v16_runs} "
+                        "runs — 'I'm not sure' said {v16_doubt} "
+                        "times.",
+        "bench.v16.intro": "Everyday word problems, freshly "
+                        "generated, each model asked to mark its own "
+                        "confidence honestly. They failed the same "
+                        "way every time: confidently.",
+        "bench.v16.foot": "Raw: bench/results_v16_calibration.jsonl · "
+                        "bench/FINDINGS-V16.md · generator: "
+                        "bench/gen16.py (seeded, double oracle).",
+        "bench.v15.sum": "The wall is a SHAPE: {v15_alone_wins}/"
+                        "{v15_cells} chain attempts solved naked or "
+                        "retried — {v15_best_arm}/{v15_arm_cells} by "
+                        "the best server arm.",
+        "bench.v15.intro": "The full matrix: 5 transports × 4 free "
+                        "models × 20 seeded problems (400 cells), "
+                        "hypotheses committed BEFORE the first run, "
+                        "failed predictions published first.",
+        "bench.v15.foot": "Raw: bench/results_v15_matrix.jsonl · "
+                        "bench/FINDINGS-V15.md · replay: python "
+                        "bench/run15.py && python bench/score15.py",
+        "bench.v12.sum": "{v12_zero} alone → {v12_hero} with one "
+                        "relay call. The zero becomes the hero.",
+        "bench.v10.sum": "One right answer each: {v10_alone} alone → "
+                        "{v10_server} relayed — at $0, audited by "
+                        "the harness itself.",
+        "bench.v9.sum": "One vague sentence, six keys: {v9_alone} → "
+                        "{v9_card} with the intake card.",
+        "bench.v6.sum": "The first matrix — naked vs relay. Every "
+                        "row, harness and failure: "
+                        "bench/FINDINGS.md.",
   "bench12.intro": "Ten exact calculations (7834×9217, 0.1+0.2, chained "
                    "percentages…) × four FREE local models × three arms: "
                    "answering naked, writing Python, or relaying one "
@@ -354,7 +409,6 @@ TR = {
                  "facilitateur. Entre un serveur et un robot, il n'existe "
                  "que des prix et des reçus.",
   "bench.h2": "Mesuré, pas promis",
-  "bench9.h2": "Ou : le modèle n'a plus besoin d'être intelligent",
   "bench9.intro": "Une phrase française volontairement floue, six champs "
                   "requis — montants triés à 2 décimales, pourcentages, "
                   "dates uniques, URL, email, total. Attentes calculées à "
@@ -367,7 +421,6 @@ TR = {
                  "sha256. La variante autonome (le modèle choisit l'outil "
                  "lui-même) marque aussi 6/6. Graines, scripts, échecs : "
                  "bench/results_v9.jsonl.\n",
-  "bench10.h2": "Ou : le problème n'a jamais été d'être intelligent — bench v10",
   "bench10.intro": "Dix-huit tâches à réponse UNIQUE — chiffres de "
                    "contrôle GS1, un SHA-256, remises en cascade, une "
                    "colonne de montants qui prouve elle-même sa virgule. "
@@ -382,7 +435,63 @@ TR = {
                   "ça répète. Exécutions brutes : "
                   "bench/results_v10.jsonl, méthode : "
                   "bench/FINDINGS-V10.md.\n",
-  "bench12.h2": "Bench v12 — le zéro devient héros",
+        "bench.v19.sum": "{v19_wins}/{v19_days} tentatives justes pour les modèles — "
+                        "machine : {v19_m_ok}/{v19_m_days} jours sur un même octet "
+                        "; {v19_drift} sorties différentes pour un seul modèle en "
+                        "30 jours.",
+        "bench.v19.intro": "Le même CSV sale nettoyé 30 jours de suite. "
+                        "Spéc à six règles, gold ÉCRIT À LA MAIN avant "
+                        "le banc, un bras retry qui ne voit que sa "
+                        "propre forme — jamais la réponse. Température "
+                        "0,7 : le régime réel des agents, publié.",
+        "bench.v19.arm": "bras", "bench.v19.right": "jours justes /30",
+        "bench.v19.distinct": "sorties distinctes",
+        "bench.v19.foot": "Brut : bench/results_v19_csv_bill.jsonl · "
+                        "méthode + dollars : bench/FINDINGS-V19.md · "
+                        "rejeu : python bench/run19.py",
+        "bench.v17.sum": "Retry ×5 sur une erreur systématique : "
+                        "{v17_retry_wins}/{v17_retry_cells} chaînes "
+                        "réparées — la même faute, 5× le prix.",
+        "bench.v17.intro": "Trois bras, les mêmes 20 problèmes neufs, "
+                        "chaque token compté : répondre nu, recommencer "
+                        "cinq fois, ou donner le calcul au serveur. "
+                        "Cellules : {v17_cells}.",
+        "bench.v17.nu": "nu", "bench.v17.retry": "retry ×5",
+        "bench.v17.relay": "serveur (ok · tokens/juste)",
+        "bench.v17.foot": "Brut : bench/results_v17_tokens.jsonl · "
+                        "bench/FINDINGS-V17.md · rejeu : python "
+                        "bench/run17.py",
+        "bench.v16.sum": "{v16_wrong} fautes en {v16_runs} runs — "
+                        "« je ne suis pas sûr » dit {v16_doubt} fois.",
+        "bench.v16.intro": "Des problèmes du quotidien générés à la "
+                        "volée, chaque modèle prié de marquer "
+                        "honnêtement sa confiance. Ils ont échoué "
+                        "toujours de la même façon : avec assurance.",
+        "bench.v16.foot": "Brut : bench/results_v16_calibration.jsonl "
+                        "· bench/FINDINGS-V16.md · générateur : "
+                        "bench/gen16.py (seedé, double oracle).",
+        "bench.v15.sum": "Le mur a une FORME : {v15_alone_wins}/"
+                        "{v15_cells} tentatives en chaîne nues ou en "
+                        "retry — {v15_best_arm}/{v15_arm_cells} avec "
+                        "le meilleur bras serveur.",
+        "bench.v15.intro": "La matrice complète : 5 transports × 4 "
+                        "modèles gratuits × 20 problèmes seedés "
+                        "(400 cellules), hypothèses commitées AVANT la "
+                        "première cellule, prédictions ratées publiées "
+                        "en premier.",
+        "bench.v15.foot": "Brut : bench/results_v15_matrix.jsonl · "
+                        "bench/FINDINGS-V15.md · rejeu : python "
+                        "bench/run15.py && python bench/score15.py",
+        "bench.v12.sum": "{v12_zero} seul → {v12_hero} avec un seul "
+                        "relais. Le zéro devient héros.",
+        "bench.v10.sum": "Une seule bonne réponse chacun : {v10_alone} "
+                        "seul → {v10_server} relayé — à 0 $, audité "
+                        "par le banc lui-même.",
+        "bench.v9.sum": "Une phrase vague, six clés : {v9_alone} → "
+                        "{v9_card} avec la carte d'intention.",
+        "bench.v6.sum": "La première matrice — nu vs relais. Chaque "
+                        "ligne, chaque harnais, chaque échec : "
+                        "bench/FINDINGS.md.",
   "bench12.intro": "Dix calculs exacts (7834×9217, 0.1+0.2, pourcentages "
                    "en chaîne…) × quatre modèles locaux GRATUITS × trois "
                    "bras : répondre nu, écrire du Python, ou relayer une "
@@ -591,7 +700,6 @@ TR = {
                  "x402 USDC na Base, liquidado por um facilitador. Entre "
                  "um servidor e um robô, só existem preços e recibos.",
   "bench.h2": "Medido, não prometido",
-  "bench9.h2": "Ou: o modelo nunca precisa ser inteligente",
   "bench9.intro": "Uma frase vaga (em francês), seis campos obrigatórios — "
                   "valores com 2 decimais, percentuais, datas únicas, URL, "
                   "e-mail, total. Expectativas calculadas à mão antes de "
@@ -604,7 +712,6 @@ TR = {
                  "variante autônoma (o modelo escolhe a ferramenta) também "
                  "marca 6/6. Sementes, scripts, falhas: "
                  "bench/results_v9.jsonl.\n",
-  "bench10.h2": "Ou: nunca foi sobre ser inteligente — bench v10",
   "bench10.intro": "Dezoito tarefas com UMA resposta certa cada — "
                    "dígitos de controle GS1, um SHA-256, descontos em "
                    "cascata, uma coluna de valores que prova o próprio "
@@ -618,7 +725,62 @@ TR = {
                   "repetir não converge, repete. Execuções brutas: "
                   "bench/results_v10.jsonl, método: "
                   "bench/FINDINGS-V10.md.\n",
-  "bench12.h2": "Bench v12 — o zero vira herói",
+        "bench.v19.sum": "{v19_wins}/{v19_days} tentativas corretas para os modelos "
+                        "— máquina: {v19_m_ok}/{v19_m_days} dias no mesmo byte; "
+                        "{v19_drift} saídas diferentes de um só modelo em 30 dias.",
+        "bench.v19.intro": "O mesmo CSV sujo limpo 30 dias seguidos. "
+                        "Especificação de seis regras, gold ESCRITO À "
+                        "MÃO antes do banco, um braço retry que só vê "
+                        "sua própria forma — nunca a resposta. "
+                        "Temperatura 0,7: o regime real dos agentes, "
+                        "divulgado.",
+        "bench.v19.arm": "braço", "bench.v19.right": "dias certos /30",
+        "bench.v19.distinct": "saídas distintas",
+        "bench.v19.foot": "Bruto: bench/results_v19_csv_bill.jsonl · "
+                        "método + dólares: bench/FINDINGS-V19.md · "
+                        "replay: python bench/run19.py",
+        "bench.v17.sum": "Retry ×5 num erro sistemático: "
+                        "{v17_retry_wins}/{v17_retry_cells} cadeias "
+                        "consertadas — o mesmo erro, 5× o preço.",
+        "bench.v17.intro": "Três braços, os mesmos 20 problemas novos, "
+                        "cada token contado: responder nuo, tentar "
+                        "cinco vezes, ou entregar o cálculo ao "
+                        "servidor. Células: {v17_cells}.",
+        "bench.v17.nu": "nu", "bench.v17.retry": "retry ×5",
+        "bench.v17.relay": "servidor (ok · tokens/certo)",
+        "bench.v17.foot": "Bruto: bench/results_v17_tokens.jsonl · "
+                        "bench/FINDINGS-V17.md · replay: python "
+                        "bench/run17.py",
+        "bench.v16.sum": "{v16_wrong} erros em {v16_runs} execuções — "
+                        "«não tenho certeza» dito {v16_doubt} vezes.",
+        "bench.v16.intro": "Problemas do dia a dia gerados na hora, "
+                        "cada modelo convidado a marcar sua confiança "
+                        "com honestidade. Falharam sempre do mesmo "
+                        "modo: com certeza.",
+        "bench.v16.foot": "Bruto: bench/results_v16_calibration.jsonl "
+                        "· bench/FINDINGS-V16.md · gerador: "
+                        "bench/gen16.py (semeado, duplo oráculo).",
+        "bench.v15.sum": "O muro tem FORMA: {v15_alone_wins}/{v15_cells} "
+                        "tentativas em cadeia nuas ou com retry — "
+                        "{v15_best_arm}/{v15_arm_cells} com o melhor "
+                        "braço servidor.",
+        "bench.v15.intro": "A matriz completa: 5 transportes × 4 "
+                        "modelos gratuitos × 20 problemas semeado "
+                        "(400 células), hipóteses comitadas ANTES da "
+                        "primeira célula, previsões furadas "
+                        "publicadas primeiro.",
+        "bench.v15.foot": "Bruto: bench/results_v15_matrix.jsonl · "
+                        "bench/FINDINGS-V15.md · replay: python "
+                        "bench/run15.py && python bench/score15.py",
+        "bench.v12.sum": "{v12_zero} sozinho → {v12_hero} com um só "
+                        "relé. O zero vira herói.",
+        "bench.v10.sum": "Uma resposta certa cada: {v10_alone} sozinho "
+                        "→ {v10_server} com relé — a $0, auditado pelo "
+                        "próprio banco.",
+        "bench.v9.sum": "Uma frase vaga, seis chaves: {v9_alone} → "
+                        "{v9_card} com o cartão de intenção.",
+        "bench.v6.sum": "A primeira matriz — nu vs relé. Cada linha, "
+                        "cada harness, cada falha: bench/FINDINGS.md.",
   "bench12.intro": "Dez cálculos exatos (7834×9217, 0.1+0.2, porcentagens "
                    "em cadeia…) × quatro modelos locais GRATUITOS × três "
                    "braços: responder nu, escrever Python, ou repassar uma "
@@ -971,7 +1133,7 @@ TEMPLATE = """<!DOCTYPE html>
     font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase;
     color: var(--gold); border: 1px solid #3a3320; background: #14110a;
     padding: 5px 12px; border-radius: 999px; margin-bottom: 18px; }
-</style>
+.bcard{border:1px solid var(--line,#232b3d);border-radius:10px;margin:10px 0;background:var(--card,#121724)}\n.bcard summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--ink,#e8ecf4);list-style-position:outside}\n.bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}\n.bcard .bbody{padding:4px 18px 16px}\n</style>
 </head>
 <body>
 <div class="wrap">
@@ -1031,32 +1193,79 @@ TEMPLATE = """<!DOCTYPE html>
     <section class="section" id="bench">
       <h2>{{bench.h2}}</h2>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
-      <div class="tblwrap"><table class="bench">
-        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench.with}}</th><th>{{bench.tokens}}</th></tr>
-{{bench_rows}}
-      </table></div>
-      <p class="tiers" style="margin-top: 18px;">{{bench.foot}}</p>
-      <h3 style="margin-top: 42px;">{{bench9.h2}}</h3>
-      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench9.intro}}</p>
-      <div class="tblwrap"><table class="bench">
-        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench9.with}}</th><th>{{bench.tokens}}</th></tr>
-{{bench9_rows}}
-      </table></div>
-      <p class="tiers" style="margin-top: 18px;">{{bench9.foot}}</p>
-      <h3 style="margin-top: 42px;">{{bench10.h2}}</h3>
-      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench10.intro}}</p>
-      <div class="tblwrap"><table class="bench">
-        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench10.with}}</th><th>{{bench.tokens}}</th></tr>
-{{bench10_rows}}
-      </table></div>
-      <p class="tiers" style="margin-top: 18px;">{{bench10.foot}}</p>
-      <h3 style="margin-top: 42px;">{{bench12.h2}}</h3>
-      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench12.intro}}</p>
-      <div class="tblwrap"><table class="bench">
-        <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench12.code}}</th><th>{{bench12.relay}}</th></tr>
-{{bench12_rows}}
-      </table></div>
-      <p class="tiers" style="margin-top: 18px;">{{bench12.foot}}</p>
+      <details class="bcard" open>
+        <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v19.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v19.arm}}</th><th>{{bench.v19.right}}</th><th>{{bench.v19.distinct}}</th><th>{{bench.tokens}}</th></tr>
+{{bench19_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v19.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v17</span>{{bench.v17.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v17.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.v17.nu}}</th><th>{{bench.v17.retry}}</th><th>{{bench.v17.relay}}</th></tr>
+{{bench17_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v17.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v16</span>{{bench.v16.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v16.intro}}</p>
+          <p class="tiers">{{bench.v16.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v15</span>{{bench.v15.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v15.intro}}</p>
+          <p class="tiers">{{bench.v15.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v12</span>{{bench.v12.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench12.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench12.code}}</th><th>{{bench12.relay}}</th></tr>
+{{bench12_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench12.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v10</span>{{bench.v10.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench10.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench10.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench10_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench10.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v9</span>{{bench.v9.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench9.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench9.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench9_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench9.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v6</span>{{bench.v6.sum}}</summary>
+        <div class="bbody">
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.foot}}</p>
+        </div>
+      </details>
     </section>
 
     <section class="section build" id="build">
@@ -1600,6 +1809,118 @@ def bench12_rows():
 BENCH12 = bench12_rows()
 assert BENCH12, "no v12 rows — run bench/run12.py first"
 
+
+# ---------------- hub des bancs : tout vient du brut -----------------
+def _rows_of(fname):
+    import json as _j
+    f = ROOT / "bench" / fname
+    if not f.exists():
+        return []
+    with open(f, encoding="utf-8") as fh:
+        return [_j.loads(l) for l in fh if l.strip()]
+
+
+def compute_hub():
+    """Chaque nombre affiché par le hub est recalculé ici depuis les
+    jsonls ; test_landing les recalcule à son tour indépendamment —
+    le générateur ne peut pas inventer un chiffre."""
+    h = {}
+    m15 = _rows_of("results_v15_matrix.jsonl")
+    ch = [r for r in m15 if r.get("family") in ("mix", "partage")
+          and r.get("arm") in ("N", "T", "S", "C", "R")]
+    h["v15_cells"] = sum(1 for r in ch if r["arm"] in ("N", "T"))
+    h["v15_alone_wins"] = sum(1 for r in ch if r["arm"] in ("N", "T")
+                              and r["ok"])
+    h["v15_server_wins"] = sum(1 for r in ch if r["arm"] in
+                               ("S", "C", "R") and r["ok"])
+    per_arm = {arm: sum(1 for r in ch if r["arm"] == arm and r["ok"])
+               for arm in ("S", "C", "R")}
+    h["v15_best_arm"] = max(per_arm.values())
+    h["v15_arm_cells"] = sum(1 for r in ch if r["arm"] ==
+                             max(per_arm, key=per_arm.get))
+    m16 = _rows_of("results_v16_calibration.jsonl")
+    h["v16_runs"] = len(m16)
+    h["v16_wrong"] = sum(1 for r in m16 if not r["ok"])
+    h["v16_doubt"] = sum(1 for r in m16
+                         if r.get("confident") is False)
+    m17 = _rows_of("results_v17_tokens.jsonl")
+
+    def a17(r):
+        a = r["arm"]
+        return ("nu" if a.startswith("nude") else
+                "retry" if a.startswith("retry") else "relay")
+    tbl = {}
+    for r in m17:
+        d = tbl.setdefault((r["model"], a17(r)), [0, 0, 0])
+        d[0] += 1
+        d[1] += int(bool(r["ok"]))
+        d[2] += r["tokens"]
+    h["v17_tbl"] = tbl
+    ch17 = [r for r in m17 if r.get("family") in ("mix", "partage")
+            and a17(r) == "retry"]
+    h["v17_retry_cells"] = len(ch17)
+    h["v17_retry_wins"] = sum(1 for r in ch17 if r["ok"])
+    h["v17_cells"] = len(m17)
+    m19 = _rows_of("results_v19_csv_bill.jsonl")
+    agg = {}
+    for r in m19:
+        d = agg.setdefault((r["arm"], r["model"]),
+                           {"n": 0, "c": 0, "t": 0, "s": set()})
+        d["n"] += 1
+        d["c"] += int(bool(r["correct"]))
+        d["t"] += r["toks"]
+        d["s"].add(r["sha"])
+    h["v19"] = agg
+    h["v19_days"] = sum(d["n"] for k, d in agg.items()
+                        if k[0] in ("N", "R"))
+    h["v19_wins"] = sum(d["c"] for k, d in agg.items()
+                        if k[0] in ("N", "R"))
+    h["v19_drift"] = max(len(d["s"]) for k, d in agg.items()
+                         if k[0] == "N")
+    h["v19_m_days"] = agg[("M", "machine")]["n"]
+    h["v19_m_ok"] = agg[("M", "machine")]["c"]
+    h["v19_mult"] = "%.1f" % (
+        sum(d["t"] for k, d in agg.items() if k[0] == "R") /
+        max(1, sum(d["t"] for k, d in agg.items() if k[0] == "N")))
+    return h
+
+
+HUB = compute_hub()
+
+
+def _fmt_tok(n):
+    return "{:,}".format(int(n)).replace(",", " ")
+
+
+def bench19_rows_html():
+    out = []
+    for k in (("M", "machine"), ("N", "1.5b"), ("R", "1.5b"),
+              ("N", "7b"), ("R", "7b")):
+        d = HUB["v19"][k]
+        out.append('<tr><td>%s&nbsp;%s</td><td class="%s">%d/%d</td>'
+                   '<td class="num">%d</td><td class="num">%s</td></tr>'
+                   % (k[0], k[1], "yes" if d["c"] == d["n"] else "no",
+                      d["c"], d["n"], len(d["s"]), _fmt_tok(d["t"])))
+    return "\n".join(out)
+
+
+def bench17_rows_html():
+    out = []
+    for m in ("1.5b", "7b", "8b"):
+        cells = []
+        for a in ("nu", "retry", "relay"):
+            d = HUB["v17_tbl"].get((m, a))
+            if not d:
+                cells.append('<td class="num">—</td>')
+                continue
+            per = ("∞" if d[1] == 0
+                   else _fmt_tok(round(d[2] / d[1])))
+            cells.append('<td class="num">%d/%d · %s</td>'
+                         % (d[1], d[0], per))
+        out.append("<tr><td>%s</td>%s</tr>" % (m, "".join(cells)))
+    return "\n".join(out)
+
+
 LABEL12 = {"0.5b": "qwen2.5:0.5b", "1.5b": "qwen2.5:1.5b",
            "7b": "qwen2.5:7b-q4", "8b": "llama3.1:8b"}
 
@@ -1652,6 +1973,21 @@ def main():
     ver = app_mod.app.version
     fmt = dict(ver=ver, n_tools=len(TOOLS), n_recipes=len(RECIPES),
                n_free=N_FREE, n_cap=N_CAP, n_paid=N_PAID)
+    fmt.update({k: v for k, v in HUB.items()
+                if isinstance(v, (int, str))})
+    r12 = next((r for r in BENCH12 if r[0] == "0.5b"), None)
+    if r12:
+        (nk, tk), (_cd, tc), (rl, tr) = r12[1]
+        fmt["v12_zero"] = "%d/%d" % (nk, tk)
+        fmt["v12_hero"] = "%d/%d" % (rl, tr)
+    if BENCH10:
+        m0, ak0, bk0, ntasks, _x, _y = BENCH10[0]
+        fmt["v10_alone"] = "%d/%d" % (ak0, ntasks)
+        fmt["v10_server"] = "%d/%d" % (bk0, ntasks)
+    if BENCH9:
+        m0, ak, bk, _x, _y = BENCH9[0]
+        fmt["v9_alone"] = "%d/6" % ak
+        fmt["v9_card"] = "%d/6" % bk
     for lang, cat in TR.items():
         cat = {k: (v.format(**fmt) if "{" in v else v)
                for k, v in cat.items()}
@@ -1661,6 +1997,8 @@ def main():
         cat["bench9_rows"] = bench9_rows_html()
         cat["bench10_rows"] = bench10_rows_html()
         cat["bench12_rows"] = bench12_rows_html()
+        cat["bench17_rows"] = bench17_rows_html()
+        cat["bench19_rows"] = bench19_rows_html()
         (ROOT / "locales" / ("%s.json" % lang)).write_text(
             json.dumps(cat, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8")
