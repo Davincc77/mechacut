@@ -257,19 +257,52 @@ def _agg(kind, vals, col):
     if kind == "count":
         return len(vals)
     nums = []
+    kinds = set()
     for v in vals:
         n = coerce(v)
         if isinstance(n, bool) or not isinstance(n, (int, float)):
             raise TransformError("aggregation %s needs numeric values "
                                  "in column %r, got %r" % (kind, col, v))
         nums.append(n)
+        kinds.add("int" if isinstance(n, int) else "float")
+    if kind in ("min", "max"):
+        return (min if kind == "min" else max)(nums)
+    # P5 (sonde de contrat 22-11) : sum() en float pourrissait visible-
+    # ment — 118.71000000000001 dans une cellule d'argent. Et le gold
+    # B010 dit plus : « 1,10 + 2,20 = 3.30 » — la ZÉRO finale est du
+    # contrat, pas un ornement. Règle de la maison : un nombre entré en
+    # string ressort en string (le JSON ne sait pas distinguer 3.3 de
+    # 3.30 — le mot, si). Decimal additionne les LITÉRAUX, la somme
+    # porte les décimales max des entrées, exactement. Entrées
+    # numériques : comportement inchangé (int reste int, float rendu
+    # au double le plus proche de la somme EXACTE — le pourri change,
+    # le correct ne bouge pas ; doctrine pins).
+    from decimal import Decimal
+    dec = [Decimal(v) if isinstance(v, str)
+           else (Decimal(n) if isinstance(n, int) else Decimal(repr(n)))
+           for v, n in zip(vals, nums)]
+    tot = sum(dec, Decimal(0))
     if kind == "sum":
-        return sum(nums)
-    if kind == "mean":
-        return sum(nums) / len(nums)
-    if kind == "min":
-        return min(nums)
-    return max(nums)
+        # C'est le POINT qui porte le contrat : « 10 » sans décimale
+        # reste un entier (les pins et les agents le comparent comme
+        # tel) ; dès qu'une entrée affiche « . », l'échelle est une
+        # affirmation — « 22.00 » n'est pas « 22 » — et le mot le
+        # rend, pas le nombre.
+        if any(isinstance(v, str) and "." in v for v in vals):
+            return str(tot)
+        if any(isinstance(v, str) for v in vals) and kinds == {"int"}:
+            return int(tot)
+        if any(isinstance(v, str) for v, n in zip(vals, nums)
+               if isinstance(n, float)):
+            return float(tot)
+        if kinds == {"int"}:
+            return int(tot)
+        if kinds == {"int"}:
+            return int(tot)
+        return float(tot)
+    # mean : division exacte, rendu numérique (le contrat des chaînes
+    # est celui de la SOMME ; la moyenne n'a pas de forme littérale).
+    return float(tot / Decimal(len(dec)))
 
 
 def table_pivot(rows, index, columns, values, agg="sum"):
