@@ -22,11 +22,17 @@ def _rows(name):
     return [json.loads(l) for l in f.read_text().splitlines() if l.strip()]
 
 
-def test_eight_collapsible_bench_cards():
+def test_collapsible_bench_cards_grouped_by_thesis():
     cards = re.findall(r'<details class="bcard"[^>]*>\s*'
-                       r'<summary><span class="bv">(v\d+)</span>', HTML)
-    assert cards == ["v23", "v20", "v19", "v17", "v16", "v15",
-                     "v12", "v10", "v9", "v6"], cards
+                       r'<summary><span class="bv">([vF][0-9b]+)'
+                       r'</span>', HTML)
+    assert cards == ["v6", "v9", "v10", "v11", "v12",          # exécution
+                     "v15", "v17", "F5", "v23",                # forme
+                     "v16", "v20", "v22", "v22b",              # doute+forme payante
+                     "v13", "v14",                              # lecture
+                     "v19", "v24"], cards                       # régime réel
+    groups = re.findall(r'<h3 class="bgroup">([^<]+)</h3>', HTML)
+    assert len(groups) == 5, groups
 
 
 def test_v19_summary_matches_raw():
@@ -99,3 +105,26 @@ def test_v23_summary_matches_raw():
                 "and the lock refused %d right answers over their "
                 "names." % (wins, len(ch), cost, refused))
     assert expected in HTML, expected
+
+
+def test_v11_f5_v24_summary_match_raw():
+    r = _rows("results_v11.jsonl")
+    def w(sub, arm):
+        rs = [x for x in r if sub in x["model"] and x["arm"] == arm]
+        return "%d/%d" % (sum(1 for x in rs if x["ok"]), len(rs))
+    assert ("the 7B goes %s to %s relayed" % (w("7b", "naked"),
+                                              w("7b", "relay"))
+            in HTML)
+    f5 = _rows("results_f5_accept.jsonl")
+    wins = sum(1 for x in f5 if x["verdict"] == "OK")
+    rep = sum(x["repairs"] for x in f5)
+    assert ("%d/%d chain attempts with the fiche — criterion ≥19 "
+            "PASSED; %d repaired" % (wins, len(f5), rep) in HTML)
+    r24 = _rows("results_v24_lfm3_30days.jsonl")
+    n24 = [x for x in r24 if x["arm"] == "N"]
+    sil = sum(1 for x in n24 if not x["shape"])
+    okc = sum(1 for x in n24 if x["ok"])
+    usd = sum(x["usd"] for x in n24)
+    assert ("%d/%d days of empty answers after 8,192 reasoning "
+            "tokens, %d right, billed $%.4f"
+            % (sil, len(n24), okc, usd) in HTML)

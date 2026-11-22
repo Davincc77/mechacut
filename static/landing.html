@@ -172,6 +172,7 @@
 .bcard summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--ink,#e8ecf4);list-style-position:outside}
 .bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}
 .bcard .bbody{padding:4px 18px 16px}
+.bgroup{color:var(--gold,#ffcf5c);margin:30px 0 8px;font-size:1.08em;letter-spacing:.02em}
 </style>
 </head>
 <body>
@@ -235,81 +236,17 @@
       <h2>{{bench.h2}}</h2>
       <p class="quote">{{bench.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
-      <details class="bcard" open>
-        <summary><span class="bv">v23</span>{{bench.v23.sum}}</summary>
+      <h3 class="bgroup">{{bench.g1}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v6</span>{{bench.v6.sum}}</summary>
         <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v23.intro}}</p>
           <div class="tblwrap"><table>
-            <tr><th>{{bench.v23.arm}}</th><th>{{bench.v23.wins}}</th><th>{{bench.v23.usd}}</th></tr>
-{{bench23_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.v23.foot}}</p>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.foot}}</p>
         </div>
       </details>
-      <details class="bcard">
-        <summary><span class="bv">v20</span>{{bench.v20.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v20.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.v20.model}}</th><th>{{bench.v20.naked}}</th><th>{{bench.v20.locked}}</th></tr>
-{{bench20_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.v20.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v19.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.v19.arm}}</th><th>{{bench.v19.right}}</th><th>{{bench.v19.distinct}}</th><th>{{bench.tokens}}</th></tr>
-{{bench19_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.v19.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v17</span>{{bench.v17.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v17.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.model}}</th><th>{{bench.v17.nu}}</th><th>{{bench.v17.retry}}</th><th>{{bench.v17.relay}}</th></tr>
-{{bench17_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.v17.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v16</span>{{bench.v16.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v16.intro}}</p>
-          <p class="tiers">{{bench.v16.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v15</span>{{bench.v15.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v15.intro}}</p>
-          <p class="tiers">{{bench.v15.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v12</span>{{bench.v12.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench12.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench12.code}}</th><th>{{bench12.relay}}</th></tr>
-{{bench12_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench12.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v10</span>{{bench.v10.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench10.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench10.with}}</th><th>{{bench.tokens}}</th></tr>
-{{bench10_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench10.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
+          <details class="bcard">
         <summary><span class="bv">v9</span>{{bench.v9.sum}}</summary>
         <div class="bbody">
           <p class="tiers" style="color: var(--muted);">{{bench9.intro}}</p>
@@ -319,18 +256,129 @@
           <p class="tiers" style="margin-top: 12px;">{{bench9.foot}}</p>
         </div>
       </details>
-      <details class="bcard">
-        <summary><span class="bv">v6</span>{{bench.v6.sum}}</summary>
+          <details class="bcard">
+        <summary><span class="bv">v10</span>{{bench.v10.sum}}</summary>
         <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench10.intro}}</p>
           <div class="tblwrap"><table>
-            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench.with}}</th><th>{{bench.tokens}}</th></tr>
-{{bench_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.foot}}</p>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench10.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench10_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench10.foot}}</p>
         </div>
       </details>
-    </section>
+          <details class="bcard">
+        <summary><span class="bv">v11</span>{{bench.v11.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v11.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v12</span>{{bench.v12.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench12.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench12.code}}</th><th>{{bench12.relay}}</th></tr>
+{{bench12_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench12.foot}}</p>
+        </div>
+      </details>
+            <h3 class="bgroup">{{bench.g2}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v15</span>{{bench.v15.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v15.intro}}</p>
+          <p class="tiers">{{bench.v15.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v17</span>{{bench.v17.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v17.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.v17.nu}}</th><th>{{bench.v17.retry}}</th><th>{{bench.v17.relay}}</th></tr>
+{{bench17_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v17.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">F5</span>{{bench.f5.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.f5.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard" open>
+        <summary><span class="bv">v23</span>{{bench.v23.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v23.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v23.arm}}</th><th>{{bench.v23.wins}}</th><th>{{bench.v23.usd}}</th></tr>
+{{bench23_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v23.foot}}</p>
+        </div>
+      </details>
+            <h3 class="bgroup">{{bench.g3}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v16</span>{{bench.v16.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v16.intro}}</p>
+          <p class="tiers">{{bench.v16.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v20</span>{{bench.v20.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v20.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v20.model}}</th><th>{{bench.v20.naked}}</th><th>{{bench.v20.locked}}</th></tr>
+{{bench20_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v20.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v22</span>{{bench.v22.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v22.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v22b</span>{{bench.v22b.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v22b.foot}}</p>
+        </div>
+      </details>
+            <h3 class="bgroup">{{bench.g4}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v13</span>{{bench.v13.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v13.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v14</span>{{bench.v14.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v14.foot}}</p>
+        </div>
+      </details>
+            <h3 class="bgroup">{{bench.g5}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v19.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v19.arm}}</th><th>{{bench.v19.right}}</th><th>{{bench.v19.distinct}}</th><th>{{bench.tokens}}</th></tr>
+{{bench19_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v19.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v24</span>{{bench.v24.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v24.foot}}</p>
+        </div>
+      </details>
+          </section>
 
-    <section class="section build" id="build">
+<section class="section build" id="build">
       <h2>{{build.h2}}</h2>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{build.intro}}</p>
       <div class="playgrid">

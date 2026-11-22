@@ -193,6 +193,48 @@ TR = {
         "bench.v20.locked": "with the lock",
         "bench.v20.foot": "Raw: bench/results_v20_target_lock.jsonl · "
                           "method: bench/FINDINGS-V20.md.\n",
+        "bench.g1": "What they miss is executing, not thinking",
+        "bench.g2": "The wall is a SHAPE — and shapes are a training target",
+        "bench.g3": "Nobody says \"I'm not sure\" — paying more doesn't dodge the "
+                        "shape",
+        "bench.g4": "Reading is the ceiling no tool breaks",
+        "bench.g5": "The real regime: thirty days of the same job",
+        "bench.v11.sum": "Fifteen hostile tasks: the 7B goes {v11_7b_nu} to "
+                        "{v11_7b_relay} relayed; the 8B {v11_8b_nu} to "
+                        "{v11_8b_relay}.",
+        "bench.v11.foot": "Raw: bench/results_v11.jsonl · method: "
+                        "bench/FINDINGS-V11.md",
+        "bench.f5.sum": "{f5_wins}/{f5_cells} chain attempts with the fiche — "
+                        "criterion ≥19 PASSED; {f5_repairs} repaired by a named "
+                        "refusal; the 7B alone {f5_7b}.",
+        "bench.f5.foot": "Raw: bench/results_f5_accept.jsonl · method: "
+                        "bench/FINDINGS-F5.md",
+        "bench.v13.sum": "The negative result, published first: on real GSM8K the "
+                        "relay card falls to {v13_relay_05b}/20 for the 0.5B — "
+                        "asking the model for the decomposition still leaves it "
+                        "doing the decomposition.",
+        "bench.v13.foot": "Raw: bench/results_v13_gsm8k.jsonl · method: "
+                        "bench/FINDINGS-V13.md",
+        "bench.v14.sum": "Strict skill: {v14_breaks}/{v14_cells} protocol breaks — "
+                        "the class the form can guarantee — while reading stays "
+                        "free.",
+        "bench.v14.foot": "Raw: bench/results_v14_skill.jsonl · method: "
+                        "bench/FINDINGS-V14.md",
+        "bench.v22.sum": "A frontier Haiku answers {v22_nu} naked — {v22_fiche} with "
+                        "the fiche. Paying more doesn't change the shape.",
+        "bench.v22.foot": "Raw: bench/results_v22.jsonl · method: "
+                        "bench/FINDINGS-V22.md",
+        "bench.v22b.sum": "The tool-trained frontier model fills slots right "
+                        "{v22b_ok}/{v22b_cells} — the objection is half-right, and "
+                        "that half is what v23 measures.",
+        "bench.v22b.foot": "Raw: bench/results_v22b.jsonl · method: "
+                        "bench/FINDINGS-V22.md",
+        "bench.v24.sum": "Thirty days of the same CSV with a model that CAN do "
+                        "chains: {v24_sil}/{v24_days} days of empty answers after "
+                        "8,192 reasoning tokens, {v24_ok} right, billed ${v24_usd}. "
+                        "The machine: {v24_m_ok} at $0.00.",
+        "bench.v24.foot": "Raw: bench/results_v24_lfm3_30days.jsonl · the amendment "
+                        "lives in git history (run24 amendé)",
         "bench.v19.sum": "{v19_wins}/{v19_days} attempts right for the models — "
                         "machine: {v19_m_ok}/{v19_m_days} days on one identical "
                         "hash; {v19_drift} different outputs from one model in 30 "
@@ -526,6 +568,49 @@ TR = {
         "bench.v20.locked": "avec verrou",
         "bench.v20.foot": "Brut : bench/results_v20_target_lock.jsonl · "
                           "méthode : bench/FINDINGS-V20.md.\n",
+        "bench.g1": "Ce qu'ils ratent n'est pas de réfléchir — c'est d'exécuter",
+        "bench.g2": "Le mur est une FORME — et les formes sont un objectif "
+                        "d'entraînement",
+        "bench.g3": "Personne ne dit « je ne suis pas sûr » — payer plus "
+                        "n'esquive pas la forme",
+        "bench.g4": "La lecture est le plafond qu'aucun outil ne franchit",
+        "bench.g5": "Le régime réel : trente jours du même job",
+        "bench.v11.sum": "Quinze tâches hostiles : le 7B passe de {v11_7b_nu} à "
+                        "{v11_7b_relay} en relais ; le 8B de {v11_8b_nu} à "
+                        "{v11_8b_relay}.",
+        "bench.v11.foot": "Brut : bench/results_v11.jsonl · méthode : "
+                        "bench/FINDINGS-V11.md",
+        "bench.f5.sum": "{f5_wins}/{f5_cells} tentatives en chaîne avec la fiche — "
+                        "critère ≥19 PASSÉ ; {f5_repairs} réparées par un refus "
+                        "nommé ; le 7B seul {f5_7b}.",
+        "bench.f5.foot": "Brut : bench/results_f5_accept.jsonl · méthode : "
+                        "bench/FINDINGS-F5.md",
+        "bench.v13.sum": "Le résultat négatif, publié en premier : sur GSM8K réel, "
+                        "la fiche-relais s'effondre à {v13_relay_05b}/20 pour le "
+                        "0.5B — demander la décomposition au modèle, c'est encore "
+                        "la lui laisser faire.",
+        "bench.v13.foot": "Brut : bench/results_v13_gsm8k.jsonl · méthode : "
+                        "bench/FINDINGS-V13.md",
+        "bench.v14.sum": "Skill stricte : {v14_breaks}/{v14_cells} ruptures de "
+                        "protocole — la seule classe que la forme garantit — la "
+                        "lecture, elle, reste libre.",
+        "bench.v14.foot": "Brut : bench/results_v14_skill.jsonl · méthode : "
+                        "bench/FINDINGS-V14.md",
+        "bench.v22.sum": "Un Haiku de frontière répond {v22_nu} nu — {v22_fiche} "
+                        "avec la fiche. Payer plus ne change pas la forme.",
+        "bench.v22.foot": "Brut : bench/results_v22.jsonl · méthode : "
+                        "bench/FINDINGS-V22.md",
+        "bench.v22b.sum": "Le modèle frontière entraîné pour les outils remplit les "
+                        "créneaux justes {v22b_ok}/{v22b_cells} — l'objection a "
+                        "raison à moitié, et cette moitié est ce que v23 mesure.",
+        "bench.v22b.foot": "Brut : bench/results_v22b.jsonl · méthode : "
+                        "bench/FINDINGS-V22.md",
+        "bench.v24.sum": "Trente jours sur le même CSV avec un modèle QUI SAIT les "
+                        "chaînes : {v24_sil}/{v24_days} jours de réponse vide après "
+                        "8 192 tokens de raisonnement, {v24_ok} justes, facturés "
+                        "${v24_usd}. La machine : {v24_m_ok} à 0,00 $.",
+        "bench.v24.foot": "Brut : bench/results_v24_lfm3_30days.jsonl · l'amendement "
+                        "est dans l'historique git (run24 amendé)",
         "bench.v19.sum": "{v19_wins}/{v19_days} tentatives justes pour les modèles — "
                         "machine : {v19_m_ok}/{v19_m_days} jours sur un même octet "
                         "; {v19_drift} sorties différentes pour un seul modèle en "
@@ -871,6 +956,47 @@ TR = {
         "bench.v20.locked": "com cadeado",
         "bench.v20.foot": "Bruto: bench/results_v20_target_lock.jsonl · "
                           "método: bench/FINDINGS-V20.md.\n",
+        "bench.g1": "O que eles erram não é pensar — é executar",
+        "bench.g2": "O muro é uma FORMA — e formas são alvo de treino",
+        "bench.g3": "Ninguém diz «não tenho certeza» — pagar mais não desvia da "
+                        "forma",
+        "bench.g4": "A leitura é o teto que nenhuma ferramenta fura",
+        "bench.g5": "O regime real: trinta dias do mesmo trabalho",
+        "bench.v11.sum": "Quinze tarefas hostis: o 7B vai de {v11_7b_nu} a "
+                        "{v11_7b_relay} com relé; o 8B de {v11_8b_nu} a "
+                        "{v11_8b_relay}.",
+        "bench.v11.foot": "Bruto: bench/results_v11.jsonl · método: "
+                        "bench/FINDINGS-V11.md",
+        "bench.f5.sum": "{f5_wins}/{f5_cells} tentativas encadeadas com a ficha — "
+                        "critério ≥19 APROVADO; {f5_repairs} reparadas por recusa "
+                        "nomeada; o 7B sozinho {f5_7b}.",
+        "bench.f5.foot": "Bruto: bench/results_f5_accept.jsonl · método: "
+                        "bench/FINDINGS-F5.md",
+        "bench.v13.sum": "O resultado negativo, publicado primeiro: no GSM8K real o "
+                        "cartão-relé desaba a {v13_relay_05b}/20 no 0.5B — pedir a "
+                        "decomposição ao modelo ainda é deixá-la com o modelo.",
+        "bench.v13.foot": "Bruto: bench/results_v13_gsm8k.jsonl · método: "
+                        "bench/FINDINGS-V13.md",
+        "bench.v14.sum": "Skill estrita: {v14_breaks}/{v14_cells} rupturas de "
+                        "protocolo — a única classe que a forma garante — a leitura "
+                        "segue livre.",
+        "bench.v14.foot": "Bruto: bench/results_v14_skill.jsonl · método: "
+                        "bench/FINDINGS-V14.md",
+        "bench.v22.sum": "Um Haiku de fronteira responde {v22_nu} nu — {v22_fiche} "
+                        "com a ficha. Pagar mais não muda a forma.",
+        "bench.v22.foot": "Bruto: bench/results_v22.jsonl · método: "
+                        "bench/FINDINGS-V22.md",
+        "bench.v22b.sum": "O modelo de fronteira treinado para ferramentas preenche "
+                        "{v22b_ok}/{v22b_cells} slots certos — a objeção tem metade "
+                        "razão, e essa metade é o que v23 mede.",
+        "bench.v22b.foot": "Bruto: bench/results_v22b.jsonl · método: "
+                        "bench/FINDINGS-V22.md",
+        "bench.v24.sum": "Trinta dias no mesmo CSV com um modelo QUE SABE cadeias: "
+                        "{v24_sil}/{v24_days} dias de resposta vazia após 8.192 "
+                        "tokens de raciocínio, {v24_ok} certas, faturados "
+                        "${v24_usd}. A máquina: {v24_m_ok} a $0,00.",
+        "bench.v24.foot": "Bruto: bench/results_v24_lfm3_30days.jsonl · a emenda está "
+                        "no histórico git (run24 amendado)",
         "bench.v19.sum": "{v19_wins}/{v19_days} tentativas corretas para os modelos "
                         "— máquina: {v19_m_ok}/{v19_m_days} dias no mesmo byte; "
                         "{v19_drift} saídas diferentes de um só modelo em 30 dias.",
@@ -1298,7 +1424,7 @@ TEMPLATE = """<!DOCTYPE html>
     font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase;
     color: var(--gold); border: 1px solid #3a3320; background: #14110a;
     padding: 5px 12px; border-radius: 999px; margin-bottom: 18px; }
-.bcard{border:1px solid var(--line,#232b3d);border-radius:10px;margin:10px 0;background:var(--card,#121724)}\n.bcard summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--ink,#e8ecf4);list-style-position:outside}\n.bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}\n.bcard .bbody{padding:4px 18px 16px}\n</style>
+.bcard{border:1px solid var(--line,#232b3d);border-radius:10px;margin:10px 0;background:var(--card,#121724)}\n.bcard summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--ink,#e8ecf4);list-style-position:outside}\n.bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}\n.bcard .bbody{padding:4px 18px 16px}\n.bgroup{color:var(--gold,#ffcf5c);margin:30px 0 8px;font-size:1.08em;letter-spacing:.02em}\n</style>
 </head>
 <body>
 <div class="wrap">
@@ -1361,81 +1487,17 @@ TEMPLATE = """<!DOCTYPE html>
       <h2>{{bench.h2}}</h2>
       <p class="quote">{{bench.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
-      <details class="bcard" open>
-        <summary><span class="bv">v23</span>{{bench.v23.sum}}</summary>
+      <h3 class="bgroup">{{bench.g1}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v6</span>{{bench.v6.sum}}</summary>
         <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v23.intro}}</p>
           <div class="tblwrap"><table>
-            <tr><th>{{bench.v23.arm}}</th><th>{{bench.v23.wins}}</th><th>{{bench.v23.usd}}</th></tr>
-{{bench23_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.v23.foot}}</p>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.foot}}</p>
         </div>
       </details>
-      <details class="bcard">
-        <summary><span class="bv">v20</span>{{bench.v20.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v20.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.v20.model}}</th><th>{{bench.v20.naked}}</th><th>{{bench.v20.locked}}</th></tr>
-{{bench20_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.v20.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v19.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.v19.arm}}</th><th>{{bench.v19.right}}</th><th>{{bench.v19.distinct}}</th><th>{{bench.tokens}}</th></tr>
-{{bench19_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.v19.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v17</span>{{bench.v17.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v17.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.model}}</th><th>{{bench.v17.nu}}</th><th>{{bench.v17.retry}}</th><th>{{bench.v17.relay}}</th></tr>
-{{bench17_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.v17.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v16</span>{{bench.v16.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v16.intro}}</p>
-          <p class="tiers">{{bench.v16.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v15</span>{{bench.v15.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench.v15.intro}}</p>
-          <p class="tiers">{{bench.v15.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v12</span>{{bench.v12.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench12.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench12.code}}</th><th>{{bench12.relay}}</th></tr>
-{{bench12_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench12.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
-        <summary><span class="bv">v10</span>{{bench.v10.sum}}</summary>
-        <div class="bbody">
-          <p class="tiers" style="color: var(--muted);">{{bench10.intro}}</p>
-          <div class="tblwrap"><table>
-            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench10.with}}</th><th>{{bench.tokens}}</th></tr>
-{{bench10_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench10.foot}}</p>
-        </div>
-      </details>
-      <details class="bcard">
+          <details class="bcard">
         <summary><span class="bv">v9</span>{{bench.v9.sum}}</summary>
         <div class="bbody">
           <p class="tiers" style="color: var(--muted);">{{bench9.intro}}</p>
@@ -1445,18 +1507,129 @@ TEMPLATE = """<!DOCTYPE html>
           <p class="tiers" style="margin-top: 12px;">{{bench9.foot}}</p>
         </div>
       </details>
-      <details class="bcard">
-        <summary><span class="bv">v6</span>{{bench.v6.sum}}</summary>
+          <details class="bcard">
+        <summary><span class="bv">v10</span>{{bench.v10.sum}}</summary>
         <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench10.intro}}</p>
           <div class="tblwrap"><table>
-            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench.with}}</th><th>{{bench.tokens}}</th></tr>
-{{bench_rows}}          </table></div>
-          <p class="tiers" style="margin-top: 12px;">{{bench.foot}}</p>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench10.with}}</th><th>{{bench.tokens}}</th></tr>
+{{bench10_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench10.foot}}</p>
         </div>
       </details>
-    </section>
+          <details class="bcard">
+        <summary><span class="bv">v11</span>{{bench.v11.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v11.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v12</span>{{bench.v12.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench12.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.alone}}</th><th>{{bench12.code}}</th><th>{{bench12.relay}}</th></tr>
+{{bench12_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench12.foot}}</p>
+        </div>
+      </details>
+            <h3 class="bgroup">{{bench.g2}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v15</span>{{bench.v15.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v15.intro}}</p>
+          <p class="tiers">{{bench.v15.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v17</span>{{bench.v17.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v17.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.model}}</th><th>{{bench.v17.nu}}</th><th>{{bench.v17.retry}}</th><th>{{bench.v17.relay}}</th></tr>
+{{bench17_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v17.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">F5</span>{{bench.f5.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.f5.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard" open>
+        <summary><span class="bv">v23</span>{{bench.v23.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v23.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v23.arm}}</th><th>{{bench.v23.wins}}</th><th>{{bench.v23.usd}}</th></tr>
+{{bench23_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v23.foot}}</p>
+        </div>
+      </details>
+            <h3 class="bgroup">{{bench.g3}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v16</span>{{bench.v16.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v16.intro}}</p>
+          <p class="tiers">{{bench.v16.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v20</span>{{bench.v20.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v20.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v20.model}}</th><th>{{bench.v20.naked}}</th><th>{{bench.v20.locked}}</th></tr>
+{{bench20_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v20.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v22</span>{{bench.v22.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v22.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v22b</span>{{bench.v22b.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v22b.foot}}</p>
+        </div>
+      </details>
+            <h3 class="bgroup">{{bench.g4}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v13</span>{{bench.v13.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v13.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v14</span>{{bench.v14.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v14.foot}}</p>
+        </div>
+      </details>
+            <h3 class="bgroup">{{bench.g5}}</h3>
+          <details class="bcard">
+        <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v19.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v19.arm}}</th><th>{{bench.v19.right}}</th><th>{{bench.v19.distinct}}</th><th>{{bench.tokens}}</th></tr>
+{{bench19_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v19.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">v24</span>{{bench.v24.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v24.foot}}</p>
+        </div>
+      </details>
+          </section>
 
-    <section class="section build" id="build">
+<section class="section build" id="build">
       <h2>{{build.h2}}</h2>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{build.intro}}</p>
       <div class="playgrid">
@@ -2159,6 +2332,56 @@ def compute_hub():
                            and abs(r["got"] - r["gold"]) < 0.005)
     h["v23_tbl"] = tbl23
     h["v23_usd"] = "%.4f" % sum(r["usd"] for r in m23)
+    # ---------------- les oubliées du hub : v11, v13, v14, F5,
+    # ---------------- v22, v22b, v24 ----------------
+    m11 = _rows_of("results_v11.jsonl")
+    def w11(model_sub, arm):
+        rs = [r for r in m11 if model_sub in r["model"]
+              and r["arm"] == arm]
+        return "%d/%d" % (sum(1 for r in rs if r["ok"]), len(rs))
+    h["v11_7b_nu"] = w11("7b", "naked")
+    h["v11_7b_relay"] = w11("7b", "relay")
+    h["v11_8b_nu"] = w11("8b", "naked")
+    h["v11_8b_relay"] = w11("8b", "relay")
+    m13 = _rows_of("results_v13_gsm8k.jsonl")
+    def w13(model, arm):
+        rs = [r for r in m13 if r["model"] == model and r["arm"] == arm]
+        return sum(1 for r in rs if r["ok"])
+    h["v13_relay_05b"] = w13("0.5b", "relay")
+    h["v13_relay_8b"] = w13("8b", "relay")
+    h["v13_nu_05b"] = w13("0.5b", "naked")
+    m14 = _rows_of("results_v14_skill.jsonl")
+    h["v14_breaks"] = sum(1 for r in m14
+                          if r.get("err") == "protocol_giveup")
+    h["v14_steps"] = sum(1 for r in m14 if r.get("err") == "max_steps")
+    h["v14_ok"] = sum(1 for r in m14 if r["ok"])
+    h["v14_cells"] = len(m14)
+    mf5 = _rows_of("results_f5_accept.jsonl")
+    h["f5_wins"] = sum(1 for r in mf5 if r["verdict"] == "OK")
+    h["f5_cells"] = len(mf5)
+    h["f5_repairs"] = sum(r["repairs"] for r in mf5)
+    h["f5_7b"] = "%d/%d" % (sum(1 for r in mf5 if r["model"] == "7b"
+                                and r["verdict"] == "OK"),
+                            sum(1 for r in mf5 if r["model"] == "7b"))
+    m22 = _rows_of("results_v22.jsonl")
+    def w22(arm):
+        rs = [r for r in m22 if r["arm"] == arm]
+        return "%d/%d" % (sum(1 for r in rs if r["ok"]), len(rs))
+    h["v22_nu"] = w22("N")
+    h["v22_fiche"] = w22("F")
+    h["v22_code"] = w22("C")
+    m22b = _rows_of("results_v22b.jsonl")
+    h["v22b_ok"] = sum(1 for r in m22b if r["m_ok"])
+    h["v22b_cells"] = len(m22b)
+    m24 = _rows_of("results_v24_lfm3_30days.jsonl")
+    n24 = [r for r in m24 if r["arm"] == "N"]
+    mm24 = [r for r in m24 if r["arm"] == "M"]
+    h["v24_days"] = len(n24)
+    h["v24_sil"] = sum(1 for r in n24 if not r["shape"])
+    h["v24_ok"] = sum(1 for r in n24 if r["ok"])
+    h["v24_usd"] = "%.4f" % sum(r["usd"] for r in n24)
+    h["v24_m_ok"] = "%d/%d" % (sum(1 for r in mm24 if r["ok"]),
+                               len(mm24))
     return h
 
 
