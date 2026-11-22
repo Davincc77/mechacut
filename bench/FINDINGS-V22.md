@@ -5,8 +5,12 @@ ne font pas ces erreurs ». Réponse mesurée en dollars, trois familles
 frontière (claude-haiku-4.5, gpt-5-mini, deepseek-v3.2), trois bras
 (NU / CODE écrit par le modèle exécuté en sandbox / FICHE prod
 B_routée de F5 rejouée), 7 problèmes à chaîne gelés de v16, prix $/M
-figés dans le harnais AVANT la première cellule. Coût total vérifié :
-< 0,02 $ (relevé par ligne, somme dans score22).
+figés dans le harnais AVANT la première cellule. COÛT (corrigé le
+22-11 au soir : la première ligne clamait « < 0,02 $ » sans avoir
+été sommée — la somme recalculée ligne à ligne, tokens × tarifs
+gelés : V22 = 0,0344 $, V22b = 0,0637 $, total 0,098 $ ; relevé
+par ligne dans les jsonls — une publication de prix se prouve,
+sinon c'est du slogan).
 
 ## La matrice (jugée v2 — voir l'incident du juge plus bas)
 
