@@ -82,11 +82,11 @@ KEY = ""  # gelée dans main() avant la première cellule
 
 # prix $/M tokens, saisis sur /v1/models le 22-11-2026 (GELÉS)
 PRICING = {
-    "anthropic/claude-haiku-latest": (0.10, 0.50),
+    "anthropic/claude-haiku-4.5": (1.00, 5.00),
     "openai/gpt-5-mini": (0.25, 2.00),
     "deepseek/deepseek-v3.2": (0.26, 0.38),
 }
-SHORT = {"anthropic/claude-haiku-latest": "haiku",
+SHORT = {"anthropic/claude-haiku-4.5": "haiku45",
          "openai/gpt-5-mini": "gpt5m",
          "deepseek/deepseek-v3.2": "dsv32"}
 ARMS = ("N", "C", "F")
@@ -112,17 +112,12 @@ PYBLOCK = re.compile(r"```(?:python)?\s*(.+?)```", re.S)
 
 def key():
     import os
-    for p in (os.path.expanduser("~/.hermes/.env"),
-              os.path.expanduser("~/.hermes/config.yaml")):
-        try:
-            for ln in open(p):
-                m = re.search(r'(NOUS[A-Z_]*KEY[^A-Za-z0-9]*)([\w.\-]{10,})',
-                              ln)
-                if m:
-                    return m.group(2)
-        except OSError:
-            pass
-    raise SystemExit("pas de clé Nous")
+    p = os.path.expanduser("~/.hermes/auth.json")
+    try:
+        d = json.load(open(p))["providers"]["nous"]
+        return d.get("agent_key") or d["access_token"]
+    except Exception:
+        raise SystemExit("pas de clé Nous (auth.json providers/nous)")
 
 
 def api(model, msgs):
@@ -133,7 +128,7 @@ def api(model, msgs):
         req = urllib.request.Request(
             API, data=json.dumps(body).encode(),
             headers={"Content-Type": "application/json",
-                     "Authorization": "Bearer " + KEY})
+                     "Authorization": "Bearer " + key()})
         return json.loads(urllib.request.urlopen(req, timeout=180).read())
     tmark = "0"
     try:
