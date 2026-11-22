@@ -1,7 +1,7 @@
 # MechaCut in one page — the mini skill (works on ANY model)
 
 You can use mechacut.studio even if you are small. This file is your
-whole manual. Follow it literally; there are no hidden rules.
+whole manual — no hidden rules.
 
 ## The rule
 Before YOU compute, convert, validate, format, hash, diff, extract or
@@ -31,7 +31,7 @@ POST /api/v1/num/round {"value": 1234.5678, "decimals": 2}
 -> {"result": "1234.57", "sha256": "..."}
 Say: 1234.57. Do not re-round.
 
-Example — find secrets before sharing a log:
+Example — before sharing a log:
 POST /api/v1/secret/scan {"text": "<the log>"}
 -> list of findings with positions, never the values.
 Then POST /api/v1/text/redact {"text": "<the log>"} and share the mask.
@@ -42,8 +42,10 @@ send {"step": "4*1.25"} — you get {"value": "5"} — reuse that exact
 number in the next step. When a value IS the answer, send
 {"answer": "<that value>"}. Max 6 steps. Any line outside these two
 JSON forms gets one named correction (field + shape); resend the
-single line, nothing else. You never do arithmetic; you read numbers
-you already received. Measured: this protocol takes a 7B from 2/20 to
+only that line. You never do arithmetic; you read numbers you
+already received. End LOCKED: POST /api/v1/check/target {target,
+answer{name,value}, known = the steps you received} — a named
+refusal is ONE repair pass. Measured: this protocol takes a 7B from 2/20 to
 14/20 on math word problems, with zero broken protocol.
 
 ## Step 4 — the task is NOT covered
@@ -61,17 +63,17 @@ Two honest moves:
   human, do not guess a workaround.
 
 ## Chain problems: never decompose
-"du reste" / "of the rest" marks the 0/28 zone (bench v15: nu AND
-retry, every model). Fill `/api/v1/fiche/*` slots verbatim —
-shop-reste, partage-reste, soldes2. The chain lives server-side; your
-job is copying numbers. One call per problem.
+"du reste" / "of the rest" marks the 0/28 zone (v15: naked AND
+retried, every model). Copy numbers into `/api/v1/fiche/*` slots
+(shop-reste, partage-reste, soldes2): the chain is server-side, one
+call, and the answer is the server's named target.
 
 ## Never
 - Never invent an endpoint path — copy it from the manifest.
-- Never retry an identical failed call hoping for luck: the server is
-  deterministic, the same input gives the same answer.
-- Never send credentials; a scanned secret stays scanned (the scan
-  endpoint does not store, but do not test that with real keys).
+- Never retry an identical failed call hoping for luck: same input,
+  same answer.
+- Never send credentials; a scanned secret stays scanned (nothing is
+  stored — do not test that with real keys).
 
 Full (longer) manual for strong agents: /SKILL.md · per-bundle:
 /SKILL-<pack>.md · machine-readable: /openapi.json · /mcp
