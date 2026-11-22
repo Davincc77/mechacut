@@ -16,7 +16,14 @@ FICHES_CONNUES = {"shop-reste": "remaining",
                   "soldes2": "final"}
 
 
-def load(path=ANNUAIRE):
+def load(path=ANNUAIRE, strict=True):
+    """strict=True (défaut, tests + dépôt) : chaque preuve doit exister
+    sur disque — c'est la garde R4, une entrée sans ligne de bench
+    commitée est une opinion. strict=False (runtime prod) : le Docker
+    n'embarque pas bench/ ; à l'appel HTTP on sert l'entrée, la preuve
+    restant CITÉE dans la réponse. La vérification d'existence est un
+    garde de COMMIT, pas de REQUEST — sinon le prod plante sur un
+    fichier que l'image ne contient pas (incident 0.84.0, consigné)."""
     with open(path, encoding="utf-8") as fh:
         d = json.load(fh)
     assert isinstance(d.get("version"), str) and d["version"]
@@ -24,6 +31,9 @@ def load(path=ANNUAIRE):
         d["regles_transport"]
     for r in d["regles_transport"]:
         assert r.get("loi") and r.get("preuve"), "règle sans preuve"
+        if strict:
+            assert os.path.exists(os.path.join(ROOT, r["preuve"])), \
+                "preuve de règle absente : %s" % r["preuve"]
     ids = set()
     for e in d.get("entrees", []):
         p = e["prescription"]
@@ -36,9 +46,11 @@ def load(path=ANNUAIRE):
             "la loi T1 ne se négocie pas : %s" % e["id"]
         proofs = e["preuve"] if isinstance(e["preuve"], list) \
             else [e["preuve"]]
-        for pf in proofs:
-            assert os.path.exists(os.path.join(ROOT, pf)), \
-                "preuve absente du disque : %s (%s)" % (pf, e["id"])
+        assert proofs, "entrée sans preuve : %s" % e["id"]
+        if strict:
+            for pf in proofs:
+                assert os.path.exists(os.path.join(ROOT, pf)), \
+                    "preuve absente du disque : %s (%s)" % (pf, e["id"])
         assert e["id"] not in ids, "id dupliqué : %s" % e["id"]
         ids.add(e["id"])
     return d

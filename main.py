@@ -3677,7 +3677,7 @@ def _router_out(out: dict):
 def api_router_plan(req: RouterTextRequest):
     """Symptôme → prescription mesurée (fiche, créneaux, transport,
     preuve). Ne calcule rien, ne devine rien."""
-    d = annuaire.load()
+    d = annuaire.load(strict=False)  # runtime : preuves citées, garde d'existence au commit
     entree, _ = annuaire.trouver(req.texte, d)
     out = {"match": entree is not None,
            "regles_transport": [r["loi"] for r in d["regles_transport"]]}
@@ -3698,7 +3698,7 @@ def api_router_apply(req: RouterTextRequest):
     """L'annuaire APPELLE et APPLIQUE : grammaire fermée matchée →
     créneaux extraits verbatim → la fiche tourne, zéro LM. Sinon :
     refus nommé + prompt à remplir — jamais un nombre inventé."""
-    d = annuaire.load()
+    d = annuaire.load(strict=False)  # runtime : preuves citées, garde d'existence au commit
     entree, _ = annuaire.trouver(req.texte, d)
     if entree is None:
         return _router_out({"applied": False, "match": False, "note":

@@ -145,6 +145,25 @@ def test_plan_prescrit_avec_preuves():
     assert r2.json()["match"] is False
 
 
+def test_parity_prod_image_sans_bench(tmp_path):
+    """Incident 0.84.0 : le Docker n'embarque pas bench/ — un load
+    strict au runtime plantait la prod sur les preuves (500). Garde :
+    preuves absentes = le strict crève (commit), le runtime sert."""
+    import json
+    import pytest
+    d = annuaire.load()
+    for e in d["entrees"]:
+        e["preuve"] = ["bench/PAS-DANS-L-IMAGE.md"]
+    for r in d["regles_transport"]:
+        r["preuve"] = "bench/PAS-DANS-L-IMAGE.md"
+    fp = tmp_path / "ghost.json"
+    fp.write_text(json.dumps(d, ensure_ascii=False), encoding="utf-8")
+    with pytest.raises(AssertionError):
+        annuaire.load(str(fp))            # le garde de commit veille
+    g = annuaire.load(str(fp), strict=False)   # le runtime sert
+    assert len(g["entrees"]) == 3
+
+
 # ------------------------------------------------- R1 : la fiche rend l'or
 def _reste(total, matin, pct):
     r = client.post("/api/v1/fiche/shop-reste", json={"slots": {
