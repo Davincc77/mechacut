@@ -108,12 +108,14 @@ TR = {
   "pill": "v{ver} · {n_tools} transforms · {n_recipes} recipes",
   "hero1": "Meaning is learned.",
   "hero2": "Mechanics are known.",
+  "hero3": "Competence is not learned. It is served.",
   "lede": "A suite of <strong>{n_tools} deterministic transforms</strong> "
           "for AI agents — {n_free} free forever, {n_cap} free under "
           "32 KB then pay-per-call, {n_paid} machine-payable — plus "
           "{n_recipes} one-call recipes, free. The model stops guessing "
           "what a checksum can prove.",
   "bundles.h2": "The catalogue",
+  "bundles.creed": "A model computes. A server knows.",
   "cat.search": "search a tool or your problem…",
   "cat.hits": "~n~ of ~t~ tools",
   "panel.copy": "copy curl",
@@ -133,6 +135,7 @@ TR = {
                  "challenge, settled by a facilitator. Between a server "
                  "and a robot, only prices and receipts exist.",
   "bench.h2": "Measured, not promised",
+  "bench.creed": "The wall is FORM, not size — and we priced the door.",
   "bench9.intro": "One deliberately vague French sentence, six required "
                   "fields — money sorted to 2 decimals, percents, unique "
                   "dates, URL, email, total. Expectations hand-computed "
@@ -391,6 +394,7 @@ TR = {
   "pill": "v{ver} · {n_tools} transformations · {n_recipes} recettes",
   "hero1": "Le sens s'apprend.",
   "hero2": "La mécanique se sait.",
+  "hero3": "La compétence ne s'apprend pas. Elle se sert.",
   "lede": "Une suite de <strong>{n_tools} transformations "
           "déterministes</strong> pour agents IA — {n_free} gratuites à "
           "jamais, {n_cap} gratuites sous 32 Ko puis payables à l\u2019appel, "
@@ -398,6 +402,7 @@ TR = {
           "prêtes à l\u2019appel unique, gratuites. Le modèle arrête de "
           "deviner ce qu\u2019une somme de contrôle peut prouver.",
   "bundles.h2": "Le catalogue",
+  "bundles.creed": "Un modèle calcule. Un serveur sait.",
   "cat.search": "chercher un outil ou votre problème…",
   "cat.hits": "~n~ outils sur ~t~",
   "panel.copy": "copier curl",
@@ -418,6 +423,7 @@ TR = {
                  "facilitateur. Entre un serveur et un robot, il n'existe "
                  "que des prix et des reçus.",
   "bench.h2": "Mesuré, pas promis",
+  "bench.creed": "Le mur, c'est la FORME, pas la taille — et nous avons chiffré la porte.",
   "bench9.intro": "Une phrase française volontairement floue, six champs "
                   "requis — montants triés à 2 décimales, pourcentages, "
                   "dates uniques, URL, email, total. Attentes calculées à "
@@ -692,6 +698,7 @@ TR = {
   "pill": "v{ver} · {n_tools} transformações · {n_recipes} receitas",
   "hero1": "Significado se aprende.",
   "hero2": "Mecânica se conhece.",
+  "hero3": "Competência não se aprende. Serve-se.",
   "lede": "Uma suíte de <strong>{n_tools} transformações "
           "determinísticas</strong> para agentes de IA — {n_free} grátis "
           "para sempre, {n_cap} grátis abaixo de 32 KB e depois pagas "
@@ -699,6 +706,7 @@ TR = {
           "{n_recipes} receitas de chamada única, grátis. O modelo para "
           "de adivinhar o que um checksum pode provar.",
   "bundles.h2": "O catálogo",
+  "bundles.creed": "Um modelo calcula. Um servidor sabe.",
   "cat.search": "busque uma ferramenta ou seu problema…",
   "cat.hits": "~n~ ferramentas de ~t~",
   "panel.copy": "copiar curl",
@@ -718,6 +726,7 @@ TR = {
                  "x402 USDC na Base, liquidado por um facilitador. Entre "
                  "um servidor e um robô, só existem preços e recibos.",
   "bench.h2": "Medido, não prometido",
+  "bench.creed": "O muro é a FORMA, não o tamanho — e nós precificamos a porta.",
   "bench9.intro": "Uma frase vaga (em francês), seis campos obrigatórios — "
                   "valores com 2 decimais, percentuais, datas únicas, URL, "
                   "e-mail, total. Expectativas calculadas à mão antes de "
@@ -1032,6 +1041,10 @@ TEMPLATE = """<!DOCTYPE html>
   h1 .dim { color: var(--muted); }
   .lede { font-size: 19px; color: var(--muted); max-width: 680px; margin-bottom: 52px; }
   .lede strong { color: var(--fg); font-weight: 500; }
+  .creed { font-size: 21px; font-style: italic; color: var(--fg);
+    max-width: 680px; margin: 2px 0 26px; }
+  .creed .sig { font-style: normal; color: var(--muted);
+    font-size: 15px; letter-spacing: .02em; }
   .catbar { display: flex; gap: 14px; align-items: baseline;
     flex-wrap: wrap; margin-bottom: 14px; }
   #catsearch { flex: 1 1 240px; background: var(--card);
@@ -1187,11 +1200,13 @@ TEMPLATE = """<!DOCTYPE html>
     <section>
       <div class="pill">{{pill}}</div>
       <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
+      <p class="creed">{{hero3}}<span class="sig"> — V. Cirilli</span></p>
       <p class="lede">{{lede}}</p>
     </section>
 
     <section class="section" id="bundles">
       <h2>{{bundles.h2}}</h2>
+      <p class="quote">{{bundles.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{bundles.intro}}</p>
       <div class="catbar">
         <input id="catsearch" type="search" placeholder="{{cat.search}}" aria-label="{{cat.search}}">
@@ -1218,6 +1233,7 @@ TEMPLATE = """<!DOCTYPE html>
 
     <section class="section" id="bench">
       <h2>{{bench.h2}}</h2>
+      <p class="quote">{{bench.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
       <details class="bcard" open>
         <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>

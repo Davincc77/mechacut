@@ -37,6 +37,10 @@
   h1 .dim { color: var(--muted); }
   .lede { font-size: 19px; color: var(--muted); max-width: 680px; margin-bottom: 52px; }
   .lede strong { color: var(--fg); font-weight: 500; }
+  .creed { font-size: 21px; font-style: italic; color: var(--fg);
+    max-width: 680px; margin: 2px 0 26px; }
+  .creed .sig { font-style: normal; color: var(--muted);
+    font-size: 15px; letter-spacing: .02em; }
   .catbar { display: flex; gap: 14px; align-items: baseline;
     flex-wrap: wrap; margin-bottom: 14px; }
   #catsearch { flex: 1 1 240px; background: var(--card);
@@ -196,11 +200,13 @@
     <section>
       <div class="pill">{{pill}}</div>
       <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
+      <p class="creed">{{hero3}}<span class="sig"> — V. Cirilli</span></p>
       <p class="lede">{{lede}}</p>
     </section>
 
     <section class="section" id="bundles">
       <h2>{{bundles.h2}}</h2>
+      <p class="quote">{{bundles.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{bundles.intro}}</p>
       <div class="catbar">
         <input id="catsearch" type="search" placeholder="{{cat.search}}" aria-label="{{cat.search}}">
@@ -227,6 +233,7 @@
 
     <section class="section" id="bench">
       <h2>{{bench.h2}}</h2>
+      <p class="quote">{{bench.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
       <details class="bcard" open>
         <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
