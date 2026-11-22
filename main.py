@@ -43,6 +43,10 @@ POST /api/v1/money/flight_comp  flight date keys the EC261/UK261 table —     (
                                 old text vs 2026/2202, bands + MAY-reductions
 POST /api/v1/date/week          ISO week <-> date, W53 by theorem, the       (free)
                                 %Y-W%V trap shown on the requested date
+POST /api/v1/money/baggage      flight date keys LAW vs carrier gauge;       (free)
+                                40x30x15 underseat free from 2027-10-23
+POST /api/v1/csv/excel_damage   what Excel DESTROYS on double-click,         (free)
+                                per column, published vectors, import said
 
 Bundle 4.1 — numbers & money (TOOLS-50 #24-26):
 POST /api/v1/num/format       value + closed locale/currency tables -> text
@@ -208,6 +212,8 @@ import srikit
 import tzambkit
 import compkit
 import weekkit
+import bagkit
+import damagekit
 import auditor
 import sayings
 import verdict
@@ -301,7 +307,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.80.0",
+    version="0.81.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4359,6 +4365,60 @@ def api_date_week(req: DateWeekRequest):
     body, err = run_date_week(req.dict())
     return err if err else body
 
+# ---------------- bundle 50: money/baggage + csv/excel_damage
+
+
+class MoneyBaggageRequest(BaseModel):
+    flight_date: Optional[str] = None
+    regime: Optional[str] = None
+    bag: Optional[str] = None
+    bag_unit: Optional[str] = None
+    weight_kg: Optional[str] = None
+    personal_sizer: Optional[str] = None
+    cabin_sizer: Optional[str] = None
+    cabin_sum_limit: Optional[str] = None
+    cabin_weight_max: Optional[str] = None
+
+
+def run_money_baggage(args: dict):
+    try:
+        out = bagkit.run_baggage(args)
+    except bagkit.BagError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/baggage")
+def api_money_baggage(req: MoneyBaggageRequest):
+    body, err = run_money_baggage(req.dict())
+    return err if err else body
+
+
+class CsvExcelDamageRequest(BaseModel):
+    csv: Optional[str] = None
+    locale: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_csv_excel_damage(args: dict):
+    try:
+        out = damagekit.run_damage(args)
+    except damagekit.DamageError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/csv/excel_damage")
+def api_csv_excel_damage(req: CsvExcelDamageRequest):
+    body, err = run_csv_excel_damage(req.dict())
+    return err if err else body
+
 # ------------------------------ bundle 0: task router + named recipes
 
 @app.get("/route")
@@ -4684,6 +4744,8 @@ TOOL_RUN = {
            "date_tz_ambiguity": run_date_tz_ambiguity,
            "money_flight_comp": run_money_flight_comp,
            "date_week": run_date_week,
+           "money_baggage": run_money_baggage,
+           "csv_excel_damage": run_csv_excel_damage,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -5847,6 +5909,103 @@ MCP_TOOLS = [
             "year": {"type": "string",
                      "description": "YYYY — how many weeks, does "
                                     "W53 exist"}}}},
+    {
+        "name": "money_baggage",
+        "description": "Cabin baggage decided by the FLIGHT DATE, not "
+                       "the press date. Reg. (EU) 2026/2202 applies "
+                       "FROM 2027-10-23: before that no EU size rule "
+                       "exists at all (each airline decides); from it, "
+                       "exactly ONE legal edge — a personal item up "
+                       "to 40x30x15 cm must be carried under the seat "
+                       "FREE. The regulation sets NO size limit for "
+                       "the overhead bag (The Age) and NO weight cap "
+                       "for the personal item; where law is silent "
+                       "the answer SAYS silent, it does not invent. "
+                       "Carrier gauges are SUPPLIED arguments (the "
+                       "measured 2026 table: Ryanair 40x30x20, KLM "
+                       "40x30x15, easyJet 45x36x20/56x45x25…), never "
+                       "fetched. Fit is compared PER DIMENSION with "
+                       "rotation allowed — 40x18x30 passes a 40x30x20 "
+                       "gauge while raw-order checking fails it. The "
+                       "press '100 cm combined + 7 kg' reading is "
+                       "returned as a tested press CLAIM (the standard "
+                       "55x40x20 trolley sums to 115 cm, so that "
+                       "reading would outlaw every normal cabin case "
+                       "— the law does not say it), never a rule. UK "
+                       "departures named out of scope. Zero fetch, "
+                       "not legal advice. Free.",
+        "inputSchema": {"type": "object", "properties": {
+            "flight_date": {"type": "string",
+                            "description": "YYYY-MM-DD — selects the "
+                                           "legal stage (from 2027-"
+                                           "10-23 the 40x30x15 cap)"},
+            "regime": {"type": "string", "enum": ["EU", "UK", "other"],
+                       "description": "follows the DEPARTURE airport "
+                                      "and the operator — supplied, "
+                                      "never guessed"},
+            "bag": {"type": "string",
+                    "description": "'LxWxH' as measured, any face "
+                                   "order (rotation is checked)"},
+            "bag_unit": {"type": "string", "enum": ["cm", "in"],
+                         "description": "inches convert at exactly "
+                                        "2.54"},
+            "weight_kg": {"type": "string"},
+            "personal_sizer": {"type": "string",
+                               "description": "carrier's current "
+                                              "personal-item gauge, "
+                                              "you supply it"},
+            "cabin_sizer": {"type": "string",
+                            "description": "carrier's overhead gauge; "
+                                           "without it and with law "
+                                           "silent the verdict is "
+                                           "UNDETERMINED, not 'yes'"},
+            "cabin_sum_limit": {"type": "string",
+                                "description": "sum limit ONLY if "
+                                               "your carrier "
+                                               "publishes one"},
+            "cabin_weight_max": {"type": "string",
+                                 "description": "carrier cap; law "
+                                                "sets no weight for "
+                                                "the underseat item"}}}},
+    {
+        "name": "csv_excel_damage",
+        "description": "Before the double-click: what Excel will "
+                       "SILENTLY DESTROY in this CSV, per column. "
+                       "The damage happens ON OPEN and saving writes "
+                       "it back — a stripped leading zero is "
+                       "unrecoverable from the file (delimiter.live). "
+                       "Predicts Microsoft's own three Automatic Data "
+                       "Conversion toggles (Excel 365 2309+/16.77): "
+                       "leading zeros (02134->2134), text-to-date "
+                       "(SEPT2->2026-09-02, MARCH1->March 1 — gene "
+                       "names die; '3-4' is March 4 under en but "
+                       "April 3 under eu: SAME cell, TWO dates, so "
+                       "locale is an argument never a guess), the "
+                       "15-significant-digit wall (4111111111111111"
+                       "->4111111111111110, 987654321098765432->"
+                       "9.87654E+17), scientific notation (1E5->"
+                       "100000), formula shapes (-5, +43, =... "
+                       "injection surface), full-width digits (１２３ "
+                       "compares as a different ID). A token without "
+                       "a year takes the CURRENT year in Excel — so "
+                       "as_of is REQUIRED here: determinism first. "
+                       "Output: per-column rule counts + samples + "
+                       "the prescribed import (Data>From Text/CSV "
+                       "typed Text, or the toggles off, or ship "
+                       ".xlsx). csv/fix REPAIRS after the fact; this "
+                       "PREDICTS before it. Detection lot — the "
+                       "stored-vs-displayed numFmt mask rendering "
+                       "(the 88 % misled study) is the queued M "
+                       "part. Free.",
+        "inputSchema": {"type": "object", "properties": {
+            "csv": {"type": "string",
+                    "description": "the CSV text, <= 20000 chars"},
+            "locale": {"type": "string", "enum": ["en", "eu"],
+                       "description": "date coercion order: en reads "
+                                      "m/d, eu reads d/m"},
+            "as_of": {"type": "string",
+                      "description": "YYYY-MM-DD freezing the year "
+                                     "Excel implies for '3/4'"}}}},
     {
         "name": "table_sql_dump",
         "description": "CSV/JSON rows into executable CREATE TABLE + "
@@ -7285,6 +7444,8 @@ def build_listing_text():
             "  POST /api/v1/date/tz_ambiguity  wall clock -> single|fold|gap, every UTC instant named",
             "  POST /api/v1/money/flight_comp  flight date + km + delay -> €250/400/600 or £220/350/520, table keyed by FLIGHT DATE",
             "  POST /api/v1/date/week          ISO week <-> date, %Y-W%V trap shown, does W53 exist?",
+            "  POST /api/v1/money/baggage      does my bag pass: law by FLIGHT DATE vs gauges you supply, rotation fit",
+            "  POST /api/v1/csv/excel_damage   predict Excel's silent CSV damage BEFORE the double-click, per column",
         "  POST /api/v1/check/*      the output gates: agree/redlines/refs",
         "",
         "PAYLOAD (one line, honest): mechacut.studio — %d deterministic"
@@ -7428,6 +7589,8 @@ def index(request: Request):
             "/api/v1/date/tz_ambiguity": "POST (zone, local wall clock, no offset) -> verdict single | fold | gap for DST transitions: every candidate UTC instant named with offset and abbreviation, transition minute + affected window computed from the installed IANA tzdata (never embedded, never fetched), PEP 495 fold rule stated, gap neighbours (last valid / first valid wall clocks) for schedulers, named refusals for offsets and guessed zones (free)",
             "/api/v1/money/flight_comp": "POST (regime EU|UK, flight_date, event, distance_km, delay_min|notice_days+reroute) -> EC261/UK261 compensation with the table chosen BY FLIGHT DATE: old text + Sturgeon/Nelson case-law before 2027-10-23, (EU) 2026/2202 codified rules after ('EXCEEDING three hours' strict), UK261 £220/£350/£520 with the official under-4h £260 band, intra-Union EUR 400 cap named, 50%/25 % reductions as named MAY-options, nine-month claim deadline as an exact date, refusals named, zero fetch, zero legal promises (free)",
             "/api/v1/date/week": "POST (date | iso YYYY-Www-d | year) -> ISO 8601 week round-trip: iso_week/iso_year split out of the calendar year, week bounds, W53 existence by THEOREM (53 Thursdays — zero tables), nonexistent weeks refused naming the artifact, %Y-W%V vs %G-W%V shown on the requested date, Excel/US conventions beside ISO (free)",
+            "/api/v1/money/baggage": "POST (flight_date regime bag [bag_unit|weight_kg|personal_sizer|cabin_sizer|cabin_sum_limit|cabin_weight_max]) -> cabin-baggage verdict: EU law keyed by FLIGHT DATE (silent before 2027-10-23, 40x30x15 underseat safe-harbour after, NO overhead size in law), carrier gauges as SUPPLIED arguments compared PER DIMENSION with rotation allowed, the press '100 cm combined / 7 kg' reading rendered as a tested press claim never a legal rule, weight named per source, zero fetch, not legal advice (free)",
+            "/api/v1/csv/excel_damage": "POST (csv locale en|eu as_of) -> what Excel silently REWRITES at open, per column with published vectors (02134->2134, 4111111111111111->4111111111111110, 1E5->100000, SEPT2/MARCH1->dates, '3-4' = March 4 in en / April 3 in eu), Microsoft's three Automatic Data Conversion toggles named, formula shapes and full-width digits flagged, column-as-Text import prescribed, unrecoverability stated; detection lot — numFmt display rendering is the queued M part (free)",
             "/api/v1/table/sql_dump": "POST (csv|rows table dialect types) -> CREATE TABLE + INSERT with types DEDUCED and DIT (type+reason+sample), dialect-exact quoting, identifiers outside closed grammar refused by name, sqlite round-trip verified (🟡 above 32 KB)",
             "/api/v1/table/scale": "POST (items factor|servings) -> recipe scaling with THREE answers per line: exact fraction, measurable amount at the class rounding step (rule named), delta — silent rounding impossible, pinch refused by name (free)",
             "/api/v1/check/format": "POST (payload formats) -> closed-set format validation for fields JSON Schema cannot describe (free)",

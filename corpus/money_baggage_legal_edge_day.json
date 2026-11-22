@@ -1,0 +1,9 @@
+{
+ "body": {
+  "bag": "40x30x15",
+  "flight_date": "2027-10-23",
+  "regime": "EU"
+ },
+ "name": "money_baggage_legal_edge_day",
+ "path": "/api/v1/money/baggage"
+}

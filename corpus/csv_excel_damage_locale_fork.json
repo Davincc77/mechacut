@@ -1,0 +1,9 @@
+{
+ "body": {
+  "as_of": "2026-11-22",
+  "csv": "rng\n1-2\n3-4\n",
+  "locale": "eu"
+ },
+ "name": "csv_excel_damage_locale_fork",
+ "path": "/api/v1/csv/excel_damage"
+}

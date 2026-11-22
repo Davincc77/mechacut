@@ -1,0 +1,10 @@
+{
+ "body": {
+  "bag": "55x40x20",
+  "cabin_sum_limit": "100",
+  "flight_date": "2027-11-02",
+  "regime": "EU"
+ },
+ "name": "money_baggage_press_sum_115",
+ "path": "/api/v1/money/baggage"
+}

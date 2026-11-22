@@ -653,6 +653,34 @@ TABLE = (
      "logs + expected effects -> match verdict",
      "receipt verify transfer log topic confirm amount sent worked "
      "reçu confirmation transfert"),
+    ("money_baggage", "/api/v1/money/baggage", "numbers",
+     "Date du vol = palier LOI (40×30×15 sous le siège GRATUIT depuis "
+     "2027-10-23, RIEN avant — chaque compagnie décide) ; casier : la "
+     "loi ne fixe AUCUNE taille ; gabarits transporteur EN ARGUMENTS, "
+     "jamais fetchus ; ajustement PAR DIMENSION avec ROTATION (40×18×30 "
+     "passe dans 40×30×20) ; le « cumul 100 cm / 7 kg » de la presse "
+     "rendu comme affirmation TESTÉE (55+40+20=115), jamais comme règle",
+     "cabin baggage carry on size 40x30x15 underseat personal item "
+     "hand luggage allowance does my bag fit suitcase sizer gauge "
+     "rotation overhead new eu rule 2027 air passenger voyage sac "
+     "bagage cabine dimensions franchie main valise sous le siège "
+     "règle ue 2027 bagagem de mão malas de mão dimensões cabine "
+     "regulamento eu bagagem franquia tamanho permitido"),
+    ("csv_excel_damage", "/api/v1/csv/excel_damage", "repair",
+     "Ce qu'Excel DÉTRUIT au double-clic, PRÉDIT avant : zéros de tête "
+     "(02134→2134), mur des 15 chiffres (…1111→…1110), notation "
+     "scientifique (1E5→100000), dates forcées (SEPT2, MARCH1, « 3-4 » "
+     "= 4 mars EN / 3 avril EU — locale ARGUMENT, année figée par "
+     "as_of), formes de formule (=-+@), pleine chasse ; règles = les "
+     "trois interrupteurs Microsoft nommés ; import colonne-Texte "
+     "PRESCRIT ; csv/fix répare, ici on PRÉDIT",
+     "excel csv damage leading zeros scientific notation date "
+     "conversion corrupted on open double click spreadsheet gene "
+     "names postcode truncation 15 digits import text columns "
+     "dtype forecast predict before opening excel détruit zéros "
+     "conversion date mise en forme import texte colonnes planilha "
+     "csv excel zeros à esquerda notação científica corrupção ao "
+     "abrir datas forçadas"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)

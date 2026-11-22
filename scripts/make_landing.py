@@ -220,7 +220,7 @@ TR = {
                  "line into ANY agent, even the smallest — it becomes "
                  "the full manual:",
     "everyday.h2": "For the rest of us",
-  "everyday.intro": "No code, no jargon. Ten things a normal person "
+  "everyday.intro": "No code, no jargon. Eleven things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -265,6 +265,13 @@ TR = {
                       "facts either side of that line can pay "
                       "differently. \u20ac or \u00a3, with the claim "
                       "deadline as a real date.",
+  "everyday.e11.name": "Will my bag pass the gate",
+  "everyday.e11.say": "\u201cMy bag is 40\u00d718\u00d712, flight in "
+                      "November 2027 \u2014 free under the seat? The "
+                      "FLIGHT DATE decides: the 2027 law caps the "
+                      "under-seat item at 40\u00d730\u00d715, nothing "
+                      "before it. Rotation counts \u2014 faces sorted, "
+                      "never the order you typed.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -440,7 +447,7 @@ TR = {
                  "dans n'importe quel agent, m\u00eame le plus petit "
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour le commun des mortels",
-  "everyday.intro": "Pas de code, pas de jargon. Dix choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Onze choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
                     "réelle du serveur, pas une maquette.",
@@ -490,6 +497,13 @@ TR = {
                       "Mêmes faits de part et d'autre de cette ligne, "
                       "réponses différentes. € ou £, avec le délai de "
                       "recours en vraie date.",
+  "everyday.e11.name": "Mon sac passera-t-il la porte",
+  "everyday.e11.say": "« Mon sac fait 40×18×12, vol en novembre 2027 "
+                      "— gratuit sous le siège ? » C'est la DATE DU "
+                      "VOL qui décide : la règle 2027 plafonne "
+                      "l'article sous-siège à 40×30×15, avant elle "
+                      "rien n'est fixé. La rotation compte — faces "
+                      "triées, jamais l'ordre tapé.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -664,7 +678,7 @@ TR = {
   "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para o cidad\u00e3o comum",
-  "everyday.intro": "Sem código, sem jargão. Dez coisas que "
+  "everyday.intro": "Sem código, sem jargão. Onze coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -711,6 +725,13 @@ TR = {
                       "“ACIMA DE três horas”. Mesmos fatos de cada lado "
                       "dessa linha pagam diferente. € ou £, com o prazo "
                       "de reclamar em data real.",
+  "everyday.e11.name": "Minha bagagem passa no portão",
+  "everyday.e11.say": "“Minha mala é 40×18×12, voo em novembro de "
+                      "2027 — grátis sob o assento?” A DATA DO VOO "
+                      "decide: a regra de 2027 limita o item sob o "
+                      "assento a 40×30×15; antes dela, nada é fixo. "
+                      "Rotação conta — faces ordenadas, nunca a ordem "
+                      "digitada.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -1259,7 +1280,10 @@ W = {
       "comp": "\u2192 %s owed under the NEW table (\u22652027-10-23) \u00b7 "
               "carrier MAY pay %s \u00b7 claim by %s \u00b7 or \u00a3220/"
               "\u00a3350/\u00a3520 under UK261 \u00b7 same flight date, "
-              "old rules: a different answer"},
+              "old rules: a different answer",
+      "bag": "\u2192 %s under the seat by the 2027 LAW \u00b7 carrier "
+             "gauge 40\u00d730\u00d720: %s once faces are sorted \u00b7 "
+             "overhead: the law sets NO size"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -1276,7 +1300,10 @@ W = {
       "comp": "\u2192 %s dus sous la NOUVELLE table (\u226523 oct. 2027) \u00b7 "
               "le transporteur PEUT payer %s \u00b7 réclamation avant le %s \u00b7 "
               "ou \u00a3220/\u00a3350/\u00a3520 sous UK261 \u00b7 même vol avant "
-              "le 23 oct. 2027 : autre réponse"},
+              "le 23 oct. 2027 : autre réponse",
+      "bag": "\u2192 %s sous le siège par la LOI 2027 \u00b7 gabarit "
+             "compagnie 40\u00d730\u00d720 : %s faces triées \u00b7 casier "
+             ": la loi ne fixe RIEN"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -1293,7 +1320,10 @@ W = {
       "comp": "→ %s devidos pela NOVA tabela (≥23 out. 2027) · a "
               "companhia PODE pagar %s · reclamar até %s · ou "
               "£220/£350/£520 sob UK261 · ANAC/R$ é outra tabela, "
-              "não calculada aqui"},
+              "não calculada aqui",
+      "bag": "→ %s sob o assento pela LEI 2027 · gabarito da cia "
+             "40×30×20: %s com faces ordenadas · bagageiro: a lei "
+             "não fixa NADA"},
 }
 
 
@@ -1353,6 +1383,17 @@ _EVERYDAY_CALLS = [
          d["owed"]["display"],
          d["reductions_may"][0]["amount"] if d["reductions_may"] else "?",
          d["deadlines"]["claim_by"])),
+    ("/api/v1/money/baggage",
+     {"flight_date": "2027-11-02", "regime": "EU", "bag": "40x18x12",
+      "personal_sizer": "40x30x20"},
+     "bag", lambda d, L: (
+         {"en": "FREE", "fr": "GRATUIT", "pt": "GRÁTIS"}[L]
+         if d["personal_law"]["within_legal_safe_harbour"]
+         else {"en": "NOT free by law", "fr": "non gratuit",
+               "pt": "não grátis"}[L],
+         {"en": "fits", "fr": "passe", "pt": "cabe"}[L]
+         if d["carrier"]["personal_vs_sizer"]["fits"]
+         else {"en": "over", "fr": "dépassé", "pt": "estoura"}[L])),
 ]
 
 
@@ -1368,6 +1409,8 @@ BUILDER_CONSUMED = {"everyday.h2", "everyday.intro"} | {
 def everyday_html(lang, cat):
     from fastapi.testclient import TestClient
     import main as _m
+    _m.RATE_LIMIT = 10**9  # build harness: 11 cards x 3 langs > 30/min,
+    # the last pt chips used to bake as "?" silently (22-11)
     cli = TestClient(_m.app)
     cur = {"en": "USD", "fr": "EUR", "pt": "BRL"}[lang]
 

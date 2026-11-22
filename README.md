@@ -5,16 +5,33 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 134 transforms + 6 named recipes as of v0.80.0, each with its tool card
+— 136 transforms + 6 named recipes as of v0.81.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 146 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 153 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money/flight_comp` (flight
+is the truth of today. Recent highlights: `money/baggage` (cabin-baggage
+verdict keyed by the FLIGHT DATE — Regulation (EU) 2026/2202 applies only
+FROM 2027-10-23 and until then no EU size rule exists at all; from it,
+exactly one legal edge: the 40×30×15 under-seat item must ride FREE, while
+the regulation sets NO size for the overhead bag and NO weight for the
+personal item — where law is silent the answer says silent. Carrier
+gauges are supplied arguments, never fetched; fit is compared per
+dimension WITH rotation, so 40×18×30 passes a 40×30×20 gauge that raw
+order fails; the press "100 cm combined + 7 kg" reading is returned as a
+tested claim — the standard 55×40×20 trolley sums to 115 cm — never as
+law), `csv/excel_damage` (what Excel will SILENTLY DESTROY in your CSV
+before you double-click it, per column, replaying published vectors:
+02134→2134, 4111111111111111→4111111111111110, 987654321098765432→
+9.87654E+17, 1E5→100000, SEPT2 and MARCH1 coerced to dates, "3-4" is
+March 4 under en and April 3 under eu — same cell, two dates, so locale
+is an argument and the implied year is frozen by as_of; rules named by
+Microsoft's own three Automatic Data Conversion toggles, the import mode
+prescribed, the unrecoverability stated), `money/flight_comp` (flight
 compensation keyed by the FLIGHT DATE, because Regulation (EU) 2026/2202
 applies only FROM 2027-10-23 and the press conflated the two dates —
 identical facts either side of that line pay DIFFERENTLY: the new Art.
@@ -324,7 +341,9 @@ same utterance -> same card -> same sha256.
   5545), XML→JSON with conversion rules printed in the response, URL
   canonicalization (RFC 3986 §6.2.2), CSV→SQL dumps validated by a
   real sqlite roundtrip, EC261/UK261 flight compensation by flight
-  date, ISO week arithmetic, shoe sizes in millimetres, SRI
+  date, ISO week arithmetic, cabin-baggage law-vs-gauge by flight
+  date, Excel's silent CSV damage predicted per column, shoe sizes
+  in millimetres, SRI
   generation from local bytes, a 12-formula catalog and a
   comprehension mirror (/intent/reflect)
 - Still open from earlier plans: jq passthrough for power users,

@@ -1,0 +1,10 @@
+{
+ "body": {
+  "bag": "40x18x30",
+  "flight_date": "2027-11-02",
+  "personal_sizer": "40x30x20",
+  "regime": "EU"
+ },
+ "name": "money_baggage_rotation_vs_sizer",
+ "path": "/api/v1/money/baggage"
+}

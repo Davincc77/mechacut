@@ -127,6 +127,23 @@ SAY = {
         "pt": "meu relatório imprime 2027-W53 mas essa semana não "
               "existe — o ano ISO real, os limites e a semana do Excel "
               "ao lado"},
+    "/api/v1/money/baggage": {
+        "en": "my bag is 40×18×30 and my flight is 2027-11-02 — does "
+              "it fit under the seat for free, and what does my "
+              "airline's gauge say",
+        "fr": "mon sac fait 40×18×30, vol le 2 nov. 2027 — passe-t-il "
+              "gratuitement sous le siège, et que dit le gabarit de "
+              "ma compagnie",
+        "pt": "minha bagagem é 40×18×30, voo 2/11/2027 — passa de "
+              "graça sob o assento, e o que diz o gabarito da minha "
+              "companhia"},
+    "/api/v1/csv/excel_damage": {
+        "en": "before I open this CSV in Excel — which columns will "
+              "silently lose their zeros, IDs and dates",
+        "fr": "avant d'ouvrir ce CSV dans Excel — quelles colonnes "
+              "perdront en silence leurs zéros, identifiants et dates",
+        "pt": "antes de abrir este CSV no Excel — quais colunas "
+              "perderão em silêncio os zeros, IDs e datas"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",

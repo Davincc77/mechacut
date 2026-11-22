@@ -1,0 +1,9 @@
+{
+ "body": {
+  "as_of": "2026-11-22",
+  "csv": "note\nhello\n2026\n",
+  "locale": "en"
+ },
+ "name": "csv_excel_damage_safe_column",
+ "path": "/api/v1/csv/excel_damage"
+}
