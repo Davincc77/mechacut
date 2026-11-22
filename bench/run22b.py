@@ -54,7 +54,7 @@ def api_t07(model, prompt):
     req = run22.urllib.request.Request(
         run22.API, data=json.dumps(body).encode(),
         headers={"Content-Type": "application/json",
-                 "Authorization": "***" + run22.key()})
+                 "Authorization": "Bearer " + run22.key()})
     r = json.loads(run22.urllib.request.urlopen(req, timeout=180).read())
     u = r.get("usage", {})
     return (r["choices"][0]["message"]["content"] or "",
