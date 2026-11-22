@@ -5,7 +5,7 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 140 transforms + 9 named recipes as of v0.85.0, each with its tool card
+— 143 transforms + 9 named recipes as of v0.87.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
@@ -14,7 +14,20 @@ written to be followed literally by a 0.5B. Prove-the-determinism checklist:
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `date/tz_anchor` (one wall
+is the truth of today. Recent highlights: `ship/dimweight` (what a
+parcel is actually BILLED, one step per rounding: two published
+calculators print 35 and 34.5 on the SAME 20×20×12 inches — the exact
+value 4800/139 = 34.5323741007 settles it; gates (>1 ft³), ceilings
+(70 lb) and divisors are ARGUMENTS with as_of — carrier tables rot,
+USPS moved 166→139 on 2026-07-12 — and the declared divisor unit makes
+the published mm-into-139 trap structurally impossible);
+`json/coerce` (the tool-call arguments a strict reader rejects:
+models write `limit` 8.0, serde expects u64 and drops the WHOLE call;
+the published magpie grammar repairs whole floats to integer
+notation, leaves exponents and real fractions AS WRITTEN — and
+re-emits them exactly, notation is data — refuses quoted `"false"` by
+name, casts strings only on declaration, and never touches `007`);
+`date/tz_anchor` (one wall
 clock, two clocks reading it — six production bugs measured in November
 2026 share the shape: a naive timestamp written against the job's zone,
 anchored by a UTC box; every candidate instant, the drift SIGNED in
