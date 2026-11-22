@@ -316,6 +316,21 @@ def date_calc(base, op, params=None, tz=None):
             cur = dt.date()
             end = other.date()
             count = 0
+            include_base = params.get("include_base", False)
+            if include_base:
+                if sign < 0:
+                    raise DateError("include_base needs until >= base "
+                                    "(the counting window starts AT base; "
+                                    "backward windows refuse, they are "
+                                    "not mirrored by guesswork)")
+                if cur == end:
+                    if (cur.weekday() not in weekend
+                            and str(cur) not in hol):
+                        return {"business_days": 1}
+                    return {"business_days": 0}
+                if (cur.weekday() not in weekend
+                        and str(cur) not in hol):
+                    count = 1
             while cur != end:
                 cur = cur + step
                 if cur.weekday() not in weekend and str(cur) not in hol:

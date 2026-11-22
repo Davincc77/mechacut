@@ -74,7 +74,7 @@ POST /api/v1/id/slug          transliterated, collapsed, bounded
 POST /api/v1/fingerprint      canonical JSON/CSV hash = your cache key
 
 Bundle 6.1 — validators (TOOLS-50 #37-41):
-POST /api/v1/validate/iban    closed 61-country table + mod-97   ($0.0005)
+POST /api/v1/validate/iban    closed 61-country table + mod-97   (free)
 POST /api/v1/validate/phone   -> E.164 via closed dial-code table (free)
 POST /api/v1/validate/email   structure + normalized form  (free, no DNS)
 POST /api/v1/validate/url     components + canonical (IDN, ports)  (free)
@@ -324,7 +324,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.90.0",
+    version="0.91.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5778,7 +5778,10 @@ MCP_TOOLS = [
         "description": (
             "Date arithmetic: add (calendar-aware duration like \"1y2m3dT4h\", "
             "month-end clamped), business_days (n, holidays, weekend), diff "
-            "(days|business_days|human|calendar), boundary "
+            "(days|business_days|human|calendar; business_days counts "
+            "base-exclusive by default, include_base=true counts BOTH "
+            "endpoints, backward windows with include_base are refused, "
+            "not mirrored), boundary "
             "(day|week|month|quarter|year, start|end), age. Free."
         ),
         "inputSchema": {
@@ -8290,7 +8293,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.90.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.91.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":
@@ -8543,7 +8546,7 @@ def index(request: Request):
             "/api/v1/id/uuid": "POST op + name/seed/at -> deterministic UUID v5|v4_seeded|v7",
             "/api/v1/id/slug": "POST text -> url-safe slug",
             "/api/v1/fingerprint": "POST JSON or CSV -> canonical sha256 (cache key)",
-            "/api/v1/validate/iban": "POST iban -> structure + mod-97 verdict ($0.0005)",
+            "/api/v1/validate/iban": "POST iban -> structure + mod-97 verdict (free)",
             "/api/v1/validate/phone": "POST phone -> E.164 + country (free)",
             "/api/v1/validate/email": "POST email -> structure + normalized (free)",
             "/api/v1/validate/url": "POST url -> components + canonical (free)",

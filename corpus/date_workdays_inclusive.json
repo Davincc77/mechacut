@@ -1,0 +1,8 @@
+{
+  "name": "date_workdays_inclusive",
+  "path": "/api/v1/date/calc",
+  "body": {"base": "2026-01-05", "op": "diff",
+           "params": {"until": "2026-01-16", "unit": "business_days",
+                      "holidays": ["2026-01-12"],
+                      "include_base": true}}
+}

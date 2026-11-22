@@ -832,6 +832,24 @@
   },
   {
    "body": {
+    "base": "2026-01-05",
+    "op": "diff",
+    "params": {
+     "holidays": [
+      "2026-01-12"
+     ],
+     "include_base": true,
+     "unit": "business_days",
+     "until": "2026-01-16"
+    }
+   },
+   "name": "date_workdays_inclusive",
+   "path": "/api/v1/date/calc",
+   "sha256": "899d4c6a453e50cd2aefbd89f00795385e50f7b49515b7c09e3bd2d33f0184d0",
+   "status": 200
+  },
+  {
+   "body": {
     "items": [
      "https://A.com/x/",
      "https://a.com/x",
@@ -2876,8 +2894,6 @@
    },
    "name": "validate_iban_fr",
    "path": "/api/v1/validate/iban",
-   "price_atomic": "500",
-   "requires_payment": true,
    "sha256": "4ea5295b62bfe5f2c15ecab9c20130e103bf5283b555dbd45b34fafd6f8cca0c",
    "status": 200
   },

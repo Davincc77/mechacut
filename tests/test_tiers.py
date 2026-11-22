@@ -29,7 +29,6 @@ def test_tier_tables_are_exact():
                                "/api/v1/text/patch": "500",
                                "/api/v1/text/apply-diff": "500",
                                "/api/v1/money/prorate": "500",
-                               "/api/v1/validate/iban": "500",
                                "/api/v1/text/chunk": "1000",
                                "/api/v1/html/text": "1000",
                                "/api/v1/integrity/verify": "1000"}

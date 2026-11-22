@@ -35,7 +35,7 @@ Prices (USDC atomic units, 6 decimals):
   /api/v1/ics/generate    500  ($0.0005) above 32 KB          🟡
   /api/v1/ics/parse       500  ($0.0005) above 32 KB          🟡
   /api/v1/number/spell    500  ($0.0005) above 32 KB          🟡
-  /api/v1/validate/iban   500  ($0.0005)                      🔴
+  /api/v1/validate/iban   free (V21: rival gratuit même byte — 22-11)🟢
   /api/v1/text/chunk     1000  ($0.001)                       🔴
   /api/v1/html/text     1000  ($0.001)                       🔴
   /api/v1/md/render       500  ($0.0005) above 32 KB          🟡
@@ -73,7 +73,6 @@ PRICES = {
     "/api/v1/text/patch": "500",
     "/api/v1/text/apply-diff": "500",
     "/api/v1/money/prorate": "500",
-    "/api/v1/validate/iban": "500",
     "/api/v1/text/chunk": "1000",
     "/api/v1/html/text": "1000",
     "/api/v1/integrity/verify": "1000",
@@ -109,7 +108,6 @@ PRICE_LABELS = {
     "/api/v1/text/patch": "$0.0005",
     "/api/v1/text/apply-diff": "$0.0005",
     "/api/v1/money/prorate": "$0.0005",
-    "/api/v1/validate/iban": "$0.0005",
     "/api/v1/text/chunk": "$0.001",
     "/api/v1/html/text": "$0.001",
     "/api/v1/integrity/verify": "$0.001",
