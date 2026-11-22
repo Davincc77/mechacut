@@ -236,6 +236,26 @@
       <p class="quote">{{bench.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
       <details class="bcard" open>
+        <summary><span class="bv">v23</span>{{bench.v23.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v23.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v23.arm}}</th><th>{{bench.v23.wins}}</th><th>{{bench.v23.usd}}</th></tr>
+{{bench23_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v23.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v20</span>{{bench.v20.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v20.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v20.model}}</th><th>{{bench.v20.naked}}</th><th>{{bench.v20.locked}}</th></tr>
+{{bench20_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v20.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
         <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
         <div class="bbody">
           <p class="tiers" style="color: var(--muted);">{{bench.v19.intro}}</p>

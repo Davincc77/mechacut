@@ -25,8 +25,8 @@ def _rows(name):
 def test_eight_collapsible_bench_cards():
     cards = re.findall(r'<details class="bcard"[^>]*>\s*'
                        r'<summary><span class="bv">(v\d+)</span>', HTML)
-    assert cards == ["v19", "v17", "v16", "v15", "v12", "v10", "v9",
-                     "v6"], cards
+    assert cards == ["v23", "v20", "v19", "v17", "v16", "v15",
+                     "v12", "v10", "v9", "v6"], cards
 
 
 def test_v19_summary_matches_raw():
@@ -66,5 +66,36 @@ def test_no_stale_scroll_structure():
     # le contrat « pas des heures de scroll » : la section bench doit
     # tenir dans les cartes, pas en tableaux dépliés par défaut.
     bench = HTML[HTML.index('id="bench"'):HTML.index('id="build"')]
-    assert bench.count("<table>") == 6          # 6 bancs tabulaires
-    assert bench.count('open>') == 1            # seule la v19 est ouverte
+    assert bench.count("<table>") == 8          # 8 bancs tabulaires
+    assert bench.count('open>') == 1            # seule la v23 est ouverte
+    assert re.search(r'<details class="bcard" open>\s*<summary>'
+                     r'<span class="bv">v23</span>', HTML), \
+        "la carte ouverte par défaut doit être le dernier banc rendu"
+
+
+def test_v20_summary_matches_raw():
+    rows = _rows("results_v20_target_lock.jsonl")
+
+    def w(mk, arm):
+        return sum(1 for r in rows if r["model"] == mk
+                   and r["arm"] == arm and r["ok"])
+    expected = ("The wall is AIM: llama 8B went %d\u2192%d/20 with a "
+                "target lock; the 7B signed its first %d/20."
+                % (w("8b", "S"), w("8b", "L"), w("7b", "L")))
+    assert expected in HTML, expected
+
+
+def test_v23_summary_matches_raw():
+    rows = _rows("results_v23_lfm3.jsonl")
+    ch = [r for r in rows if r["arm"] == "N"
+          and r["family"] in ("mix", "partage")]
+    wins = sum(1 for r in ch if r["ok"])
+    cost = sum(r["usd"] for r in rows if r["arm"] == "N")
+    refused = sum(1 for r in rows if r["arm"] == "L" and not r["ok"]
+                  and r["got"] is not None
+                  and abs(r["got"] - r["gold"]) < 0.005)
+    expected = ("A 1.7B trained for agents solved %d/%d chains naked "
+                "for $%.4f \u2014 our wall was TRAINING, not size; "
+                "and the lock refused %d right answers over their "
+                "names." % (wins, len(ch), cost, refused))
+    assert expected in HTML, expected

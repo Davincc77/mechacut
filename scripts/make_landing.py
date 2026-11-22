@@ -160,6 +160,39 @@ TR = {
                   "never converges, it repeats. Raw runs: "
                   "bench/results_v10.jsonl, method: "
                   "bench/FINDINGS-V10.md.\n",
+        "bench.v23.sum": "A 1.7B trained for agents solved "
+                        "{v23_chain}/{v23_chain_cells} chains naked for "
+                        "${v23_cost} — our wall was TRAINING, not size; "
+                        "and the lock refused {v23_refused} right "
+                        "answers over their names.",
+        "bench.v23.intro": "The cross-family replication: the same 20 "
+                           "seeded problems, the same arms as v20, one "
+                           "model of another lineage (LFM3-1.7B, "
+                           "tri-hybrid, post-trained for tool calls). "
+                           "Nude {v23_n_all}/20, relayed {v23_s_all}/20, "
+                           "locked {v23_l_all}/20. Nothing here refutes "
+                           "v19: answering right once is not answering "
+                           "with the same byte thirty days running.",
+        "bench.v23.arm": "arm", "bench.v23.wins": "right /20",
+        "bench.v23.usd": "cost",
+        "bench.v23.foot": "Raw: bench/results_v23_lfm3.jsonl · method: "
+                          "bench/FINDINGS-V23.md · $ at frozen "
+                          "per-token prices.\n",
+        "bench.v20.sum": "The wall is AIM: llama 8B went "
+                         "{v20_8b_s}→{v20_8b_l}/20 with a target lock; "
+                         "the 7B signed its first {v20_7b_l}/20.",
+        "bench.v20.intro": "The promise of v17, measured: the answer "
+                           "must name the quantity it returns. Nude, "
+                           "the 8B computed right and answered beside "
+                           "it — {v20_aside} of its misses carried "
+                           "another quantity of the chain; the lock "
+                           "converted {v20_aside_conv}. {v20_cells} "
+                           "cells, and the naked arm replays v15 "
+                           "exactly ({v20_replay}).",
+        "bench.v20.model": "model", "bench.v20.naked": "naked",
+        "bench.v20.locked": "with the lock",
+        "bench.v20.foot": "Raw: bench/results_v20_target_lock.jsonl · "
+                          "method: bench/FINDINGS-V20.md.\n",
         "bench.v19.sum": "{v19_wins}/{v19_days} attempts right for the models — "
                         "machine: {v19_m_ok}/{v19_m_days} days on one identical "
                         "hash; {v19_drift} different outputs from one model in 30 "
@@ -458,6 +491,41 @@ TR = {
                   "ça répète. Exécutions brutes : "
                   "bench/results_v10.jsonl, méthode : "
                   "bench/FINDINGS-V10.md.\n",
+        "bench.v23.sum": "Un 1,7 B entraîné pour les agents a résolu "
+                        "{v23_chain}/{v23_chain_cells} chaînes à nu pour "
+                        "${v23_cost} — notre mur était l'ENTRAÎNEMENT, "
+                        "pas la taille ; et le verrou a refusé "
+                        "{v23_refused} bonnes réponses pour leurs noms.",
+        "bench.v23.intro": "La réplication hors-famille : les mêmes 20 "
+                           "problèmes seedés, les mêmes bras que v20, un "
+                           "modèle d'une autre lignée (LFM3-1.7B, "
+                           "tri-hybride, post-entraîné au tool calling). "
+                           "Nu {v23_n_all}/20, relayé {v23_s_all}/20, "
+                           "verrouillé {v23_l_all}/20. Rien ici ne "
+                           "réfute v19 : répondre juste une fois n'est "
+                           "pas répondre au même octet trente jours de "
+                           "suite.",
+        "bench.v23.arm": "bras", "bench.v23.wins": "justes /20",
+        "bench.v23.usd": "coût",
+        "bench.v23.foot": "Brut : bench/results_v23_lfm3.jsonl · "
+                          "méthode : bench/FINDINGS-V23.md · $ aux "
+                          "tarifs par token gelés.\n",
+        "bench.v20.sum": "Le mur est une CIBLE : le llama 8B passe de "
+                         "{v20_8b_s} à {v20_8b_l}/20 avec le verrou de "
+                         "cible ; le 7B signe son premier "
+                         "{v20_7b_l}/20.",
+        "bench.v20.intro": "La promesse de v17 mesurée : la réponse "
+                           "doit nommer la quantité qu'elle rend. Nu, "
+                           "le 8B calculait juste et répondait à côté — "
+                           "{v20_aside} de ses fautes portaient une "
+                           "autre quantité de la chaîne, le verrou en a "
+                           "converti {v20_aside_conv}. {v20_cells} "
+                           "cellules, et le bras nu rejoue v15 à "
+                           "l'identique ({v20_replay}).",
+        "bench.v20.model": "modèle", "bench.v20.naked": "nu",
+        "bench.v20.locked": "avec verrou",
+        "bench.v20.foot": "Brut : bench/results_v20_target_lock.jsonl · "
+                          "méthode : bench/FINDINGS-V20.md.\n",
         "bench.v19.sum": "{v19_wins}/{v19_days} tentatives justes pour les modèles — "
                         "machine : {v19_m_ok}/{v19_m_days} jours sur un même octet "
                         "; {v19_drift} sorties différentes pour un seul modèle en "
@@ -768,6 +836,41 @@ TR = {
                   "repetir não converge, repete. Execuções brutas: "
                   "bench/results_v10.jsonl, método: "
                   "bench/FINDINGS-V10.md.\n",
+        "bench.v23.sum": "Um 1,7B treinado para agentes resolveu "
+                        "{v23_chain}/{v23_chain_cells} correntes nu por "
+                        "${v23_cost} — nosso muro era o TREINAMENTO, "
+                        "não o tamanho; e o cadeado recusou "
+                        "{v23_refused} respostas certas pelos nomes.",
+        "bench.v23.intro": "A replicação fora da família: os mesmos 20 "
+                           "problemas com semente, os mesmos braços do "
+                           "v20, um modelo de outra linhagem (LFM3-1.7B, "
+                           "tri-híbrido, pós-treinado para tool "
+                           "calling). Nu {v23_n_all}/20, retransmitido "
+                           "{v23_s_all}/20, com cadeado "
+                           "{v23_l_all}/20. Nada aqui refuta o v19: "
+                           "acertar uma vez não é responder no mesmo "
+                           "byte trinta dias seguidos.",
+        "bench.v23.arm": "braço", "bench.v23.wins": "acertos /20",
+        "bench.v23.usd": "custo",
+        "bench.v23.foot": "Bruto: bench/results_v23_lfm3.jsonl · "
+                          "método: bench/FINDINGS-V23.md · $ a preços "
+                          "por token congelados.\n",
+        "bench.v20.sum": "O muro é um ALVO: o llama 8B vai de "
+                         "{v20_8b_s} para {v20_8b_l}/20 com o cadeado "
+                         "de alvo; o 7B fecha seu primeiro "
+                         "{v20_7b_l}/20.",
+        "bench.v20.intro": "A promessa de v17 medida: a resposta deve "
+                           "nomear a quantidade que devolve. Nu, o 8B "
+                           "calculava certo e respondia ao lado — "
+                           "{v20_aside} de seus erros traziam outra "
+                           "quantidade da cadeia, e o cadeado converteu "
+                           "{v20_aside_conv}. {v20_cells} células, e o "
+                           "braço nu reencena o v15 exatamente "
+                           "({v20_replay}).",
+        "bench.v20.model": "modelo", "bench.v20.naked": "nu",
+        "bench.v20.locked": "com cadeado",
+        "bench.v20.foot": "Bruto: bench/results_v20_target_lock.jsonl · "
+                          "método: bench/FINDINGS-V20.md.\n",
         "bench.v19.sum": "{v19_wins}/{v19_days} tentativas corretas para os modelos "
                         "— máquina: {v19_m_ok}/{v19_m_days} dias no mesmo byte; "
                         "{v19_drift} saídas diferentes de um só modelo em 30 dias.",
@@ -1259,6 +1362,26 @@ TEMPLATE = """<!DOCTYPE html>
       <p class="quote">{{bench.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
       <details class="bcard" open>
+        <summary><span class="bv">v23</span>{{bench.v23.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v23.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v23.arm}}</th><th>{{bench.v23.wins}}</th><th>{{bench.v23.usd}}</th></tr>
+{{bench23_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v23.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
+        <summary><span class="bv">v20</span>{{bench.v20.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.v20.intro}}</p>
+          <div class="tblwrap"><table>
+            <tr><th>{{bench.v20.model}}</th><th>{{bench.v20.naked}}</th><th>{{bench.v20.locked}}</th></tr>
+{{bench20_rows}}          </table></div>
+          <p class="tiers" style="margin-top: 12px;">{{bench.v20.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard">
         <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
         <div class="bbody">
           <p class="tiers" style="color: var(--muted);">{{bench.v19.intro}}</p>
@@ -1987,6 +2110,55 @@ def compute_hub():
     h["v19_mult"] = "%.1f" % (
         sum(d["t"] for k, d in agg.items() if k[0] == "R") /
         max(1, sum(d["t"] for k, d in agg.items() if k[0] == "N")))
+    # ---------------- v20 : le verrou de cible (120 cellules)
+    m20 = _rows_of("results_v20_target_lock.jsonl")
+
+    def w20(mk, arm):
+        return sum(1 for r in m20 if r["model"] == mk
+                   and r["arm"] == arm and r["ok"])
+    h["v20_8b_s"], h["v20_8b_l"] = w20("8b", "S"), w20("8b", "L")
+    h["v20_7b_s"], h["v20_7b_l"] = w20("7b", "S"), w20("7b", "L")
+    h["v20_15b_s"], h["v20_15b_l"] = w20("1.5b", "S"), w20("1.5b", "L")
+    h["v20_replay"] = "%d/%d/%d" % (h["v20_8b_s"], h["v20_7b_s"],
+                                    h["v20_15b_s"])
+    from gen16 import problems as _probs
+    q20 = {t["i"]: t for t in _probs()}
+
+    def _aside(r):
+        t = q20[r["i"]]
+        return (r["got"] is not None and
+                any(abs(float(v) - r["got"]) < 0.005 and
+                    k != t["cible"] for k, v in t["qte"].items()))
+    aside_i = {r["i"] for r in m20 if r["arm"] == "S" and not r["ok"]
+               and _aside(r)}
+    h["v20_aside"] = len(aside_i)
+    h["v20_aside_conv"] = sum(
+        1 for i in aside_i if any(r["arm"] == "L" and r["i"] == i
+                                  and r["ok"] for r in m20))
+    h["v20_cells"] = len(m20)
+    # ---------------- v23 : la réplication hors-famille (60 cellules)
+    m23 = _rows_of("results_v23_lfm3.jsonl")
+    CH23 = ("mix", "partage")
+    h["v23_chain"] = sum(1 for r in m23 if r["arm"] == "N"
+                         and r["family"] in CH23 and r["ok"])
+    h["v23_chain_cells"] = sum(1 for r in m23 if r["arm"] == "N"
+                               and r["family"] in CH23)
+    h["v23_cost"] = "%.4f" % sum(r["usd"] for r in m23
+                                 if r["arm"] == "N")
+    arm23, tbl23 = {}, {}
+    for a in ("N", "S", "L"):
+        rs = [r for r in m23 if r["arm"] == a]
+        arm23[a] = sum(1 for r in rs if r["ok"])
+        tbl23[a] = (arm23[a], len(rs),
+                    "%.4f" % sum(r["usd"] for r in rs))
+    h["v23_n_all"], h["v23_s_all"], h["v23_l_all"] = (arm23["N"],
+                                                      arm23["S"],
+                                                      arm23["L"])
+    h["v23_refused"] = sum(1 for r in m23 if r["arm"] == "L"
+                           and not r["ok"] and r["got"] is not None
+                           and abs(r["got"] - r["gold"]) < 0.005)
+    h["v23_tbl"] = tbl23
+    h["v23_usd"] = "%.4f" % sum(r["usd"] for r in m23)
     return h
 
 
@@ -2073,6 +2245,30 @@ def bench9_rows_html():
     return "\n".join(out)
 
 
+def bench20_rows_html():
+    out = []
+    for lbl, s_, l_ in (("llama3.1:8b", HUB["v20_8b_s"],
+                         HUB["v20_8b_l"]),
+                        ("qwen2.5:7b-q4", HUB["v20_7b_s"],
+                         HUB["v20_7b_l"]),
+                        ("qwen2.5:1.5b", HUB["v20_15b_s"],
+                         HUB["v20_15b_l"])):
+        out.append('<tr><td>%s</td><td class="num">%d/20</td>'
+                   '<td class="%s">%d/20</td></tr>'
+                   % (lbl, s_, "yes" if l_ == 20 else "", l_))
+    return "\n".join(out)
+
+
+def bench23_rows_html():
+    out = []
+    for a, lbl in (("N", "nude"), ("S", "relay"), ("L", "lock")):
+        w, n, u = HUB["v23_tbl"][a]
+        out.append('<tr><td>%s</td><td class="%s">%d/%d</td>'
+                   '<td class="num">$%s</td></tr>'
+                   % (lbl, "yes" if w == n else "", w, n, u))
+    return "\n".join(out)
+
+
 def main():
     import main as app_mod  # after everything else, cheap sanity
     ver = app_mod.app.version
@@ -2104,6 +2300,8 @@ def main():
         cat["bench12_rows"] = bench12_rows_html()
         cat["bench17_rows"] = bench17_rows_html()
         cat["bench19_rows"] = bench19_rows_html()
+        cat["bench20_rows"] = bench20_rows_html()
+        cat["bench23_rows"] = bench23_rows_html()
         (ROOT / "locales" / ("%s.json" % lang)).write_text(
             json.dumps(cat, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8")
