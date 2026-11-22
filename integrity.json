@@ -1619,6 +1619,104 @@
   },
   {
    "body": {
+    "offer": "bogo_percent",
+    "pairs": [
+     [
+      "40.00",
+      "40.00"
+     ]
+    ],
+    "second_percent": "50"
+   },
+   "name": "money_bogo_equal_25",
+   "path": "/api/v1/money/bogo",
+   "sha256": "90536dd328730009c39d7777d82d7c33841f2366f7a10b54d228f200f77995d3",
+   "status": 200
+  },
+  {
+   "body": {
+    "offer": "bogo_free",
+    "pairs": [
+     [
+      "40.00",
+      "40.00"
+     ]
+    ]
+   },
+   "name": "money_bogo_free_50",
+   "path": "/api/v1/money/bogo",
+   "sha256": "cf15a05139edbf7fcb007c0d509068f07a15d30f4dc1c15b2ec383458d0920ef",
+   "status": 200
+  },
+  {
+   "body": {
+    "extras": [
+     "25"
+    ],
+    "offer": "bogo_percent",
+    "pairs": [
+     [
+      "25",
+      "25"
+     ]
+    ],
+    "second_percent": "50"
+   },
+   "name": "money_bogo_odd_remainder_50_3",
+   "path": "/api/v1/money/bogo",
+   "sha256": "73c6d410342578989d4988d2de735090e881742a438b1a8a56def6cedaafec32",
+   "status": 200
+  },
+  {
+   "body": {
+    "coupon_percent": "30",
+    "offer": "bogo_percent",
+    "pairs": [
+     [
+      "40.00",
+      "40.00"
+     ]
+    ],
+    "second_percent": "50"
+   },
+   "name": "money_bogo_stacked_475",
+   "path": "/api/v1/money/bogo",
+   "sha256": "efabe10d4d6212c7ad12787b292f2646165f74bc4f4953b5c519698215dfda9f",
+   "status": 200
+  },
+  {
+   "body": {
+    "offer": "bogo_percent",
+    "pairs": [
+     [
+      "60.00",
+      "40.00"
+     ]
+    ],
+    "second_percent": "50"
+   },
+   "name": "money_bogo_unequal_20_published",
+   "path": "/api/v1/money/bogo",
+   "sha256": "156defcae4e3f6d365a6c484bc068745727159dffef3725295e7492152275901",
+   "status": 200
+  },
+  {
+   "body": {
+    "offer": "2_for_15",
+    "pairs": [
+     [
+      "40.00",
+      "40.00"
+     ]
+    ]
+   },
+   "name": "money_bogo_unknown_offer_refused",
+   "path": "/api/v1/money/bogo",
+   "sha256": "86972353b909449fecded40f6acb6dc77b65af0e3d5114d8e0a46d1a3257f3b6",
+   "status": 400
+  },
+  {
+   "body": {
     "a_fixed": "10",
     "a_fixed_per": "month",
     "a_unit_per": "kWh",

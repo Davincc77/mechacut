@@ -416,9 +416,9 @@ def test_everyday_chip_baked_three_languages():
     assert "billed 6 kg vs 5 kg" in en["everyday_grid"]
     assert "facturé 6 kg" in fr["everyday_grid"]
     assert "cobrado 6 kg" in pt["everyday_grid"]
-    assert "Fourteen" in en["everyday.intro"]
-    assert "Quatorze" in fr["everyday.intro"]
-    assert "Catorze" in pt["everyday.intro"]
+    assert "Fifteen" in en["everyday.intro"]  # resize 22-11 20h30: bundle61 joint e15 (bogo)
+    assert "Quinze" in fr["everyday.intro"]
+    assert "Quinze" in pt["everyday.intro"]
 
 
 def test_golden_contains_eleven_new_pins():

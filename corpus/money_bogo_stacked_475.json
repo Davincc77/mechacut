@@ -1,0 +1,15 @@
+{
+ "body": {
+  "offer": "bogo_percent",
+  "second_percent": "50",
+  "pairs": [
+   [
+    "40.00",
+    "40.00"
+   ]
+  ],
+  "coupon_percent": "30"
+ },
+ "name": "money_bogo_stacked_475",
+ "path": "/api/v1/money/bogo"
+}

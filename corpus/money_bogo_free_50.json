@@ -1,0 +1,13 @@
+{
+ "body": {
+  "offer": "bogo_free",
+  "pairs": [
+   [
+    "40.00",
+    "40.00"
+   ]
+  ]
+ },
+ "name": "money_bogo_free_50",
+ "path": "/api/v1/money/bogo"
+}

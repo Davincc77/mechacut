@@ -785,7 +785,23 @@ TABLE = (
      "invalid type floating point expected strict parse call args "
      "truthy quoted false leading zeros notation "
      "arguments appel outil coercion arguments refuses "
-     "argumentos chamada ferramenta coerção tipos estritos"),
+     "argumentos chamada ferramenta coerção tipos estritos"),    ("money_bogo", "/api/v1/money/bogo", "numbers",
+     "Le pourcentage que la CAISSE applique vraiment sous un panneau "
+     "« BUY ONE GET ONE 50 % » : la remise porte sur le MOINCHER des "
+     "deux (règle de détail publiée — 60+40 rend 80 sur 100, soit 20 %, "
+     "ni 25 ni 50), prix égaux = 25 % de la paire JAMAIS 50, l'article "
+     "impair se paie PLEIN (les paires sont DONNÉES, jamais devinées), "
+     "le coupon s'EMPILE en produit de facteurs (25 puis 30 = 47,5, "
+     "jamais 55) ; trace par paire, fraction exacte à côté de "
+     "l'affichage",
+     "bogo buy one get one second item cheaper pair effective checkout "
+     "half off percent promo hoodies fine print real discount stack "
+     "coupon bogo achète un obtiens le deuxième gratuit moins cher "
+     "paire pourcentage réel caisse promo moitié prix empiler coupon "
+     "note bogo compre um leve segundo grátis mais barato par "
+     "porcentagem real caixa promoção metade preço cupom desconto "
+     "verdadeiro"),
+
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)

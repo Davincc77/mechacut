@@ -359,7 +359,7 @@ TR = {
                  "line into ANY agent, even the smallest — it becomes "
                  "the full manual:",
     "everyday.h2": "For the rest of us",
-  "everyday.intro": "No code, no jargon. Fourteen things a normal person "
+  "everyday.intro": "No code, no jargon. Fifteen things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -436,6 +436,14 @@ TR = {
                       "step named. And carrier tables ROT (USPS moved "
                       "166 → 139 in July 2026), so the divisor stays "
                       "YOUR argument — never our memory.",
+  "everyday.e15.name": "The BOGO sign says 50 % — the bill does not",
+  "everyday.e15.say": "\u201cBuy one, get the second 50 % off — a "
+                      "$60 and a $40 hoodie, am I at −50, −25?\u201d "
+                      "Neither: the % hits the CHEAPER item (published "
+                      "retail rule), so the pair is 80 of 100 = −20 %. "
+                      "Equal prices would be −25 %, BOGO free −50 %, "
+                      "and a −30 coupon on top gives −47.5, never 55 — "
+                      "percentages multiply.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -752,7 +760,7 @@ TR = {
                  "dans n'importe quel agent, m\u00eame le plus petit "
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour le commun des mortels",
-  "everyday.intro": "Pas de code, pas de jargon. Quatorze choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Quinze choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
                     "réelle du serveur, pas une maquette.",
@@ -836,6 +844,16 @@ TR = {
                       "tables transporteurs POURRISSENT (USPS : 166→139 "
                       "en juillet 2026), le diviseur reste VOTRE "
                       "argument — jamais notre m\u00e9moire.",
+  "everyday.e15.name": "L'affiche dit 50 % — la note, jamais",
+  "everyday.e15.say": "« Ach\u00e8te le premier, le deuxi\u00e8me \u00e0 "
+                      "−50 % — deux sweats \u00e0 60 \u20ac et 40 \u20ac, "
+                      "j'en ai pour combien ? » Ni 50 ni 25 : la remise "
+                      "porte sur le MOINCHER des deux (r\u00e8gle de "
+                      "d\u00e9tail publi\u00e9e), la paire rend 80 sur "
+                      "100 = −20 %. \u00c0 prix \u00e9gaux, −25 % ; "
+                      "BOGO gratuit, −50 % ; et un coupon −30 % par "
+                      "dessus fait −47,5 %, jamais 55 — \u00e7a se "
+                      "multiplie.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -1148,7 +1166,7 @@ TR = {
   "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para o cidad\u00e3o comum",
-  "everyday.intro": "Sem código, sem jargão. Catorze coisas que "
+  "everyday.intro": "Sem código, sem jargão. Quinze coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -1226,6 +1244,14 @@ TR = {
                       "cada passo nomeado. E as tabelas ESTRAGAM "
                       "(USPS: 166→139 em julho de 2026); o divisor "
                       "continua SEU argumento — nunca nossa memória.",
+  "everyday.e15.name": "A placa diz 50 % — a conta, nunca",
+  "everyday.e15.say": "“Compre um e leve o segundo com 50% off — duas "
+                      "camisetas de R$ 60 e R$ 40, quanto eu pago?” Nem "
+                      "50 nem 25: o desconto cai sobre a MAIS BARATA "
+                      "(regra de varejo publicada), o par sai por 80 de "
+                      "100 = −20 %. Preços iguais = −25 %; BOGO grátis = "
+                      "−50 %; e um cupom de −30 % por cima dá −47,5 %, "
+                      "nunca 55 — percentuais multiplicam.”",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -1911,7 +1937,8 @@ W = {
       "points": "\u2192 %s \u00a2/point, exactly %s \u00b7 above your "
                 "floor %s \u2192 redeem",
       "dim": "\u2192 billed %s kg vs %s kg \u2014 same box, divisors "
-             "5 000 vs 6 000, each step named"},
+             "5 000 vs 6 000, each step named",
+      "bogo": "\u2192 sign says 50%%, the pair pays %s — you pay %s of %s"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -1938,7 +1965,8 @@ W = {
       "points": "\u2192 %s centime par point, exactement %s \u00b7 "
                 "au-dessus du plancher %s \u2192 on prend",
       "dim": "\u2192 factur\u00e9 %s kg (÷ 5 000) contre %s kg "
-             "(÷ 6 000) \u2014 m\u00eame bo\u00eete, chaque \u00e9tape nomm\u00e9e"},
+             "(÷ 6 000) \u2014 m\u00eame bo\u00eete, chaque \u00e9tape nomm\u00e9e",
+      "bogo": "\u2192 l'affiche dit 50%%, la paire paie %s — on r\u00e8gle %s sur %s"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -1965,7 +1993,8 @@ W = {
       "points": "→ %s centavo por ponto, exato %s · acima do piso %s "
                 "→ resgate",
       "dim": "→ cobrado %s kg (÷ 5 000) contra %s kg (÷ 6 000) — "
-             "mesma caixa, cada passo nomeado"},
+             "mesma caixa, cada passo nomeado",
+      "bogo": "\u2192 a placa diz 50%%, o par sai por %s — voc\u00ea paga %s de %s"},
 }
 
 
@@ -2073,6 +2102,14 @@ _EVERYDAY_CALLS = [
      "dim", lambda d, L: (
          d["results"][0]["billed_weight"],
          d["results"][1]["billed_weight"])),
+    ("/api/v1/money/bogo",
+     {"offer": "bogo_percent", "second_percent": "50",
+      "pairs": [["60.00", "40.00"]]},
+     "bogo", lambda d, L_: tuple(
+         {"en": lambda s: s, "fr": lambda s: s.replace(".", ","),
+          "pt": lambda s: s.replace(".", ",")}[L_](
+             d["effective"]["percent"] + "|" + d["totals"]["paid"] +
+             "|" + d["totals"]["full"]).split("|"))),
 ]
 
 

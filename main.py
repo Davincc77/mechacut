@@ -229,6 +229,7 @@ import anchorkit
 import pointskit
 import dimkit
 import castkit
+import bogokit
 import auditor
 import sayings
 import verdict
@@ -323,7 +324,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.88.0",
+    version="0.89.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4801,6 +4802,31 @@ def api_ship_dimweight(req: ShipDimweightRequest):
     return err if err else body
 
 
+class MoneyBogoRequest(BaseModel):
+    offer: Optional[str] = None
+    pairs: Optional[List[List[str]]] = None
+    extras: Optional[List[str]] = None
+    second_percent: Optional[str] = None
+    coupon_percent: Optional[str] = None
+
+
+def run_money_bogo(args: dict):
+    try:
+        out = bogokit.run_bogo(args)
+    except bogokit.BogoError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/bogo")
+def api_money_bogo(req: MoneyBogoRequest):
+    body, err = run_money_bogo(req.dict())
+    return err if err else body
+
+
 class JsonCoerceRequest(BaseModel):
     raw: Optional[str] = None
     json_schema: Optional[Dict[str, str]] = Field(default=None,
@@ -5169,6 +5195,7 @@ TOOL_RUN = {
            "money_points": run_money_points,
            "ship_dimweight": run_ship_dimweight,
            "json_coerce": run_json_coerce,
+           "money_bogo": run_money_bogo,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -8108,6 +8135,41 @@ MCP_TOOLS = [
                                        "enum": ["on", "off", "true",
                                                 "false"],
                                        "default": "off"}}}},
+    {
+        "name": "money_bogo",
+        "description": "The discount the CHECKOUT really applies under "
+                       "a buy-one-get-one sign, exact Decimal: the "
+                       "percent hits the CHEAPER item of each pair "
+                       "(published retail rule — $60+$40 pays 80 of 100 "
+                       "= 20%, neither 25 nor 50); equal prices give "
+                       "25% on the pair, never 50; an odd item pays "
+                       "FULL (pairs are GIVEN, never guessed — extras); "
+                       "a coupon stacks as FACTORS (25% then 30% = "
+                       "47.5, never 55). Per-pair expression travels; "
+                       "the saved ratio travels as an exact fraction "
+                       "beside the 4-dp display. Closed offers: "
+                       "bogo_free | bogo_percent; comma prices refused "
+                       "by name (num/parse is the shape tool); cap 12 "
+                       "pairs. Free.",
+        "inputSchema": {"type": "object",
+                        "required": ["offer", "pairs"],
+                        "properties": {
+                            "offer": {"type": "string",
+                                      "enum": ["bogo_free",
+                                               "bogo_percent"]},
+                            "pairs": {"type": "array",
+                                      "minItems": 1, "maxItems": 12,
+                                      "items": {"type": "array",
+                                                "minItems": 2,
+                                                "maxItems": 2,
+                                                "items": {
+                                                    "type": "string"}}},
+                            "extras": {"type": "array",
+                                       "maxItems": 12,
+                                       "items": {"type": "string"}},
+                            "second_percent": {"type": "string"},
+                            "coupon_percent": {"type": "string"}}},
+    },
 ]
 
 
@@ -8147,7 +8209,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.88.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.89.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":

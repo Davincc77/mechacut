@@ -207,6 +207,14 @@ SAY = {
               "tout refusé — répare les arguments sans jamais deviner",
         "pt": "o modelo mandou limit 8.0 e o parser estrito recusou a "
               "chamada inteira — conserte os argumentos sem adivinhar"},
+    "/api/v1/money/bogo": {
+        "en": "the sign says buy one get one 50% off — a $60 and a $40 "
+              "hoodie: what percentage does the register really take",
+        "fr": "l'affiche dit achète le premier, le deuxième à −50 % — "
+              "deux sweats à 60 € et 40 €, c'est combien sur la note",
+        "pt": "a placa diz compre um e leve o segundo com 50% off — "
+              "duas camisetas de R$ 60 e R$ 40: qual é o desconto real "
+              "no caixa"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",

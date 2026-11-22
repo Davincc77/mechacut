@@ -1,0 +1,17 @@
+{
+ "body": {
+  "offer": "bogo_percent",
+  "second_percent": "50",
+  "pairs": [
+   [
+    "25",
+    "25"
+   ]
+  ],
+  "extras": [
+   "25"
+  ]
+ },
+ "name": "money_bogo_odd_remainder_50_3",
+ "path": "/api/v1/money/bogo"
+}

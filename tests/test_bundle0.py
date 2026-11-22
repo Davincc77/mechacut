@@ -82,7 +82,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 152   # 143 tools + 9 recipes
+    assert seen == len(routing.TABLE) == 153   # 144 tools + 9 recipes (22-11 20h30 bundle61 money_bogo)
 
 
 def test_pack_unknown():
