@@ -79,6 +79,34 @@ def test_no_stale_scroll_structure():
         "la carte ouverte par défaut doit être le dernier banc rendu"
 
 
+def test_v22_v22b_summaries_match_raw():
+    rows = _rows("results_v22.jsonl")
+    n = [r for r in rows if r["arm"] == "N"]
+    f = [r for r in rows if r["arm"] == "F"]
+    per = {m: sum(1 for r in n if r["model"] == m and r["ok"])
+           for m in {r["model"] for r in n}}
+    expected = ("Three frontier models answer %d/%d naked — one at "
+                "%d/7, another at %d/7. Through the frozen fiche: "
+                "%d/%d. Paying more doesn't change the shape."
+                % (sum(1 for r in n if r["ok"]), len(n),
+                   max(per.values()), min(per.values()),
+                   sum(1 for r in f if r["ok"]), len(f)))
+    assert expected in HTML, expected
+    b = _rows("results_v22b.jsonl")
+    pairs = {}
+    msha = {}
+    for r in b:
+        pairs.setdefault((r["model"], str(r["i"])), set()).add(r["code_sha"])
+        msha.setdefault(str(r["i"]), set()).add(r["m_sha"])
+    expected_b = ("Five passes at agent temperature: %d/%d right — the "
+                  "SAME program twice: %d/14. The server: %s sha per "
+                  "problem."
+                  % (sum(1 for r in b if r["c_ok"]), len(b),
+                     sum(1 for v in pairs.values() if len(v) == 1),
+                     max(len(v) for v in msha.values())))
+    assert expected_b in HTML, expected_b
+
+
 def test_v20_summary_matches_raw():
     rows = _rows("results_v20_target_lock.jsonl")
 

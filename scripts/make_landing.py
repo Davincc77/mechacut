@@ -220,13 +220,14 @@ TR = {
                         "free.",
         "bench.v14.foot": "Raw: bench/results_v14_skill.jsonl · method: "
                         "bench/FINDINGS-V14.md",
-        "bench.v22.sum": "A frontier Haiku answers {v22_nu} naked — {v22_fiche} with "
-                        "the fiche. Paying more doesn't change the shape.",
+        "bench.v22.sum": "Three frontier models answer {v22_nu} naked — one at "
+                        "{v22_best}, another at {v22_worst}. Through the frozen "
+                        "fiche: {v22_fiche}. Paying more doesn't change the shape.",
         "bench.v22.foot": "Raw: bench/results_v22.jsonl · method: "
                         "bench/FINDINGS-V22.md",
-        "bench.v22b.sum": "The tool-trained frontier model fills slots right "
-                        "{v22b_ok}/{v22b_cells} — the objection is half-right, and "
-                        "that half is what v23 measures.",
+        "bench.v22b.sum": "Five passes at agent temperature: {v22b_ok}/{v22b_cells} "
+                        "right — the SAME program twice: {v22b_stable}/14. The "
+                        "server: {v22b_shas} sha per problem.",
         "bench.v22b.foot": "Raw: bench/results_v22b.jsonl · method: "
                         "bench/FINDINGS-V22.md",
         "bench.v24.sum": "Thirty days of the same CSV with a model that CAN do "
@@ -604,13 +605,14 @@ TR = {
                         "lecture, elle, reste libre.",
         "bench.v14.foot": "Brut : bench/results_v14_skill.jsonl · méthode : "
                         "bench/FINDINGS-V14.md",
-        "bench.v22.sum": "Un Haiku de frontière répond {v22_nu} nu — {v22_fiche} "
-                        "avec la fiche. Payer plus ne change pas la forme.",
+        "bench.v22.sum": "Trois modèles frontière, {v22_nu} justes nus — l'un "
+                        "{v22_best}, l'autre {v22_worst}. Par la fiche gelée : "
+                        "{v22_fiche}. Payer plus ne change pas la forme.",
         "bench.v22.foot": "Brut : bench/results_v22.jsonl · méthode : "
                         "bench/FINDINGS-V22.md",
-        "bench.v22b.sum": "Le modèle frontière entraîné pour les outils remplit les "
-                        "créneaux justes {v22b_ok}/{v22b_cells} — l'objection a "
-                        "raison à moitié, et cette moitié est ce que v23 mesure.",
+        "bench.v22b.sum": "Cinq passes au régime des agents : {v22b_ok}/{v22b_cells} "
+                        "justes — le MÊME programme deux fois : {v22b_stable}/14. "
+                        "Le serveur : {v22b_shas} sha par problème.",
         "bench.v22b.foot": "Brut : bench/results_v22b.jsonl · méthode : "
                         "bench/FINDINGS-V22.md",
         "bench.v24.sum": "Trente jours sur le même CSV avec un modèle QUI SAIT les "
@@ -1000,13 +1002,14 @@ TR = {
                         "segue livre.",
         "bench.v14.foot": "Bruto: bench/results_v14_skill.jsonl · método: "
                         "bench/FINDINGS-V14.md",
-        "bench.v22.sum": "Um Haiku de fronteira responde {v22_nu} nu — {v22_fiche} "
-                        "com a ficha. Pagar mais não muda a forma.",
+        "bench.v22.sum": "Três modelos fronteira respondem {v22_nu} nus — um "
+                        "{v22_best}, outro {v22_worst}. Pela ficha congelada: "
+                        "{v22_fiche}. Pagar mais não muda a forma.",
         "bench.v22.foot": "Bruto: bench/results_v22.jsonl · método: "
                         "bench/FINDINGS-V22.md",
-        "bench.v22b.sum": "O modelo de fronteira treinado para ferramentas preenche "
-                        "{v22b_ok}/{v22b_cells} slots certos — a objeção tem metade "
-                        "razão, e essa metade é o que v23 mede.",
+        "bench.v22b.sum": "Cinco passes no regime dos agentes: {v22b_ok}/{v22b_cells} "
+                        "certos — o MESMO programa duas vezes: {v22b_stable}/14. "
+                        "O servidor: {v22b_shas} sha por problema.",
         "bench.v22b.foot": "Bruto: bench/results_v22b.jsonl · método: "
                         "bench/FINDINGS-V22.md",
         "bench.v24.sum": "Trinta dias no mesmo CSV com um modelo QUE SABE cadeias: "
@@ -2409,15 +2412,34 @@ def compute_hub():
                                 and r["verdict"] == "OK"),
                             sum(1 for r in mf5 if r["model"] == "7b"))
     m22 = _rows_of("results_v22.jsonl")
-    def w22(arm):
-        rs = [r for r in m22 if r["arm"] == arm]
+
+    def w22(arm, model=None):
+        rs = [r for r in m22 if r["arm"] == arm
+              and (model is None or r["model"] == model)]
         return "%d/%d" % (sum(1 for r in rs if r["ok"]), len(rs))
     h["v22_nu"] = w22("N")
     h["v22_fiche"] = w22("F")
     h["v22_code"] = w22("C")
+    # meilleur/pire modèle au bras N — la carte doit nommer ses
+    # dénominateurs (loi du guard : une phrase = des nombres dont
+    # chacun a LE SIEN sujet, vérifié par test_bundle52).
+    per_n = {m: sum(1 for r in m22 if r["arm"] == "N" and r["model"] == m
+                    and r["ok"])
+             for m in {r["model"] for r in m22 if r["arm"] == "N"}}
+    best = max(per_n, key=lambda m: per_n[m])
+    worst = min(per_n, key=lambda m: per_n[m])
+    h["v22_best"] = "%d/7" % per_n[best]
+    h["v22_worst"] = "%d/7" % per_n[worst]
     m22b = _rows_of("results_v22b.jsonl")
-    h["v22b_ok"] = sum(1 for r in m22b if r["m_ok"])
+    h["v22b_ok"] = sum(1 for r in m22b if r["c_ok"])
     h["v22b_cells"] = len(m22b)
+    pairs = {}
+    msha = {}
+    for r in m22b:
+        pairs.setdefault((r["model"], str(r["i"])), set()).add(r["code_sha"])
+        msha.setdefault(str(r["i"]), set()).add(r["m_sha"])
+    h["v22b_stable"] = sum(1 for v in pairs.values() if len(v) == 1)
+    h["v22b_shas"] = str(max(len(v) for v in msha.values()))
     m24 = _rows_of("results_v24_lfm3_30days.jsonl")
     n24 = [r for r in m24 if r["arm"] == "N"]
     mm24 = [r for r in m24 if r["arm"] == "M"]
