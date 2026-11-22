@@ -59,9 +59,11 @@ def load(path=ANNUAIRE, strict=True):
 def trouver(texte, d=None):
     """Le mot le plus spécifique gagne. Les accents sont pliés
     (l'incident live 22-11 : « recoit » sans accent perdait la
-    bataille contre « du reste » partagé). ÉGALITÉ = PAS DE MATCH :
-    un lien d'annuaire qu'on départagerait par l'ordre des lignes
-    est une devinette, et on ne devine pas (R3)."""
+    bataille contre « du reste » partagé). ÉGALITÉ = PAS DE MATCH.
+    SEUIL (loi T5, incident B003 22-11) : un seul mot incidentel ne
+    route rien — « Frais de TIERS : 1 000 € » dans une note
+    d'incident routait partage-reste. Un match exige ≥ 2 mots-clés
+    distincts : un leurreur peut glisser UN mot, pas deux familles."""
     import unicodedata
     d = d or load()
 
@@ -75,8 +77,8 @@ def trouver(texte, d=None):
         s = sum(1 for m in e["mots_cles"] if fold(m) in t)
         scores.append((e, s))
     best = max(s for _, s in scores) if scores else 0
-    if best == 0:
-        return None, 0
+    if best < 2:
+        return None, best
     vainqueurs = [e for e, s in scores if s == best]
     if len(vainqueurs) > 1:
         return None, best          # égalité : on ne départage pas à l'ordre

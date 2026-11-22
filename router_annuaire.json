@@ -1,18 +1,21 @@
 {
-  "version": "1.0.0",
-  "note": "Annuaire de douleurs — chaque entrée porte sa preuve (fichier de bench commité AVANT elle). Spec et lois : docs/ROUTER-SPEC.md. Ce fichier est de la DATA : il se pinne comme les goldens, il ne s'invente pas à chaud.",
+  "version": "1.1.0",
+  "note": "Annuaire de douleurs — chaque entrée porte sa preuve (fichier de bench commité AVANT elle). Spec et lois : docs/ROUTER-SPEC.md. Ce fichier est de la DATA : il se pinne comme les goldens, il ne s'invente pas à chaud. v1.1.0 (22-11 soir) : vocabulaire EN/PT ajouté sur dictée du radar (docs/RADAR, rows plan-WRONG) ; la règle des seuils est la loi T5.",
   "regles_transport": [
     {"id": "T1", "loi": "chaîne → fiche mono-appel ROUTÉE, jamais de choix multiple exposé au LM", "preuve": "bench/FINDINGS-F5.md"},
     {"id": "T2", "loi": "retry interdit SAUF une repasse sur refus nommé (champ+forme donnés)", "preuve": "bench/FINDINGS-V17.md"},
     {"id": "T3", "loi": "multi-tours (protocole steps) réservé aux classes disciplinées mesurées (bras S, v15)", "preuve": "bench/FINDINGS-V15.md"},
-    {"id": "T4", "loi": "la réponse est answer[cible], jamais la dernière valeur de la trace (gate V22 22-11 : trace[-1]=leftover ≠ cible)", "preuve": "bench/run22.py"}
+    {"id": "T4", "loi": "la réponse est answer[cible], jamais la dernière valeur de la trace (gate V22 22-11 : trace[-1]=leftover ≠ cible)", "preuve": "bench/run22.py"},
+    {"id": "T5", "loi": "un seul mot incidentel ne route rien : seuil ≥ 2 mots-clés distincts, égalité = NO_MATCH (incident B003 22-11 : « Frais de TIERS : 1 000 € » routait partage-reste — la clause qui tue les leures)", "preuve": "scripts/route_radar.py"}
   ],
   "entrees": [
     {
       "id": "chaine-shop-reste",
       "symptome": "deux ventes successives dont une en % DU RESTE ; « combien reste-t-il »",
       "mots_cles": ["magasin", "vendus", "après-midi", "restants",
-                    "combien restent"],
+                    "combien restent",
+                    "shop", "items", "sold", "afternoon", "how many left",
+                    "loja", "vendeu", "da tarde", "quantos restam"],
       "classe": "chaine",
       "prescription": {
         "fiche": "shop-reste",
@@ -25,7 +28,9 @@
     {
       "id": "chaine-partage-reste",
       "symptome": "partage en plusieurs parts où une part est une fraction DU RESTE",
-      "mots_cles": ["partage", "reçoit", "du reste", "moitié", "tiers", "quart"],
+      "mots_cles": ["partage", "reçoit", "du reste", "la seconde",
+                    "split", "of the rest", "second",
+                    "divida", "recebe", "do resto", "a segunda"],
       "classe": "chaine",
       "prescription": {
         "fiche": "partage-reste",
@@ -39,7 +44,9 @@
       "id": "chaine-soldes2",
       "symptome": "deux réductions successives en % ; la somme des % est un leurre",
       "mots_cles": ["solde", "soldé", "réduit", "réduction", "remise",
-                    "baisse", "hausse", "successive"],
+                    "successive", "puis", "prix final", "baisse", "hausse",
+                    "% off", "plus another", "discounted",
+                    "desconto", "reduzido", "preço final"],
       "classe": "chaine",
       "prescription": {
         "fiche": "soldes2",

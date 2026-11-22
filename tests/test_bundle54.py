@@ -156,11 +156,80 @@ def test_plan_prescrit_avec_preuves():
     b = r.json()
     assert b["match"] is True
     assert b["prescription"]["fiche"] == "partage-reste"
-    assert len(b["regles_transport"]) == 4
-    assert all(p.endswith(".md") for p in b["preuve"])
+    assert len(b["regles_transport"]) == 5
+    assert all(p.endswith(".md") or p.endswith(".py")
+               for p in b["preuve"])
     r2 = client.post("/api/v1/router/plan",
                      json={"texte": "Quelle est la capitale du Pérou ?"})
     assert r2.json()["match"] is False
+
+
+# --------- 22-11 soir : dictée du radar (plan-WRONG) + incident B003
+RADAR_EN_SHOP = ("shop had 435 items, 35 sold in the morning, "
+                 "40% of the rest in the afternoon, how many left?")
+RADAR_PT_SHOP = ("loja tinha 435, vendeu 35 de manha, 40% do resto "
+                 "a tarde, quantos restam")
+RADAR_EN_PARTAGE = "split 3829: first gets 2/5, second 1/6 of the rest"
+RADAR_FR_SOLDES = "-25 % puis -20 % sur 81,90 — prix final"
+RADAR_LEURRE_OFF = ("is 30% off plus another 20% the same as 50% off "
+                    "on 89.90")
+B003_NOTE = ("Note d'incident #INC-3357133151 du 2026-03-04 : perte de "
+             "visibilité sur la file de paiement. 2026-03-11 : alerte reçue "
+             "à https://status.acme-demo-d7afe59e.io/incident/48ee4038. "
+             "Constat : 250,50 € de transactions gelées puis 3 200,00 € en "
+             "attente de rapprochement ; coût de réouverture estimé à 45,90 "
+             "€. Le périmètre concerné représente 12,5 % du flux le "
+             "2026-03-18, puis 8 % le 2026-03-25, et enfin 9,75 % après "
+             "rejeu. Frais de tiers : 1 000,00 €, remboursements clients : "
+             "12 450,75 €, divers : 8 900,00 €. Contact : "
+             "ops-1604853353@acme-demo.io. Reprise complète attendue le "
+             "2026-03-25.")
+
+
+def test_radar_trouver_multlingue():
+    d = annuaire.load()
+    for texte, fiche in ((RADAR_EN_SHOP, "shop-reste"),
+                        (RADAR_PT_SHOP, "shop-reste"),
+                        (RADAR_EN_PARTAGE, "partage-reste"),
+                        (RADAR_FR_SOLDES, "soldes2"),
+                        (RADAR_LEURRE_OFF, "soldes2")):
+        e, s = annuaire.trouver(texte, d)
+        assert e and s >= 2, (texte, e and e["id"], s)
+        assert e["prescription"]["fiche"] == fiche, texte
+
+
+def test_b003_tiers_ne_route_pas():
+    """Loi T5, pêchée par la sonde de contrat du corpus (B003) : un seul
+    mot incidentel — « Frais de TIERS » — ne doit PAS router partage."""
+    d = annuaire.load()
+    e, s = annuaire.trouver(B003_NOTE, d)
+    assert e is None and s < 2
+
+
+def test_radar_apply_multlingue():
+    a = _apply(RADAR_EN_SHOP)
+    assert a["applied"] is True
+    # 435 items, 35 sold morning -> reste 400 ; 40% OF THE REST vendus
+    # l'après-midi -> 160 ; left = 240. Gold écrit à la main avant run.
+    assert a["reponse"] == "240"
+    b = _apply(RADAR_EN_PARTAGE)
+    assert b["applied"] is True
+    # 3829×3/5=2297.4 ; ×1/6 = 382.9 exact (la fiche rend la forme
+    # "382.90" — même quantité, autre notation : on compare les nombres)
+    assert float(b["reponse"]) == 382.9
+    c = _apply(RADAR_FR_SOLDES)
+    assert c["applied"] is True
+    # 81.90×0.75×0.8 = 49.14
+    assert c["creneaux"] == {"price": "81.90", "pct1": "25%",
+                             "pct2": "20%"}
+    assert c["reponse"] == "49.14"
+    # PT : grammaire couverte, créneaux verbatim
+    p = _apply(RADAR_PT_SHOP)
+    assert p["applied"] is True and p["creneaux"]["total"] == "435"
+    # leurre ambigu : deux « % off » distincts -> AMBIGU nommé, zéro nombre
+    l = _apply(RADAR_LEURRE_OFF)
+    assert l["applied"] is False
+    assert any(x["slot"] == "pct1" for x in l["ambigus"])
 
 
 def test_parity_prod_image_sans_bench(tmp_path):
