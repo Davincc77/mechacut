@@ -60,7 +60,7 @@
   "bench.v22.foot": "Raw: bench/results_v22.jsonl · method: bench/FINDINGS-V22.md",
   "bench.v22b.sum": "The tool-trained frontier model fills slots right 70/70 — the objection is half-right, and that half is what v23 measures.",
   "bench.v22b.foot": "Raw: bench/results_v22b.jsonl · method: bench/FINDINGS-V22.md",
-  "bench.v24.sum": "Thirty days of the same CSV with a model that CAN do chains: 26/30 days of empty answers after 8,192 reasoning tokens, 4 right, billed $0.0493. The machine: 30/30 at $0.00.",
+  "bench.v24.sum": "Thirty days of the same CSV with a model that CAN do chains: 25/30 days of empty answers after 8,192 reasoning tokens, 4 right, billed $0.0493. The machine: 30/30 at $0.00.",
   "bench.v24.foot": "Raw: bench/results_v24_lfm3_30days.jsonl · the amendment lives in git history (run24 amendé)",
   "bench.v19.sum": "0/120 attempts right for the models — machine: 30/30 days on one identical hash; 21 different outputs from one model in 30 days.",
   "bench.v19.intro": "The same dirty CSV cleaned 30 days in a row. Six-rule spec, a gold file written BY HAND before the harness, a retry arm that only ever sees its own format — never the answer. Temperature 0.7: the real regime of agents, disclosed.",

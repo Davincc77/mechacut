@@ -122,7 +122,8 @@ def test_v11_f5_v24_summary_match_raw():
             "PASSED; %d repaired" % (wins, len(f5), rep) in HTML)
     r24 = _rows("results_v24_lfm3_30days.jsonl")
     n24 = [x for x in r24 if x["arm"] == "N"]
-    sil = sum(1 for x in n24 if not x["shape"])
+    # silence = réponse VIDE (sha du newline), pas « refusé de forme »
+    sil = sum(1 for x in n24 if x["sha"] == "01ba4719c80b6fe9")
     okc = sum(1 for x in n24 if x["ok"])
     usd = sum(x["usd"] for x in n24)
     assert ("%d/%d days of empty answers after 8,192 reasoning "

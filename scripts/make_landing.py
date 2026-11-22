@@ -2377,7 +2377,12 @@ def compute_hub():
     n24 = [r for r in m24 if r["arm"] == "N"]
     mm24 = [r for r in m24 if r["arm"] == "M"]
     h["v24_days"] = len(n24)
-    h["v24_sil"] = sum(1 for r in n24 if not r["shape"])
+    h["v24_sil"] = sum(1 for r in n24
+                       if r["sha"] == "01ba4719c80b6fe9")
+    # SILENCE STRICT = la réponse vide (sha du newline), pas
+    # « forme refusée » : l'exemplaire 26 comptait comme silence le
+    # seul jour de contenu mal formé non vide (d7f807). 25 vides +
+    # 4 justes + 1 malformé = 30. Garde mirrors la même ligne.
     h["v24_ok"] = sum(1 for r in n24 if r["ok"])
     h["v24_usd"] = "%.4f" % sum(r["usd"] for r in n24)
     h["v24_m_ok"] = "%d/%d" % (sum(1 for r in mm24 if r["ok"]),

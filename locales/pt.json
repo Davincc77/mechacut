@@ -60,7 +60,7 @@
   "bench.v22.foot": "Bruto: bench/results_v22.jsonl · método: bench/FINDINGS-V22.md",
   "bench.v22b.sum": "O modelo de fronteira treinado para ferramentas preenche 70/70 slots certos — a objeção tem metade razão, e essa metade é o que v23 mede.",
   "bench.v22b.foot": "Bruto: bench/results_v22b.jsonl · método: bench/FINDINGS-V22.md",
-  "bench.v24.sum": "Trinta dias no mesmo CSV com um modelo QUE SABE cadeias: 26/30 dias de resposta vazia após 8.192 tokens de raciocínio, 4 certas, faturados $0.0493. A máquina: 30/30 a $0,00.",
+  "bench.v24.sum": "Trinta dias no mesmo CSV com um modelo QUE SABE cadeias: 25/30 dias de resposta vazia após 8.192 tokens de raciocínio, 4 certas, faturados $0.0493. A máquina: 30/30 a $0,00.",
   "bench.v24.foot": "Bruto: bench/results_v24_lfm3_30days.jsonl · a emenda está no histórico git (run24 amendado)",
   "bench.v19.sum": "0/120 tentativas corretas para os modelos — máquina: 30/30 dias no mesmo byte; 21 saídas diferentes de um só modelo em 30 dias.",
   "bench.v19.intro": "O mesmo CSV sujo limpo 30 dias seguidos. Especificação de seis regras, gold ESCRITO À MÃO antes do banco, um braço retry que só vê sua própria forma — nunca a resposta. Temperatura 0,7: o regime real dos agentes, divulgado.",

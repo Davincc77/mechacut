@@ -60,7 +60,7 @@
   "bench.v22.foot": "Brut : bench/results_v22.jsonl · méthode : bench/FINDINGS-V22.md",
   "bench.v22b.sum": "Le modèle frontière entraîné pour les outils remplit les créneaux justes 70/70 — l'objection a raison à moitié, et cette moitié est ce que v23 mesure.",
   "bench.v22b.foot": "Brut : bench/results_v22b.jsonl · méthode : bench/FINDINGS-V22.md",
-  "bench.v24.sum": "Trente jours sur le même CSV avec un modèle QUI SAIT les chaînes : 26/30 jours de réponse vide après 8 192 tokens de raisonnement, 4 justes, facturés $0.0493. La machine : 30/30 à 0,00 $.",
+  "bench.v24.sum": "Trente jours sur le même CSV avec un modèle QUI SAIT les chaînes : 25/30 jours de réponse vide après 8 192 tokens de raisonnement, 4 justes, facturés $0.0493. La machine : 30/30 à 0,00 $.",
   "bench.v24.foot": "Brut : bench/results_v24_lfm3_30days.jsonl · l'amendement est dans l'historique git (run24 amendé)",
   "bench.v19.sum": "0/120 tentatives justes pour les modèles — machine : 30/30 jours sur un même octet ; 21 sorties différentes pour un seul modèle en 30 jours.",
   "bench.v19.intro": "Le même CSV sale nettoyé 30 jours de suite. Spéc à six règles, gold ÉCRIT À LA MAIN avant le banc, un bras retry qui ne voit que sa propre forme — jamais la réponse. Température 0,7 : le régime réel des agents, publié.",
