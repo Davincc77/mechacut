@@ -43,8 +43,44 @@ class Slot(Exception):
                                      "\"40%\"")
 
 
-def _slot(name, v):
+def _loc(args):
+    """F7 : la langue des NOMBRES se déclare, elle ne se devine pas.
+    « 1.250 » vaut 1250 en pt/fr et 1.25 en en — deviner, c'est le
+    « 40 » nu bis. Absent = grammaire fermée actuelle (aucune
+    régression : ce qui passait passe, rien de nouveau ne passe)."""
+    loc = (args or {}).get("locale")
+    if loc is None:
+        return ""
+    if loc not in ("en", "fr", "pt"):
+        raise Slot("locale", loc, 'one of "en", "fr", "pt" — or omit '
+                   "the field and write plain closed numbers")
+    return loc
+
+
+def _slot(name, v, loc=""):
     s = str(v if v is not None else "").strip()
+    s = re.sub(r"\s+%", "%", s)   # « 40 % » partout : l'espace n'est
+                                  # pas un sens
+    if loc == "en":
+        m = re.fullmatch(r"(\d{1,3})(,\d{3})+(\.\d+)?", s)
+        if m:
+            s = s.replace(",", "")
+    elif loc in ("fr", "pt"):
+        m = re.fullmatch(r"(\d{1,3})([.\s ]\d{3})+(,\d+)?", s)
+        if m:
+            s = re.sub(r"[.\s ](?=\d{3})", "", s).replace(",", ".")
+        elif re.fullmatch(r"\d+,\d+", s):
+            s = s.replace(",", ".")   # « 89,90 » = 89.90
+    if not loc and re.fullmatch(r"\d{1,3}([.,]\d{3})+", s):
+        # « 1.250 » vaut 1250 en pt/fr et 1.25 en en : la grammaire
+        # fermée seule ne peut PAS trancher. C'est un refus nommé,
+        # jamais une dévination silencieuse (P2, gelé 20h10).
+        raise Slot(name, v, 'ambiguous thousands separator: '
+                   '"%s" reads as %s (pt/fr) or %s (en) — declare '
+                   '"locale": "en"|"fr"|"pt" in the slots — the fiche '
+                   "never guesses"
+                   % (s, s.replace(".", "").replace(",", ""),
+                      s.replace(",", ".")))
     if not SLOT_RE.match(s):
         raise Slot(name, v)
     fr = (F(Decimal(s[:-1])) / 100 if s.endswith("%") else
@@ -90,9 +126,10 @@ def _trace(pairs):
 def shop_reste(args):
     """total, sold_morning, pct_afternoon → remaining.
     (v15 famille « mix » : 0/28 nu+retry.)"""
-    total = _slot("total", args.get("total"))
-    morning = _slot("sold_morning", args.get("sold_morning"))
-    pct = _slot("pct_afternoon", args.get("pct_afternoon"))
+    loc = _loc(args)
+    total = _slot("total", args.get("total"), loc)
+    morning = _slot("sold_morning", args.get("sold_morning"), loc)
+    pct = _slot("pct_afternoon", args.get("pct_afternoon"), loc)
     rest1 = total - morning
     if rest1 < 0:
         raise Slot("sold_morning", args.get("sold_morning"))
@@ -116,9 +153,10 @@ def shop_reste(args):
 def partage_reste(args):
     """total, first_part, second_of_rest → second_share (+ leftover).
     (v15 famille « partage » : 0/28 aussi.)"""
-    total = _slot("total", args.get("total"))
-    f1 = _slot("first_part", args.get("first_part"))
-    f2 = _slot("second_of_rest", args.get("second_of_rest"))
+    loc = _loc(args)
+    total = _slot("total", args.get("total"), loc)
+    f1 = _slot("first_part", args.get("first_part"), loc)
+    f2 = _slot("second_of_rest", args.get("second_of_rest"), loc)
     rest = total * (1 - f1)
     second = rest * f2
     left = rest - second
@@ -138,12 +176,13 @@ def partage_reste(args):
 
 
 def soldes2(args):
+    loc = _loc(args)
     """price, pct1, pct2 → final (+ le mensonge de la somme).
     Ne duplique PAS money/discount : deux remises, noyau minimal, la
     fiche POINTE discount pour les chaînes à N paliers."""
-    price = _slot("price", args.get("price"))
-    p1 = _slot("pct1", args.get("pct1"))
-    p2 = _slot("pct2", args.get("pct2"))
+    price = _slot("price", args.get("price"), loc)
+    p1 = _slot("pct1", args.get("pct1"), loc)
+    p2 = _slot("pct2", args.get("pct2"), loc)
     after1 = price * (1 - p1)
     final = after1 * (1 - p2)
     naive = price * (1 - (p1 + p2))

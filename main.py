@@ -103,7 +103,7 @@ Bundle 16 — volume (TOOLS-50 #52, #46, #47):
 POST /api/v1/batch            same tool over N payloads, one call (cap 32 KB)
 POST /api/v1/recipe/invoice   line items -> full invoice, exact + words (free)
 POST /api/v1/recipe/schedule  cron + count -> events + ICS in one call   (free)
-POST /api/v1/fiche/shop-reste|partage-reste|soldes2  the 'of the REST' chains, slots in, trace out (free)
+POST /api/v1/fiche/shop-reste|partage-reste|soldes2  the 'of the REST' chains, slots in, trace out; "locale" declares number grammar (free)
 POST /api/v1/recipe/facts     free text -> fact inventory canonical + total (free)
 POST /api/v1/intent/card      plain words -> tool + form to fill, or the question to ask (free)
 POST /api/v1/formula            published formula + your numbers, exact (free)
@@ -8424,9 +8424,9 @@ def index(request: Request):
             "/api/v1/batch": "POST tool + payloads[] -> every result in one call (cap 32 KB)",
             "/api/v1/recipe/invoice": "POST line items + VAT -> exact invoice + words + due date (free)",
             "/api/v1/recipe/schedule": "POST cron + start -> occurrences + ICS (free)",
-            "/api/v1/fiche/shop-reste": "POST slots (total sold_morning pct_afternoon) -> the rest-after-rest chain traced, exact (free)",
-            "/api/v1/fiche/partage-reste": "POST slots (total first_part second_of_rest) -> share-of-the-rest traced, fractions welcome (free)",
-            "/api/v1/fiche/soldes2": "POST slots (price pct1 pct2) -> final + the naive-sum lie measured (free)",
+            "/api/v1/fiche/shop-reste": "POST slots (total sold_morning pct_afternoon) -> the rest-after-rest chain traced, exact (free); numbers verbatim, optional \"locale\": en|fr|pt declares the number grammar (1.250 = 1250 in pt, never guessed)",
+            "/api/v1/fiche/partage-reste": "POST slots (total first_part second_of_rest) -> share-of-the-rest traced, fractions welcome (free); optional \"locale\": en|fr|pt for thousands/decimal forms",
+            "/api/v1/fiche/soldes2": "POST slots (price pct1 pct2) -> final + the naive-sum lie measured (free); optional \"locale\": en|fr|pt (81,90 in pt = 81.90)",
             "/api/v1/router/plan": "POST texte -> prescribed fiche + slots + transport rule, each entry cited to a published bench line; never guesses (free)",
             "/api/v1/router/apply": "POST texte -> closed-grammar match: the server extracts verbatim slots and RUNS the fiche, zero LM calls; else named refusal + fill-in prompt (free)",
             "/api/v1/recipe/facts": "POST free text -> normalized fact inventory + money total in one call (free)",
