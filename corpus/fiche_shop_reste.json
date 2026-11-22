@@ -1,0 +1,11 @@
+{
+ "name": "fiche_shop_reste",
+ "path": "/api/v1/fiche/shop-reste",
+ "body": {
+  "slots": {
+   "total": "435",
+   "sold_morning": "35",
+   "pct_afternoon": "40%"
+  }
+ }
+}

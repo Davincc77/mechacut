@@ -1,0 +1,11 @@
+{
+ "name": "fiche_partage_reste",
+ "path": "/api/v1/fiche/partage-reste",
+ "body": {
+  "slots": {
+   "total": "3829",
+   "first_part": "2/5",
+   "second_of_rest": "1/6"
+  }
+ }
+}

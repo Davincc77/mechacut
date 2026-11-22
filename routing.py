@@ -510,6 +510,25 @@ TABLE = (
      "HTML -> canonical readable text",
      "html text extract scrape strip readable label boilerplate script "
      "style page actually says lisible"),
+    ("recipe_shop_reste", "/api/v1/fiche/shop-reste", "numbers",
+     "la chaîne « du RESTE » en un appel : total, vendus du matin, "
+     "% de l'après-midi -> la trace des trois pas et le reste exact ; "
+     "0/28 nu et retry sur cette forme (bench v15) — la décomposition "
+     "est le travail, il est déjà fait ici",
+     "remaining stock shop inventory sold of the rest du reste "
+     "afternoon pourcentage apres-midi combien restent il reste "
+     "quantite restante vendas restantes restando depois"),
+    ("recipe_partage_reste", "/api/v1/fiche/partage-reste", "numbers",
+     "part de la PART : total, première part, seconde « du reste » -> "
+     "la seconde part + le reliquat, fractions exactes tracées",
+     "share of the rest inheritance budget split fraction premier "
+     "partage heritage budget repartition du reste parte do restante "
+     "heranca divisao"),
+    ("recipe_soldes2", "/api/v1/fiche/soldes2", "numbers",
+     "deux remises, un prix final exact + le mensonge de la somme "
+     "chiffré ; les chaînes à N paliers restent chez money/discount",
+     "two discounts sale price final remise solde successive "
+     "desconto duplo deux pourcentages cascade simple"),
     ("recipe_clean_table", "/api/v1/recipe/clean-table", "repair",
      "one call: dirty CSV -> typed unique rows",
      "recipe pipeline csv clean typed rows rag table trio shortcut sales "

@@ -814,6 +814,45 @@
   },
   {
    "body": {
+    "slots": {
+     "first_part": "2/5",
+     "second_of_rest": "1/6",
+     "total": "3829"
+    }
+   },
+   "name": "fiche_partage_reste",
+   "path": "/api/v1/fiche/partage-reste",
+   "sha256": "bbf2edfc05306fc019889dfeae2636c20637235b7bcedfc18ee32b19fca92190",
+   "status": 200
+  },
+  {
+   "body": {
+    "slots": {
+     "pct_afternoon": "40%",
+     "sold_morning": "35",
+     "total": "435"
+    }
+   },
+   "name": "fiche_shop_reste",
+   "path": "/api/v1/fiche/shop-reste",
+   "sha256": "1b6287204f3b6dd9f5f7280e5341f20180fc64388adc37470c7047b254d02809",
+   "status": 200
+  },
+  {
+   "body": {
+    "slots": {
+     "pct1": "25%",
+     "pct2": "20%",
+     "price": "81.90"
+    }
+   },
+   "name": "fiche_soldes2",
+   "path": "/api/v1/fiche/soldes2",
+   "sha256": "61e0d1c52ac06ffe24b6ac348f9036b242bd11a55d7e1d5fff085688fc8ecf2c",
+   "status": 200
+  },
+  {
+   "body": {
     "blob": "Y2Fm6Q=="
    },
    "name": "file_encoding_cp1252",

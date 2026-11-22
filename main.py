@@ -99,6 +99,7 @@ Bundle 16 — volume (TOOLS-50 #52, #46, #47):
 POST /api/v1/batch            same tool over N payloads, one call (cap 32 KB)
 POST /api/v1/recipe/invoice   line items -> full invoice, exact + words (free)
 POST /api/v1/recipe/schedule  cron + count -> events + ICS in one call   (free)
+POST /api/v1/fiche/shop-reste|partage-reste|soldes2  the 'of the REST' chains, slots in, trace out (free)
 POST /api/v1/recipe/facts     free text -> fact inventory canonical + total (free)
 POST /api/v1/intent/card      plain words -> tool + form to fill, or the question to ask (free)
 POST /api/v1/formula            published formula + your numbers, exact (free)
@@ -182,6 +183,7 @@ import intake
 import geo
 import leakkit
 import chainkit
+import ficheskit
 import taxid
 import addrkit
 import timekit
@@ -307,7 +309,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.81.0",
+    version="0.82.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -3620,6 +3622,39 @@ def api_recipe_schedule(req: RecipeScheduleRequest):
     return err if err else body
 
 
+class FicheRequest(BaseModel):
+    slots: Optional[dict] = None
+
+
+def _run_fiche(name: str, args: dict):
+    try:
+        out = ficheskit.run_fiche(name, args.get("slots") or {})
+    except ficheskit.Slot as e:
+        return None, bad_request([{"field": e.field,
+                                   "message": e.message,
+                                   "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/fiche/shop-reste")
+def api_fiche_shop_reste(req: FicheRequest):
+    body, err = _run_fiche("shop_reste", req.model_dump())
+    return err if err else body
+
+
+@app.post("/api/v1/fiche/partage-reste")
+def api_fiche_partage_reste(req: FicheRequest):
+    body, err = _run_fiche("partage_reste", req.model_dump())
+    return err if err else body
+
+
+@app.post("/api/v1/fiche/soldes2")
+def api_fiche_soldes2(req: FicheRequest):
+    body, err = _run_fiche("soldes2", req.model_dump())
+    return err if err else body
+
+
 class RecipeFactsRequest(BaseModel):
     text: str
     kinds: Optional[List[str]] = None
@@ -4066,6 +4101,44 @@ RECIPE_SPECS = [
                                    {"type": "string"}},
                          "total": {"type": "boolean",
                                    "default": True}}}},
+    {"name": "recipe_shop_reste",
+     "description": "The 'of the REST' chain in ONE call: total, "
+                    "sold_morning, pct_afternoon slots in -> the three "
+                    "step trace and `remaining` out, exact Fractions. "
+                    "Naked models score 0/28 on this shape (bench v15, "
+                    "retries included) — not because of arithmetic but "
+                    "because the decomposition IS the job. You copy "
+                    "numbers; the chain is ours.",
+     "inputSchema": {"type": "object", "properties": {"slots": {
+         "type": "object", "properties": {
+             "total": {"type": "string"},
+             "sold_morning": {"type": "string"},
+             "pct_afternoon": {"type": "string"}}}},
+         "required": ["slots"]}},
+    {"name": "recipe_partage_reste",
+     "description": "Share of a share: total, first_part, "
+                    "second_of_rest (fractions like 2/5 accepted) -> "
+                    "second_share + leftover, with the trace. THE word "
+                    "that zeroes free models is 'of the rest' — here "
+                    "it is a slot name, nothing to re-derive.",
+     "inputSchema": {"type": "object", "properties": {"slots": {
+         "type": "object", "properties": {
+             "total": {"type": "string"},
+             "first_part": {"type": "string"},
+             "second_of_rest": {"type": "string"}}}},
+         "required": ["slots"]}},
+    {"name": "recipe_soldes2",
+     "description": "Two discounts, final price + the naive-sum lie "
+                    "quantified — the minimal kernel of a discount "
+                    "chain; N-step chains belong to /api/v1/money/"
+                    "discount (the fiche points there, never "
+                    "duplicates it).",
+     "inputSchema": {"type": "object", "properties": {"slots": {
+         "type": "object", "properties": {
+             "price": {"type": "string"},
+             "pct1": {"type": "string"},
+             "pct2": {"type": "string"}}}},
+         "required": ["slots"]}},
     {"name": "recipe_schedule",
      "description": "One call: cron + start + count -> occurrences + ready "
                     "ICS. Appointments without arithmetic. Free.",
@@ -4830,6 +4903,9 @@ TOOL_RUN = {
            "batch": run_batch,
            "recipe_invoice": run_recipe_invoice,
            "recipe_schedule": run_recipe_schedule,
+           "recipe_shop_reste": lambda a: _run_fiche("shop_reste", a),
+           "recipe_partage_reste": lambda a: _run_fiche("partage_reste", a),
+           "recipe_soldes2": lambda a: _run_fiche("soldes2", a),
            }
 
 # ---------------------------------------------------------------- MCP
@@ -7385,7 +7461,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.79.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.82.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":
@@ -7658,6 +7734,9 @@ def index(request: Request):
             "/api/v1/batch": "POST tool + payloads[] -> every result in one call (cap 32 KB)",
             "/api/v1/recipe/invoice": "POST line items + VAT -> exact invoice + words + due date (free)",
             "/api/v1/recipe/schedule": "POST cron + start -> occurrences + ICS (free)",
+            "/api/v1/fiche/shop-reste": "POST slots (total sold_morning pct_afternoon) -> the rest-after-rest chain traced, exact (free)",
+            "/api/v1/fiche/partage-reste": "POST slots (total first_part second_of_rest) -> share-of-the-rest traced, fractions welcome (free)",
+            "/api/v1/fiche/soldes2": "POST slots (price pct1 pct2) -> final + the naive-sum lie measured (free)",
             "/api/v1/recipe/facts": "POST free text -> normalized fact inventory + money total in one call (free)",
             "/api/v1/intent/card": "POST a human sentence -> tool choice + pre-filled form or the exact missing-field question (free)",
             "/api/v1/intent/check": "POST tool + filled args -> ok or the exact fields still missing (free)",

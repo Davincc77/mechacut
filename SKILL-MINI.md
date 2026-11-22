@@ -60,6 +60,12 @@ Two honest moves:
 - If the answer is 402, the tool wants x402 USDC on Base: tell the
   human, do not guess a workaround.
 
+## Chain problems: never decompose
+"du reste" / "of the rest" marks the 0/28 zone (bench v15: nu AND
+retry, every model). Fill `/api/v1/fiche/*` slots verbatim —
+shop-reste, partage-reste, soldes2. The chain lives server-side; your
+job is copying numbers. One call per problem.
+
 ## Never
 - Never invent an endpoint path — copy it from the manifest.
 - Never retry an identical failed call hoping for luck: the server is

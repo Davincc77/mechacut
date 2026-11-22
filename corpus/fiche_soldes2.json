@@ -1,0 +1,11 @@
+{
+ "name": "fiche_soldes2",
+ "path": "/api/v1/fiche/soldes2",
+ "body": {
+  "slots": {
+   "price": "81.90",
+   "pct1": "25%",
+   "pct2": "20%"
+  }
+ }
+}

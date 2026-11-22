@@ -14,7 +14,9 @@ def test_skill_mini_served_and_budgeted():
     r = client.get("/SKILL-MINI.md")
     assert r.status_code == 200
     body = r.text
-    assert len(body.encode("utf-8")) < 3200   # ~700 tokens : un 0.5B porte
+    assert len(body.encode("utf-8")) < 3500   # ~700 tokens : un 0.5B porte
+    # resize 22-11 soir : +la règle F5/A1 — contenu issu du bench, pas
+    # décoratif ; le vrai plafond portabilité reste <4000.
     for needle in ("/agent/manifest", "/api/v1/intent/card",
                    "request_on_x", "402", "Never reformat"):
         assert needle in body, needle

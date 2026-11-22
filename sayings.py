@@ -8,6 +8,23 @@ actually talks to their agent.
 """
 
 SAY = {
+    "/api/v1/fiche/shop-reste": {
+        "en": "shop had 435, sold 35 morning, 40% of the REST "
+              "afternoon, how many remain?",
+        "fr": "le magasin a 435 articles, 35 vendus le matin, 40 % du "
+              "RESTE l'après-midi — combien restent ?",
+        "pt": "a loja tinha 435, vendeu 35 de manha, 40% DO RESTO a "
+              "tarde — quantos restam?"},
+    "/api/v1/fiche/partage-reste": {
+        "en": "split 3829: first gets 2/5, second 1/6 OF THE REST",
+        "fr": "partage 3 829 € : le premier a 2/5, le second 1/6 DU "
+              "RESTE",
+        "pt": "divida 3829: o primeiro pega 2/5, o segundo 1/6 DO "
+              "RESTO"},
+    "/api/v1/fiche/soldes2": {
+        "en": "-25% then -20% on 81.90 — final price, exact",
+        "fr": "-25 % puis -20 % sur 81,90 € — prix final exact",
+        "pt": "-25% e depois -20% em 81,90 — preço final exato"},
     "/api/v1/chart": {
         "en": "bar chart of these sales figures",
         "fr": "fais-moi un histogramme de ces ventes",

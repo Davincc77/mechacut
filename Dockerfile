@@ -7,7 +7,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY main.py chart.py reshape.py repair.py tables.py edits.py dates.py numfmt.py units.py money.py spell.py identity.py checkers.py context.py mdrender.py htmltext.py check.py extract.py rules.py micro.py eth.py ethabi.py routing.py payments.py intake.py verdict.py redlines.py cache.py geo.py leakkit.py chainkit.py taxid.py addrkit.py timekit.py holidays.py icskit.py amortize.py pdftext.py auditor.py sayings.py rates.py pngkit.py certkit.py urlkit.py reldate.py moneykit.py formatkit.py discountkit.py calckit.py scalekit.py formulakit.py reflectkit.py recurrkit.py shoeskit.py srikit.py tzambkit.py compkit.py weekkit.py bagkit.py damagekit.py xmlkit.py sqlkit.py digitkit.py webkit.py qrkit.py bip39_english.txt SKILL.md SKILL-MINI.md integrity.json ./
+COPY main.py chart.py reshape.py repair.py tables.py edits.py dates.py numfmt.py units.py money.py spell.py identity.py checkers.py context.py mdrender.py htmltext.py check.py extract.py rules.py micro.py eth.py ethabi.py routing.py payments.py intake.py verdict.py redlines.py cache.py geo.py leakkit.py chainkit.py taxid.py addrkit.py timekit.py holidays.py icskit.py amortize.py pdftext.py auditor.py sayings.py rates.py pngkit.py certkit.py urlkit.py reldate.py moneykit.py formatkit.py discountkit.py calckit.py scalekit.py formulakit.py reflectkit.py recurrkit.py shoeskit.py srikit.py tzambkit.py compkit.py weekkit.py bagkit.py damagekit.py xmlkit.py sqlkit.py ficheskit.py digitkit.py webkit.py qrkit.py bip39_english.txt SKILL.md SKILL-MINI.md integrity.json ./
 COPY data/ ./data/
 COPY static/ ./static/
 COPY locales/ ./locales/
