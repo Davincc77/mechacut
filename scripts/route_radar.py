@@ -140,8 +140,9 @@ def probe_router(manifest):
                            data=json.dumps({"texte": text}).encode(),
                            headers={"Content-Type":
                                     "application/json"})
-            got = (body.get("fiche") or body.get("prescribed")
-                   or body.get("route") or "")
+            presc = body.get("prescription")
+            got = (presc.get("fiche") if isinstance(presc, dict)
+                   else None) or body.get("fiche") or ""
             rec = {"text": text[:80], "want": want, "via": "plan",
                    "verdict": ("plan-http-%d" % st if st != 200
                                else "ok" if (want is None and
