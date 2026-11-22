@@ -312,7 +312,8 @@ def test_mcp_exposes_bundle1():
                       'text_normalize', 'batch', 'logic_rules', 'sort_multi',
                       'json_query', 'check_redlines', 'check_target', 'check_agreement',
                       'intent_card', 'intent_check', 'extract_facts',
-                      'text_select', 'check_constraints', 'check_refs']
+                      'text_select', 'check_constraints', 'check_refs',
+                      'ship_dimweight', 'json_coerce']
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 2,
                                   "method": "tools/call",
                                   "params": {"name": "json_repair",

@@ -1,0 +1,9 @@
+{
+ "body": {
+  "raw": "{\"quantity\": \"2\", \"unit_price\": \"3\", \"note\": \"x\"}",
+  "schema": {"quantity": "integer", "unit_price": "integer"},
+  "cast_strings": "on"
+ },
+ "name": "json_coerce_string_cast_optin",
+ "path": "/api/v1/json/coerce"
+}

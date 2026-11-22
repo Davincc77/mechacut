@@ -1,0 +1,14 @@
+{
+ "body": {
+  "dims": {"l": "20", "w": "20", "h": "12", "unit": "in"},
+  "actual_weight": {"value": "2", "unit": "lb"},
+  "rules": [
+   {"name": "rollo", "divisor": "139", "divisor_unit": "in3_lb",
+    "dim_round": "ceil", "weight_step": "1"},
+   {"name": "amzprep", "divisor": "139", "divisor_unit": "in3_lb",
+    "dim_round": "ceil", "weight_step": "none"}],
+  "as_of": "2026-07-12"
+ },
+ "name": "ship_dimweight_rollo_vs_amzprep_diverge",
+ "path": "/api/v1/ship/dimweight"
+}

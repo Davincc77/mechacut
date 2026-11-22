@@ -1,0 +1,13 @@
+{
+ "body": {
+  "dims": {"l": "40", "w": "30", "h": "25", "unit": "cm"},
+  "actual_weight": {"value": "1.2", "unit": "kg"},
+  "rules": [
+   {"name": "carrier-5000", "divisor": "5000", "divisor_unit": "cm3_kg",
+    "dim_round": "ceil", "weight_step": "1"},
+   {"name": "carrier-6000", "divisor": "6000", "divisor_unit": "cm3_kg",
+    "dim_round": "ceil", "weight_step": "1"}]
+ },
+ "name": "ship_dimweight_cm_two_divisors",
+ "path": "/api/v1/ship/dimweight"
+}

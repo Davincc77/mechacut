@@ -353,7 +353,7 @@ TR = {
                  "line into ANY agent, even the smallest — it becomes "
                  "the full manual:",
     "everyday.h2": "For the rest of us",
-  "everyday.intro": "No code, no jargon. Thirteen things a normal person "
+  "everyday.intro": "No code, no jargon. Fourteen things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -422,6 +422,14 @@ TR = {
                       "1.491034…, subtracted BEFORE dividing. And the "
                       "floor that says take-it-or-pay-cash is yours, "
                       "never a stale table.",
+  "everyday.e14.name": "The billed weight, both chains printed",
+  "everyday.e14.say": "\u201cTwo carriers bill 6 kg and 5 kg for my "
+                      "40×30×25 box — who is wrong?\u201d Neither: "
+                      "30 000 cm³ ÷ 5 000 = 6 exactly, ÷ 6 000 = 5 "
+                      "exactly — two divisors, one honest chain, each "
+                      "step named. And carrier tables ROT (USPS moved "
+                      "166 → 139 in July 2026), so the divisor stays "
+                      "YOUR argument — never our memory.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -732,7 +740,7 @@ TR = {
                  "dans n'importe quel agent, m\u00eame le plus petit "
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour le commun des mortels",
-  "everyday.intro": "Pas de code, pas de jargon. Treize choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Quatorze choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
                     "réelle du serveur, pas une maquette.",
@@ -806,6 +814,16 @@ TR = {
                       "soustraction passe AVANT la division, et c'est "
                       "VOTRE plancher qui dit « on prend » ou « payez "
                       "cash ».",
+  "everyday.e14.name": "Le poids vraiment factur\u00e9, les deux "
+                       "cha\u00eenes imprim\u00e9es",
+  "everyday.e14.say": "« Deux transporteurs facturent 6 kg et 5 kg "
+                      "pour ma bo\u00eete 40×30×25 — qui a tort ? » "
+                      "Personne : 30 000 cm\u00b3 ÷ 5 000 = 6 pile, "
+                      "÷ 6 000 = 5 pile — deux diviseurs, une cha\u00eene "
+                      "honn\u00eate, chaque \u00e9tape nomm\u00e9e. Et les "
+                      "tables transporteurs POURRISSENT (USPS : 166→139 "
+                      "en juillet 2026), le diviseur reste VOTRE "
+                      "argument — jamais notre m\u00e9moire.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -1112,7 +1130,7 @@ TR = {
   "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para o cidad\u00e3o comum",
-  "everyday.intro": "Sem código, sem jargão. Treze coisas que "
+  "everyday.intro": "Sem código, sem jargão. Catorze coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -1181,6 +1199,15 @@ TR = {
                       "exato 1081/725 = 1,491034… Subtraia ANTES de "
                       "dividir; é o SEU piso que diz “resgate” ou "
                       "“pague em dinheiro”.",
+  "everyday.e14.name": "O peso de fato cobrado, as duas correntes "
+                       "impressas",
+  "everyday.e14.say": "“Duas transportadoras cobram 6 kg e 5 kg pela "
+                      "minha caixa 40×30×25 — quem erra?” Nenhuma: "
+                      "30 000 cm³ ÷ 5 000 = 6 exatos, ÷ 6 000 = 5 "
+                      "exatos — dois divisores, uma corrente honesta, "
+                      "cada passo nomeado. E as tabelas ESTRAGAM "
+                      "(USPS: 166→139 em julho de 2026); o divisor "
+                      "continua SEU argumento — nunca nossa memória.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -1858,7 +1885,9 @@ W = {
                "year) \u00b7 exact \u2014 web calculators round the "
                "fixed part first",
       "points": "\u2192 %s \u00a2/point, exactly %s \u00b7 above your "
-                "floor %s \u2192 redeem"},
+                "floor %s \u2192 redeem",
+      "dim": "\u2192 billed %s kg vs %s kg \u2014 same box, divisors "
+             "5 000 vs 6 000, each step named"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -1883,7 +1912,9 @@ W = {
                "(%s par an) \u00b7 exact — la presse arrondit le fixe "
                "avant de diviser",
       "points": "\u2192 %s centime par point, exactement %s \u00b7 "
-                "au-dessus du plancher %s \u2192 on prend"},
+                "au-dessus du plancher %s \u2192 on prend",
+      "dim": "\u2192 factur\u00e9 %s kg (÷ 5 000) contre %s kg "
+             "(÷ 6 000) \u2014 m\u00eame bo\u00eete, chaque \u00e9tape nomm\u00e9e"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -1909,7 +1940,8 @@ W = {
                "fixo antes",
       "points": "→ %s centavo por ponto, exato %s · acima do piso %s "
                 "→ resgate",
-    },
+      "dim": "→ cobrado %s kg (÷ 5 000) contra %s kg (÷ 6 000) — "
+             "mesma caixa, cada passo nomeado"},
 }
 
 
@@ -2004,6 +2036,19 @@ _EVERYDAY_CALLS = [
          {"en": lambda s: s, "fr": lambda s: s.replace(".", ","),
           "pt": lambda s: s.replace(".", ",")}[L](
              d["routes"][0]["vs_floor"]["floor"]))),
+    ("/api/v1/ship/dimweight",
+     {"dims": {"l": "40", "w": "30", "h": "25", "unit": "cm"},
+      "actual_weight": {"value": "1.2", "unit": "kg"},
+      "rules": [
+          {"name": "carrier-5000", "divisor": "5000",
+           "divisor_unit": "cm3_kg", "dim_round": "ceil",
+           "weight_step": "1"},
+          {"name": "carrier-6000", "divisor": "6000",
+           "divisor_unit": "cm3_kg", "dim_round": "ceil",
+           "weight_step": "1"}]},
+     "dim", lambda d, L: (
+         d["results"][0]["billed_weight"],
+         d["results"][1]["billed_weight"])),
 ]
 
 

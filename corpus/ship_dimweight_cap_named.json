@@ -1,0 +1,10 @@
+{
+ "body": {
+  "dims": {"l": "20", "w": "20", "h": "12", "unit": "in"},
+  "actual_weight": {"value": "2", "unit": "lb"},
+  "rules": [{"name": "capped", "divisor": "139", "divisor_unit": "in3_lb",
+             "dim_round": "ceil", "weight_step": "1", "cap": "30"}]
+ },
+ "name": "ship_dimweight_cap_named",
+ "path": "/api/v1/ship/dimweight"
+}

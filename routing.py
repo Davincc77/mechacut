@@ -760,6 +760,32 @@ TABLE = (
      "valeur stockée rendu format nombre affichage cellule styles "
      "xml visual formato número exibido célula render estilo de "
      "número valor estocado"),
+    ("ship_dimweight", "/api/v1/ship/dimweight", "numbers",
+     "Le poids VRAIMENT facture du colis : dimensions arrondies AU "
+     "POUCE SUPERIEUR avant volume, volume ÷ diviseur (son unite est "
+     "DECLAREE — le piege mm÷139 x16,4 devient impossible), max(actual, "
+     "dimensionnel), ceil au palier, plafond. rollo 35 lb vs amzprep "
+     "34,5 sur les MEMES pouces : la fraction exacte 4800/139 tranche "
+     "et chaque etape est nommee ; tables transporteurs en ARGUMENTS "
+     "(USPS 166→139 le 12-juil-2026 = elles pourrissent)",
+     "dimensional weight dim billed parcel box carrier divisor 139 "
+     "pound volumetric shipping cost surprise max fee girth "
+     "poids facture colis dimensions volumetrique transporteur "
+     "expedition livre pale palier plafond poids volumetrique colis "
+     "cobrado cubagem caixa envio transportadora divisor faturamento"),
+    ("json_coerce", "/api/v1/json/coerce", "repair",
+     "Repare les ARGUMENTS d'un appel d'outil qu'un lecteur STRICT "
+     "refuse : 8.0→8 (classe serde « invalid type: floating point "
+     "2500.0, expected u64 », 11/11 tours mesurés), exponents et "
+     "fractions vraies laisses TELS QUELS, 'false' en chaine refuse PAR "
+     "LE NOM (piege truthy), string→number seulement si cast_strings=on, "
+     "'007' JAMAIS (les zeros de tete sont du payload), cles dupliquees "
+     "refusees ; la notation d'origine est CONSERVEE a la sortie",
+     "tool call arguments coerce cast serde u64 i64 whole float "
+     "invalid type floating point expected strict parse call args "
+     "truthy quoted false leading zeros notation "
+     "arguments appel outil coercion arguments refuses "
+     "argumentos chamada ferramenta coerção tipos estritos"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)

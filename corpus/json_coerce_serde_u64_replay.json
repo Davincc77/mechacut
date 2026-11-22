@@ -1,0 +1,8 @@
+{
+ "body": {
+  "raw": "{\"yield_time_ms\": 2500.0, \"session_id\": 17277.0}",
+  "schema": {"yield_time_ms": "u64", "session_id": "u64"}
+ },
+ "name": "json_coerce_serde_u64_replay",
+ "path": "/api/v1/json/coerce"
+}

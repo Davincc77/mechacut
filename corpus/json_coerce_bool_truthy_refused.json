@@ -1,0 +1,8 @@
+{
+ "body": {
+  "raw": "{\"force\": \"false\"}",
+  "schema": {"force": "boolean"}
+ },
+ "name": "json_coerce_bool_truthy_refused",
+ "path": "/api/v1/json/coerce"
+}

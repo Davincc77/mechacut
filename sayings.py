@@ -192,6 +192,21 @@ SAY = {
               "exactement",
         "pt": "29 000 pontos por um voo de R$ 438 menos R$ 5,60 de "
               "taxas — quantos centavos vale cada ponto"},
+    "/api/v1/ship/dimweight": {
+        "en": "my box is 20x20x12 inches and two calculators say 35 "
+              "and 34.5 — which weight does the carrier bill",
+        "fr": "mon colis fait 40×30×25 cm, un simulateur annonce 5 kg "
+              "et le transporteur facture 6 — quel poids est vraiment "
+              "facturé",
+        "pt": "minha caixa é 40×30×25 cm, um simulador diz 5 kg e a "
+              "transportadora cobra 6 — qual peso sai na fatura"},
+    "/api/v1/json/coerce": {
+        "en": "the model sent limit 8.0 and the strict parser rejected "
+              "the whole call — repair the arguments without guessing",
+        "fr": "le modèle a envoyé limit 8.0 et le parseur strict a "
+              "tout refusé — répare les arguments sans jamais deviner",
+        "pt": "o modelo mandou limit 8.0 e o parser estrito recusou a "
+              "chamada inteira — conserte os argumentos sem adivinhar"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",

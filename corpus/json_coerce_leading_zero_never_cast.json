@@ -1,0 +1,9 @@
+{
+ "body": {
+  "raw": "{\"code\": \"007\", \"qty\": \"2\"}",
+  "schema": {"code": "integer", "qty": "integer"},
+  "cast_strings": "on"
+ },
+ "name": "json_coerce_leading_zero_never_cast",
+ "path": "/api/v1/json/coerce"
+}

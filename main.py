@@ -227,6 +227,8 @@ import crosskit
 import displaykit
 import anchorkit
 import pointskit
+import dimkit
+import castkit
 import auditor
 import sayings
 import verdict
@@ -321,7 +323,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.86.0",
+    version="0.87.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4774,6 +4776,66 @@ def api_money_points(req: MoneyPointsRequest):
     body, err = run_money_points(req.dict())
     return err if err else body
 
+
+class ShipDimweightRequest(BaseModel):
+    dims: Optional[Dict[str, str]] = None
+    actual_weight: Optional[Dict[str, str]] = None
+    rules: Optional[List[Dict[str, Any]]] = None
+    as_of: Optional[str] = None
+
+
+def run_ship_dimweight(args: dict):
+    try:
+        out = dimkit.run_dimweight(args)
+    except dimkit.DimError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/ship/dimweight")
+def api_ship_dimweight(req: ShipDimweightRequest):
+    body, err = run_ship_dimweight(req.dict())
+    return err if err else body
+
+
+class JsonCoerceRequest(BaseModel):
+    raw: Optional[str] = None
+    json_schema: Optional[Dict[str, str]] = Field(default=None,
+                                                  alias="schema")
+    cast_strings: Optional[str] = None
+    strict: Optional[str] = None
+
+
+def run_json_coerce(args: dict):
+    args = dict(args or {})
+    if "schema" not in args and "json_schema" in args:
+        args["schema"] = args.pop("json_schema")
+    try:
+        out = castkit.run_coerce(args)
+    except castkit._StrictRefused as e:
+        return None, bad_request(
+            [{"field": r["path"],
+              "message": "strict refusal: %s — got %s"
+                         % (r["code"], r["got"]),
+              "expected": "%s — %s" % (r["expected"], r["repair"])}
+             for r in e.refused])
+    except castkit.CoerceError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/json/coerce")
+def api_json_coerce(req: JsonCoerceRequest):
+    body, err = run_json_coerce(req.dict())
+    return err if err else body
+
+
 # ------------------------------ bundle 0: task router + named recipes
 
 @app.get("/route")
@@ -5105,6 +5167,8 @@ TOOL_RUN = {
            "csv_excel_display": run_csv_excel_display,
            "date_tz_anchor": run_date_tz_anchor,
            "money_points": run_money_points,
+           "ship_dimweight": run_ship_dimweight,
+           "json_coerce": run_json_coerce,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -7937,7 +8001,114 @@ MCP_TOOLS = [
                          "default": "fold"},
             },
         },
-    },]
+    },
+    {
+        "name": "ship_dimweight",
+        "description": "What a parcel is actually BILLED, step by "
+                       "step: dimensions -> ceil each BEFORE volume -> "
+                       "volume ÷ divisor -> max(actual, dimensional) "
+                       "-> ceil to the weight palier -> cap. Two "
+                       "published calculators disagree on the SAME "
+                       "inches (20x20x12: rollo 35 lb, amzprep 34.5 — "
+                       "the exact value is 4800/139 = 34.5323741007, "
+                       "one of them skipped the final ceil). Carrier "
+                       "tables are ARGUMENTS, never embedded — they "
+                       "rot (USPS moved 166 -> 139 ON 2026-07-12); "
+                       "divisor carries its own unit (in3_lb|cm3_kg), "
+                       "which kills the published mm-into-139 trap "
+                       "(x16.4). USPS-style gates: >1 cubic foot, 70 "
+                       "lb cap, as named steps. All Fractions exact; "
+                       "free.",
+        "inputSchema": {"type": "object",
+                        "required": ["dims", "actual_weight", "rules"],
+                        "properties": {
+                            "dims": {"type": "object",
+                                     "required": ["l", "w", "h", "unit"],
+                                     "properties": {
+                                         "l": {"type": "string"},
+                                         "w": {"type": "string"},
+                                         "h": {"type": "string"},
+                                         "unit": {"type": "string",
+                                                  "enum": ["in", "cm",
+                                                           "mm"]}}},
+                            "actual_weight": {
+                                "type": "object",
+                                "required": ["value", "unit"],
+                                "properties": {
+                                    "value": {"type": "string"},
+                                    "unit": {"type": "string",
+                                             "enum": ["lb", "kg", "g",
+                                                      "oz"]}}},
+                            "rules": {"type": "array",
+                                      "minItems": 1, "maxItems": 6,
+                                      "items": {"type": "object",
+                                                "required": ["divisor",
+                                                             "divisor_unit",
+                                                             "dim_round",
+                                                             "weight_step"],
+                                                "properties": {
+                                                    "name": {"type": "string"},
+                                                    "divisor": {"type": "string"},
+                                                    "divisor_unit": {"type": "string",
+                                                                     "enum": ["in3_lb",
+                                                                              "cm3_kg"]},
+                                                    "dim_round": {"type": "string",
+                                                                  "enum": ["ceil",
+                                                                           "none"]},
+                                                    "weight_step": {"type": "string",
+                                                                    "enum": ["1",
+                                                                             "0.5",
+                                                                             "0.25",
+                                                                             "none"]},
+                                                    "min_volume": {"type": "string"},
+                                                    "cap": {"type": "string"}}}},
+                            "as_of": {"type": "string",
+                                      "description": "YYYY-MM-DD date "
+                                                     "the carrier "
+                                                     "table was read"}}}},
+    {
+        "name": "json_coerce",
+        "description": "Repair tool-call ARGUMENTS a strict reader "
+                       "rejects, per a declared flat schema, WITHOUT "
+                       "guessing: 8.0 -> 8 in an integer slot (the "
+                       "published magpie #3152 serde class: 'invalid "
+                       "type: floating point 2500.0, expected u64' — "
+                       "measured 11/11 turns), exponents and real "
+                       "fractions LEFT AS WRITTEN (the fix's own "
+                       "scope), quoted 'false' refused BY NAME (the "
+                       "PraisonAI #6369 truthy trap), string->number "
+                       "only with cast_strings='on', '007' NEVER "
+                       "cast (leading zeros are payload: phone, CNPJ, "
+                       "SIREN), duplicate keys refused, bounds named "
+                       "(u64|i64|u32|i32). Output preserves the "
+                       "literal notation: coerced_text re-emits 1.0e3 "
+                       "as 1.0e3. strict='true' turns refusals into "
+                       "the 400 repair prompt. Free.",
+        "inputSchema": {"type": "object",
+                        "required": ["raw", "schema"],
+                        "properties": {
+                            "raw": {"type": "string",
+                                    "description": "the exact JSON "
+                                                   "text of the tool-"
+                                                   "call arguments, "
+                                                   "e.g. '{\"limit\": "
+                                                   "8.0}'"},
+                            "schema": {"type": "object",
+                                       "description": "{key: type} "
+                                                     "over integer|u64|"
+                                                     "i64|u32|i32|"
+                                                     "number|string|"
+                                                     "boolean|array<"
+                                                     "those}"},
+                            "cast_strings": {"type": "string",
+                                             "enum": ["on", "off",
+                                                      "true", "false"],
+                                             "default": "off"},
+                            "strict": {"type": "string",
+                                       "enum": ["on", "off", "true",
+                                                "false"],
+                                       "default": "off"}}}},
+]
 
 
 @app.get("/mcp")
@@ -7976,7 +8147,7 @@ async def mcp_rpc(request: Request):
     if method == "initialize":
         return _rpc({"protocolVersion": "2024-11-05",
                      "capabilities": {"tools": {}},
-                     "serverInfo": {"name": "mechacut", "version": "0.86.0"}}, rid)
+                     "serverInfo": {"name": "mechacut", "version": "0.87.0"}}, rid)
     if method == "tools/list":
         return _rpc({"tools": MCP_TOOLS}, rid)
     if method == "tools/call":

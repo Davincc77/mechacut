@@ -1,0 +1,11 @@
+{
+ "body": {
+  "dims": {"l": "305", "w": "203", "h": "152", "unit": "mm"},
+  "actual_weight": {"value": "2", "unit": "lb"},
+  "rules": [{"name": "usps-style", "divisor": "139",
+             "divisor_unit": "in3_lb", "dim_round": "ceil",
+             "weight_step": "1", "min_volume": "1728"}]
+ },
+ "name": "ship_dimweight_mm_gate_below_1728",
+ "path": "/api/v1/ship/dimweight"
+}

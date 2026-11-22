@@ -1,0 +1,8 @@
+{
+ "body": {
+  "raw": "{\"n\": 1.0e3, \"m\": 2.5}",
+  "schema": {"n": "integer", "m": "number"}
+ },
+ "name": "json_coerce_exponent_left_as_written",
+ "path": "/api/v1/json/coerce"
+}

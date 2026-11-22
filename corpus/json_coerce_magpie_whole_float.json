@@ -1,0 +1,8 @@
+{
+ "body": {
+  "raw": "{\"limit\": 8.0}",
+  "schema": {"limit": "integer"}
+ },
+ "name": "json_coerce_magpie_whole_float",
+ "path": "/api/v1/json/coerce"
+}
