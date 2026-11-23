@@ -92,6 +92,18 @@ canal d'écriture) → deux 401 mystérieux, une fausse piste « clé
 tournante ». Leçon outillage : après écriture d'un fichier touchant
 un jeton, grep le contenu RÉEL avant de diagnostiquer l'API.
 
+## L'incident de ripoint (23-11) — publié, même doctrine que le prix
+
+Recomptage des jsonls bruts à la demande de l'humain : le claim porté par le
+brouillon d'article « le même programme produit deux fois : 0 paire sur 14 »
+était FAUX — 3 paires sur 14 voient un sha de code revenir une fois
+(dsv32 #2 : deux retours, 3 shas distincts sur 5 passes ; dsv32 #8 et gpt5m
+#12 : un retour chacun, 4 shas). B2 tient dans les termes publiés ci-dessus
+(« ≥ 4 shas distincts » : gpt5m 7/7, dsv32 6/7), c'est la reformulation
+article qui avait forci. Corrigé EN+FR : « 3 paires sur 14, jamais comme
+artefact stable ». Le nombre d'articles reste 170+9 (prod 1.16.0, 23-11),
+l'ancien ripoint 143+9 datait du 22-11 — dérive normale, consignée.
+
 ## Verdict global du banc — ce que la thèse devient
 
 1. « Sans nous la frontière échoue » est RETIRÉ du vocabulaire :

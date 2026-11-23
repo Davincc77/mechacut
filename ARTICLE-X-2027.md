@@ -1,8 +1,10 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 143 + 9, vérifiés live 22-11).
-FR version below. ~470 words EN.*
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 170 + 9, vérifiés live 23-11, prod 1.16.0).
+FR version below. ~480 words EN. — passe 23-11 : ripoint 143→170 et rectification
+du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
+dans FINDINGS-V22, même doctrine que la correction de prix V22).
 
 ---
 
@@ -16,7 +18,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **143 transforms + 9 named chain recipes**, stateless, keyless at
+agents: **170 transforms + 9 named chain recipes**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -42,9 +44,10 @@ published raw (`bench/results_v22.jsonl`, $0.0344):
 
 Then the bench that matters to anyone who runs a job more than once. Five repeats
 of the *winning* arm at agent temperature (0.7): 70/70 numerically right — and the
-same program produced twice: **0 of 14** model-problem pairs. New code every pass,
-one decimal tail in the mix (`776.6000000000000000000000002`), each run right, none
-identical. The frozen server, same 70 controls: one sha per problem, every time.
+identical program came back twice in only **3 of 14** model-problem pairs, and never
+as a stable artifact: the other 11 rewrote it every pass. Code new each time, one
+decimal tail in the mix (`776.6000000000000000000000002`), each run right, the answer
+changing shape in 8 of 14 pairs. The frozen server, same 70 controls: one sha per problem, every time.
 A model that is right is not a model that is reproducible. Production is the second
 one. Retry does not fix any of this — measured too: five samples on a systematic
 miss, unanimous on the same wrong number, ×4 the bill. Repeating is not thinking,
@@ -75,7 +78,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **143 transforms + 9 recettes-chaînes nommées**,
+déterministes pour agents : **170 transforms + 9 recettes-chaînes nommées**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette
@@ -101,11 +104,13 @@ première cellule, brut publié (`bench/results_v22.jsonl`, 0,0344 $) :
 
 Puis le banc qui compte pour quiconque exécute un job plus d'une fois. Cinq
 repasses du *bras gagnant* en température d'agent (0,7) : 70/70 justes
-numériquement — et le même programme produit deux fois : **0 sur 14** paires
-modèle-problème. Code nouveau à chaque passe, une queue de float dans le lot
-(`776.6000000000000000000000002`), chaque course juste, aucune identique. Le
-serveur gelé, mêmes 70 contrôles : un sha par problème, à chaque fois. Un modèle
-qui a raison n'est pas un modèle reproductible. La production, c'est le second.
+numériquement — et le même programme n'est revenu deux fois que dans **3 paires
+sur 14** modèle-problème, et jamais comme artefact stable : les 11 autres l'ont
+réécrit à chaque passe. Code nouveau à chaque fois, une queue de float dans le lot
+(`776.6000000000000000000000002`), chaque course juste, la réponse changeant de
+forme dans 8 paires sur 14. Le serveur gelé, mêmes 70 contrôles : un sha par
+problème, à chaque fois. Un modèle qui a raison n'est pas un modèle reproductible.
+La production, c'est le second.
 Le retry n'y change rien — mesuré aussi : cinq échantillons sur une erreur
 systématique, unanimes sur le même faux nombre, ×4 la facture. Répéter n'est pas
 penser, et échantillonner n'est pas prouver.
