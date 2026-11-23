@@ -225,6 +225,13 @@ SAY = {
         "pt": "o pacote de 500 g virou 400 g pelo mesmo preço — quanto "
               "isso dá por quilo de verdade, e o leve 2 por R$ 7 é "
               "mais barato por grama que o pote grande"},
+    "/api/v1/food/poultry": {
+        "en": "Thanksgiving is Thursday — what time does the turkey "
+              "leave the freezer to hit the table at three",
+        "fr": "thanksgiving jeudi : à quelle heure sortir la dinde "
+              "du congélateur pour être à table à quinze heures",
+        "pt": "ação de graça quinta: a que horas tirar o peru do "
+              "congelador para estar à mesa às quinze horas"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",
