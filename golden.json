@@ -136,6 +136,7 @@
   "ledger_summary_run_chain": "200:883c19f94eb8551faad63ea1a0bc38841a57b754774320d11a17c2b8c697f465",
   "ledger_summary_year_boundary": "200:fc5dcce744bd4096180f5ee77b0f73a7c2c51757f0814915da72c910812a15bc",
   "logic_rules_sepa": "200:dee41eba91b36fb382bd2e96e378538c7f39bc8bcda13048ff91e0d4b4c11708",
+  "loop_doom_check_basic": "200:9fc889b377d2ded3df0a3a8a31bcfa5121537f7fa88fcdf57b24e200f7a3fb5a",
   "math_calc_product": "200:38ea56decda4b0819cebd8160f8f9ee3b1be610962fd97e51fc125b8d4c17eb2",
   "math_calc_rounded_chain": "200:f6ecacf4034cac10aa616b115b557fd2be472f59a426af926afbe39fd8ff5c3d",
   "md_render_kitchen_sink": "200:9dfbdadcc4a2851a1a1bea3c7882b2d6101d07d20b54c172b51bcb3c4ae3028a",

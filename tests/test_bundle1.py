@@ -322,7 +322,7 @@ def test_mcp_exposes_bundle1():
                           'ledger_summary', 'eval_compare',
                           'shop_shipping_deadline',
                           'shop_return_deadline',
-                          'invoice_validate_totals', 'check_allowlist']  # queue 23-11 bundles 77-78
+                          'invoice_validate_totals', 'check_allowlist', 'loop_doom_check']  # queue 23-11 bundle82
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 2,
                                   "method": "tools/call",
                                   "params": {"name": "json_repair",

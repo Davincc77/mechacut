@@ -64,6 +64,7 @@ POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/
 POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, cent-exact (free)
 POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences pointées (free)
 POST /api/v1/check/allowlist     rules + requests -> policy verdicts (free)
+POST /api/v1/loop/doom-check     tool-call trace -> doom determinism, named thresholds (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
 POST /api/v1/shop/return-deadline    retailer + purchase date -> published holiday RETURN deadline, provenance and conflicts named (free)
@@ -257,6 +258,7 @@ import dates
 import identity
 import edits
 import allowkit
+import loopkit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -341,7 +343,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.4.0",
+    version="1.5.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1652,6 +1654,44 @@ def run_check_allowlist(args: dict):
 @app.post("/api/v1/check/allowlist")
 def api_check_allowlist(req: CheckAllowlistRequest):
     body, err = run_check_allowlist(req.model_dump())
+    return err if err else body
+
+
+class DoomCall(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tool: str
+    args: Any = None
+
+
+class LoopDoomCheckRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    calls: List[DoomCall]
+    doom_min: int = 3
+    cycles_min: int = 2
+    storm_min: int = 4
+
+
+def run_loop_doom_check(args: dict):
+    try:
+        req = LoopDoomCheckRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = loopkit.loop_doom_check(
+            [c.model_dump() for c in req.calls],
+            req.doom_min, req.cycles_min, req.storm_min)
+    except loopkit.LoopError as e:
+        return None, bad_request(
+            [{"field": "calls", "message": str(e),
+              "expected": "calls: [{tool, args?}], thresholds integers "
+                          "2-50, at most 200 calls"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/loop/doom-check")
+def api_loop_doom_check(req: LoopDoomCheckRequest):
+    body, err = run_loop_doom_check(req.model_dump())
     return err if err else body
 
 
@@ -5793,6 +5833,7 @@ TOOL_RUN = {
            "ledger_apply_payments": run_ledger_apply_payments,
            "eval_compare": run_eval_compare,
            "check_allowlist": run_check_allowlist,
+           "loop_doom_check": run_loop_doom_check,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
            "shop_return_deadline": run_shop_return_deadline,
@@ -9421,6 +9462,36 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "loop_doom_check",
+        "description": (
+            "Judge a tool-call trace for blind repetition: DOOM (runs "
+            "of >= doom_min identical consecutive calls, identity on "
+            "canonical bytes so key order never hides a loop), CYCLIC "
+            "(a period 2-6 repeated >= cycles_min whole times), STORM "
+            "(a call appearing >= storm_min times scattered), or "
+            "HEALTHY. All signals reported, verdict is the most severe "
+            "present; thresholds echoed, ceilings named. Motions "
+            "belong to the harness; the verdict is mechanics, and "
+            "mechanics belong here. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["calls"],
+            "properties": {
+                "calls": {"type": "array", "items": {
+                    "type": "object",
+                    "required": ["tool"],
+                    "properties": {
+                        "tool": {"type": "string"},
+                        "args": {},
+                    }}},
+                "doom_min": {"type": "integer", "default": 3},
+                "cycles_min": {"type": "integer", "default": 2},
+                "storm_min": {"type": "integer", "default": 4},
+            },
+        },
+    },
 ]
 
 
@@ -9647,6 +9718,7 @@ def index(request: Request):
             "/api/v1/ledger/apply-payments": "POST invoices + payments -> FIFO reconciliation (free)",
             "/api/v1/eval/compare": "POST expected + got -> verdict OK/WRONG + named divergences (free)",
             "/api/v1/check/allowlist": "POST rules + requests -> ALLOW/DENY/AMBIGUOUS by closed grammar (free)",
+            "/api/v1/loop/doom-check": "POST tool calls -> DOOM/CYCLIC/STORM/HEALTHY (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
             "/api/v1/number/spell": "POST amount -> words FR/EN/PT for legal mentions (free < 32 KB)",
             "/api/v1/hash/digest": "POST data + algo -> hex digest (a model cannot hash)",

@@ -1,0 +1,14 @@
+{
+  "name": "loop_doom_check_basic",
+  "path": "/api/v1/loop/doom-check",
+  "body": {
+    "calls": [
+      {"tool": "bash", "args": {"c": "ls"}},
+      {"tool": "read", "args": {"p": "a.py"}},
+      {"tool": "bash", "args": {"c": "ls"}},
+      {"tool": "read", "args": {"p": "a.py"}},
+      {"tool": "bash", "args": {"c": "ls"}},
+      {"tool": "read", "args": {"p": "a.py"}}
+    ]
+  }
+}

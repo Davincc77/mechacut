@@ -169,6 +169,11 @@ TABLE = (
      "allowlist policy allow deny gate approve refuse subject action "
      "permission rule specific ambiguous autorisation politique "
      "permisso recusa regra deixar fazer"),
+    ("loop_doom_check", "/api/v1/loop/doom-check", "checks",
+     "doom/cyclic/storm verdicts over a tool-call trace",
+     "loop doom cyclic storm repeat repetition trace agent calls "
+     "retry stuck boucle repetition relance agentique trace "
+     "repetitif boucler"),
     ("ledger_apply_payments", "/api/v1/ledger/apply-payments",
      "numbers",
      "FIFO reconciliation of payments onto invoices",

@@ -2159,6 +2159,52 @@
   },
   {
    "body": {
+    "calls": [
+     {
+      "args": {
+       "c": "ls"
+      },
+      "tool": "bash"
+     },
+     {
+      "args": {
+       "p": "a.py"
+      },
+      "tool": "read"
+     },
+     {
+      "args": {
+       "c": "ls"
+      },
+      "tool": "bash"
+     },
+     {
+      "args": {
+       "p": "a.py"
+      },
+      "tool": "read"
+     },
+     {
+      "args": {
+       "c": "ls"
+      },
+      "tool": "bash"
+     },
+     {
+      "args": {
+       "p": "a.py"
+      },
+      "tool": "read"
+     }
+    ]
+   },
+   "name": "loop_doom_check_basic",
+   "path": "/api/v1/loop/doom-check",
+   "sha256": "9fc889b377d2ded3df0a3a8a31bcfa5121537f7fa88fcdf57b24e200f7a3fb5a",
+   "status": 200
+  },
+  {
+   "body": {
     "expr": "7834*9217"
    },
    "name": "math_calc_product",

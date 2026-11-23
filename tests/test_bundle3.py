@@ -217,7 +217,7 @@ def test_mcp_dates_tools():
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 1,
                                   "method": "tools/list"})
     names = [t["name"] for t in r.json()["result"]["tools"]]
-    assert len(names) == 157  # +shop_return_deadline (23-11 bundle80)
+    assert len(names) == 158  # +loop_doom_check (23-11 bundle82)
     for t in ("date_parse", "date_tz", "date_calc", "cron_next",
               "cron_humanize", "ics_generate", "ics_parse"):
         assert t in names
