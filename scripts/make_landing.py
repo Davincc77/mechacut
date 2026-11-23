@@ -2363,6 +2363,14 @@ CAT_TOP10 = {"en": "\u2605 Top 10", "fr": "\u2605 Le top 10",
 PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
                 # validés nom par nom + chiffres par chiffres au merge
     "fr": {
+        "address_parse":
+            "adresse postale → pays, code postal validé contre 50 grammaires, lignes restantes ; ambiguïté NOMMÉE, jamais devinée",
+        "date_civil":
+            "instant + zone IANA nommée → la date civile que cette zone habite ; glissement d'exercice signalé, fuseau du serveur jamais lu",
+        "text_fold_report":
+            "qu'une suppression d'accents ou de casse EFFACE une identité distincte — rapporté, nommé ; le pliage lui-même reste à l'appelant",
+        "text_novel_words":
+            "description contre titre : les mots nouveaux comptés par item, les flux écho nommés, borne dite (défaut 3)",
         "date_window":
             "bornes d'une clause (min..max jours avant/après un "     "événement) → la fenêtre INCLUSIVE entière, span et sens dits ; "     "bornes inversées refusées par nom (on ne trie pas un contrat)",
         "date_deemed":
@@ -2713,6 +2721,14 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "food_ovenschedule":
             "un four, des plats, une heure de service : compte à rebours à l'envers, conflits de température nommés, jamais d'horloge murale — les timelines web ne vérifient rien de tout ça",
     },    "pt": {
+        "address_parse":
+            "endereço postal → país, CEP validado contra 50 gramáticas, linhas restantes; ambiguidade NOMEADA, nunca adivinhada",
+        "date_civil":
+            "instante + fuso IANA nomeado → a data civil que o fuso habita; mudança de exercício sinalizada, fuso do servidor nunca lido",
+        "text_fold_report":
+            "quais reducoes de acentos ou caixa APAGAM uma identidade distinta — relatado, nomeado; o dobramento em si fica com o chamador",
+        "text_novel_words":
+            "descricao contra titulo: palavras novas contadas por item, feeds eco nomeados, limite dito (padrao 3)",
         "date_window":
             "limites de uma cláusula (min..max dias antes/depois de um evento) → a janela INCLUSIVE inteira, span e sentido ditos; limites invertidas recusadas por nome (não se reordena um contrato)",
         "date_deemed":

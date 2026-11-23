@@ -961,3 +961,40 @@ def deemed(sent, method, deemed_days=None):
     return {"sent": d.isoformat(), "method": method, "days": days,
             "table_days": table, "source": source,
             "deemed_receipt": (d + timedelta(days=days)).isoformat()}
+
+
+# --------------------------------------------------------------------------
+# date_civil — bundle 89 (@LilySaucy). 212 factures de Tokyo datées au
+# fuseau du serveur : le UTC était juste, l'exercice était faux. Ici le
+# fuseau est un ARGUMENT OBLIGATOIRE et la réponse dit si la date civile
+# CHANGE D'ANNÉE par rapport au UTC — le glissement fiscal est nommé,
+# jamais silencé. L'horloge du serveur n'est jamais lue.
+# --------------------------------------------------------------------------
+def civil(instant, timezone):
+    if not isinstance(timezone, str) or not timezone.strip():
+        raise DateError("tz_required: the civil date belongs to a NAMED "
+                        "zone — the server's own zone is never read "
+                        "(212 invoices learned that the hard way)")
+    try:
+        z = _zone(timezone)
+    except DateError:
+        raise DateError("zone_unknown: %r — use an IANA name, e.g. "
+                        "Asia/Tokyo" % timezone)
+    if not isinstance(instant, str) or not instant.strip():
+        raise DateError("instant: ISO timestamp with offset required")
+    dt = _parse_instant(instant)
+    if dt.tzinfo is None:
+        raise DateError("instant must carry its offset (+00:00) — a naked "
+                        "wall time has no civil date anywhere until a zone "
+                        "is named")
+    import datetime as _m
+    loc = dt.astimezone(z)
+    utc_d = dt.astimezone(_m.timezone.utc).date()
+    off = loc.strftime("%z")
+    off = off[:3] + ":" + off[3:] if off else "+00:00"
+    return {"utc_date": utc_d.isoformat(),
+            "civil_date": loc.date().isoformat(),
+            "civil_weekday": loc.strftime("%A"),
+            "offset": off, "zone": timezone.strip(),
+            "day_shift": utc_d != loc.date(),
+            "year_shift": utc_d.year != loc.date().year}

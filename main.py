@@ -70,6 +70,10 @@ POST /api/v1/number/words-pair   "thirty (40)" -> MISMATCH, both kept, no pick (
 POST /api/v1/date/window         min/max bounds -> the whole clause, inclusive, span named (free)
 POST /api/v1/date/deemed         sent + method -> deemed receipt; no method, no date (free)
 POST /api/v1/agent/propose       contract -> named verdict + git blob (the network door; nothing stored)
+POST /api/v1/text/fold-report    Hermès vs Hermes: the folding that erases an identity is REPORTED (free)
+POST /api/v1/text/novel-words    title vs description: new words counted, echo feeds named (free)
+POST /api/v1/address/parse       postal grammar over 50 countries — ambiguity is said, never guessed (free)
+POST /api/v1/date/civil          instant + named zone -> civil date; the fiscal-year slip is flagged (free)
 POST /api/v1/agent/retry-budget  error class + hash count + budget -> REPEAT/MUTATE/ABORT (free)
 POST /api/v1/shop/discount-audit price history + announced cut -> Omnibus 30-day legality verdict (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
@@ -267,6 +271,7 @@ import edits
 import allowkit
 import loopkit
 import proposekit
+import addparsekit
 import retrykit
 import omnibuskit
 import evalkit
@@ -353,7 +358,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.9.0",
+    version="1.11.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1860,6 +1865,125 @@ def run_agent_propose(args: dict):
 @app.post("/api/v1/agent/propose")
 def api_agent_propose(req: AgentProposeRequest):
     body, err = run_agent_propose(req.model_dump())
+    return err if err else body
+
+
+class FoldReportRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    values: List[str]
+    mode: str = "accents"
+
+
+def run_text_fold_report(args: dict):
+    try:
+        req = FoldReportRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = micro.fold_report(req.values, req.mode)
+    except ValueError as e:
+        return None, bad_request(
+            [{"field": "values/mode", "message": str(e),
+              "expected": "values: 1..200 strings; mode accents|cas|"
+                          "les_deux"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/text/fold-report")
+def api_text_fold_report(req: FoldReportRequest):
+    body, err = run_text_fold_report(req.model_dump())
+    return err if err else body
+
+
+class NovelItem(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    title: str
+    description: str
+
+
+class NovelWordsRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    items: List[NovelItem]
+    max_echo: int = 3
+
+
+def run_text_novel_words(args: dict):
+    try:
+        req = NovelWordsRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = micro.novel_words([i.model_dump() for i in req.items],
+                                req.max_echo)
+    except ValueError as e:
+        return None, bad_request(
+            [{"field": "items/max_echo", "message": str(e),
+              "expected": "items: 1..200 {title, description}; max_echo "
+                          "integer 0..20"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/text/novel-words")
+def api_text_novel_words(req: NovelWordsRequest):
+    body, err = run_text_novel_words(req.model_dump())
+    return err if err else body
+
+
+class AddressParseRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    text: str
+    country: str = ""
+
+
+def run_address_parse(args: dict):
+    try:
+        req = AddressParseRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = addparsekit.parse(req.text, req.country or None)
+    except ValueError as e:
+        return None, bad_request(
+            [{"field": "text/country", "message": str(e),
+              "expected": "text: 1..500 chars, <= 6 components; country: "
+                          "ISO alpha-2 among the 50 postal grammars"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/address/parse")
+def api_address_parse(req: AddressParseRequest):
+    body, err = run_address_parse(req.model_dump())
+    return err if err else body
+
+
+class DateCivilRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    instant: str
+    timezone: str = ""
+
+
+def run_date_civil(args: dict):
+    try:
+        req = DateCivilRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = dates.civil(req.instant, req.timezone)
+    except dates.DateError as e:
+        return None, bad_request(
+            [{"field": "instant/timezone", "message": str(e),
+              "expected": "instant: ISO timestamp WITH offset; timezone: "
+                          "named IANA zone — required, never defaulted"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/civil")
+def api_date_civil(req: DateCivilRequest):
+    body, err = run_date_civil(req.model_dump())
     return err if err else body
 
 
@@ -6153,6 +6277,10 @@ TOOL_RUN = {
            "date_window": run_date_window,
            "date_deemed": run_date_deemed,
            "agent_propose": run_agent_propose,
+           "text_fold_report": run_text_fold_report,
+           "text_novel_words": run_text_novel_words,
+           "address_parse": run_address_parse,
+           "date_civil": run_date_civil,
            "agent_retrybudget": run_agent_retrybudget,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
@@ -9996,6 +10124,94 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "text_fold_report",
+        "description": (
+            "Accent-stripping changes ENTITIES: Hermès becomes Hermes and "
+            "two suppliers collapse into one name. This tool does not "
+            "fold for you — it reports WHERE folding erases a boundary: "
+            "values in, verdict COLLIDE or SAFE, each collision with the "
+            "folded key and the raws that collapsed into it, in first-"
+            "seen order. Mode: accents, cas, or les_deux — because "
+            "knowing WHICH transformation killed the distinction is half "
+            "the answer. Ceiling 200 values, grammar named. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["values"],
+            "properties": {
+                "values": {"type": "array", "items": {"type": "string"}},
+                "mode": {"type": "string",
+                         "enum": ["accents", "cas", "les_deux"]},
+            },
+        },
+    },
+    {
+        "name": "text_novel_words",
+        "description": (
+            "RSS descriptions that repeat their title are filler dressed "
+            "as content. Per item: words in the description that the "
+            "title did not already say (casefold + accent-folded, so the "
+            "count is a quantity not a string game), verdict ECHO when "
+            "novelty <= max_echo (default 3, bound named) else NOVEL; "
+            "the list verdict is ALL-ECHO / MIXED / ALL-NOVEL with "
+            "counts. Measured on the feed that started it: 100 of 100 "
+            "items added three words or fewer. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["items"],
+            "properties": {
+                "items": {"type": "array", "items": {
+                    "type": "object",
+                    "required": ["title", "description"],
+                    "properties": {"title": {"type": "string"},
+                                   "description": {"type": "string"}}}},
+                "max_echo": {"type": "integer", "default": 3},
+            },
+        },
+    },
+    {
+        "name": "address_parse",
+        "description": (
+            "One line of postal address in; components out, with NO "
+            "role guessing we cannot prove: country resolved from an "
+            "argument first, then a named country, then the postal "
+            "grammar scan (country_source says which); postal validated "
+            "against the 50 shipped grammars; when a code fits many "
+            "(75011 fits 22 grammars) the verdict is AMBIGUOUS_POSTAL "
+            "with the sorted candidates — pass country as an argument "
+            "and it becomes PARSED with provenance 'argument'. The rest "
+            "is lines, in order. Ceilings 6 parts / 500 chars. Street "
+            "vs city naming is NOT guessed: that is a different, more "
+            "honest tool. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["text"],
+            "properties": {"text": {"type": "string"},
+                           "country": {"type": "string"}},
+        },
+    },
+    {
+        "name": "date_civil",
+        "description": (
+            "212 Tokyo invoices were dated in the SERVER's zone: the UTC "
+            "instant was right and the fiscal year was wrong. The civil "
+            "date is the date a NAMED zone says it is: instant (with "
+            "offset) + IANA timezone, both required — the server clock "
+            "is never read, a naked instant is refused. Answer: utc_date "
+            "vs civil_date, weekday, offset, and the shifts named: "
+            "day_shift, year_shift — when civil year != UTC year, the "
+            "accounting period has moved and this says it. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["instant"],
+            "properties": {"instant": {"type": "string"},
+                           "timezone": {"type": "string"}},
+        },
+    },
 ]
 
 
@@ -10228,6 +10444,10 @@ def index(request: Request):
             "/api/v1/date/window": "POST bounds -> the full inclusive window, inverted bounds refused (free)",
             "/api/v1/date/deemed": "POST sent + method -> deemed receipt or named refusal (free)",
             "/api/v1/agent/propose": "POST contract -> DUPLICATE-OF/SUSPECT/ELIGIBLE, blob commit-ready, nothing stored (free)",
+            "/api/v1/text/fold-report": "POST values -> COLLIDE/SAFE: which foldings erase an identity (free)",
+            "/api/v1/text/novel-words": "POST items -> ECHO/NOVEL: descriptions that add nothing, counted (free)",
+            "/api/v1/address/parse": "POST address -> country, postal (grammar or candidates), lines; ambiguity said (free)",
+            "/api/v1/date/civil": "POST instant + zone -> civil date, year shift named, server zone never read (free)",
             "/api/v1/agent/retry-budget": "POST error class + attempt + hashes -> REPEAT/MUTATE/ABORT, deterministic backoff (free)",
             "/api/v1/shop/discount-audit": "POST price history + announced cut -> Omnibus 30-day legality verdict (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",

@@ -204,6 +204,26 @@ TABLE = (
      "propose proposal contract network submit tool new duplicate "
      "eligible suspect blob inbox proposition contrat soumettre "
      "propuesta contrato submissão"),
+    ("text_fold_report", "/api/v1/text/fold-report", "text",
+     "which case or accent foldings erase a distinct entity — reported, "
+     "the fold itself left to the caller",
+     "fold accents casefolding entity hermes identity collision "
+     "nfd normalisation accents entite collision repli"),
+    ("text_novel_words", "/api/v1/text/novel-words", "text",
+     "description vs title: new words counted per item, echo feeds "
+     "named, bound stated",
+     "rss novelty echo description title words filler contenu titre "
+     "novedad recheio"),
+    ("address_parse", "/api/v1/address/parse", "extract",
+     "postal address -> country, postal code validated against 50 "
+     "grammars, remaining lines; ambiguity named, never resolved by luck",
+     "address postal parse components country city street adresse "
+     "cep endereço código postal componentes"),
+    ("date_civil", "/api/v1/date/civil", "dates",
+     "instant + named IANA zone -> the civil date that zone lives in; "
+     "fiscal year shift flagged; server zone never consulted",
+     "civil date invoice date timezone fuso fiscal year exercice "
+     "date civile zona orologio locale date civile"),
     ("agent_retrybudget", "/api/v1/agent/retry-budget", "checks",
      "is re-attempting this failure rational? closed taxonomy, "
      "hash ceiling, session budget, deterministic backoff",

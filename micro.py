@@ -583,3 +583,96 @@ def file_encoding(blob_b64):
                 "first_bad_hex": raw[e.start:e.start + 4].hex(),
                 "note": "could be latin-1/cp1252/shift-jis: the bytes do "
                         "not prove which; no guessing here"}
+
+
+# --------------------------------------------------------------------------
+# text_fold_report — bundle 88 (@reportio). Retirer les accents peut
+# changer l'ENTITÉ : Hermès devient Hermes. Cet outil ne fold pas pour
+# l'appelant — il dit QUAND le pliage écrase une frontière.
+# --------------------------------------------------------------------------
+def fold_report(values, mode="accents"):
+    if mode not in ("accents", "cas", "les_deux"):
+        raise ValueError("mode_grammar: accents | cas | les_deux — got %r"
+                         % mode)
+    if not isinstance(values, list) or not values:
+        raise ValueError("values_grammar: 1..200 strings required")
+    if len(values) > 200:
+        raise ValueError("ceiling: 200 values max per call, got %d"
+                         % len(values))
+    groups = {}
+    order = []
+    for raw in values:
+        v = str(raw)
+        f = v
+        if mode in ("accents", "les_deux"):
+            f = "".join(c for c in unicodedata.normalize("NFD", f)
+                        if not unicodedata.combining(c))
+        if mode in ("cas", "les_deux"):
+            f = f.casefold()
+        if f not in groups:
+            groups[f] = []
+            order.append(f)
+        groups[f].append(v)
+    collisions = [{"folded": f, "raws": groups[f]} for f in order
+                  if len(groups[f]) > 1]
+    return {"verdict": "COLLIDE" if collisions else "SAFE",
+            "mode": mode,
+            "collisions": collisions,
+            "counts": {"values": len(values),
+                       "folded_distinct": len(groups),
+                       "collisions": len(collisions)}}
+
+
+# --------------------------------------------------------------------------
+# text_novel_words — bundle 88 (@reportio). La description RSS qui ne dit
+# rien de plus que le titre : le compte des mots NOUVEAUX, borne nommée,
+# verdict par item et sur la liste.
+# --------------------------------------------------------------------------
+_WORD_RE = re.compile(r"[0-9a-zà-ÿ']+", re.UNICODE)
+
+
+def _tokset(text):
+    t = unicodedata.normalize("NFKD", str(text).casefold())
+    t = "".join(c for c in t if not unicodedata.combining(c))
+    return set(_WORD_RE.findall(t))
+
+
+def novel_words(items, max_echo=3):
+    if not isinstance(items, list) or not items:
+        raise ValueError("items_grammar: 1..200 {title, description}")
+    if len(items) > 200:
+        raise ValueError("ceiling: 200 items max per call, got %d"
+                         % len(items))
+    if isinstance(max_echo, bool) or not isinstance(max_echo, int) \
+            or not 0 <= max_echo <= 20:
+        raise ValueError("max_echo_grammar: integer 0..20 (named bound)")
+    out, echo, novel = [], 0, 0
+    for it in items:
+        if not isinstance(it, dict) or "title" not in it \
+                or "description" not in it:
+            raise ValueError("items_grammar: each item needs title AND "
+                             "description")
+        base = _tokset(it["title"])
+        desc_tokens = _WORD_RE.findall(
+            "".join(c for c in unicodedata.normalize(
+                "NFKD", str(it["description"]).casefold())
+                if not unicodedata.combining(c)))
+        seen, new = set(), []
+        for w in desc_tokens:
+            if w not in base and w not in seen:
+                seen.add(w)
+                new.append(w)
+        verdict = "ECHO" if len(new) <= max_echo else "NOVEL"
+        if verdict == "ECHO":
+            echo += 1
+        else:
+            novel += 1
+        out.append({"novel_count": len(new),
+                    "novel_words": sorted(new)[:10],
+                    "verdict": verdict})
+    overall = ("ALL-ECHO" if novel == 0 else
+               "ALL-NOVEL" if echo == 0 else "MIXED")
+    return {"verdict": overall,
+            "items": out,
+            "counts": {"echo": echo, "novel": novel, "items": len(items)},
+            "max_echo": max_echo}

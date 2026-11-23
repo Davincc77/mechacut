@@ -45,7 +45,7 @@ def test_manifest_token_budget():
     # per tool; the real ceiling is the byte budget + dense fold in the
     # routing module — line count is only a proxy, resized here as the
     # catalogue grows past its original 95-tool shape
-    assert len(lines) < 210   # resize 24-11 bundle87 (+1 route manifest)
+    assert len(lines) < 214   # resize 24-11 bundle89
     # shipping_deadline, +invoice_validate_totals) : 197 lignes, le
     # plafond OCTETS <9000 tient (mesuré 7 789) et la moyenne
     # <130/ligne aussi — la ligne reste un proxy, précédent 192/196
@@ -91,7 +91,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 174   # +agent_propose (24-11 bundle87)
+    assert seen == len(routing.TABLE) == 178   # +address_parse +date_civil (24-11 bundle89)
 
 
 def test_pack_unknown():
