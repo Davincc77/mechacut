@@ -324,6 +324,9 @@ TR = {
   "bench.foot": "The 7B goes from 0 % to 100 % in a single pipeline call. "
                 "Every run, every token, is in bench/results.jsonl.",
     "nav.build": "Build",
+      "nav.market": "Market",
+      "market.h2": "They say it too",
+      "market.creed": "The big houses converged on the same sentence — only the delivery differs.",
   "build.h2": "What you can build tonight",
   "build.intro": "You have a free small model on your machine. Here are "
                  "three things to make it do — the quoted lines are what "
@@ -359,7 +362,8 @@ TR = {
   "build.connect": "Or skip the story and wire it now: paste this ONE "
                  "line into ANY agent, even the smallest — it becomes "
                  "the full manual:",
-    "everyday.h2": "For the rest of us",
+    "everyday.h2": "For everyone",
+      "everyday.open": "Expand the proofs — real server outputs, no mockups.",
   "everyday.intro": "No code, no jargon. Nineteen things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
@@ -803,6 +807,9 @@ TR = {
                 "Chaque exécution, chaque token, est dans "
                 "bench/results.jsonl.",
     "nav.build": "Construire",
+      "nav.market": "Eux aussi",
+      "market.h2": "Ils le disent aussi",
+      "market.creed": "Les grandes maisons ont convergé sur la même phrase — seule la façon de la livrer diffère.",
   "build.h2": "Ce que tu peux construire ce soir",
   "build.intro": "Tu as un petit mod\u00e8le gratuit sur ta machine. "
                  "Voici trois choses \u00e0 lui faire faire — les phrases "
@@ -839,7 +846,9 @@ TR = {
   "build.connect": "Ou branche-le tout de suite : colle CETTE ligne "
                  "dans n'importe quel agent, m\u00eame le plus petit "
                  "\u2014 elle devient le manuel complet :",
-    "everyday.h2": "Pour le commun des mortels",
+    "everyday.h2": "Pour tout le monde",
+      "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
+      "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
   "everyday.intro": "Pas de code, pas de jargon. Dix-neuf choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
@@ -1284,6 +1293,9 @@ TR = {
                 "pipeline. Cada execução, cada token, está em "
                 "bench/results.jsonl.",
     "nav.build": "Construir",
+      "nav.market": "Mercado",
+      "market.h2": "Eles também dizem",
+      "market.creed": "As grandes casas convergiram na mesma frase — só o modo de entregá-la difere.",
   "build.h2": "O que voc\u00ea pode construir hoje",
   "build.intro": "Voc\u00ea tem um modelo pequeno e gratuito na sua "
                  "m\u00e1quina. Tr\u00eas coisas para fazer com ele — as "
@@ -1317,7 +1329,8 @@ TR = {
                   "em bench/results_v9.jsonl — reproduza voc\u00ea mesmo.",
   "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
-    "everyday.h2": "Para o cidad\u00e3o comum",
+    "everyday.h2": "Para todo mundo",
+      "everyday.open": "Expandir as provas — saídas reais do servidor, não maquetes.",
   "everyday.intro": "Sem código, sem jargão. Dezenove coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
@@ -1587,14 +1600,14 @@ TEMPLATE = """<!DOCTYPE html>
   nav .lang.cur { color: var(--gold); }
   main { padding: 70px 0 60px; }
   h1 { font-family: "Space Grotesk", sans-serif; font-weight: 700;
-    font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -.5px;
-    margin-bottom: 22px; }
+    font-size: clamp(30px, 5vw, 50px); line-height: 1.05; letter-spacing: -.5px;
+    margin-bottom: 16px; }
   h1 .dim { color: var(--muted); }
-  .why { font-size: 16px; font-weight: 400; line-height: 1.62; max-width: 640px; margin: 0 0 30px; color: var(--muted); }
+  .why { font-size: 15px; font-weight: 400; line-height: 1.6; max-width: 680px; margin: 14px 0 0; color: var(--muted); }
   .why strong { color: var(--gold); font-weight: 600; }
-  .lede { font-size: 19px; color: var(--muted); max-width: 680px; margin-bottom: 52px; }
+  .lede { font-size: 16px; color: var(--muted); max-width: 700px; margin-bottom: 36px; }
   .lede strong { color: var(--fg); font-weight: 500; }
-  .creed { font-size: 21px; font-style: italic; color: var(--fg);
+  .creed { font-size: 17px; font-style: italic; color: var(--fg);
     max-width: 680px; margin: 2px 0 26px; }
   .creed .sig { font-style: normal; color: var(--muted);
     font-size: 15px; letter-spacing: .02em; }
@@ -1616,7 +1629,7 @@ TEMPLATE = """<!DOCTYPE html>
     color: var(--muted); margin: -6px 0 14px; line-height: 1.8; }
   .tierlegend .lg { white-space: nowrap; }
   @media (max-width: 640px) { .tierlegend .lg { white-space: normal; } }
-  .catgrid { display: grid; grid-template-columns: repeat(3, 1fr);
+  .catgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 10px; max-height: 30rem; overflow-y: auto; padding-right: 6px;
     scrollbar-width: thin; scrollbar-color: #333 transparent; }
   .tcard { text-align: left; background: var(--card);
@@ -1670,9 +1683,9 @@ TEMPLATE = """<!DOCTYPE html>
     header.top nav.open { display: flex; }
     .tpanel { width: 100vw; max-width: 100vw; border-left: none; }
   }
-  h2 { font-family: "Space Grotesk", sans-serif; font-size: 30px;
+  h2 { font-family: "Space Grotesk", sans-serif; font-size: 25px;
     font-weight: 700; letter-spacing: -.3px; margin-bottom: 18px; }
-  .section { margin-bottom: 80px; }
+  .section { margin-bottom: 56px; }
   .vision p { color: var(--muted); max-width: 720px; margin-bottom: 16px; font-size: 16.5px; }
   .vision p strong { color: var(--fg); font-weight: 500; }
   .playgrid { display: grid; grid-template-columns: repeat(auto-fit,
@@ -1725,6 +1738,13 @@ TEMPLATE = """<!DOCTYPE html>
     font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase;
     color: var(--gold); border: 1px solid #3a3320; background: #14110a;
     padding: 5px 12px; border-radius: 999px; margin-bottom: 18px; }
+  .tcard .tp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .mcard{border-left:2px solid var(--gold);padding:14px 18px;background:var(--card);border-radius:0 10px 10px 0}
+  .mcard q{display:block;color:var(--fg);font-size:14.5px;line-height:1.55;font-style:italic}
+  .mcard cite{display:block;margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);font-style:normal}
+  .mcard cite b{color:var(--gold);font-weight:400}
+  .mcard cite a{color:var(--muted)}
 .bcard{border:1px solid var(--line,#232b3d);border-radius:10px;margin:10px 0;background:var(--card,#121724)}\n.bcard summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--ink,#e8ecf4);list-style-position:outside}\n.bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}\n.bcard .bbody{padding:4px 18px 16px}\n.bgroup{color:var(--gold,#ffcf5c);margin:30px 0 8px;font-size:1.08em;letter-spacing:.02em}\n</style>
 </head>
 <body>
@@ -1738,6 +1758,7 @@ TEMPLATE = """<!DOCTYPE html>
     <nav>
       <a href="#bundles">{{nav.tools}}</a>
       <a href="#bench">{{nav.numbers}}</a>
+      <a href="#market">{{nav.market}}</a>
       <a href="#build">{{nav.build}}</a>
       <a href="#vision">{{nav.vision}}</a>
       <a href="#contract">{{nav.api}}</a>
@@ -1751,11 +1772,17 @@ TEMPLATE = """<!DOCTYPE html>
 
   <main>
     <section>
-      <p class="why">{{hero.why}}</p>
       <div class="pill">{{pill}}</div>
       <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
       <p class="creed">{{hero3}}<span class="sig"> — C.V.</span></p>
       <p class="lede">{{lede}}</p>
+      <p class="why">{{hero.why}}</p>
+    </section>
+
+    <section class="section" id="market">
+      <h2>{{market.h2}}</h2>
+      <p class="quote">{{market.creed}}</p>
+{{market_grid}}
     </section>
 
     <section class="section" id="bundles">
@@ -2431,10 +2458,55 @@ _EVERYDAY_CALLS = [
 # keys that live in the locale dicts but are consumed HERE at build
 # time (baked into everyday_grid), not as {{tokens}} in TEMPLATE —
 # test_i18n checks parity against this list, not against luck.
-BUILDER_CONSUMED = {"everyday.h2", "everyday.intro"} | {
+BUILDER_CONSUMED = {"everyday.h2", "everyday.intro",
+    "everyday.open"} | {
     "everyday.e%d.%s" % (i, f)
     for i in range(1, len(_EVERYDAY_CALLS) + 1)
     for f in ("name", "say")}
+
+
+MARKET = [
+    ("Tools are a new kind of software which reflects a contract between "
+     "deterministic systems and non-deterministic agents.",
+     "Anthropic Engineering", "Writing effective tools for AI agents, "
+     "jun 2026",
+     "https://www.anthropic.com/engineering/writing-tools-for-agents"),
+    ("When we launched Claude's web search tool, we identified that Claude "
+     "was needlessly appending 2025 to the tool's query parameter, biasing "
+     "search results and degrading performance.",
+     "Anthropic Engineering", "same article — mechanics the model kept "
+     "re-inventing",
+     "https://www.anthropic.com/engineering/writing-tools-for-agents"),
+    ("Orchestrating via code makes tasks more deterministic and predictable, "
+     "in terms of speed, cost and performance.",
+     "OpenAI", "Agents SDK docs, Agent Orchestration",
+     "https://openai.github.io/openai-agents-js/guides/multi-agent/"),
+    ("If the model has to rediscover the same shell recipe every time, that "
+     "is usually a sign that the recipe should be a script.",
+     "OpenAI Developers blog", "Using skills to accelerate OSS maintenance, "
+     "mar 2026", "https://developers.openai.com/blog/skills-agents-sdk"),
+    ("When you push deterministic work through an LLM, things break in "
+     "unpredictable ways and you stop trusting the system.",
+     "Peter Steinberger", "creator of OpenClaw — LLMs judge, scripts do "
+     "the deterministic work",
+     "https://www.coldmountain.ai/wiki/people/peter-steinberger"),
+    ("Faithful tool use is not saturated: even the best of 19 headline "
+     "models — Grok-4.3 at 86.33%, Claude, GPT, Qwen behind — still "
+     "fumbles a meaningful fraction of tool-required tasks.",
+     "ToolFailBench", "arXiv 2607.04686, 2026 — the field measuring what "
+     "we sell", "https://arxiv.org/abs/2607.04686"),
+]
+
+
+def market_html(lang, cat):
+    cells = []
+    for q, who, when, url in MARKET:
+        cells.append(
+            '<div class="mcard"><q>%s</q><cite><b>%s</b> — %s<br>'
+            '<a href="%s">%s</a></cite></div>'
+            % (q.replace("<", "&lt;"), who, when, url,
+               url.split("/")[2]))
+    return '<div class="mgrid">%s</div>' % "".join(cells)
 
 
 def everyday_html(lang, cat):
@@ -2472,9 +2544,10 @@ def everyday_html(lang, cat):
             '      <h2>%s</h2>\n'
             '      <p class="tiers" style="color: var(--muted); '
             'max-width: 720px;">%s</p>\n'
-            '      <div class="playgrid">%s</div>\n    </section>'
+            '      <details class="bcard"><summary>%s</summary>\n'
+            '      <div class="playgrid">%s</div></details>\n    </section>'
             % (cat["everyday.h2"], cat["everyday.intro"],
-               "".join(cells)))
+               cat["everyday.open"], "".join(cells)))
 
 
 def catalog_grid(lang):
@@ -2968,6 +3041,7 @@ def main():
         cat = {k: (v.format(**fmt) if "{" in v else v)
                for k, v in cat.items()}
         cat["bundles_grid"] = catalog_grid(lang)
+        cat["market_grid"] = market_html(lang, cat)
         cat["everyday_grid"] = everyday_html(lang, cat)
         cat["bench_rows"] = bench_rows_html()
         cat["bench9_rows"] = bench9_rows_html()
