@@ -181,7 +181,7 @@ Son contrat.
 
 ### Ce que la suite est, aujourd'hui, en chiffres vérifiables au curl
 
-`curl https://mechacut.studio/agent/manifest` répond : **158 transformations
+`curl https://mechacut.studio/agent/manifest` répond : **170 transformations
 déterministes + 9 recettes nommées.** Le palier libre est sans clé — pas de
 compte, pas d'inscription, 30/min. Chaque réponse porte son sha256. Chaque
 refus nomme le champ, la forme attendue et un exemple. Rien n'est stocké ;
