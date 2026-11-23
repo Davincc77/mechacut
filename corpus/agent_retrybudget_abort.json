@@ -1,0 +1,10 @@
+{
+  "name": "agent_retrybudget_abort",
+  "path": "/api/v1/agent/retry-budget",
+  "body": {
+    "error_class": "invalid_argument",
+    "attempt": 4,
+    "payload_hash": "f6e5d4c3b2a1",
+    "same_hash_count": 4
+  }
+}

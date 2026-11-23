@@ -174,6 +174,24 @@ TABLE = (
      "loop doom cyclic storm repeat repetition trace agent calls "
      "retry stuck boucle repetition relance agentique trace "
      "repetitif boucler"),
+    ("agent_retrybudget", "/api/v1/agent/retry-budget", "checks",
+     "is re-attempting this failure rational? closed taxonomy, "
+     "hash ceiling, session budget, deterministic backoff",
+     "retry budget verdict transient fixable terminal repeat "
+     "mutate abort identical hash backoff ceiling quota throttled "
+     "limiter stuck exhausted attempt rational relance decision "
+     "re tenter hachage identique plafonne budget tokens "
+     "rationnel re-tentative reexperimentar veredito transcidente "
+     "identico orcamento"),
+    ("shop_discount_audit", "/api/v1/shop/discount-audit", "checks",
+     "Omnibus thirty-day rule: is the crossed-out price legal? "
+     "reference, true percent, verdict named",
+     "discount audit strikethrough crossed price legal omnibus "
+     "thirty lowest reference reduction misleading compliant fake "
+     "sale advertised CJEU article fake-bargain solde prix barre "
+     "legal licite trompeuse annonce annoncee regle des trente "
+     "jours remise exageree desconto preco riscado ilegal "
+     "promocao verdadeira falsa trinta dias menor regra enganosa"),
     ("ledger_apply_payments", "/api/v1/ledger/apply-payments",
      "numbers",
      "FIFO reconciliation of payments onto invoices",
@@ -245,7 +263,9 @@ TABLE = (
      "chained discounts as exact factors — 30%+20% is 44% not 50%, order "
      "of steps compared, formula returned",
      "discount solde promo pourcentage remise chained black friday "
-     "desconto promoção desconto em cascata"),
+     "same another versus combined equal stacked trick "
+     "desconto promoção desconto em cascata equivalencia "
+     "somado enganoso"),
     ("table_sql_dump", "/api/v1/table/sql_dump", "repair",
      "csv to sql: CREATE TABLE + INSERT from rows, types DEDUCED but "
      "SAID, quoting exact per dialect",
@@ -673,7 +693,7 @@ TABLE = (
      "nunca incluir vazio proibido privacidade vazamento"),
     ("check_target", "/api/v1/check/target", "checks",
      "is the answer for the RIGHT quantity? target lock: named target, named refusal, closed synonym grammar",
-     "target lock cible verrou answer name quantity refuse prix final reste "
+     "target lock cible verrou answer name quantity refuse "
      "alvo cadeado resposta nome quantidade mauvaise question a cote "
      "the wrong question right number wrong naming answered beside"),
     ("check_agreement", "/api/v1/check/agreement", "checks",

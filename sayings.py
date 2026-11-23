@@ -489,4 +489,18 @@ SAY = {
         "en": "what's the VAT on $200 at 8.25%?",
         "fr": "quelle TVA sur 200 € HT à 20 % ?",
         "pt": "qual o imposto sobre R$ 200 a 17%?"},
+    "/api/v1/shop/discount-audit": {
+        "en": "an EU shop strikes 100 down to 70 — real 30% off "
+              "under the Omnibus rule, or fiction?",
+        "fr": "l'étiquette annonce -30 % sur un 89,90 € — le prix "
+              "barré tient-il la règle des 30 jours ?",
+        "pt": "a loja na UE grita 30% OFF sobre o preço riscado — "
+              "a regra dos 30 dias segura a auditoria?"},
+    "/api/v1/agent/retry-budget": {
+        "en": "same 429 three times running — retry it, change it, "
+              "or stop?",
+        "fr": "le même timeout au troisième essai — re-tenter en "
+              "core, muter ou abandonner ?",
+        "pt": "o mesmo erro tres vezes seguidas — repetir, mudar "
+              "ou parar?"},
 }

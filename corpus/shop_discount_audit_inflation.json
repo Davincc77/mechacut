@@ -1,0 +1,16 @@
+{
+  "name": "shop_discount_audit_inflation",
+  "path": "/api/v1/shop/discount-audit",
+  "body": {
+    "history": [
+      {"date": "2026-10-01", "price": "100.00"},
+      {"date": "2026-11-07", "price": "80.00"},
+      {"date": "2026-11-09", "price": "100.00"}
+    ],
+    "as_of": "2026-11-27",
+    "sale_price": "70.00",
+    "previous_price": "100.00",
+    "claimed_percent": "30",
+    "jurisdiction": "eu"
+  }
+}

@@ -69,8 +69,20 @@ CASES = [
     ("split 3829: first gets 2/5, second 1/6 of the rest",
      "partage"),
     ("-25 % puis -20 % sur 81,90 — prix final", "soldes"),
+    # RE-DÉCLARÉE 23-11 cycle 14h56 : la want « soldes » n'a jamais
+    # désigné un outil du catalogue — l'artefact comparatif vit chez
+    # money_discount ; la want dit maintenant le nom vrai.
     ("is 30% off plus another 20% the same as 50% off on 89.90",
-     "soldes"),
+     "discount"),
+    # les deux outils du cycle — garde de leur propre douleur
+    ("is retrying this timeout a fourth time rational or am i stuck",
+     "retrybudget"),
+    ("this strikethrough says minus 30 percent — is it legal under "
+     "the omnibus rule", "discount_audit"),
+    ("le prix barré annonce -30 pour cent — est-ce licite face à "
+     "la règle des trente jours ?", "discount_audit"),
+    ("a loja anuncia 30% sobre o preço riscado — é ilegal pela "
+     "regra dos 30 dias?", "discount_audit"),
     # quotidien — le noyau qui compte
     ("mon vol est arrive avec 3 h 20 de retard le 1er nov. 2027, "
      "que me doit la table EU", "flight"),
@@ -142,9 +154,16 @@ def probe_router(manifest):
                               else "OVERMATCH")
         else:
             hit = any(want.lower() in n.lower() for n in names[:3])
-            rec["verdict"] = ("ok" if hit else
-                              ("NO_MATCH" if not tools
-                               else "WRONG"))
+            # TOP1_WRONG (douleur pêchée 14h54) : le bon outil est
+            # DANS la liste mais le mauvais est EN TÊTE — l'inversion
+            # que la règle top-5 masquait (« -25 % puis -20 % »
+            # volé top-1 par check_target via « prix final »).
+            rec["verdict"] = ("TOP1_WRONG" if (
+                hit and names and want.lower()
+                not in names[0].lower()) else
+                "ok" if hit else
+                ("NO_MATCH" if not tools
+                 else "WRONG"))
         rows.append(rec)
         time.sleep(APP_MIN_GAP)
     if has_plan:

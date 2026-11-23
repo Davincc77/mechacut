@@ -528,6 +528,22 @@ TR = {
                       "WITH the candidate fact, and never lets "
                       "\u0027whichever is later\u0027 quietly become a "
                       "guess: delivery date is an argument.",
+  "everyday.e22.name": "Is that crossed-out price LEGAL \u2014 the "
+                     "Omnibus 30-day rule, audited from your own "
+                     "history",
+  "everyday.e22.say": "EU law names the reference: the LOWEST price "
+                      "the shop applied in the previous 30 days "
+                      "(Directive 2019/2161 art. 6a) \u2014 and a "
+                      "weekend sale lowers that floor even after the "
+                      "price went back up (CJEU C-330/23). 100 "
+                      "\u2192 80 \u2192 100 \u2192 70 is a 12.5% cut, "
+                      "not 30%. The Commission's March 2026 sweep: "
+                      "30% of 314 traders got the reference wrong; "
+                      "Spain fined seven shops up to 350,000 EUR. "
+                      "Paste the shop's own price history and the "
+                      "cut's date \u2014 the machine returns the "
+                      "legal reference, the true percentage and a "
+                      "named verdict. It never fetches a price.",
   "nav.kit": "Kit",
   "kit.h2": "The suite on your disk",
   "kit.creed": "The protocol is not the transport \u2014 it is the birth certificate of the tool.",
@@ -1039,6 +1055,25 @@ TR = {
                       "aux enseignes mono-sources \u2014 avec le fait "
                       "candidat. \u00ab Au plus tard des deux \u00bb exige "
                       "la date de livraison : jamais de devinette.",
+  "everyday.e22.name": "Le prix barr\u00e9 est-il L\u00c9GAL \u2014 "
+                     "r\u00e8gle Omnibus des 30 jours, audit\u00e9 sur "
+                     "votre historique",
+  "everyday.e22.say": "La loi nomme la r\u00e9f\u00e9rence : le prix "
+                      "le PLUS BAS appliqu\u00e9 par le magasin sur "
+                      "les 30 jours pr\u00e9c\u00e9dents (directive "
+                      "2019/2161 art. 6a) \u2014 et une promo du "
+                      "week-end ABAISSE cette r\u00e9f\u00e9rence "
+                      "m\u00eame si le prix est remont\u00e9 depuis "
+                      "(CJEU C-330/23). 100 \u2192 80 \u2192 100 "
+                      "\u2192 70 = remise de 12,5 %, pas 30 %. "
+                      "Sweep de la Commission, mars 2026 : 30 % des "
+                      "314 commerces contr\u00f4l\u00e9s se trompent "
+                      "de r\u00e9f\u00e9rence ; l'Espagne a "
+                      "amend\u00e9 sept sites jusqu'\u00e0 350 000 "
+                      "\u20ac. Collez l'historique du magasin et la "
+                      "date : la machine rend la r\u00e9f\u00e9rence "
+                      "l\u00e9gale, le vrai pourcentage, verdict "
+                      "nomm\u00e9. Elle ne fetch aucun prix.",
   "nav.kit": "Kit",
   "kit.h2": "La suite sur votre disque",
   "kit.creed": "Le protocole n'est pas le transport \u2014 c'est l'acte de naissance de l'outil.",
@@ -1542,6 +1577,22 @@ TR = {
                       "\u00e9 recusada pelo nome, com o fato candidato. "
                       "\u00ab O mais tarde dos dois \u00bb exige a data de "
                       "entrega: nunca adivinha.",
+  "everyday.e22.name": "O pre\u00e7o riscado \u00e9 LEGAL \u2014 a "
+                     "regra Omnibus dos 30 dias, auditada do SEU "
+                     "hist\u00f3rico",
+  "everyday.e22.say": "A lei europeia nomeia a refer\u00eancia: o "
+                      "pre\u00e7o MAIS BAIXO aplicado pela loja nos "
+                      "30 dias anteriores (Diretiva 2019/2161 art. "
+                      "6a) \u2014 e uma promo\u00e7\u00e3o de fim de "
+                      "semana ABAIXA essa refer\u00eancia mesmo se o "
+                      "pre\u00e7o voltou a subir (TJUE C-330/23). 100 "
+                      "\u2192 80 \u2192 100 \u2192 70 \u00e9 12,5%, "
+                      "n\u00e3o 30%. Na varredura da Comiss\u00e3o de "
+                      "mar\u00e7o de 2026, 30% de 314 lojas erraram "
+                      "a refer\u00eancia; a Espanha multou sete sites "
+                      "em at\u00e9 350.000 EUR. A ferramenta audita "
+                      "lojas da UE a partir do hist\u00f3rico que "
+                      "VOC\u00ca fornece \u2014 jamais busca pre\u00e7os.",
   "nav.kit": "Kit",
   "kit.h2": "A suíte no seu disco",
   "kit.creed": "O protocolo não é o transporte \u2014 é a certidão de nascimento da ferramenta.",
@@ -2308,6 +2359,13 @@ CAT_TOP10 = {"en": "\u2605 Top 10", "fr": "\u2605 Le top 10",
 PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
                 # validés nom par nom + chiffres par chiffres au merge
     "fr": {
+        "agent_retrybudget":
+            "re-tenter cet échec est-il rationnel ? taxonomie "
+            "fermée, plafond de hachage, budget de session, backoff "
+            "déterministe",
+        "shop_discount_audit":
+            "règle Omnibus des trente jours : le prix barré est-il "
+            "légal ? référence, vrai pourcentage, verdict nommé",
         "chart_from_data":
             "records/CSV → spécification Vega-Lite + PNG",
         "reshape_json":
@@ -2642,8 +2700,13 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "fenêtre des restes, USDA FSIS : seuil 2h, 3-4 jours frigo, 2-6 mois congélateur (UNION des deux pages FSIS contradictoires) — tous les temps en ARGUMENTS, jamais l'horloge murale, jamais de tables inventées",
         "food_ovenschedule":
             "un four, des plats, une heure de service : compte à rebours à l'envers, conflits de température nommés, jamais d'horloge murale — les timelines web ne vérifient rien de tout ça",
-    },
-    "pt": {
+    },    "pt": {
+        "agent_retrybudget":
+            "repetir esta falha é racional? taxonomia fechada, teto "
+            "de hash, orçamento de sessão, backoff determinístico",
+        "shop_discount_audit":
+            "regra Omnibus de trinta dias: o preço riscado é legal? "
+            "referência, porcentagem real, veredito nomeado",
         "chart_from_data":
             "registros/CSV → especificação Vega-Lite + PNG",
         "reshape_json":
@@ -3030,13 +3093,18 @@ W = {
                   "prints %s \u2014 named, never averaged",
       "returndead": "\u2192 return by %s (%s) \u00b7 Target's holiday "
                     "window closed %s \u2014 the 'Jan 31' headline "
-                    "never says"},
+                    "never says",
+      "auditcut": "\u2192 %s \u00b7 legal reference %s \u00b7 real "
+                  "cut %s%%, not the announced 30%%"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "returndead": "\u2192 retour jusqu'au %s (%s) \u00b7 chez "
                          "Target la fen\u00eatre des f\u00eates fermait "
                          "le %s \u2014 le titre \u00ab jusqu'au 31 "
                          "janvier \u00bb ne le dit jamais",
+           "auditcut": "\u2192 %s \u00b7 r\u00e9f\u00e9rence l\u00e9gale %s "
+                       "\u00b7 vraie remise %s%%, pas les 30%% "
+                       "annonc\u00e9s",
            "word": "\u2192 \u00ab %s \u00bb",
            "iban": "\u2192 cl\u00e9 de contr\u00f4le valide \u00b7 %s",
            "page": "\u2192 page autonome (%s octets) \u00b7 Ctrl-P = PDF",
@@ -3080,6 +3148,8 @@ W = {
                          "Target a janela de festas fechou em %s "
                          "\u2014 a manchete \u00ab at\u00e9 31 de "
                          "janeiro \u00bb nunca diz isso",
+           "auditcut": "\u2192 %s \u00b7 refer\u00eancia legal %s \u00b7 "
+                       "corte real %s%%, n\u00e3o os 30%% anunciados",
            "word": "\u2192 \u201c%s\u201d",
            "iban": "\u2192 d\u00edgito verificador v\u00e1lido \u00b7 %s",
            "page": "\u2192 p\u00e1gina aut\u00f4noma (%s bytes) \u00b7 "
@@ -3273,6 +3343,14 @@ _EVERYDAY_CALLS = [
      "returndead", lambda d, L_: (
          d["return_by"], d["return_by_weekday"],
          d["purchase_window"][1])),
+    ("/api/v1/shop/discount-audit",
+     {"history": [{"date": "2026-10-01", "price": "100.00"},
+                  {"date": "2026-11-07", "price": "80.00"},
+                  {"date": "2026-11-09", "price": "100.00"}],
+      "as_of": "2026-11-27", "sale_price": "70.00",
+      "previous_price": "100.00", "claimed_percent": "30"},
+     "auditcut", lambda d, L_: (
+         d["verdict"], d["reference_price"], d["true_percent"])),
 ]
 
 

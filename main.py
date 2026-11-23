@@ -65,6 +65,8 @@ POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, 
 POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences pointées (free)
 POST /api/v1/check/allowlist     rules + requests -> policy verdicts (free)
 POST /api/v1/loop/doom-check     tool-call trace -> doom determinism, named thresholds (free)
+POST /api/v1/agent/retry-budget  error class + hash count + budget -> REPEAT/MUTATE/ABORT (free)
+POST /api/v1/shop/discount-audit price history + announced cut -> Omnibus 30-day legality verdict (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
 POST /api/v1/shop/return-deadline    retailer + purchase date -> published holiday RETURN deadline, provenance and conflicts named (free)
@@ -259,6 +261,8 @@ import identity
 import edits
 import allowkit
 import loopkit
+import retrykit
+import omnibuskit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -343,7 +347,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.5.0",
+    version="1.6.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1692,6 +1696,98 @@ def run_loop_doom_check(args: dict):
 @app.post("/api/v1/loop/doom-check")
 def api_loop_doom_check(req: LoopDoomCheckRequest):
     body, err = run_loop_doom_check(req.model_dump())
+    return err if err else body
+
+
+class AgentRetryBudgetRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    error_class: str
+    attempt: int
+    payload_hash: Optional[str] = None
+    same_hash_count: Optional[int] = None
+    retry_max: int = 3
+    budget_tokens: Optional[int] = None
+    est_cost_tokens: Optional[int] = None
+    retry_after_seconds: Optional[int] = None
+    idempotent: Optional[bool] = None
+
+
+def run_agent_retrybudget(args: dict):
+    try:
+        req = AgentRetryBudgetRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = retrykit.agent_retrybudget(
+            req.error_class, req.attempt, req.payload_hash,
+            req.same_hash_count, req.retry_max, req.budget_tokens,
+            req.est_cost_tokens, req.retry_after_seconds,
+            req.idempotent)
+    except retrykit.RetryBudgetError as e:
+        msg = str(e)
+        field = msg.split(" ", 1)[0]
+        if field not in ("error_class", "attempt", "same_hash_count",
+                         "retry_max", "budget_tokens",
+                         "est_cost_tokens", "retry_after_seconds",
+                         "payload_hash"):
+            field = "error_class"
+        return None, bad_request(
+            [{"field": field, "message": msg,
+              "expected": "error_class from the closed taxonomy "
+                          "(transient/fixable/terminal, 13 members); "
+                          "attempt 1..50; same_hash_count 1..50 and "
+                          "<= attempt; retry_max 2..10; budgets "
+                          "0..10000000; retry_after_seconds 0..3600"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/retry-budget")
+def api_agent_retrybudget(req: AgentRetryBudgetRequest):
+    body, err = run_agent_retrybudget(req.model_dump())
+    return err if err else body
+
+
+class DiscountAuditEntry(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    date: str
+    price: str
+
+
+class ShopDiscountAuditRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    history: List[DiscountAuditEntry]
+    as_of: str
+    sale_price: str
+    previous_price: Optional[str] = None
+    claimed_percent: Optional[str] = None
+    jurisdiction: str = "eu"
+    campaign_start: Optional[str] = None
+    on_market_since: Optional[str] = None
+
+
+def run_shop_discount_audit(args: dict):
+    try:
+        req = ShopDiscountAuditRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = omnibuskit.shop_discount_audit(
+            [{"date": h.date, "price": h.price} for h in req.history],
+            req.as_of, req.sale_price, req.previous_price,
+            req.claimed_percent, req.jurisdiction,
+            req.campaign_start, req.on_market_since)
+    except omnibuskit.DiscountAuditError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/discount-audit")
+def api_shop_discount_audit(req: ShopDiscountAuditRequest):
+    body, err = run_shop_discount_audit(req.model_dump())
     return err if err else body
 
 
@@ -5834,6 +5930,8 @@ TOOL_RUN = {
            "eval_compare": run_eval_compare,
            "check_allowlist": run_check_allowlist,
            "loop_doom_check": run_loop_doom_check,
+           "agent_retrybudget": run_agent_retrybudget,
+           "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
            "shop_return_deadline": run_shop_return_deadline,
@@ -9492,6 +9590,68 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "agent_retrybudget",
+        "description": (
+            "Is re-attempting THIS failure rational? Closed retry "
+            "taxonomy (transient -> REPEAT, fixable -> MUTATE, "
+            "terminal -> ABORT), identical-hash ceiling (the 1840-"
+            "identical-retries story), session token budget, "
+            "provider Retry-After honored, deterministic 1-2-4 "
+            "backoff capped at 64s — never a LM guessing. Verdict + "
+            "named reason + guidance; retryable travels as a "
+            "machine field. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["error_class", "attempt"],
+            "properties": {
+                "error_class": {"type": "string"},
+                "attempt": {"type": "integer"},
+                "payload_hash": {"type": "string"},
+                "same_hash_count": {"type": "integer"},
+                "retry_max": {"type": "integer", "default": 3},
+                "budget_tokens": {"type": "integer"},
+                "est_cost_tokens": {"type": "integer"},
+                "retry_after_seconds": {"type": "integer"},
+                "idempotent": {"type": "boolean"},
+            },
+        },
+    },
+    {
+        "name": "shop_discount_audit",
+        "description": (
+            "Is that crossed-out price legal? Omnibus Directive "
+            "(EU) 2019/2161 art. 6a arithmetic: reference = lowest "
+            "applied price of the previous 30 days (CJEU "
+            "C-330/23: earlier sales LOWER the reference), "
+            "true_percent vs claimed, verdict COMPLIANT/"
+            "MISLEADING_INFLATION/WRONG_REFERENCE/NO_REDUCTION; "
+            "progressive-step clause de/fr, history and as_of are "
+            "ARGUMENTS — never a fetched price. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["history", "as_of", "sale_price"],
+            "properties": {
+                "history": {"type": "array", "items": {
+                    "type": "object",
+                    "required": ["date", "price"],
+                    "properties": {
+                        "date": {"type": "string"},
+                        "price": {"type": "string"},
+                    }}},
+                "as_of": {"type": "string"},
+                "sale_price": {"type": "string"},
+                "previous_price": {"type": "string"},
+                "claimed_percent": {"type": "string"},
+                "jurisdiction": {"type": "string",
+                                  "default": "eu"},
+                "campaign_start": {"type": "string"},
+                "on_market_since": {"type": "string"},
+            },
+        },
+    },
 ]
 
 
@@ -9719,6 +9879,8 @@ def index(request: Request):
             "/api/v1/eval/compare": "POST expected + got -> verdict OK/WRONG + named divergences (free)",
             "/api/v1/check/allowlist": "POST rules + requests -> ALLOW/DENY/AMBIGUOUS by closed grammar (free)",
             "/api/v1/loop/doom-check": "POST tool calls -> DOOM/CYCLIC/STORM/HEALTHY (free)",
+            "/api/v1/agent/retry-budget": "POST error class + attempt + hashes -> REPEAT/MUTATE/ABORT, deterministic backoff (free)",
+            "/api/v1/shop/discount-audit": "POST price history + announced cut -> Omnibus 30-day legality verdict (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
             "/api/v1/number/spell": "POST amount -> words FR/EN/PT for legal mentions (free < 32 KB)",
             "/api/v1/hash/digest": "POST data + algo -> hex digest (a model cannot hash)",

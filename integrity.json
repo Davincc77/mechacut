@@ -102,6 +102,31 @@
   },
   {
    "body": {
+    "attempt": 4,
+    "error_class": "invalid_argument",
+    "payload_hash": "f6e5d4c3b2a1",
+    "same_hash_count": 4
+   },
+   "name": "agent_retrybudget_abort",
+   "path": "/api/v1/agent/retry-budget",
+   "sha256": "2145b7e754ef55352c2e68b5da4e4a1a7e9003787d2f7680269614f7558754ab",
+   "status": 200
+  },
+  {
+   "body": {
+    "attempt": 2,
+    "error_class": "rate_limited",
+    "payload_hash": "a1b2c3d4e5f6",
+    "retry_after_seconds": 30,
+    "same_hash_count": 2
+   },
+   "name": "agent_retrybudget_repeat",
+   "path": "/api/v1/agent/retry-budget",
+   "sha256": "f1daf7e0ef23f5c41517d9af7db7f276a819cb581b2bc90f7be2517deecaf178",
+   "status": 200
+  },
+  {
+   "body": {
     "diff": "--- before\n+++ after\n@@ -1,3 +1,3 @@\n l1\n-l2\n+X\n l3\n",
     "text": "l1\nl2\nl3\nl4\n"
    },
@@ -3416,6 +3441,57 @@
    "name": "ship_dimweight_rollo_vs_amzprep_diverge",
    "path": "/api/v1/ship/dimweight",
    "sha256": "d1394a62722df1e07a435102942acd0603b73c0efb63f28436b77a6a5a6ac97f",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-27",
+    "claimed_percent": "30",
+    "history": [
+     {
+      "date": "2026-10-01",
+      "price": "100.00"
+     },
+     {
+      "date": "2026-11-07",
+      "price": "80.00"
+     },
+     {
+      "date": "2026-11-09",
+      "price": "100.00"
+     }
+    ],
+    "jurisdiction": "eu",
+    "previous_price": "100.00",
+    "sale_price": "70.00"
+   },
+   "name": "shop_discount_audit_inflation",
+   "path": "/api/v1/shop/discount-audit",
+   "sha256": "2232c4c88e768daf88392704225aa2772fb6242a22c4abe9ed36de7635fdcf97",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-27",
+    "campaign_start": "2026-11-20",
+    "claimed_percent": "30",
+    "history": [
+     {
+      "date": "2026-09-15",
+      "price": "100.00"
+     },
+     {
+      "date": "2026-11-20",
+      "price": "80.00"
+     }
+    ],
+    "jurisdiction": "de",
+    "previous_price": "100.00",
+    "sale_price": "70.00"
+   },
+   "name": "shop_discount_audit_progressive_de",
+   "path": "/api/v1/shop/discount-audit",
+   "sha256": "b90c7faa58bc95e84e7a1643b5ca7c14a4d90fd1bfcc58d30bff9cf880f90a17",
    "status": 200
   },
   {
