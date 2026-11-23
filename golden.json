@@ -124,6 +124,7 @@
   "json_coerce_string_cast_optin": "200:8facdc950f811df8f5428aada6039f4f2e6f59527938257cb6e669027d369da5",
   "json_map_round": "200:bf0905840845f844b8d0083d70c0f71d6883f064fdd0aa0adcc5dba8843a9777",
   "json_query_emails": "200:35f8cdeb40c6abf68b417252e03f50621c13fdb2c037faab4355ac78d8455bed",
+  "ledger_apply_payments_basic": "200:9da546dc0206fc5a946c88534ff71ac64dc4fde980f4e066360b0b2a432a2947",
   "logic_rules_sepa": "200:dee41eba91b36fb382bd2e96e378538c7f39bc8bcda13048ff91e0d4b4c11708",
   "math_calc_product": "200:38ea56decda4b0819cebd8160f8f9ee3b1be610962fd97e51fc125b8d4c17eb2",
   "math_calc_rounded_chain": "200:f6ecacf4034cac10aa616b115b557fd2be472f59a426af926afbe39fd8ff5c3d",

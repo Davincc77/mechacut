@@ -298,3 +298,124 @@ def money_aging(invoices, as_of, buckets=None):
            "max_days_overdue": max_od,
            "count": len(rows)}
     return res
+
+
+def _money2(text, field):
+    """Ledger discipline for reconciliation: plain decimals AT MOST 2
+    places. A sub-cent invoice amount is a currency problem or a
+    missing num/round upstream — it must be named, never silently
+    quantized here, because every allocation below must stay exact."""
+    d = _dec_plain(text, field)
+    exp = d.as_tuple().exponent
+    if isinstance(exp, int) and exp < -2:
+        raise MoneyError("%s has sub-cent precision (%r) — the "
+                         "reconciliation is cent-level: round upstream "
+                         "(num/round) or fix the currency, not this tool"
+                         % (field, text))
+    return d
+
+
+def _fmt2(x):
+    # exact: all inputs are <= 2 places and this tool only adds and
+    # subtracts, so a quantize here never rounds.
+    return format(x.quantize(Decimal("0.01")), "f")
+
+
+def money_apply_payments(invoices, payments):
+    """FIFO reconciliation of payments onto invoices (ROADMAP-FINANCE
+    1.2, the refusal message of aging already promised this tool).
+    Money is applied IN THE GIVEN PAYMENT ORDER — the engine never
+    reorders the agent's cash. Invoices are charged by due date,
+    oldest first; equal dues keep input order (a tie is a rule, not
+    a coin). Amounts: plain decimal strings, exact Decimal, no
+    rounding anywhere (allocation is subtraction). A payment larger
+    than all open dues leaves a named LEFTOVER, it is never smeared
+    onto the newest invoice. Refusals, not guesses: zero-amount
+    invoice, zero payment, duplicate ids, negative, slashed dates.
+    Output keeps invoices in INPUT order: the ledger you sent is the
+    ledger you get back."""
+    if not isinstance(invoices, list) or not isinstance(payments, list):
+        raise MoneyError("invoices and payments must both be lists")
+    seen = set()
+    rows = []
+    for i, inv in enumerate(invoices):
+        due = _iso_day(inv["due"], "invoices[%d].due" % i)
+        amt = _money2(inv["amount"], "invoices[%d].amount" % i)
+        paid = (_money2(inv["paid"], "invoices[%d].paid" % i)
+                if inv.get("paid") is not None else Decimal(0))
+        inv_id = inv.get("id") or str(i + 1)
+        if inv_id in seen:
+            raise MoneyError("duplicate invoice id %r — ids are the "
+                             "join key of the reconciliation" % inv_id)
+        seen.add(inv_id)
+        if amt == 0:
+            raise MoneyError("invoices[%d].amount is zero — a zero "
+                             "invoice is a typo or a stub, neither "
+                             "belongs in a reconciliation" % i)
+        if amt < 0 or paid < 0:
+            raise MoneyError("invoices[%d] carries a negative amount — "
+                             "credits are a different ledger operation"
+                             % i)
+        if paid > amt:
+            raise MoneyError(
+                "invoices[%d] is overpaid by %s on its face — aging "
+                "refuses this too; here the fix is upstream data, "
+                "not an invented bucket" % (i, (paid - amt)))
+        rows.append({"id": inv_id, "due": due, "amount": amt,
+                     "paid": paid, "applied": Decimal(0),
+                     "allocations": []})
+    seen_p = set()
+    prows = []
+    order = sorted(range(len(rows)), key=lambda k: (rows[k]["due"], k))
+    queue = [rows[k] for k in order]
+    qi = 0
+    for j, p in enumerate(payments):
+        pdate = _iso_day(p["date"], "payments[%d].date" % j)
+        pamt = _money2(p["amount"], "payments[%d].amount" % j)
+        pid = p.get("id") or "p%d" % (j + 1)
+        if pid in seen_p:
+            raise MoneyError("duplicate payment id %r" % pid)
+        seen_p.add(pid)
+        if pamt == 0:
+            raise MoneyError("payments[%d].amount is zero — a zero "
+                             "payment is a typo or a test, cash never "
+                             "reconciles to nothing" % j)
+        if pamt < 0:
+            raise MoneyError("payments[%d] is negative — refunds are "
+                             "a credit note, not a payment" % j)
+        left = pamt
+        allocs = []
+        while left > 0 and qi < len(queue):
+            row = queue[qi]
+            open_amount = row["amount"] - row["paid"] - row["applied"]
+            take = left if left < open_amount else open_amount
+            row["applied"] += take
+            left -= take
+            allocs.append({"invoice": row["id"],
+                           "amount": _fmt2(take)})
+            if row["paid"] + row["applied"] == row["amount"]:
+                qi += 1
+        prows.append({"id": pid, "date": pdate.isoformat(),
+                      "amount": _fmt2(pamt), "leftover": _fmt2(left),
+                      "allocations": allocs})
+    pay_total = sum((Decimal(r["amount"]) for r in prows), Decimal(0))
+    applied_total = sum((p["applied"] for p in rows), Decimal(0))
+    out_rows, open_total = [], Decimal(0)
+    for row in rows:
+        outstanding = row["amount"] - row["paid"] - row["applied"]
+        open_total += outstanding
+        status = ("paid" if outstanding == 0 else
+                  "partial" if row["paid"] + row["applied"] > 0
+                  else "unpaid")
+        out_rows.append({"id": row["id"], "due": row["due"].isoformat(),
+                         "amount": _fmt2(row["amount"]),
+                         "paid_before": _fmt2(row["paid"]),
+                         "applied": _fmt2(row["applied"]),
+                         "outstanding": _fmt2(outstanding),
+                         "status": status})
+    return {"invoices": out_rows, "payments": prows,
+            "payment_total": _fmt2(pay_total),
+            "applied_total": _fmt2(applied_total),
+            "unapplied_total": _fmt2(pay_total - applied_total),
+            "open_total": _fmt2(open_total),
+            "count": len(out_rows)}

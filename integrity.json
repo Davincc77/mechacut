@@ -1859,6 +1859,43 @@
   },
   {
    "body": {
+    "invoices": [
+     {
+      "amount": "100.00",
+      "due": "2026-10-01",
+      "id": "F1"
+     },
+     {
+      "amount": "200.00",
+      "due": "2026-11-01",
+      "id": "F2"
+     },
+     {
+      "amount": "300.00",
+      "due": "2026-12-01",
+      "id": "F3"
+     }
+    ],
+    "payments": [
+     {
+      "amount": "250.00",
+      "date": "2026-11-15",
+      "id": "P1"
+     },
+     {
+      "amount": "400.00",
+      "date": "2026-11-20",
+      "id": "P2"
+     }
+    ]
+   },
+   "name": "ledger_apply_payments_basic",
+   "path": "/api/v1/ledger/apply-payments",
+   "sha256": "9da546dc0206fc5a946c88534ff71ac64dc4fde980f4e066360b0b2a432a2947",
+   "status": 200
+  },
+  {
+   "body": {
     "facts": {
      "amount": 1200,
      "country": "FR",

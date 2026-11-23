@@ -1,0 +1,15 @@
+{
+  "name": "ledger_apply_payments_basic",
+  "path": "/api/v1/ledger/apply-payments",
+  "body": {
+    "invoices": [
+      {"id": "F1", "due": "2026-10-01", "amount": "100.00"},
+      {"id": "F2", "due": "2026-11-01", "amount": "200.00"},
+      {"id": "F3", "due": "2026-12-01", "amount": "300.00"}
+    ],
+    "payments": [
+      {"id": "P1", "date": "2026-11-15", "amount": "250.00"},
+      {"id": "P2", "date": "2026-11-20", "amount": "400.00"}
+    ]
+  }
+}

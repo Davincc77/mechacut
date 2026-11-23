@@ -61,6 +61,7 @@ Bundle 4.2 — units & money (TOOLS-50 #27-29):
 POST /api/v1/units/convert    closed families, exact rational factors
 POST /api/v1/money/prorate    amount x covered/cycle days, rounded last (paid)
 POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/61-90/90+ (free)
+POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, cent-exact (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
 Bundle 4.3 — spell-out (TOOLS-50 #30):
@@ -330,7 +331,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.98.0",
+    version="0.99.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1495,6 +1496,57 @@ def run_money_aging(args: dict):
 @app.post("/api/v1/money/aging")
 def api_money_aging(req: MoneyAgingRequest):
     body, err = run_money_aging(req.model_dump())
+    return err if err else body
+
+
+class LedgerPayment(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    date: str
+    amount: str
+    id: Optional[str] = None
+
+
+class LedgerApplyPaymentsRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    invoices: List[MoneyAgingInvoice]
+    payments: List[LedgerPayment]
+
+
+def run_ledger_apply_payments(args: dict):
+    try:
+        req = LedgerApplyPaymentsRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    if not req.invoices:
+        return None, bad_request(
+            [{"field": "invoices",
+              "message": "no invoices — there is nothing to apply "
+                         "money onto",
+              "expected": "at least one invoice"}])
+    if not req.payments:
+        return None, bad_request(
+            [{"field": "payments",
+              "message": "no payments — reconciliation of an empty "
+                         "cash list is a table of zeros, refused like "
+                         "in aging",
+              "expected": "at least one payment"}])
+    try:
+        out = money.money_apply_payments(
+            [i.model_dump() for i in req.invoices],
+            [p.model_dump() for p in req.payments])
+    except money.MoneyError as e:
+        return None, bad_request(
+            [{"field": "payments", "message": str(e),
+              "expected": "date ISO YYYY-MM-DD; amount plain decimal "
+                          "string, cent-level at most (grouped forms "
+                          "go through num/parse first)"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/ledger/apply-payments")
+def api_ledger_apply_payments(req: LedgerApplyPaymentsRequest):
+    body, err = run_ledger_apply_payments(req.model_dump())
     return err if err else body
 
 
@@ -5463,6 +5515,7 @@ TOOL_RUN = {
            "ship_dimweight": run_ship_dimweight,
            "json_coerce": run_json_coerce,
            "money_bogo": run_money_bogo,
+           "ledger_apply_payments": run_ledger_apply_payments,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
            "food_poultry": run_food_poultry,
@@ -8757,6 +8810,49 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "ledger_apply_payments",
+        "description": (
+            "FIFO reconciliation: payments onto invoices, oldest due "
+            "first, ties keep input order; payments apply in the order "
+            "given — the engine never reorders your cash. Cent-level "
+            "exact Decimal, sub-cent inputs refused with a pointer, "
+            "over-application leaves a named leftover instead of "
+            "smearing onto the newest invoice. Refunds are credit "
+            "notes, not negative payments. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["invoices", "payments"],
+            "properties": {
+                "invoices": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["due", "amount"],
+                        "properties": {
+                            "due": {"type": "string"},
+                            "amount": {"type": "string"},
+                            "paid": {"type": "string"},
+                            "id": {"type": "string"},
+                        },
+                    },
+                },
+                "payments": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["date", "amount"],
+                        "properties": {
+                            "date": {"type": "string"},
+                            "amount": {"type": "string"},
+                            "id": {"type": "string"},
+                        },
+                    },
+                },
+            },
+        },
+    },
 ]
 
 
@@ -8980,6 +9076,7 @@ def index(request: Request):
             "/api/v1/units/convert": "POST value + from/to -> closed-family conversion",
             "/api/v1/money/prorate": "POST amount + cycle + window -> prorated (paid)",
             "/api/v1/money/aging": "POST invoices + as_of -> due-date buckets (free)",
+            "/api/v1/ledger/apply-payments": "POST invoices + payments -> FIFO reconciliation (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
             "/api/v1/number/spell": "POST amount -> words FR/EN/PT for legal mentions (free < 32 KB)",
             "/api/v1/hash/digest": "POST data + algo -> hex digest (a model cannot hash)",

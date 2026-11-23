@@ -159,6 +159,12 @@ TABLE = (
      "deux pour sept "
      "preco por quilo preco por litro mais barato comparacao mercado "
      "reducao embalagem etiqueta conta errada mesmo preco dois por"),
+    ("ledger_apply_payments", "/api/v1/ledger/apply-payments",
+     "numbers",
+     "FIFO reconciliation of payments onto invoices",
+     "reconcile reconciliation payment apply fifo invoice outstanding "
+     "rapprochement paiement facture lettrage relance impayé "
+     "comptable ledger cash clearing unapplied leftover"),
     ("money_split", "/api/v1/money/split", "numbers",
      "cent-exact split, closed remainder rule",
      "money split bill participants cents remainder share friends evenly "

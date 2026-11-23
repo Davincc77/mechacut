@@ -535,7 +535,7 @@ TR = {
                  "tokens for the whole suite), GET /route?q=…, "
                  "POST /api/v1/pipeline.",
   "agents.hint": "install one pack",
-  "footer.family": "Mechacut is part of the Cirilli family — .klickd, "
+  "footer.family": "Mechacut is part of the C.V. family — .klickd, "
                    "moovicut, Ponte.",
  },
  "fr": {
@@ -1000,7 +1000,7 @@ TR = {
                  "tokens pour toute la suite), GET /route?q=…, "
                  "POST /api/v1/pipeline.",
   "agents.hint": "installez un pack",
-  "footer.family": "Mechacut fait partie de la famille Cirilli — .klickd, "
+  "footer.family": "Mechacut fait partie de la famille C.V. — .klickd, "
                    "moovicut, Ponte.",
  },
  "pt": {
@@ -1446,7 +1446,7 @@ TR = {
                  "(~500 tokens para a suíte inteira), GET /route?q=…, "
                  "POST /api/v1/pipeline.",
   "agents.hint": "instale um pack",
-  "footer.family": "Mechacut faz parte da família Cirilli — .klickd, "
+  "footer.family": "Mechacut faz parte da família C.V. — .klickd, "
                    "moovicut, Ponte.",
  },
 }
@@ -1671,7 +1671,7 @@ TEMPLATE = """<!DOCTYPE html>
     <section>
       <div class="pill">{{pill}}</div>
       <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
-      <p class="creed">{{hero3}}<span class="sig"> — V. Cirilli</span></p>
+      <p class="creed">{{hero3}}<span class="sig"> — C.V.</span></p>
       <p class="lede">{{lede}}</p>
     </section>
 

@@ -22,7 +22,7 @@ CREEDS = ("hero3", "bundles.creed", "bench.creed")
 
 
 def test_three_creed_slots_in_template():
-    assert ('<p class="creed">{{hero3}}<span class="sig"> — V. Cirilli'
+    assert ('<p class="creed">{{hero3}}<span class="sig"> — C.V.'
             '</span></p>') in TEMPLATE
     assert ('<h2>{{bundles.h2}}</h2>\n      <p class="quote">'
             '{{bundles.creed}}</p>') in TEMPLATE
@@ -41,7 +41,7 @@ def test_creed_sentences_verbatim_each_language():
 def test_hero3_carries_the_signature_once():
     for lang, html in HTML.items():
         s = LOCALES[lang]["hero3"]
-        assert html.count(s + '<span class="sig"> — V. Cirilli</span>'
+        assert html.count(s + '<span class="sig"> — C.V.</span>'
                          ) == 1, lang
 
 
