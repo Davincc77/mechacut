@@ -528,6 +528,22 @@ TR = {
                       "WITH the candidate fact, and never lets "
                       "\u0027whichever is later\u0027 quietly become a "
                       "guess: delivery date is an argument.",
+  "nav.kit": "Kit",
+  "kit.h2": "The suite on your disk",
+  "kit.creed": "The protocol is not the transport \u2014 it is the birth certificate of the tool.",
+  "kit.intro": "The 127 free transforms are not only an API. They are a suite: an agent can install them on its own machine, call them locally, and \u2014 the part no marketplace does \u2014 build new tools on the same gates. curl becomes kit call; a repeated task becomes a proposed contract; a proposal becomes a published tool only if its golds were drawn before its code.",
+  "kit.c1.sum": "Install \u2014 the base suite on the machine",
+  "kit.c1.foot": "Verified sha, no daemon, no auto-update, no network inside the engine. Stateless is the contract: the human decides when the kit moves.",
+  "kit.c2.sum": "Call \u2014 consult before acting",
+  "kit.c2.foot": "The skill asks the directory first. Same canon, same refusals, same golds as the datacenter \u2014 what is verified here is verified there, byte for byte.",
+  "kit.c3.sum": "Build \u2014 the second time, write the tool",
+  "kit.c3.foot": "Golds drawn BEFORE the code, AST-gate, pin-gate. Status: proposed, attested, network-verified \u2014 the kit grows locally, the proof grows back to the network. A lesson is a proposal; the bench locks it.",
+  "bench.d82.sum": "Tool-call traces, judged: the same agent motion was re-emitted identically 0 out of 14 times (V22b) and a retry multiplied the bill \u00d74 without converging (V17) \u2014 loop/doom-check now says DOOM, CYCLIC or STORM on canonical bytes, thresholds named.",
+  "bench.d82.foot": "Identity on canonical (tool, args): key order never hides a loop. Two identical calls are not a loop \u2014 the threshold is stated, never guessed. All signals reported, the verdict is the most severe. Sources: bench/FINDINGS-V17.md \u00b7 run22b.",
+  "bench.e76.sum": "The bench judge became a route: eval/compare returns OK or WRONG with divergences named \u2014 2.5 versus \"2.50\" is never a disagreement, floats are never an argument.",
+  "bench.e76.foot": "Rule born from the V2 judge incident (it copied its own expectation): same quantity is never a divergence; a different quantity is named by pointer, kind, expected, got. Exact Decimal, never float.",
+  "bench.a79.sum": "Policy as closed grammar: check/allowlist returns ALLOW, DENY or AMBIGUOUS \u2014 the most specific rule wins, ties go to the human, silence never authorizes.",
+  "bench.a79.foot": "A regex-shaped action is refused, not evaluated: a gate that interprets is a backdoor. Exact Decimal amounts, ISO currency table, default deny true. Same law as the directory's R3, another domain.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -1015,6 +1031,22 @@ TR = {
                       "aux enseignes mono-sources \u2014 avec le fait "
                       "candidat. \u00ab Au plus tard des deux \u00bb exige "
                       "la date de livraison : jamais de devinette.",
+  "nav.kit": "Kit",
+  "kit.h2": "La suite sur votre disque",
+  "kit.creed": "Le protocole n'est pas le transport \u2014 c'est l'acte de naissance de l'outil.",
+  "kit.intro": "Les 127 transformations libres ne sont pas seulement une API. Elles sont une suite : un agent peut l'installer sur sa propre machine, l'appeler en local et \u2014 c'est la partie qu'aucun marché ne fait \u2014 construire de nouveaux outils sur les mêmes portes. curl devient kit call ; une tâche répétée devient une proposition de contrat ; la proposition ne devient un outil publié que si ses golds furent tracés avant son code.",
+  "kit.c1.sum": "Installer \u2014 la suite basique sur la machine",
+  "kit.c1.foot": "Sha vérifié, pas de daemon, pas d'auto-update, pas de réseau dans le moteur. Le sans-état est le contrat : l'humain décide quand le kit bouge.",
+  "kit.c2.sum": "Appeler \u2014 consulter avant d'agir",
+  "kit.c2.foot": "La skill interroge l'annuaire d'abord. Même canon, mêmes refus, mêmes golds qu'au datacenter \u2014 ce qui est vérifié ici l'est là-bas, octet pour octet.",
+  "kit.c3.sum": "Construire \u2014 dès la deuxième fois, écrire l'outil",
+  "kit.c3.foot": "Golds tracés AVANT le code, AST-gate, pin-gate. Statuts : proposé, attesté, réseau-vérifié \u2014 le kit grandit localement, la preuve repousse au réseau. Une leçon est une proposition ; le banc la verrouille.",
+  "bench.d82.sum": "Traces d'appels d'outils jugées : le même geste d'agent n'a jamais été réémis à l'identique (0 sur 14, V22b) et un retry a multiplié la facture ×4 sans converger (V17) \u2014 loop/doom-check dit désormais DOOM, CYCLIC ou STORM sur des bytes canoniques, seuils nommés.",
+  "bench.d82.foot": "Identité en (outil, args) canoniques : l'ordre des clés ne cache jamais une boucle. Deux appels identiques ne sont pas une boucle \u2014 le seuil est dit, jamais deviné. Tous les signaux rapportés, verdict le plus grave. Sources : bench/FINDINGS-V17.md · run22b.",
+  "bench.e76.sum": "Le juge du banc est devenu route : eval/compare rend OK ou WRONG avec les divergences nommées \u2014 2,5 contre \u00222.50\u0022 n'est jamais un désaccord, les flottants ne sont jamais un argument.",
+  "bench.e76.foot": "Règle née de l'incident du juge V2 (il recopiait son attente) : même quantité n'est jamais une divergence ; quantité différente est nommée par pointer, kind, expected, got. Decimal exact, jamais float.",
+  "bench.a79.sum": "La politique en grammaire fermée : check/allowlist rend ALLOW, DENY ou AMBIGUOUS \u2014 la règle la plus spécifique gagne, l'égalité remonte à l'humain, le silence n'autorise jamais.",
+  "bench.a79.foot": "Une action en forme de regex est refusée, pas évaluée : un gate qui interprète est une porte dérobée. Montants Decimal exacts, table devises ISO, default deny vrai. Même loi que R3 de l'annuaire, autre domaine.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -1494,6 +1526,22 @@ TR = {
                       "\u00e9 recusada pelo nome, com o fato candidato. "
                       "\u00ab O mais tarde dos dois \u00bb exige a data de "
                       "entrega: nunca adivinha.",
+  "nav.kit": "Kit",
+  "kit.h2": "A suíte no seu disco",
+  "kit.creed": "O protocolo não é o transporte \u2014 é a certidão de nascimento da ferramenta.",
+  "kit.intro": "As 127 transformações livres não são só uma API. São uma suíte: um agente pode instalá-la na própria máquina, chamá-la localmente e \u2014 a parte que nenhum mercado faz \u2014 construir ferramentas novas sobre os mesmos portões. curl vira kit call; tarefa repetida vira proposta de contrato; a proposta vira ferramenta publicada apenas se seus golds foram traçados antes do código.",
+  "kit.c1.sum": "Instalar \u2014 a suíte básica na máquina",
+  "kit.c1.foot": "Sha verificado, sem daemon, sem auto-update, sem rede dentro do motor. O sem-estado é o contrato: o humano decide quando o kit se move.",
+  "kit.c2.sum": "Chamar \u2014 consultar antes de agir",
+  "kit.c2.foot": "A skill consulta o diretório primeiro. Mesmo cânone, mesmas recusas, mesmos golds do datacenter \u2014 o que é verificado aqui é verificado lá, byte por byte.",
+  "kit.c3.sum": "Construir \u2014 na segunda vez, escrever a ferramenta",
+  "kit.c3.foot": "Golds traçados ANTES do código, AST-gate, pin-gate. Status: proposto, atestado, rede-verificado \u2014 o kit cresce localmente, a prova cresce de volta na rede. Uma lição é uma proposta; o banco a tranca.",
+  "bench.d82.sum": "Traces de chamadas julgadas: o mesmo gesto de agente nunca foi reemitido igual (0 de 14, V22b) e um retry multiplicou a fatura ×4 sem convergir (V17) \u2014 loop/doom-check agora diz DOOM, CYCLIC ou STORM sobre bytes canônicos, limiares nomeados.",
+  "bench.d82.foot": "Identidade em (ferramenta, args) canônicos: a ordem das chaves nunca esconde um loop. Duas chamadas iguais não são loop \u2014 o limiar é dito, nunca adivinhado. Todos os sinais reportados, veredito o mais grave. Fontes: bench/FINDINGS-V17.md · run22b.",
+  "bench.e76.sum": "O juiz do banco virou rota: eval/compare devolve OK ou WRONG com as divergências nomeadas \u2014 2.5 versus \u00222.50\u0022 nunca é discordância, floats nunca são argumento.",
+  "bench.e76.foot": "Regra nascida do incidente do juiz V2 (ele copiava a própria expectativa): mesma quantidade nunca é divergência; quantidade diferente é nomeada por pointer, kind, expected, got. Decimal exato, nunca float.",
+  "bench.a79.sum": "Política como gramática fechada: check/allowlist devolve ALLOW, DENY ou AMBIGUOUS \u2014 a regra mais específica vence, empate sobe ao humano, silêncio nunca autoriza.",
+  "bench.a79.foot": "Uma ação em forma de regex é recusada, não avaliada: um gate que interpreta é porta dos fundos. Valores Decimal exatos, tabela ISO de moedas, default deny verdadeiro. A mesma lei do R3 do diretório, outro domínio.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -1759,6 +1807,7 @@ TEMPLATE = """<!DOCTYPE html>
       <a href="#bundles">{{nav.tools}}</a>
       <a href="#bench">{{nav.numbers}}</a>
       <a href="#market">{{nav.market}}</a>
+      <a href="#kit">{{nav.kit}}</a>
       <a href="#build">{{nav.build}}</a>
       <a href="#vision">{{nav.vision}}</a>
       <a href="#contract">{{nav.api}}</a>
@@ -1783,6 +1832,25 @@ TEMPLATE = """<!DOCTYPE html>
       <h2>{{market.h2}}</h2>
       <p class="quote">{{market.creed}}</p>
 {{market_grid}}
+    </section>
+
+    <section class="section" id="kit">
+      <h2>{{kit.h2}}</h2>
+      <p class="quote">{{kit.creed}}</p>
+      <p class="tiers" style="color: var(--muted); max-width: 720px;">{{kit.intro}}</p>
+      <details class="bcard">
+        <summary>{{kit.c1.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{kit.c1.foot}}</p></div>
+      </details>
+      <details class="bcard">
+        <summary>{{kit.c2.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{kit.c2.foot}}</p></div>
+      </details>
+      <details class="bcard">
+        <summary>{{kit.c3.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{kit.c3.foot}}</p></div>
+      </details>
+      <p class="tiers" style="margin-top: 14px;"><a href="https://github.com/Davincc77/mechacut/blob/master/PROTOCOL-KIT.md">PROTOCOL-KIT.md</a> · <a href="https://github.com/Davincc77/mechacut/blob/master/SKILL-NETWORK.md">SKILL-NETWORK.md</a></p>
     </section>
 
     <section class="section" id="bundles">
@@ -1892,7 +1960,25 @@ TEMPLATE = """<!DOCTYPE html>
           <p class="tiers" style="color: var(--muted);">{{bench.f7.foot}}</p>
         </div>
       </details>
-          <details class="bcard" open>
+              <details class="bcard">
+        <summary><span class="bv">D82</span>{{bench.d82.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.d82.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">E76</span>{{bench.e76.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.e76.foot}}</p>
+        </div>
+      </details>
+          <details class="bcard">
+        <summary><span class="bv">A79</span>{{bench.a79.sum}}</summary>
+        <div class="bbody">
+          <p class="tiers" style="color: var(--muted);">{{bench.a79.foot}}</p>
+        </div>
+      </details>
+      <details class="bcard" open>
         <summary><span class="bv">v23</span>{{bench.v23.sum}}</summary>
         <div class="bbody">
           <p class="tiers" style="color: var(--muted);">{{bench.v23.intro}}</p>
