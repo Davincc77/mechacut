@@ -80,7 +80,10 @@ The headline, measured on our own models in our own bench — both arms
 published, anyone can re-run them:
 
 - A 1.5-billion-parameter model, naked: **0/50** tasks. Equipped with the
-  suite as a 650-token skill: **45/50** (pipeline arm), 40/50 (relayed arm).
+  suite as a 650-token skill (its size at measurement; the equip-bench below
+  later taught us two payload shapes were missing, and the skill grew to
+  ~1,000 tokens the same day — the bench edits the manual, not the marketing):
+  **45/50** (pipeline arm), 40/50 (relayed arm).
 - Across the field, our measured ceiling matches the papers: ToolFailBench
   (arXiv, 2026) puts the best model on Earth — Grok-4.3 — at **86.33%**
   faithful tool use. Even the champion fumbles one call in seven.
@@ -324,8 +327,10 @@ Le titre, mesuré sur nos propres modèles dans notre propre banc — deux bras
 publiés, rejouables par n'importe qui :
 
 - Un modèle de 1,5 milliard de paramètres, nu : **0/50** tâches. Équipé de
-  la suite comme skill de 650 jetons : **45/50** (bras pipeline), 40/50
-  (bras relais).
+  la suite comme skill de 650 jetons (sa taille à la mesure ; le banc ci-des-
+  sous nous a appris qu'il y manquait deux formes de payload, et la skill est
+  passée à ~1 000 jetons le jour même — c'est le banc qui corrige le manuel,
+  pas le marketing) : **45/50** (bras pipeline), 40/50 (bras relais).
 - Dans tout le champ, notre plafond mesuré rejoint les papiers :
   ToolFailBench (arXiv, 2026) met le meilleur modèle de la Terre —
   Grok-4.3 — à **86,33 %** d'usage fidèle des outils. Même le champion

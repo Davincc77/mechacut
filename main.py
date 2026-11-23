@@ -5520,7 +5520,7 @@ def api_payouts_doc():
 @app.get("/SKILL-MINI.md", response_class=PlainTextResponse)
 def skill_mini_md():
     """The one-page skill: written so a 0.5B model can follow it
-    literally. ~650 tokens, no hidden rules, byte-stable."""
+    literally. ~1,000 tokens, no hidden rules, byte-stable."""
     return (Path(__file__).parent / "SKILL-MINI.md").read_text()
 
 
@@ -10904,7 +10904,7 @@ def index(request: Request):
             "/mcp": "stateless MCP JSON-RPC: one tool per transform",
             "/openapi.json": "OpenAPI 3.1",
             "/SKILL.md": "agent skill",
-            "/SKILL-MINI.md": "one-page skill for weak models (~650 tokens)",
+            "/SKILL-MINI.md": "one-page skill for weak models (~1,000 tokens)",
             "/agent/examples.json": "real request+response pairs per tool, captured at build",
             "/agent/manifest": "GET one line per tool: navigation in ~500 tokens (free)",
             "/tools/{name}.json": "GET single tool schema on demand (free)",
