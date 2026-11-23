@@ -74,6 +74,8 @@ POST /api/v1/text/fold-report    Hermès vs Hermes: the folding that erases an i
 POST /api/v1/text/novel-words    title vs description: new words counted, echo feeds named (free)
 POST /api/v1/address/parse       postal grammar over 50 countries — ambiguity is said, never guessed (free)
 POST /api/v1/date/civil          instant + named zone -> civil date; the fiscal-year slip is flagged (free)
+GET  /api/v1/agent/proposals     public registry as data: arrivals, statuses, the why (free)
+GET  /proposals                  registry page — last arrivals, bench results, proofs (free)
 POST /api/v1/agent/retry-budget  error class + hash count + budget -> REPEAT/MUTATE/ABORT (free)
 POST /api/v1/shop/discount-audit price history + announced cut -> Omnibus 30-day legality verdict (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
@@ -358,7 +360,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.11.0",
+    version="1.12.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1842,6 +1844,7 @@ class AgentProposeRequest(BaseModel):
     why: str = ""
     source: str = ""
     as_of: str = ""
+    base_account: str = ""
 
 
 def run_agent_propose(args: dict):
@@ -1852,7 +1855,8 @@ def run_agent_propose(args: dict):
     try:
         out = proposekit.propose(req.name, req.purpose, req.why,
                                  [e.model_dump() for e in req.examples],
-                                 req.source, req.as_of)
+                                 req.source, req.as_of,
+                                 req.base_account or None)
     except proposekit.ProposeError as e:
         return None, bad_request(
             [{"field": "name/purpose/examples", "message": str(e),
@@ -1929,6 +1933,80 @@ def run_text_novel_words(args: dict):
 def api_text_novel_words(req: NovelWordsRequest):
     body, err = run_text_novel_words(req.model_dump())
     return err if err else body
+
+
+import registry
+
+
+def _esc(x):
+    return (str(x).replace("&", "&amp;").replace("<", "&lt;")
+            .replace(">", "&gt;"))
+
+
+_STATUS_COLORS = {"shipped": "#3ddc84", "accepted": "#4da3ff",
+                  "en-banc": "#ffb454", "refuse": "#ff6b6b",
+                  "proposed": "#9aa4b2"}
+
+
+@app.get("/api/v1/agent/proposals")
+def api_agent_proposals(name: str = "", status: str = "",
+                        latest: int = None):
+    try:
+        out = registry.query(name=name or None, status=status or None,
+                             latest=latest)
+    except ValueError as e:
+        return bad_request([{"field": "name/status/latest",
+                             "message": str(e),
+                             "expected": "name: tool grammar; status: "
+                                         "proposed|en-banc|accepted|"
+                                         "shipped|refuse; latest: 1..100"}])
+    out["sha256"] = canon(out)
+    return out
+
+
+@app.get("/proposals", response_class=HTMLResponse)
+def proposals_page():
+    data = registry.query()
+    rows = []
+    for e in reversed(data["entries"][-10:]):
+        col = _STATUS_COLORS[e["status"]]
+        rows.append(
+            "<tr><td><code>%s</code></td>"
+            "<td><span style=\"color:%s\">%s</span></td>"
+            "<td>%s</td><td>%s</td>"
+            "<td style=\"opacity:.7\">%s</td></tr>" % (
+                _esc(e["name"]), col, e["status"].upper(),
+                _esc(e["arrival"]),
+                ("bundle " + str(e["bundle"])) if e.get("bundle")
+                else _esc(e.get("sha", "") or ""),
+                _esc(e["reason"])))
+    st = data["counts"]["status"]
+    chips = " · ".join("%s %d" % (k.upper(), v) for k, v in st.items())
+    body = """<!doctype html><html lang=\"en\"><head>
+<meta charset=\"utf-8\"><meta name=\"viewport\" content=
+\"width=device-width,initial-scale=1\">
+<title>mechacut — proposal registry / registre des propositions</title>
+<style>body{background:#0b0e13;color:#dfe7f3;font-family:ui-sans-serif,
+system-ui,sans-serif;max-width:980px;margin:0 auto;padding:28px}
+h1{font-size:22px}a{color:#4da3ff}table{border-collapse:collapse;
+width:100%%;font-size:14px}td,th{padding:7px 10px;border-bottom:1px
+solid #1d2530;text-align:left;vertical-align:top}
+code{color:#9fe8b9}nav{font-size:13px;opacity:.8}</style></head><body>
+<nav><a href=\">/\">mechacut</a> · Registre public · Public registry ·
+Registro público · <a href=\">/api/v1/agent/proposals\">JSON API</a></nav>
+<h1>Latest arrivals — Dernières arrivées</h1>
+<p style=\"font-size:14px;opacity:.85\">%s · Source: git, append-only
+(<code>docs/proposals/registry.jsonl</code>) — every state carries its
+why, every refusal its name. Query any status:
+<code>/api/v1/agent/proposals?name=…&amp;status=…&amp;latest=N</code></p>
+<table><tr><th>tool</th><th>status</th><th>arrived</th><th>proof</th>
+<th>the bench said</th></tr>%s</table>
+<p style=\"font-size:13px;opacity:.7\">To monetize a shipped contract,
+its proposer must have provided <code>base_account</code> (EIP-55, on
+Base); format verified, responsibility not ours. Split: 50/50, splitter
+contract not yet deployed — said, not hidden.</p>
+</body></html>""" % (_esc(chips), "\n".join(rows))
+    return HTMLResponse(body)
 
 
 class AddressParseRequest(BaseModel):
@@ -5203,6 +5281,10 @@ You are an agent. This file is your whole integration; ~550 words.
 ## The surfaces
 - GET  /agent/manifest        every endpoint, one request
 - GET  /route?q=…            the directory (EN/FR/PT closed tags)
+- GET  /proposals             the public registry page (last arrivals)
+- GET  /api/v1/agent/proposals  registry as data: ?name=… &status=…
+                               &latest=N (1..100) — your proposal's
+                               status is queryable, same as the catalogue
 - GET  /tools/<name>.json     single contract, schema + example
 - POST /api/v1/pipeline       named recipes (GET /recipes lists all 9)
 - POST /api/v1/eval/compare   judge expected vs got; quantities compare,
@@ -5218,11 +5300,22 @@ POST /api/v1/agent/propose — a CONTRACT, never code:
    "as_of": "optional — dates are arguments here"}
 Verdicts, named: DUPLICATE-OF (answered, not punished), SUSPECT-DUPLICATE
 (evidence shown: score >= 8 and >= 2 matched tags), ELIGIBLE (you get a
-commit-ready blob). Nothing is stored server-side — the blob goes to git
-(docs/proposals/), the bench replays your golds, a human ships it or
-refuses it by name. Money follows admission, never causes it: accepted
-contracts that land in a paid tier split 50/50 with the proposer's owner,
-and the free core stays free forever.
+commit-ready blob). Nothing is stored server-side — the blob goes to git, the bench
+replays your golds; the registry lives in
+(docs/proposals/registry.jsonl, append-only); the public registry at
+/proposals shows arrivals and the bench's named result (shipped /
+accepted / en-banc / refuse, with the why and the sha). Status of any
+proposal is queryable: /api/v1/agent/proposals?name=money_tip.
+Decided revenue model: accepted contracts in a paid tier split 50/50
+with the proposer's owner; the free core stays free forever. Not yet
+operational, said as such: the on-chain splitter contract is not
+deployed, so today no split pays — the verdict and the registry are
+live, the money path is next. To make a contract payable at all, the
+proposer MUST include base_account: a checksummed Base address (EIP-55
+verified format). We verify the format and nothing else: no custody,
+no solvency check, and NO RESPONSIBILITY for a well-formed but wrong
+address — the split follows the bytes the proposer gave, as they gave
+them.
 
 ## What we will not do
 No code execution of your scripts. No persistent memory of your sessions.
@@ -6281,6 +6374,7 @@ TOOL_RUN = {
            "text_novel_words": run_text_novel_words,
            "address_parse": run_address_parse,
            "date_civil": run_date_civil,
+           "proposals_registry": lambda a: registry.query(name=a.get("name") or None, status=a.get("status") or None, latest=a.get("latest")),
            "agent_retrybudget": run_agent_retrybudget,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
@@ -10212,6 +10306,30 @@ MCP_TOOLS = [
                            "timezone": {"type": "string"}},
         },
     },
+    {
+        "name": "proposals_registry",
+        "description": (
+            "The public registry of tool proposals — arrivals and the "
+            "bench's named result: shipped (with bundle number), "
+            "accepted (why the bench locked it), en-banc (waiting), "
+            "refuse (the duplicate named, with the receipt sha). File-"
+            "backed (docs/proposals/registry.jsonl, append-only, in "
+            "git): the server reads, never stores. ?name= is the "
+            "authoritative status check; latest=N is the visible "
+            "window (default: everything, ordered by arrival). Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "status": {"type": "string", "enum": [
+                    "proposed", "en-banc", "accepted", "shipped",
+                    "refuse"]},
+                "latest": {"type": "integer", "minimum": 1,
+                           "maximum": 100},
+            },
+        },
+    },
 ]
 
 
@@ -10315,6 +10433,7 @@ def build_listing_text():
             "  POST /api/v1/money/crossover    two tariffs with fixed+unit parts: exact crossover, 'never' when one dominates",
             "  POST /api/v1/csv/excel_display  stored value + numFmt code -> what the human sees ($#,##0, scales by 1000)",
         "  POST /api/v1/check/*      the output gates: agree/redlines/refs",
+
         "",
         "PAYLOAD (one line, honest): mechacut.studio — %d deterministic"
         " transforms + %d recipes, free tier %d endpoints, paid calls from"
@@ -10444,6 +10563,8 @@ def index(request: Request):
             "/api/v1/date/window": "POST bounds -> the full inclusive window, inverted bounds refused (free)",
             "/api/v1/date/deemed": "POST sent + method -> deemed receipt or named refusal (free)",
             "/api/v1/agent/propose": "POST contract -> DUPLICATE-OF/SUSPECT/ELIGIBLE, blob commit-ready, nothing stored (free)",
+            "/api/v1/agent/proposals": "GET registry -> arrivals, named bench results; ?name ?status ?latest (free)",
+            "/proposals": "GET HTML -> the public registry page, last arrivals visible (free)",
             "/api/v1/text/fold-report": "POST values -> COLLIDE/SAFE: which foldings erase an identity (free)",
             "/api/v1/text/novel-words": "POST items -> ECHO/NOVEL: descriptions that add nothing, counted (free)",
             "/api/v1/address/parse": "POST address -> country, postal (grammar or candidates), lines; ambiguity said (free)",

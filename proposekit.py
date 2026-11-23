@@ -22,7 +22,8 @@ def _norm(s):
     return re.sub(r"[^a-z0-9]", "", s.lower())
 
 
-def propose(name, purpose, why, examples, source, as_of):
+def propose(name, purpose, why, examples, source,
+              as_of, base_account=None):
     if not NAME_RE.match(name or ""):
         raise ProposeError(
             "bad_name: %r — grammar ^[a-z][a-z0-9]{2,39}$ "
@@ -46,6 +47,26 @@ def propose(name, purpose, why, examples, source, as_of):
                            "characters max")
     if len(source or "") > 200:
         raise ProposeError("source_grammar: source is one URL, 200 max")
+
+    acct = None
+    if base_account is not None and str(base_account).strip():
+        import eth
+        try:
+            chk = eth.eth_address(str(base_account))
+        except eth.EthError as e:
+            raise ProposeError(
+                "base_account_grammar: %s — the account is where a "
+                "future split would go; we verify the EIP-55 checksum "
+                "format, and we take NO responsibility for a wrong but "
+                "well-formed address — that is the proposer's" % e)
+        if not chk["valid_eip55"]:
+            raise ProposeError(
+                "base_account_grammar: checksum invalid — expected %r "
+                "(mixed-case EIP-55; all-lowercase is accepted as the "
+                "network-style variant)" % chk["checksummed"])
+        acct = {"account": chk["checksummed"],
+                "chain": "base", "asset": "USDC",
+                "verified": "format EIP-55 (not custody, not solvency)"}
 
     import routing
     exact = _norm(name)
@@ -74,7 +95,8 @@ def propose(name, purpose, why, examples, source, as_of):
             "examples": examples,
             "why": why or "", "source": source or "",
             "as_of": as_of or None,
-            "undated": not as_of}
+            "undated": not as_of,
+            "base_account": (acct or {}).get("account")}
     out = {"verdict": verdict,
            "matches": matches_detail or
            [{"tool": d, "score": None, "matched": ["exact-name"]}
@@ -83,13 +105,23 @@ def propose(name, purpose, why, examples, source, as_of):
            "thresholds": {"suspect_min_score": SUSPECT_MIN_SCORE,
                           "suspect_min_matched": SUSPECT_MIN_MATCHED},
            "blob": blob,
+           "monetizable": acct is not None,
+           "accountability": (
+               "the Base account is the proposer's own; mechacut never "
+               "custodies it and takes no responsibility for a "
+               "well-formed but wrong address — a contract pays or it "
+               "does not, it never guesses" if acct else
+               "no account given: the contract is network-eligible but "
+               "not monetizable — provide base_account (EIP-55 on Base) "
+               "and re-propose"),
            "next_steps": [
                "commit the blob verbatim as docs/proposals/%s.json in "
                "github.com/Davincc77/mechacut" % name,
                "the bench replays its examples against any existing "
                "candidate; golds stay hand-traced — an accepted proposal "
                "ships as a bundle or is refused by name",
-               "money follows admission, never causes it"],
+               "money follows admission, never causes it",
+                "to make this contract payable: re-propose with base_account — a checksummed Base address of YOURS; a human-held key is never asked for and never stored" ],
            "stored": False}
     if verdict == "DUPLICATE-OF":
         out["blob"] = None

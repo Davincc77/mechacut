@@ -1028,7 +1028,9 @@ def manifest_text(version):
         "detail on demand: GET /tools/<name>.json | "
         "install one pack: GET /SKILL-<pack>.md | "
         "one-call pipelines: GET /api/v1/recipes or POST /api/v1/pipeline | "
-        'find tools: GET /route?q="your task words"',
+        'find tools: GET /route?q="your task words" | '
+        "proposal registry: GET /proposals (HTML) or "
+        "/api/v1/agent/proposals?name=…&status=…&latest=N",
         "not here: storyboards, shot lists, scene breakdowns "
         "-> sister product moovicut.studio",
     ]
