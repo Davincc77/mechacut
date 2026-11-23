@@ -464,6 +464,22 @@ TR = {
                       "1-to-2-day hold. Hours are arguments, never the "
                       "wall clock. And done is 165\u00b0F at the "
                       "thermometer \u2014 the real judge.",
+  "everyday.e18.name": "The turkey is leftovers now \u2014 which day "
+                       "does the fridge window close",
+  "everyday.e18.say": "The press prints the rule in stone: \u201ceat "
+                      "it by Monday Nov 30\u201d (NBC, 19-Nov) next to "
+                      "\u201cno more than three days, 72 hours "
+                      "optimal\u201d (ky3, same day) \u2014 expired on "
+                      "Dec 1 and already disagreeing. The two FSIS "
+                      "pages themselves fight about the freezer (2-6 "
+                      "months vs 3-4): this tool renders the UNION of "
+                      "both published windows with both anchors, the "
+                      "2-hour gate STRICT from cooked_at (exactly 2 h "
+                      "passes, 2 h 01 discards), the 4th day named "
+                      "LAST_DAY \u2014 and quality labelled quality: "
+                      "safe indefinitely at 0\u00b0F. Dates are "
+                      "arguments; 165\u00b0F is the judge, gravy a "
+                      "rolling boil.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -893,6 +909,22 @@ TR = {
                       "heures sont des arguments, jamais l'horloge "
                       "murale. Et cuit est 165 °F à la sonde — le vrai "
                       "juge.",
+  "everyday.e18.name": "La dinde est en restes — quel jour se ferme la "
+                       "fenêtre du frigo",
+  "everyday.e18.say": "La presse grave la règle en dur : « à manger "
+                      "avant lundi 30 novembre » (NBC, 19 nov) à côté "
+                      "de « pas plus de trois jours, 72 heures "
+                      "optimales » (ky3, le même jour) — périmé au 1er "
+                      "décembre et déjà contradictoire. Les deux pages "
+                      "FSIS se contredisent sur le congélateur (2-6 "
+                      "mois contre 3-4) : l'outil rend l'UNION des deux "
+                      "fenêtres publiées, les deux ancres citées, la "
+                      "règle des 2 heures STRICTE depuis cooked_at (2 h "
+                      "pile passe, 2 h 01 jette), le 4ᵉ jour nommé "
+                      "LAST_DAY — et la qualité nommée qualité : sûre "
+                      "indéfiniment à −18 °C. Les dates sont des "
+                      "arguments ; 74 °C (165 °F) au thermomètre, le "
+                      "jus au bouillon franc.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -1310,6 +1342,21 @@ TR = {
                       "1 a 2 dias. Horas são argumentos, nunca o relógio "
                       "de parede. E cozido é 165 °F no termômetro — o "
                       "juiz real.",
+  "everyday.e18.name": "O peru virou sobra — que dia fecha a janela da "
+                       "geladeira",
+  "everyday.e18.say": "A imprensa grava a regra em pedra: «coma até "
+                      "segunda 30 de novembro» (NBC, 19.nov) ao lado de "
+                      "«não mais que três dias, 72 horas ótimas» (ky3, "
+                      "mesmo dia) — vencidos em 1º de dezembro e já "
+                      "contraditórios. As duas páginas do FSIS brigam "
+                      "sobre o congelador (2-6 meses contra 3-4): a "
+                      "ferramenta entrega a UNIÃO das duas janelas "
+                      "publicadas com as duas âncoras, a regra das 2 "
+                      "horas ESTRITA desde cooked_at (2 h exatas passam, "
+                      "2 h 01 descartam), o 4º dia chamado LAST_DAY — e "
+                      "qualidade rotulada qualidade: seguro "
+                      "indefinidamente a 0 °F. Datas são argumentos; "
+                      "165 °F é o juiz, o molho em fervura forte.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -2000,7 +2047,9 @@ W = {
       "unitprice": "\u2192 500 g to 400 g, same sticker: \u2212%s%% of "
                    "product, +%s%% per unit \u2014 two denominators",
       "poultry": "\u2192 16-lb bird into the fridge by %s, not "
-                 "before %s"},
+                 "before %s",
+      "leftovers": "\u2192 Thanksgiving 2026 replay: eat by %s \u00b7 "
+                   "band %s"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -2033,7 +2082,9 @@ W = {
                    "\u2212%s%% de produit, +%s%% au kilo \u2014 deux "
                    "d\u00e9nominateurs",
       "poultry": "\u2192 dinde 16 lb : cong\u00e9lateur avant %s, "
-                 "jamais avant %s"},
+                 "jamais avant %s",
+      "leftovers": "\u2192 replay thanksgiving 2026 : \u00e0 consommer "
+                   "avant %s \u00b7 bande %s"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -2066,7 +2117,9 @@ W = {
                    "\u2212%s%% de produto, +%s%% por quilo \u2014 dois "
                    "denominadores",
       "poultry": "\u2192 peru de 16 lb: geladeira at\u00e9 %s, nunca "
-                 "antes de %s"},
+                 "antes de %s",
+      "leftovers": "\u2192 replay thanksgiving 2026: comer at\u00e9 %s "
+                   "\u00b7 banda %s"},
 }
 
 
@@ -2195,6 +2248,11 @@ _EVERYDAY_CALLS = [
      "poultry", lambda d, L_: (
          d["put_in_refrigerator"]["by"],
          d["put_in_refrigerator"]["not_before"])),
+    ("/api/v1/food/leftovers",
+     {"category": "turkey", "cooked_at": "2026-11-26T17:00",
+      "stored_at": "2026-11-26T19:00", "as_of": "2026-11-30"},
+     "leftovers", lambda d, L_: (
+         d["fridge"]["last_day"], d["as_of"]["band"])),
 ]
 
 
