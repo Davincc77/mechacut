@@ -164,7 +164,7 @@
   "nav.kit": "Kit",
   "kit.h2": "The suite on your disk",
   "kit.creed": "The protocol is not the transport — it is the birth certificate of the tool.",
-  "kit.intro": "The 127 free transforms are not only an API. They are a suite: an agent can install them on its own machine, call them locally, and — the part no marketplace does — build new tools on the same gates. curl becomes kit call; a repeated task becomes a proposed contract; a proposal becomes a published tool only if its golds were drawn before its code.",
+  "kit.intro": "The free transforms are not only an API. They are a suite: an agent can install them on its own machine, call them locally, and — the part no marketplace does — build new tools on the same gates. curl becomes kit call; a repeated task becomes a proposed contract; a proposal becomes a published tool only if its golds were drawn before its code.",
   "kit.c1.sum": "Install — the base suite on the machine",
   "kit.c1.foot": "Verified sha, no daemon, no auto-update, no network inside the engine. Stateless is the contract: the human decides when the kit moves.",
   "kit.c2.sum": "Call — consult before acting",

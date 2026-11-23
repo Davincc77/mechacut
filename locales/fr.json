@@ -164,7 +164,7 @@
   "nav.kit": "Kit",
   "kit.h2": "La suite sur votre disque",
   "kit.creed": "Le protocole n'est pas le transport — c'est l'acte de naissance de l'outil.",
-  "kit.intro": "Les 127 transformations libres ne sont pas seulement une API. Elles sont une suite : un agent peut l'installer sur sa propre machine, l'appeler en local et — c'est la partie qu'aucun marché ne fait — construire de nouveaux outils sur les mêmes portes. curl devient kit call ; une tâche répétée devient une proposition de contrat ; la proposition ne devient un outil publié que si ses golds furent tracés avant son code.",
+  "kit.intro": "Les transformations libres ne sont pas seulement une API. Elles sont une suite : un agent peut l'installer sur sa propre machine, l'appeler en local et — c'est la partie qu'aucun marché ne fait — construire de nouveaux outils sur les mêmes portes. curl devient kit call ; une tâche répétée devient une proposition de contrat ; la proposition ne devient un outil publié que si ses golds furent tracés avant son code.",
   "kit.c1.sum": "Installer — la suite basique sur la machine",
   "kit.c1.foot": "Sha vérifié, pas de daemon, pas d'auto-update, pas de réseau dans le moteur. Le sans-état est le contrat : l'humain décide quand le kit bouge.",
   "kit.c2.sum": "Appeler — consulter avant d'agir",

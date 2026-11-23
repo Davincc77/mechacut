@@ -164,7 +164,7 @@
   "nav.kit": "Kit",
   "kit.h2": "A suíte no seu disco",
   "kit.creed": "O protocolo não é o transporte — é a certidão de nascimento da ferramenta.",
-  "kit.intro": "As 127 transformações livres não são só uma API. São uma suíte: um agente pode instalá-la na própria máquina, chamá-la localmente e — a parte que nenhum mercado faz — construir ferramentas novas sobre os mesmos portões. curl vira kit call; tarefa repetida vira proposta de contrato; a proposta vira ferramenta publicada apenas se seus golds foram traçados antes do código.",
+  "kit.intro": "As transformações livres não são só uma API. São uma suíte: um agente pode instalá-la na própria máquina, chamá-la localmente e — a parte que nenhum mercado faz — construir ferramentas novas sobre os mesmos portões. curl vira kit call; tarefa repetida vira proposta de contrato; a proposta vira ferramenta publicada apenas se seus golds foram traçados antes do código.",
   "kit.c1.sum": "Instalar — a suíte básica na máquina",
   "kit.c1.foot": "Sha verificado, sem daemon, sem auto-update, sem rede dentro do motor. O sem-estado é o contrato: o humano decide quando o kit se move.",
   "kit.c2.sum": "Chamar — consultar antes de agir",
