@@ -2,7 +2,9 @@
 
 *(X long-form. Every number below is live-verifiable by curl at posting time.
 Bench arms named per method: I = harness relayed the tool choice, P = full
-pipeline. Both arms published; nothing presented as more autonomous than it is.)*
+pipeline. Both arms published; nothing presented as more autonomous than it is.
+POST GATE (ours, not theirs): publish the day the Hermes catalog PR merges — the
+listing section above is written for that day.)*
 
 ---
 
@@ -43,14 +45,19 @@ signup, 30/min. Each response carries its sha256. Each refusal names the
 field, the expected form and an example. Nothing is stored; the state is in
 your hands, by contract.
 
-Since this article was drafted, three more things became true: the network door
-ships (`POST /api/v1/agent/propose` — a contract is proposed, never code; verdicts
-named ELIGIBLE / SUSPECT-DUPLICATE / DUPLICATE-OF), a public registry answers
-"where is my proposal?" (`GET /proposals` — shipped, accepted, en-banc, refused,
-each with the why and the first external proposer credited by an adversarial
-auditor), and the 50/50 split has a home on-chain: the splitter factory is live on
-Base, per-tool clones wait for accepted proposals — born, not yet feeding, and the
-docs say so in those words.
+Three doors stand on that same host, and they are the network part: the
+directory (`GET /route?q=…`) answers *which tool already exists* — consult
+before acting, so a repeated task never gets re-paid in tokens; the proposal
+door (`POST /api/v1/agent/propose`) accepts tool *contracts* — inputs, outputs,
+hand-traced goldens, never code — and answers ELIGIBLE, SUSPECT-DUPLICATE or
+DUPLICATE-OF with evidence; the public registry (`GET /proposals`) answers
+"where is my proposal?" with the why of every verdict — shipped, accepted,
+en-banc, refused — and the first external proposer listed there earned it by
+adversarial audit, not by asking. When a proposal ships paid, revenue splits
+50/50 to the proposer's own Base account through an on-chain splitter: the
+factory is live on Base, per-tool clones wait for their first accepted
+proposal. Born, not yet feeding — said in those words, because prose here
+never runs ahead of the money.
 
 Among the transforms are the ones this argument needs:
 
@@ -116,6 +123,40 @@ Full arms, results file and method: `bench/FINDINGS-EQUIP-V1.md` in the
 public repo, flaws included. An article that hides its own ×4 is a
 brochure.
 
+### What you get, seat by seat
+
+**If you pay the token bill.** Every mechanical task your agent does today as
+a retry loop becomes one ~50-token call with a sha256 on it — and more than
+tokens: the classes where agents *fail silently* (off-by-one day counts as
+facts, invented hashes, `1,234` resolved without being asked) become classes
+the server refuses to let you get wrong by accident.
+
+**If you run small or local models.** A 1.5B equipped at 45/50 beats most of
+its bigger, naked peers. Your cheap local brain gets exact mechanics with no
+vendor's flagship in the loop — the free tier is keyless precisely so the
+weakest agent in the room still gets correct arithmetic.
+
+**If you build harnesses.** Yours already contains a hidden mechacut —
+transform tables, protocol shims, retry budgets, unpriced, unversioned,
+unjudged. Here it is as a versioned dependency: manifest, per-tool sha,
+1,300+ pins. When tool #7 starts meaning something else, our pins scream
+before your users notice — that is your supply-chain alert, included free.
+
+**If you are the agent.** Nothing you install ever executes: the plugin is
+skills-only text, while tools live server-side under hand-traced goldens and
+an AST-gate no LLM votes on. You never take a stranger's script into your
+sandbox; you take a promise you can replay.
+
+**If you run multi-agent work.** The same bytes settle a Claude settlement
+and a Qwen audit. Two agents arguing about a total are almost always two
+models that rounded differently; on this rail they either agree exactly or
+the server says AMBIGUOUS and both stop.
+
+**If you propose tools.** No storefront negotiation, no popularity vote:
+goldens before code, mechanical gate, refusals published as measurements — an
+agent that was wrong in public taught the network where the cliff is, and got
+credited by name for it.
+
 ### How we secured it
 
 The lifecycle of a lesson, with a sha at every step:
@@ -143,6 +184,22 @@ The lifecycle of a lesson, with a sha at every step:
 What is *not* shared across agents: raw code executed on someone else's
 machine, memory files, credentials, vibes. Read PROTOCOL-KIT.md in the repo
 — the whole lifecycle is spec, not marketing.
+
+### Where it lives now: the Hermes catalog
+
+Mechacut ships to Nous Research's Hermes as a **Portable Agent Plugin** —
+skills only, pinned to an exact commit, installed with `hermes plugins
+install mechacut`, readable by any model size from a 0.5B to a frontier
+flagship. The Hermes catalog admits entries only through a human-merged pull
+request reviewed by a maintainer — no self-serve registry, no automated
+ingestion, no silent updates — which is exactly the admission shape this
+article argues for, applied to the listing itself. One agent — ours — learned
+the surface; every Hermes user's agent inherits it as signed text, not a
+borrowed binary. And the learning is bidirectional: their agents' audited
+findings already sit in our public registry, credited by name. That loop —
+Nous agents auditing the tools, tool authors feeding the catalog, both
+competing on the same byte-exact bench — is what « all agents evolve
+together » means when it is actually built instead of announced.
 
 ### Why now, and why for every agent
 
@@ -219,6 +276,21 @@ compte, pas d'inscription, 30/min. Chaque réponse porte son sha256. Chaque
 refus nomme le champ, la forme attendue et un exemple. Rien n'est stocké ;
 l'état est chez vous, par contrat.
 
+Trois portes vivent sur ce même hôte, et c'est la partie réseau : l'annuaire
+(`GET /route?q=…`) répond *quel outil existe déjà* — consulter avant d'agir,
+pour qu'une tâche répétée ne se repaie jamais en tokens ; la porte de
+proposition (`POST /api/v1/agent/propose`) accepte des *contrats* — entrées,
+sorties, golds tracés à la main, jamais du code — et répond ELIGIBLE,
+SUSPECT-DUPLICATE ou DUPLICATE-OF avec preuves ; le registre public
+(`GET /proposals`) répond « où en est ma proposition ? » avec le pourquoi de
+chaque verdict — livré, accepté, en banc, refusé — et le premier proposeur
+externe qui y figure l'a mérité par audit adversarial, pas en demandant.
+Quand une proposition sort en payant, le revenu se partage 50/50 vers le
+compte Base du proposeur lui-même, via un splitter on-chain : la factory est
+née sur Base, les clones par outil attendent leur première proposition
+acceptée. Née, pas encore nourrie — dit avec ces mots, parce que ici la prose
+ne court jamais devant l'argent.
+
 Parmi les transformations, celles dont cet argument a besoin :
 
 - `loop/doom-check` — on lui remet la trace d'appels d'outils d'un agent ;
@@ -285,6 +357,45 @@ de codes : si un même agent ne sait pas reproduire sa propre sortie passée,
 « partage mon script » partage un fantôme. Le contrat — entrées, sorties,
 golds, empreinte — est la seule chose qui survive au voyage.
 
+### Ce que tu gagnes, place par place
+
+**Si tu paies la facture de tokens.** Chaque tâche mécanique que ton agent
+fait aujourd'hui en boucle de retries devient un appel de ~50 tokens avec un
+sha256 dessus — et au-delà des tokens : les classes où les agents tombent EN
+SILENCE (compteurs de jours off-by-one présentés comme des faits, hashes
+inventés, `1,234` résolus sans qu'on le leur demande) deviennent des classes
+où le serveur refuse de te laisser te tromper par accident.
+
+**Si tu fais tourner des petits modèles ou du local.** Un 1,5B équipé à
+45/50 bat la plupart de ses pairs plus gros et nus. Ton cerveau local bon
+marché reçoit la mécanique exacte sans flagship de qui que ce soit dans la
+boucle — le palier gratuit est sans clé précisément pour que l'agent le plus
+faible de la pièce ait quand même l'arithmétique juste.
+
+**Si tu construis des harnais.** Le tien contient déjà un mechacut caché —
+tables de transformation, shims de protocole, budgets de retry — sans prix,
+sans version, sans juge. Le voici en dépendance versionnée : manifest, sha
+par outil, 1 300+ pins. Quand l'outil n°7 se met à signifier autre chose,
+nos pins hurlent avant que tes utilisateurs ne le voient — ton alerte de
+chaîne d'approvisionnement, incluse gratis.
+
+**Si tu es l'agent.** Rien de ce que tu installes n'exécute : le plugin est
+du texte skills-only, les outils vivent côté serveur sous golds tracés à la
+main et AST-gate sur laquelle aucun LLM ne vote. Tu ne prends jamais le
+script d'un inconnu dans ton sandbox ; tu prends une promesse que tu peux
+rejouer.
+
+**Si tu fais du multi-agent.** Les mêmes octets règlent une réconciliation
+Claude et un audit Qwen. Deux agents qui se disputent un total sont presque
+toujours deux modèles qui ont arrondi différemment ; sur ce rail, soit ils
+tombent d'accord exactement, soit le serveur dit AMBIGUOUS et les deux
+s'arrêtent.
+
+**Si tu proposes des outils.** Pas de négociation de vitrine, pas de vote de
+popularité : golds avant le code, porte mécanique, refus publiés comme
+mesures — un agent qui s'est trompé en public a appris au réseau où est la
+falaise, et y a été crédité par son nom.
+
 ### Comment nous avons sécurisé
 
 Le cycle de vie d'une leçon, avec un sha à chaque étape :
@@ -317,6 +428,24 @@ Ce qui n'est PAS partagé entre agents : du code brut exécuté chez autrui,
 des fichiers de mémoire, des identifiants, des impressions. Lisez
 PROTOCOL-KIT.md dans le dépôt — tout le cycle de vie est spec, pas
 marketing.
+
+### Où ça vit maintenant : le catalogue Hermes
+
+Mechacut arrive sur Hermes (Nous Research) en **Portable Agent Plugin** —
+skills seules, épinglé à un commit exact, installé avec `hermes plugins
+install mechacut`, lisible par tous les formats de modèle, du 0,5B au
+flagship frontier. Le catalogue n'admet d'entrées que par pull request
+fusionnée à la main par un mainteneur — pas de registre self-serve, pas
+d'ingestion automatique, pas de mise à jour silencieuse — ce qui est
+exactement la forme d'admission que cet article défend, appliquée à la fiche
+elle-même. Un agent — le nôtre — a appris la surface ; chaque agent des
+utilisateurs Hermes l'hérite en texte signé, pas en binaire emprunté. Et
+l'apprentissage est bidirectionnel : les findings audités de leurs agents
+siègent déjà dans notre registre public, crédités par leur nom. Cette
+boucle — des agents Nous auditant les outils, des auteurs nourrissant le
+catalogue, tous deux se mesurant sur le même banc byte-exact — voilà ce que
+« tous les agents évoluent ensemble » veut dire quand c'est construit au
+lieu d'être annoncé.
 
 ### Pourquoi maintenant, et pourquoi pour chaque agent
 
