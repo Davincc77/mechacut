@@ -93,12 +93,25 @@ CASES = [
     ("openpyxl read 1000000 but the human saw $1,000", "display"),
     ("tarif A 0,25 €/kWh + 0,60 par jour, B 0,27 + 0,45 — à partir "
      "de combien de kWh A gagne", "crossover"),
+    # bundle 95 — l'ORTHGRAPHE ACCENTUÉE, variante que le corpus ne
+    # testait JAMAIS (ses « variantes d'accents » étaient déaccentuées :
+    # l'angle mort du test était le test). Sept dictées MESURÉES en
+    # prod le 23-nov sous v1.16.0 (WRONG/NO_MATCH avant le pli T7).
+    ("c'est quoi un prix barré légal", "discount_audit"),
+    ("prix barré légal plus bas à 80", "discount_audit"),
+    ("le prix barré est-il vrai", "discount_audit"),
+    ("la promotion est-elle licite", "discount_audit"),
+    ("recouvrement facture impayé", "aging"),
+    ("preço riscado é legal", "discount_audit"),
+    ("is the strikethrough was price legal under omnibus",
+     "discount_audit"),
     # leurres : aucune extraction fermee n'est licite — le routeur
     # doit REFUSER par le nom, pas inventer.
     ("raconte-moi une blague sur les bases de donnees", None),
     ("je ne sais pas encore ce que je veux calculer, parlons-en",
      None),
     ("435 articles et puis la vie, le temps, les gens", None),
+    ("raconte-moi une blague sur les soldes légaux", None),
 ]
 
 

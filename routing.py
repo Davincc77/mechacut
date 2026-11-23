@@ -13,6 +13,7 @@ Closed tables, stdlib only, no LLM: same words, same bytes, sha256 on it.
 import hashlib
 import json
 import re
+import unicodedata
 
 import payments
 
@@ -249,7 +250,8 @@ TABLE = (
      "sale advertised CJEU article fake-bargain solde prix barre "
      "legal licite trompeuse annonce annoncee regle des trente "
      "jours remise exageree desconto preco riscado ilegal "
-     "promocao verdadeira falsa trinta dias menor regra enganosa"),
+     "promocao verdadeira falsa trinta dias menor regra enganosa "
+     "vrai promotion"),
     ("ledger_apply_payments", "/api/v1/ledger/apply-payments",
      "numbers",
      "FIFO reconciliation of payments onto invoices",
@@ -511,7 +513,7 @@ TABLE = (
      "agenda disponibilidade horário conflito calendário"),
     ("cron_validate", "/api/v1/cron/validate", "time",
      "cron: parse, impossible-date verdict, next runs from a given time",
-     "cron schedule recurring timer expressaoScheduler agendador "
+     "cron schedule recurring timer expressao scheduler agendador "
      "rappel périodique recorrente"),
     ("crypto_address", "/api/v1/crypto/address", "identity",
      "crypto address: base58check, bech32 segwit, EIP-55 — checksum verdict",
@@ -767,16 +769,16 @@ TABLE = (
      "règle de trois, dilution C1V1, dosage mg/kg, EDD Naegele, "
      "hydratation du boulanger, part en pourcentage — la formule "
      "publiée, vos nombres substitués, le calcul exact",
-     "formula,rule of three,dilution,dosage,naegle,due date,"
-     "hydration,bakers percentage,percentage of total,vitesse,"
-     "temps distance vitesse,consommation carburant,règle de trois,"
-     "date de naissance prévue,hydratation levain,pourcentage"),
+     "formula rule of three dilution dosage naegle due date "
+     "hydration bakers percentage percentage of total vitesse "
+     "temps distance vitesse consommation carburant règle de trois "
+     "date de naissance prévue hydratation levain pourcentage"),
     ("intent_reflect", "/api/v1/intent/reflect", "core",
      "le miroir de compréhension : tu déclares ta lecture (formule + "
      "args), la machine te la rend écrite et exacte avant que tu la "
      "prennes pour la vérité",
-     "comprehension,reading check,word problem,énoncé,comprendre,"
-     "vérifier ma lecture,j'ai mal compris,misread"),
+     "comprehension reading check word problem énoncé comprendre "
+     "vérifier ma lecture j'ai mal compris misread"),
     ("intent_card", "/api/v1/intent/card", "core",
      "plain sentence -> the right tool + a pre-filled form, or the exact question to ask",
      "what can you do help intent unclear ambiguous ask human which tool "
@@ -811,7 +813,7 @@ TABLE = (
     ("text_escape", "/api/v1/text/escape", "text",
      "one value escaped for html sql shell csv json url",
      "escape injection sanitize quote sql shell html csv url "
-     "Ã©chapper echapper injection protege requete"),
+     "échapper echapper injection protege requete"),
     ("text_normalize", "/api/v1/text/normalize", "text",
      "unicode forms, accents, fullwidth, whitespace rules",
      "unicode normalize nfc nfd accents fullwidth match names dedupe "
@@ -1204,6 +1206,30 @@ STOP = STOP_EN | STOP_FR | STOP_PT
 # T6 — le plancher de confiance publié dans la réponse /route.
 CONF_FLOOR = 4
 
+# T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le
+# 23-nov-2026) : la requête est tokenisée en minuscules ASCII ; sans
+# pli, « barré » éclate en « barr » (le é est un séparateur), « légal »
+# en « l »+« gal », et 84 mots de tags accentés + les tags à majuscules
+# (RFC, CJEU, kWh…) ne répondent JAMAIS à leur propre spelling. Le pli
+# est des deux côtés — requête ET table — sinon « impayé » plié ne
+# matche plus le tag brut « impayé » : NFKD + retrait des combining
+# marks (stdlib, fermé, idempotent) + les caractères latins que NFKD
+# ne décompose PAS (œ æ ø đ ð ß et leurs doubles de casse — table
+# close ci-dessous, testée) + minuscules. Mêmes octets d'entrée,
+# mêmes octets de sortie, pour toujours.
+_TRIT = str.maketrans({"œ": "oe", "æ": "ae", "ß": "ss", "ø": "o",
+                       "đ": "d", "ð": "d",
+                       "Œ": "oe", "Æ": "ae", "ẞ": "ss", "Ø": "o",
+                       "Đ": "d", "Ð": "d"})
+
+
+def _nw(w):
+    """Normalized word: fold accents, transliterate the five NFKD
+    holdouts, lowercase. Deterministic; idempotent by construction."""
+    w = w.translate(_TRIT)
+    return "".join(c for c in unicodedata.normalize("NFKD", w)
+                   if not unicodedata.combining(c)).lower()
+
 
 def _stem(w):
     """Tiny closed suffix-stripper: deterministic, no tables, no ML."""
@@ -1220,7 +1246,7 @@ def _stem(w):
 
 def route(query, top=5):
     toks, seen = [], set()
-    for t in re.split(r"[^a-z0-9]+", (query or "").lower()):
+    for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
         if not t or t in STOP:
             continue
         # CLASSE b81 : un chiffre dans une requête est une DONNÉE,
@@ -1241,12 +1267,13 @@ def route(query, top=5):
         # pluriel ne matche jamais JAMAIS son propre mot (bug pêché
         # par food_leftovers, bundle 71 : stem("leftovers") =
         # "leftover" != "leftovers").
-        nsegs = set(filter(None, (_stem(x) for x in name.split("_"))))
-        nsegs |= set(filter(None, (_stem(x) for x in
+        nsegs = set(filter(None, (_stem(_nw(x)) for x in name.split("_"))))
+        nsegs |= set(filter(None, (_stem(_nw(x)) for x in
                                    re.split(r"[/_-]+", tail))))
-        tagset = set(filter(None, (_stem(x) for x in tags.split())))
-        pwords = set(filter(None, (_stem(x) for x in
-                                   re.split(r"[^a-z0-9]+", purpose.lower()))))
+        tagset = set(filter(None, (_stem(_nw(x)) for x in tags.split())))
+        pwords = set(filter(None, (_stem(_nw(x)) for x in
+                                   re.split(r"[^a-z0-9]+",
+                                            purpose.lower()))))
         score, matched = 0, []
         for st in toks:
             if st in nsegs:
@@ -1281,7 +1308,7 @@ STORY_TERMS = frozenset(_stem(w) for w in _STORY_WORDS.split())
 def elsewhere(query):
     """Sister-product pointer for media-shaped tasks: [] or one entry."""
     toks = set()
-    for t in re.split(r"[^a-z0-9]+", (query or "").lower()):
+    for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
         if t:
             toks.add(_stem(t))
     if toks & STORY_TERMS:
