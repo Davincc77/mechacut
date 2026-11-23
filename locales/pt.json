@@ -175,7 +175,7 @@
   "kit.c3.foot": "Golds traçados ANTES do código, AST-gate, pin-gate. Status: proposto, atestado, rede-verificado — o kit cresce localmente, a prova cresce de volta na rede. Uma lição é uma proposta; o banco a tranca.",
   "kit.howto.p1": "Instalar a skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> — soltar o arquivo no agente (CLAUDE.md, AGENTS.md, skills/). ~650 tokens, calibrado para modelos pequenos.",
   "kit.howto.p2": "Fazê-lo consultar primeiro: antes de agir, o agente descreve o problema em uma frase a /route/resolve — o diretório devolve a ferramenta que já existe, ou diz que não há.",
-  "kit.howto.p3": "Chamar: POSTs sem estado, sem chave no livre; a resposta traz seu sha256, a recusa traz campo + esperado + exemplo. A especificação PROTOCOL-KIT.md ESTÁ PUBLICADA (raiz do repositório) ; o runner em disco é um lote seguinte — não está no ar, não está prometido, acompanhado aqui.",
+  "kit.howto.p3": "Chamar: POSTs sem estado, sem chave no livre; a resposta traz seu sha256, a recusa traz campo + esperado + exemplo. Tudo o que há nesta página já funciona: uma linha instala o arquivo de skill, o diretório responde, as chamadas livres não têm chave.",
   "kit.plain.sum": "Você não é desenvolvedor? Sem problema — a gente traduz.",
   "kit.plain.p1": "Abra seu assistente de IA de sempre (Claude, ChatGPT, Grok, Copilot…).",
   "kit.plain.p2": "Envie esta mensagem: \"Leia https://mechacut.studio/SKILL-MINI.md e siga-o para os meus cálculos.\" Nada para instalar, nada para pagar, sem conta.",
