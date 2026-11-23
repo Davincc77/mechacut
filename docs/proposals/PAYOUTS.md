@@ -40,8 +40,13 @@ gave them. This is written in the propose response itself
 immutability.
 
 ## Deployment procedure (human, ~10 minutes, Base mainnet)
-1. Export your hot wallet key for the deploy (never in chat, never in
-   git): `export PRIVATE_KEY=*** `RPC_URL=https://mainnet.base.org`.
+1. In YOUR terminal (never in chat): set the public treasury and run
+   the deploy — the key of the gas-paying account is asked by the
+   script with a MASKED PROMPT (getpass): never in shell history,
+   never printed, never stored. The gas account may be a burner with
+   ~$5 of ETH on Base; the contracts have NO owner, so that account
+   controls nothing after paying gas.
+   `export TREASURY_ADDRESS="0x…your-main-wallet" RPC_URL=https://mainnet.base.org`
 2. USDC on Base is fixed: `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`.
    Treasury = your payout address for the core's half.
 3. `python scripts/deploy_splitter.py factory` — deploys
