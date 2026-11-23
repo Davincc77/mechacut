@@ -41,10 +41,21 @@ def test_fr_grammar_only_query_refuses_by_name():
 
 def test_pt_dead_query_no_longer_prescribed():
     # avant T6 : money_baggage score 5 sur ["de","40"] — prescription
-    # de bruit. Le trou PT (loja/vendeu/manha absents des tags) reste
-    # OUVERT et honnête : liste vide, pas une fausse aiguille.
-    assert routing.route("loja tinha 435, vendeu 35 de manha, "
-                         "40% do resto a tarde, quantos restam") == []
+    # de bruit. En T6, la ligne mourait HONNÊTEMENT (liste vide) : le
+    # trou PT était ouvert et déclaré. BUNDLE 72 LE FERME : la phrase
+    # du radar (dictée depuis 21h57) route désormais sur la recette
+    # shop par ses SIX mots de contenu PT — l'inversion de cette
+    # assertion EST le livrable, loi T6 intacte (les mots de grammaire
+    # seuls restent sous le plancher, vérifié au test suivant).
+    hits = routing.route("loja tinha 435, vendeu 35 de manha, "
+                         "40% do resto a tarde, quantos restam")
+    assert hits[0]["tool"] == "recipe_shop_reste"
+
+
+def test_pt_grammar_only_still_refuses():
+    # le trou bouché ne rouvre pas la plaie T6 : une phrase PT sans
+    # AUCUN contenu possédé meurt toujours liste vide.
+    assert routing.route("me conta uma piada sobre a vida") == []
 
 
 def test_raw_stop_saves_mois_from_moi():

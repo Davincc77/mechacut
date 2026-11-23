@@ -1315,6 +1315,154 @@
   },
   {
    "body": {
+    "dishes": [
+     {
+      "minutes": 55,
+      "name": "pie",
+      "temp": 180
+     }
+    ],
+    "serve_at": "2026-11-26T16:00"
+   },
+   "name": "food_ovenschedule_bare_temp_refused",
+   "path": "/api/v1/food/ovenschedule",
+   "sha256": "37cc6eb66a4f3a80f2482390a1090cb53f268f36a28eab627b1579f56ea9aa11",
+   "status": 400
+  },
+  {
+   "body": {
+    "dishes": [
+     {
+      "minutes": 40,
+      "name": "gratin",
+      "rest": 10,
+      "temp": 200,
+      "temp_unit": "C"
+     }
+    ],
+    "serve_at": "2026-11-28T12:00"
+   },
+   "name": "food_ovenschedule_celsius_392",
+   "path": "/api/v1/food/ovenschedule",
+   "sha256": "82974a20fb0442a888f5b4ae573cd5705d1c658dcbc193cce3dedc465eb290d1",
+   "status": 200
+  },
+  {
+   "body": {
+    "dishes": [
+     {
+      "minutes": 195,
+      "name": "turkey",
+      "rest": 25,
+      "temp": 325,
+      "temp_unit": "F"
+     },
+     {
+      "minutes": 45,
+      "name": "stuffing",
+      "rest": 15,
+      "temp": 325,
+      "temp_unit": "F"
+     },
+     {
+      "minutes": 15,
+      "name": "rolls",
+      "temp": 425,
+      "temp_unit": "F"
+     }
+    ],
+    "serve_at": "2026-11-26T16:00"
+   },
+   "name": "food_ovenschedule_no_gap_conflict",
+   "path": "/api/v1/food/ovenschedule",
+   "sha256": "898c57a493f7fcf6c8fea8030d270ecec30709e8d56a95df49354e7554788f84",
+   "status": 200
+  },
+  {
+   "body": {
+    "dishes": [
+     {
+      "minutes": 300,
+      "name": "brisket",
+      "rest": 180,
+      "temp": 275,
+      "temp_unit": "F"
+     }
+    ],
+    "serve_at": "2026-11-26T16:00"
+   },
+   "name": "food_ovenschedule_rest_danger_refused",
+   "path": "/api/v1/food/ovenschedule",
+   "sha256": "8c516cf3953664d7ede9809ceb3d9b3aa81ddfe7acbb81480888d5745f86d543",
+   "status": 400
+  },
+  {
+   "body": {
+    "dishes": [
+     {
+      "minutes": 195,
+      "name": "turkey",
+      "rest": 25,
+      "temp": 325,
+      "temp_unit": "F"
+     },
+     {
+      "minutes": 45,
+      "name": "stuffing",
+      "rest": 15,
+      "temp": 325,
+      "temp_unit": "F"
+     },
+     {
+      "minutes": 15,
+      "name": "rolls",
+      "temp": 425,
+      "temp_unit": "F"
+     }
+    ],
+    "earliest_start": "2026-11-26T13:00",
+    "preheat": 20,
+    "serve_at": "2026-11-26T16:00"
+   },
+   "name": "food_ovenschedule_short_window",
+   "path": "/api/v1/food/ovenschedule",
+   "sha256": "6c722b158d75432ba9f6cc95ccc060a9d23e0986f38b9327eda4bfe8bbd58b80",
+   "status": 200
+  },
+  {
+   "body": {
+    "dishes": [
+     {
+      "minutes": 195,
+      "name": "turkey",
+      "rest": 25,
+      "temp": 325,
+      "temp_unit": "F"
+     },
+     {
+      "minutes": 45,
+      "name": "stuffing",
+      "rest": 15,
+      "temp": 325,
+      "temp_unit": "F"
+     },
+     {
+      "minutes": 15,
+      "name": "rolls",
+      "temp": 425,
+      "temp_unit": "F"
+     }
+    ],
+    "preheat": 20,
+    "serve_at": "2026-11-26T16:00"
+   },
+   "name": "food_ovenschedule_thanksgiving_2026",
+   "path": "/api/v1/food/ovenschedule",
+   "sha256": "afc44cb6f26a78073cf19b565f402403395dae424d51d1fba52b1ff34cf71750",
+   "status": 200
+  },
+  {
+   "body": {
     "mode": "cook",
     "weight": "14"
    },

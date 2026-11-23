@@ -359,7 +359,7 @@ TR = {
                  "line into ANY agent, even the smallest — it becomes "
                  "the full manual:",
     "everyday.h2": "For the rest of us",
-  "everyday.intro": "No code, no jargon. Sixteen things a normal person "
+  "everyday.intro": "No code, no jargon. Nineteen things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -480,6 +480,19 @@ TR = {
                       "safe indefinitely at 0\u00b0F. Dates are "
                       "arguments; 165\u00b0F is the judge, gravy a "
                       "rolling boil.",
+  "everyday.e19.name": "Three dishes want the oven — the countdown, "
+                       "every conflict named",
+  "everyday.e19.say": "Eight 2026 timelines publish the same dinner "
+                      "with rests of 20 to 60 minutes, 325 or 350 °F "
+                      "— and nobody counts the preheat that "
+                      "eats 45 minutes. Scheduled BACKWARDS from your "
+                      "serve_at (an argument, never the wall clock): "
+                      "one oven, one dish, rests outside; a dish "
+                      "entering the instant the previous leaves at "
+                      "another setting is a named conflict; a bare "
+                      "180 without a unit is refused; rest beyond 2 h "
+                      "hits the FSIS danger zone — same rule as "
+                      "the leftovers window.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -796,7 +809,7 @@ TR = {
                  "dans n'importe quel agent, m\u00eame le plus petit "
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour le commun des mortels",
-  "everyday.intro": "Pas de code, pas de jargon. Seize choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Dix-neuf choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
                     "réelle du serveur, pas une maquette.",
@@ -925,6 +938,20 @@ TR = {
                       "indéfiniment à −18 °C. Les dates sont des "
                       "arguments ; 74 °C (165 °F) au thermomètre, le "
                       "jus au bouillon franc.",
+  "everyday.e19.name": "Trois plats veulent le four — le compte à "
+                       "rebours, les conflits nommés",
+  "everyday.e19.say": "Huit timelines de Thanksgiving 2026 publient "
+                      "le même dîner avec des repos de 20 à 60 "
+                      "minutes, 325 ou 350 °F — et personne ne compte "
+                      "les 45 minutes de préchauffage. Calcul À "
+                      "REBOURS depuis votre heure de service (un "
+                      "argument, jamais l'horloge murale) : un four, "
+                      "un plat à la fois, repos dehors. Le plat "
+                      "suivant entre à la minute où le précédent "
+                      "sort, à une autre consigne : conflit nommé ; "
+                      "« 180 » sans unité : refusé ; au-delà de 2 h "
+                      "de repos : zone de danger FSIS, la même règle "
+                      "que pour les restes.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -1237,7 +1264,7 @@ TR = {
   "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para o cidad\u00e3o comum",
-  "everyday.intro": "Sem código, sem jargão. Dezesseis coisas que "
+  "everyday.intro": "Sem código, sem jargão. Dezenove coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -1357,6 +1384,22 @@ TR = {
                       "qualidade rotulada qualidade: seguro "
                       "indefinidamente a 0 °F. Datas são argumentos; "
                       "165 °F é o juiz, o molho em fervura forte.",
+  "everyday.e19.name": "Três pratos querem o forno — a contagem e os "
+                       "conflitos nomeados",
+  "everyday.e19.say": "Oito cronogramas de Thanksgiving 2026 publicam "
+                      "o mesmo jantar com descansos de 20, 25, 30, 45 "
+                      "ou 60 minutos, 325 ou 350 °F — e ninguém conta "
+                      "os 45 minutos de preaquecimento. A ferramenta "
+                      "calcula PARA TRÁS a partir do seu horário de "
+                      "servir (argumento, nunca o relógio): um forno, "
+                      "um prato por vez, descanso fora. O próximo "
+                      "prato que entra na hora em que este sai, a "
+                      "outra temperatura, é conflito nomeado "
+                      "(no_gap_temp_change); os minutos de ajuste são "
+                      "argumento (preheat); «180» sem unidade é "
+                      "recusado — 82 °C ou 356 °F é cara ou coroa; e "
+                      "repouso além de duas horas cai na zona de "
+                      "perigo do FSIS, a mesma regra das sobras.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -2049,7 +2092,9 @@ W = {
       "poultry": "\u2192 16-lb bird into the fridge by %s, not "
                  "before %s",
       "leftovers": "\u2192 Thanksgiving 2026 replay: eat by %s \u00b7 "
-                   "band %s"},
+                   "band %s",
+      "ovenschedule": "\u2192 oven on %s, bird out %s \u00b7 temp "
+                      "conflicts: %d \u2014 no timeline checks this"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -2084,7 +2129,10 @@ W = {
       "poultry": "\u2192 dinde 16 lb : cong\u00e9lateur avant %s, "
                  "jamais avant %s",
       "leftovers": "\u2192 replay thanksgiving 2026 : \u00e0 consommer "
-                   "avant %s \u00b7 bande %s"},
+                   "avant %s \u00b7 bande %s",
+      "ovenschedule": "\u2192 four allumé %s, dinde dehors %s · "
+                      "conflits : %d — aucune timeline ne vérifie "
+                      "ça"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -2119,7 +2167,10 @@ W = {
       "poultry": "\u2192 peru de 16 lb: geladeira at\u00e9 %s, nunca "
                  "antes de %s",
       "leftovers": "\u2192 replay thanksgiving 2026: comer at\u00e9 %s "
-                   "\u00b7 banda %s"},
+                   "\u00b7 banda %s",
+      "ovenschedule": "\u2192 forno ligado %s, peru de fora %s · "
+                      "conflitos de temperatura: %d — nenhum "
+                      "cronograma avisa isso"},
 }
 
 
@@ -2253,6 +2304,18 @@ _EVERYDAY_CALLS = [
       "stored_at": "2026-11-26T19:00", "as_of": "2026-11-30"},
      "leftovers", lambda d, L_: (
          d["fridge"]["last_day"], d["as_of"]["band"])),
+    ("/api/v1/food/ovenschedule",
+     {"serve_at": "2026-11-26T16:00",
+      "dishes": [
+          {"name": "turkey", "minutes": 195, "temp": 325,
+           "temp_unit": "F", "rest": 25},
+          {"name": "stuffing", "minutes": 45, "temp": 325,
+           "temp_unit": "F", "rest": 15},
+          {"name": "rolls", "minutes": 15, "temp": 425,
+           "temp_unit": "F"}]},
+     "ovenschedule", lambda d, L_: (
+         d["oven_on_at"][11:16], d["dishes"][0]["out_at"][11:16],
+         d["temp_conflicts"])),
 ]
 
 

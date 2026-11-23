@@ -1,0 +1,16 @@
+{
+ "name": "food_ovenschedule_celsius_392",
+ "path": "/api/v1/food/ovenschedule",
+ "body": {
+  "serve_at": "2026-11-28T12:00",
+  "dishes": [
+   {
+    "name": "gratin",
+    "minutes": 40,
+    "temp": 200,
+    "temp_unit": "C",
+    "rest": 10
+   }
+  ]
+ }
+}

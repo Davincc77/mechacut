@@ -1,0 +1,30 @@
+{
+ "name": "food_ovenschedule_thanksgiving_2026",
+ "path": "/api/v1/food/ovenschedule",
+ "body": {
+  "serve_at": "2026-11-26T16:00",
+  "preheat": 20,
+  "dishes": [
+   {
+    "name": "turkey",
+    "minutes": 195,
+    "temp": 325,
+    "temp_unit": "F",
+    "rest": 25
+   },
+   {
+    "name": "stuffing",
+    "minutes": 45,
+    "temp": 325,
+    "temp_unit": "F",
+    "rest": 15
+   },
+   {
+    "name": "rolls",
+    "minutes": 15,
+    "temp": 425,
+    "temp_unit": "F"
+   }
+  ]
+ }
+}

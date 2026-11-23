@@ -235,6 +235,7 @@ import unitpricekit
 import modelidkit
 import poultrykit
 import leftoverskit
+import ovenschedulekit
 import auditor
 import sayings
 import verdict
@@ -329,7 +330,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.97.0",
+    version="0.98.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4983,6 +4984,30 @@ def api_food_leftovers(req: FoodLeftoversRequest):
     return err if err else body
 
 
+class FoodOvenscheduleRequest(BaseModel):
+    serve_at: Optional[str] = None
+    dishes: Optional[Any] = None
+    preheat: Optional[Any] = None
+    earliest_start: Optional[str] = None
+
+
+def run_food_ovenschedule(args: dict):
+    try:
+        out = ovenschedulekit.run_ovenschedule(args)
+    except ovenschedulekit.OvenError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/food/ovenschedule")
+def api_food_ovenschedule(req: FoodOvenscheduleRequest):
+    body, err = run_food_ovenschedule(req.model_dump())
+    return err if err else body
+
+
 class JsonCoerceRequest(BaseModel):
     raw: Optional[str] = None
     json_schema: Optional[Dict[str, str]] = Field(default=None,
@@ -5442,6 +5467,7 @@ TOOL_RUN = {
            "agent_modelid": run_agent_modelid,
            "food_poultry": run_food_poultry,
            "food_leftovers": run_food_leftovers,
+           "food_ovenschedule": run_food_ovenschedule,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -8656,6 +8682,78 @@ MCP_TOOLS = [
                           "description": "optional ISO DATE 'now': "
                                          "WITHIN / LAST_DAY / "
                                          "EXPIRED band"},
+            },
+        },
+    },
+    {
+        "name": "food_ovenschedule",
+        "description": (
+            "One oven, many dishes, one serve time: the countdown "
+            "scheduled BACKWARDS from serve_at as an argument — no "
+            "wall clock, no invented cook times (durations come from "
+            "you; the FSIS weight table lives in food/poultry). "
+            "Eight published 2026 Thanksgiving timelines agree on "
+            "nothing: rests of 20, 25, 30, 45 or 60 minutes for the "
+            "same bird, 325 vs 350 F, and preheating that silently "
+            "eats 45 minutes (thekitchencalc). This tool orders the "
+            "load, keeps rests OUTSIDE the oven, and names what the "
+            "timelines never check: consecutive dishes at different "
+            "settings with zero minutes between them (no_gap_"
+            "temp_change), the adjustment minutes as an explicit "
+            "argument (preheat, default 0 = 'my oven holds'), and "
+            "holds beyond the FSIS 2-hour danger zone as a refusal "
+            "by name — the same rule as food/leftovers. A bare "
+            "temperature is refused too: 180 without a unit is a "
+            "coin flip between 82 C and 356 F. earliest_start "
+            "compares to the oven lighting, short window returned "
+            "as short_by_minutes, feasible=False — the arithmetic "
+            "is the contract, the window belongs to the world. Max "
+            "12 dishes. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["serve_at", "dishes"],
+            "properties": {
+                "serve_at": {"type": "string",
+                             "description": "naive ISO when dinner "
+                                            "hits the table, "
+                                            "2026-11-26T16:00"},
+                "dishes": {"type": "array",
+                           "description": "load order, 1-12 items",
+                           "items": {"type": "object",
+                                     "required": ["name", "minutes",
+                                                  "temp",
+                                                  "temp_unit"],
+                                     "properties": {
+                                         "name": {"type": "string"},
+                                         "minutes": {
+                                             "type": "integer",
+                                             "minimum": 1},
+                                         "temp": {
+                                             "type": "integer",
+                                             "description": "never "
+                                               "accepted without "
+                                               "temp_unit"},
+                                         "temp_unit": {
+                                             "type": "string",
+                                             "enum": ["F", "C"]},
+                                         "rest": {
+                                             "type": "integer",
+                                             "minimum": 0,
+                                             "maximum": 120,
+                                             "description": "minutes "
+                                               "OUTSIDE the oven; "
+                                               ">120 refused (FSIS "
+                                               "danger zone)"}}}},
+                "preheat": {"type": "integer", "minimum": 0,
+                            "maximum": 60, "default": 0,
+                            "description": "adjustment minutes the "
+                                           "oven needs between "
+                                           "different settings"},
+                "earliest_start": {
+                    "type": "string",
+                    "description": "naive ISO — earliest moment the "
+                                   "oven may be lit"},
             },
         },
     },

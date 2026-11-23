@@ -545,9 +545,17 @@ TABLE = (
      "% de l'après-midi -> la trace des trois pas et le reste exact ; "
      "0/28 nu et retry sur cette forme (bench v15) — la décomposition "
      "est le travail, il est déjà fait ici",
+     # Bundle 72 (23-11) — trou PT dicté par le radar, ligne « loja
+     # tinha 435… » NO_MATCH active depuis 21h57 (scans 21h57→06:22).
+     # Les 7 mots sont LIBRES (audit de possession du cycle : aucun
+     # voisin ne les porte — sobras/geladeira/frigo restent chez
+     # leftovers, restante chez partage). « quantos » JAMAIS pris
+     # (interrogatif, loi c129b4d). Un seul de ces mots = 3 < plancher
+     # T6 : la loi anti-mot-incidentel tient, la phrase complète = 18.
      "remaining stock shop inventory sold of the rest du reste "
      "afternoon pourcentage apres-midi combien restent il reste "
-     "quantite restante vendas restantes restando depois"),
+     "quantite restante vendas restantes restando depois "
+     "loja vendeu manha manh tarde resto restam"),
     ("recipe_partage_reste", "/api/v1/fiche/partage-reste", "numbers",
      "part de la PART : total, première part, seconde « du reste » -> "
      "la seconde part + le reliquat, fractions exactes tracées",
@@ -841,6 +849,20 @@ TABLE = (
      "bin danger conservation rechauffer sobras geladeira "
      "esquentar keep garder rester consommer validade durar "
      "safe frigo"),
+    # Bundle 73 (23-11) — le compte à rebours d'UN four. Tags neufs
+    # passés à l'audit de possession : oven / countdown / preheat /
+    # conflict / serve / minuterie / forno / assado / sequencia /
+    # cronograma / temperatura étaient LIBRES ; « schedule » (7
+    # possesseurs), « roast » (poultry), « timing » (leftovers) et
+    # « rest » (les deux recettes) ne sont PAS pris — pas de
+    # co-quille, loi des voisins.
+    ("food_ovenschedule", "/api/v1/food/ovenschedule", "dates",
+     "un four, des plats, une heure de service : compte à rebours à "
+     "l'envers, conflits de température nommés, jamais d'horloge "
+     "murale — les timelines web ne vérifient rien de tout ça",
+     "oven countdown preheat conflict serve four plan du four "
+     "minuterie forno assado sequencia cronograma temperatura "
+     "température"),
 
 )
 

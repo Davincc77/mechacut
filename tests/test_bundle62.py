@@ -267,6 +267,9 @@ def test_e15_landing_card_baked_three_languages():
         "sur 100,00" in fr["everyday_grid"]
     assert "a placa diz 50%, o par sai por 20,0000 — você paga 80,00 " \
         "de 100,00" in pt["everyday_grid"]
-    # resize 22-11 bundle66: la grille passe a seize puces
-    for doc, word in ((en, "Sixteen"), (fr, "Seize"), (pt, "Dezesseis")):
+    # resize 22-11 bundle66: la grille passe a seize puces ;
+    # resize 23-11 bundle73 : e19 (ovenschedule) — dix-neuf, compte
+    # recalé sur le nombre réel de cartes (e17/e18 avaient dérivé).
+    for doc, word in ((en, "Nineteen"), (fr, "Dix-neuf"),
+                      (pt, "Dezenove")):
         assert word in doc["everyday.intro"]

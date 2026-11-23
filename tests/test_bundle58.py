@@ -416,10 +416,13 @@ def test_everyday_chip_baked_three_languages():
     assert "billed 6 kg vs 5 kg" in en["everyday_grid"]
     assert "facturé 6 kg" in fr["everyday_grid"]
     assert "cobrado 6 kg" in pt["everyday_grid"]
-    # resize 22-11 bundle66: e16 (unitprice) rejoint la grille
-    assert "Sixteen" in en["everyday.intro"]
-    assert "Seize" in fr["everyday.intro"]
-    assert "Dezesseis" in pt["everyday.intro"]
+    # resize 22-11 bundle66: e16 (unitprice) rejoint la grille.
+    # resize 23-11 bundle73: le COMPTE était périmé (e17/e18 ajoutés
+    # sans recompter — dérive mesurée) ; e19 (ovenschedule) le remet à
+    # jour, et l'assertion porte désormais le compte réel des cartes.
+    assert "Nineteen" in en["everyday.intro"]
+    assert "Dix-neuf" in fr["everyday.intro"]
+    assert "Dezenove" in pt["everyday.intro"]
 
 
 def test_golden_contains_eleven_new_pins():

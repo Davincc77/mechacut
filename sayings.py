@@ -242,6 +242,17 @@ SAY = {
         "pt": "o peru foi para a geladeira às 21h depois do jantar "
               "das 16h — até que dia comer, e até quando se "
               "congelar hoje à noite"},
+    "/api/v1/food/ovenschedule": {
+        "en": "the bird, the stuffing and the rolls all want the "
+              "oven before a 4 pm serve — give me the countdown and "
+              "name the temperature conflicts",
+        "fr": "la dinde, la farce et les petits pains veulent tous "
+              "le four avant un service de 16 h — donne-moi le "
+              "compte à rebours et nomme les conflits de "
+              "température",
+        "pt": "o peru, o recheio e os pães querem todos o forno "
+              "antes das 16h — me dá a contagem regressiva e "
+              "nomeia os conflitos de temperatura"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",

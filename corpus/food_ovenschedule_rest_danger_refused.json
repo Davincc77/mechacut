@@ -1,0 +1,16 @@
+{
+ "name": "food_ovenschedule_rest_danger_refused",
+ "path": "/api/v1/food/ovenschedule",
+ "body": {
+  "serve_at": "2026-11-26T16:00",
+  "dishes": [
+   {
+    "name": "brisket",
+    "minutes": 300,
+    "temp": 275,
+    "temp_unit": "F",
+    "rest": 180
+   }
+  ]
+ }
+}

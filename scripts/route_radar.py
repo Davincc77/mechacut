@@ -35,6 +35,12 @@ import urllib.request
 from datetime import datetime
 
 APP = "https://mechacut.studio"
+# Règle de cadence (bundle 72) : le scan 06:22 du 23-nov s'est
+# auto-infligé un plan-http-429 — 0,3 s de sommeil = 33 req/min,
+# au-dessus de NOTRE propre règle 25/min enseignée à l'instance qui
+# consomme. La lentille ferme sa douleur : toute sonde de PROD attend
+# APP_MIN_GAP.
+APP_MIN_GAP = 2.6
 UA = ("mechacut-radar/1.0 (growth-loop; contact: "
       "github.com/Davincc77/mechacut)")
 NOUS = "https://inference-api.nousresearch.com/v1"
@@ -124,16 +130,23 @@ def probe_router(manifest):
         # destination. En dessous, c'est un refus doux ; au-dessus,
         # OVERMATCH. Les scores des vraies douleurs (shop/prix) sont
         # >=9 sur ce corpus.
+        # Bundle 72 : le verdict s'appuie sur la LISTE RENVOYÉE, plus
+        # sur un score-magasin (l'ancien « <= 5 » datait d'avant T6 :
+        # sous le plancher 4 publié, un leurre à 4-5 franchissait la
+        # porte comme « leurre-ok »). Un refus = liste vide (ou
+        # elsewhere) ; c'est la garantie T6 elle-même, pas un seuil
+        # dupliqué dans l'outillage.
         if want is None:
-            rec["verdict"] = ("leurre-ok" if top_score <= 5 or
-                              body.get("elsewhere") else "OVERMATCH")
+            rec["verdict"] = ("leurre-ok" if (not tools or
+                                              body.get("elsewhere"))
+                              else "OVERMATCH")
         else:
             hit = any(want.lower() in n.lower() for n in names[:3])
             rec["verdict"] = ("ok" if hit else
-                              ("NO_MATCH" if top_score <= 5
+                              ("NO_MATCH" if not tools
                                else "WRONG"))
         rows.append(rec)
-        time.sleep(0.3)
+        time.sleep(APP_MIN_GAP)
     if has_plan:
         for text, want in CASES[:8]:
             st, body = get(APP + "/api/v1/router/plan",
@@ -151,7 +164,7 @@ def probe_router(manifest):
                                              str(got).lower())
                                else "plan-WRONG")}
             rows.append(rec)
-            time.sleep(0.3)
+            time.sleep(APP_MIN_GAP)
     return rows
 
 
@@ -167,24 +180,36 @@ def probe_catalog(sample=12):
     k = key()
     if not k:
         return [{"verdict": "catalog-skipped", "text": "pas de cle"}]
-    req = urllib.request.Request(NOUS + "/models", headers={
-        "Authorization": "Bearer " + k, "User-Agent": UA})
+    # Bundle 72 : la lecture passe par get() comme le reste — un seul
+    # chemin réseau, et le test peut rejouer la sonde hors-ligne.
+    st, listing = get(NOUS + "/models",
+                      headers={"Authorization": "Bearer " + k})
     try:
-        ids = sorted(m["id"] for m in json.loads(
-            urllib.request.urlopen(req, timeout=60).read())["data"])
-    except Exception as e:
-        return [{"verdict": "catalog-error", "text": str(e)[:80]}]
+        ids = sorted(m["id"] for m in listing["data"])
+    except Exception:
+        return [{"verdict": "catalog-error",
+                 "text": "http-%d" % st}]
     step = max(1, len(ids) // sample)
     picked = ids[::step][:sample]
     out = []
     for mid in picked:
-        body = json.dumps({"model": mid, "stream": False,
-                           "max_tokens": 2, "messages": [{"role":
-                           "user", "content": "OK"}]}).encode()
-        st, _ = get(NOUS + "/chat/completions", data=body, headers={
-            "Authorization": "Bearer " + k,
-            "Content-Type": "application/json"})
-        out.append({"text": mid, "want": None,
+        # Bundle 72 — le verdict doit TYPER l'endpoint. Mesuré 06:22 :
+        # google/gemini-embedding-001:batch, appelé en /chat par
+        # l'ancienne sonde, renvoyait http-400 — le catalogue mélange
+        # les TYPES (chat/embeddings) sans le dire dans l'id ; c'est
+        # le piège V23 sous son second jour (listed ≠ invocable ICI).
+        embed = "embed" in mid.lower()
+        if embed:
+            path, probe = "/embeddings", {"model": mid, "input": "OK"}
+        else:
+            path, probe = "/chat/completions", {
+                "model": mid, "stream": False, "max_tokens": 2,
+                "messages": [{"role": "user", "content": "OK"}]}
+        st, _ = get(NOUS + path, data=json.dumps(probe).encode(),
+                    headers={
+                        "Authorization": "Bearer " + k,
+                        "Content-Type": "application/json"})
+        out.append({"text": mid, "want": "embed" if embed else None,
                     "verdict": "ok" if st == 200 else
                     ("MIRAGE" if st == 404 else "http-%d" % st)})
         time.sleep(1.0)

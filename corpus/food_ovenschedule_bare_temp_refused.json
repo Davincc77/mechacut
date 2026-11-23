@@ -1,0 +1,14 @@
+{
+ "name": "food_ovenschedule_bare_temp_refused",
+ "path": "/api/v1/food/ovenschedule",
+ "body": {
+  "serve_at": "2026-11-26T16:00",
+  "dishes": [
+   {
+    "name": "pie",
+    "minutes": 55,
+    "temp": 180
+   }
+  ]
+ }
+}
