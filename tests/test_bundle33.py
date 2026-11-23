@@ -28,6 +28,14 @@ def ossl_field(name):
     for line in txt.splitlines():
         k, _, v = line.partition("=")
         f[k.strip()] = v.strip()
+    # Labels differ by implementation: LibreSSL (/usr/bin) writes
+    # "SHA256 Fingerprint", OpenSSL 3.x (homebrew) writes
+    # "sha256 Fingerprint" — same hex bytes (verified side by side,
+    # 23-nov-2026). Alias the label; the VALUE is untouched, so the
+    # field-by-field comparison stays full-hex whichever openssl is
+    # on PATH.
+    if "SHA256 Fingerprint" not in f and "sha256 Fingerprint" in f:
+        f["SHA256 Fingerprint"] = f["sha256 Fingerprint"]
     return f
 
 
