@@ -501,3 +501,242 @@ def money_ledger_summary(entries, opening_balance="0"):
                        "outflow": _fmt2(total_out),
                        "net": _fmt2(total_in - total_out)},
             "closing_balance": _fmt2(bal)}
+
+
+# ---------------------------------------------------------------------
+# invoice/validate-totals (ROADMAP-FINANCE 1.4) — claim-vs-claim.
+# ---------------------------------------------------------------------
+
+_Q2 = Decimal("0.01")
+
+
+def _round2(x):
+    return x.quantize(_Q2, rounding=ROUND_HALF_UP)
+
+
+def money_validate_totals(lines, declared, tax_mode="exclusive",
+                          currency=None):
+    """Validate DECLARED invoice numbers against the arithmetic the
+    document itself asserts (ROADMAP-FINANCE 1.4). This tool does NOT
+    compute an invoice — /api/v1/recipe/invoice does. The published
+    identities (AGTNurat/LLM-invoice-extraction README, checked
+    23-nov-2026): amount == qty x unit_price per line, sum of line
+    bases == subtotal, subtotal - discount + tax == total, and the
+    tax claim against per-line tax_rate.
+
+    Rules, all published in this docstring (determinisme d'admission) :
+      * Comparison is cent-level HALF-UP. A document built with
+        banker's rounding can show a named 0.01 delta — the delta is
+        the product, never silently corrected: "a corrected number
+        destroys the evidence that the receipt didn't add up"
+        (antonau.tech, nov-2026). The raw sub-cent product travels as
+        expected_exact whenever it differs.
+      * A line base is its declared amount when present, else
+        qty x unit_price. Signs are NOT adjudicated: a credit line is
+        a negative in one of the factors and the identity holds —
+        refusing it would reject legitimate documents.
+      * The total chain uses declared parts only: subtotal declared or
+        recomputed from lines (subtotal_source names which), discount
+        omitted means 0 (convention published here), tax omitted means
+        0 ONLY when no line carries a tax_rate — otherwise the check
+        is not_checked rather than a guess (declaring a total while
+        hiding the tax is exactly the ambiguous document).
+      * The tax claim is checked against TWO published methods:
+        aggregate rounding round2(sum of exact bases x rate) and
+        per-line rounding sum of round2 per line. A declared tax that
+        matches either passes, method named; matching neither fails
+        with the delta against the aggregate.
+      * Blind spot, published as a fact (the same README's
+        coordinated_price experiment: 49/49): an internally
+        consistent wrong number is INVISIBLE to identity checks.
+        This tool validates that the document adds up to itself.
+    Money inputs: plain decimal strings, at most 2 places (sub-cent
+    claims are a num/round problem, grouped forms a num/parse one).
+    tax_rate: plain 0..100 (percent of the exclusive base).
+    """
+    if tax_mode not in ("exclusive", "inclusive"):
+        raise MoneyError("tax_mode must be 'exclusive' or 'inclusive' "
+                         "(got %r) — the closed table offers nothing "
+                         "else" % (tax_mode,))
+    if not lines:
+        raise MoneyError("no lines — there is nothing to validate a "
+                         "claim against (an empty document is a "
+                         "refusal, not a table of zeros: same law as "
+                         "aging and apply-payments)")
+    declared = declared or {}
+    if not any(k in declared for k in ("subtotal", "discount", "tax",
+                                       "total")):
+        raise MoneyError("no declared totals to validate — computing "
+                         "is another contract: /api/v1/recipe/invoice "
+                         "builds an invoice, this tool auditions a "
+                         "claim")
+    checked_fields = [k for k in ("subtotal", "discount", "tax",
+                                  "total") if k in declared]
+    if checked_fields == ["discount"]:
+        raise MoneyError("a lone discount forms no identity — declare "
+                         "at least subtotal, tax or total alongside")
+
+    bases = []
+    checks = []
+    seen_ids = set()
+    has_rate = False
+    for i, line in enumerate(lines):
+        lid = line.get("id")
+        if lid is not None:
+            if lid in seen_ids:
+                raise MoneyError("duplicate line id %r — ids are the "
+                                 "join key of the audit, they must be "
+                                 "unique (same law as apply-payments)"
+                                 % (lid,))
+            seen_ids.add(lid)
+        name = lid if lid is not None else "#%d" % (i + 1,)
+        qty = _dec_plain(line.get("qty"), "lines[%s].qty" % name)
+        price = _money2(line.get("unit_price"),
+                        "lines[%s].unit_price" % name)
+        exact = qty * price
+        declared_amount = line.get("amount")
+        if declared_amount is not None:
+            a = _money2(declared_amount, "lines[%s].amount" % name)
+            exp = _round2(exact)
+            checks.append({
+                "check": "line:%s" % name,
+                "declared": _fmt2(a), "expected": _fmt2(exp),
+                "delta": _fmt2(a - exp),
+                "status": "pass" if a == exp else "fail",
+                **({"expected_exact": format(exact, "f")}
+                   if _round2(exact) != exact else {}),
+            })
+            base = a
+        else:
+            base = exact
+        rate = line.get("tax_rate")
+        rate_d = None
+        if rate is not None:
+            has_rate = True
+            rate_d = _dec_plain(rate, "lines[%s].tax_rate" % name)
+            if rate_d < 0 or rate_d > 100:
+                raise MoneyError(
+                    "lines[%s].tax_rate %r outside 0..100 — percent of "
+                    "the base; a compound surcharge is its own line, "
+                    "not a rate above 100" % (name, rate))
+        bases.append((base, rate_d))
+
+    subtotal_source = "declared"
+    sum_bases_exact = sum((b for b, _ in bases), Decimal(0))
+    if "subtotal" in declared:
+        s = _money2(declared["subtotal"], "declared.subtotal")
+        exp_s = _round2(sum_bases_exact)
+        checks.append({
+            "check": "subtotal", "declared": _fmt2(s),
+            "expected": _fmt2(exp_s), "delta": _fmt2(s - exp_s),
+            "status": "pass" if s == exp_s else "fail",
+            **({"expected_exact": format(sum_bases_exact, "f")}
+               if exp_s != sum_bases_exact else {}),
+        })
+        chain_subtotal = s
+    else:
+        subtotal_source = "recomputed_from_lines"
+        chain_subtotal = _round2(sum_bases_exact)
+
+    # tax claim (needs at least one rate and a declared tax)
+    expected_tax_agg = expected_tax_perline = None
+    if has_rate:
+        if tax_mode == "exclusive":
+            agg = sum((b * r / Decimal(100) for b, r in bases
+                       if r is not None), Decimal(0))
+            per = sum((_round2(b * r / Decimal(100)) for b, r in bases
+                       if r is not None), Decimal(0))
+        else:
+            agg = sum((b * r / (Decimal(100) + r) for b, r in bases
+                       if r is not None), Decimal(0))
+            per = sum((_round2(b * r / (Decimal(100) + r))
+                       for b, r in bases if r is not None), Decimal(0))
+        expected_tax_agg = _round2(agg)
+        expected_tax_perline = _round2(per)
+    if "tax" in declared:
+        t = _money2(declared["tax"], "declared.tax")
+        if not has_rate:
+            checks.append({
+                "check": "tax", "declared": _fmt2(t), "status":
+                    "not_checked",
+                "reason": "tax is declared but no line carries a "
+                          "tax_rate — the rate is the document's, "
+                          "inventing one here would invent the answer",
+            })
+            chain_tax = t
+        else:
+            if t == expected_tax_agg:
+                status, method, exp = "pass", "aggregate", expected_tax_agg
+            elif t == expected_tax_perline:
+                status, method, exp = "pass", "per_line", expected_tax_perline
+            else:
+                status, method, exp = ("fail", "aggregate",
+                                       expected_tax_agg)
+            checks.append({
+                "check": "tax", "declared": _fmt2(t),
+                "expected": _fmt2(exp), "delta": _fmt2(t - exp),
+                "status": status, "method": method,
+                "rounding_methods": {
+                    "aggregate": _fmt2(expected_tax_agg),
+                    "per_line": _fmt2(expected_tax_perline)},
+            })
+            chain_tax = t
+    else:
+        if has_rate:
+            chain_tax = None
+        else:
+            chain_tax = Decimal(0)
+
+    discount = Decimal(0)
+    discount_defaulted = True
+    if "discount" in declared:
+        discount = _money2(declared["discount"], "declared.discount")
+        discount_defaulted = False
+
+    if "total" in declared:
+        tot = _money2(declared["total"], "declared.total")
+        if chain_tax is None:
+            checks.append({
+                "check": "total", "declared": _fmt2(tot),
+                "status": "not_checked",
+                "reason": "lines carry tax_rate but tax is not "
+                          "declared — filling your total with a "
+                          "guessed tax (aggregate or per-line) would "
+                          "make the audit a coin flip",
+            })
+        else:
+            exp_t = chain_subtotal - discount + chain_tax
+            checks.append({
+                "check": "total", "declared": _fmt2(tot),
+                "expected": _fmt2(exp_t), "delta": _fmt2(tot - exp_t),
+                "status": "pass" if tot == exp_t else "fail",
+            })
+
+    evaluated = [c for c in checks if c["status"] in ("pass", "fail")]
+    failed = [c for c in checks if c["status"] == "fail"]
+    out = {
+        "verdict": "CONTRADICTED" if failed else "OK",
+        "rounding": ("half-up at cent; per-line vs aggregate tax "
+                     "rounding is checked as BOTH published methods "
+                     "(method named on the tax claim)"),
+        "subtotal_source": subtotal_source,
+        "tax_mode": tax_mode,
+        "checks": checks,
+        "counts": {
+            "lines": len(lines),
+            "evaluated": len(evaluated),
+            "failed": len(failed),
+            "not_checked": len(checks) - len(evaluated),
+        },
+        "blind_spot": ("an internally consistent wrong number is "
+                       "invisible to identity checks — this tool "
+                       "proves the document adds up to itself, never "
+                       "that it matches reality"),
+    }
+    if discount_defaulted and any(c["check"] == "total"
+                                  for c in checks):
+        out["discount_convention"] = ("discount omitted means 0 in the "
+                                      "total chain (published rule)")
+    if currency is not None:
+        out["currency"] = currency
+    return out

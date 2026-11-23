@@ -64,6 +64,8 @@ POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/
 POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, cent-exact (free)
 POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences pointées (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
+POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
+POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
 Bundle 4.3 — spell-out (TOOLS-50 #30):
@@ -253,6 +255,7 @@ import dates
 import identity
 import edits
 import evalkit
+import shipdeadkit
 import money
 import numfmt
 import payments
@@ -334,7 +337,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.1.0",
+    version="1.2.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1627,6 +1630,92 @@ def run_ledger_summary(args: dict):
 @app.post("/api/v1/ledger/summary")
 def api_ledger_summary(req: LedgerSummaryRequest):
     body, err = run_ledger_summary(req.model_dump())
+    return err if err else body
+
+
+class ShopShippingDeadlineRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    carrier: str
+    service: str
+    transit_days: Optional[int] = None
+    year: Optional[int] = None
+    as_of: Optional[str] = None
+
+
+def run_shop_shipping_deadline(args: dict):
+    try:
+        req = ShopShippingDeadlineRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = shipdeadkit.ship_deadline(
+            req.carrier, req.service, transit_days=req.transit_days,
+            year=2026 if req.year is None else req.year,
+            as_of=req.as_of)
+    except shipdeadkit.ShipDeadError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/shipping-deadline")
+def api_shop_shipping_deadline(req: ShopShippingDeadlineRequest):
+    body, err = run_shop_shipping_deadline(req.model_dump())
+    return err if err else body
+
+
+class InvoiceValidateLine(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    id: Optional[str] = None
+    qty: str
+    unit_price: str
+    amount: Optional[str] = None
+    tax_rate: Optional[str] = None
+
+
+class InvoiceDeclaredTotals(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    subtotal: Optional[str] = None
+    discount: Optional[str] = None
+    tax: Optional[str] = None
+    total: Optional[str] = None
+
+
+class InvoiceValidateTotalsRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    lines: List[InvoiceValidateLine]
+    declared: InvoiceDeclaredTotals
+    tax_mode: Optional[str] = "exclusive"
+    currency: Optional[str] = None
+
+
+def run_invoice_validate_totals(args: dict):
+    try:
+        req = InvoiceValidateTotalsRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    declared = {k: v for k, v in req.declared.model_dump().items()
+                if v is not None}
+    try:
+        out = money.money_validate_totals(
+            [l.model_dump() for l in req.lines], declared,
+            tax_mode=req.tax_mode or "exclusive",
+            currency=req.currency)
+    except money.MoneyError as e:
+        return None, bad_request(
+            [{"field": "lines", "message": str(e),
+              "expected": "plain decimal strings, cent-level at "
+                          "most (grouped forms go through num/parse "
+                          "first); tax_rate a plain 0..100 percent"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/invoice/validate-totals")
+def api_invoice_validate_totals(req: InvoiceValidateTotalsRequest):
+    body, err = run_invoice_validate_totals(req.model_dump())
     return err if err else body
 
 
@@ -5598,6 +5687,8 @@ TOOL_RUN = {
            "ledger_apply_payments": run_ledger_apply_payments,
            "eval_compare": run_eval_compare,
            "ledger_summary": run_ledger_summary,
+           "shop_shipping_deadline": run_shop_shipping_deadline,
+           "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
            "food_poultry": run_food_poultry,
@@ -9010,6 +9101,119 @@ MCP_TOOLS = [
                     "description": "$.a.b[0] pointer grammar",
                 },
                 "strict_types": {"type": "boolean", "default": False},
+            },
+        },
+    },
+    {
+        "name": "shop_shipping_deadline",
+        "description": (
+            "Christmas 2026 last ship-by day, US lower-48, from a "
+            "cross-checked press table (>=2 concordant sources per "
+            "row): carrier + service (UPS/USPS fixed dates; FedEx "
+            "ground & home-delivery need transit_days 1-5) -> ship_by "
+            "+ derived weekday + arrives_by. A dissident published "
+            "date is returned NAMED, never averaged; UPS Ground has "
+            "no single date and is refused by name, so is any year "
+            "outside the table. Optional as_of (ISO day) adds "
+            "days_left. No network, no clock. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["carrier", "service"],
+            "additionalProperties": False,
+            "properties": {
+                "carrier": {"type": "string",
+                            "description": "usps | ups | fedex"},
+                "service": {
+                    "type": "string",
+                    "description": "e.g. ground-advantage, priority-"
+                                   "express, 2nd-day-air, express-"
+                                   "saver, overnight; fedex ground/"
+                                   "home-delivery need transit_days",
+                },
+                "transit_days": {
+                    "type": "integer",
+                    "description": "1..5, only for fedex ground "
+                                   "and home-delivery",
+                },
+                "year": {"type": "integer",
+                         "description": "only 2026 is tabled"},
+                "as_of": {
+                    "type": "string",
+                    "description": "ISO YYYY-MM-DD day to count "
+                                   "days_left from (optional)",
+                },
+            },
+        },
+    },
+    {
+        "name": "invoice_validate_totals",
+        "description": (
+            "Audit DECLARED invoice numbers against the arithmetic "
+            "the document itself asserts: amount == qty x unit_price "
+            "per line, sum of line bases == subtotal, subtotal - "
+            "discount + tax == total, declared tax vs line tax_rate "
+            "under BOTH published rounding methods (aggregate / "
+            "per-line; the match is NAMED). Exact Decimal cent-level, "
+            "signed deltas, verdict OK or CONTRADICTED. Numbers are "
+            "never corrected — a corrected claim destroys the "
+            "evidence it was wrong. Computing an invoice is another "
+            "contract (recipe/invoice). Blind spot published: an "
+            "internally consistent wrong number stays invisible. "
+            "Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["lines", "declared"],
+            "additionalProperties": False,
+            "properties": {
+                "lines": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["qty", "unit_price"],
+                        "additionalProperties": False,
+                        "properties": {
+                            "id": {"type": "string"},
+                            "qty": {"type": "string",
+                                    "description": "plain decimal"},
+                            "unit_price": {
+                                "type": "string",
+                                "description": "plain decimal, cent "
+                                               "level",
+                            },
+                            "amount": {
+                                "type": "string",
+                                "description": "declared line total "
+                                               "(optional)",
+                            },
+                            "tax_rate": {
+                                "type": "string",
+                                "description": "percent 0..100 "
+                                               "(optional)",
+                            },
+                        },
+                    },
+                },
+                "declared": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "subtotal": {"type": "string"},
+                        "discount": {"type": "string"},
+                        "tax": {"type": "string"},
+                        "total": {"type": "string"},
+                    },
+                },
+                "tax_mode": {
+                    "type": "string",
+                    "description": "exclusive (default) | inclusive",
+                },
+                "currency": {
+                    "type": "string",
+                    "description": "echoed label only, never "
+                                   "computed with",
+                },
             },
         },
     },

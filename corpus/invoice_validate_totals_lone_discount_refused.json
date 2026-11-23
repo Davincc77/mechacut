@@ -1,0 +1,15 @@
+{
+ "name": "invoice_validate_totals_lone_discount_refused",
+ "path": "/api/v1/invoice/validate-totals",
+ "body": {
+  "lines": [
+   {
+    "qty": "1",
+    "unit_price": "1.00"
+   }
+  ],
+  "declared": {
+   "discount": "0.50"
+  }
+ }
+}

@@ -1,0 +1,8 @@
+{
+ "name": "shop_shipping_deadline_ups_ground_refused",
+ "path": "/api/v1/shop/shipping-deadline",
+ "body": {
+  "carrier": "ups",
+  "service": "ground"
+ }
+}

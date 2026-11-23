@@ -32,6 +32,20 @@ SAY = {
               "reporté",
         "pt": "resuma meu livro-razão por mês com o saldo "
               "acumulado"},
+    "/api/v1/shop/shipping-deadline": {
+        "en": "last day to ship UPS 2nd Day Air so it arrives by "
+              "Christmas?",
+        "fr": "dernier jour pour envoyer avec FedEx Express Saver "
+              "avant Noël — combien de jours me reste-t-il ?",
+        "pt": "qual o último dia para enviar FedEx Ground 3 dias e "
+              "chegar no Natal 2026?"},
+    "/api/v1/invoice/validate-totals": {
+        "en": "the OCR read $1,204.50 as the total — do these lines "
+              "actually add up to it?",
+        "fr": "la facture annonce 1 204,50 € de total — est-ce que "
+              "les lignes somment vraiment à ce chiffre ?",
+        "pt": "a nota diz R$ 1.204,50 no total — as linhas batem "
+              "com esse valor?"},
     "/api/v1/chart": {
         "en": "bar chart of these sales figures",
         "fr": "fais-moi un histogramme de ces ventes",

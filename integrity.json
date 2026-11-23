@@ -1740,6 +1740,57 @@
   },
   {
    "body": {
+    "declared": {
+     "discount": "0.50"
+    },
+    "lines": [
+     {
+      "qty": "1",
+      "unit_price": "1.00"
+     }
+    ]
+   },
+   "name": "invoice_validate_totals_lone_discount_refused",
+   "path": "/api/v1/invoice/validate-totals",
+   "sha256": "ac40691e81c330d561931b4bcff63e7af85884fcaedc3687b7dbed9543abffbf",
+   "status": 400
+  },
+  {
+   "body": {
+    "currency": "EUR",
+    "declared": {
+     "subtotal": "3.00",
+     "tax": "0.17",
+     "total": "3.17"
+    },
+    "lines": [
+     {
+      "id": "A",
+      "qty": "1",
+      "tax_rate": "5.5",
+      "unit_price": "1.00"
+     },
+     {
+      "id": "B",
+      "qty": "1",
+      "tax_rate": "5.5",
+      "unit_price": "1.00"
+     },
+     {
+      "id": "C",
+      "qty": "1",
+      "tax_rate": "5.5",
+      "unit_price": "1.00"
+     }
+    ]
+   },
+   "name": "invoice_validate_totals_rounding_split",
+   "path": "/api/v1/invoice/validate-totals",
+   "sha256": "47f9259d538777981e6b7681d31083d9f35b852a52ef8560e9b1023b18047ba4",
+   "status": 200
+  },
+  {
+   "body": {
     "how": "outer",
     "left": [
      {
@@ -3280,6 +3331,26 @@
    "path": "/api/v1/ship/dimweight",
    "sha256": "d1394a62722df1e07a435102942acd0603b73c0efb63f28436b77a6a5a6ac97f",
    "status": 200
+  },
+  {
+   "body": {
+    "carrier": "fedex",
+    "service": "express saver"
+   },
+   "name": "shop_shipping_deadline_saver_conflict",
+   "path": "/api/v1/shop/shipping-deadline",
+   "sha256": "20e8acaa3e765dfb2e7ba40519c6d95eedb840ddd0925bb60b3a7882edcca8c1",
+   "status": 200
+  },
+  {
+   "body": {
+    "carrier": "ups",
+    "service": "ground"
+   },
+   "name": "shop_shipping_deadline_ups_ground_refused",
+   "path": "/api/v1/shop/shipping-deadline",
+   "sha256": "34bfaca27e7c740c029e622c57a9c52f0a310a9afc8e9ddbc03ad5b0c9b6a825",
+   "status": 400
   },
   {
    "body": {

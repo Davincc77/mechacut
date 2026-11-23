@@ -39,7 +39,13 @@ def test_landing_budget():
     # squelette d'ancres) et par le VRAI contrat de portabilité :
     # le manifest < 9000 octets (test_bundle0) — la landing est une
     # vitrine navigateur, pas un artefact de contexte de modèle.
-    assert len(html.encode("utf-8")) < 143_000  # resize 23-11 bundle76 (+eval_compare)
+    assert len(html.encode("utf-8")) < 144_200  # resize 23-11 bundles
+    # 77-78 : deux lignes TABLE + une carte du quotidien (e20, la
+    # divergence FedEx nommee) coutent ~2 200 octets PAR page, la prose
+    # FR elaguee de 530 (e18/e19/e20 ratisses, chaque fait conserve)
+    # FR mesure 143 983 < 144 200, PT 142 894, EN 141 420. Le VRAI
+    # contrat de portabilite est le manifest (<9000 octets, tien),
+    # precedent 143 000 au bundle76.
     # the catalogue grid is internally scrolled: page height cannot grow
     assert "max-height: 30rem" in html
     # fixed section skeleton: five landmark anchors, never one per tool

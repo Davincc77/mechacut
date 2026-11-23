@@ -176,6 +176,19 @@ TABLE = (
      "grand livre report "
      "resume mensuel solde cloture clôture "
      "balancete mensal razao livro encerramento resumo conta razão"),
+    ("shop_shipping_deadline", "/api/v1/shop/shipping-deadline",
+     "dates",
+     "last ship-by day for Christmas by carrier and service",
+     "shipping ship-by christmas day arrives ground saver air "
+     "noel fetes dernier jour envoi avant usps ups fedex "
+     "natal ultima data envie chegan ata fedex ups"),
+    ("invoice_validate_totals", "/api/v1/invoice/validate-totals",
+     "checks",
+     "declared invoice totals vs exact arithmetic, signed deltas",
+     "validate totals declared sum arithmetic contradiction audit "
+     "receipt ocr claim "
+     "verifier totaux declare somme calcul ecart facture recu "
+     "validar totais declarados soma conferenca nota divergencia"),
     ("money_split", "/api/v1/money/split", "numbers",
      "cent-exact split, closed remainder rule",
      "money split bill participants cents remainder share friends evenly "

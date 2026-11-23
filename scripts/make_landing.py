@@ -493,6 +493,21 @@ TR = {
                       "180 without a unit is refused; rest beyond 2 h "
                       "hits the FSIS danger zone — same rule as "
                       "the leftovers window.",
+  "everyday.e20.name": "Christmas ship-by dates \u2014 \u22652 sources "
+                     "per row, the outlier NAMED",
+  "everyday.e20.say": "Six holiday tables published Nov 13\u201321, "
+                      "2026 disagree: one syndicate prints FedEx "
+                      "Saver, 2Day and Overnight a full day later \u2014 "
+                      "silently, because its target is Dec 25, not "
+                      "Dec 24. This table keeps only rows where \u22652 "
+                      "sources agree, names the dissenter WITH its "
+                      "reason, derives every weekday from the "
+                      "calendar the press itself cites, refuses UPS "
+                      "Ground (zone-dependent \u2014 no single date "
+                      "exists) and never extrapolates a year. as_of "
+                      "is an argument: \u00ab how many days are left "
+                      "\u00bb is arithmetic, not a clock. The window "
+                      "dies Dec 23.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -923,31 +938,41 @@ TR = {
                       "juge.",
   "everyday.e18.name": "La dinde est en restes — quel jour se ferme la "
                        "fenêtre du frigo",
-  "everyday.e18.say": "La presse grave la règle en dur : « à manger "
-                      "avant lundi 30 novembre » (NBC, 19 nov) à côté "
-                      "de « trois jours, 72 heures optimales » (ky3) — "
-                      "périmé dès le 1er décembre. Les deux pages FSIS "
-                      "se contredisent sur le congélateur (2-6 mois "
-                      "contre 3-4) : l'outil rend l'UNION des deux "
-                      "fenêtres, les deux ancres citées, la règle des "
-                      "2 heures STRICTE depuis cooked_at (2 h pile "
-                      "passe, 2 h 01 jette), le 4ᵉ jour nommé LAST_DAY "
-                      "— sûre indéfiniment à −18 °C, la qualité nommée "
-                      "qualité.",
+  "everyday.e18.say": "La presse grave \u00e0 manger avant "
+                      "lundi 30 novembre \u00bb (NBC, 19 nov) — "
+                      "p\u00e9rim\u00e9 au 1er d\u00e9c. — \u00e0 c\u00f4t\u00e9 de \u00ab trois "
+                      "jours, 72 h optimales \u00bb (ky3) pour la "
+                      "m\u00eame dinde. Les deux pages FSIS se "
+                      "contredisent (2-6 vs 3-4 mois) : l'outil "
+                      "rend l'UNION des fen\u00eatres, les deux "
+                      "ancres cit\u00e9es, la r\u00e8gle des 2 h STRICTE "
+                      "depuis cooked_at (2 h pile passe, 2 h 01 "
+                      "jette), le 4\u1d49 jour nomm\u00e9 LAST_DAY, s\u00fbre "
+                      "\u00e0 −18 \u00b0C, qualit\u00e9 nomm\u00e9e qualit\u00e9.",
   "everyday.e19.name": "Trois plats veulent le four — le compte à "
                        "rebours, les conflits nommés",
-  "everyday.e19.say": "Huit timelines de Thanksgiving 2026 publient "
-                      "le même dîner avec des repos de 20 à 60 "
-                      "minutes, 325 ou 350 °F — et personne ne compte "
-                      "les 45 minutes de préchauffage. Calcul À "
-                      "REBOURS depuis votre heure de service (un "
-                      "argument, jamais l'horloge murale) : un four, "
-                      "un plat à la fois, repos dehors. Le plat "
-                      "suivant entre à la minute où le précédent "
-                      "sort, à une autre consigne : conflit nommé ; "
-                      "« 180 » sans unité : refusé ; au-delà de 2 h "
-                      "de repos : zone de danger FSIS, la même règle "
-                      "que pour les restes.",
+  "everyday.e19.say": "Huit timelines 2026 publient le m\u00eame "
+                      "d\u00eener avec des repos de 20 \u00e0 60 "
+                      "minutes, 325 ou 350 \u00b0F \u2014 et personne ne "
+                      "compte le pr\u00e9chauffage qui mange 45 "
+                      "minutes. Calcul \u00e0 REBOURS depuis "
+                      "l'heure de service (un argument, jamais "
+                      "l'horloge) : un four, un plat \u00e0 la fois, "
+                      "repos dehors ; entr\u00e9e \u00e0 la minute de la "
+                      "sortie \u00e0 une autre consigne = conflit "
+                      "nomm\u00e9 ; \u00ab 180 \u00bb sans unit\u00e9 = "
+                      "refus\u00e9 ; repos au-del\u00e0 de 2 h = zone "
+                      "de danger FSIS, la r\u00e8gle des restes.",
+  "everyday.e20.name": "Dates limites d'envoi de No\u00eal \u2014 "
+                     "\u22652 sources par ligne, la divergente nomm\u00e9e",
+  "everyday.e20.say": "Six tableaux du 13 au 21 nov. 2026 se "
+                      "contredisent : un syndicat imprime FedEx "
+                      "Saver, 2Day, Overnight un jour plus tard "
+                      "\u2014 sa cible est le 25, pas le 24. Ligne "
+                      "gard\u00e9e si \u22652 sources concordent ; "
+                      "divergente nomm\u00e9e avec sa raison. UPS "
+                      "Ground refus\u00e9 : pas de date unique. "
+                      "Fen\u00eatre close le 23 d\u00e9c.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -1395,6 +1420,17 @@ TR = {
                       "recusado — 82 °C ou 356 °F é cara ou coroa; e "
                       "repouso além de duas horas cai na zona de "
                       "perigo do FSIS, a mesma regra das sobras.",
+  "everyday.e20.name": "Prazos de envio do Natal \u2014 \u22652 fontes "
+                     "por linha, a divergente nomeada",
+  "everyday.e20.say": "Seis tabelas de 13 a 21/nov/2026 se "
+                      "contradizem: um sindicato imprime FedEx "
+                      "Saver, 2Day e Overnight um dia depois \u2014 a "
+                      "meta dele \u00e9 25, n\u00e3o 24. Linha s\u00f3 com "
+                      "\u22652 fontes concordantes; a divergente \u00e9 "
+                      "nomeada com o motivo. UPS Ground recusado: "
+                      "data \u00fanica n\u00e3o existe. as_of \u00e9 "
+                      "argumento, n\u00e3o rel\u00f3gio. Janela morre "
+                      "em 23/dez.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -2088,7 +2124,9 @@ W = {
       "leftovers": "\u2192 Thanksgiving 2026 replay: eat by %s \u00b7 "
                    "band %s",
       "ovenschedule": "\u2192 oven on %s, bird out %s \u00b7 temp "
-                      "conflicts: %d \u2014 no timeline checks this"},
+                      "conflicts: %d \u2014 no timeline checks this",
+      "deadline": "\u2192 last ship %s (%s) \u00b7 the dissenter "
+                  "prints %s \u2014 named, never averaged"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "word": "\u2192 \u00ab %s \u00bb",
@@ -2124,9 +2162,10 @@ W = {
                  "jamais avant %s",
       "leftovers": "\u2192 replay thanksgiving 2026 : \u00e0 consommer "
                    "avant %s \u00b7 bande %s",
-      "ovenschedule": "\u2192 four allumé %s, dinde dehors %s · "
+      "ovenschedule": "\u2192 four allum\u00e9 %s, dinde dehors %s \u00b7 "
                       "conflits : %d — aucune timeline ne vérifie "
-                      "ça"},
+                      "ça",
+      "deadline": "\u2192 dernier envoi %s (%s) \u00b7 la source discordante publie %s \u2014 nomm\u00e9e, jamais moyenn\u00e9e"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
            "word": "\u2192 \u201c%s\u201d",
@@ -2164,7 +2203,8 @@ W = {
                    "\u00b7 banda %s",
       "ovenschedule": "\u2192 forno ligado %s, peru de fora %s · "
                       "conflitos de temperatura: %d — nenhum "
-                      "cronograma avisa isso"},
+                      "cronograma avisa isso",
+      "deadline": "\u2192 \u00faltimo envio %s (%s) \u00b7 a fonte divergente publica %s \u2014 nomeada, nunca m\u00e9dia"},
 }
 
 
@@ -2310,6 +2350,11 @@ _EVERYDAY_CALLS = [
      "ovenschedule", lambda d, L_: (
          d["oven_on_at"][11:16], d["dishes"][0]["out_at"][11:16],
          d["temp_conflicts"])),
+    ("/api/v1/shop/shipping-deadline",
+     {"carrier": "fedex", "service": "express-saver"},
+     "deadline", lambda d, L_: (
+         d["ship_by"], d["ship_by_weekday"],
+         d["cross_check"]["conflict"]["ship_by"])),
 ]
 
 

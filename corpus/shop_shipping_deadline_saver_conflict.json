@@ -1,0 +1,8 @@
+{
+ "name": "shop_shipping_deadline_saver_conflict",
+ "path": "/api/v1/shop/shipping-deadline",
+ "body": {
+  "carrier": "fedex",
+  "service": "express saver"
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "name": "invoice_validate_totals_rounding_split",
+ "path": "/api/v1/invoice/validate-totals",
+ "body": {
+  "lines": [
+   {
+    "id": "A",
+    "qty": "1",
+    "unit_price": "1.00",
+    "tax_rate": "5.5"
+   },
+   {
+    "id": "B",
+    "qty": "1",
+    "unit_price": "1.00",
+    "tax_rate": "5.5"
+   },
+   {
+    "id": "C",
+    "qty": "1",
+    "unit_price": "1.00",
+    "tax_rate": "5.5"
+   }
+  ],
+  "declared": {
+   "subtotal": "3.00",
+   "tax": "0.17",
+   "total": "3.17"
+  },
+  "currency": "EUR"
+ }
+}
