@@ -65,16 +65,6 @@ USDC = {
     "base-sepolia": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
 }
 
-# bundle95 — the on-chain 50/50 splitter. x402 carries exactly ONE payTo
-# (EIP-3009 has one `to` field), so the split is not in the wire protocol,
-# it lives BEHIND it: MECHACUT_PAY_TO points at this contract and
-# distribute() divides the USDC on-chain at the deploy-time ratio.
-# Source: contracts/MechacutSplitter.sol; artifact + shas: contracts/build/
-# MechacutSplitter.json; ops: scripts/splitter_ops.py (chain guard,
-# runtime-code sha verified on-chain after deploy). "" until deployed —
-# while empty, SKILL-KIT and /proposals MUST say "splitter not deployed";
-# once set, they MUST NOT (test_bundle95 pins both directions of the lie).
-SPLITTER = {"base": "", "base-sepolia": ""}
 CAP_BYTES = 32 * 1024
 PRICES = {
     "/api/v1/chart": "1000",
