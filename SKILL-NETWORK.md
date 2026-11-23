@@ -83,7 +83,7 @@ devient pas une dépendance mais un échange.
 Rien de tout cela n'exige une infrastructure nouvelle. Exige des golds,
 tracés à la main, avant la première ligne. Comme toujours ici.
 
-## Loiquate — verrouiller et alerter (humain, 23-11, nuit)
+## Loi commune — verrouiller et alerter (humain, 23-11, nuit)
 
 4. **Chaque leçon est une proposition.** Le réseau n'adopte rien
    automatiquement : la soumission d'un agent entre en file comme
