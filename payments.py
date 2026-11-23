@@ -64,6 +64,17 @@ USDC = {
     "base": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
     "base-sepolia": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
 }
+
+# bundle95 — the on-chain 50/50 splitter. x402 carries exactly ONE payTo
+# (EIP-3009 has one `to` field), so the split is not in the wire protocol,
+# it lives BEHIND it: MECHACUT_PAY_TO points at this contract and
+# distribute() divides the USDC on-chain at the deploy-time ratio.
+# Source: contracts/MechacutSplitter.sol; artifact + shas: contracts/build/
+# MechacutSplitter.json; ops: scripts/splitter_ops.py (chain guard,
+# runtime-code sha verified on-chain after deploy). "" until deployed —
+# while empty, SKILL-KIT and /proposals MUST say "splitter not deployed";
+# once set, they MUST NOT (test_bundle95 pins both directions of the lie).
+SPLITTER = {"base": "", "base-sepolia": ""}
 CAP_BYTES = 32 * 1024
 PRICES = {
     "/api/v1/chart": "1000",
@@ -118,6 +129,54 @@ def pay_to():
     return os.environ.get("MECHACUT_PAY_TO", "").strip()
 
 
+def _splitters_file():
+    default = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "docs", "proposals", "splitters.json")
+    return os.environ.get("MECHACUT_SPLITTERS", default)
+
+
+def pay_to_for(path):
+    """payTo of the challenge: the tool's registered splitter when
+    docs/proposals/splitters.json (git, human-committed) gives one with
+    a VALID EIP-55 address; the env pay_to() otherwise. The file is
+    never trusted before being served: a malformed address falls back
+    to the global one — a wrong payTo silently burns every payment."""
+    import json
+    try:
+        m = json.loads(open(_splitters_file(), encoding="utf-8").read())
+    except (OSError, ValueError):
+        return pay_to()
+    cand = str(m.get(path, "")).strip()
+    if not cand:
+        return pay_to()
+    if _valid_eip55(cand):
+        return cand
+    return pay_to()
+
+
+def splitter_note(path):
+    """What the server did, in words — for audits, never guessed."""
+    import json
+    try:
+        m = json.loads(open(_splitters_file(), encoding="utf-8").read())
+    except (OSError, ValueError):
+        return "fallback_env"
+    cand = str(m.get(path, "")).strip()
+    if not cand:
+        return "fallback_env"
+    if _valid_eip55(cand):
+        return "splitter_registered"
+    return "ignored_grammar"
+
+
+def _valid_eip55(addr):
+    import eth
+    try:
+        return bool(eth.eth_address(addr)["valid_eip55"])
+    except eth.EthError:
+        return False
+
+
 def network():
     return os.environ.get("MECHACUT_NETWORK", "base").strip()
 
@@ -160,7 +219,7 @@ def _requirement(url, path):
         "resource": url,
         "description": desc,
         "mimeType": "application/json",
-        "payTo": pay_to(),
+        "payTo": pay_to_for(path),
         "maxTimeoutSeconds": 60,
         "asset": asset(),
         # EIP-712 domain of the token on THIS network: test USDC on

@@ -360,7 +360,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.12.0",
+    version="1.13.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5307,10 +5307,13 @@ replays your golds; the registry lives in
 accepted / en-banc / refuse, with the why and the sha). Status of any
 proposal is queryable: /api/v1/agent/proposals?name=money_tip.
 Decided revenue model: accepted contracts in a paid tier split 50/50
-with the proposer's owner; the free core stays free forever. Not yet
-operational, said as such: the on-chain splitter contract is not
-deployed, so today no split pays — the verdict and the registry are
-live, the money path is next. To make a contract payable at all, the
+with the proposer's owner; the free core stays free forever. Splitter
+status, said plainly: the contracts are written, compiled and PROVEN on
+a local EVM (one CREATE2 clone per paid tool, immutable terms, no owner,
+no admin, permissionless flush, ETH cannot enter — see /PAYOUTS), but
+NOT YET DEPLOYED on Base: today x402 settles to the core address and no
+split pays until a human deploys the factory. The money path is built,
+not born. To make a contract payable at all, the
 proposer MUST include base_account: a checksummed Base address (EIP-55
 verified format). We verify the format and nothing else: no custody,
 no solvency check, and NO RESPONSIBILITY for a well-formed but wrong
@@ -5329,6 +5332,14 @@ curl https://mechacut.studio/agent/manifest
 @app.get("/SKILL-KIT.md", response_class=PlainTextResponse)
 def api_skill_kit():
     return SKILL_KIT_TEXT
+
+
+@app.get("/PAYOUTS", response_class=PlainTextResponse)
+def api_payouts_doc():
+    from pathlib import Path as _P
+    return (_P(__file__).resolve().parent / "docs" / "proposals" /
+            "PAYOUTS.md").read_text(encoding="utf-8")
+
 
 
 @app.get("/SKILL-MINI.md", response_class=PlainTextResponse)
