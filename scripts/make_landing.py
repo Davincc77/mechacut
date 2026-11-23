@@ -562,6 +562,7 @@ TR = {
   "kit.plain.p2": "Send it this message: \u0022Read https://mechacut.studio/SKILL-MINI.md and follow it for my calculations.\u0022 Nothing to install, nothing to pay, no account.",
   "kit.plain.p3": "Then ask your real task: \u002230% then 20% discount \u2014 what is that really?\u0022, \u0022how many days overdue is this invoice?\u0022 The numbers no longer come from its head \u2014 they come from the suite, and they are the same for everyone.",
   "kit.dev.sum": "For developers \u2014 three lines, no account",
+  "kit.propose": "Propose a tool: POST /api/v1/agent/propose — a contract, never code; duplicate named, evidence shown, eligibility returned as a commit-ready blob. Nothing stored server-side. Protocol skill: /SKILL-KIT.md",
   "bench.d82.sum": "Tool-call traces, judged: the same agent motion was re-emitted identically 0 out of 14 times (V22b) and a retry multiplied the bill \u00d74 without converging (V17) \u2014 loop/doom-check now says DOOM, CYCLIC or STORM on canonical bytes, thresholds named.",
   "bench.d82.foot": "Identity on canonical (tool, args): key order never hides a loop. Two identical calls are not a loop \u2014 the threshold is stated, never guessed. All signals reported, the verdict is the most severe. Sources: bench/FINDINGS-V17.md \u00b7 run22b.",
   "bench.e76.sum": "The bench judge became a route: eval/compare returns OK or WRONG with divergences named \u2014 2.5 versus \"2.50\" is never a disagreement, floats are never an argument.",
@@ -1092,6 +1093,7 @@ TR = {
   "kit.plain.p2": "Envoyez-lui ce message : \u0022 Lis https://mechacut.studio/SKILL-MINI.md et suis-le pour tous mes calculs.\u0022 Rien à installer, rien à payer, pas de compte.",
   "kit.plain.p3": "Demandez ensuite votre véritable tâche : \u0022 30 % puis 20 % de remise, ça fait combien réellement ?\u0022, \u0022 cette facture est en retard de combien de jours ?\u0022 Les chiffres ne sortent plus de sa tête \u2014 ils sortent de la suite, et ils sont les mêmes pour tout le monde.",
   "kit.dev.sum": "Pour les développeurs \u2014 trois lignes, sans compte",
+  "kit.propose": "Proposer un outil : POST /api/v1/agent/propose — un contrat, jamais du code ; doublon nommé, preuve affichée, éligibilité rendue en blob prêt au commit. Rien n'est stocké côté serveur. Skill du protocole : /SKILL-KIT.md",
   "bench.d82.sum": "Traces d'appels d'outils jugées : le même geste d'agent n'a jamais été réémis à l'identique (0 sur 14, V22b) et un retry a multiplié la facture ×4 sans converger (V17) \u2014 loop/doom-check dit désormais DOOM, CYCLIC ou STORM sur des bytes canoniques, seuils nommés.",
   "bench.d82.foot": "Identité en (outil, args) canoniques : l'ordre des clés ne cache jamais une boucle. Deux appels identiques ne sont pas une boucle \u2014 le seuil est dit, jamais deviné. Tous les signaux rapportés, verdict le plus grave. Sources : bench/FINDINGS-V17.md · run22b.",
   "bench.e76.sum": "Le juge du banc est devenu route : eval/compare rend OK ou WRONG avec les divergences nommées \u2014 2,5 contre \u00222.50\u0022 n'est jamais un désaccord, les flottants ne sont jamais un argument.",
@@ -1611,6 +1613,7 @@ TR = {
   "kit.plain.p2": "Envie esta mensagem: \u0022Leia https://mechacut.studio/SKILL-MINI.md e siga-o para os meus cálculos.\u0022 Nada para instalar, nada para pagar, sem conta.",
   "kit.plain.p3": "Depois peça a tarefa real: \u002230% e depois 20% de desconto dá quanto?\u0022, \u0022quantos dias de atraso tem esta fatura?\u0022 Os números não saem mais da cabeça dele \u2014 saem da suíte, e são os mesmos para todos.",
   "kit.dev.sum": "Para desenvolvedores \u2014 três linhas, sem conta",
+  "kit.propose": "Proporcionar uma ferramenta: POST /api/v1/agent/propose — um contrato, nunca código; duplicado nomeado, evidência exibida, elegibilidade devolvida como blob pronto para commit. Nada é guardado no servidor. Skill do protocolo: /SKILL-KIT.md",
   "bench.d82.sum": "Traces de chamadas julgadas: o mesmo gesto de agente nunca foi reemitido igual (0 de 14, V22b) e um retry multiplicou a fatura ×4 sem convergir (V17) \u2014 loop/doom-check agora diz DOOM, CYCLIC ou STORM sobre bytes canônicos, limiares nomeados.",
   "bench.d82.foot": "Identidade em (ferramenta, args) canônicos: a ordem das chaves nunca esconde um loop. Duas chamadas iguais não são loop \u2014 o limiar é dito, nunca adivinhado. Todos os sinais reportados, veredito o mais grave. Fontes: bench/FINDINGS-V17.md · run22b.",
   "bench.e76.sum": "O juiz do banco virou rota: eval/compare devolve OK ou WRONG com as divergências nomeadas \u2014 2.5 versus \u00222.50\u0022 nunca é discordância, floats nunca são argumento.",
@@ -1946,6 +1949,7 @@ TEMPLATE = """<!DOCTYPE html>
         <div class="bbody"><p class="tiers" style="color: var(--muted);">{{kit.c3.foot}}</p></div>
       </details>
       <p class="tiers" style="margin-top: 14px;"><a href="https://github.com/Davincc77/mechacut/blob/master/PROTOCOL-KIT.md">PROTOCOL-KIT.md</a> · <a href="https://github.com/Davincc77/mechacut/blob/master/SKILL-NETWORK.md">SKILL-NETWORK.md</a></p>
+      <p class="tiers" style="margin-top: 10px;">{{kit.propose}}</p>
     </section>
 
     <section class="section" id="bundles">

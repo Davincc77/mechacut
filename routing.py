@@ -198,6 +198,12 @@ TABLE = (
      "deemed receipt dispatch sending method registered courier "
      "standard mail email delivery date reception reputee envoi "
      "recomendado correio Entrega empfang"),
+    ("agent_propose", "/api/v1/agent/propose", "checks",
+     "network door: contract proposal judged against the live catalogue — "
+     "DUPLICATE-OF, SUSPECT with evidence, ELIGIBLE with commit-ready blob",
+     "propose proposal contract network submit tool new duplicate "
+     "eligible suspect blob inbox proposition contrat soumettre "
+     "propuesta contrato submissão"),
     ("agent_retrybudget", "/api/v1/agent/retry-budget", "checks",
      "is re-attempting this failure rational? closed taxonomy, "
      "hash ceiling, session budget, deterministic backoff",
