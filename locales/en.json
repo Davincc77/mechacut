@@ -7,6 +7,7 @@
   "nav.api": "Contract",
   "pill": "v1.2.0 · 155 transforms · 9 recipes",
   "hero1": "Meaning is learned.",
+  "hero.why": "<strong>Why determinism?</strong> Because a right answer that changes on every run is not an answer — it is a dice roll. A machine that returns the same bytes for the same question makes agents auditable: every response carries its checksum, every error names the offending field, and what you test in the morning is what you ship at night.",
   "hero2": "Mechanics are known.",
   "hero3": "Competence is not learned. It is served.",
   "lede": "A suite of <strong>155 deterministic transforms</strong> for AI agents — 125 free forever, 20 free under 32 KB then pay-per-call, 10 machine-payable — plus 9 one-call recipes, free. The model stops guessing what a checksum can prove.",

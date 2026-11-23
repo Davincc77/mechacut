@@ -107,6 +107,7 @@ TR = {
   "nav.api": "Contract",
   "pill": "v{ver} · {n_tools} transforms · {n_recipes} recipes",
   "hero1": "Meaning is learned.",
+  "hero.why": "<strong>Why determinism?</strong> Because a right answer that changes on every run is not an answer — it is a dice roll. A machine that returns the same bytes for the same question makes agents auditable: every response carries its checksum, every error names the offending field, and what you test in the morning is what you ship at night.",
   "hero2": "Mechanics are known.",
   "hero3": "Competence is not learned. It is served.",
   "lede": "A suite of <strong>{n_tools} deterministic transforms</strong> "
@@ -561,6 +562,7 @@ TR = {
   "Vision", "nav.api": "Contrat",
   "pill": "v{ver} · {n_tools} transformations · {n_recipes} recettes",
   "hero1": "Le sens s'apprend.",
+  "hero.why": "<strong>Pourquoi le déterminisme ?</strong> Parce qu'une réponse juste qui change à chaque exécution n'est pas une réponse — c'est un dé. Une machine qui rend les mêmes octets à la même question rend les agents auditables : chaque réponse porte son empreinte, chaque erreur nomme le champ fautif, et ce que vous testez le matin est ce que vous vendez le soir.",
   "hero2": "La mécanique se sait.",
   "hero3": "La compétence ne s'apprend pas. Elle se sert.",
   "lede": "Une suite de <strong>{n_tools} transformations "
@@ -1032,6 +1034,7 @@ TR = {
   "nav.api": "Contrato",
   "pill": "v{ver} · {n_tools} transformações · {n_recipes} receitas",
   "hero1": "Significado se aprende.",
+  "hero.why": "<strong>Por que determinismo?</strong> Porque uma resposta certa que muda a cada execução não é uma resposta — é um dado lançado. Uma máquina que devolve os mesmos bytes para a mesma pergunta torna agentes auditáveis: cada resposta traz sua impressão, cada erro nomeia o campo culpado, e o que você testa de manhã é o que você entrega à noite.",
   "hero2": "Mecânica se conhece.",
   "hero3": "Competência não se aprende. Serve-se.",
   "lede": "Uma suíte de <strong>{n_tools} transformações "
@@ -1540,6 +1543,8 @@ TEMPLATE = """<!DOCTYPE html>
     font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -.5px;
     margin-bottom: 22px; }
   h1 .dim { color: var(--muted); }
+  .why { font-size: 20px; line-height: 1.55; max-width: 700px; margin: 0 0 26px; color: var(--fg); }
+  .why strong { color: var(--gold); font-weight: 700; }
   .lede { font-size: 19px; color: var(--muted); max-width: 680px; margin-bottom: 52px; }
   .lede strong { color: var(--fg); font-weight: 500; }
   .creed { font-size: 21px; font-style: italic; color: var(--fg);
@@ -1699,6 +1704,7 @@ TEMPLATE = """<!DOCTYPE html>
 
   <main>
     <section>
+      <p class="why">{{hero.why}}</p>
       <div class="pill">{{pill}}</div>
       <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
       <p class="creed">{{hero3}}<span class="sig"> — C.V.</span></p>

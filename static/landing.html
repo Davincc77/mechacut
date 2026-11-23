@@ -35,6 +35,8 @@
     font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -.5px;
     margin-bottom: 22px; }
   h1 .dim { color: var(--muted); }
+  .why { font-size: 20px; line-height: 1.55; max-width: 700px; margin: 0 0 26px; color: var(--fg); }
+  .why strong { color: var(--gold); font-weight: 700; }
   .lede { font-size: 19px; color: var(--muted); max-width: 680px; margin-bottom: 52px; }
   .lede strong { color: var(--fg); font-weight: 500; }
   .creed { font-size: 21px; font-style: italic; color: var(--fg);
@@ -199,6 +201,7 @@
 
   <main>
     <section>
+      <p class="why">{{hero.why}}</p>
       <div class="pill">{{pill}}</div>
       <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
       <p class="creed">{{hero3}}<span class="sig"> — C.V.</span></p>
