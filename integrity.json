@@ -294,6 +294,46 @@
   },
   {
    "body": {
+    "requests": [
+     {
+      "action": "refund",
+      "amount": "99.99",
+      "id": "q1",
+      "subject": "alice"
+     },
+     {
+      "action": "refund",
+      "amount": "100.01",
+      "id": "q2",
+      "subject": "alice"
+     },
+     {
+      "action": "refund",
+      "amount": "1",
+      "id": "q3",
+      "subject": "bob"
+     }
+    ],
+    "rules": [
+     {
+      "action": "refund",
+      "max_amount": "100.00",
+      "subject": "alice"
+     },
+     {
+      "action": "*",
+      "allow": false,
+      "subject": "*"
+     }
+    ]
+   },
+   "name": "check_allowlist_basic",
+   "path": "/api/v1/check/allowlist",
+   "sha256": "8f5d0386efac72d5e28f550ba68e9321a56eefbffd9b69a1cf1e9c7bd4e33c12",
+   "status": 200
+  },
+  {
+   "body": {
     "constraints": {
      "must_contain": [
       "total"

@@ -1,0 +1,17 @@
+{
+  "name": "check_allowlist_basic",
+  "path": "/api/v1/check/allowlist",
+  "body": {
+    "rules": [
+      {"subject": "alice", "action": "refund", "max_amount": "100.00"},
+      {"subject": "*", "action": "*", "allow": false}
+    ],
+    "requests": [
+      {"id": "q1", "subject": "alice", "action": "refund",
+       "amount": "99.99"},
+      {"id": "q2", "subject": "alice", "action": "refund",
+       "amount": "100.01"},
+      {"id": "q3", "subject": "bob", "action": "refund", "amount": "1"}
+    ]
+  }
+}

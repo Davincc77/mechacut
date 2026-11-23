@@ -63,6 +63,7 @@ POST /api/v1/money/prorate    amount x covered/cycle days, rounded last (paid)
 POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/61-90/90+ (free)
 POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, cent-exact (free)
 POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences pointées (free)
+POST /api/v1/check/allowlist     rules + requests -> policy verdicts (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
@@ -254,6 +255,7 @@ import mdrender
 import dates
 import identity
 import edits
+import allowkit
 import evalkit
 import shipdeadkit
 import money
@@ -337,7 +339,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.2.0",
+    version="1.3.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1585,6 +1587,69 @@ def run_eval_compare(args: dict):
 @app.post("/api/v1/eval/compare")
 def api_eval_compare(req: EvalCompareRequest):
     body, err = run_eval_compare(req.model_dump())
+    return err if err else body
+
+
+class AllowRuleModel(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    subject: str
+    action: str
+    allow: bool = True
+    max_amount: Optional[str] = None
+    currencies: Optional[List[str]] = None
+
+
+class AllowRequestModel(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    subject: str
+    action: str
+    amount: Optional[str] = None
+    currency: Optional[str] = None
+    id: Optional[str] = None
+
+
+class CheckAllowlistRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    rules: List[AllowRuleModel]
+    requests: List[AllowRequestModel]
+    default_deny: bool = True
+
+
+def run_check_allowlist(args: dict):
+    try:
+        req = CheckAllowlistRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    if not req.rules:
+        return None, bad_request(
+            [{"field": "rules",
+              "message": "an empty allowlist is an open door — refused, "
+                         "not evaluated",
+              "expected": "at least one rule"}])
+    if not req.requests:
+        return None, bad_request(
+            [{"field": "requests",
+              "message": "no requests to judge — empty verdicts list "
+                         "is a table of nothing, refused like in aging",
+              "expected": "at least one request"}])
+    try:
+        out = allowkit.allow_check(
+            [r.model_dump() for r in req.rules],
+            [q.model_dump() for q in req.requests],
+            req.default_deny)
+    except allowkit.AllowError as e:
+        return None, bad_request(
+            [{"field": "rules", "message": str(e),
+              "expected": "exact subject/action strings or '*', allow a "
+                          "real boolean, max_amount plain decimal string, "
+                          "currencies ISO codes from the closed table"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/check/allowlist")
+def api_check_allowlist(req: CheckAllowlistRequest):
+    body, err = run_check_allowlist(req.model_dump())
     return err if err else body
 
 
@@ -5686,6 +5751,7 @@ TOOL_RUN = {
            "money_bogo": run_money_bogo,
            "ledger_apply_payments": run_ledger_apply_payments,
            "eval_compare": run_eval_compare,
+           "check_allowlist": run_check_allowlist,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
            "invoice_validate_totals": run_invoice_validate_totals,
@@ -9217,6 +9283,48 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "check_allowlist",
+        "description": (
+            "Policy as closed grammar: rules (subject/action exact or "
+            "the literal '*', allow boolean, max_amount ceiling, "
+            "currencies ISO set) judged against requests — most "
+            "specific rule wins (specificity = concrete fields); an "
+            "equal-specificity conflict returns AMBIGUOUS and refuses "
+            "to coin-flip policy; no matching rule with default_deny "
+            "refuses — silence never allows. Regex-shaped actions are "
+            "REFUSED, not evaluated. Amounts exact Decimal; sub-"
+            "requests ceiling 200 named. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["rules", "requests"],
+            "properties": {
+                "rules": {"type": "array", "items": {
+                    "type": "object",
+                    "required": ["subject", "action"],
+                    "properties": {
+                        "subject": {"type": "string"},
+                        "action": {"type": "string"},
+                        "allow": {"type": "boolean", "default": True},
+                        "max_amount": {"type": "string"},
+                        "currencies": {"type": "array",
+                                       "items": {"type": "string"}},
+                    }}},
+                "requests": {"type": "array", "items": {
+                    "type": "object",
+                    "required": ["subject", "action"],
+                    "properties": {
+                        "subject": {"type": "string"},
+                        "action": {"type": "string"},
+                        "amount": {"type": "string"},
+                        "currency": {"type": "string"},
+                        "id": {"type": "string"},
+                    }}},
+                "default_deny": {"type": "boolean", "default": True},
+            },
+        },
+    },
 ]
 
 
@@ -9442,6 +9550,7 @@ def index(request: Request):
             "/api/v1/money/aging": "POST invoices + as_of -> due-date buckets (free)",
             "/api/v1/ledger/apply-payments": "POST invoices + payments -> FIFO reconciliation (free)",
             "/api/v1/eval/compare": "POST expected + got -> verdict OK/WRONG + named divergences (free)",
+            "/api/v1/check/allowlist": "POST rules + requests -> ALLOW/DENY/AMBIGUOUS by closed grammar (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
             "/api/v1/number/spell": "POST amount -> words FR/EN/PT for legal mentions (free < 32 KB)",
             "/api/v1/hash/digest": "POST data + algo -> hex digest (a model cannot hash)",

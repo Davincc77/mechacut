@@ -164,6 +164,11 @@ TABLE = (
      "eval evaluate compare judge diff expected got verdict wrong "
      "divergence pointer artifact score evaluer comparer juger "
      "verification ecart"),
+    ("check_allowlist", "/api/v1/check/allowlist", "checks",
+     "policy verdicts by closed grammar, most specific wins",
+     "allowlist policy allow deny gate approve refuse subject action "
+     "permission rule specific ambiguous autorisation politique "
+     "permisso recusa regra deixar fazer"),
     ("ledger_apply_payments", "/api/v1/ledger/apply-payments",
      "numbers",
      "FIFO reconciliation of payments onto invoices",
