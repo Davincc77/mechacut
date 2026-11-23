@@ -1173,6 +1173,26 @@
   },
   {
    "body": {
+    "expected": {
+     "lines": [
+      1,
+      2,
+      3
+     ],
+     "total": "81.90",
+     "vat": {
+      "pct": 20
+     }
+    },
+    "got": "{\"lines\": [1, 2], \"total\": \"81.90\", \"vat\": {\"pct\": \"20\"}}"
+   },
+   "name": "eval_compare_basic",
+   "path": "/api/v1/eval/compare",
+   "sha256": "952edd7ec299a3dd936a695f6a8754fae9dfedd988f19aea25f9f7b51ceeb6f3",
+   "status": 200
+  },
+  {
+   "body": {
     "context_chars": 8,
     "text": "Invoice INV-2026-114 due 2026-12-05 total $1,200.50 plus 20% VAT, wire FR76 1234 5678 9012 3456 7890 1234, info@acme.io, https://acme.io/inv"
    },

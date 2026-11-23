@@ -1,0 +1,8 @@
+{
+  "name": "eval_compare_basic",
+  "path": "/api/v1/eval/compare",
+  "body": {
+    "expected": {"total": "81.90", "vat": {"pct": 20}, "lines": [1, 2, 3]},
+    "got": "{\"lines\": [1, 2], \"total\": \"81.90\", \"vat\": {\"pct\": \"20\"}}"
+  }
+}

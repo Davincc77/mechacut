@@ -62,6 +62,7 @@ POST /api/v1/units/convert    closed families, exact rational factors
 POST /api/v1/money/prorate    amount x covered/cycle days, rounded last (paid)
 POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/61-90/90+ (free)
 POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, cent-exact (free)
+POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences pointées (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -251,6 +252,7 @@ import mdrender
 import dates
 import identity
 import edits
+import evalkit
 import money
 import numfmt
 import payments
@@ -332,7 +334,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.0.0",
+    version="1.1.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1548,6 +1550,38 @@ def run_ledger_apply_payments(args: dict):
 @app.post("/api/v1/ledger/apply-payments")
 def api_ledger_apply_payments(req: LedgerApplyPaymentsRequest):
     body, err = run_ledger_apply_payments(req.model_dump())
+    return err if err else body
+
+
+class EvalCompareRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    expected: Any
+    got: Any
+    ignore_paths: Optional[List[str]] = None
+    strict_types: bool = False
+
+
+def run_eval_compare(args: dict):
+    try:
+        req = EvalCompareRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = evalkit.eval_compare(req.expected, req.got,
+                                   req.ignore_paths, req.strict_types)
+    except evalkit.EvalError as e:
+        return None, bad_request(
+            [{"field": "got", "message": str(e),
+              "expected": "JSON values (objects/arrays/scalars) or "
+                          "parseable JSON strings; ignore_paths like "
+                          "$.a.b[0]"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/eval/compare")
+def api_eval_compare(req: EvalCompareRequest):
+    body, err = run_eval_compare(req.model_dump())
     return err if err else body
 
 
@@ -5562,6 +5596,7 @@ TOOL_RUN = {
            "json_coerce": run_json_coerce,
            "money_bogo": run_money_bogo,
            "ledger_apply_payments": run_ledger_apply_payments,
+           "eval_compare": run_eval_compare,
            "ledger_summary": run_ledger_summary,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -8952,6 +8987,32 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "eval_compare",
+        "description": (
+            "The bench judge as an endpoint: expected vs got (JSON or "
+            "parseable strings) -> verdict OK/WRONG with divergences "
+            "named by JSON pointer and class (value/type/shape/"
+            "only_expected/only_got). Equal quantity is never a "
+            "disagreement: 2.5, \"2.50\" and \"5/2\" match — "
+            "strict_types=true makes form part of the answer. "
+            "ignore_paths skips echo fields on BOTH sides and the "
+            "skipped list ships in the report. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["expected", "got"],
+            "properties": {
+                "expected": {"description": "any JSON value"},
+                "got": {"description": "any JSON value or JSON string"},
+                "ignore_paths": {
+                    "type": "array", "items": {"type": "string"},
+                    "description": "$.a.b[0] pointer grammar",
+                },
+                "strict_types": {"type": "boolean", "default": False},
+            },
+        },
+    },
 ]
 
 
@@ -9176,6 +9237,7 @@ def index(request: Request):
             "/api/v1/money/prorate": "POST amount + cycle + window -> prorated (paid)",
             "/api/v1/money/aging": "POST invoices + as_of -> due-date buckets (free)",
             "/api/v1/ledger/apply-payments": "POST invoices + payments -> FIFO reconciliation (free)",
+            "/api/v1/eval/compare": "POST expected + got -> verdict OK/WRONG + named divergences (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
             "/api/v1/number/spell": "POST amount -> words FR/EN/PT for legal mentions (free < 32 KB)",
             "/api/v1/hash/digest": "POST data + algo -> hex digest (a model cannot hash)",

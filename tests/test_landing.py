@@ -39,7 +39,7 @@ def test_landing_budget():
     # squelette d'ancres) et par le VRAI contrat de portabilité :
     # le manifest < 9000 octets (test_bundle0) — la landing est une
     # vitrine navigateur, pas un artefact de contexte de modèle.
-    assert len(html.encode("utf-8")) < 142_000
+    assert len(html.encode("utf-8")) < 143_000  # resize 23-11 bundle76 (+eval_compare)
     # the catalogue grid is internally scrolled: page height cannot grow
     assert "max-height: 30rem" in html
     # fixed section skeleton: five landmark anchors, never one per tool

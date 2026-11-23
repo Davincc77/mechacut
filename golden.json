@@ -76,6 +76,7 @@
   "eth_eip712_mail": "200:6c87166b0853a5f541d34ca655f674ed44be1ff877ca412df5174974211e29c4",
   "eth_selector_transfer": "200:e7552cba4546fdb642e191b1910509d26ba1dc7478e8933df72f36e1904244cf",
   "eth_units_15ether": "200:6a7d38f8bbcf863bcb20a3117b9b877111b6c77cd4f65baade30b6ee57f8dd65",
+  "eval_compare_basic": "200:952edd7ec299a3dd936a695f6a8754fae9dfedd988f19aea25f9f7b51ceeb6f3",
   "extract_facts_invoice": "200:32a40a4fa8f476ba3098cd541b80abaa730bbac291b98cf09c7cbdf4f67fdc58",
   "fiche_partage_reste": "200:bbf2edfc05306fc019889dfeae2636c20637235b7bcedfc18ee32b19fca92190",
   "fiche_shop_reste": "200:1b6287204f3b6dd9f5f7280e5341f20180fc64388adc37470c7047b254d02809",

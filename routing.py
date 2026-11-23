@@ -159,6 +159,11 @@ TABLE = (
      "deux pour sept "
      "preco por quilo preco por litro mais barato comparacao mercado "
      "reducao embalagem etiqueta conta errada mesmo preco dois por"),
+    ("eval_compare", "/api/v1/eval/compare", "checks",
+     "judge two JSON artifacts: OK/WRONG, divergences named",
+     "eval evaluate compare judge diff expected got verdict wrong "
+     "divergence pointer artifact score evaluer comparer juger "
+     "verification ecart"),
     ("ledger_apply_payments", "/api/v1/ledger/apply-payments",
      "numbers",
      "FIFO reconciliation of payments onto invoices",
