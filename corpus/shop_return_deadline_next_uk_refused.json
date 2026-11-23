@@ -1,0 +1,9 @@
+{
+ "name": "shop_return_deadline_next_uk_refused",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "next",
+  "purchase_date": "2026-11-20",
+  "country": "UK"
+ }
+}

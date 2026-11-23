@@ -1,0 +1,9 @@
+{
+ "name": "shop_return_deadline_target_dec26_refused",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "target",
+  "purchase_date": "2026-12-26",
+  "category": "electronics"
+ }
+}

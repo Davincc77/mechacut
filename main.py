@@ -66,6 +66,7 @@ POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences 
 POST /api/v1/check/allowlist     rules + requests -> policy verdicts (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
+POST /api/v1/shop/return-deadline    retailer + purchase date -> published holiday RETURN deadline, provenance and conflicts named (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -258,6 +259,7 @@ import edits
 import allowkit
 import evalkit
 import shipdeadkit
+import returndeadkit
 import money
 import numfmt
 import payments
@@ -339,7 +341,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.3.0",
+    version="1.4.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1728,6 +1730,45 @@ def run_shop_shipping_deadline(args: dict):
 @app.post("/api/v1/shop/shipping-deadline")
 def api_shop_shipping_deadline(req: ShopShippingDeadlineRequest):
     body, err = run_shop_shipping_deadline(req.model_dump())
+    return err if err else body
+
+
+class ShopReturnDeadlineRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    retailer: str
+    purchase_date: str
+    country: Optional[str] = None
+    category: Optional[str] = None
+    delivery_date: Optional[str] = None
+    membership: Optional[bool] = None
+    channel: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_shop_return_deadline(args: dict):
+    try:
+        req = ShopReturnDeadlineRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = returndeadkit.return_deadline(
+            req.retailer, req.purchase_date,
+            country=req.country or "US", category=req.category,
+            delivery_date=req.delivery_date,
+            membership=req.membership,
+            channel=req.channel or "first_party",
+            as_of=req.as_of)
+    except returndeadkit.ReturnDeadError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/return-deadline")
+def api_shop_return_deadline(req: ShopReturnDeadlineRequest):
+    body, err = run_shop_return_deadline(req.model_dump())
     return err if err else body
 
 
@@ -5754,6 +5795,7 @@ TOOL_RUN = {
            "check_allowlist": run_check_allowlist,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
+           "shop_return_deadline": run_shop_return_deadline,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -9209,6 +9251,60 @@ MCP_TOOLS = [
                     "description": "ISO YYYY-MM-DD day to count "
                                    "days_left from (optional)",
                 },
+            },
+        },
+    },
+    {
+        "name": "shop_return_deadline",
+        "description": (
+            "Holiday 2026-2027 RETURN deadline for a purchase date, "
+            "from a cross-checked >=2-source table: retailer + "
+            "purchase_date (+ country US|UK, category, membership "
+            "for bestbuy, channel, delivery_date when the rule "
+            "counts from receipt) -> return_by + weekday + rule "
+            "applied. Provenance per row (published | press2); a "
+            "pattern-vs-published conflict is returned NAMED, never "
+            "averaged; single-source retailers are refused by name "
+            "carrying the candidate fact; the Day-1 counting "
+            "convention is explicit. No network, no clock. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["retailer", "purchase_date"],
+            "additionalProperties": False,
+            "properties": {
+                "retailer": {"type": "string",
+                             "description": "amazon | walmart | "
+                                            "target | bestbuy | "
+                                            "costco (US); amazon "
+                                            "(UK)"},
+                "purchase_date": {"type": "string",
+                                  "description": "ISO YYYY-MM-DD, "
+                                                 "season 2026 only"},
+                "country": {"type": "string",
+                            "description": "US (default) | UK"},
+                "category": {"type": "string",
+                             "description": "general | electronics | "
+                                            "entertainment | apple | "
+                                            "beats | phone | "
+                                            "activatable | verizon | "
+                                            "decoration | applecare | "
+                                            "protection_plan | "
+                                            "target_plus"},
+                "delivery_date": {"type": "string",
+                                  "description": "ISO date, required "
+                                                 "when the rule "
+                                                 "counts from "
+                                                 "delivery/receipt"},
+                "membership": {"type": "boolean",
+                               "description": "bestbuy Plus/Total "
+                                              "only"},
+                "channel": {"type": "string",
+                            "description": "first_party (default) | "
+                                           "marketplace"},
+                "as_of": {"type": "string",
+                          "description": "ISO YYYY-MM-DD day to "
+                                         "count days_left from"},
             },
         },
     },

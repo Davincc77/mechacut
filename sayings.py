@@ -39,6 +39,13 @@ SAY = {
               "avant Noël — combien de jours me reste-t-il ?",
         "pt": "qual o último dia para enviar FedEx Ground 3 dias e "
               "chegar no Natal 2026?"},
+    "/api/v1/shop/return-deadline": {
+        "en": "can I still return the Christmas gift I bought at "
+              "Target, and until when?",
+        "fr": "jusqu'à quelle date peut-on encore retourner un "
+              "cadeau de Noël acheté chez Walmart ?",
+        "pt": "qual o prazo para devolver um presente de Natal "
+              "comprado na Amazon?"},
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",

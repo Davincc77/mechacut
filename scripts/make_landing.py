@@ -509,6 +509,21 @@ TR = {
                       "is an argument: \u00ab how many days are left "
                       "\u00bb is arithmetic, not a clock. The window "
                       "dies Dec 23.",
+  "everyday.e21.name": "Holiday RETURN deadlines \u2014 \u22652 sources, "
+                     "provenance class on every row",
+  "everyday.e21.say": "The shared January-31 headline is a lie of "
+                      "omission: Target's purchase window closes Dec "
+                      "24, Best Buy's member rule splits at Dec 4, "
+                      "and parcelmonitor publishes last year's dates "
+                      "shifted by one as \u0027likely pattern\u0027 while "
+                      "Seller Central had published the 2026 text "
+                      "verbatim. This table keeps only rows with two "
+                      "concordant sources, carries provenance "
+                      "(published|press), names the Day-1 counting "
+                      "convention, refuses single-source retailers "
+                      "WITH the candidate fact, and never lets "
+                      "\u0027whichever is later\u0027 quietly become a "
+                      "guess: delivery date is an argument.",
 "x402.h2": "Machine payments",
   "x402.p1": "The paying path is four bytes of protocol: the server "
              "answers <code>402</code> with requirements; the agent signs "
@@ -975,6 +990,22 @@ TR = {
                       "divergente nomm\u00e9e avec sa raison. UPS "
                       "Ground refus\u00e9 : pas de date unique. "
                       "Fen\u00eatre close le 23 d\u00e9c.",
+  "everyday.e21.name": "Dates limites de RETOUR des f\u00eates \u2014 "
+                     "\u22652 sources, classe de provenance par ligne",
+  "everyday.e21.say": "Le titre commun \u00ab jusqu'au 31 janvier \u00bb "
+                      "est un mensonge par omission : chez Target "
+                      "la fen\u00eatre d'achat ferme le 24 d\u00e9c., "
+                      "chez Best Buy la r\u00e8gle membres se coupe au "
+                      "4 d\u00e9c., et un blog publie les dates de l'an "
+                      "dernier d\u00e9cal\u00e9es d'un an comme \u00ab patron "
+                      "probable \u00bb pendant que Seller Central avait "
+                      "publi\u00e9 le texte 2026 mot pour mot. Ici : "
+                      "ligne gard\u00e9e si deux sources concordent, "
+                      "provenance \u00e0 c\u00f4t\u00e9 (publi\u00e9 | presse), "
+                      "convention de comptage nomm\u00e9e, refus nomm\u00e9 "
+                      "aux enseignes mono-sources \u2014 avec le fait "
+                      "candidat. \u00ab Au plus tard des deux \u00bb exige "
+                      "la date de livraison : jamais de devinette.",
 "x402.h2": "Paiements machine",
   "x402.p1": "Le chemin payant tient en quatre octets de protocole : le "
              "serveur répond <code>402</code> avec ses exigences ; "
@@ -1434,6 +1465,22 @@ TR = {
                       "data \u00fanica n\u00e3o existe. as_of \u00e9 "
                       "argumento, n\u00e3o rel\u00f3gio. Janela morre "
                       "em 23/dez.",
+  "everyday.e21.name": "Prazos de DEVOLU\u00c7\u00c3O das festas \u2014 \u22652 "
+                     "fontes, classe de proven\u00e2ncia por linha",
+  "everyday.e21.say": "A manchete compartilhada \u00ab at\u00e9 31 de "
+                      "janeiro \u00bb \u00e9 mentira por omiss\u00e3o: na "
+                      "Target a janela de compra fecha 24/dez, na "
+                      "Best Buy a regra de membros corta em 4/dez, "
+                      "e um blog publica as datas do ano passado "
+                      "deslocadas de um ano como \u00ab prov\u00e1vel "
+                      "padr\u00e3o \u00bb enquanto o Seller Central j\u00e1 "
+                      "havia o texto 2026 literal. Aqui: linha s\u00f3 "
+                      "com duas fontes concordantes; proven\u00e2ncia "
+                      "viaja junto (publicado | imprensa); conven\u00e7\u00e3o "
+                      "de contagem nomeada; loja de fonte \u00fanica "
+                      "\u00e9 recusada pelo nome, com o fato candidato. "
+                      "\u00ab O mais tarde dos dois \u00bb exige a data de "
+                      "entrega: nunca adivinha.",
 "x402.h2": "Pagamentos entre máquinas",
   "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
              "servidor responde <code>402</code> com os requisitos; o "
@@ -2132,9 +2179,16 @@ W = {
       "ovenschedule": "\u2192 oven on %s, bird out %s \u00b7 temp "
                       "conflicts: %d \u2014 no timeline checks this",
       "deadline": "\u2192 last ship %s (%s) \u00b7 the dissenter "
-                  "prints %s \u2014 named, never averaged"},
+                  "prints %s \u2014 named, never averaged",
+      "returndead": "\u2192 return by %s (%s) \u00b7 Target's holiday "
+                    "window closed %s \u2014 the 'Jan 31' headline "
+                    "never says"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
+           "returndead": "\u2192 retour jusqu'au %s (%s) \u00b7 chez "
+                         "Target la fen\u00eatre des f\u00eates fermait "
+                         "le %s \u2014 le titre \u00ab jusqu'au 31 "
+                         "janvier \u00bb ne le dit jamais",
            "word": "\u2192 \u00ab %s \u00bb",
            "iban": "\u2192 cl\u00e9 de contr\u00f4le valide \u00b7 %s",
            "page": "\u2192 page autonome (%s octets) \u00b7 Ctrl-P = PDF",
@@ -2174,6 +2228,10 @@ W = {
       "deadline": "\u2192 dernier envoi %s (%s) \u00b7 la source discordante publie %s \u2014 nomm\u00e9e, jamais moyenn\u00e9e"},
     "pt": {"qr": "QR v%s \u00b7 %s\u00d7%s m\u00f3dulos \u00b7 SVG "
                  "impress\u00edvel, determin\u00edstico",
+           "returndead": "\u2192 devolver at\u00e9 %s (%s) \u00b7 na "
+                         "Target a janela de festas fechou em %s "
+                         "\u2014 a manchete \u00ab at\u00e9 31 de "
+                         "janeiro \u00bb nunca diz isso",
            "word": "\u2192 \u201c%s\u201d",
            "iban": "\u2192 d\u00edgito verificador v\u00e1lido \u00b7 %s",
            "page": "\u2192 p\u00e1gina aut\u00f4noma (%s bytes) \u00b7 "
@@ -2361,6 +2419,12 @@ _EVERYDAY_CALLS = [
      "deadline", lambda d, L_: (
          d["ship_by"], d["ship_by_weekday"],
          d["cross_check"]["conflict"]["ship_by"])),
+    ("/api/v1/shop/return-deadline",
+     {"retailer": "target", "purchase_date": "2026-12-20",
+      "category": "phone"},
+     "returndead", lambda d, L_: (
+         d["return_by"], d["return_by_weekday"],
+         d["purchase_window"][1])),
 ]
 
 

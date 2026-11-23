@@ -1,0 +1,9 @@
+{
+ "name": "shop_return_deadline_apple_16_days_earlier",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "amazon",
+  "purchase_date": "2026-12-20",
+  "category": "ipad"
+ }
+}

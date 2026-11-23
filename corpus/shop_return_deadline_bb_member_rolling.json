@@ -1,0 +1,9 @@
+{
+ "name": "shop_return_deadline_bb_member_rolling",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "bestbuy",
+  "purchase_date": "2026-12-04",
+  "membership": true
+ }
+}

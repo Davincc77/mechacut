@@ -39,7 +39,12 @@ def test_landing_budget():
     # squelette d'ancres) et par le VRAI contrat de portabilité :
     # le manifest < 9000 octets (test_bundle0) — la landing est une
     # vitrine navigateur, pas un artefact de contexte de modèle.
-    assert len(html.encode("utf-8")) < 144_600  # resize 23-11 (+hero.why ×3 — base bundles 77-78)
+    assert len(html.encode("utf-8")) < 147_800  # resize 23-11 bundle80 (+shop_return_deadline ligne TABLE + carte e21 ×3) — base b79 145_600
+    # 80 : une ligne TABLE + une carte du quotidien (e21, la fenêtre
+    # Target close Dec 24) coutent ~2 700 octets PAR page, FR mesure
+    # 146 756, PT 145 615, EN 144 047 (re-mesure apres b81 : le
+    # retrait des tags-chiffres rend ~30 octets). Le VRAI contrat de
+    # portabilite reste le manifest (<9000 octets, test_bundle0).
     # 77-78 : deux lignes TABLE + une carte du quotidien (e20, la
     # divergence FedEx nommee) coutent ~2 200 octets PAR page, la prose
     # FR elaguee de 530 (e18/e19/e20 ratisses, chaque fait conserve)

@@ -3374,6 +3374,73 @@
   },
   {
    "body": {
+    "as_of": "2026-11-23",
+    "purchase_date": "2026-12-20",
+    "retailer": "amazon"
+   },
+   "name": "shop_return_deadline_amazon_us_hard_date",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "b1b8b3ba61a8d22ad5977e4398f36d86b3e176b194b91cdfc2dc86a642076b5b",
+   "status": 200
+  },
+  {
+   "body": {
+    "category": "ipad",
+    "purchase_date": "2026-12-20",
+    "retailer": "amazon"
+   },
+   "name": "shop_return_deadline_apple_16_days_earlier",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "93d6503a202263a51273066182cb88c842bc48c98e75c8a618108a148252d6bb",
+   "status": 200
+  },
+  {
+   "body": {
+    "membership": true,
+    "purchase_date": "2026-12-04",
+    "retailer": "bestbuy"
+   },
+   "name": "shop_return_deadline_bb_member_rolling",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "1f9b0fb2631c019833501376637688e34b3a68d41b22f4370f58db60f33b974a",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "UK",
+    "purchase_date": "2026-11-20",
+    "retailer": "next"
+   },
+   "name": "shop_return_deadline_next_uk_refused",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "416c9ecedaeb726b9da7ad24f33c134f1a3d678f13962e45c8b364c499d1ee03",
+   "status": 400
+  },
+  {
+   "body": {
+    "category": "electronics",
+    "purchase_date": "2026-12-26",
+    "retailer": "target"
+   },
+   "name": "shop_return_deadline_target_dec26_refused",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "1126abb40719651c24bd40434cde5aa4312101017cca8fc8b88ef39697ae4dc9",
+   "status": 400
+  },
+  {
+   "body": {
+    "country": "UK",
+    "delivery_date": "2027-01-05",
+    "purchase_date": "2026-12-20",
+    "retailer": "amazon"
+   },
+   "name": "shop_return_deadline_uk_later_of",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "1622101b3f2100d6982ba9a2e1c044530c18f722456233de208a2b9ebb577a15",
+   "status": 200
+  },
+  {
+   "body": {
     "carrier": "fedex",
     "service": "express saver"
    },

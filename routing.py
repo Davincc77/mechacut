@@ -187,6 +187,17 @@ TABLE = (
      "shipping ship-by christmas day arrives ground saver air "
      "noel fetes dernier jour envoi avant usps ups fedex "
      "natal ultima data envie chegan ata fedex ups"),
+     ("shop_return_deadline", "/api/v1/shop/return-deadline",
+     "dates",
+     "published holiday return deadline for a purchase date, "
+     "provenance and conflicts named",
+     "return deadline returns exchange last day gift christmas "
+     "holiday purchase window seller retailer walmart target "
+     "bestbuy amazon costco apple "
+     "retour delai date limite retourner echange cadeau apres "
+     "noel achat magasin delai de retour "
+     "troca devolucao prazo ultimo dia devolver presente depois "
+     "do natal comprar"),
     ("invoice_validate_totals", "/api/v1/invoice/validate-totals",
      "checks",
      "declared invoice totals vs exact arithmetic, signed deltas",
@@ -265,7 +276,7 @@ TABLE = (
      "invalides sautés LISTÉS, ancrage du DTSTART déclaré, COUNT ou "
      "UNTIL jamais les deux, refus nommés, cap 500",
      "rrule recurrence recurring biweekly every other week monthly "
-     "occupancy occurrences calendar series expand rfc 5545 dtstart "
+     "occupancy occurrences calendar series expand rfc rfc5545 dtstart "
      "until count byday wkst recurrente qui se repete un mardi sur "
      "deux tous les quinze jours derouler recurrence dates de serie "
      "recorrencia se repete a cada duas semanas quinzenal expandir "
@@ -301,7 +312,7 @@ TABLE = (
      "réductions = options « le transporteur PEUT », forclusion 9 mois "
      "en date exacte, zéro fetch",
      "flight compensation ec261 uk261 delayed cancelled denied boarding "
-     "eur250 400 600 gbp220 350 520 claim deadline refund air passenger "
+     "eur250 eur400 eur600 gbp220 gbp350 gbp520 claim deadline refund air passenger "
      "rights indemnite vol retard annulation suppression billet "
      "forclusion recours compensacao voo atrasado cancelamento "
      "direitos do passageiro aeronautico"),
@@ -313,7 +324,7 @@ TABLE = (
      "PostgreSQL/Snowflake",
      "iso week week number isoweek isocalendar w53 kw53 week-based-year "
      "excel weeknum isoweeknum date boundary reporting semana numero "
-     "semaine iso semaine 53 calendrier kw kalenderwoche woche wochenzahl "
+     "semaine iso semaine semaine53 calendrier kw kalenderwoche woche wochenzahl "
      "numero da semana semana iso contagem de semanas ano semanal"),
     ("units_shoe_size", "/api/v1/units/shoe_size", "numbers",
      "Pointures en millimetres exacts — pas publiés en fractions "
@@ -377,7 +388,7 @@ TABLE = (
      "capitalisation épargne"),
     ("ics_validate", "/api/v1/ics/validate", "time",
      "VCALENDAR lint: RFC 5545 MUSTs as errors, SHOULDs as warnings",
-     "ics calendar validate lint vevent dtstart dtend RFC 5545 "
+     "ics calendar validate lint vevent dtstart dtend RFC rfc5545 "
      "calendrier agenda verificação"),
     ("schedule_holidays", "/api/v1/schedule/holidays", "time",
      "statutory holidays FR BR PT DE US with the law cited on every line",
@@ -526,7 +537,7 @@ TABLE = (
     ("validate_iban", "/api/v1/validate/iban", "checks",
      "61 countries, BBAN + mod-97",
      "iban bank validate payment account sepa country bban transfer payout "
-     "97 bancaire"),
+     "mod97 bancaire"),
     ("validate_phone", "/api/v1/validate/phone", "checks",
      "E.164 + country rules",
      "phone validate number e164 mobile country ddi plus dial whatsapp "
@@ -557,7 +568,7 @@ TABLE = (
      "style variable conversion"),
     ("text_truncate", "/api/v1/text/truncate", "text",
      "boundary-exact truncation",
-     "truncate cut limit text length boundary ellipsis words 280 shorten "
+     "truncate cut limit text length boundary ellipsis words tweet shorten "
      "fit whole mid coupure"),
     ("regex_test", "/api/v1/regex/test", "text",
      "match/spans/groups/replace, sandboxed",
@@ -757,11 +768,11 @@ TABLE = (
      "jamais fetchus ; ajustement PAR DIMENSION avec ROTATION (40×18×30 "
      "passe dans 40×30×20) ; le « cumul 100 cm / 7 kg » de la presse "
      "rendu comme affirmation TESTÉE (55+40+20=115), jamais comme règle",
-     "cabin baggage carry on size 40x30x15 underseat personal item "
+     "cabin baggage carry on size 40x30x15 under seat underseat personal item "
      "hand luggage allowance does my bag fit suitcase sizer gauge "
-     "rotation overhead new eu rule 2027 air passenger voyage sac "
+     "rotation overhead new eu rule air passenger voyage sac "
      "bagage cabine dimensions franchie main valise sous le siège "
-     "règle ue 2027 bagagem de mão malas de mão dimensões cabine "
+     "règle ue bagagem de mão malas de mão dimensões cabine "
      "regulamento eu bagagem franquia tamanho permitido"),
     ("csv_excel_damage", "/api/v1/csv/excel_damage", "repair",
      "Ce qu'Excel DÉTRUIT au double-clic, PRÉDIT avant : zéros de tête "
@@ -773,7 +784,7 @@ TABLE = (
      "PRESCRIT ; csv/fix répare, ici on PRÉDIT",
      "excel csv damage leading zeros scientific notation date "
      "conversion corrupted on open double click spreadsheet gene "
-     "names postcode truncation 15 digits import text columns "
+     "names postcode truncation digits import text columns "
      "dtype forecast predict before opening excel détruit zéros "
      "conversion date mise en forme import texte colonnes planilha "
      "csv excel zeros à esquerda notação científica corrupção ao "
@@ -817,7 +828,7 @@ TABLE = (
      "style, la prédiction d'import est une autre route",
      "excel numfmt styles xlsx stored rendered diverge scale "
      "thousands trailing comma markitdown openpyxl pandas wrong "
-     "budget cell shows extractor misled mise en forme affichée "
+     "budget cell shows saw shown extractor misled mise en forme affichée "
      "valeur stockée rendu format nombre affichage cellule styles "
      "xml visual formato número exibido célula render estilo de "
      "número valor estocado"),
@@ -829,7 +840,7 @@ TABLE = (
      "34,5 sur les MEMES pouces : la fraction exacte 4800/139 tranche "
      "et chaque etape est nommee ; tables transporteurs en ARGUMENTS "
      "(USPS 166→139 le 12-juil-2026 = elles pourrissent)",
-     "dimensional weight dim billed parcel box carrier divisor 139 "
+     "dimensional weight dim billed parcel box carrier divisor "
      "pound volumetric shipping cost surprise max fee girth "
      "poids facture colis dimensions volumetrique transporteur "
      "expedition livre pale palier plafond poids volumetrique colis "
@@ -866,7 +877,7 @@ TABLE = (
      "audit model ids against a pasted catalog — named verdicts, "
      "did-you-mean at a named distance, never swears the GET (V23)",
      "model id modelid litellm openrouter gateway prefix prefixe "
-     "prefixo not found 404 invalid identifier alias catalog annuaire "
+     "prefixo not found invalid identifier alias catalog annuaire "
      "catalogo erreur config agent nome modelo catalogo "
      "identificador inexistente errado vierge tiret underscore"),
     ("food_poultry", "/api/v1/food/poultry", "dates",
@@ -1088,6 +1099,7 @@ STOP_FR = frozenset(
     "jusqu plus moins tres tr tout tous toute toutes autre autres "
     "mon ma mes ton ta tes son sa ses notre nos votre vos leur leurs "
     "je tu il elle on nous vous ils elles me te moi toi se soi y "
+    "ce cet cette ces "
     "peut peux peuvent veux veut vouloir voulais "
     "fais fait faire dis dit dire suis es etes etre avoir ont eu "
     "dois doivent ici".split())
@@ -1124,6 +1136,13 @@ def route(query, top=5):
     toks, seen = [], set()
     for t in re.split(r"[^a-z0-9]+", (query or "").lower()):
         if not t or t in STOP:
+            continue
+        # CLASSE b81 : un chiffre dans une requête est une DONNÉE,
+        # jamais une intention — il ne vote pour aucune ligne. La
+        # maladie des tags-« 1 »/« 50 » (dictée FR b78, 8-7 chez
+        # csv_excel_display) est guérie à la SOURCE, pas phrase par
+        # phrase. test_bundle81 la verrouille statiquement.
+        if t.isdigit():
             continue
         st = _stem(t)
         if st not in seen:
