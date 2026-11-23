@@ -556,8 +556,8 @@ TR = {
   "kit.c3.foot": "Golds drawn BEFORE the code, AST-gate, pin-gate. Status: proposed, attested, network-verified \u2014 the kit grows locally, the proof grows back to the network. A lesson is a proposal; the bench locks it.",
   "kit.howto.p1": "Install the skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 drop the file into your agent (CLAUDE.md, AGENTS.md, skills/). ~650 tokens, sized for small models.",
   "kit.howto.p2": "Make it consult first: before acting, the agent describes the problem in one sentence to /route/resolve \u2014 the directory returns the tool that already exists, or says none does.",
-  "kit.howto.p3": "Call: stateless POSTs, keyless on free; the response carries its sha256, the refusal carries field + expected + example. The on-disk local kit (own tools, same gates) is specified in PROTOCOL-KIT.md \u2014 under construction.",
-  "kit.plain.sum": "Not a developer? Good.",
+  "kit.howto.p3": "Call: stateless POSTs, keyless on free; the response carries its sha256, the refusal carries field + expected + example. The PROTOCOL-KIT.md spec is PUBLISHED (repo root); the on-disk runner is a further bundle \u2014 not live, not promised, tracked here.",
+  "kit.plain.sum": "Not a developer? No problem \u2014 we translate.",
   "kit.plain.p1": "Open your usual AI assistant (Claude, ChatGPT, Grok, Copilot\u2026).",
   "kit.plain.p2": "Send it this message: \u0022Read https://mechacut.studio/SKILL-MINI.md and follow it for my calculations.\u0022 Nothing to install, nothing to pay, no account.",
   "kit.plain.p3": "Then ask your real task: \u002230% then 20% discount \u2014 what is that really?\u0022, \u0022how many days overdue is this invoice?\u0022 The numbers no longer come from its head \u2014 they come from the suite, and they are the same for everyone.",
@@ -1086,8 +1086,8 @@ TR = {
   "kit.c3.foot": "Golds tracés AVANT le code, AST-gate, pin-gate. Statuts : proposé, attesté, réseau-vérifié \u2014 le kit grandit localement, la preuve repousse au réseau. Une leçon est une proposition ; le banc la verrouille.",
   "kit.howto.p1": "Installer la skill : <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 déposer le fichier chez l'agent (CLAUDE.md, AGENTS.md, skills/). ~650 jetons, calibré pour les petits modèles.",
   "kit.howto.p2": "Le faire consulter d'abord : avant d'agir, l'agent décrit son problème en une phrase à /route/resolve \u2014 l'annuaire rend l'outil qui existe déjà, ou dit qu'aucun n'existe.",
-  "kit.howto.p3": "Appeler : POST sans état, sans clé sur le libre ; la réponse porte son sha256, le refus porte champ + attendu + exemple. Le kit local sur disque (outils propres, mêmes portes) est spécifié dans PROTOCOL-KIT.md \u2014 en construction.",
-  "kit.plain.sum": "Vous n'êtes pas développeur ? Tant mieux.",
+  "kit.howto.p3": "Appeler : POST sans état, sans clé sur le libre ; la réponse porte son sha256, le refus porte champ + attendu + exemple. La spec PROTOCOL-KIT.md EST PUBLIÉE (racine du dépôt) ; le runner sur disque est un lot suivant \u2014 pas en ligne, pas promis, suivi ici.",
+  "kit.plain.sum": "Vous n'êtes pas développeurs ? Pas grave, on traduit.",
   "kit.plain.p1": "Ouvrez votre assistant IA habituel (Claude, ChatGPT, Grok, Copilot\u2026).",
   "kit.plain.p2": "Envoyez-lui ce message : \u0022 Lis https://mechacut.studio/SKILL-MINI.md et suis-le pour tous mes calculs.\u0022 Rien à installer, rien à payer, pas de compte.",
   "kit.plain.p3": "Demandez ensuite votre véritable tâche : \u0022 30 % puis 20 % de remise, ça fait combien réellement ?\u0022, \u0022 cette facture est en retard de combien de jours ?\u0022 Les chiffres ne sortent plus de sa tête \u2014 ils sortent de la suite, et ils sont les mêmes pour tout le monde.",
@@ -1605,8 +1605,8 @@ TR = {
   "kit.c3.foot": "Golds traçados ANTES do código, AST-gate, pin-gate. Status: proposto, atestado, rede-verificado \u2014 o kit cresce localmente, a prova cresce de volta na rede. Uma lição é uma proposta; o banco a tranca.",
   "kit.howto.p1": "Instalar a skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 soltar o arquivo no agente (CLAUDE.md, AGENTS.md, skills/). ~650 tokens, calibrado para modelos pequenos.",
   "kit.howto.p2": "Fazê-lo consultar primeiro: antes de agir, o agente descreve o problema em uma frase a /route/resolve \u2014 o diretório devolve a ferramenta que já existe, ou diz que não há.",
-  "kit.howto.p3": "Chamar: POSTs sem estado, sem chave no livre; a resposta traz seu sha256, a recusa traz campo + esperado + exemplo. O kit local em disco (ferramentas próprias, mesmos portões) está especificado em PROTOCOL-KIT.md \u2014 em construção.",
-  "kit.plain.sum": "Você não é desenvolvedor? Melhor ainda.",
+  "kit.howto.p3": "Chamar: POSTs sem estado, sem chave no livre; a resposta traz seu sha256, a recusa traz campo + esperado + exemplo. A especificação PROTOCOL-KIT.md ESTÁ PUBLICADA (raiz do repositório) ; o runner em disco é um lote seguinte \u2014 não está no ar, não está prometido, acompanhado aqui.",
+  "kit.plain.sum": "Você não é desenvolvedor? Sem problema \u2014 a gente traduz.",
   "kit.plain.p1": "Abra seu assistente de IA de sempre (Claude, ChatGPT, Grok, Copilot\u2026).",
   "kit.plain.p2": "Envie esta mensagem: \u0022Leia https://mechacut.studio/SKILL-MINI.md e siga-o para os meus cálculos.\u0022 Nada para instalar, nada para pagar, sem conta.",
   "kit.plain.p3": "Depois peça a tarefa real: \u002230% e depois 20% de desconto dá quanto?\u0022, \u0022quantos dias de atraso tem esta fatura?\u0022 Os números não saem mais da cabeça dele \u2014 saem da suíte, e são os mesmos para todos.",
@@ -2359,6 +2359,10 @@ CAT_TOP10 = {"en": "\u2605 Top 10", "fr": "\u2605 Le top 10",
 PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
                 # validés nom par nom + chiffres par chiffres au merge
     "fr": {
+        "net_ratelimit":
+            "en-têtes Retry-After et X-RateLimit-* lus (delta-seconds ou IMF-fixdate strict) ; en désaccord, les deux attendus sont NOMMÉS, jamais choisis ; now est un argument, jamais l’horloge murale",
+        "number_words_pair":
+            "forme écrite et forme chiffrée vérifiées l’une contre l’autre — trente (40) refuse : AGREE/MISMATCH/NO_PAIR, les deux valeurs gardées",
         "agent_retrybudget":
             "re-tenter cet échec est-il rationnel ? taxonomie "
             "fermée, plafond de hachage, budget de session, backoff "
@@ -2701,6 +2705,10 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "food_ovenschedule":
             "un four, des plats, une heure de service : compte à rebours à l'envers, conflits de température nommés, jamais d'horloge murale — les timelines web ne vérifient rien de tout ça",
     },    "pt": {
+        "net_ratelimit":
+            "cabeçalhos Retry-After e X-RateLimit-* lidos (delta-seconds ou IMF-fixdate estrito); em contradição, ambas as esperas são NOMEADAS, nunca escolhidas; now é argumento, nunca relógio de parede",
+        "number_words_pair":
+            "forma por extenso e forma numérica conferidas uma contra a outra — trinta (40) recusa: AGREE/MISMATCH/NO_PAIR, os dois valores guardados",
         "agent_retrybudget":
             "repetir esta falha é racional? taxonomia fechada, teto "
             "de hash, orçamento de sessão, backoff determinístico",

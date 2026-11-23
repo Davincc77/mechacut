@@ -65,6 +65,8 @@ POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, 
 POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences pointées (free)
 POST /api/v1/check/allowlist     rules + requests -> policy verdicts (free)
 POST /api/v1/loop/doom-check     tool-call trace -> doom determinism, named thresholds (free)
+POST /api/v1/net/ratelimit       retry headers -> honest wait window or named contradiction (free)
+POST /api/v1/number/words-pair   "thirty (40)" -> MISMATCH, both kept, no pick (free)
 POST /api/v1/agent/retry-budget  error class + hash count + budget -> REPEAT/MUTATE/ABORT (free)
 POST /api/v1/shop/discount-audit price history + announced cut -> Omnibus 30-day legality verdict (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
@@ -347,7 +349,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.6.0",
+    version="1.7.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1696,6 +1698,61 @@ def run_loop_doom_check(args: dict):
 @app.post("/api/v1/loop/doom-check")
 def api_loop_doom_check(req: LoopDoomCheckRequest):
     body, err = run_loop_doom_check(req.model_dump())
+    return err if err else body
+
+
+class RateLimitRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    headers: Dict[str, str]
+    now: str
+    status: Optional[int] = None
+
+
+def run_net_ratelimit(args: dict):
+    try:
+        req = RateLimitRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = webkit.rate_limit(req.headers, req.now, req.status)
+    except webkit.RateLimitError as e:
+        return None, bad_request(
+            [{"field": "headers/now", "message": str(e),
+              "expected": "headers object; now ISO with UTC offset; "
+                          "status optional integer"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/net/ratelimit")
+def api_net_ratelimit(req: RateLimitRequest):
+    body, err = run_net_ratelimit(req.model_dump())
+    return err if err else body
+
+
+class WordsPairRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    text: str
+
+
+def run_number_words_pair(args: dict):
+    try:
+        req = WordsPairRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = spell.words_pair(req.text)
+    except ValueError as e:
+        return None, bad_request(
+            [{"field": "text", "message": str(e),
+              "expected": "text: prose containing spelled and digit forms"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/number/words-pair")
+def api_number_words_pair(req: WordsPairRequest):
+    body, err = run_number_words_pair(req.model_dump())
     return err if err else body
 
 
@@ -5930,6 +5987,8 @@ TOOL_RUN = {
            "eval_compare": run_eval_compare,
            "check_allowlist": run_check_allowlist,
            "loop_doom_check": run_loop_doom_check,
+           "net_ratelimit": run_net_ratelimit,
+           "number_words_pair": run_number_words_pair,
            "agent_retrybudget": run_agent_retrybudget,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
@@ -9652,6 +9711,48 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "net_ratelimit",
+        "description": (
+            "Read the real throttle headers an API sent you: Retry-After "
+            "(delta-seconds or strict RFC 9110 IMF-fixdate), "
+            "retry-after-ms, X-RateLimit-Reset/Limit/Remaining. Verdict: "
+            "OPEN, THROTTLED, BLOCKED (429 honored even headerless, with "
+            "no window invented), UNKNOWN (header present, unparsable — "
+            "said, not guessed), CONTRADICTION (sources disagree: BOTH "
+            "waits are reported, none chosen). now is an argument, never "
+            "the wall clock. Feeds agent_retrybudget upstream. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["headers", "now"],
+            "properties": {
+                "headers": {"type": "object", "additionalProperties":
+                            {"type": "string"}},
+                "now": {"type": "string",
+                        "description": "ISO timestamp with UTC offset"},
+                "status": {"type": "integer"},
+            },
+        },
+    },
+    {
+        "name": "number_words_pair",
+        "description": (
+            "Contracts say amounts twice: Thirty (30). The pair tool "
+            "extracts every spelled form adjacent to a parenthesized "
+            "digit, checks them as QUANTITIES (2100 equals 2100.00), and "
+            "refuses to pick a side when they disagree: AGREE, MISMATCH "
+            "(both values kept), NO_PAIR, ambiguous separators said by "
+            "name. FR/EN/PT grammar is exactly spell_number's own tables "
+            "inverted — closed, versioned, no new vocabulary. The inverse "
+            "of number_spell, and its referee. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["text"],
+            "properties": {"text": {"type": "string"}},
+        },
+    },
 ]
 
 
@@ -9879,6 +9980,8 @@ def index(request: Request):
             "/api/v1/eval/compare": "POST expected + got -> verdict OK/WRONG + named divergences (free)",
             "/api/v1/check/allowlist": "POST rules + requests -> ALLOW/DENY/AMBIGUOUS by closed grammar (free)",
             "/api/v1/loop/doom-check": "POST tool calls -> DOOM/CYCLIC/STORM/HEALTHY (free)",
+            "/api/v1/net/ratelimit": "POST http headers -> OPEN/THROTTLED/BLOCKED/CONTRADICTION wait windows (free)",
+            "/api/v1/number/words-pair": "POST text -> spelled vs digit forms checked, never chosen (free)",
             "/api/v1/agent/retry-budget": "POST error class + attempt + hashes -> REPEAT/MUTATE/ABORT, deterministic backoff (free)",
             "/api/v1/shop/discount-audit": "POST price history + announced cut -> Omnibus 30-day legality verdict (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",

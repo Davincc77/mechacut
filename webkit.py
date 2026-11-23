@@ -193,3 +193,117 @@ def compress_gzip(payload_b64, mode="compress", level=9):
                 "payload_b64": _b64.b64encode(out).decode(),
                 "archive_bytes": len(raw), "output_bytes": len(out)}
     raise WebError("mode is compress or decompress")
+
+
+# --------------------------------------------------------------------------
+# http_ratelimit — bundle 85. Lit les vrais en-têtes de débit, ne choisit
+# jamais entre deux sources qui se contredisent : les nomme.
+# --------------------------------------------------------------------------
+_DOW = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+_MON = ("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+import re as _re
+
+_IMF = _re.compile(
+    r"^(Sun|Mon|Tue|Wed|Thu|Fri|Sat), (\d\d) (Jan|Feb|Mar|Apr|May|Jun|"
+    r"Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$")
+_SECS = _re.compile(r"^(0|[1-9]\d{0,12})$")
+
+
+class RateLimitError(ValueError):
+    pass
+
+
+def _h(headers, name):
+    for k, v in headers.items():
+        if str(k).lower() == name:
+            return str(v).strip()
+    return None
+
+
+def _parse_imf(value):
+    import datetime as _dt
+    m = _IMF.match(value)
+    if not m:
+        raise RateLimitError("retry-after is neither delta-seconds nor "
+                             "RFC 9110 IMF-fixdate: %r" % value)
+    dow, dom, mon, year, hh, mm, ss = m.groups()
+    if _DOW.index(dow) != _dt.date(int(year), _MON.index(mon) + 1,
+                                   int(dom)).weekday():
+        raise RateLimitError("retry-after weekday does not match its date: "
+                             "%r" % value)
+    if int(hh) > 23 or int(mm) > 59 or int(ss) > 60:
+        raise RateLimitError("retry-after time out of range: %r" % value)
+    return _dt.datetime(int(year), _MON.index(mon) + 1, int(dom),
+                        int(hh), int(mm), int(ss),
+                        tzinfo=_dt.timezone.utc)
+
+
+def rate_limit(headers, now, status=None):
+    import datetime as _dt
+    if not isinstance(headers, dict):
+        raise RateLimitError("headers must be an object")
+    try:
+        now_dt = _dt.datetime.fromisoformat(now.replace("Z", "+00:00"))
+    except Exception:
+        raise RateLimitError("now must be an ISO timestamp (it is an "
+                             "argument, never the wall clock): %r" % now)
+    if now_dt.tzinfo is None:
+        raise RateLimitError("now must carry a UTC offset")
+    warnings, candidates = [], {}
+    ra = _h(headers, "retry-after")
+    ram = _h(headers, "retry-after-ms")
+    reset = _h(headers, "x-ratelimit-reset")
+    limit = _h(headers, "x-ratelimit-limit")
+    remaining = _h(headers, "x-ratelimit-remaining")
+    if ra is not None:
+        if _SECS.match(ra):
+            candidates["retry-after"] = int(ra)
+        else:
+            try:
+                d = _parse_imf(ra)
+                candidates["retry-after"] = max(
+                    0, int((d - now_dt).total_seconds()))
+            except RateLimitError as e:
+                warnings.append(str(e))
+    if ram is not None and _SECS.match(ram):
+        candidates["retry-after-ms"] = int(ram) // 1000
+    if reset is not None:
+        if _SECS.match(reset):
+            candidates["x-ratelimit-reset"] = max(
+                0, int(reset) - int(now_dt.timestamp()))
+        else:
+            warnings.append("x-ratelimit-reset is not epoch-seconds: %r"
+                            % reset)
+    out = {"verdict": "OPEN", "retry_after_seconds": None,
+           "earliest_retry": None, "source": None, "candidates": [],
+           "limit": None, "remaining": None, "warnings": warnings}
+    if limit is not None and _SECS.match(limit):
+        out["limit"] = int(limit)
+    if remaining is not None and _SECS.match(remaining):
+        out["remaining"] = int(remaining)
+    if candidates:
+        best = min(candidates.values())
+        winners = sorted(k for k, v in candidates.items() if v == best)
+        if len(set(candidates.values())) > 1:
+            out["verdict"] = "CONTRADICTION"
+            out["candidates"] = sorted(str(v) for v in set(
+                candidates.values()))
+            out["source"] = "+".join(sorted(candidates))
+        elif status == 429:
+            out["verdict"] = "BLOCKED"
+            out["source"] = winners[0]
+        else:
+            out["verdict"] = "THROTTLED"
+            out["source"] = winners[0]
+        out["retry_after_seconds"] = str(best)
+        out["earliest_retry"] = (
+            now_dt + _dt.timedelta(seconds=best)).isoformat()
+    elif ra is not None or reset is not None:
+        out["verdict"] = "UNKNOWN"   # header présent, non pasé : dit, pas choisi
+    if status == 429 and out["verdict"] == "OPEN":
+        out["verdict"] = "BLOCKED"
+        out["retry_after_seconds"] = None
+        out["warnings"].append("409-less blocked: status 429 with no usable "
+                               "retry headers — no wait window is asserted")
+    return out

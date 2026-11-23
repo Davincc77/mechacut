@@ -174,6 +174,18 @@ TABLE = (
      "loop doom cyclic storm repeat repetition trace agent calls "
      "retry stuck boucle repetition relance agentique trace "
      "repetitif boucler"),
+    ("net_ratelimit", "/api/v1/net/ratelimit", "web",
+     "Retry-After / X-RateLimit-* headers -> OPEN | THROTTLED | BLOCKED | "
+     "UNKNOWN | CONTRADICTION, both waits named",
+     "rate limit retry-after ratelimit throttle headers quota reset "
+     "remaining backoff debit en-tete limite temporisation "
+     "limitacao cabecalho tetos espera"),
+    ("number_words_pair", "/api/v1/number/words-pair", "numbers",
+     "spelled and digit amounts checked against each other — thirty (40) "
+     "refuses, both values kept, no side chosen",
+     "words pair amount cheque montant lettre chiffres contrat trinta "
+     "trente thirty mismatch spelled numeral extenso por letras cifra "
+     "contrato valor duplicado"),
     ("agent_retrybudget", "/api/v1/agent/retry-budget", "checks",
      "is re-attempting this failure rational? closed taxonomy, "
      "hash ceiling, session budget, deterministic backoff",

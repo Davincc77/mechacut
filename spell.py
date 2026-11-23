@@ -5,6 +5,7 @@ words, forever. Not a model task: no LLM gets French "quatre-vingts" vs
 "quatre-vingt" twice the same way.
 """
 
+import re
 from decimal import Decimal
 
 from numfmt import _dec, NumberError
@@ -118,8 +119,11 @@ _LANGS = {
     },
     "en": {
         "small": _en_small, "hundred": _hundred_en,
-        "scales": [("thousand", "thousands"), ("million", "millions"),
-                   ("billion", "billions"), ("trillion", "trillions")],
+        # pluriel anglais : JAMAIS. "two thousands" est une faute — la
+        # table était héritée du motif FR/PT. Constaté par number_words_pair
+        # au premier jour de vie (24-11) ; corrigé ici, version bump déclaré.
+        "scales": [("thousand", "thousand"), ("million", "million"),
+                   ("billion", "billion"), ("trillion", "trillion")],
         "minus": "minus", "point": "point",
     },
     "pt": {
@@ -258,3 +262,116 @@ def num_spell(value, lang="fr", currency=None, cents=True, capital=False):
     return {"words": out, "lang": lang,
             "currency": (currency.upper() if currency else None),
             "amount": ("-" if neg else "") + format(d, "f")}
+
+
+# --------------------------------------------------------------------------
+# number_words_pair — bundle 85. « Thirty (30) days » : la suite lit les
+# DEUX formes, refuse de choisir quand elles se contredisent. L'index
+# inverse est construit en épelant 0..9999 par les tables déjà vivantes —
+# zero grammaire neuve, l'inversion est exactement le contrat de spell.
+# --------------------------------------------------------------------------
+_PAIR_RE = re.compile(
+    r"([A-Za-z\u00c0-\u017f][A-Za-z\u00c0-\u017f' \u2011-]*?)\s*\(\s*"
+    r"([0-9][0-9 .,\u00a0 ]{0,20})\s*\)")
+_DIGITS_ONLY_RE = re.compile(r"\b\d[\d .,\u00a0]{0,19}\d\b|\b\d+\b")
+_PAIR_LANGS = ("fr", "en", "pt")
+_INDEX = {}
+
+
+def _index():
+    if _INDEX:
+        return _INDEX
+    for lang in _PAIR_LANGS:
+        table = {}
+        for i in range(10000):
+            w = spell_number(i, lang).strip().lower()
+            table.setdefault(w, i)
+            w2 = w.replace(" and ", " ")
+            if w2 != w:
+                table.setdefault(w2, i)
+        _INDEX[lang] = table
+    return _INDEX
+
+
+def _run_value(run):
+    """Plus longue suffixe épelable du groupe de mots ; None si aucune."""
+    words = [w for w in run.replace("\u2011", "-").lower().split() if w]
+    if not words:
+        return None
+    for k in range(len(words)):
+        tail = " ".join(words[k:])
+        vals = {}
+        for lang in _PAIR_LANGS:
+            v = _index()[lang].get(tail)
+            if v is not None:
+                vals.setdefault(v, []).append(lang)
+        if len(vals) == 1:
+            v = next(iter(vals))
+            return tail, v, sorted({l for ls in vals.values() for l in ls}), None
+        if len(vals) > 1:
+            return tail, None, sorted({l for ls in vals.values() for l in ls}), \
+                "same words, different values across languages"
+    return None
+
+
+def _parse_numeric(raw):
+    s = raw.replace("\u00a0", " ").strip()
+    if re.match(r"^\d{1,3}(?:[ ,]\d{3})+(?:\.\d+|,\d+)?$", s):
+        s = re.sub(r"[ ,](?=\d{3}\b)", "", s)
+        return Decimal(s.replace(",", ".")), None
+    m = re.match(r"^(\d+)([.,])(\d+)$", s)
+    if m:
+        if m.group(2) == ".":
+            return Decimal(m.group(1) + "." + m.group(3)), None
+        if len(m.group(3)) != 3:
+            return Decimal(m.group(1) + "." + m.group(3)), None
+        return None, "ambiguous decimal separator: %r" % raw
+    if re.match(r"^\d+$", s):
+        return Decimal(s), None
+    return None, "unparseable numeric form: %r" % raw
+
+
+def words_pair(text):
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError("text is required and must not be empty")
+    idx = _index()
+    pairs, digit_only, ambiguous, warns = [], [], [], []
+    consumed = []
+    for m in _PAIR_RE.finditer(text):
+        run, raw = m.group(1), m.group(2)
+        parsed, err = _parse_numeric(raw)
+        if err:
+            ambiguous.append({"numeric": raw, "why": err})
+            consumed.append((m.start(), m.end()))
+            continue
+        rv = _run_value(run)
+        if rv is None:
+            digit_only.append(raw.strip())
+            consumed.append((m.start(), m.end()))
+            continue
+        spelled, value, langs, amb = rv
+        if amb:
+            warns.append("%s: %s" % (spelled, amb))
+            digit_only.append(raw.strip())
+            continue
+        agree = parsed == Decimal(value)
+        pairs.append({"words": spelled, "word_value": str(value),
+                      "numeric": raw.strip(), "lang": langs[0]
+                      if len(langs) == 1 else "+".join(langs),
+                      "agree": bool(agree)})
+        consumed.append((m.start(), m.end()))
+    for m in _DIGITS_ONLY_RE.finditer(text):
+        if any(a <= m.start() < b for a, b in consumed):
+            continue
+        digit_only.append(m.group(0).strip())
+    if pairs and all(p["agree"] for p in pairs):
+        verdict = "AGREE"
+    elif any(not p["agree"] for p in pairs):
+        verdict = "MISMATCH"
+    else:
+        verdict = "NO_PAIR"
+    return {"verdict": verdict, "pairs": pairs,
+            "counts": {"pairs": len(pairs), "digit_only": len(digit_only),
+                       "ambiguous": len(ambiguous)},
+            "digit_only": digit_only, "ambiguous": ambiguous,
+            "warnings": warns}
