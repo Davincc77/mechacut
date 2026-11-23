@@ -2,8 +2,8 @@
 
 *(X long-form, written FOR Hermes users, about the Hermes plugin first.
 Every number is curlable at posting time; both bench arms live in the public
-repo. POST GATE: the one-word catalog install is written for merge day —
-until then the Git line, which is live today.)*
+repo. POST GATE: the one-word catalog install line activates merge day —
+the Git line is live today.)*
 
 ---
 
@@ -236,7 +236,7 @@ C'est la partie que le plugin déverrouille en silence, et la raison pour
 laquelle on l'appelle un réseau : **un agent apprend, tous les agents
 apprennent — s'ils le veulent.**
 
-Quand un agent équipé bute sur une falaise — une tâche qu'il a due faire
+Quand un agent équipé bute sur une falaise — une tâche qu'il a dû faire
 deux fois à la main — il peut proposer la leçon comme un *contrat* : entrées,
 sorties, golds tracés à la main avant que le code existe. Puis les portes de
 la maison tournent : une AST-gate qui est du runtime et pas du sentiment
