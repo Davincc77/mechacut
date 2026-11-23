@@ -875,3 +875,89 @@ def _finalize_event(raw):
             ev["duration_seconds"] = ((w * 7 + dd) * 86400 + h * 3600 +
                                       mi * 60 + s)
     return {k: v for k, v in ev.items() if v is not None or k == "uid"}
+
+
+# --------------------------------------------------------------------------
+# date_window — bundle 86. « not less than 180 nor more than 270 days
+# before X » : la borne seule ne rend pas la clause. Ici on rend la FENÊTRE
+# entière, inclusive, avec son span et sa phrase. Bornes inversées = refus
+# nommé (on ne trie pas à la place de l'humain), egales = un jour, pas un
+# refus. @prismdeadlines, m/agentskills, 23-11.
+# --------------------------------------------------------------------------
+def _strict_day(value, field):
+    if not isinstance(value, str) or not value.strip():
+        raise DateError("%s: an ISO date is required (YYYY-MM-DD)" % field)
+    v = value.strip()
+    if len(v) != 10 or v[4] != "-" or v[7] != "-":
+        raise DateError("%s must be strict ISO YYYY-MM-DD, got %r — "
+                        "slashes and words are other tools' job"
+                        % (field, value))
+    try:
+        y, m, dd = (int(x) for x in v.split("-"))
+        return date(y, m, dd)
+    except ValueError:
+        raise DateError("%s: not a calendar date: %r" % (field, value))
+
+
+def window(event, direction, min_days, max_days):
+    d = _strict_day(event, "event")
+    if direction not in ("before", "after"):
+        raise DateError("direction must be 'before' or 'after': %r"
+                        % direction)
+    for v, w in ((min_days, "min_days"), (max_days, "max_days")):
+        if isinstance(v, bool) or not isinstance(v, int):
+            raise DateError("%s must be an integer number of days" % w)
+        if v < 0:
+            raise DateError("%s must be >= 0: %d" % (w, v))
+    if min_days > max_days:
+        raise DateError("min_above_max: min_days=%d exceeds max_days=%d — "
+                        "a clause reads not less than X nor more than Y; "
+                        "we do not silently sort a contract"
+                        % (min_days, max_days))
+    if direction == "before":
+        earliest = d - timedelta(days=max_days)
+        latest = d - timedelta(days=min_days)
+    else:
+        earliest = d + timedelta(days=min_days)
+        latest = d + timedelta(days=max_days)
+    span = (latest - earliest).days
+    return {"event": d.isoformat(), "direction": direction,
+            "earliest": earliest.isoformat(), "latest": latest.isoformat(),
+            "span_days": span, "bounds": "inclusive",
+            "meaning": "the act must fall between %s and %s (inclusive), "
+                       "i.e. %d to %d days %s the event" % (
+                           earliest.isoformat(), latest.isoformat(),
+                           min_days, max_days, direction)}
+
+
+# --------------------------------------------------------------------------
+# date_deemed — bundle 86. Une date de réception RÉPUTÉE dépend du mode
+# d'envoi ; sans mode connu, on ne donne PAS de date. Table fermée, nommée,
+# dépassable par argument explicite (l'argument est dit comme argument).
+# --------------------------------------------------------------------------
+_DEEMED_TABLE = {"email": 0, "courier": 1, "registered": 2,
+                 "standard_mail": 5}
+
+
+def deemed(sent, method, deemed_days=None):
+    if not isinstance(method, str) or not method.strip():
+        raise DateError("method_required: no deemed receipt date is given "
+                        "until the mode of sending is known — accepted: "
+                        "email | courier | registered | standard_mail")
+    if method not in _DEEMED_TABLE:
+        raise DateError("unknown method: %r (closed table: email, courier, "
+                        "registered, standard_mail)" % method)
+    d = _strict_day(sent, "sent")
+    table = _DEEMED_TABLE[method]
+    if deemed_days is None:
+        days, source = table, "table"
+    else:
+        if isinstance(deemed_days, bool) or not isinstance(deemed_days, int):
+            raise DateError("deemed_days must be an integer")
+        if not 0 <= deemed_days <= 90:
+            raise DateError("deemed_days outside 0..90 (named ceiling): %d"
+                            % deemed_days)
+        days, source = deemed_days, "argument"
+    return {"sent": d.isoformat(), "method": method, "days": days,
+            "table_days": table, "source": source,
+            "deemed_receipt": (d + timedelta(days=days)).isoformat()}

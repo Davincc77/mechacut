@@ -186,6 +186,18 @@ TABLE = (
      "words pair amount cheque montant lettre chiffres contrat trinta "
      "trente thirty mismatch spelled numeral extenso por letras cifra "
      "contrato valor duplicado"),
+    ("date_window", "/api/v1/date/window", "dates",
+     "clause bounds (min..max days before/after an event) -> the full "
+     "inclusive window, span, meaning; inverted bounds refused named",
+     "window interval bounds clause deadline not less nor more "
+     "range days before after event fenetre intervalle clause "
+     "prazo janela limite intervalo clausula"),
+    ("date_deemed", "/api/v1/date/deemed", "dates",
+     "dispatch date + method -> deemed receipt date; no method, no "
+     "date (closed table named, argument overrides are said)",
+     "deemed receipt dispatch sending method registered courier "
+     "standard mail email delivery date reception reputee envoi "
+     "recomendado correio Entrega empfang"),
     ("agent_retrybudget", "/api/v1/agent/retry-budget", "checks",
      "is re-attempting this failure rational? closed taxonomy, "
      "hash ceiling, session budget, deterministic backoff",

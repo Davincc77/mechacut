@@ -126,8 +126,8 @@ TR = {
   "panel.got": "the server answered:",
   "nav.menu": "menu",
   "bundles.intro": "Same request, same bytes — every response carries its "
-                   "own sha256. Install one pack, or read the 500-token "
-                   "manifest and let <code>GET /route</code> pick.",
+                   "own sha256. Install one pack, or read the whole "
+                   "manifest in one request and let <code>GET /route</code> pick.",
   "tiers.h2": "Three tiers, no accounts",
   "tiers.intro": "Agents do not read pricing pages — so the price is in "
                  "the protocol: a free route answers keyless, a capped "
@@ -606,8 +606,8 @@ TR = {
   "contract.li5": "Errors that repair: field, message, expected, always",
   "contract.li6": "x402 machine payments: USDC on Base, facilitator "
                   "verified, zero human in the loop",
-  "agents.line": "Speak agent: MCP tools, GET /agent/manifest (~500 "
-                 "tokens for the whole suite), GET /route?q=…, "
+  "agents.line": "Speak agent: MCP tools, GET /agent/manifest ("
+                 "the whole suite in one request), GET /route?q=…, "
                  "POST /api/v1/pipeline.",
   "agents.hint": "install one pack",
   "footer.family": "Mechacut is part of the C.V. family — see moovicut.",
@@ -641,8 +641,8 @@ TR = {
   "panel.got": "le serveur a répondu :",
   "nav.menu": "menu",
   "bundles.intro": "Même requête, mêmes octets — chaque réponse porte son "
-                   "sha256. Installez un pack, ou lisez le manifeste de "
-                   "500 tokens et laissez <code>GET /route</code> choisir.",
+                   "sha256. Installez un pack, ou lisez le manifeste entier "
+                   "en une requête et laissez <code>GET /route</code> choisir.",
   "tiers.h2": "Trois paliers, zéro compte",
   "tiers.intro": "Les agents ne lisent pas les pages de tarifs — donc le "
                  "prix est dans le protocole : une route gratuite répond "
@@ -1142,8 +1142,8 @@ TR = {
                   "toujours",
   "contract.li6": "Paiements machine x402 : USDC sur Base, vérifiés par "
                   "facilitateur, zéro humain dans la boucle",
-  "agents.line": "Parlez agent : outils MCP, GET /agent/manifest (~500 "
-                 "tokens pour toute la suite), GET /route?q=…, "
+  "agents.line": "Parlez agent : outils MCP, GET /agent/manifest ("
+                 "toute la suite en une requête), GET /route?q=…, "
                  "POST /api/v1/pipeline.",
   "agents.hint": "installez un pack",
   "footer.family": "Mechacut fait partie de la famille C.V. — voir moovicut.",
@@ -1177,8 +1177,8 @@ TR = {
   "panel.got": "o servidor respondeu:",
   "nav.menu": "menu",
   "bundles.intro": "Mesma requisição, mesmos bytes — cada resposta carrega "
-                   "seu sha256. Instale um pack, ou leia o manifesto de "
-                   "500 tokens e deixe <code>GET /route</code> escolher.",
+                   "seu sha256. Instale um pack, ou leia o manifesto inteiro "
+                   "em uma requisição e deixe <code>GET /route</code> escolher.",
   "tiers.h2": "Três níveis, zero contas",
   "tiers.intro": "Agentes não leem páginas de preço — então o preço está "
                  "no protocolo: uma rota grátis responde sem chave, uma "
@@ -1660,7 +1660,7 @@ TR = {
   "contract.li6": "Pagamentos x402 entre máquinas: USDC na Base, "
                   "verificados por facilitador, zero humano no circuito",
   "agents.line": "Fale agente: ferramentas MCP, GET /agent/manifest "
-                 "(~500 tokens para a suíte inteira), GET /route?q=…, "
+                 "(a suíte inteira em uma requisição), GET /route?q=…, "
                  "POST /api/v1/pipeline.",
   "agents.hint": "instale um pack",
   "footer.family": "Mechacut faz parte da família C.V. — veja moovicut.",
@@ -2359,6 +2359,10 @@ CAT_TOP10 = {"en": "\u2605 Top 10", "fr": "\u2605 Le top 10",
 PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
                 # validés nom par nom + chiffres par chiffres au merge
     "fr": {
+        "date_window":
+            "bornes d'une clause (min..max jours avant/après un "     "événement) → la fenêtre INCLUSIVE entière, span et sens dits ; "     "bornes inversées refusées par nom (on ne trie pas un contrat)",
+        "date_deemed":
+            "date d'envoi + mode d'envoi → réception réputée ; sans mode, pas de date (table fermée nommée, override argument déclaré)",
         "net_ratelimit":
             "en-têtes Retry-After et X-RateLimit-* lus (delta-seconds ou IMF-fixdate strict) ; en désaccord, les deux attendus sont NOMMÉS, jamais choisis ; now est un argument, jamais l’horloge murale",
         "number_words_pair":
@@ -2705,6 +2709,10 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "food_ovenschedule":
             "un four, des plats, une heure de service : compte à rebours à l'envers, conflits de température nommés, jamais d'horloge murale — les timelines web ne vérifient rien de tout ça",
     },    "pt": {
+        "date_window":
+            "limites de uma cláusula (min..max dias antes/depois de um evento) → a janela INCLUSIVE inteira, span e sentido ditos; limites invertidas recusadas por nome (não se reordena um contrato)",
+        "date_deemed":
+            "data de envio + modo de envio → recebimento reputado; sem modo, sem data (tabela fechada nomeada, override por argumento declarado)",
         "net_ratelimit":
             "cabeçalhos Retry-After e X-RateLimit-* lidos (delta-seconds ou IMF-fixdate estrito); em contradição, ambas as esperas são NOMEADAS, nunca escolhidas; now é argumento, nunca relógio de parede",
         "number_words_pair":

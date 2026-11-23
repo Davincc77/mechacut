@@ -45,7 +45,7 @@ def test_manifest_token_budget():
     # per tool; the real ceiling is the byte budget + dense fold in the
     # routing module — line count is only a proxy, resized here as the
     # catalogue grows past its original 95-tool shape
-    assert len(lines) < 206   # resize 24-11 bundle85 (+2 routes manifest)
+    assert len(lines) < 208   # resize 24-11 bundle86 (+2 routes manifest)
     # shipping_deadline, +invoice_validate_totals) : 197 lignes, le
     # plafond OCTETS <9000 tient (mesuré 7 789) et la moyenne
     # <130/ligne aussi — la ligne reste un proxy, précédent 192/196
@@ -91,7 +91,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 171   # +net_ratelimit +number_words_pair (24-11 bundle85)
+    assert seen == len(routing.TABLE) == 173   # +date_window +date_deemed (24-11 bundle86)
 
 
 def test_pack_unknown():
@@ -192,5 +192,10 @@ def test_recipes_registry():
     r = client.get("/api/v1/recipes")
     b = r.json()
     assert sorted(b["recipes"]) == ["clean-json", "clean-table",
-                                       "data-trio", "facts"]
+                                       "data-trio", "facts", "invoice",
+                                       "partage-reste", "schedule",
+                                       "shop-reste", "soldes2"]
+    # le registre vendait 4 lignes alors que le manifest promet 9 recettes
+    # depuis des bundles — la liste est désormais DÉRIVÉE de RECIPE_SPECS,
+    # plus de main.py énuméré à la main (consigné bundle86, 24-11)
     assert "sha256" in b

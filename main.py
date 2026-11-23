@@ -67,6 +67,8 @@ POST /api/v1/check/allowlist     rules + requests -> policy verdicts (free)
 POST /api/v1/loop/doom-check     tool-call trace -> doom determinism, named thresholds (free)
 POST /api/v1/net/ratelimit       retry headers -> honest wait window or named contradiction (free)
 POST /api/v1/number/words-pair   "thirty (40)" -> MISMATCH, both kept, no pick (free)
+POST /api/v1/date/window         min/max bounds -> the whole clause, inclusive, span named (free)
+POST /api/v1/date/deemed         sent + method -> deemed receipt; no method, no date (free)
 POST /api/v1/agent/retry-budget  error class + hash count + budget -> REPEAT/MUTATE/ABORT (free)
 POST /api/v1/shop/discount-audit price history + announced cut -> Omnibus 30-day legality verdict (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
@@ -349,7 +351,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.7.0",
+    version="1.8.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1753,6 +1755,69 @@ def run_number_words_pair(args: dict):
 @app.post("/api/v1/number/words-pair")
 def api_number_words_pair(req: WordsPairRequest):
     body, err = run_number_words_pair(req.model_dump())
+    return err if err else body
+
+
+class DateWindowRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    event: str
+    direction: str
+    min_days: int
+    max_days: int
+
+
+def run_date_window(args: dict):
+    try:
+        req = DateWindowRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = dates.window(req.event, req.direction, req.min_days,
+                           req.max_days)
+    except dates.DateError as e:
+        return None, bad_request(
+            [{"field": "event/direction/min_days/max_days",
+              "message": str(e),
+              "expected": "event ISO YYYY-MM-DD; direction before|after; "
+                          "0 <= min_days <= max_days"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/window")
+def api_date_window(req: DateWindowRequest):
+    body, err = run_date_window(req.model_dump())
+    return err if err else body
+
+
+class DateDeemedRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    sent: str
+    method: str = ""    # le refus method_required vient du module, en
+                        # table nommée — pas d'un 422 pydantic muet
+    deemed_days: Optional[int] = None
+
+
+def run_date_deemed(args: dict):
+    try:
+        req = DateDeemedRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = dates.deemed(req.sent, req.method, req.deemed_days)
+    except dates.DateError as e:
+        return None, bad_request(
+            [{"field": "sent/method/deemed_days", "message": str(e),
+              "expected": "sent ISO YYYY-MM-DD; method email|courier|"
+                          "registered|standard_mail; deemed_days 0..90 "
+                          "optional"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/deemed")
+def api_date_deemed(req: DateDeemedRequest):
+    body, err = run_date_deemed(req.model_dump())
     return err if err else body
 
 
@@ -5770,24 +5835,22 @@ def api_recipe_data_trio(req: RecipeDataTrioRequest):
     return err if err else body
 
 
+@app.get("/recipes")
+def api_recipes_short():
+    """Alias court du pied de page : /recipes promis, /recipes servi."""
+    return api_recipes()
+
+
 @app.get("/api/v1/recipes")
 def api_recipes():
-    body = {"recipes": {
-        "clean-table": "csv/fix -> csv/types -> list/dedupe: dirty CSV in, "
-                       "typed unique rows out (POST {csv})",
-        "data-trio": "the rag-ingestion trio in one call: dirty csv + "
-                     "broken json + url list -> final YAML {rows, totals, "
-                     "urls} (POST {csv, json_text, urls}) — also a "
-                     "pipeline step: recipe_data_trio",
-        "facts": "free text -> recipe/facts: every money/percent/date/"
-                 "number/url/email/uuid/iban canonicalized, deduped and "
-                 "sorted in ONE call, plus the money total (POST {text}) "
-                 "— the multi-step answer a weak model cannot assemble "
-                 "alone",
-        "clean-json": "json/repair -> json/canonical: broken JSON in, "
-                      "canonical bytes out (POST {text, style})"},
-        "usage": "POST /api/v1/recipe/<name>; a failing step returns its "
-                 "own 400 with field+expected+example, untouched"}
+    rec = {}
+    for sp in RECIPE_SPECS:
+        key = sp["name"].replace("recipe_", "").replace("_", "-")
+        rec[key] = sp["description"].split(" (GET ")[0].rstrip(".")
+    body = {"recipes": rec,
+            "count": len(rec),
+            "usage": "POST /api/v1/recipe/<name>; a failing step returns "
+                     "its own 400 with field+expected+example, untouched"}
     body["sha256"] = canon(body)
     return body
 
@@ -5989,6 +6052,8 @@ TOOL_RUN = {
            "loop_doom_check": run_loop_doom_check,
            "net_ratelimit": run_net_ratelimit,
            "number_words_pair": run_number_words_pair,
+           "date_window": run_date_window,
+           "date_deemed": run_date_deemed,
            "agent_retrybudget": run_agent_retrybudget,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
@@ -9753,6 +9818,55 @@ MCP_TOOLS = [
             "properties": {"text": {"type": "string"}},
         },
     },
+    {
+        "name": "date_window",
+        "description": (
+            "Clauses give intervals, tools give points: 'not less than "
+            "180 nor more than 270 days before X' is a WINDOW, and every "
+            "date calculator so far answered one bound. You hand event, "
+            "direction (before|after), min_days, max_days; you get "
+            "earliest, latest, span_days, bounds inclusive, and the "
+            "meaning sentence. Inverted bounds are REFUSED named "
+            "(min_above_max) — we do not silently sort a contract; equal "
+            "bounds are a single-day window, not an error. Strict ISO "
+            "event only; dates as arguments, never the wall clock. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["event", "direction", "min_days", "max_days"],
+            "properties": {
+                "event": {"type": "string"},
+                "direction": {"type": "string",
+                              "enum": ["before", "after"]},
+                "min_days": {"type": "integer"},
+                "max_days": {"type": "integer"},
+            },
+        },
+    },
+    {
+        "name": "date_deemed",
+        "description": (
+            "A deemed receipt date depends on HOW it was sent. Closed "
+            "table: email +0, courier +1, registered +2, standard_mail +5 "
+            "(calendar days; the table is returned in the answer, named). "
+            "No method, no date: method_required is a refusal, not a "
+            "default — 'the deadline is unknown' is the honest answer "
+            "until the mode of dispatch is known. deemed_days 0..90 "
+            "overrides the table and the answer says 'argument' so the "
+            "provenance is never blurred. Strict ISO sent. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["sent", "method"],
+            "properties": {
+                "sent": {"type": "string"},
+                "method": {"type": "string",
+                           "enum": ["email", "courier", "registered",
+                                    "standard_mail"]},
+                "deemed_days": {"type": "integer"},
+            },
+        },
+    },
 ]
 
 
@@ -9982,6 +10096,8 @@ def index(request: Request):
             "/api/v1/loop/doom-check": "POST tool calls -> DOOM/CYCLIC/STORM/HEALTHY (free)",
             "/api/v1/net/ratelimit": "POST http headers -> OPEN/THROTTLED/BLOCKED/CONTRADICTION wait windows (free)",
             "/api/v1/number/words-pair": "POST text -> spelled vs digit forms checked, never chosen (free)",
+            "/api/v1/date/window": "POST bounds -> the full inclusive window, inverted bounds refused (free)",
+            "/api/v1/date/deemed": "POST sent + method -> deemed receipt or named refusal (free)",
             "/api/v1/agent/retry-budget": "POST error class + attempt + hashes -> REPEAT/MUTATE/ABORT, deterministic backoff (free)",
             "/api/v1/shop/discount-audit": "POST price history + announced cut -> Omnibus 30-day legality verdict (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
