@@ -328,7 +328,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.95.0",
+    version="0.96.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5002,8 +5002,13 @@ def api_route(q: str = "", top: int = Query(default=5, ge=1, le=10)):
                           '"dirty csv to typed rows"'}],
             "route_failed")
     body = {"query": q, "tools": routing.route(q, top),
+            "confidence_floor": routing.CONF_FLOOR,
             "note": "closed-vocabulary ranking over the manifest table; "
-                    "no LLM: same words, same answer, sha256 on it"}
+                    "no LLM: same words, same answer, sha256 on it. "
+                    "Grammar words (EN/FR/PT) never score; nothing "
+                    "under the confidence floor is listed — below it "
+                    "the server refuses by name instead of prescribing "
+                    "noise (T6, bundle 70)"}
     rail = routing.elsewhere(q)
     if rail:
         body["elsewhere"] = rail

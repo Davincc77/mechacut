@@ -14,7 +14,7 @@ written to be followed literally by a 0.5B. Prove-the-determinism checklist:
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `food/poultry` (the Thanksgiving window, USDA/FSIS tables as ARGUMENTS — put the 16-lb bird in the fridge by 2026-11-21T10:00, not before 11-19; every web calculator contradicts the next; done is 165°F at the thermometer, never a guessed date); `agent/modelid` (static audit of
+is the truth of today. Recent highlights: `/route` T6 (bundle 70: FR/PT grammar words are stop-words now — tested on the RAW token because `stem(mois) == moi` would have killed the dates signal with the pronoun — and nothing under confidence floor 4 is listed: an incidental tag (3) or purpose word (2) never prescribes, a tool NAME (4) is not incidental; the radar's three standing OVERMATCH died at the source, dead PT queries get an honest empty list instead of a noise needle, and the two vocabulary holes the floor exposed got filled, not hidden); `food/poultry` (the Thanksgiving window, USDA/FSIS tables as ARGUMENTS — put the 16-lb bird in the fridge by 2026-11-21T10:00, not before 11-19; every web calculator contradicts the next; done is 165°F at the thermometer, never a guessed date); `agent/modelid` (static audit of
 your agent's model-id strings against a pasted catalog: closed grammar
 `org/name[:variant|#variant]`, named verdicts — PREFIX_KEPT, NO_ORG,
 CASE_DRIFT, PUNCT_DRIFT, VARIANT_DECOR — did-you-mean at a NAMED

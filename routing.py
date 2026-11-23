@@ -233,7 +233,8 @@ TABLE = (
      "occupancy occurrences calendar series expand rfc 5545 dtstart "
      "until count byday wkst recurrente qui se repete un mardi sur "
      "deux tous les quinze jours derouler recurrence dates de serie "
-     "recorrencia se repete a cada duas semanas quinzenal expandir"),
+     "recorrencia se repete a cada duas semanas quinzenal expandir "
+     "rappel lembrete"),
     ("date_tz_ambiguity", "/api/v1/date/tz_ambiguity", "dates",
      "Heure murale + zone -> single | fold | gap : les heures qui "
      "n'existent pas (spring forward) ou qui existent DEUX FOIS (fall "
@@ -749,7 +750,7 @@ TABLE = (
      "nation breakeven tarif comparaison prix de reviens bascule kwh "
      "abonnement fixe mensuel journalier quelle consommation "
      "compensação tarifa qual mais barata ponto de equivalência kwh "
-     "assinatura mensalidade taxa de adesão"),
+     "assinatura mensalidade taxa de adesão plano barato"),
     ("money_points", "/api/v1/money/points", "numbers",
      "Combien vaut un POINT : cpp = (prix cash - reste cash - "
      "rewards forgoes) / points x 100 en FRACTION EXACTE (1081/725 "
@@ -972,9 +973,73 @@ def pack_markdown(pack, mcp_tools):
 
 
 # ------------------------------------------------------- B0.8 task router
+#
+# Bundle 70 (2026-11-23) — T6, né du radar comme T5 est né de B003.
+# La loi T5 (« un leurreur peut glisser UN mot, pas deux familles »)
+# protégeait la grammaire fermée de /router/apply ; /route restait
+# monolingue EN alors que les mots FR/PT entraient dans PURPOSES et
+# TAGS par v1.1.0. Résultat mesuré (docs/RADAR, scans 22h42→03h31,
+# 3 OVERMATCH persistants) : le routeur prescrivait sur des mots de
+# GRAMMAIRE seuls — matched ["moi","sur","les","de"],
+# ["ne","pas","que","en"], ["pui","la","le","les"] — et une requête
+# PT morte se voyait prescrire money_baggage sur ["de","40"].
+# Mêmes classes de douleur documentées ailleurs : laya #1453
+# (stopwords pt/es/fr/it partagés déplacent le routage), README
+# llm-router-plugins (« a big model chosen for a one-word greeting
+# because none is never reached »), autonomous-dev (« update the
+# README » → IMPLEMENT), 9router #317 (keyword lists monolingues =
+# faux positifs).
+#
+# DEUX règles fermées, aucune n'invente quoi que ce soit :
+#  1. STOP × 3 langues, testée sur le token BRUT avant _stem — la
+#     raison est une collision mesurée : _stem("mois") == "moi",
+#     donc stopper la tige tuerait le vrai signal FR des dates avec
+#     le pronom. Stopper la forme brute ne tue que la grammaire.
+#     (Le token arrive déjà plié par le splitter : "après" -> "apr",
+#     "très" -> "tr", "où" -> "o" — les variantes accentuées sont
+#     couvertes sous leur forme réelle.)
+#  2. CONF_FLOOR = 4, le plancher publié dans la réponse /route :
+#     sous 4, AUCUN outil n'est listé — le serveur refuse par le nom
+#     au lieu de prescrire du bruit. Le 4 n'est pas un nombre réglé
+#     à la main sur le corpus : c'est le POIDS DU NOM. Un mot incidentel
+#     vaut au plus 3 (tag) ou 2 (purpose) — jamais le plancher ; un mot
+#     qui EST le nom de l'outil (« chart », « csv », « batch ») vaut 4
+#     et survit seul, parce que nommer n'est pas glisser. Les poids
+#     4/3/2 restent INTACTS : ils portent la marge d'égalité de T5 dans
+#     les intent cards (test_bundle21) et le golden intent_card_round —
+#     les changer a été essayé et rejeté par le banc lui-même.
 
-STOP = frozenset("a an and do for from in into is it make my of on or "
-                 "please that the this to turn with".split())
+STOP_EN = frozenset("a an and do for from in into is it make my of on or "
+                    "please that the this to turn with".split())
+
+# Grammaire française fermée — pronoms, articles, prépositions,
+# conjonctions, modaux. Volontairement ABSENTS (ce sont des signaux) :
+# "est" (fuseau EST), "temps" (dates), "combien" (quantité),
+# "mois" dérivé, "avant/apres" de crossover restent testés bruts.
+STOP_FR = frozenset(
+    "le la les un une des du de l au aux en dans sur sous chez vers "
+    "avec sans pour par depuis avant apr apres et ou ni mais donc car "
+    "si que qui quoi dont o quand comment ne pas rien personne jamais "
+    "plus moins tres tr tout tous toute toutes autre autres "
+    "mon ma mes ton ta tes son sa ses notre nos votre vos leur leurs "
+    "je tu il elle on nous vous ils elles me te moi toi se soi y "
+    "peut peux peuvent veux veut vouloir voulais "
+    "fais fait faire dis dit dire suis es etes etre avoir ont eu "
+    "dois doivent ici".split())
+
+# Grammaire portugaise fermée — mêmes familles de mots.
+STOP_PT = frozenset(
+    "o os as um uma uns umas de do da das dos dum em no na nos nas "
+    "num numa por para sem sob sobre e ou mas porque quando como que "
+    "quem qual quais nao sim tambem tamb ja meu minha meus minhas "
+    "teu tua teus suas seu sua nossos nossas voce voces ele ela elas "
+    "isto isso aquilo aqui ali se me te lhe vos muito "
+    "esta estao estava foram ser sao tem tenho queria fazer faz ao".split())
+
+STOP = STOP_EN | STOP_FR | STOP_PT
+
+# T6 — le plancher de confiance publié dans la réponse /route.
+CONF_FLOOR = 4
 
 
 def _stem(w):
@@ -1019,7 +1084,7 @@ def route(query, top=5):
             if w:
                 score += w
                 matched.append(st)
-        if score:
+        if score >= CONF_FLOOR:
             scored.append((-score, idx, name, path, pack, purpose,
                            score, matched))
     scored.sort()
