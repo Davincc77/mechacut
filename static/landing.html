@@ -227,8 +227,18 @@
       <h2>{{kit.h2}}</h2>
       <p class="quote">{{kit.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{kit.intro}}</p>
+      <details class="bcard" open>
+        <summary>{{kit.plain.sum}}</summary>
+        <div class="bbody">
+          <ol class="tiers" style="color: var(--muted); max-width: 720px;">
+            <li>{{kit.plain.p1}}</li>
+            <li>{{kit.plain.p2}}</li>
+            <li>{{kit.plain.p3}}</li>
+          </ol>
+        </div>
+      </details>
       <details class="bcard">
-        <summary>{{kit.howto.sum}}</summary>
+        <summary>{{kit.dev.sum}}</summary>
         <div class="bbody">
           <ol class="tiers" style="color: var(--muted); max-width: 720px;">
             <li>{{kit.howto.p1}}</li>

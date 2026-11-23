@@ -538,10 +538,14 @@ TR = {
   "kit.c2.foot": "The skill asks the directory first. Same canon, same refusals, same golds as the datacenter \u2014 what is verified here is verified there, byte for byte.",
   "kit.c3.sum": "Build \u2014 the second time, write the tool",
   "kit.c3.foot": "Golds drawn BEFORE the code, AST-gate, pin-gate. Status: proposed, attested, network-verified \u2014 the kit grows locally, the proof grows back to the network. A lesson is a proposal; the bench locks it.",
-  "kit.howto.sum": "Today's move \u2014 three lines, no account",
   "kit.howto.p1": "Install the skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 drop the file into your agent (CLAUDE.md, AGENTS.md, skills/). ~650 tokens, sized for small models.",
   "kit.howto.p2": "Make it consult first: before acting, the agent describes the problem in one sentence to /route/resolve \u2014 the directory returns the tool that already exists, or says none does.",
   "kit.howto.p3": "Call: stateless POSTs, keyless on free; the response carries its sha256, the refusal carries field + expected + example. The on-disk local kit (own tools, same gates) is specified in PROTOCOL-KIT.md \u2014 under construction.",
+  "kit.plain.sum": "Not a developer? Good.",
+  "kit.plain.p1": "Open your usual AI assistant (Claude, ChatGPT, Grok, Copilot\u2026).",
+  "kit.plain.p2": "Send it this message: \u0022Read https://mechacut.studio/SKILL-MINI.md and follow it for my calculations.\u0022 Nothing to install, nothing to pay, no account.",
+  "kit.plain.p3": "Then ask your real task: \u002230% then 20% discount \u2014 what is that really?\u0022, \u0022how many days overdue is this invoice?\u0022 The numbers no longer come from its head \u2014 they come from the suite, and they are the same for everyone.",
+  "kit.dev.sum": "For developers \u2014 three lines, no account",
   "bench.d82.sum": "Tool-call traces, judged: the same agent motion was re-emitted identically 0 out of 14 times (V22b) and a retry multiplied the bill \u00d74 without converging (V17) \u2014 loop/doom-check now says DOOM, CYCLIC or STORM on canonical bytes, thresholds named.",
   "bench.d82.foot": "Identity on canonical (tool, args): key order never hides a loop. Two identical calls are not a loop \u2014 the threshold is stated, never guessed. All signals reported, the verdict is the most severe. Sources: bench/FINDINGS-V17.md \u00b7 run22b.",
   "bench.e76.sum": "The bench judge became a route: eval/compare returns OK or WRONG with divergences named \u2014 2.5 versus \"2.50\" is never a disagreement, floats are never an argument.",
@@ -1045,10 +1049,14 @@ TR = {
   "kit.c2.foot": "La skill interroge l'annuaire d'abord. Même canon, mêmes refus, mêmes golds qu'au datacenter \u2014 ce qui est vérifié ici l'est là-bas, octet pour octet.",
   "kit.c3.sum": "Construire \u2014 dès la deuxième fois, écrire l'outil",
   "kit.c3.foot": "Golds tracés AVANT le code, AST-gate, pin-gate. Statuts : proposé, attesté, réseau-vérifié \u2014 le kit grandit localement, la preuve repousse au réseau. Une leçon est une proposition ; le banc la verrouille.",
-  "kit.howto.sum": "La manip d'aujourd'hui \u2014 trois lignes, sans compte",
   "kit.howto.p1": "Installer la skill : <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 déposer le fichier chez l'agent (CLAUDE.md, AGENTS.md, skills/). ~650 jetons, calibré pour les petits modèles.",
   "kit.howto.p2": "Le faire consulter d'abord : avant d'agir, l'agent décrit son problème en une phrase à /route/resolve \u2014 l'annuaire rend l'outil qui existe déjà, ou dit qu'aucun n'existe.",
   "kit.howto.p3": "Appeler : POST sans état, sans clé sur le libre ; la réponse porte son sha256, le refus porte champ + attendu + exemple. Le kit local sur disque (outils propres, mêmes portes) est spécifié dans PROTOCOL-KIT.md \u2014 en construction.",
+  "kit.plain.sum": "Vous n'êtes pas développeur ? Tant mieux.",
+  "kit.plain.p1": "Ouvrez votre assistant IA habituel (Claude, ChatGPT, Grok, Copilot\u2026).",
+  "kit.plain.p2": "Envoyez-lui ce message : \u0022 Lis https://mechacut.studio/SKILL-MINI.md et suis-le pour tous mes calculs.\u0022 Rien à installer, rien à payer, pas de compte.",
+  "kit.plain.p3": "Demandez ensuite votre véritable tâche : \u0022 30 % puis 20 % de remise, ça fait combien réellement ?\u0022, \u0022 cette facture est en retard de combien de jours ?\u0022 Les chiffres ne sortent plus de sa tête \u2014 ils sortent de la suite, et ils sont les mêmes pour tout le monde.",
+  "kit.dev.sum": "Pour les développeurs \u2014 trois lignes, sans compte",
   "bench.d82.sum": "Traces d'appels d'outils jugées : le même geste d'agent n'a jamais été réémis à l'identique (0 sur 14, V22b) et un retry a multiplié la facture ×4 sans converger (V17) \u2014 loop/doom-check dit désormais DOOM, CYCLIC ou STORM sur des bytes canoniques, seuils nommés.",
   "bench.d82.foot": "Identité en (outil, args) canoniques : l'ordre des clés ne cache jamais une boucle. Deux appels identiques ne sont pas une boucle \u2014 le seuil est dit, jamais deviné. Tous les signaux rapportés, verdict le plus grave. Sources : bench/FINDINGS-V17.md · run22b.",
   "bench.e76.sum": "Le juge du banc est devenu route : eval/compare rend OK ou WRONG avec les divergences nommées \u2014 2,5 contre \u00222.50\u0022 n'est jamais un désaccord, les flottants ne sont jamais un argument.",
@@ -1544,10 +1552,14 @@ TR = {
   "kit.c2.foot": "A skill consulta o diretório primeiro. Mesmo cânone, mesmas recusas, mesmos golds do datacenter \u2014 o que é verificado aqui é verificado lá, byte por byte.",
   "kit.c3.sum": "Construir \u2014 na segunda vez, escrever a ferramenta",
   "kit.c3.foot": "Golds traçados ANTES do código, AST-gate, pin-gate. Status: proposto, atestado, rede-verificado \u2014 o kit cresce localmente, a prova cresce de volta na rede. Uma lição é uma proposta; o banco a tranca.",
-  "kit.howto.sum": "O movimento de hoje \u2014 três linhas, sem conta",
   "kit.howto.p1": "Instalar a skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 soltar o arquivo no agente (CLAUDE.md, AGENTS.md, skills/). ~650 tokens, calibrado para modelos pequenos.",
   "kit.howto.p2": "Fazê-lo consultar primeiro: antes de agir, o agente descreve o problema em uma frase a /route/resolve \u2014 o diretório devolve a ferramenta que já existe, ou diz que não há.",
   "kit.howto.p3": "Chamar: POSTs sem estado, sem chave no livre; a resposta traz seu sha256, a recusa traz campo + esperado + exemplo. O kit local em disco (ferramentas próprias, mesmos portões) está especificado em PROTOCOL-KIT.md \u2014 em construção.",
+  "kit.plain.sum": "Você não é desenvolvedor? Melhor ainda.",
+  "kit.plain.p1": "Abra seu assistente de IA de sempre (Claude, ChatGPT, Grok, Copilot\u2026).",
+  "kit.plain.p2": "Envie esta mensagem: \u0022Leia https://mechacut.studio/SKILL-MINI.md e siga-o para os meus cálculos.\u0022 Nada para instalar, nada para pagar, sem conta.",
+  "kit.plain.p3": "Depois peça a tarefa real: \u002230% e depois 20% de desconto dá quanto?\u0022, \u0022quantos dias de atraso tem esta fatura?\u0022 Os números não saem mais da cabeça dele \u2014 saem da suíte, e são os mesmos para todos.",
+  "kit.dev.sum": "Para desenvolvedores \u2014 três linhas, sem conta",
   "bench.d82.sum": "Traces de chamadas julgadas: o mesmo gesto de agente nunca foi reemitido igual (0 de 14, V22b) e um retry multiplicou a fatura ×4 sem convergir (V17) \u2014 loop/doom-check agora diz DOOM, CYCLIC ou STORM sobre bytes canônicos, limiares nomeados.",
   "bench.d82.foot": "Identidade em (ferramenta, args) canônicos: a ordem das chaves nunca esconde um loop. Duas chamadas iguais não são loop \u2014 o limiar é dito, nunca adivinhado. Todos os sinais reportados, veredito o mais grave. Fontes: bench/FINDINGS-V17.md · run22b.",
   "bench.e76.sum": "O juiz do banco virou rota: eval/compare devolve OK ou WRONG com as divergências nomeadas \u2014 2.5 versus \u00222.50\u0022 nunca é discordância, floats nunca são argumento.",
@@ -1850,8 +1862,18 @@ TEMPLATE = """<!DOCTYPE html>
       <h2>{{kit.h2}}</h2>
       <p class="quote">{{kit.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{kit.intro}}</p>
+      <details class="bcard" open>
+        <summary>{{kit.plain.sum}}</summary>
+        <div class="bbody">
+          <ol class="tiers" style="color: var(--muted); max-width: 720px;">
+            <li>{{kit.plain.p1}}</li>
+            <li>{{kit.plain.p2}}</li>
+            <li>{{kit.plain.p3}}</li>
+          </ol>
+        </div>
+      </details>
       <details class="bcard">
-        <summary>{{kit.howto.sum}}</summary>
+        <summary>{{kit.dev.sum}}</summary>
         <div class="bbody">
           <ol class="tiers" style="color: var(--muted); max-width: 720px;">
             <li>{{kit.howto.p1}}</li>
