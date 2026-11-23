@@ -281,6 +281,17 @@ TABLE = (
      "noel achat magasin delai de retour "
      "troca devolucao prazo ultimo dia devolver presente depois "
      "do natal comprar"),
+    ("shop_pricedrop_refund", "/api/v1/shop/pricedrop-refund",
+     "dates",
+     "price drop after purchase: who owes you the difference, by "
+     "when, in which money — closed 2026 BF table",
+     "price drop dropped lowered after purchase difference refund "
+     "adjustment guarantee owed lower price claim window bestbuy "
+     "target costco fnac darty apple "
+     "prix baisse baisse apres achat remboursement difference "
+     "garantie meilleur prix qui me doit ecart carte cadeau "
+     "queda de preco depois comprar diferenca reembolso garantia "
+     "melhor preco"),
     ("invoice_validate_totals", "/api/v1/invoice/validate-totals",
      "checks",
      "declared invoice totals vs exact arithmetic, signed deltas",

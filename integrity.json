@@ -3574,6 +3574,47 @@
   },
   {
    "body": {
+    "drop_date": "2026-11-20",
+    "new_price": "80.00",
+    "purchase_date": "2026-11-05",
+    "purchase_price": "100.00",
+    "retailer": "bestbuy"
+   },
+   "name": "shop_pricedrop_bestbuy_delivery_required_refused",
+   "path": "/api/v1/shop/pricedrop-refund",
+   "sha256": "b47b09db520294c2ef99e1c35b58558dc33550ac962f79817cf153bf3c64ff5c",
+   "status": 400
+  },
+  {
+   "body": {
+    "as_of": "2026-11-25",
+    "drop_date": "2026-11-28",
+    "new_price": "80.00",
+    "purchase_date": "2026-11-05",
+    "purchase_price": "100.00",
+    "retailer": "fnac"
+   },
+   "name": "shop_pricedrop_fnac_giftcard_window",
+   "path": "/api/v1/shop/pricedrop-refund",
+   "sha256": "0ded67f855c597dc4f4ef77af8e8edd2a1443d513d7ae28d828fe103ef693a4d",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-25",
+    "drop_date": "2026-12-10",
+    "new_price": "80.00",
+    "purchase_date": "2026-11-20",
+    "purchase_price": "100.00",
+    "retailer": "target"
+   },
+   "name": "shop_pricedrop_target_holiday",
+   "path": "/api/v1/shop/pricedrop-refund",
+   "sha256": "a3983623ac261e229dd1fa9d59991129b14dda1d6a6b7b2aada6440b14bf2279",
+   "status": 200
+  },
+  {
+   "body": {
     "as_of": "2026-11-23",
     "purchase_date": "2026-12-20",
     "retailer": "amazon"

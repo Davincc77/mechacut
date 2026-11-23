@@ -1,0 +1,11 @@
+{
+ "body": {
+  "retailer": "bestbuy",
+  "purchase_date": "2026-11-05",
+  "drop_date": "2026-11-20",
+  "purchase_price": "100.00",
+  "new_price": "80.00"
+ },
+ "name": "shop_pricedrop_bestbuy_delivery_required_refused",
+ "path": "/api/v1/shop/pricedrop-refund"
+}

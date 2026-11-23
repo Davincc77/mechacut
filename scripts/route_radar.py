@@ -105,6 +105,21 @@ CASES = [
     ("preço riscado é legal", "discount_audit"),
     ("is the strikethrough was price legal under omnibus",
      "discount_audit"),
+    # bundle 96 — le pilier 3 du trio boutique. Douleur : la
+    # requête HUMaine « qui me rend la différence » était volée par
+    # unitprice/discount-audit (les mots « prix » et « 80 » sont
+    # déjà occupés) ; ces lignes ferment la découvrabilité du nouvel
+    # outil ET gardent la frontière avec return-deadline.
+    ("j'ai acheté 100 à la Fnac, passé à 80, qui me rembourse la "
+     "différence", "pricedrop"),
+    ("i paid 100 at best buy and the price dropped to 80 last week "
+     "— who owes me the difference", "pricedrop"),
+    ("comprei por 100 na fnac e caiu para 80, quem me devolve a "
+     "diferenca", "pricedrop"),
+    ("PRIX BAISSE APRES ACHAT REMBOURSEMENT DIFFÉRENCE fnac",
+     "pricedrop"),
+    ("can I still return the TV I bought at target, until when",
+     "return_deadline"),
     # leurres : aucune extraction fermee n'est licite — le routeur
     # doit REFUSER par le nom, pas inventer.
     ("raconte-moi une blague sur les bases de donnees", None),

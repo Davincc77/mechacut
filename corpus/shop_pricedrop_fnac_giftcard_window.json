@@ -1,0 +1,12 @@
+{
+ "body": {
+  "retailer": "fnac",
+  "purchase_date": "2026-11-05",
+  "drop_date": "2026-11-28",
+  "purchase_price": "100.00",
+  "new_price": "80.00",
+  "as_of": "2026-11-25"
+ },
+ "name": "shop_pricedrop_fnac_giftcard_window",
+ "path": "/api/v1/shop/pricedrop-refund"
+}

@@ -322,6 +322,7 @@ def test_mcp_exposes_bundle1():
                           'ledger_summary', 'eval_compare',
                           'shop_shipping_deadline',
                           'shop_return_deadline',
+                          'shop_pricedrop_refund',
                           'invoice_validate_totals', 'check_allowlist',
                           'loop_doom_check', 'agent_retrybudget',
                           'agent_mcpaudit', 'shop_discount_audit', 'net_ratelimit', 'number_words_pair', 'date_window', 'date_deemed', 'agent_propose', 'text_fold_report', 'text_novel_words', 'address_parse', 'date_civil', 'proposals_registry']  # queue 23-11 bundles 82-84, 92

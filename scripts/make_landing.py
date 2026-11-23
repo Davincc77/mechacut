@@ -544,6 +544,19 @@ TR = {
                       "cut's date \u2014 the machine returns the "
                       "legal reference, the true percentage and a "
                       "named verdict. It never fetches a price.",
+  "everyday.e23.name": "Price DROPPED after you paid — who owes the "
+                       "difference, by when, in which money",
+  "everyday.e23.say": "You bought at 100, the shop now shows 80. No "
+                      "law forces a refund — but the shops' own "
+                      "published guarantees do, and those windows "
+                      "are DATES: Target Dec 24, Best Buy Jan 15, "
+                      "Costco 30 days, Fnac-Darty the campaign "
+                      "itself (gift card, not cash), Amazon nothing "
+                      "at all. Paste purchase + drop dates and both "
+                      "prices — the machine returns the verdict, the "
+                      "claim deadline, the amount and the refund "
+                      "mode, with the source class on every row. It "
+                      "never fetches a price.",
   "nav.kit": "Kit",
   "kit.h2": "The suite on your disk",
   "kit.creed": "The protocol is not the transport \u2014 it is the birth certificate of the tool.",
@@ -1076,6 +1089,21 @@ TR = {
                       "date : la machine rend la r\u00e9f\u00e9rence "
                       "l\u00e9gale, le vrai pourcentage, verdict "
                       "nomm\u00e9. Elle ne fetch aucun prix.",
+  "everyday.e23.name": "Le prix a BAISS\u00c9 apr\u00e8s votre achat "
+                       "\u2014 qui doit la diff\u00e9rence, jusqu'\u00e0 quand, en quelle monnaie",
+  "everyday.e23.say": "Achet\u00e9 100, affich\u00e9 80 aujourd'hui. "
+                      "Aucune loi n'oblige au remboursement \u2014 "
+                      "mais les garanties publi\u00e9es par les "
+                      "enseignes oui, et leurs fen\u00eatres sont des "
+                      "DATES : Target 24 d\u00e9c, Best Buy 15 janv, "
+                      "Costco 30 jours, Fnac-Darty la campagne elle-"
+                      "m\u00eame (carte cadeau, pas esp\u00e8ces), "
+                      "Amazon rien du tout. Collez les dates d'achat "
+                      "et de baisse et les deux prix \u2014 la "
+                      "machine rend le verdict, la date limite de "
+                      "r\u00e9clamation, le montant et la monnaie "
+                      "du remboursement, classe de source sur chaque "
+                      "ligne. Elle ne fetch aucun prix.",
   "nav.kit": "Kit",
   "kit.h2": "La suite sur votre disque",
   "kit.creed": "Le protocole n'est pas le transport \u2014 c'est l'acte de naissance de l'outil.",
@@ -1597,6 +1625,18 @@ TR = {
                       "em at\u00e9 350.000 EUR. A ferramenta audita "
                       "lojas da UE a partir do hist\u00f3rico que "
                       "VOC\u00ca fornece \u2014 jamais busca pre\u00e7os.",
+  "everyday.e23.name": "O pre\u00e7o CAIU depois da compra \u2014 quem "
+                       "deve a diferen\u00e7a, at\u00e9 quando, em que dinheiro",
+  "everyday.e23.say": "Comprou por 100, a loja mostra 80 agora. "
+                      "Nenhuma lei obriga o reembolso \u2014 mas as "
+                      "garantias publicadas das lojas sim, e essas "
+                      "janelas s\u00e3o DATAS: Target 24 dez, Best "
+                      "Buy 15 jan, Costco 30 dias, Amazon nada. Cole "
+                      "as datas da compra e da queda e os dois "
+                      "pre\u00e7os \u2014 a m\u00e1quina devolve o "
+                      "veredicto, o prazo do pedido, o valor e a "
+                      "forma do reembolso, com a classe de fonte em "
+                      "cada linha. Ela nunca busca pre\u00e7os.",
   "nav.kit": "Kit",
   "kit.h2": "A suíte no seu disco",
   "kit.creed": "O protocolo não é o transporte \u2014 é a certidão de nascimento da ferramenta.",
@@ -3143,7 +3183,10 @@ W = {
                     "window closed %s \u2014 the 'Jan 31' headline "
                     "never says",
       "auditcut": "\u2192 %s \u00b7 legal reference %s \u00b7 real "
-                  "cut %s%%, not the announced 30%%"},
+                  "cut %s%%, not the announced 30%%",
+      "pricedrop": "\u2192 owed %s \u00b7 claim by %s (%s) \u00b7 the "
+                   "window is a published date, the source class "
+                   "travels in the row"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "returndead": "\u2192 retour jusqu'au %s (%s) \u00b7 chez "
@@ -3153,6 +3196,9 @@ W = {
            "auditcut": "\u2192 %s \u00b7 r\u00e9f\u00e9rence l\u00e9gale %s "
                        "\u00b7 vraie remise %s%%, pas les 30%% "
                        "annonc\u00e9s",
+           "pricedrop": "\u2192 %s \u00e0 r\u00e9clamer avant le %s "
+                        "(%s) \u00b7 la fen\u00eatre est une date "
+                        "publi\u00e9e, la classe de source voyage",
            "word": "\u2192 \u00ab %s \u00bb",
            "iban": "\u2192 cl\u00e9 de contr\u00f4le valide \u00b7 %s",
            "page": "\u2192 page autonome (%s octets) \u00b7 Ctrl-P = PDF",
@@ -3198,6 +3244,9 @@ W = {
                          "janeiro \u00bb nunca diz isso",
            "auditcut": "\u2192 %s \u00b7 refer\u00eancia legal %s \u00b7 "
                        "corte real %s%%, n\u00e3o os 30%% anunciados",
+           "pricedrop": "\u2192 %s a reclamar at\u00e9 %s (%s) \u00b7 a "
+                        "janela \u00e9 data publicada, a classe da "
+                        "fonte viaja na linha",
            "word": "\u2192 \u201c%s\u201d",
            "iban": "\u2192 d\u00edgito verificador v\u00e1lido \u00b7 %s",
            "page": "\u2192 p\u00e1gina aut\u00f4noma (%s bytes) \u00b7 "
@@ -3399,6 +3448,13 @@ _EVERYDAY_CALLS = [
       "previous_price": "100.00", "claimed_percent": "30"},
      "auditcut", lambda d, L_: (
          d["verdict"], d["reference_price"], d["true_percent"])),
+    ("/api/v1/shop/pricedrop-refund",
+     {"retailer": "target", "purchase_date": "2026-11-20",
+      "drop_date": "2026-12-10", "purchase_price": "100.00",
+      "new_price": "80.00"},
+     "pricedrop", lambda d, L_: (
+         d["refund_amount"], d["claim_by"],
+         d["claim_by_weekday"])),
 ]
 
 

@@ -82,6 +82,7 @@ POST /api/v1/shop/discount-audit price history + announced cut -> Omnibus 30-day
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
 POST /api/v1/shop/return-deadline    retailer + purchase date -> published holiday RETURN deadline, provenance and conflicts named (free)
+POST /api/v1/shop/pricedrop-refund   purchase + drop dates/prices -> who OWES the difference, by when, in which money — closed 2026 BF table (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -282,6 +283,7 @@ import mcpauditkit
 import evalkit
 import shipdeadkit
 import returndeadkit
+import pricedroprefundkit
 import money
 import numfmt
 import payments
@@ -363,7 +365,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.16.0",
+    version="1.17.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2433,6 +2435,53 @@ def run_shop_return_deadline(args: dict):
 @app.post("/api/v1/shop/return-deadline")
 def api_shop_return_deadline(req: ShopReturnDeadlineRequest):
     body, err = run_shop_return_deadline(req.model_dump())
+    return err if err else body
+
+
+class ShopPriceDropRefundRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    retailer: str
+    purchase_date: str
+    drop_date: str
+    purchase_price: str
+    new_price: str
+    country: Optional[str] = None
+    delivery_date: Optional[str] = None
+    membership: Optional[bool] = None
+    promo_start: Optional[str] = None
+    promo_end: Optional[str] = None
+    channel: Optional[str] = None
+    drop_is_event_pricing: Optional[bool] = None
+    currency: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_shop_pricedrop_refund(args: dict):
+    try:
+        req = ShopPriceDropRefundRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = pricedroprefundkit.pricedrop_refund(
+            req.retailer, req.purchase_date, req.drop_date,
+            req.purchase_price, req.new_price, country=req.country,
+            delivery_date=req.delivery_date,
+            membership=req.membership, promo_start=req.promo_start,
+            promo_end=req.promo_end,
+            channel=req.channel or "first_party",
+            drop_is_event_pricing=req.drop_is_event_pricing,
+            currency=req.currency, as_of=req.as_of)
+    except pricedroprefundkit.PriceDropError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/pricedrop-refund")
+def api_shop_pricedrop_refund(req: ShopPriceDropRefundRequest):
+    body, err = run_shop_pricedrop_refund(req.model_dump())
     return err if err else body
 
 
@@ -6567,6 +6616,7 @@ TOOL_RUN = {
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
            "shop_return_deadline": run_shop_return_deadline,
+           "shop_pricedrop_refund": run_shop_pricedrop_refund,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -10075,6 +10125,95 @@ MCP_TOOLS = [
                 "channel": {"type": "string",
                             "description": "first_party (default) | "
                                            "marketplace"},
+                "as_of": {"type": "string",
+                          "description": "ISO YYYY-MM-DD day to "
+                                         "count days_left from"},
+            },
+        },
+    },
+    {
+        "name": "shop_pricedrop_refund",
+        "description": (
+            "Own-price DROPPED after purchase: who owes you the "
+            "difference, by when, in which money. Closed 2026 "
+            "Black-Friday table from published clauses — FR: fnac/"
+            "darty (campaign 2 nov–30 nov, refund in store gift card, "
+            "NOT cash); US: target (holiday to Dec 24 else 14 days), "
+            "bestbuy (return period from receipt, holiday claims to "
+            "Jan 15), costco (30 days; sale-dated promos need BOTH "
+            "windows), apple (min of receipt+14 and drop+14, BF "
+            "excluded), homedepot (30 days), amazon/walmart (NONE — "
+            "a published fact, with the return-deadline lever). "
+            "Inputs: retailer + purchase_date + drop_date + the two "
+            "prices (+ delivery_date where the clock runs from "
+            "receipt, membership bestbuy-only, promo dates costco-"
+            "only, channel, drop_is_event_pricing, as_of). Returns "
+            "eligible, claim_by, refund (Decimal cents), mode, "
+            "provenance class, conflicts NAMED. Never fetches a "
+            "price. Single-source chains (Macy's, Currys, Argos…) "
+            "refused BY NAME carrying the candidate fact. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["retailer", "purchase_date", "drop_date",
+                         "purchase_price", "new_price"],
+            "additionalProperties": False,
+            "properties": {
+                "retailer": {"type": "string",
+                             "description": "target | bestbuy | "
+                                            "costco | apple | "
+                                            "homedepot | amazon | "
+                                            "walmart (US); fnac | "
+                                            "darty (FR)"},
+                "purchase_date": {"type": "string",
+                                  "description": "ISO YYYY-MM-DD, "
+                                                 "season 2026 only"},
+                "drop_date": {"type": "string",
+                              "description": "ISO YYYY-MM-DD the "
+                                             "lower price appeared, "
+                                             "on/after purchase"},
+                "purchase_price": {"type": "string",
+                                   "description": "decimal string "
+                                                  "you paid, e.g. "
+                                                  "\"100.00\""},
+                "new_price": {"type": "string",
+                              "description": "decimal string now, "
+                                             "e.g. \"80.00\""},
+                "country": {"type": "string",
+                            "description": "must match the "
+                                           "retailer's table: US or "
+                                           "FR — optional, defaults "
+                                           "from the retailer"},
+                "delivery_date": {"type": "string",
+                                  "description": "ISO date, "
+                                                 "required when the "
+                                                 "clock runs from "
+                                                 "receipt (bestbuy, "
+                                                 "apple)"},
+                "membership": {"type": "boolean",
+                               "description": "bestbuy Plus/Total "
+                                              "only"},
+                "promo_start": {"type": "string",
+                                "description": "ISO date, costco "
+                                               "only: dated-sale "
+                                               "double window"},
+                "promo_end": {"type": "string",
+                              "description": "ISO date, costco only"},
+                "channel": {"type": "string",
+                            "description": "first_party (default) | "
+                                           "marketplace — marketplace "
+                                           "has no guarantee on "
+                                           "these rows"},
+                "drop_is_event_pricing": {
+                    "type": "boolean",
+                    "description": "true when the lower price IS a "
+                                   "Black Friday / flash-event "
+                                   "price — several clauses exclude "
+                                   "it by name"},
+                "currency": {"type": "string",
+                             "description": "ISO-4217 echo; EUR "
+                                            "default for FR rows, "
+                                            "USD for US"},
                 "as_of": {"type": "string",
                           "description": "ISO YYYY-MM-DD day to "
                                          "count days_left from"},

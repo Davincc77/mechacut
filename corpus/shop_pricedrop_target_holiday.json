@@ -1,0 +1,12 @@
+{
+ "body": {
+  "retailer": "target",
+  "purchase_date": "2026-11-20",
+  "drop_date": "2026-12-10",
+  "purchase_price": "100.00",
+  "new_price": "80.00",
+  "as_of": "2026-11-25"
+ },
+ "name": "shop_pricedrop_target_holiday",
+ "path": "/api/v1/shop/pricedrop-refund"
+}

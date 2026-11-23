@@ -46,6 +46,13 @@ SAY = {
               "cadeau de Noël acheté chez Walmart ?",
         "pt": "qual o prazo para devolver um presente de Natal "
               "comprado na Amazon?"},
+    "/api/v1/shop/pricedrop-refund": {
+        "en": "I paid 100 for the TV, it dropped to 80 last week — "
+              "does Best Buy owe me the difference, and until when?",
+        "fr": "acheté 100 € à la Fnac, passé à 80 € — qui me "
+              "rembourse la différence et jusqu'à quand ?",
+        "pt": "paguei 100 e caiu para 80 — quem me devolve a "
+              "diferença e até quando?"},
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",
