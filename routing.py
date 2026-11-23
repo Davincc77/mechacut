@@ -839,7 +839,8 @@ TABLE = (
      "all times ARGUMENTS, never wall clock, never invented tables",
      "leftovers leftover reheating reheat gravy stuffing discard "
      "bin danger conservation rechauffer sobras geladeira "
-     "esquentar"),
+     "esquentar keep garder rester consommer validade durar "
+     "safe frigo"),
 
 )
 
@@ -1027,7 +1028,7 @@ STOP_FR = frozenset(
     "le la les un une des du de l au aux en dans sur sous chez vers "
     "avec sans pour par depuis avant apr apres et ou ni mais donc car "
     "si que qui quoi dont o quand comment ne pas rien personne jamais "
-    "plus moins tres tr tout tous toute toutes autre autres "
+    "jusqu plus moins tres tr tout tous toute toutes autre autres "
     "mon ma mes ton ta tes son sa ses notre nos votre vos leur leurs "
     "je tu il elle on nous vous ils elles me te moi toi se soi y "
     "peut peux peuvent veux veut vouloir voulais "

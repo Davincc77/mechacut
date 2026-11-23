@@ -214,6 +214,17 @@ def test_router_routes_leftovers_without_stealing_poultry():
     import routing
     hits = routing.route("are my leftovers still safe")
     assert hits and hits[0]["tool"] == "food_leftovers"
+    # les deux phrases pêchées en LIVE au rituel de déploiement
+    # (EN : text_count volait sur les pwords ; FR : frigo/garder
+    # absents = requête morte). Vocabulaire ajouté sur audit —
+    # interrogatifs comment/where jamais pris, "last" cédé à
+    # anchorkit qui le nomme déjà.
+    hits = routing.route("how long are my turkey leftovers safe in "
+                         "the fridge")
+    assert hits and hits[0]["tool"] == "food_leftovers"
+    hits = routing.route("jusqu'a quand garder les restes de dinde "
+                         "au frigo")
+    assert hits and hits[0]["tool"] == "food_leftovers"
     # la dinde crue à dégeler reste chez poultry — pas de vol :
     hits = routing.route("when do I take the turkey out of the "
                          "freezer to thaw")
