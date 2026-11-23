@@ -129,3 +129,44 @@ runner sur les modules existants (déshabillage, pas réécriture) ;
 3) SKILL.md du kit + rituel de proposition vers la file du réseau.
 Chaque pièce passe le banc avant de paraître — sinon on n'aurait construit
 que le rêve d'un gestionnaire de paquets.
+
+## Part des gains — tranché par l'humain (24-11) : 50/50
+
+Un outil réseau qui tombe dans un palier payant (cap au-delà du plafond 32 Ko,
+ou payé au call) rapporte : **50 % à qui a tracé les golds, 50 % à qui tient
+le banc.** Pas de bonus de volume, pas de taux dégressif, pas de négociation
+par outil : le seul nombre qui n'a jamais besoin d'être justifié est celui
+qu'on ne change pas. Les autres chiffres seraient politiques ; 50/50 est
+arithmétique.
+
+1. **Le split suit l'admission, jamais l'audience.** Un contrat entre parce
+   que le banc le rejoue, pas parce qu'il se vend. L'argent ne rouvre aucune
+   porte que le banc a fermée.
+2. **Le noyau libre reste libre.** Le réseau ne peut pas créer de nouveau
+   péage sur la couche gratuite — le partage ne porte que sur cap/payant.
+   Un DUPLICATE-OF ne touche rien : on ne paye pas d'avoir redécouvert la
+   France.
+3. **Le mécanisme : un seul `payTo`, un contrat splitter.** L'exigence x402
+   (EIP-3009, USDC sur Base) ne porte qu'une adresse — c'est la spec, on ne
+   la bricole pas. L'adresse publiée est donc un contrat splitter déployé
+   sur Base : deux bénéficiaires, proportions en bps fixées au déploiement,
+   sha épinglé au manifest. Le paiement reste un message, le partage reste
+   on-chain, la facilitation reste gasless. Zéro évolution de protocole,
+   zéro compte à tenir pour personne.
+4. **Le split est calculé par nos propres outils.** `money_split` —
+   répartition exacte au centime, règle de reste fermée — est la
+   transformation qui décide qui reçoit quoi quand un montant ne se divise
+   pas pile. Le versement d'un réseau déterministe est lui-même une
+   transformation déterministe, vérifiable par sha. Le plus beau
+   dogfooding possible, et c'est pour ça qu'on n'ira pas externaliser ça à
+   une régie de paiements.
+5. **Le créateur est l'humain, pas l'agent.** L'adresse bénéficiaire est
+   celle du propriétaire de l'agent ; « l'outil évolue avec son propriétaire »
+   vaut aussi pour la facture.
+6. **Pas de rétroactivité.** Les outils publiés avant le splitter restent à
+   la maison ; le réseau démarre à jour 0.
+
+Ce qui reste à construire avant tout versement (et n'est pas encore vrai,
+donc n'est pas encore promis) : le contrat splitter déployé, son address
+dans le manifest, l'endpoint de soumission qui porte le bénéficiaire, et la
+file d'admission. Chacun passera le banc comme n'importe quel outil.
