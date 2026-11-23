@@ -2045,10 +2045,12 @@ TEMPLATE = """<!DOCTYPE html>
   var LBL = {say: "{{panel.say}}", got: "{{panel.got}}"};
   var copyb = document.getElementById("tpcopy");
   var closeb = document.getElementById("tpclose");
-  var pack = "all", tier = "all", w = "", last = null;
+  var pack = "all", tier = "all", w = "", last = null,
+      topmode = true;
   function ok(c) {
     return (pack === "all" || c.dataset.pack === pack) &&
            (tier === "all" || c.dataset.tier === tier) &&
+           (!topmode || w !== "" || c.dataset.top === "1") &&
            (!w || c.dataset.hay.indexOf(w) >= 0);
   }
   function apply() {
@@ -2063,12 +2065,14 @@ TEMPLATE = """<!DOCTYPE html>
     var chip = e.target.closest(".chip");
     if (chip) {
       var kv = chip.dataset.f.split("=");
-      if (kv[0] === "x") { pack = "all"; tier = "all"; }
-      else if (kv[0] === "pack") { pack = kv[1]; }
-      else { tier = kv[1]; }
+      if (kv[0] === "top") { topmode = true; pack = "all"; tier = "all"; }
+      else if (kv[0] === "x") { topmode = false; pack = "all"; tier = "all"; }
+      else if (kv[0] === "pack") { topmode = false; pack = kv[1]; }
+      else { topmode = false; tier = kv[1]; }
       tray.querySelectorAll(".chip").forEach(function (c) {
         var k2 = c.dataset.f.split("=");
-        var on = k2[0] === "x" ? (pack === "all" && tier === "all")
+        var on = k2[0] === "top" ? topmode
+             : k2[0] === "x" ? (!topmode && pack === "all" && tier === "all")
              : k2[0] === "pack" ? (pack === k2[1]) : (tier === k2[1]);
         c.classList.toggle("on", on);
       });
@@ -2163,6 +2167,15 @@ TEMPLATE = """<!DOCTYPE html>
 
 PACK_LABEL_EXTRA = {"en": "skill packs:", "fr": "packs de compétences :",
                     "pt": "pacotes de skills:"}
+TOP10 = {  # le catalogue grand public : ce que « pour tout le monde » utilise
+    "qr_generate", "csv_excel_damage", "csv_excel_display", "money_baggage",
+    "money_discount", "money_split", "money_unitprice", "date_relative",
+    "validate_iban", "money_flight_comp",
+}
+CAT_TOP10 = {"en": "\u2605 Top 10", "fr": "\u2605 Le top 10",
+             "pt": "\u2605 Top 10"}
+
+
 CAT_ALL = {"en": "all", "fr": "tout", "pt": "tudo"}
 
 
@@ -2490,6 +2503,29 @@ MARKET = [
      "Peter Steinberger", "creator of OpenClaw — LLMs judge, scripts do "
      "the deterministic work",
      "https://www.coldmountain.ai/wiki/people/peter-steinberger"),
+    ("Grok @Bot can do your accounting.",
+     "Elon Musk", "@elonmusk on X, nov 2026 — while ToolFailBench "
+     "measures Grok-4.3 at 86.33% faithful tool use",
+     "https://finance.yahoo.com/technology/ai/articles/elon-musk-says-"
+     "grok-accounting-043007297.html"),
+    ("Bots are AI teammates that do real work for you. They sign in to "
+     "your tools, use them just like you do, and come back with finished "
+     "work.",
+     "xAI, Grok Bot launch", "@bot on X, aug 2026 — the promise; the "
+     "arithmetic it leans on is exactly what we make exact",
+     "https://interestingengineering.com/ai-robotics/xai-grok-bot-"
+     "computer-agent"),
+    ("We don't store memories; we generate them. That's what memory is "
+     "like in large language models, and that's why they can confabulate.",
+     "Geoffrey Hinton", "AI4 conference, 2026 — why the answer to an "
+     "invoice total is generated, never retrieved",
+     "https://www.rdworldonline.com/hinton-ai4-conference-language-"
+     "model-insights-rd-impact/"),
+    ("Traditional computers automate what you can specify in code. This "
+     "latest round of LLMs can automate what you can verify.",
+     "Andrej Karpathy", "Sequoia Ascent 2026 — and what can be verified "
+     "deserves to be specified once, exactly",
+     "https://karpathy.bearblog.dev/sequoia-ascent-2026/"),
     ("Faithful tool use is not saturated: even the best of 19 headline "
      "models — Grok-4.3 at 86.33%, Claude, GPT, Qwen behind — still "
      "fumbles a meaningful fraction of tool-required tasks.",
@@ -2555,8 +2591,9 @@ def catalog_grid(lang):
     The grid has a fixed max-height, so the page budget cannot grow with
     len(TABLE): 90 tools fit the same three screens as 53. All text is
     baked server-side — the runtime substitution is a single pass."""
-    chips = ['<span class="chip on" data-f="x=all">%s</span>'
-             % CAT_ALL[lang]]
+    chips = ['<span class="chip on" data-f="top=1">%s</span>'
+                  % CAT_TOP10[lang],
+             '<span class="chip" data-f="x=all">%s</span>' % CAT_ALL[lang]]
     for pk in routing.PACKS:
         chips.append('<span class="chip" data-f="pack=%s">%s</span>'
                      % (pk, PACK_TITLE[lang].get(pk, pk)))
@@ -2576,10 +2613,10 @@ def catalog_grid(lang):
         purp = purpose.replace("&", "&amp;").replace("<", "&lt;")
         cards.append(
             '<button class="tcard" data-pack="%s" data-tier="%s" '
-            'data-tool="%s" data-hay="%s"><span class="tierdot" '
+            'data-top="%s" data-tool="%s" data-hay="%s"><span class="tierdot" '
             'title="%s %s — %s">%s'
             '</span> <code>%s</code><span class="tp">%s</span></button>'
-            % (pack, tier, name, hay, BADGE[tier], TIER_CHIP[lang][tier],
+            % (pack, tier, "1" if name in TOP10 else "0", name, hay, BADGE[tier], TIER_CHIP[lang][tier],
                TIER_RULE[lang][tier], BADGE[tier], name, purp))
     packs = " · ".join('<a href="/SKILL-%s.md">%s</a>' % (pk, pk)
                        for pk in routing.PACKS)

@@ -482,10 +482,12 @@
   var LBL = {say: "{{panel.say}}", got: "{{panel.got}}"};
   var copyb = document.getElementById("tpcopy");
   var closeb = document.getElementById("tpclose");
-  var pack = "all", tier = "all", w = "", last = null;
+  var pack = "all", tier = "all", w = "", last = null,
+      topmode = true;
   function ok(c) {
     return (pack === "all" || c.dataset.pack === pack) &&
            (tier === "all" || c.dataset.tier === tier) &&
+           (!topmode || w !== "" || c.dataset.top === "1") &&
            (!w || c.dataset.hay.indexOf(w) >= 0);
   }
   function apply() {
@@ -500,12 +502,14 @@
     var chip = e.target.closest(".chip");
     if (chip) {
       var kv = chip.dataset.f.split("=");
-      if (kv[0] === "x") { pack = "all"; tier = "all"; }
-      else if (kv[0] === "pack") { pack = kv[1]; }
-      else { tier = kv[1]; }
+      if (kv[0] === "top") { topmode = true; pack = "all"; tier = "all"; }
+      else if (kv[0] === "x") { topmode = false; pack = "all"; tier = "all"; }
+      else if (kv[0] === "pack") { topmode = false; pack = kv[1]; }
+      else { topmode = false; tier = kv[1]; }
       tray.querySelectorAll(".chip").forEach(function (c) {
         var k2 = c.dataset.f.split("=");
-        var on = k2[0] === "x" ? (pack === "all" && tier === "all")
+        var on = k2[0] === "top" ? topmode
+             : k2[0] === "x" ? (!topmode && pack === "all" && tier === "all")
              : k2[0] === "pack" ? (pack === k2[1]) : (tier === k2[1]);
         c.classList.toggle("on", on);
       });
