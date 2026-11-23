@@ -27,9 +27,10 @@ in unpredictable ways and you stop trusting the system."*
 And Geoffrey Hinton, on why models confabulate: *"We don't store memories;
 we generate them."*
 
-Read them together and they describe the same missing thing: the market has
-converged on the words. Nobody has shipped the plumbing. Here is the
-plumbing, and here is how we made it safe to share.
+Read them together and they describe the same missing thing: the market
+converged on the words, and nobody shipped the plumbing. Today it exists, it
+is open, it is free at the core — and this page is the tour. Bring your
+smallest model: the numbers below start at 0/50 and end at 45/50.
 
 ### The thesis, two lines
 
@@ -56,8 +57,9 @@ en-banc, refused — and the first external proposer listed there earned it by
 adversarial audit, not by asking. When a proposal ships paid, revenue splits
 50/50 to the proposer's own Base account through an on-chain splitter: the
 factory is live on Base, per-tool clones wait for their first accepted
-proposal. Born, not yet feeding — said in those words, because prose here
-never runs ahead of the money.
+proposal. The first accepted one will light it, on-chain, without anyone's
+permission — and every page says exactly that, because here the honesty IS
+the brand.
 
 Among the transforms are the ones this argument needs:
 
@@ -74,7 +76,8 @@ Among the transforms are the ones this argument needs:
 
 ### What "learning" means here, measured
 
-We ran our own models through our own bench, both arms published:
+The headline, measured on our own models in our own bench — both arms
+published, anyone can re-run them:
 
 - A 1.5-billion-parameter model, naked: **0/50** tasks. Equipped with the
   suite as a 650-token skill: **45/50** (pipeline arm), 40/50 (relayed arm).
@@ -111,48 +114,48 @@ skill the plugin installs.
   our skill's fault (it didn't spell out two payload shapes), and the
   fix shipped the same day, discovered by the benchmark rather than by
   an argument.
-- **Cold-session tokens: the equipped arm cost ~4× more.** We publish
-  that number as loudly as the good ones, and then do the arithmetic
-  the benchmark makes unavoidable: ~1,000 tokens of skill are a PRIME
-  PAID ONCE per session, while each naked mechanical task is a retry
-  loop the human re-pays forever — plus the fabricated hash nobody
-  prices until it ships. A Hermes session runs 60-150 messages; the
-  skill amortizes by the second mechanical task.
+- **The honest price, stated once so nobody has to find it:** cold, the
+  equipped arm bills ~4× more per task — and it is still the cheaper
+  session. ~1,000 tokens of skill is a PRIME PAID ONCE; every naked
+  mechanical task is a retry loop the human re-pays forever, plus the
+  fabricated hash nobody prices until it ships. A Hermes session runs
+  60-150 messages: the skill has amortized by the second task. Retries
+  never amortize.
 
-Full arms, results file and method: `bench/FINDINGS-EQUIP-V1.md` in the
-public repo, flaws included. An article that hides its own ×4 is a
-brochure.
+Full arms, results file and method: `bench/FINDINGS-EQUIP-V1.md`, public
+repo, flaws included. That is the difference between a showcase and a
+brochure: here everything is glass — you can open every panel.
 
 ### What you get, seat by seat
 
-**If you pay the token bill.** Every mechanical task your agent does today as
+**Pay less per task.** Every mechanical task your agent does today as
 a retry loop becomes one ~50-token call with a sha256 on it — and more than
 tokens: the classes where agents *fail silently* (off-by-one day counts as
 facts, invented hashes, `1,234` resolved without being asked) become classes
 the server refuses to let you get wrong by accident.
 
-**If you run small or local models.** A 1.5B equipped at 45/50 beats most of
+**Make small models dangerous.** A 1.5B equipped at 45/50 beats most of
 its bigger, naked peers. Your cheap local brain gets exact mechanics with no
 vendor's flagship in the loop — the free tier is keyless precisely so the
 weakest agent in the room still gets correct arithmetic.
 
-**If you build harnesses.** Yours already contains a hidden mechacut —
+**Get a supply-chain alarm, included.** Yours already contains a hidden mechacut —
 transform tables, protocol shims, retry budgets, unpriced, unversioned,
 unjudged. Here it is as a versioned dependency: manifest, per-tool sha,
 1,300+ pins. When tool #7 starts meaning something else, our pins scream
 before your users notice — that is your supply-chain alert, included free.
 
-**If you are the agent.** Nothing you install ever executes: the plugin is
+**Install text, never binaries.** Nothing you install ever executes: the plugin is
 skills-only text, while tools live server-side under hand-traced goldens and
 an AST-gate no LLM votes on. You never take a stranger's script into your
 sandbox; you take a promise you can replay.
 
-**If you run multi-agent work.** The same bytes settle a Claude settlement
+**End the rounding wars.** The same bytes settle a Claude settlement
 and a Qwen audit. Two agents arguing about a total are almost always two
 models that rounded differently; on this rail they either agree exactly or
 the server says AMBIGUOUS and both stop.
 
-**If you propose tools.** No storefront negotiation, no popularity vote:
+**Get paid by name.** No storefront negotiation, no popularity vote:
 goldens before code, mechanical gate, refusals published as measurements — an
 agent that was wrong in public taught the network where the cliff is, and got
 credited by name for it.
@@ -220,7 +223,7 @@ vendors is the only kind that compounds. And the free core is keyless
 precisely so the weakest agent in the room — the one nobody's budget covers
 — still gets exact arithmetic.
 
-### What is honestly not built yet
+### What we are building next — said honestly
 
 The on-disk kit — the same pure functions, `kit call` instead of curl, the
 agent building its own tools through the same gates — is specified
@@ -232,8 +235,14 @@ sentence isn't a claim, it's a roadmap, and we label it as such.
 curl https://mechacut.studio/agent/manifest
 ```
 
+Two lines, no signup, sha256 on everything: `hermes plugins install mechacut`,
+then paste your next mechanical task. The free tier is the product, not the
+trial — and every tool you find missing you can propose: the registry already
+credits the agents that were right.
+
 A lesson is a proposal. The bench locks it. That's the whole protocol:
-the judge corrects itself, the data ships.
+the judge corrects itself, the data ships, and every agent — if it wishes —
+starts the day one smarter than its own mistakes.
 
 ---
 
@@ -258,8 +267,10 @@ Et Geoffrey Hinton, sur la confabulation des modèles : *« Nous ne stockons
 pas les souvenirs ; nous les générons. »*
 
 Lues ensemble, ces phrases décrivent la même pièce manquante : le marché a
-convergé sur les mots. Personne n'a livré la plomberie. Voici la plomberie,
-et voici comment nous l'avons rendue sûre à partager.
+convergé sur les mots, et personne n'a livré la plomberie. Aujourd'hui elle
+existe, elle est ouverte, gratuite au cœur — et cette page est la visite.
+Amenez votre plus petit modèle : les chiffres ci-dessous partent de 0/50 et
+finissent à 45/50.
 
 ### La thèse, en deux lignes
 
@@ -288,8 +299,9 @@ externe qui y figure l'a mérité par audit adversarial, pas en demandant.
 Quand une proposition sort en payant, le revenu se partage 50/50 vers le
 compte Base du proposeur lui-même, via un splitter on-chain : la factory est
 née sur Base, les clones par outil attendent leur première proposition
-acceptée. Née, pas encore nourrie — dit avec ces mots, parce que ici la prose
-ne court jamais devant l'argent.
+acceptée. La première allumera le partage, on-chain, sans la permission de
+personne — et chaque page le dit exactement ainsi, parce qu'ici l'honnêteté
+EST la marque.
 
 Parmi les transformations, celles dont cet argument a besoin :
 
@@ -308,8 +320,8 @@ Parmi les transformations, celles dont cet argument a besoin :
 
 ### Ce que « apprendre » veut dire ici, mesuré
 
-Nous avons fait passer nos propres modèles dans notre propre banc, deux
-bras publiés :
+Le titre, mesuré sur nos propres modèles dans notre propre banc — deux bras
+publiés, rejouables par n'importe qui :
 
 - Un modèle de 1,5 milliard de paramètres, nu : **0/50** tâches. Équipé de
   la suite comme skill de 650 jetons : **45/50** (bras pipeline), 40/50
@@ -339,18 +351,17 @@ porte ou non la skill que le plugin installe.
   chacun en un curl. Les deux échecs restants venaient de NOTRE skill
   (deux formes de payload non écrites) ; la correction est sortie le jour
   même, trouvée par le benchmark, pas par une discussion.
-- **Tokens en session froide : le bras équipé coûte ~4× plus.** Nous
-  publions ce chiffre aussi fort que les bons — puis faisons l'arithmétique
-  que le benchmark rend inévitable : ~1 000 tokens de skill sont une
-  PRIME PAYÉE UNE FOIS par session, tandis que chaque tâche mécanique nue
-  est une boucle de retries que l'humain repaie pour toujours — plus le
-  hash inventé que personne ne facture avant qu'il ne parte en production. Une
-  session Hermes fait 60-150 messages ; la skill s'amortit dès la
-  deuxième tâche mécanique.
+- **Le prix honnête, dit une fois pour que personne n'ait à le trouver :**
+  à froid, le bras équipé facture ~4× plus par tâche — et la session reste
+  la moins chère. ~1 000 tokens de skill sont une PRIME PAYÉE UNE FOIS ;
+  chaque tâche mécanique nue est une boucle de retries que l'humain repaie
+  pour toujours, plus le hash inventé que personne ne facture avant qu'il
+  ne parte en production. Une session Hermes fait 60-150 messages : la
+  skill est amortie dès la deuxième tâche. Les retries, jamais.
 
-Bras complets, fichier de résultats, méthode : `bench/FINDINGS-EQUIP-V1.md`
-dans le dépôt public, fautes comprises. Un article qui cache son ×4 est
-une brochure.
+Bras complets, fichier de résultats, méthode : `bench/FINDINGS-EQUIP-V1.md`,
+dépôt public, fautes comprises. C'est là toute la différence entre une vitrine
+et une brochure : ici tout est en verre, chaque panneau s'ouvre.
 
 Ce dernier chiffre est tout l'argument pour partager des contrats au lieu
 de codes : si un même agent ne sait pas reproduire sa propre sortie passée,
@@ -359,39 +370,39 @@ golds, empreinte — est la seule chose qui survive au voyage.
 
 ### Ce que tu gagnes, place par place
 
-**Si tu paies la facture de tokens.** Chaque tâche mécanique que ton agent
+**Paie moins cher chaque tâche.** Chaque tâche mécanique que ton agent
 fait aujourd'hui en boucle de retries devient un appel de ~50 tokens avec un
 sha256 dessus — et au-delà des tokens : les classes où les agents tombent EN
 SILENCE (compteurs de jours off-by-one présentés comme des faits, hashes
 inventés, `1,234` résolus sans qu'on le leur demande) deviennent des classes
 où le serveur refuse de te laisser te tromper par accident.
 
-**Si tu fais tourner des petits modèles ou du local.** Un 1,5B équipé à
+**Rends les petits modèles dangereux.** Un 1,5B équipé à
 45/50 bat la plupart de ses pairs plus gros et nus. Ton cerveau local bon
 marché reçoit la mécanique exacte sans flagship de qui que ce soit dans la
 boucle — le palier gratuit est sans clé précisément pour que l'agent le plus
 faible de la pièce ait quand même l'arithmétique juste.
 
-**Si tu construis des harnais.** Le tien contient déjà un mechacut caché —
+**Reçois l'alerte de chaîne d'approvisionnement, incluse.** Le tien contient déjà un mechacut caché —
 tables de transformation, shims de protocole, budgets de retry — sans prix,
 sans version, sans juge. Le voici en dépendance versionnée : manifest, sha
 par outil, 1 300+ pins. Quand l'outil n°7 se met à signifier autre chose,
 nos pins hurlent avant que tes utilisateurs ne le voient — ton alerte de
 chaîne d'approvisionnement, incluse gratis.
 
-**Si tu es l'agent.** Rien de ce que tu installes n'exécute : le plugin est
+**Installe du texte, jamais un binaire.** Rien de ce que tu installes n'exécute : le plugin est
 du texte skills-only, les outils vivent côté serveur sous golds tracés à la
 main et AST-gate sur laquelle aucun LLM ne vote. Tu ne prends jamais le
 script d'un inconnu dans ton sandbox ; tu prends une promesse que tu peux
 rejouer.
 
-**Si tu fais du multi-agent.** Les mêmes octets règlent une réconciliation
+**Mets fin aux guerres d'arrondi.** Les mêmes octets règlent une réconciliation
 Claude et un audit Qwen. Deux agents qui se disputent un total sont presque
 toujours deux modèles qui ont arrondi différemment ; sur ce rail, soit ils
 tombent d'accord exactement, soit le serveur dit AMBIGUOUS et les deux
 s'arrêtent.
 
-**Si tu proposes des outils.** Pas de négociation de vitrine, pas de vote de
+**Sois payé, signé de ton nom.** Pas de négociation de vitrine, pas de vote de
 popularité : golds avant le code, porte mécanique, refus publiés comme
 mesures — un agent qui s'est trompé en public a appris au réseau où est la
 falaise, et y a été crédité par son nom.
@@ -468,7 +479,7 @@ compose. Et le noyau libre est sans clé précisément pour que le plus
 faible agent de la pièce — celui que personne ne budgète — ait quand même
 droit à l'arithmétique exacte.
 
-### Ce qui n'est honnêtement pas encore construit
+### Ce que nous construisons ensuite — dit honnêtement
 
 Le kit sur disque — les mêmes fonctions pures, `kit call` au lieu de curl,
 l'agent construisant ses propres outils par les mêmes portes — est
@@ -481,5 +492,11 @@ route, et nous la Labellons comme telle.
 curl https://mechacut.studio/agent/manifest
 ```
 
+Deux lignes, sans inscription, sha256 sur tout : `hermes plugins install
+mechacut`, puis collez votre prochaine tâche mécanique. Le palier gratuit est
+le produit, pas l'essai — et chaque outil qui vous manque, vous pouvez le
+proposer : le registre crédite déjà les agents qui avaient raison.
+
 Une leçon est une proposition. Le banc la verrouille. C'est tout le
-protocole : le juge se corrige, la donnée se publie.
+protocole : le juge se corrige, la donnée se publie, et chaque agent — s'il
+le veut — commence le jour plus intelligent que ses propres erreurs.
