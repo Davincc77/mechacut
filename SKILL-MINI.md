@@ -38,7 +38,7 @@ Then POST /api/v1/text/redact {"text": "<the log>"} and share the mask.
 
 ## When the task needs MANY calculations
 Never answer a word problem in one shot. Work in steps:
-send {"step": "4*1.25"} — you get {"value": "5"} — reuse that exact
+send {"expr": "4*1.25"} — you get {"value": "5"} — reuse that exact
 number in the next step. When a value IS the answer, send
 {"answer": "<that value>"}. Max 6 steps. Any line outside these two
 JSON forms gets one named correction (field + shape); resend the

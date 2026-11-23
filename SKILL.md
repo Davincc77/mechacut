@@ -37,7 +37,7 @@ under 32 KB only; paid steps answer 402 with the direct route.
 For any task needing more than one arithmetic operation (word
 problems, unit chains, financial steps): the model decomposes, the
 server computes. Each turn the model emits EXACTLY one line —
-`{"step": "<closed expression: digits + - * / ( )>"}` — and Mechacut
+`{"expr": "<closed expression: digits + - * / ( )>"}` — and Mechacut
 `/api/v1/math/calc` answers `{"value": "<exact Decimal>"}` (language
 closed, refusal named, 0.1+0.2 = 0.3). The model copies that value
 verbatim into the next step. Final turn: `{"answer": "<value>"}`.
