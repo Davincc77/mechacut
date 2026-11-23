@@ -79,6 +79,37 @@ We ran our own models through our own bench, both arms published:
   to re-emit its own program byte-identically: **0 successes out of 14.**
   Probabilistic machines do not repeat; that is literally their feature.
 
+### The number Hermes users actually ask: equipped vs naked, same day
+
+This week we ran the honest version of that claim on our own machine:
+qwen2.5-7B, temperature 0, ten repetitive mechanical tasks (round a
+money value, split $100 among 7, date arithmetic, a sha256, a unit
+conversion, an ambiguous `1,234`…), identical sandbox in both arms, the
+only difference being whether the agent's context carries the mechacut
+skill the plugin installs.
+
+- **Naked: 5/10 right.** And the failures are the interesting kind:
+  asked for a sha256 it had no way to compute, it *fabricated a
+  plausible one* — `9a2d9a2d9a2d…` repeated, presented as fact. Asked
+  to count days, it picked an off-by-one reading of the question and
+  never suspected the question was ambiguous.
+- **Equipped: 6/10 right** — and the real hash, the right date, the
+  right product, each in one curl. The two misses that remained were
+  our skill's fault (it didn't spell out two payload shapes), and the
+  fix shipped the same day, discovered by the benchmark rather than by
+  an argument.
+- **Cold-session tokens: the equipped arm cost ~4× more.** We publish
+  that number as loudly as the good ones, and then do the arithmetic
+  the benchmark makes unavoidable: ~1,000 tokens of skill are a PRIME
+  PAID ONCE per session, while each naked mechanical task is a retry
+  loop the human re-pays forever — plus the fabricated hash nobody
+  prices until it ships. A Hermes session runs 60-150 messages; the
+  skill amortizes by the second mechanical task.
+
+Full arms, results file and method: `bench/FINDINGS-EQUIP-V1.md` in the
+public repo, flaws included. An article that hides its own ×4 is a
+brochure.
+
 That last number is the whole argument for sharing contracts instead of
 code: if the same agent cannot reproduce its own past output, "share my
 script" shares a ghost. The contract — inputs, outputs, goldens, hash —
@@ -219,6 +250,34 @@ bras publiés :
   à un modèle de réémettre son propre programme octet pour octet :
   **0 succès sur 14.** Les machines probabilistes ne se répètent pas ;
   c'est littéralement leur fonction.
+
+### Le chiffre que les utilisateurs Hermes demandent : équipé vs nu, même jour
+
+Cette semaine, nous avons testé la version honnête de cette promesse sur notre machine : qwen2.5-7B, température 0, dix tâches mécaniques répétitives (arrondir un montant, partager 100 $ entre 7, calcul de
+dates, un sha256, une conversion d'unités, un `1,234` ambigu…), même
+sandbox dans les deux bras, seule différence : le contexte de l'agent
+porte ou non la skill que le plugin installe.
+
+- **Nu : 5/10.** Et les échecs sont intéressants : sans moyen de calculer
+  un sha256, il en a **fabriqué un plausible** — `9a2d9a2d9a2d…` répété,
+  présenté comme un fait. Pour compter des jours, il a choisi une lecture
+  off-by-one de la question sans jamais soupçonner qu'elle était ambiguë.
+- **Équipé : 6/10** — et le vrai hash, la bonne date, le vrai produit,
+  chacun en un curl. Les deux échecs restants venaient de NOTRE skill
+  (deux formes de payload non écrites) ; la correction est sortie le jour
+  même, trouvée par le benchmark, pas par une discussion.
+- **Tokens en session froide : le bras équipé coûte ~4× plus.** Nous
+  publions ce chiffre aussi fort que les bons — puis faisons l'arithmétique
+  que le benchmark rend inévitable : ~1 000 tokens de skill sont une
+  PRIME PAYÉE UNE FOIS par session, tandis que chaque tâche mécanique nue
+  est une boucle de retries que l'humain repaie pour toujours — plus le
+  hash inventé que personne ne facture avant qu'il ne parte en production. Une
+  session Hermes fait 60-150 messages ; la skill s'amortit dès la
+  deuxième tâche mécanique.
+
+Bras complets, fichier de résultats, méthode : `bench/FINDINGS-EQUIP-V1.md`
+dans le dépôt public, fautes comprises. Un article qui cache son ×4 est
+une brochure.
 
 Ce dernier chiffre est tout l'argument pour partager des contrats au lieu
 de codes : si un même agent ne sait pas reproduire sa propre sortie passée,
