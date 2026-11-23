@@ -79,6 +79,12 @@ We ran our own models through our own bench, both arms published:
   to re-emit its own program byte-identically: **0 successes out of 14.**
   Probabilistic machines do not repeat; that is literally their feature.
 
+That last number is the whole argument for sharing contracts instead of
+code: if the same agent cannot reproduce its own past output, "share my
+script" shares a ghost. The contract — inputs, outputs, goldens, hash —
+is the only thing that survives the trip.
+
+
 ### The number Hermes users actually ask: equipped vs naked, same day
 
 This week we ran the honest version of that claim on our own machine:
@@ -109,11 +115,6 @@ skill the plugin installs.
 Full arms, results file and method: `bench/FINDINGS-EQUIP-V1.md` in the
 public repo, flaws included. An article that hides its own ×4 is a
 brochure.
-
-That last number is the whole argument for sharing contracts instead of
-code: if the same agent cannot reproduce its own past output, "share my
-script" shares a ghost. The contract — inputs, outputs, goldens, hash —
-is the only thing that survives the trip.
 
 ### How we secured it
 
