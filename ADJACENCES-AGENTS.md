@@ -32,13 +32,16 @@ nommé (avec la raison)**. Le refus est une livrable comme les autres.
 | état / durée | → refus nommé (sans-état) |
 | données / specs (42 % d'échecs multi-agent) | notre réponse spec : chaque 400 porte champ + expected + exemple (publié depuis bundle 4) ; le multi-agent n'est pas notre terrain |
 
-## Décisions demandées à l'humain
-1. `eval/compare` (juge de banc → route) — O/N ? C'est le plus gros
-   morceau neuf, contrat à écrire avant la première ligne.
-2. `check/allowlist` — O/N ? Plus petit, dans la famille logic/rules.
-3. Les deux refus majeurs (navigateur, sandbox) : les assumer PUBLICS
-   (une ligne « ce que mechacut ne fait pas, et pourquoi » sur la
-   landing — c'est une position de marque, ça se défend) ou internes ?
+## Décisions — tranchées par l'humain (23-11, 10h)
+1. `eval/compare` : **OUI** — contrat + gold à la main, à écrire en premier.
+2. `check/allowlist` : **OUI** — dans la foulée.
+3. Refus publics : **NON**. Rien sur la landing, rien sous forme
+   d'anti-vitrine. La clarté sur ce qu'on fait rend les refus
+   implicites : une suite qui dit précisément ses 152 transforms
+   n'a pas à énumérer ce qu'elle ne sera jamais. Le refus reste
+   interne (ce doc) comme boussole de roadmap : « pas de navigateur,
+   pas de sandbox, pas de mémoire, pas de durée » = ce qu'on ne
+   viendra PAS vendre un jour, pas ce qu'on ira crier.
 
 ## Provenance
 Cartes reçues de l'humain le 23-11 (captures d'un tiers, 13+16
