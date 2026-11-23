@@ -2,8 +2,13 @@
 
 *(X long-form, written FOR Hermes users, about the Hermes plugin first.
 Every number is curlable at posting time; both bench arms live in the public
-repo. POST GATE: the one-word catalog install line activates merge day —
-the Git line is live today.)*
+repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
+panel's "Install from Git" flow installed and activated the plugin today, and
+the CLI line below matches `hermes plugins install`'s own grammar (catalog
+name, Git URL, or owner/repo). POST GATE: the catalog submission is public
+pull request NousResearch/hermes-agent#159281, open and awaiting human
+review; the admission paragraph cites it as under review. A watcher flips
+the paragraph and activates the one-word catalog line on merge day.)*
 
 ---
 
@@ -110,8 +115,10 @@ receipt is byte-exact.
 No storefront, no popularity vote, no self-updating listing: every version
 is a pinned commit, and the Hermes catalog itself admits plugins only via a
 human-merged pull request — the same admission ritual this suite applies to
-every tool. The listing of this plugin passes through the door it preaches.
-That is not a tagline; it is checkable on GitHub.
+every tool. The listing of this plugin is passing through that door in front
+of everyone: pull request NousResearch/hermes-agent#159281 sits open, waiting
+for a human merge button — yes or no, it happens on the record, at an address
+you can read right now. That is not a tagline; it is checkable on GitHub.
 
 ## Why it is safe on your machine
 
@@ -132,9 +139,14 @@ That is not a tagline; it is checkable on GitHub.
 
 ```bash
 curl https://mechacut.studio/agent/manifest          # the whole surface, keyless, right now
-# hermes plugins install Davincc77/mechacut-plugin   # via Git, today
+hermes plugins install Davincc77/mechacut-plugin     # via Git — live today
 # hermes plugins install mechacut                    # via the catalog, merge day
 ```
+
+Zero-terminal route, same result: the desktop app's Plugins panel →
+**Install from Git** → paste `Davincc77/mechacut-plugin` — the card appears,
+you flip it to Activated, pinned to an exact commit. Either way what you
+install is markdown: no binaries, no install scripts.
 
 Then hand your agent the three tasks you already know it fumbles: round
 `2.675` to two decimals, split $100.00 seven ways, hash any string and
@@ -258,8 +270,11 @@ Pas de vitrine, pas de vote de popularité, pas de fiche qui s'auto-modifie :
 chaque version est un commit épinglé, et le catalogue Hermes lui-même
 n'admet les plugins que par pull request fusionnée à la main par un
 mainteneur — le même rituel d'admission que cette suite applique à chaque
-outil. La fiche de ce plugin passe par la porte qu'elle prêche. Ce n'est pas
-une tagline : c'est vérifiable sur GitHub.
+outil. La fiche de ce plugin passe par cette porte en direct devant tout le
+monde : la pull request NousResearch/hermes-agent#159281 est ouverte,
+elle attend un bouton de fusion humain — oui ou non, ça se passe sur la
+place publique, à une adresse lisible dès maintenant. Ce n'est pas une
+tagline : c'est vérifiable sur GitHub.
 
 ## Pourquoi c'est sûr chez toi
 
@@ -283,9 +298,14 @@ une tagline : c'est vérifiable sur GitHub.
 
 ```bash
 curl https://mechacut.studio/agent/manifest          # toute la surface, sans clé, maintenant
-# hermes plugins install Davincc77/mechacut-plugin   # via Git, aujourd'hui
+hermes plugins install Davincc77/mechacut-plugin     # via Git — live aujourd'hui
 # hermes plugins install mechacut                    # via le catalogue, au jour du merge
 ```
+
+Sans terminal, même résultat : panneau Plugins de l'app desktop →
+**Installer depuis Git** → colle `Davincc77/mechacut-plugin` — la carte
+apparaît, tu bascules sur Activé, épinglée à un commit exact. Dans les deux
+cas tu installes du markdown : pas de binaire, pas de script d'installation.
 
 Puis donne à ton agent les trois tâches que tu sais déjà ratées chez lui :
 arrondir `2,675` à deux décimales, partager 100,00 $ entre sept personnes,
