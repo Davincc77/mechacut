@@ -1032,7 +1032,8 @@ def manifest_text(version):
         "tiers: free=keyless 30/min; cap=free under 32KB then x402; "
         "paid=x402 from call one.",
         "every POST response carries sha256; every 400 carries "
-        "field+expected+example — the error is the repair prompt.",
+        "field+expected on every refusal — the error IS "
+        "the repair prompt; ambiguous refusals name their readings.",
         "detail on demand: GET /tools/<name>.json | "
         "install one pack: GET /SKILL-<pack>.md | "
         "one-call pipelines: GET /api/v1/recipes or POST /api/v1/pipeline | "
@@ -1086,7 +1087,7 @@ PACK_NOTES = {
     "dates": "parse, timezones with DST, cron, ICS — no model math",
     "numbers": "exact numbers, units, money, amounts in words — for "
                "multi-step math never solve in one shot: POST "
-               "{\"step\": \"<expr>\"} to /api/v1/math/calc one "
+               "{\"expr\": \"<op>\"} to /api/v1/math/calc one "
                "operation at a time and quote the value it returns",
     "web": "artifacts of the wire: keys and archives verified in memory, "
            "nothing extracted, nothing written",
@@ -1114,7 +1115,7 @@ def pack_markdown(pack, mcp_tools):
         "",
         "%s. Stateless POST at mechacut.studio, no key, no account."
         % PACK_NOTES[pack],
-        "Responses carry sha256; 400s carry field+expected+example.",
+        "Responses carry sha256; 400s carry field+expected.",
         "Tiers: free=keyless; cap=free under 32 KB then x402; "
         "paid=x402 per call.",
         "",

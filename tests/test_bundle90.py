@@ -55,17 +55,22 @@ def _p(body):
 
 ORDER = ["http_ratelimit", "number_words_pair", "date_window",
          "date_deemed", "text_fold_report", "text_novel_words",
-         "address_parse", "date_civil", "money_tip", "money_split"]
+         "address_parse", "date_civil", "money_tip", "money_split",
+         "date_slash_ambiguity"]
 
 
 def test_l1_listed_in_file_order_with_said_dates():
     s, b = _q({})
     assert s == 200 and b["verdict"] == "LISTED"
     assert [e["name"] for e in b["entries"]] == ORDER
-    assert b["counts"]["status"] == {"shipped": 6, "accepted": 2,
+    # 24-11 soir : 11e arrivée — premier proposeur EXTERNE nommé
+    # (l'audit adversarial Hermes), shipped 6->7. La garde des comptes
+    # exacts EST le test du registre : quand il casse, c'est la
+    # collection qui a grandi, et le pin s'incline devant le fichier.
+    assert b["counts"]["status"] == {"shipped": 7, "accepted": 2,
                                      "en-banc": 1, "refuse": 1,
                                      "proposed": 0}
-    assert b["counts"]["total"] == 10
+    assert b["counts"]["total"] == 11
     for e in b["entries"]:
         assert len(e["arrival"]) == 10 and e["arrival"][4] == "-"
     assert b["registry"] == "docs/proposals/registry.jsonl"
@@ -73,14 +78,13 @@ def test_l1_listed_in_file_order_with_said_dates():
 
 def test_l2_latest_is_a_window_not_a_promise():
     s, b = _q({"latest": 3})
-    assert [e["name"] for e in b["entries"]] == ["date_civil",
-                                                 "money_tip",
-                                                 "money_split"]
-    assert b["counts"] == {"shown": 3, "total": 10}
-    s, b = _q({"latest": 10})
+    assert [e["name"] for e in b["entries"]] == [
+        "money_tip", "money_split", "date_slash_ambiguity"]  # 3 derniers du fichier
+    assert b["counts"] == {"shown": 3, "total": 11}
+    s, b = _q({"latest": 11})
     assert [e["name"] for e in b["entries"]] == ORDER  # ordre du fichier
     s, b = _q({"latest": 12})
-    assert b["counts"]["shown"] == 10  # up to, never exactly
+    assert b["counts"]["shown"] == 11  # up to, never exactly
 
 
 def test_l3_search_one_named_proposal():

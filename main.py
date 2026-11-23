@@ -188,6 +188,7 @@ import difflib
 import hashlib
 from types import SimpleNamespace
 import json
+import re
 import threading
 import time
 from collections import deque
@@ -362,7 +363,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.15.0",
+    version="1.16.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -397,19 +398,59 @@ def _sha_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+_REPAIR_PREFIX = re.compile(r"^[a-z][a-z0-9_./ -]{1,30}: ")
+
+
 def bad_request(errors, kind="invalid_input", extra=None):
+    """The single door every 400 passes. Since bundle 93 it refuses to
+    emit a naked refusal: an entry without `expected` borrows it from
+    its own repair sentence (module messages are written AS repairs —
+    'qr: format is svg or png' expects 'format is svg or png'). A
+    message that is not a repair at all gets an honest fallback, never
+    silence. The audit of 24-11 counted 29 naked 400s; all 116 seams
+    flow through here, so one guard closes the class forever."""
+    if isinstance(errors, list):
+        for e in errors:
+            if isinstance(e, dict) and "expected" not in e:
+                msg = str(e.get("message", ""))
+                e["expected"] = (
+                    _REPAIR_PREFIX.sub("", msg, count=1) if
+                    _REPAIR_PREFIX.search(msg) else
+                    ("see the contract: /tools/" +
+                     str(e.get("field", "body"))))
     body: Dict[str, Any] = {"error": kind, "errors": errors}
     if extra:
         body.update(extra)
     return JSONResponse(status_code=400, content=body)
 
 
+_TYPE_WORDS = {"missing": "required field present",
+               "string_type": "string", "int_type": "integer",
+               "bool_type": "boolean", "list_type": "array",
+               "dict_type": "object", "value_error": "see message",
+               "extra_forbidden": "only the contract's own keys "
+                                  "(unknown ones are refused)"}
+
+
 def _pyd_errors(e):
+    """Every 400 is a repair prompt: the audit of 24-11 counted 29
+    refusals carrying field+message but NOT the promised `expected` —
+    all of them flowing through this one function. One seam, fixed
+    once, verified by fuzz (test_bundle93 R8)."""
     raw = e.errors() if hasattr(e, "errors") else None
     if raw:
-        return [{"field": ".".join(str(p) for p in x["loc"]),
-                 "message": x["msg"]} for x in raw]
-    return [{"message": str(e)}]
+        out = []
+        for x in raw:
+            field = ".".join(str(p) for p in x["loc"]) or "."
+            t = x.get("type", "")
+            exp = _TYPE_WORDS.get(t)
+            if exp is None and t.endswith("_type"):
+                exp = t[:-5]
+            out.append({"field": field, "message": x["msg"],
+                        "expected": exp or x["msg"]})
+        return out
+    return [{"message": str(e),
+             "expected": "a body this contract can parse"}]
 
 
 @app.exception_handler(RequestValidationError)
@@ -861,7 +902,8 @@ def run_csv_types(args: dict):
         return None, bad_request(_pyd_errors(e))
     if req.csv is None and req.rows is None:
         return None, bad_request(
-            [{"field": "csv", "message": "send csv (text) or rows (records)"}])
+            [{"field": "csv", "message": "send csv (text) or rows (records)",
+             "expected": "csv: a string of text, or rows: a non-empty array of objects"}])
     try:
         records = chart.parse_records(data=req.rows, csv_text=req.csv)
         out, columns = tables.csv_types(records)
@@ -929,11 +971,17 @@ def run_table_pivot(args: dict):
     errors = []
     if req.mode == "pivot":
         if not req.index:
-            errors.append({"field": "index", "message": "required for pivot"})
+            errors.append({"field": "index",
+                       "message": "required for pivot",
+                       "expected": "non-empty array of column names to group rows by"})
         if not req.columns:
-            errors.append({"field": "columns", "message": "required for pivot"})
+            errors.append({"field": "columns",
+                       "message": "required for pivot",
+                       "expected": "non-empty array of column names to spread across the header"})
         if not req.values:
-            errors.append({"field": "values", "message": "required for pivot"})
+            errors.append({"field": "values",
+                       "message": "required for pivot",
+                       "expected": "non-empty array of column names to aggregate into cells"})
     if errors:
         return None, bad_request(errors)
     try:
@@ -1147,7 +1195,7 @@ def api_env_interpolate(req: EnvInterpolateRequest):
 
 class DateParseRequest(BaseModel):
     text: str
-    prefer: Literal["dmy", "mdy"] = "dmy"
+    prefer: Optional[Literal["dmy", "mdy"]] = None
     tz: Optional[str] = None
 
 
@@ -1417,7 +1465,11 @@ def run_num_round(args: dict):
         out = numfmt.num_round(req.value, req.places, req.mode,
                                req.significant)
     except numfmt.NumberError as e:
-        return None, bad_request([{"field": "value", "message": str(e)}])
+        return None, bad_request([{"field": "value", "message": str(e),
+                                   "expected": "a plain numeric string — "
+                                               "one notation per value, "
+                                               "separators named in "
+                                               "num/parse"}])
     out["sha256"] = canon(out)
     return out, None
 
@@ -2514,7 +2566,9 @@ def run_net_ip(args: dict):
         out = micro.net_ip(args.get("value"))
     except micro.MicroError as e:
         return None, bad_request([{"field": "value",
-                                   "message": "net/ip: %s" % e}])
+                                   "message": "net/ip: %s" % e,
+                                   "expected": "an IPv4/IPv6 address or "
+                                               "a CIDR block"}])
     out["sha256"] = canon(out)
     return out, None
 
@@ -2634,7 +2688,9 @@ def run_verify(args: dict):
                                        mode=args.get("mode") or "bytes")
     except auditor.AuditError as e:
         return None, bad_request([{"field": "base_url",
-                                   "message": "audit: %s" % e}])
+                                   "message": "audit: %s" % e,
+                                   "expected": "https URL of the site "
+                                               "whose pins must replay"}])
     return out, None
 
 
@@ -3825,7 +3881,10 @@ def run_fingerprint(args: dict):
     try:
         out = identity.fingerprint(req.value, req.kind)
     except identity.IdentityError as e:
-        return None, bad_request([{"field": "value", "message": str(e)}])
+        return None, bad_request([{"field": "value", "message": str(e),
+                                   "expected": "a value of the selected "
+                                               "kind (see /tools/"
+                                               "identity_fingerprint.json)"}])
     return out, None
 
 
@@ -6224,7 +6283,7 @@ def api_recipes():
     body = {"recipes": rec,
             "count": len(rec),
             "usage": "POST /api/v1/recipe/<name>; a failing step returns "
-                     "its own 400 with field+expected+example, untouched"}
+                     "its own 400 with field+expected, untouched"}
     body["sha256"] = canon(body)
     return body
 
@@ -6906,7 +6965,9 @@ MCP_TOOLS = [
         "name": "date_parse",
         "description": (
             "Parse one date (ISO 8601, RFC 2822, epoch seconds, slashed "
-            "numeric with explicit dmy/mdy preference — never guessed — or "
+             "numeric: 03/04/05-style is REFUSED with both "
+             "readings named until prefer is given (13/04 and "
+             "05/05 answer — the bytes decide) — never guessed — or "
             "month-name form) -> ISO, UTC, epoch, weekday, ISO week, naive "
             "flag. Free."
         ),

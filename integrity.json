@@ -880,7 +880,7 @@
    },
    "name": "date_parse_rfc",
    "path": "/api/v1/date/parse",
-   "sha256": "7d786b3daf863e83f18d6835a34da07e419307007f963f3d3da67514cfe1880b",
+   "sha256": "52310d271176c82fe78146a94b036de2c4963a58dad4fd0a6be93f42a8e2198e",
    "status": 200
   },
   {
@@ -3272,7 +3272,7 @@
    "path": "/api/v1/reshape",
    "price_atomic": "500",
    "requires_payment": true,
-   "sha256": "fcdfdcb1c01e674b043c289bdbc3d645c1e3fecc851682713a749dae02fc4c8d",
+   "sha256": "e9295c54f84f2081c40f2fd0ad98c3d73ba87818a0bd35cedcc0d62c4b6c6e3c",
    "status": 400
   },
   {
@@ -3933,7 +3933,7 @@
    },
    "name": "validate_bad",
    "path": "/api/v1/validate",
-   "sha256": "23ef0086e32d5660e98c566282fc3ccfcbf17b57a53bb268f65f1c30127050df",
+   "sha256": "33709d4a8b7e079a5f553daab8bfa17383709d4ffcea369dc292dcc678aa7aa2",
    "status": 400
   },
   {

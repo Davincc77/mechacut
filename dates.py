@@ -58,10 +58,15 @@ _DMY_NAME_RE = re.compile(r"^(\d{1,2})\s+([A-Za-z]{3,9})\.?,?\s+(\d{4})$")
 _MONTH_FIRST_RE = re.compile(r"^([A-Za-z]{3,9})\.?\s+(\d{1,2}),?\s+(\d{4})$")
 
 
-def parse_date(text, prefer="dmy", tz=None):
-    """Parse one human/ISO instant. Never guesses day/month order:
-    unambiguous ISO is always right, slashed dates use `prefer`
-    ("dmy" default) unless the numbers themselves decide."""
+def parse_date(text, prefer=None, tz=None):
+    """Parse one human/ISO instant. Never guesses day/month order —
+    and since bundle 93 that word has teeth: when a slashed date has
+    TWO live readings (03/04/05), parse_date REFUSES with both
+    candidates named unless `prefer` is passed. When the bytes decide
+    (13 can never be a month; 05/05/05 collapses to one day), the
+    answer is given, single-reading. ISO and month-names are never
+    touched by the refusal."""
+    ambiguity = "NONE"
     if not isinstance(text, str) or not text.strip():
         raise DateError("date must be a non-empty string")
     s = text.strip()
@@ -101,14 +106,29 @@ def parse_date(text, prefer="dmy", tz=None):
         if m:
             a, b, c = (int(m.group(1)), int(m.group(2)), m.group(3))
             year = int(c) + 2000 if len(c) == 2 else int(c)
-            if prefer not in ("dmy", "mdy"):
+            if prefer is not None and prefer not in ("dmy", "mdy"):
                 raise DateError('prefer must be "dmy" or "mdy"')
+            ambiguity = "NONE"
             if a > 12:
                 d_, mo_ = a, b
             elif b > 12:
                 d_, mo_ = b, a
+            elif a == b:
+                d_, mo_ = a, b  # both readings coincide: one fact
+            elif prefer is None:
+                # the audit of 24-11, applied: refusing here is the
+                # whole difference between a parser and a coin
+                y_ = int(c) + 2000 if len(c) == 2 else int(c)
+                raise DateError(
+                    "slash_ambiguous: %r reads as %04d-%02d-%02d (dmy) "
+                    "OR %04d-%02d-%02d (mdy) — both are valid calendar "
+                    "days; pass prefer=\"dmy\" or prefer=\"mdy\", we "
+                    "refuse to pick" % (s, y_, b, a, y_, a, b))
             else:
                 d_, mo_ = (a, b) if prefer == "dmy" else (b, a)
+                ambiguity = "RESOLVED-BY-PREFER"
+            if a == b or a > 12 or b > 12:
+                ambiguity = "SINGLE-READING"
             try:
                 naive = datetime(year, mo_, d_)
             except ValueError:
@@ -143,6 +163,7 @@ def parse_date(text, prefer="dmy", tz=None):
         "iso_week": list(dt.isocalendar()[:3]),
         "naive": dt.tzinfo is None,
         "source": source,
+        "ambiguity": ambiguity,
     }
     if dt.tzinfo is not None:
         utc = dt.astimezone(timezone.utc)

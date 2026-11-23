@@ -24,7 +24,15 @@ def test_parse_all_sources():
     assert b["utc"] == "2026-03-29T01:30:00+00:00"
     assert b["weekday"] == "Sun" and b["naive"] is False
     r = client.post("/api/v1/date/parse", json={"text": "12/03/2026"})
-    assert r.json()["date"] == "2026-03-12"  # dmy default
+    # bundle 93 : l'ancien « dmy default » était justement le devinette
+    # que l'audit du 24-11 a prise en flagrant délit. 12/03 a DEUX
+    # lectures valides -> refus nommé, plus de réponse silencieuse.
+    assert r.status_code == 400 and "slash_ambiguous" in str(r.json())
+    assert r.json()["errors"][0]["expected"]
+    r = client.post("/api/v1/date/parse",
+                    json={"text": "12/03/2026", "prefer": "dmy"})
+    assert r.json()["date"] == "2026-03-12"
+    assert r.json()["ambiguity"] == "RESOLVED-BY-PREFER"
     r = client.post("/api/v1/date/parse",
                     json={"text": "03/12/2026", "prefer": "mdy"})
     assert r.json()["date"] == "2026-03-12"
