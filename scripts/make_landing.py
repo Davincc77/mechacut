@@ -2305,6 +2305,684 @@ TOP10 = {  # le catalogue grand public : ce que « pour tout le monde » utilise
 CAT_TOP10 = {"en": "\u2605 Top 10", "fr": "\u2605 Le top 10",
              "pt": "\u2605 Top 10"}
 
+PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
+                # validés nom par nom + chiffres par chiffres au merge
+    "fr": {
+        "chart_from_data":
+            "records/CSV → spécification Vega-Lite + PNG",
+        "reshape_json":
+            "remodelage JSON sous contrôle de schéma",
+        "validate_json":
+            "JSON contre schéma, pointeurs d'erreur",
+        "json_repair":
+            "JSON cassé → valide",
+        "json_diff":
+            "diff structurel, pointeurs JSON",
+        "json_patch":
+            "applique les opérations JSON Patch",
+        "json_canonical":
+            "forme canonique + clé stable",
+        "csv_fix":
+            "CSV sale → propre, refus nommés",
+        "csv_types":
+            "infère les types de colonnes, règles fermées",
+        "csv_join":
+            "deux tables jointes, clés vérifiées",
+        "table_pivot":
+            "pivote et agrège les tables",
+        "list_dedupe":
+            "déduplication exacte, ordre préservé",
+        "format_convert":
+            "allers-retours json/csv/yaml",
+        "text_patch":
+            "rechercher/remplacer sur du texte",
+        "text_diff":
+            "diff unifié entre textes",
+        "text_apply_diff":
+            "applique le diff unifié exactement",
+        "path_normalize":
+            "chemins de fichiers canoniques, tout OS",
+        "glob_match":
+            "ce chemin correspond-il à ce glob",
+        "env_interpolate":
+            "expansion de ${VAR}, valeurs par défaut, refus",
+        "date_parse":
+            "toute chaîne de date plausible → ISO",
+        "date_tz":
+            "conversion de fuseau, exacte en heure d'été",
+        "date_calc":
+            "jours ouvrés, additions/soustractions, deltas",
+        "cron_next":
+            "les N prochaines exécutions cron, fuseau épinglé",
+        "cron_humanize":
+            "expression cron → mots simples",
+        "ics_generate":
+            "événements → calendrier ICS valide",
+        "ics_parse":
+            "ICS → événements structurés",
+        "num_format":
+            "formatage de nombres exact selon la locale",
+        "num_parse":
+            "chaînes ambiguës → décimal exact",
+        "num_round":
+            "arrondi banquier ou explicite, au-delà du float",
+        "units_convert":
+            "familles fermées, facteurs exacts",
+        "money_prorate":
+            "prorata exact avant dernier arrondi",
+        "money_aging":
+            "ancienneté des créances par date d'échéance, en tranches",
+        "money_unitprice":
+            "prix unitaire + shrinkflation, dénominateur NOMMÉ (−12.5 % du pack ≠ +12.5 % par unité)",
+        "eval_compare":
+            "juge deux artefacts JSON : OK/WRONG, divergences nommées",
+        "check_allowlist":
+            "verdicts de politique par grammaire fermée, le plus spécifique gagne",
+        "loop_doom_check":
+            "verdicts doom/cyclic/storm sur une trace d'appels d'outils",
+        "ledger_apply_payments":
+            "rapprochement FIFO des paiements sur les factures",
+        "ledger_summary":
+            "résumé mensuel du grand livre, chaîne de soldes courants",
+        "shop_shipping_deadline":
+            "dernier jour d'expédition pour Noël, par transporteur et service",
+        "shop_return_deadline":
+            "date limite de retour des fêtes publiée pour une date d'achat, provenance et conflits nommés",
+        "invoice_validate_totals":
+            "totaux déclarés de facture vs arithmétique exacte, deltas signés",
+        "money_split":
+            "répartition exacte au centime, règle de reste fermée",
+        "number_spell":
+            "montant → en lettres FR/EN/PT",
+        "net_ip":
+            "cette IP est-elle private, loopback, link-local, multicast, reserved : anatomie",
+        "net_cidr":
+            "plage cidr : réseau, broadcast, hôtes, contains, découpe de sous-réseau",
+        "file_encoding":
+            "forensique de charset : bom, table, utf-8 strict ou indéterminé, avec preuve",
+        "integrity_verify":
+            "auditeur : rejoue N fois les pins publiées de TOUTE api, verdict de déterminisme par pin, egress contrôlé",
+        "math_calc":
+            "calculatrice Decimal exacte, fermée — le modèle écrit l'expression, la machine calcule ; 0.1+0.2 fait 0.3",
+        "money_discount":
+            "remises chaînées en facteurs exacts — 30%+20% font 44% pas 50%, ordre des étapes comparé, formule renvoyée",
+        "table_sql_dump":
+            "csv vers sql : CREATE TABLE + INSERT depuis les lignes, types DÉDUITS mais DITS, quoting exact selon le dialecte",
+        "table_scale":
+            "mise à l'échelle de recette avec l'arrondi DÉCLARÉ : fraction exacte + pas mesurable par classe d'ingrédient + delta, multiplicateur dit une fois",
+        "check_format":
+            "validation de format en ensemble fermé pour les règles que JSON Schema ne peut pas exprimer (dates, semver, uuid, decimal-string…) — violations avec pourquoi + attendu",
+        "csv_money_columns":
+            "colonnes CSV financières lues par convention PROUVÉE — les valeurs non ambiguës de la colonne décident, contradictions refusées, pas devinées",
+        "date_relative":
+            "expressions de date relative (EN/FR/PT) vers ISO exact — grammaire fermée, « now » en argument, ambiguïtés signalées jamais tranchées",
+        "date_recurrence":
+            "RRULE déroulé en dates — sous-ensemble RFC 5545 fermé, mois invalides sautés LISTÉS, ancrage du DTSTART déclaré, COUNT ou UNTIL jamais les deux, refus nommés, cap 500",
+        "date_tz_ambiguity":
+            "Heure murale + zone → single | fold | gap : les heures qui n'existent pas (spring forward) ou qui existent DEUX FOIS (fall back), chaque instant UTC nommé avec offset et abréviation, la règle PEP 495 dite, les voisins du trou rendus — le verdict que date/tz applique en silence, cron_next ne signale pas",
+        "date_tz_anchor":
+            "Une heure murale ÉCRITE dans la zone du job, ANCRÉE par la machine dans sa zone : chaque instant UTC candidat, la dérive SIGNÉE en minutes (positif = en retard), les deux horloges relues ; l'offset gagne (résolution Composio #4148) ; single/fold/gap rendus par l'engine date/tz_ambiguity APPELÉ, jamais dupliqué",
+        "money_flight_comp":
+            "Date de vol = TABLE de compensation : 261/2004 + Sturgeon/Nelson avant 2027-10-23, (UE) 2026/2202 codifié APRÈS (seuil « EXCEEDING 3 h » STRICT, 180 min pile ne paye pas), UK261 £220/350/520 avec la ligne officielle £260 sous 4 h, plafond intra-UE €400 nommé, réductions = options « le transporteur PEUT », forclusion 9 mois en date exacte, zéro fetch",
+        "date_week":
+            "Semaine ISO aller-retour — année ISO SÉPARÉE du %Y, W53 par LE THÉORÈME (53 jeudis ⟺ Jan-1 jeudi, ou mercredi + bissextile ; zéro table), semaine inexistante refusée avec l'artefact %Y-W%V nommé, conventions Excel/US (%U %W WEEKNUM) côte à côte, notes PostgreSQL/Snowflake",
+        "units_shoe_size":
+            "Pointures en millimètres exacts — pas publiés en fractions (barleycorn 127/15, Paris point 20/3), demi ET tiers comme candidats de grille, dérive entre systèmes DITE, jamais un seul numéro confiant, charts marques hors contrat",
+        "net_sri":
+            "Attribut Subresource Integrity depuis des OCTETS LOCAUX — jamais de fetch : integrity prêt à coller, crossorigin, audit du style d'attribut (classe CVE-2026-120423 TAB), URL @latest ou range signalées comme panne programmée",
+        "text_url_canonical":
+            "RFC 3986 §6.2.2 canonicalisation d'URL — toute transformation listée, paramètres de tracking retirés par opt-in nommé, IDN en punycode",
+        "xml_to_json":
+            "XML vers JSON avec les règles de conversion imprimées dans la réponse ; force_array fige la cardinalité, DTD refusé par son nom",
+        "web_cert":
+            "Lint de certificat X.509 depuis PEM : SANs, validité, flags de dépréciation, forme de la chaîne ; as_of rend le verdict rejouable",
+        "id_checkdigit":
+            "clés de contrôle : ISBN/EAN/GTIN/ISIN/LEI… vérifier, réparer, scanner",
+        "image_rightsize":
+            "redimensionnement PNG déterministe : boîte exacte / bilinéaire / nearest, rééchantillonnage entier, mêmes bytes pour toujours",
+        "money_rates":
+            "taux de référence officiels de la BCE : dernier jour ou archive 90 jours, croix en Decimal, jamais un taux inventé",
+        "doc_text":
+            "PDF en texte page par page : CMaps, Flate, verdicts honnêtes sur l'absence de couche texte",
+        "money_amortize":
+            "tableau d'amortissement d'emprunt : versements en annuité, intérêts par mois, solde à 0.00",
+        "money_interest":
+            "intérêts composés + taux annuel effectif, formule incluse",
+        "ics_validate":
+            "lint VCALENDAR : les MUST de RFC 5545 en erreurs, les SHOULD en avertissements",
+        "schedule_holidays":
+            "jours fériés légaux FR BR PT DE US avec la loi citée sur chaque ligne",
+        "web_cache":
+            "texte Cache-Control → action RFC 9111, fraîcheur, directives inertes",
+        "gzip_roundtrip":
+            "compression/décompression gzip déterministe, mtime à zéro, base64",
+        "qr_generate":
+            "texte → QR code : SVG déterministe ou matrice de modules, ISO 18004",
+        "table_peek":
+            "profil de table : types de colonnes, nulls, uniques, min-max — règles fermées",
+        "csv_diff":
+            "diff de lignes par clé : ajoutées, retirées, champs changés, même compte",
+        "ssh_fingerprint":
+            "ligne de clé ssh → empreintes SHA256/MD5 exactement comme ssh-keygen les imprime",
+        "zip_verify":
+            "archive zip listée et vérifiée par CRC en mémoire, jamais extraite",
+        "schedule_overlap":
+            "agenda : blocs occupés fusionnés, paires qui se chevauchent, trous libres, verdict à un instant",
+        "cron_validate":
+            "cron : parse, verdict date impossible, prochaines exécutions depuis une heure donnée",
+        "crypto_address":
+            "adresse crypto : base58check, bech32 segwit, EIP-55 — verdict de checksum",
+        "validate_taxid":
+            "identifiant fiscal : verdict de clé de contrôle pour CNPJ, CPF, SIREN, SIRET, NIF, TVA EU",
+        "caip":
+            "identifiant de chaîne caip-2 caip-10 : namespace, nom de chaîne, adresse checksumée",
+        "secret_scan":
+            "est-ce que ce texte laisse fuiter clés api, tokens, cartes, seeds : positions, pas d'écho",
+        "text_redact":
+            "masque les secrets avec des tags numérotés stables avant tout partage",
+        "validate_country":
+            "code pays iso : alpha3, numeric, devise, décimales, indicatif téléphonique",
+        "validate_postal":
+            "grammaire de code postal par pays avec espacement canonique",
+        "geo_distance":
+            "distance orthodromique entre points ou le long d'un itinéraire ordonné",
+        "geo_geohash":
+            "encodage/décodage geohash avec bounding box, alphabet publié",
+        "file_identify":
+            "ce qu'est vraiment ce blob : magic bytes, pas l'extension de fichier",
+        "text_punycode":
+            "aller-retour domaine unicode ↔ idn xn-- et contrôle d'homoglyphes",
+        "semver_parse":
+            "grammaire semver officielle : parties, prerelease, build, stabilité",
+        "semver_sort":
+            "tri des versions par précédence, pas alphabétique : 10 > 2, pre < release",
+        "text_sanitize":
+            "nom de fichier sûr multi-OS : noms réservés, charset, budget de bytes, pourquoi",
+        "json_map":
+            "applique des ops fermées de casse et de nombre à chaque élément d'un tableau",
+        "num_fx":
+            "conversion de devise avec VOTRE taux explicite : Decimal exact, unités mineures ISO",
+        "id_ulid":
+            "création/parse/tri ULID déterministe : même seed, même id — retry-safe",
+        "pkg_name":
+            "nom de paquet npm, PyPI ou Docker valide ? version normalisée et exactement pourquoi pas",
+        "hash_hmac":
+            "signer et vérifier un payload avec une clé partagée : comparaison en temps constant",
+        "hash_digest":
+            "md5/sha/blake2b, hex + base64",
+        "enc_base64":
+            "base64/hex encodage/décodage, urlsafe",
+        "jwt_decode":
+            "segments JWT, jamais vérifiés pour de faux",
+        "id_uuid":
+            "v5/v7/seeded-v4, déterministe",
+        "id_slug":
+            "texte → slug URL propre",
+        "fingerprint":
+            "hash canonique de JSON/CSV",
+        "validate_iban":
+            "61 pays, BBAN + mod-97",
+        "validate_phone":
+            "E.164 + règles par pays",
+        "validate_email":
+            "syntaxe email + politique de domaine",
+        "validate_url":
+            "structure URL + règles de scheme",
+        "color_check":
+            "hex/rgb/hsl + contraste WCAG",
+        "text_count":
+            "mots/phrases/lignes/bytes exacts",
+        "sort_natural":
+            "file2 se trie avant file10",
+        "text_case":
+            "camel/snake/kebab/pascal exacts",
+        "text_truncate":
+            "troncature à frontière exacte",
+        "regex_test":
+            "match/spans/groups/replace, sandboxé",
+        "text_chunk":
+            "chunks RAG au budget de tokens exact",
+        "md_render":
+            "markdown → HTML fermé et sûr",
+        "html_text":
+            "HTML → texte lisible canonique",
+        "recipe_shop_reste":
+            "la chaîne « du RESTE » en un appel : total, vendus du matin, % de l'après-midi → la trace des trois pas et le reste exact ; 0/28 nu et retry sur cette forme (bench v15) — la décomposition est le travail, il est déjà fait ici",
+        "recipe_partage_reste":
+            "part de la PART : total, première part, seconde « du reste » → la seconde part + le reliquat, fractions exactes tracées",
+        "recipe_soldes2":
+            "deux remises, un prix final exact + le mensonge de la somme chiffré ; les chaînes à N paliers restent chez money/discount",
+        "recipe_clean_table":
+            "un appel : CSV sale → lignes typées uniques",
+        "recipe_clean_json":
+            "un appel : JSON cassé → texte canonique réparé",
+        "recipe_data_trio":
+            "un appel : csv sale + json cassé + liste d'urls → YAML final {rows, totals, urls}",
+        "color_palette":
+            "harmonies fermées + rampes de luminosité",
+        "check_constraints":
+            "brouillon + contraintes fermées → pass/fail par règle",
+        "check_refs":
+            "urls citées, nombres, hex, uuid vs sources fournies",
+        "extract_facts":
+            "money, date, number, url, email, uuid, iban — tout extrait, rien perdu",
+        "text_select":
+            "top-k chunks selon des règles de couverture fermées",
+        "logic_rules":
+            "faits + règles fermées → trace par règle",
+        "sort_multi":
+            "tri stable multi-clés avec ordre des égalités explicite",
+        "json_query":
+            "accès imbriqué par $-path, jokers [*], chemins canoniques",
+        "check_redlines":
+            "mots interdits/regex/formes de PII/budget dans ton brouillon : clean ou première violation",
+        "check_target":
+            "la réponse porte sur la BONNE quantité ? target lock : cible nommée, refus nommé, grammaire de synonymes fermée",
+        "check_agreement":
+            "ces payloads décrivent la même opération ? chaque divergence par pointeur",
+        "intent_check":
+            "le formulaire rempli vérifié avant de payer : ok, ou exactement quoi demander",
+        "formula_catalog":
+            "règle de trois, dilution C1V1, dosage mg/kg, EDD Naegele, hydratation du boulanger, part en pourcentage — la formule publiée, vos nombres substitués, le calcul exact",
+        "intent_reflect":
+            "le miroir de compréhension : tu déclares ta lecture (formule + args), la machine te la rend écrite et exacte avant que tu la prennes pour la vérité",
+        "intent_card":
+            "phrase simple → le bon outil + un formulaire pré-rempli, ou la question exacte à poser",
+        "batch":
+            "un outil sur N payloads en un seul appel",
+        "recipe_invoice":
+            "un appel : lignes + TVA → facture exacte + montant en lettres + échéance",
+        "recipe_facts":
+            "un appel : texte en désordre → inventaire trié money/percent/date/url + total",
+        "recipe_schedule":
+            "un appel : cron + départ → occurrences + ICS prêt",
+        "text_decode":
+            "mojibake → utf-8, seules les corrections prouvables",
+        "num_human":
+            "durées, octets, nombres romains, ordinaux, mis en forme pour humains",
+        "text_escape":
+            "une valeur échappée pour html sql shell csv json url",
+        "text_normalize":
+            "formes unicode, accents, pleine chasse, règles d'espaces",
+        "eth_address":
+            "checksum EIP-55 + verdicts de liste autorisée",
+        "eth_selector":
+            "signature → sélecteur calldata 4 octets",
+        "eth_units":
+            "conversions exactes wei gwei ether",
+        "eth_abi_encode":
+            "types+valeurs → calldata exact",
+        "eth_abi_decode":
+            "calldata → valeurs lisibles",
+        "eth_eip712":
+            "données typées → digest EIP-712 0x1901",
+        "eth_receipt":
+            "logs + effets attendus → verdict de correspondance",
+        "money_baggage":
+            "Date du vol = palier LOI (40×30×15 sous le siège GRATUIT depuis 2027-10-23, RIEN avant — chaque compagnie décide) ; casier : la loi ne fixe AUCUNE taille ; gabarits transporteur EN ARGUMENTS, jamais fetchus ; ajustement PAR DIMENSION avec ROTATION (40×18×30 passe dans 40×30×20) ; le « cumul 100 cm / 7 kg » de la presse rendu comme affirmation TESTÉE (55+40+20=115), jamais comme règle",
+        "csv_excel_damage":
+            "Ce qu'Excel DÉTRUIT au double-clic, PRÉDIT avant : zéros de tête (02134→2134), mur des 15 chiffres (…1111→…1110), notation scientifique (1E5→100000), dates forcées (SEPT2, MARCH1, « 3-4 » = 4 mars EN / 3 avril EU — locale ARGUMENT, année figée par as_of), formes de formule (=-+@), pleine chasse ; règles = les trois interrupteurs Microsoft nommés ; import colonne-Texte PRESCRIT ; csv/fix répare, ici on PRÉDIT",
+        "money_crossover":
+            "Prix de reviens de DEUX tarifs à composantes (unitaire + fixe) : la bascule en FRACTION EXACTE — les sept calculateurs publiés arrondissent le Δ fixe avant de diviser et se contredisent ; conventions de jours NOMMÉES (mensuel ×12 exact, jamais 30 jours ; journalier ×365 ou 366 bissextile fourni ; « semaine » refusée) ; DOMINATION rendue « never » nommée ; km si consommation FOURNIE ; frais one-off en mois de payback, séparés de la bascule structurelle",
+        "money_points":
+            "Combien vaut un POINT : cpp = (prix cash - reste cash - rewards forgoes) / points x 100 en FRACTION EXACTE (1081/725 là où la presse dit 1.49) ; voies côte à côte triées, égalités nommées, verdict contre FLOOR fourni, solde x cpp, retour effectif pts/$ x cpp ; jamais de table de valorisation embarquée",
+        "csv_excel_display":
+            "Ce qu'Excel AFFICHE d'une valeur STOCKÉE sous un code numFmt : la virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → $1,000 — l'attaque mesurée arXiv 2611.05806, six extracteurs python aveugles) ; exemples de la table Microsoft rejoués (« #.0,, »→12.2, « (000) »→(012), « 0% »→50%) ; arrondi de display demi-vers-le-large dit ; locale en ARGUMENT (les séparateurs du fichier sont des symboles — ingénieur Microsoft) ; General/dates/couleurs refusés PAR LE NOM ; rendu de style, la prédiction d'import est une autre route",
+        "ship_dimweight":
+            "Le poids VRAIMENT facturé du colis : dimensions arrondies AU POUCE SUPÉRIEUR avant volume, volume ÷ diviseur (son unité est DECLAREE — le piège mm÷139 x16,4 devient impossible), max(actual, dimensionnel), ceil au palier, plafond. rollo 35 lb vs amzprep 34,5 sur les MÊMES pouces : la fraction exacte 4800/139 tranche et chaque étape est nommée ; tables transporteurs en ARGUMENTS (USPS 166→139 le 12-juil-2026 = elles pourrissent)",
+        "json_coerce":
+            "Répare les ARGUMENTS d'un appel d'outil qu'un lecteur STRICT refuse : 8.0→8 (classe serde « invalid type: floating point 2500.0, expected u64 », 11/11 tours mesurés), exposants et fractions vraies laissés TELS QUELS, 'false' en chaîne refusé PAR LE NOM (piège truthy), string→number seulement si cast_strings=on, '007' JAMAIS (les zéros de tête sont du payload), clés dupliquées refusées ; la notation d'origine est CONSERVÉE à la sortie",
+        "money_bogo":
+            "Le pourcentage que la CAISSE applique vraiment sous un panneau « BUY ONE GET ONE 50 % » : la remise porte sur le MOINS CHER des deux (règle de détail publiée — 60+40 rend 80 sur 100, soit 20 %, ni 25 ni 50), prix égaux = 25 % de la paire JAMAIS 50, l'article impair se paie PLEIN (les paires sont DONNÉES, jamais devinées), le coupon s'EMPILE en produit de facteurs (25 puis 30 = 47,5, jamais 55) ; trace par paire, fraction exacte à côté de l'affichage",
+        "agent_modelid":
+            "audit des ids de modèle contre un catalogue collé — verdicts nommés, did-you-mean à une distance nommée, ne jure jamais avoir fait le GET (V23)",
+        "food_poultry":
+            "fenêtre décongélation et cuisson de la dinde, tables USDA FSIS, horloge ISO en argument — jamais l'horloge murale, jamais de nombres inventés",
+        "food_leftovers":
+            "fenêtre des restes, USDA FSIS : seuil 2h, 3-4 jours frigo, 2-6 mois congélateur (UNION des deux pages FSIS contradictoires) — tous les temps en ARGUMENTS, jamais l'horloge murale, jamais de tables inventées",
+        "food_ovenschedule":
+            "un four, des plats, une heure de service : compte à rebours à l'envers, conflits de température nommés, jamais d'horloge murale — les timelines web ne vérifient rien de tout ça",
+    },
+    "pt": {
+        "chart_from_data":
+            "registros/CSV → especificação Vega-Lite + PNG",
+        "reshape_json":
+            "remodelagem de JSON validada por schema",
+        "validate_json":
+            "JSON contra schema, ponteiros de erro",
+        "json_repair":
+            "JSON quebrado → válido",
+        "json_diff":
+            "diff estrutural, ponteiros JSON",
+        "json_patch":
+            "aplica operações JSON Patch",
+        "json_canonical":
+            "forma canônica + chave estável",
+        "csv_fix":
+            "CSV sujo → limpo, recusas nomeadas",
+        "csv_types":
+            "infer tipos de coluna, regras fechadas",
+        "csv_join":
+            "duas tabelas unidas, chaves verificadas",
+        "table_pivot":
+            "pivotear e agregar tabelas",
+        "list_dedupe":
+            "deduplicação exata, ordem preservada",
+        "format_convert":
+            "ida e volta json/csv/yaml",
+        "text_patch":
+            "localizar/substituir em texto",
+        "text_diff":
+            "diff unificado entre textos",
+        "text_apply_diff":
+            "aplica diff unificado exatamente",
+        "path_normalize":
+            "caminhos de arquivo canônicos, qualquer SO",
+        "glob_match":
+            "este caminho corresponde a este glob",
+        "env_interpolate":
+            "expansão de ${VAR}, padrões, recusas",
+        "date_parse":
+            "qualquer string de data plausível → ISO",
+        "date_tz":
+            "conversão de fuso, exata com horário de verão",
+        "date_calc":
+            "dias úteis, soma/subtração, deltas",
+        "cron_next":
+            "próximas N execuções cron, fuso fixado",
+        "cron_humanize":
+            "expressão cron → palavras simples",
+        "ics_generate":
+            "eventos → calendário ICS válido",
+        "ics_parse":
+            "ICS → eventos estruturados",
+        "num_format":
+            "formatação numérica exata por locale",
+        "num_parse":
+            "strings ambíguas → decimal exato",
+        "num_round":
+            "arredondamento banker's ou explícito, além do float",
+        "units_convert":
+            "famílias fechadas, fatores exatos",
+        "money_prorate":
+            "rateio exato antes do arredondamento final",
+        "money_aging":
+            "aging de contas a receber por vencimento, em faixas",
+        "money_unitprice":
+            "preço por unidade + shrinkflation, denominador NOMEADO (−12.5 % do pacote ≠ +12.5 % por unidade)",
+        "eval_compare":
+            "julga dois artefatos JSON: OK/WRONG, divergências nomeadas",
+        "check_allowlist":
+            "vereditos de política por gramática fechada, o mais específico vence",
+        "loop_doom_check":
+            "vereditos doom/cyclic/storm sobre o trace de chamadas de ferramenta",
+        "ledger_apply_payments":
+            "conciliação FIFO de pagamentos sobre faturas",
+        "ledger_summary":
+            "resumo mensal do livro-razão com cadeia de saldo corrente",
+        "shop_shipping_deadline":
+            "último dia de envio para o Natal, por transportadora e serviço",
+        "shop_return_deadline":
+            "prazo de devolução de fim de ano publicado para uma data de compra, procedência e conflitos nomeados",
+        "invoice_validate_totals":
+            "totais declarados da fatura vs aritmética exata, deltas com sinal",
+        "money_split":
+            "divisão exata em centavos, regra de resto fechada",
+        "number_spell":
+            "valor → por extenso FR/EN/PT",
+        "net_ip":
+            "este IP é private, loopback, link-local, multicast, reserved: anatomia",
+        "net_cidr":
+            "faixa cidr: rede, broadcast, hosts, contains, divisão de sub-rede",
+        "file_encoding":
+            "forense de charset: bom, tabela, utf-8 estrito ou indeterminado, com prova",
+        "integrity_verify":
+            "auditor: reproduz as pins publicadas de QUALQUER api N vezes, veredito de determinismo por pin, egresso protegido",
+        "math_calc":
+            "calculadora Decimal exata, fechada — o modelo escreve a expressão, a máquina calcula; 0.1+0.2 é 0.3",
+        "money_discount":
+            "descontos encadeados como fatores exatos — 30%+20% é 44% não 50%, ordem das etapas comparada, fórmula retornada",
+        "table_sql_dump":
+            "csv para sql: CREATE TABLE + INSERT a partir das linhas, tipos DEDUZIDOS mas DITOS, quoting exato por dialeto",
+        "table_scale":
+            "escalonamento de receita com o arredondamento DECLARADO: fração exata + passo mensurável por classe de ingrediente + delta, multiplicador dito uma vez",
+        "check_format":
+            "validação de formato em conjunto fechado para regras que JSON Schema não expressa (datas, semver, uuid, decimal-string…) — violações vêm com o porquê + esperado",
+        "csv_money_columns":
+            "colunas CSV financeiras lidas por convenção COMPROVADA — os valores inequívocos da própria coluna decidem, contradições são recusadas, não adivinhadas",
+        "date_relative":
+            "frases de data relativa (EN/FR/PT) para ISO exato — gramática fechada, agora como argumento, ambiguidades reportadas nunca decididas",
+        "date_recurrence":
+            "RRULE desdobrada em datas — subconjunto fechado da RFC 5545, meses inválidos pulados LISTADOS, ancoragem do DTSTART declarada, COUNT ou UNTIL nunca os dois, recusas nomeadas, teto de 500",
+        "date_tz_ambiguity":
+            "Hora do relógio + fuso → single | fold | gap : as horas que não existem (spring forward) ou que existem DUAS VEZES (fall back), cada instante UTC nomeado com offset e abreviação, a regra PEP 495 declarada, os vizinhos do buraco exibidos — o veredicto que date/tz aplica em silêncio, cron_next não sinaliza",
+        "date_tz_anchor":
+            "Uma hora do relógio ESCRITA no fuso do job, ANCORADA pela máquina no seu fuso: cada instante UTC candidato, o desvio ASSINADO em minutos (positivo = atrasado), os dois relógios relidos; o offset vence (resolução Composio #4148); single/fold/gap exibidos pelo engine date/tz_ambiguity CHAMADO, nunca duplicado",
+        "money_flight_comp":
+            "Data do voo = TABELA de compensação: 261/2004 + Sturgeon/Nelson antes de 2027-10-23, (UE) 2026/2202 codificado DEPOIS (limiar “EXCEEDING 3 h” ESTRITO, 180 min exatos não pagam), UK261 £220/350/520 com a linha oficial £260 abaixo de 4 h, teto intra-UE €400 nomeado, reduções = opções “a transportadora PODE”, prescrição 9 meses em data exata, zero fetch",
+        "date_week":
+            "Semana ISO ida e volta — ano ISO SEPARADO do %Y, W53 PELO TEOREMA (53 quintas-feiras ⟺ Jan-1 quinta-feira, ou quarta-feira + bissexto; zero tabela), semana inexistente recusada com o artefato %Y-W%V nomeado, convenções Excel/US (%U %W WEEKNUM) lado a lado, notas PostgreSQL/Snowflake",
+        "units_shoe_size":
+            "Numeração de calçado em milímetros exatos — não publicada em frações (barleycorn 127/15, Paris point 20/3), meio E terço como candidatos de grade, desvio entre sistemas DITO, nunca um único número confiante, tabelas de marcas fora do contrato",
+        "net_sri":
+            "Atributo Subresource Integrity a partir de BYTES LOCAIS — nunca fetch: integrity pronto para colar, crossorigin, auditoria do estilo do atributo (classe CVE-2026-120423 TAB), URL @latest ou range sinalizadas como falha programada",
+        "text_url_canonical":
+            "RFC 3986 §6.2.2 canonicalização de URL — toda transformação listada, parâmetros de rastreamento removidos por opt-in nomeado, IDN para punycode",
+        "xml_to_json":
+            "XML para JSON com as regras de conversão impressas na resposta; force_array fixa a cardinalidade, DTD recusado pelo nome",
+        "web_cert":
+            "Lint de certificado X.509 a partir de PEM: SANs, validade, flags de depreciação, forma da cadeia; as_of torna o veredito reproduzível",
+        "id_checkdigit":
+            "dígitos verificadores: ISBN/EAN/GTIN/ISIN/LEI… verificar, reparar, escanear",
+        "image_rightsize":
+            "redimensionamento PNG determinístico: caixa exata / bilinear / nearest, reamostragem inteira, mesmos bytes para sempre",
+        "money_rates":
+            "taxas de referência oficiais do BCE: último dia ou arquivo de 90 dias, cruzamentos em Decimal, nunca uma taxa inventada",
+        "doc_text":
+            "PDF para texto página por página: CMaps, Flate, vereditos honestos sobre ausência de camada de texto",
+        "money_amortize":
+            "tabela de amortização de empréstimo: parcelas em anuidade, juros por mês, saldo até 0.00",
+        "money_interest":
+            "juros compostos + taxa anual efetiva, fórmula inclusa",
+        "ics_validate":
+            "lint de VCALENDAR: MUSTs da RFC 5545 como erros, SHOULDs como avisos",
+        "schedule_holidays":
+            "feriados legais FR BR PT DE US com a lei citada em cada linha",
+        "web_cache":
+            "texto Cache-Control → ação RFC 9111, frescor, diretivas inertes",
+        "gzip_roundtrip":
+            "compressão/descompressão gzip determinística, mtime zerado, base64",
+        "qr_generate":
+            "texto → QR code: SVG determinístico ou matriz de módulos, ISO 18004",
+        "table_peek":
+            "perfil da tabela: tipos de coluna, nulos, únicos, min-max — regras fechadas",
+        "csv_diff":
+            "diff de linhas por chave: adicionadas, removidas, campos alterados, mesma contagem",
+        "ssh_fingerprint":
+            "linha de chave ssh → digital SHA256/MD5 exatamente como o ssh-keygen imprime",
+        "zip_verify":
+            "arquivo zip listado e verificado por CRC em memória, nunca extraído",
+        "schedule_overlap":
+            "agenda: blocos ocupados mesclados, pares sobrepostos, intervalos livres, veredito em um ponto",
+        "cron_validate":
+            "cron: parse, veredito de data impossível, próximas execuções a partir de um horário dado",
+        "crypto_address":
+            "endereço cripto: base58check, bech32 segwit, EIP-55 — veredito de checksum",
+        "validate_taxid":
+            "ID fiscal: veredito de dígito verificador para CNPJ, CPF, SIREN, SIRET, NIF, IVA UE",
+        "caip":
+            "identificador de chain caip-2 caip-10: namespace, nome da chain, endereço com checksum",
+        "secret_scan":
+            "se este texto vaza chaves de api, tokens, cartões, seeds: posições, sem eco",
+        "text_redact":
+            "mascara segredos com tags numeradas estáveis antes de compartilhar qualquer coisa",
+        "validate_country":
+            "código de país iso: alpha3, numeric, moeda, decimais, código de discagem",
+        "validate_postal":
+            "gramática de CEP por país com espaçamento canônico",
+        "geo_distance":
+            "distância ortodrômica entre pontos ou ao longo de uma rota ordenada",
+        "geo_geohash":
+            "encode/decode de geohash com bounding box, alfabeto publicado",
+        "file_identify":
+            "o que esse blob realmente é: magic bytes, não a extensão do arquivo",
+        "text_punycode":
+            "ida e volta de domínio unicode ↔ idn xn-- e checagem de homoglifos",
+        "semver_parse":
+            "gramática oficial do semver: partes, prerelease, build, estabilidade",
+        "semver_sort":
+            "ordena versões por precedência, não por alfabeto: 10 > 2, pre < release",
+        "text_sanitize":
+            "nome de arquivo seguro entre sistemas: nomes reservados, charset, orçamento de bytes, por quê",
+        "json_map":
+            "aplica ops fechadas de caixa e número em cada item de um array",
+        "num_fx":
+            "converte moeda com a SUA taxa explícita: Decimal exato, unidades menores ISO",
+        "id_ulid":
+            "gerar/parse/ordenar ULID determinístico: mesma seed, mesmo id — seguro para retry",
+        "pkg_name":
+            "nome de pacote npm, PyPI ou Docker válido? forma normalizada e exatamente por que não",
+        "hash_hmac":
+            "assina e verifica um payload com chave compartilhada: comparação em tempo constante",
+        "hash_digest":
+            "md5/sha/blake2b, hex + base64",
+        "enc_base64":
+            "base64/hex encode/decode, urlsafe",
+        "jwt_decode":
+            "segmentos JWT, nunca verificados de mentira",
+        "id_uuid":
+            "v5/v7/seeded-v4, determinístico",
+        "id_slug":
+            "texto → slug de URL limpo",
+        "fingerprint":
+            "hash canônica de JSON/CSV",
+        "validate_iban":
+            "61 países, BBAN + mod-97",
+        "validate_phone":
+            "E.164 + regras por país",
+        "validate_email":
+            "sintaxe de e-mail + política de domínio",
+        "validate_url":
+            "estrutura de URL + regras de scheme",
+        "color_check":
+            "hex/rgb/hsl + contraste WCAG",
+        "text_count":
+            "palavras/frases/linhas/bytes exatos",
+        "sort_natural":
+            "file2 vem antes de file10 na ordenação",
+        "text_case":
+            "camel/snake/kebab/pascal exatos",
+        "text_truncate":
+            "truncamento com limite exato",
+        "regex_test":
+            "match/spans/groups/replace, em sandbox",
+        "text_chunk":
+            "chunks RAG com orçamento de tokens exato",
+        "md_render":
+            "markdown → HTML fechado e seguro",
+        "html_text":
+            "HTML → texto legível canônico",
+        "recipe_shop_reste":
+            "a cadeia «do RESTO» em uma chamada: total, vendas da manhã, % da tarde → o rastro dos três passos e o resto exato; 0/28 puro e retry nessa forma (bench v15) — a decomposição é o trabalho, ele já está feito aqui",
+        "recipe_partage_reste":
+            "a parte da PARTE: total, primeira parte, segunda «do resto» → a segunda parte + o remanescente, frações exatas com rastro",
+        "recipe_soldes2":
+            "dois descontos, um preço final exato + a mentira da soma em números; as cadeias de N níveis ficam em money/discount",
+        "recipe_clean_table":
+            "uma chamada: CSV sujo → linhas tipadas únicas",
+        "recipe_clean_json":
+            "uma chamada: JSON quebrado → texto canônico reparado",
+        "recipe_data_trio":
+            "uma chamada: csv sujo + json quebrado + lista de urls → YAML final {rows, totals, urls}",
+        "color_palette":
+            "harmonias fechadas + rampas de luminosidade",
+        "check_constraints":
+            "rascunho + restrições fechadas → pass/fail por regra",
+        "check_refs":
+            "urls citadas, números, hex, uuid vs fontes fornecidas",
+        "extract_facts":
+            "money, date, number, url, email, uuid, iban — tudo extraído, nada perdido",
+        "text_select":
+            "top-k chunks por regras fechadas de cobertura",
+        "logic_rules":
+            "fatos + regras fechadas → rastro por regra",
+        "sort_multi":
+            "ordenação estável por várias chaves com ordem de empate explícita",
+        "json_query":
+            "acesso aninhado por $-path, curingas [*], caminhos canônicos",
+        "check_redlines":
+            "palavras proibidas/regex/formatos de PII/orçamento no seu rascunho: clean ou primeira violação",
+        "check_target":
+            "a resposta é sobre a QUANTIDADE CERTA? target lock: alvo nomeado, recusa nomeada, gramática de sinônimos fechada",
+        "check_agreement":
+            "esses payloads descrevem o mesmo negócio? cada divergência por ponteiro",
+        "intent_check":
+            "o formulário preenchido conferido antes de você pagar: ok, ou exatamente o que perguntar",
+        "formula_catalog":
+            "regra de três, diluição C1V1, dosagem mg/kg, EDD Naegele, hidratação do padeiro, parte em porcentagem — a fórmula publicada, seus números substituídos, o cálculo exato",
+        "intent_reflect":
+            "o espelho de compreensão: você declara sua leitura (fórmula + args), a máquina a devolve escrita e exata antes que você a tome como verdade",
+        "intent_card":
+            "frase simples → a ferramenta certa + formulário pré-preenchido, ou a pergunta exata a fazer",
+        "batch":
+            "uma ferramenta sobre N payloads em uma única chamada",
+        "recipe_invoice":
+            "uma chamada: itens + IVA → fatura exata + valor por extenso + vencimento",
+        "recipe_facts":
+            "uma chamada: texto bagunçado → inventário ordenado de money/percent/date/url + total",
+        "recipe_schedule":
+            "uma chamada: cron + início → ocorrências + ICS pronto",
+        "text_decode":
+            "mojibake → utf-8, só correções comprováveis",
+        "num_human":
+            "duração, bytes, algarismos romanos, ordinal, formatados para humanos",
+        "text_escape":
+            "um valor escapado para html sql shell csv json url",
+        "text_normalize":
+            "formas unicode, acentos, largura total, regras de espaços",
+        "eth_address":
+            "checksum EIP-55 + vereditos da lista de permitidos",
+        "eth_selector":
+            "assinatura → seletor calldata de 4 bytes",
+        "eth_units":
+            "conversões exatas wei gwei ether",
+        "eth_abi_encode":
+            "tipos+valores → calldata exato",
+        "eth_abi_decode":
+            "calldata → valores legíveis",
+        "eth_eip712":
+            "dados tipados → digest EIP-712 0x1901",
+        "eth_receipt":
+            "logs + efeitos esperados → veredito de correspondência",
+        "money_baggage":
+            "Data do voo = faixa da LEI (40×30×15 sob o assento GRÁTIS desde 2027-10-23, NADA antes — cada companhia decide); compartimento superior: a lei não fixa NENHUM tamanho; gabaritos da transportadora COMO ARGUMENTOS, nunca fetchados; ajuste POR DIMENSÃO com ROTAÇÃO (40×18×30 cabe em 40×30×20); o «total 100 cm / 7 kg» da imprensa apresentado como afirmação TESTADA (55+40+20=115), nunca como regra",
+        "csv_excel_damage":
+            "O que o Excel DESTRÓI no duplo clique, PREDITO antes: zeros à esquerda (02134→2134), muro dos 15 dígitos (…1111→…1110), notação científica (1E5→100000), datas forçadas (SEPT2, MARCH1, « 3-4 » = 4 de março EN / 3 de abril EU — locale como ARGUMENTO, ano travado por as_of), formas de fórmula (=-+@), largura total; regras = os três interruptores da Microsoft nomeados; importação Texto para Colunas PRESCRITA; csv/fix conserta, aqui se PREDIT",
+        "money_crossover":
+            "Preço de custo de DUAS tabelas com componentes (unitário + fixo): a virada em FRAÇÃO EXATA — as sete calculadoras arredondam o Δ fixo antes de dividir e se contradizem; convenções de dias NOMEADAS (mensal ×12 exato, nunca 30 dias; diário ×365 ou 366 bissexto fornecido; «semana» recusada); DOMINAÇÃO entregue como «never» nomeado; km se o consumo for FORNECIDO; taxas one-off em meses de payback, separadas da virada estrutural",
+        "money_points":
+            "Quanto vale um PONTO: cpp = (preço cash - resto cash - rewards forgoes) / pontos x 100 em FRAÇÃO EXATA (1081/725 onde a imprensa diz 1.49); vias lado a lado, ordenadas, igualdades nomeadas, veredito contra FLOOR fornecido, saldo x cpp, retorno efetivo pts/$ x cpp; nunca tabela de valoração embarcada",
+        "csv_excel_display":
+            "O que o Excel EXIBE de um valor ARMAZENADO sob um código numFmt: a vírgula trailing ESCALA por mil (« $#,##0, » + 1 000 000 → $1,000 — o ataque medido arXiv 2611.05806, seis extratores python cegos); exemplos da tabela Microsoft reproduzidos (« #.0,, »→12.2, « (000) »→(012), « 0% »→50%); arredondamento de display meio-para-fora dito; locale como ARGUMENTO (os separadores do arquivo são símbolos — engenheiro da Microsoft); General/datas/cores recusados PELO NOME; renderização de estilo, a predição de importação é outra rota",
+        "ship_dimweight":
+            "O peso REALMENTE cobrado do pacote: dimensões arredondadas PARA A POLEGADA SUPERIOR antes do volume, volume ÷ divisor (a unidade é DECLARADA — a pegadinha mm÷139 x16,4 fica impossível), max(real, dimensional), ceil na faixa, teto. rollo 35 lb vs amzprep 34,5 nas MESMAS polegadas: a fração exata 4800/139 resolve e cada etapa é nomeada; tabelas da transportadora COMO ARGUMENTOS (USPS 166→139 em 12-jul-2026 = elas apodrecem)",
+        "json_coerce":
+            "Conserta os ARGUMENTOS de uma chamada de ferramenta que um leitor RÍGIDO recusa: 8.0→8 (classe serde « invalid type: floating point 2500.0, expected u64 », 11/11 rodadas medidas), exponentes e frações reais deixados TAIS QUAIS, 'false' em string recusado PELO NOME (pegadinha truthy), string→number só se cast_strings=on, '007' NUNCA (zeros à esquerda são payload), chaves duplicadas recusadas; a notação original é CONSERVADA na saída",
+        "money_bogo":
+            "A porcentagem que o CAIXA realmente aplica sob uma placa « BUY ONE GET ONE 50 % »: o desconto incide sobre o MAIS BARATO dos dois (regra de varejo publicada — 60+40 vira 80 em 100, ou seja, 20 %, nem 25 nem 50), preços iguais = 25 % do par NUNCA 50, o item ímpar se paga CHEIO (os pares são DADOS, nunca adivinhados), o cupom se EMPILHA como produto de fatores (25 depois 30 = 47,5, nunca 55); rastro por par, fração exata ao lado do exibido",
+        "agent_modelid":
+            "audita ids de modelo contra um catálogo colado — vereditos nomeados, did-you-mean a uma distância nomeada, nunca jura que fez o GET (V23)",
+        "food_poultry":
+            "janela de descongelar e assar o peru, tabelas USDA FSIS, relógio ISO como argumento — nunca relógio de parede, nunca números inventados",
+        "food_leftovers":
+            "janela das sobras, USDA FSIS: limite 2h, 3-4 dias na geladeira, 2-6 meses no congelador (UNIÃO das duas páginas FSIS que se contradizem) — todos os tempos como ARGUMENTOS, nunca relógio de parede, nunca tabelas inventadas",
+        "food_ovenschedule":
+            "um forno, vários pratos, um horário de servir: contagem regressiva de trás para frente, conflitos de temperatura nomeados, nunca relógio de parede — as timelines da web não verificam nada disso",
+    },
+}
+
+
+
 
 CAT_ALL = {"en": "all", "fr": "tout", "pt": "tudo"}
 
@@ -2740,7 +3418,8 @@ def catalog_grid(lang):
         tier = path_tier[name]
         hay = " ".join((name, purpose, tags)).lower()
         hay = hay.replace("&", "&amp;").replace('"', "&quot;")
-        purp = purpose.replace("&", "&amp;").replace("<", "&lt;")
+        purp = PURPOSES.get(lang, {}).get(name, purpose)
+        purp = purp.replace("&", "&amp;").replace("<", "&lt;")
         cards.append(
             '<button class="tcard" data-pack="%s" data-tier="%s" '
             'data-top="%s" data-tool="%s" data-hay="%s"><span class="tierdot" '

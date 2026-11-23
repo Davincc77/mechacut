@@ -39,7 +39,7 @@ def test_landing_budget():
     # squelette d'ancres) et par le VRAI contrat de portabilité :
     # le manifest < 9000 octets (test_bundle0) — la landing est une
     # vitrine navigateur, pas un artefact de contexte de modèle.
-    assert len(html.encode("utf-8")) < 161_000  # resize 24-11 +pas-à-pas humains + déroulant développeurs
+    assert len(html.encode("utf-8")) < 163_000  # resize 24-11 +purposes traduites FR et PT (167 cartes)
     # 80 : une ligne TABLE + une carte du quotidien (e21, la fenêtre
     # Target close Dec 24) coutent ~2 700 octets PAR page, FR mesure
     # 146 756, PT 145 615, EN 144 047 (re-mesure apres b81 : le
