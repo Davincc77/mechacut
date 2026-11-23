@@ -5433,6 +5433,11 @@ No browser puppeteering. No long-running jobs. Motions belong to your
 harness; mechanics belong here.
 
 curl https://mechacut.studio/agent/manifest
+
+Edge note (24-11, external audit): Cloudflare error 1010 rejects the
+default Python-urllib fingerprint before it reaches us; curl, httpx and
+custom user agents pass. If your client uses urllib, set a User-Agent —
+the refusal is at the CDN, not in mechacut's code.
 """
 
 
