@@ -362,7 +362,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.14.0",
+    version="1.15.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5357,10 +5357,11 @@ Decided revenue model: accepted contracts in a paid tier split 50/50
 with the proposer's owner; the free core stays free forever. Splitter
 status, said plainly: the contracts are written, compiled and PROVEN on
 a local EVM (one CREATE2 clone per paid tool, immutable terms, no owner,
-no admin, permissionless flush, ETH cannot enter — see /PAYOUTS), but
-NOT YET DEPLOYED on Base: today x402 settles to the core address and no
-split pays until a human deploys the factory. The money path is built,
-not born. To make a contract payable at all, the
+no admin, permissionless flush, ETH cannot enter — see /PAYOUTS). The
+factory is LIVE on Base (0xFB209Eb982baA11Ff18CAF1ef22f29729DC3709a);
+no per-tool clone is registered yet, so today every x402 call still
+settles to the core address and no split pays anyone. Born, not yet
+feeding — said until it changes. To make a contract payable at all, the
 proposer MUST include base_account: a checksummed Base address (EIP-55
 verified format). We verify the format and nothing else: no custody,
 no solvency check, and NO RESPONSIBILITY for a well-formed but wrong

@@ -87,7 +87,8 @@ def main():
         tx = c.constructor(Web3.to_checksum_address(USDC_BASE),
                            treasury, 5000).build_transaction(
             {"from": acct.address, "gas": 3_000_000,
-             "gasPrice": w3.eth.gas_price})
+             "gasPrice": w3.eth.gas_price,
+             "nonce": w3.eth.get_transaction_count(acct.address)})
         signed = acct.sign_transaction(tx)
         h = w3.eth.send_raw_transaction(signed.raw_transaction)
         r = w3.eth.wait_for_transaction_receipt(h)
@@ -113,7 +114,8 @@ def main():
         tx = fac.functions.ensure(
             tool, Web3.to_checksum_address(payout)).build_transaction(
             {"from": acct.address, "gas": 600_000,
-             "gasPrice": w3.eth.gas_price})
+             "gasPrice": w3.eth.gas_price,
+             "nonce": w3.eth.get_transaction_count(acct.address)})
         signed = acct.sign_transaction(tx)
         h = w3.eth.send_raw_transaction(signed.raw_transaction)
         r = w3.eth.wait_for_transaction_receipt(h)

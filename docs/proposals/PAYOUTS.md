@@ -1,11 +1,16 @@
 # Pay-outs — the 50/50 path (contract, proof, deployment)
 
-State, said plainly: the contracts are WRITTEN, COMPILED and PROVEN on a
-local EVM (scripts/splitter_proof.py, tests/test_bundle91.py asserts the
-whole ledger of that proof). What is NOT done: the factory and its
-clones are not deployed on Base yet — that needs gas and a human key.
-Until then, x402 challenges keep paying the single env address
-(MECHACUT_PAY_TO) and the SKILL-KIT says so. Nothing here promises
+State, said plainly: the contracts are WRITTEN, COMPILED,
+PROVEN on a local EVM and — since 2026-11-24 — THE FACTORY IS LIVE ON
+BASE: 0xFB209Eb982baA11Ff18CAF1ef22f29729DC3709a (tx
+5786c8c543f37cb57969a25dbb71047063cfb0bd0b47d7eb1491956e249143d8).
+Verified by direct calls, not by memory: token = Circle USDC
+0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, treasury = the core account,
+payoutBps = 5000, predicted("money_tip") answers.
+What is NOT done: no per-tool clone is registered yet — ensure() waits
+for accepted proposals that carry a base_account, so today x402
+challenges keep paying the single env address (MECHACUT_PAY_TO) and the
+SKILL-KIT says exactly that. Nothing here promises
 money that moves today.
 
 ## The mechanics (contract-level, contracts/splitter.sol)
