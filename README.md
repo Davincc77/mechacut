@@ -5,16 +5,16 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 148 transforms + 9 named recipes as of v0.95.0, each with its tool card
+— 149 transforms + 9 named recipes as of v0.97.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 213 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 219 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `/route` T6 (bundle 70: FR/PT grammar words are stop-words now — tested on the RAW token because `stem(mois) == moi` would have killed the dates signal with the pronoun — and nothing under confidence floor 4 is listed: an incidental tag (3) or purpose word (2) never prescribes, a tool NAME (4) is not incidental; the radar's three standing OVERMATCH died at the source, dead PT queries get an honest empty list instead of a noise needle, and the two vocabulary holes the floor exposed got filled, not hidden); `food/poultry` (the Thanksgiving window, USDA/FSIS tables as ARGUMENTS — put the 16-lb bird in the fridge by 2026-11-21T10:00, not before 11-19; every web calculator contradicts the next; done is 165°F at the thermometer, never a guessed date); `agent/modelid` (static audit of
+is the truth of today. Recent highlights: `food/leftovers` (the leftovers window: 2-hour discard clock counted from cooked_at, STRICT like the flight table's EXCEEDING-3-h rule — exactly 2 h passes, 2 h 01 discards; 3-to-4 days from the DAY of cooking with the 4th day named LAST_DAY; the two FSIS pages contradict each other on the freezer, 2-6 vs 3-4 months, so the window rendered is their UNION with both anchors cited — and quality is labelled quality, safe indefinitely at 0F; closed category table, no per-food State-extension rows invented); `/route` T6 (bundle 70: FR/PT grammar words are stop-words now — tested on the RAW token because `stem(mois) == moi` would have killed the dates signal with the pronoun — and nothing under confidence floor 4 is listed: an incidental tag (3) or purpose word (2) never prescribes, a tool NAME (4) is not incidental; the radar's three standing OVERMATCH died at the source, dead PT queries get an honest empty list instead of a noise needle, and the two vocabulary holes the floor exposed got filled, not hidden); `food/poultry` (the Thanksgiving window, USDA/FSIS tables as ARGUMENTS — put the 16-lb bird in the fridge by 2026-11-21T10:00, not before 11-19; every web calculator contradicts the next; done is 165°F at the thermometer, never a guessed date); `agent/modelid` (static audit of
 your agent's model-id strings against a pasted catalog: closed grammar
 `org/name[:variant|#variant]`, named verdicts — PREFIX_KEPT, NO_ORG,
 CASE_DRIFT, PUNCT_DRIFT, VARIANT_DECOR — did-you-mean at a NAMED

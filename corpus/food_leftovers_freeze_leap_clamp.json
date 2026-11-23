@@ -1,0 +1,6 @@
+{
+ "name": "food_leftovers_freeze_leap_clamp",
+ "path": "/api/v1/food/leftovers",
+ "body": {"category": "turkey", "cooked_at": "2026-08-31T12:00",
+  "stored_at": "2026-08-31T13:00", "frozen_at": "2026-08-31"}
+}

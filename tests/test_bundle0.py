@@ -45,7 +45,7 @@ def test_manifest_token_budget():
     # per tool; the real ceiling is the byte budget + dense fold in the
     # routing module — line count is only a proxy, resized here as the
     # catalogue grows past its original 95-tool shape
-    assert len(lines) < 191   # resize 23-11 bundle69 (+food_poultry :
+    assert len(lines) < 192   # resize 23-11 bundle71 (+food_leftovers
     # 190 lignes, budget octets <9000 tient — seul plafond réel)
     # (resize precedent 22-11 18h : <188, 186 lignes — bundle66
     # money_unitprice porte le catalogue a 188 lignes, le 189 ci-dessus
@@ -85,7 +85,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 157   # 148 tools + 9 recipes (23-11 bundle69 food_poultry, resize apres bundle68 agent_modelid)
+    assert seen == len(routing.TABLE) == 158   # 149 tools + 9 recipes (23-11 bundle71 food_leftovers, resize apres bundle69 food_poultry)
 
 
 def test_pack_unknown():
@@ -103,7 +103,11 @@ def test_router_deterministic_and_relevant():
     names = [t["tool"] for t in b["tools"][:5]]
     # recipe outranking its own units for a recipe-shaped query is
     # correct routing, not a regression; assert membership, not order
-    assert b["tools"][0]["tool"] in ("csv_fix", "recipe_clean_table",
+    # (bundle 71 note: nsegs are stemmed now — "typed" reaches
+    # csv_types by NAME+TAG, 11 > csv_fix 9: a request for TYPED
+    # json is type inference first; the old winner set stays valid)
+    assert b["tools"][0]["tool"] in ("csv_fix", "csv_types",
+                                     "recipe_clean_table",
                                      "recipe_data_trio")
     assert set(names) & {"csv_fix", "csv_types", "recipe_clean_table",
                          "recipe_data_trio"}

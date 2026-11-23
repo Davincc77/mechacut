@@ -232,6 +232,16 @@ SAY = {
               "du congélateur pour être à table à quinze heures",
         "pt": "ação de graça quinta: a que horas tirar o peru do "
               "congelador para estar à mesa às quinze horas"},
+    "/api/v1/food/leftovers": {
+        "en": "the turkey went in the fridge at 9 pm after the "
+              "4 pm dinner — by which day do I eat it, and until "
+              "when does it keep if I freeze it tonight",
+        "fr": "la dinde est entrée au frigo à 21 h après le repas "
+              "de 16 h — jusqu'à quel jour la manger, et jusqu'à "
+              "quand si je la congèle ce soir",
+        "pt": "o peru foi para a geladeira às 21h depois do jantar "
+              "das 16h — até que dia comer, e até quando se "
+              "congelar hoje à noite"},
     "/api/v1/net/sri": {
         "en": "hash this exact local file into an integrity attribute "
               "I can paste — and audit the one that keeps failing",

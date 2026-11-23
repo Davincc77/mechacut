@@ -1,0 +1,6 @@
+{
+ "name": "food_leftovers_warm_one_hour",
+ "path": "/api/v1/food/leftovers",
+ "body": {"category": "stuffing", "cooked_at": "2026-11-26T15:00",
+  "stored_at": "2026-11-26T16:01", "warm_room": true}
+}

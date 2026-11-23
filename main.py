@@ -234,6 +234,7 @@ import bogokit
 import unitpricekit
 import modelidkit
 import poultrykit
+import leftoverskit
 import auditor
 import sayings
 import verdict
@@ -328,7 +329,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.96.0",
+    version="0.97.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4956,6 +4957,32 @@ def api_food_poultry(req: FoodPoultryRequest):
     return err if err else body
 
 
+class FoodLeftoversRequest(BaseModel):
+    category: Optional[str] = None
+    cooked_at: Optional[str] = None
+    stored_at: Optional[str] = None
+    warm_room: Optional[Any] = None
+    frozen_at: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_food_leftovers(args: dict):
+    try:
+        out = leftoverskit.run_leftovers(args)
+    except leftoverskit.LeftoversError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/food/leftovers")
+def api_food_leftovers(req: FoodLeftoversRequest):
+    body, err = run_food_leftovers(req.model_dump())
+    return err if err else body
+
+
 class JsonCoerceRequest(BaseModel):
     raw: Optional[str] = None
     json_schema: Optional[Dict[str, str]] = Field(default=None,
@@ -5414,6 +5441,7 @@ TOOL_RUN = {
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
            "food_poultry": run_food_poultry,
+           "food_leftovers": run_food_leftovers,
            "date_relative": run_relative_date,
            "text_url_canonical": run_url_canonical,
            "xml_to_json": run_xml_json,
@@ -8565,6 +8593,69 @@ MCP_TOOLS = [
                 "as_of": {"type": "string",
                           "description": "optional naive ISO 'now' "
                                          "— behind_schedule flags"},
+            },
+        },
+    },
+    {
+        "name": "food_leftovers",
+        "description": (
+            "The leftovers window as ISO dates, quoted from USDA "
+            "FSIS. The press publishes the rule in stone: 'eat by "
+            "Monday Nov 30' (NBC New York, 19-Nov-2026) and '72 "
+            "hours is optimal' (ky3, same day) for the same "
+    "turkey — headlines expired on December 1. This tool decides "
+            "by named rule: the 2-hour discard clock starts at "
+            "cooked_at (1 hour when warm_room=true, the over-90F "
+            "case), STRICT comparison — exactly 2 h passes, 2 h 01 "
+            "discards, same grammar as the EXCEEDING-3-h rule of "
+            "the flight table; refrigerated leftovers last 3 to 4 "
+            "days counted from the DAY of cooking (both FSIS pages "
+            "agree), with the 4th day band named LAST_DAY; the two "
+            "FSIS pages contradict each other on the freezer (2-6 "
+            "months vs 3-4 months), so the rendered window is "
+            "their UNION with both anchors cited, never a silent "
+            "pick — and quality is labelled quality: safe "
+            "indefinitely at 0F. Categories are the named set "
+            "turkey|stuffing|gravy|leftovers; anything else is a "
+            "refusal by name, no per-food State-extension table "
+            "invented. All four times are ARGUMENTS (cooked_at, "
+            "stored_at, frozen_at, as_of) — no wall clock; slash "
+            "dates refused (aging precedent); reheat: 165F at the "
+            "thermometer, gravy to a rolling boil. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["category", "cooked_at", "stored_at"],
+            "properties": {
+                "category": {"type": "string",
+                             "enum": ["turkey", "stuffing", "gravy",
+                                      "leftovers"]},
+                "cooked_at": {"type": "string",
+                              "description": "naive ISO when the "
+                                             "food came out of the "
+                                             "oven, "
+                                             "2026-11-26T17:00"},
+                "stored_at": {"type": "string",
+                              "description": "naive ISO into the "
+                                             "fridge — required: "
+                                             "without it the 2-hour "
+                                             "gate cannot be "
+                                             "judged"},
+                "warm_room": {"type": "boolean",
+                              "description": "ambient above 90F / "
+                                             "32C: the gate drops "
+                                             "to 1 hour",
+                              "default": False},
+                "frozen_at": {"type": "string",
+                              "description": "optional ISO/DATE "
+                                             "the food entered the "
+                                             "freezer: 2-6 month "
+                                             "quality window with "
+                                             "month-end clamp"},
+                "as_of": {"type": "string",
+                          "description": "optional ISO DATE 'now': "
+                                         "WITHIN / LAST_DAY / "
+                                         "EXPIRED band"},
             },
         },
     },

@@ -1,0 +1,6 @@
+{
+ "name": "food_leftovers_as_of_expired",
+ "path": "/api/v1/food/leftovers",
+ "body": {"category": "turkey", "cooked_at": "2026-11-22T18:00",
+  "stored_at": "2026-11-22T19:30", "as_of": "2026-11-27"}
+}

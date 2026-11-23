@@ -833,6 +833,13 @@ TABLE = (
      "window dinner bird when take out frozen thanksgiving dinde "
      "volaille congélateur congelateur cuisson four sortir heur "
      "decongelar assar peru janela hora congelado"),
+    ("food_leftovers", "/api/v1/food/leftovers", "dates",
+     "leftovers window, USDA FSIS: 2h gate, 3-4 days fridge, 2-6 "
+     "months freezer (UNION of the two contradicting FSIS pages) — "
+     "all times ARGUMENTS, never wall clock, never invented tables",
+     "leftovers leftover reheating reheat gravy stuffing discard "
+     "bin danger conservation rechauffer sobras geladeira "
+     "esquentar"),
 
 )
 
@@ -1067,7 +1074,13 @@ def route(query, top=5):
     scored = []
     for idx, (name, path, pack, purpose, tags) in enumerate(TABLE):
         tail = path[len("/api/v1/"):]
-        nsegs = set(name.split("_")) | set(re.split(r"[/_-]+", tail))
+        # nsegs STEMÉS comme les tags et le query — sinon un nom au
+        # pluriel ne matche jamais JAMAIS son propre mot (bug pêché
+        # par food_leftovers, bundle 71 : stem("leftovers") =
+        # "leftover" != "leftovers").
+        nsegs = set(filter(None, (_stem(x) for x in name.split("_"))))
+        nsegs |= set(filter(None, (_stem(x) for x in
+                                   re.split(r"[/_-]+", tail))))
         tagset = set(filter(None, (_stem(x) for x in tags.split())))
         pwords = set(filter(None, (_stem(x) for x in
                                    re.split(r"[^a-z0-9]+", purpose.lower()))))

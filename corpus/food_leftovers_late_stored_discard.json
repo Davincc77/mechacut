@@ -1,0 +1,6 @@
+{
+ "name": "food_leftovers_late_stored_discard",
+ "path": "/api/v1/food/leftovers",
+ "body": {"category": "turkey", "cooked_at": "2026-11-26T15:00",
+  "stored_at": "2026-11-26T17:01"}
+}
