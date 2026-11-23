@@ -39,7 +39,7 @@ def test_landing_budget():
     # squelette d'ancres) et par le VRAI contrat de portabilité :
     # le manifest < 9000 octets (test_bundle0) — la landing est une
     # vitrine navigateur, pas un artefact de contexte de modèle.
-    assert len(html.encode("utf-8")) < 171_500  # resize 24-11 lots C+D (+4 cartes purposes ×3, +162 octets de table)
+    assert len(html.encode("utf-8")) < 172_000  # resize 23-11 bundle92 : mesure réelle fr 171 573 / pt 170 029 / en 166 396 (+1 table +1 carte du catalogue ×3, la marge 171 500→172 000 tient un bundle de plus)
     # 80 : une ligne TABLE + une carte du quotidien (e21, la fenêtre
     # Target close Dec 24) coutent ~2 700 octets PAR page, FR mesure
     # 146 756, PT 145 615, EN 144 047 (re-mesure apres b81 : le

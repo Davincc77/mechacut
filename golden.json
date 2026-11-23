@@ -1,4 +1,7 @@
 {
+  "agent_mcpaudit_clean": "200:e8db4d1addab02c199580b5fac28d1b18315aeb73a1ebf3e15f882db9333dbb8",
+  "agent_mcpaudit_gitlab286": "200:05d70bb8bc4460ec19cc4a03155a0d0e6fea149aedca106fddc9c07d0b7f8217",
+  "agent_mcpaudit_sep986_slash": "200:3aa3377da0319256458b3c6b7bb3eb4ecdd32bb06d39ef6978c88ae23d31b324",
   "agent_modelid_nitro_absent_is_normal": "200:90a514ae3f7765684750c2f195ececf42771be6ada0112039e1102432522a396",
   "agent_modelid_no_org_n8n": "200:f0865a2e1ef5ae7c1ae2d3f769445ff21aabcc1e94e5a7c508b0b7202b39e346",
   "agent_modelid_prefix_litellm_openrouter": "200:36506fd56f28fcde2b92e036243c5952cfbb63a282f5c10e9400c89962fc8a88",

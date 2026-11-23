@@ -233,6 +233,14 @@ TABLE = (
      "re tenter hachage identique plafonne budget tokens "
      "rationnel re-tentative reexperimentar veredito transcidente "
      "identico orcamento"),
+    ("agent_mcpaudit", "/api/v1/agent/mcp-audit", "checks",
+     "pasted MCP tools/list judged against named wire-shape "
+     "rejection rules, before any client can silently drop it",
+     "mcp listing tools descriptor handshake initialize "
+     "serverinfo protocolversion inputschema empty silent "
+     "invisible wire paste claude mcpaudit outils absents "
+     "chargement vide protocole auditoria ferramentas "
+     "silenciosa descricao ausente vazia"),
     ("shop_discount_audit", "/api/v1/shop/discount-audit", "checks",
      "Omnibus thirty-day rule: is the crossed-out price legal? "
      "reference, true percent, verdict named",

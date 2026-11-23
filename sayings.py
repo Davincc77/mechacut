@@ -496,6 +496,15 @@ SAY = {
               "barré tient-il la règle des 30 jours ?",
         "pt": "a loja na UE grita 30% OFF sobre o preço riscado — "
               "a regra dos 30 dias segura a auditoria?"},
+    "/api/v1/agent/mcp-audit": {
+        "en": "your MCP server lists 12 tools and the client loads "
+              "3 — paste the listing, get the named reasons",
+        "fr": "le client ne charge que 3 outils sur 12 — colles la "
+              "liste, reçois les raisons nommées, sans lancer le "
+              "serveur",
+        "pt": "o cliente carrega 3 das 12 ferramentas — cole a "
+              "lista e receba os motivos com nome, sem executar o "
+              "servidor"},
     "/api/v1/agent/retry-budget": {
         "en": "same 429 three times running — retry it, change it, "
               "or stop?",

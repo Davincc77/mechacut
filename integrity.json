@@ -4,6 +4,84 @@
  "pins": [
   {
    "body": {
+    "initialize": {
+     "protocolVersion": "2025-06-18",
+     "serverInfo": {
+      "name": "demo-crm",
+      "version": "1.2.3"
+     }
+    },
+    "tools": [
+     {
+      "description": "fetch one user record by its id",
+      "inputSchema": {
+       "properties": {
+        "id": {
+         "description": "stable user identifier",
+         "type": "string"
+        }
+       },
+       "required": [
+        "id"
+       ],
+       "type": "object"
+      },
+      "name": "get_user"
+     }
+    ]
+   },
+   "name": "agent_mcpaudit_clean",
+   "path": "/api/v1/agent/mcp-audit",
+   "sha256": "e8db4d1addab02c199580b5fac28d1b18315aeb73a1ebf3e15f882db9333dbb8",
+   "status": 200
+  },
+  {
+   "body": {
+    "initialize": {
+     "protocolVersion": "2025-11-25",
+     "serverInfo": {
+      "name": "docs-mcp",
+      "version": "0.1"
+     }
+    },
+    "tools": [
+     {
+      "description": "search documentation for a query",
+      "inputSchema": {},
+      "name": "search_docs"
+     }
+    ]
+   },
+   "name": "agent_mcpaudit_gitlab286",
+   "path": "/api/v1/agent/mcp-audit",
+   "sha256": "05d70bb8bc4460ec19cc4a03155a0d0e6fea149aedca106fddc9c07d0b7f8217",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "description": "update the user profile fields",
+      "inputSchema": {
+       "properties": {
+        "bio": {
+         "description": "free-text biography",
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "name": "user-profile/update"
+     }
+    ]
+   },
+   "name": "agent_mcpaudit_sep986_slash",
+   "path": "/api/v1/agent/mcp-audit",
+   "sha256": "3aa3377da0319256458b3c6b7bb3eb4ecdd32bb06d39ef6978c88ae23d31b324",
+   "status": 200
+  },
+  {
+   "body": {
     "catalog": [
      "openai/gpt-5.2"
     ],

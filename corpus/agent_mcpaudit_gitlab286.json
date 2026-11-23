@@ -1,0 +1,20 @@
+{
+  "name": "agent_mcpaudit_gitlab286",
+  "path": "/api/v1/agent/mcp-audit",
+  "body": {
+    "tools": [
+      {
+        "name": "search_docs",
+        "description": "search documentation for a query",
+        "inputSchema": {}
+      }
+    ],
+    "initialize": {
+      "protocolVersion": "2025-11-25",
+      "serverInfo": {
+        "name": "docs-mcp",
+        "version": "0.1"
+      }
+    }
+  }
+}

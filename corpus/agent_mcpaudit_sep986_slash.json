@@ -1,0 +1,21 @@
+{
+  "name": "agent_mcpaudit_sep986_slash",
+  "path": "/api/v1/agent/mcp-audit",
+  "body": {
+    "tools": [
+      {
+        "name": "user-profile/update",
+        "description": "update the user profile fields",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "bio": {
+              "type": "string",
+              "description": "free-text biography"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -2383,6 +2383,14 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "en-têtes Retry-After et X-RateLimit-* lus (delta-seconds ou IMF-fixdate strict) ; en désaccord, les deux attendus sont NOMMÉS, jamais choisis ; now est un argument, jamais l’horloge murale",
         "number_words_pair":
             "forme écrite et forme chiffrée vérifiées l’une contre l’autre — trente (40) refuse : AGREE/MISMATCH/NO_PAIR, les deux valeurs gardées",
+        "agent_mcpaudit":
+            "la liste d'outils MCP collée jugée contre des "
+            "règles de rejet nommées, avant qu'un client ne "
+            "la descarte en silence",
+        "agent_mcpaudit":
+            "a lista de ferramentas MCP colada, julgada "
+            "contra regras de rejeição nomeadas, antes de um "
+            "cliente descartá-la em silêncio",
         "agent_retrybudget":
             "re-tenter cet échec est-il rationnel ? taxonomie "
             "fermée, plafond de hachage, budget de session, backoff "

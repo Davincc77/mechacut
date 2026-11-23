@@ -33,6 +33,43 @@ def test_400s_are_recorded():
     assert m["window_minutes"] == main._MISS_WINDOW // 60
 
 
+def test_400_kind_is_the_published_error_name():
+    """Le 23-11, QUATRE 400 portant error:"invalid_input" verbatim en
+    prod sont entrés au ledger comme "unknown" : le middleware lisait
+    response.body (bytes vides sur une réponse STREAM), l'except nu
+    avalait, et le capteur du loop se mentait à lui-même. Le contrat
+    publié — « every 400 carries field+expected+example » — doit être
+    LU par le ledger, pas seulement rendu à la sortie. Attendus tracés
+    à la MAIN depuis les noms d'erreur publiés (rejoués en curl live
+    23-11 17h40), jamais recopiés du module."""
+    _clear()
+    # /validate + schema mismatch → l'erreur publiée est schema_violation
+    r = _force_400()
+    assert r.json()["error"] == "schema_violation"  # contrat live vérifié
+    m = client.get("/misses.json").json()
+    assert m["by_kind"].get("schema_violation", 0) >= 1
+    assert "unknown" not in m["by_kind"], "le capteur ne doit plus deviner"
+    # /math/calc + expr vide → invalid_input (l'autre nom publié)
+    r2 = client.post("/api/v1/math/calc", json={})
+    assert r2.status_code == 400
+    assert r2.json()["error"] == "invalid_input"
+    m = client.get("/misses.json").json()
+    assert m["by_kind"].get("invalid_input", 0) >= 1
+    assert "unknown" not in m["by_kind"]
+
+
+def test_miss_kind_table_is_closed():
+    """Les trois branches de _miss_kind, values tracées à la main :
+    un JSON dict avec error → l'error ; sans error → no_error_field ;
+    pas de JSON → malformed_body. Aucun chemin ne mène à 'unknown'."""
+    assert main._miss_kind(b'{"error": "boom_x"}') == "boom_x"
+    assert main._miss_kind(b'{"detail": "no error key"}') == "no_error_field"
+    assert main._miss_kind(b"not json at all") == "malformed_body"
+    assert main._miss_kind(b"") == "malformed_body"
+    assert main._miss_kind(b'{"error": ""}') == "no_error_field"
+    assert main._miss_kind(b'[1, 2]') == "no_error_field"
+
+
 def test_misses_are_anonymized():
     _clear()
     client.post("/api/v1/reshape",

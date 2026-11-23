@@ -91,7 +91,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 178   # +address_parse +date_civil (24-11 bundle89)
+    assert seen == len(routing.TABLE) == 179   # +agent_mcpaudit (23-11 bundle92)
 
 
 def test_pack_unknown():

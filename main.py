@@ -77,6 +77,7 @@ POST /api/v1/date/civil          instant + named zone -> civil date; the fiscal-
 GET  /api/v1/agent/proposals     public registry as data: arrivals, statuses, the why (free)
 GET  /proposals                  registry page — last arrivals, bench results, proofs (free)
 POST /api/v1/agent/retry-budget  error class + hash count + budget -> REPEAT/MUTATE/ABORT (free)
+POST /api/v1/agent/mcp-audit     pasted tools/list -> named wire-shape findings; no fetch, no subprocess (free)
 POST /api/v1/shop/discount-audit price history + announced cut -> Omnibus 30-day legality verdict (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
@@ -276,6 +277,7 @@ import proposekit
 import addparsekit
 import retrykit
 import omnibuskit
+import mcpauditkit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -360,7 +362,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.13.0",
+    version="1.14.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -523,18 +525,36 @@ async def rate_limit(request: Request, call_next):
     return await call_next(request)
 
 
+def _miss_kind(data: bytes) -> str:
+    """Closed classification of a recorded 400. Absence is a named
+    fact, never a silent 'unknown': the ledger must not lie about its
+    own error contract (23-11 proof: four 400s carrying
+    error:"invalid_input" verbatim were logged as 'unknown' because
+    json.loads(b"") raised on the streamed response and the bare
+    except swallowed it)."""
+    try:
+        body = json.loads(data)
+    except Exception:
+        return "malformed_body"
+    if isinstance(body, dict) and body.get("error"):
+        return str(body["error"])
+    return "no_error_field"
+
+
 @app.middleware("http")
 async def misses_ledger(request: Request, call_next):
     response = await call_next(request)
     if response.status_code in (400, 402) and request.url.path.startswith("/api/v1/"):
-        kind = "payment_required" if response.status_code == 402 else "unknown"
-        if response.status_code == 400:
-            try:
-                body = json.loads(response.body)
-                kind = str(body.get("error", "unknown"))
-            except Exception:
-                pass
+        # A call_next response is a STREAM: response.body is empty
+        # bytes here. Consume the iterator once, judge on the real
+        # bytes, then hand the client the identical response.
+        data = b"".join([c async for c in response.body_iterator])
+        kind = ("payment_required" if response.status_code == 402
+                else _miss_kind(data))
         record_miss(request.url.path, kind)
+        response = Response(content=data, status_code=response.status_code,
+                            headers=dict(response.headers),
+                            media_type=response.media_type)
     return response
 
 
@@ -2111,6 +2131,33 @@ def run_agent_retrybudget(args: dict):
 @app.post("/api/v1/agent/retry-budget")
 def api_agent_retrybudget(req: AgentRetryBudgetRequest):
     body, err = run_agent_retrybudget(req.model_dump())
+    return err if err else body
+
+
+class AgentMcpAuditRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tools: List[Dict[str, Any]]
+    initialize: Optional[Dict[str, Any]] = None
+
+
+def run_agent_mcp_audit(args: dict):
+    try:
+        req = AgentMcpAuditRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = mcpauditkit.agent_mcp_audit(req.tools, req.initialize)
+    except mcpauditkit.McpAuditError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/mcp-audit")
+def api_agent_mcp_audit(req: AgentMcpAuditRequest):
+    body, err = run_agent_mcp_audit(req.model_dump())
     return err if err else body
 
 
@@ -6387,6 +6434,7 @@ TOOL_RUN = {
            "date_civil": run_date_civil,
            "proposals_registry": lambda a: registry.query(name=a.get("name") or None, status=a.get("status") or None, latest=a.get("latest")),
            "agent_retrybudget": run_agent_retrybudget,
+           "agent_mcpaudit": run_agent_mcp_audit,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
@@ -10075,6 +10123,30 @@ MCP_TOOLS = [
         },
     },
     {
+        "name": "agent_mcpaudit",
+        "description": (
+            "Would any real client actually load these MCP tools? "
+            "Paste the tools/list (and initialize) you are about to "
+            "ship: 18 named wire-shape rules from published incidents "
+            "(empty inputSchema — gitlab-mcp #286; root not object — "
+            "Claude Code drops silently, langfuse #13804; draft-07 "
+            "tuple items — strapi #27395; unknown protocolVersion; "
+            "non-ASCII homoglyph names; SEP-vs-spec slash conflict "
+            "RENDERED). Verdict REJECTED/NEEDS_REVIEW/INFORMATIONAL/"
+            "CLEAN + per-finding fix and evidence. Static listing "
+            "only — no fetch, no subprocess: shape certified, "
+            "runtime never. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["tools"],
+            "properties": {
+                "tools": {"type": "array", "items": {"type": "object"}},
+                "initialize": {"type": "object"},
+            },
+        },
+    },
+    {
         "name": "shop_discount_audit",
         "description": (
             "Is that crossed-out price legal? Omnibus Directive "
@@ -10581,6 +10653,7 @@ def index(request: Request):
             "/api/v1/address/parse": "POST address -> country, postal (grammar or candidates), lines; ambiguity said (free)",
             "/api/v1/date/civil": "POST instant + zone -> civil date, year shift named, server zone never read (free)",
             "/api/v1/agent/retry-budget": "POST error class + attempt + hashes -> REPEAT/MUTATE/ABORT, deterministic backoff (free)",
+            "/api/v1/agent/mcp-audit": "POST pasted tools/list + initialize? -> named wire-shape findings, 18 rules, no fetch no subprocess (free)",
             "/api/v1/shop/discount-audit": "POST price history + announced cut -> Omnibus 30-day legality verdict (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
             "/api/v1/number/spell": "POST amount -> words FR/EN/PT for legal mentions (free < 32 KB)",
