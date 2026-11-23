@@ -2,8 +2,8 @@
 """Bundle 74 — ledger/summary (ROADMAP-FINANCE 1.3, le troisième
 souffle de la ligne F1 : aging → apply-payments → SUMMARY).
 
-Aspire le bilan mensuel de Ponte (app.py _annual, by_month) : la
-même agrégation calendrier, mais en Decimal exact — Ponte somme des
+Aspire le bilan mensuel de la suite facturatrice (by_month) : la
+même agrégation calendrier, mais en Decimal exact — on somme des
 floats et round(…, 2) ; ici la chaîne de soldes est une soustraction
 après soustraction, jamais un arrondi.
 

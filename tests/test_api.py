@@ -10,10 +10,10 @@ client = TestClient(main.app)
 ROOT = Path(__file__).resolve().parent.parent
 
 ROWS = [
-    {"month": "Jan", "revenue": 1200, "product": "klickd"},
-    {"month": "Feb", "revenue": 1810, "product": "klickd"},
-    {"month": "Jan", "revenue": 940, "product": "ponte"},
-    {"month": "Feb", "revenue": 1310, "product": "ponte"},
+    {"month": "Jan", "revenue": 1200, "product": "moovicut"},
+    {"month": "Feb", "revenue": 1810, "product": "moovicut"},
+    {"month": "Jan", "revenue": 940, "product": "petrel"},
+    {"month": "Feb", "revenue": 1310, "product": "petrel"},
 ]
 
 
@@ -42,7 +42,7 @@ def test_chart_spec_shape():
 
 
 def test_chart_csv_coercion():
-    csv = "month,revenue,product\nJan,1200,klickd\nFeb,1810,klickd\n"
+    csv = "month,revenue,product\nJan,1200,moovicut\nFeb,1810,moovicut\n"
     r = client.post("/api/v1/chart",
                     json={"kind": "line", "x": "month", "y": "revenue", "csv": csv})
     assert r.status_code == 200, r.text

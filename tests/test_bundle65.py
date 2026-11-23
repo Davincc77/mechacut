@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Bundle 65 — money/aging : la 1.1 de ROADMAP-FINANCE (l'impayé,
-douleur n°1 de Ponte). Gold écrit à la main AVANT l'impl :
+douleur n°1 de la facturation BR↔EU). Gold écrit à la main AVANT l'impl :
   F1 due 2026-10-01 100.00 -> 52 jours de retard -> 31-60
   F2 due 2026-11-01 200.00 -> 21                  -> 1-30
   F3 due 2026-12-01 300.00 -> courante (-9)

@@ -182,22 +182,22 @@
     "data": [
      {
       "month": "Jan",
-      "product": "klickd",
+      "product": "moovicut",
       "revenue": 1200
      },
      {
       "month": "Feb",
-      "product": "klickd",
+      "product": "moovicut",
       "revenue": 1810
      },
      {
       "month": "Jan",
-      "product": "ponte",
+      "product": "petrel",
       "revenue": 940
      },
      {
       "month": "Feb",
-      "product": "ponte",
+      "product": "petrel",
       "revenue": 1310
      }
     ],
@@ -211,7 +211,7 @@
    "path": "/api/v1/chart",
    "price_atomic": "1000",
    "requires_payment": true,
-   "sha256": "79c854bff8a1e55840af33e9022680aa21ef71fd1138fe329f0e3ba21e996eb7",
+   "sha256": "ddd456a5fbe146878d0665fdeae069bedb71e1a68b3b3e5d668188b79f76271e",
    "status": 200
   },
   {
@@ -255,7 +255,7 @@
   },
   {
    "body": {
-    "csv": "month,revenue,product\nJan,1200,klickd\nFeb,1810,klickd\nJan,940,ponte\nFeb,1310,ponte\n",
+    "csv": "month,revenue,product\nJan,1200,moovicut\nFeb,1810,moovicut\nJan,940,petrel\nFeb,1310,petrel\n",
     "kind": "pie",
     "title": "Share",
     "x": "product",
@@ -265,7 +265,7 @@
    "path": "/api/v1/chart",
    "price_atomic": "1000",
    "requires_payment": true,
-   "sha256": "dc7a43fee233cd42184220b6ac374183a3280051d663d74b800b9aa0b6ee8dfa",
+   "sha256": "f7940b8b62c89ac4d10302b8b1106621dbb93c39864b324ffefb85d55f613f05",
    "status": 200
   },
   {

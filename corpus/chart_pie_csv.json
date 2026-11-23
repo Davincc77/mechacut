@@ -6,6 +6,6 @@
     "x": "product",
     "y": "revenue",
     "title": "Share",
-    "csv": "month,revenue,product\nJan,1200,klickd\nFeb,1810,klickd\nJan,940,ponte\nFeb,1310,ponte\n"
+    "csv": "month,revenue,product\nJan,1200,moovicut\nFeb,1810,moovicut\nJan,940,petrel\nFeb,1310,petrel\n"
   }
 }

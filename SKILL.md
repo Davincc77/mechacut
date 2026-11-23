@@ -52,7 +52,7 @@ bench/results_v14_skill.jsonl + bench/FINDINGS-V14.md.
 
 ```json
 {"kind": "bar", "x": "month", "y": "revenue", "series": "product",
- "title": "Revenue", "data": [{"month": "Jan", "revenue": 1200, "product": "klickd"}]}
+ "title": "Revenue", "data": [{"month": "Jan", "revenue": 1200, "product": "moovicut"}]}
 ```
 
 - `kind`: bar, line, area, point, step, histogram, pie. `y` required unless

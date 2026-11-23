@@ -204,7 +204,7 @@ def _dec_plain(text, field):
 
 def money_aging(invoices, as_of, buckets=None):
     """Due-date aging of receivables (ROADMAP-FINANCE 1.1, sucked from
-    the Ponte relances/impayés work). Invoices: due ISO day, amount
+    the relance/impayés ledger work of the invoicing suite). Invoices: due ISO day, amount
     and optional paid as decimal STRINGS. as_of is mandatory — the
     suite never reads a wall clock into a ledger (the midnight
     drift is a published lesson). Buckets default [30, 60, 90] ->
@@ -426,8 +426,8 @@ MAX_SUMMARY_MONTHS = 1200
 
 def money_ledger_summary(entries, opening_balance="0"):
     """Monthly rollup of a journal with a running balance (ROADMAP-FINANCE
-    1.3, the bilan arithmetic of Ponte's _annual — by_month sums — sucked
-    and upgraded: Ponte adds floats and rounds each month; here every
+    1.3, the annual-bilan arithmetic of the invoicing app — by_month sums — sucked
+    and upgraded: the old app added floats and rounded each month; here every
     figure is exact Decimal, the chain is addition only, so a closed
     month's balance is a FACT, never a rounding survivor).
 

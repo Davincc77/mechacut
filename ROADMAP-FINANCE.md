@@ -1,8 +1,8 @@
-# ROADMAP-FINANCE — sucer l'app Ponte dans Mechacut (22-11, directive humain)
+# ROADMAP-FINANCE — sucer le travail comptable de la suite facturatrice dans Mechacut (22-11, directive humain)
 
 Directive : « tous les processus financiers déterministes et
 répétitifs de la compta, aspirés et mis dans mechacut ». Le pont est
-clair : Ponte garde l'état (base, factures, auth, PDF) ; Mechacut
+clair : l.app facturation garde l'état (base, factures, auth, PDF) ; Mechacut
 aspire les **maths et le droit** — fonctions pures, entrées closes,
 oracles par outil. Chaque outil = un contrat, un gold écrit à la main
 avant l'impl, une ligne de doc, un commit. Les outils marqués
@@ -10,13 +10,13 @@ avant l'impl, une ligne de doc, un commit. Les outils marqués
 déterministe, le contenu fiscal reste sourcé loi ou signalé comme
 proposition.
 
-Source : `~/ponte/app.py` (208 k, lu via le skill ponte-dev) et ses
+Source : la suite facturatrice locale (app.py maison, 208 k) et ses
 docs. Ce fichier vit à la racine du repo ; la boucle de croissance
 le lit et peut prendre des lots, un seul propriétaire par fichier.
 
 ## F1 — ledger-core (douleur : l'impayé) — ordre d'attaque
 
-| # | outil | aspire de Ponte | contrat |
+| # | outil | aspire du comptable | contrat |
 |---|---|---|---|
 | 1.1 | `money/aging` | relances + seuils | factures + as_of → buckets (0-30/31-60/61-90/90+), outstanding, max_days_overdue |
 | 1.2 | `ledger/apply-payments` | rapprochement manuel | paiements → factures, FIFO par due-date, sur/ sous-payé nommé |
@@ -26,14 +26,14 @@ le lit et peut prendre des lots, un seul propriétaire par fichier.
 
 ## F2 — tax-eu (table fermée, sourcée)
 
-| # | outil | aspire de Ponte | contrat |
+| # | outil | aspire du comptable | contrat |
 |---|---|---|---|
 | 2.1 | `tax/vat-category` | R3 EN16931 | pays vendeur/acheteur + biens/services → AE/E/TX + mention obligatoire + raison |
 | 2.2 | `tax/einvoicing-deadline` | radar obligations C2/C3 | as_of + profil → dû/échéance/décalage, table sourcée (2026-09-01 / 2027-09-01) |
 
 ## F3 — tax-br (personne d'autre ne l'a ; marché ciblé)
 
-| # | outil | aspire de Ponte | contrat |
+| # | outil | aspire du comptable | contrat |
 |---|---|---|---|
 | 3.1 | `tax/br-export-services` | notes d'export | lignes → ISS non dû (LC116 art. 2 II), PIS/COFINS zero (Lei 10.865), IOF 0 % export, note sourcée par ligne |
 | 3.2 | `tax/pgdas-segregation` | Simples annex III vs 5.01/5.03 | lignes → revenue segregé/non, pourcentages |
@@ -54,7 +54,7 @@ num/fx). Fermé, rien à sucer.
 
 ## F6 — radar-rules
 
-| # | outil | aspire de Ponte | contrat |
+| # | outil | aspire du comptable | contrat |
 |---|---|---|---|
 | 6.1 | (existe) `logic/rules` | logic/rules | moteur déjà là |
 | 6.2 | `legal/deadline-status` | LEGAL_RULES | table versionnée sourcée + as_of → dû/late/n-a + digest ; les règles 10-11 (e-invoicing) vivent ici |

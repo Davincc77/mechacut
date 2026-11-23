@@ -8,10 +8,10 @@
     "series": "product",
     "title": "Revenue by product",
     "data": [
-      {"month": "Jan", "revenue": 1200, "product": "klickd"},
-      {"month": "Feb", "revenue": 1810, "product": "klickd"},
-      {"month": "Jan", "revenue": 940, "product": "ponte"},
-      {"month": "Feb", "revenue": 1310, "product": "ponte"}
+      {"month": "Jan", "revenue": 1200, "product": "moovicut"},
+      {"month": "Feb", "revenue": 1810, "product": "moovicut"},
+      {"month": "Jan", "revenue": 940, "product": "petrel"},
+      {"month": "Feb", "revenue": 1310, "product": "petrel"}
     ]
   }
 }
