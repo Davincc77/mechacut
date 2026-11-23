@@ -600,6 +600,69 @@ async def misses_ledger(request: Request, call_next):
 
 
 @app.middleware("http")
+async def browser_door(request: Request, call_next):
+    """CORS for the free doors only — the audited decision of bundle 94.
+
+    A browser is an agent with an address bar: the product's promise is
+    « paste text, get exact bytes », and a page that calls /route and
+    /api/v1/* free tier IS that promise served to its own UI. Paid
+    routes (x402: a human-signed contract) stay closed cross-origin —
+    a page must never be able to read — or one day sign — a payment
+    surface that is not the user's own decision. Same-origin curlers
+    see no new headers at all: nothing moved for the historical client.
+    Declared LAST among middlewares on purpose: it runs first, so
+    preflights never consume rate budget, never reach payment code,
+    never touch the body guards — they are answered here and stop."""
+    origin = request.headers.get("origin")
+    path = request.url.path
+    if not origin:
+        return await call_next(request)
+
+    FREE_PAGES = ("/route", "/route/resolve", "/agent/manifest",
+                  "/mcp", "/openapi.json", "/recipes", "/proposals",
+                  "/PAYOUTS", "/SKILL-KIT.md", "/SKILL-MINI.md")
+
+    def free_target(p):
+        if p in FREE_PAGES or p.startswith("/SKILL-") \
+                or p.startswith("/tools/"):
+            return True
+        known = any(t[1] == p for t in routing.TABLE) \
+            or p == "/api/v1/pipeline"
+        # STRUCTURAL, not situational: a priced route is never opened
+        # to cross-origin even when MECHACUT_PAY_TO is unset in this
+        # environment — prod could flip it on at any boot and a page
+        # that read a door yesterday must not be able to touch a
+        # payment surface today. Capped routes (free under 32 KB) may
+        # open; the 402 strip below closes them per-response.
+        return known and p not in payments.PRICES \
+            and not payments.enabled(p, None)
+
+    if request.method == "OPTIONS":
+        known = any(t[1] == path for t in routing.TABLE) \
+            or path in FREE_PAGES or path == "/api/v1/pipeline" \
+            or path.startswith("/tools/") or path.startswith("/SKILL-")
+        if not known:
+            return Response(status_code=405, headers={})
+        if not free_target(path):
+            # paid door: the verb is answered, the door stays shut —
+            # 204 with NO allow-origin is how a browser reads a
+            # refusal, and no payment surface is ever a web page's
+            # to fetch.
+            return Response(status_code=204, headers={})
+        return Response(status_code=204, headers={
+            "access-control-allow-origin": "*",
+            "access-control-allow-methods": "GET, POST, OPTIONS",
+            "access-control-allow-headers": "content-type, accept",
+            "access-control-max-age": "86400"})
+    response = await call_next(request)
+    if free_target(path) and response.status_code != 402:
+        # the 402 rule is mechanical, not by table: if a capped route
+        # just demanded payment for THIS body, it is not free right now.
+        response.headers["access-control-allow-origin"] = "*"
+    return response
+
+
+@app.middleware("http")
 async def hardening(request: Request, call_next):
     """Outermost: oversized bodies never reach payment or route code, and
     every response carries conservative security headers."""
