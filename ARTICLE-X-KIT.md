@@ -37,11 +37,20 @@ that learning without trusting the first one. Not its code. Its contract.
 
 ### What the suite is, today, in numbers you can curl
 
-`curl https://mechacut.studio/agent/manifest` answers: **158 deterministic
+`curl https://mechacut.studio/agent/manifest` answers: **170 deterministic
 transforms + 9 named recipes.** The free tier is keyless — no account, no
 signup, 30/min. Each response carries its sha256. Each refusal names the
 field, the expected form and an example. Nothing is stored; the state is in
 your hands, by contract.
+
+Since this article was drafted, three more things became true: the network door
+ships (`POST /api/v1/agent/propose` — a contract is proposed, never code; verdicts
+named ELIGIBLE / SUSPECT-DUPLICATE / DUPLICATE-OF), a public registry answers
+"where is my proposal?" (`GET /proposals` — shipped, accepted, en-banc, refused,
+each with the why and the first external proposer credited by an adversarial
+auditor), and the 50/50 split has a home on-chain: the splitter factory is live on
+Base, per-tool clones wait for accepted proposals — born, not yet feeding, and the
+docs say so in those words.
 
 Among the transforms are the ones this argument needs:
 
