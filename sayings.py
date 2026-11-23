@@ -42,8 +42,8 @@ SAY = {
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",
-        "fr": "la facture annonce 1 204,50 € de total — est-ce que "
-              "les lignes somment vraiment à ce chiffre ?",
+        "fr": "est-ce que le total déclaré de la facture correspond "
+              "à la somme des lignes ?",
         "pt": "a nota diz R$ 1.204,50 no total — as linhas batem "
               "com esse valor?"},
     "/api/v1/chart": {

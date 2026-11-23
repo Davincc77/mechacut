@@ -195,6 +195,20 @@ def test_determinism_and_wire_registered():
     assert "shipdeadkit.py" in docker
 
 
+def test_route_dictations_x3_langues():
+    # les phrases live (sayings) doivent tomber sur l'outil — la
+    # leçon bundle71 : le live parle AVANT le push
+    for q in ("last day to ship UPS 2nd Day Air so it arrives by "
+              "Christmas?",
+              "dernier jour pour envoyer avec FedEx Express Saver "
+              "avant Noël",
+              "qual o último dia para enviar FedEx Ground 3 dias e "
+              "chegar no Natal 2026"):
+        d = client.get("/route", params={"q": q, "top": "5"}).json()
+        tools = d.get("tools", [])
+        assert tools and tools[0]["tool"] == "shop_shipping_deadline", q
+
+
 def test_module_table_has_no_hand_derived_weekday():
     # garde-fou : les jours de semaine ne sont JAMAIS en table,
     # toujours dérivés du calendrier par _wdays

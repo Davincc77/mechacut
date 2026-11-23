@@ -222,3 +222,19 @@ def test_wire_and_docker():
     assert "invoice_validate_totals" in main.TOOL_RUN
     docker = open("Dockerfile", encoding="utf-8").read()
     assert "money.py" in docker
+
+
+def test_route_dictations_x3_langues():
+    # dictées depuis les sayings — la FR porte une LEÇON pêchée en
+    # prod 23-11 : « la facture annonce 1 204,50 € … » partait chez
+    # csv_excel_display sur les tokens NUS 1 et 50 (douleur consignée
+    # en file). La phrase qui doit router est testée, pas supposée.
+    for q in ("the OCR read $1,204.50 as the total — do these lines "
+              "actually add up to it?",
+              "est-ce que le total déclaré de la facture correspond "
+              "à la somme des lignes ?",
+              "a nota diz R$ 1.204,50 no total — as linhas batem com "
+              "esse valor?"):
+        d = client.get("/route", params={"q": q, "top": "5"}).json()
+        tools = d.get("tools", [])
+        assert tools and tools[0]["tool"] == "invoice_validate_totals", q

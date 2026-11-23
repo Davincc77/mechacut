@@ -963,7 +963,7 @@ TR = {
                       "nomm\u00e9 ; \u00ab 180 \u00bb sans unit\u00e9 = "
                       "refus\u00e9 ; repos au-del\u00e0 de 2 h = zone "
                       "de danger FSIS, la r\u00e8gle des restes.",
-  "everyday.e20.name": "Dates limites d'envoi de No\u00eal \u2014 "
+  "everyday.e20.name": "Dates limites d'envoi de No\u00ebl \u2014 "
                      "\u22652 sources par ligne, la divergente nomm\u00e9e",
   "everyday.e20.say": "Six tableaux du 13 au 21 nov. 2026 se "
                       "contredisent : un syndicat imprime FedEx "
