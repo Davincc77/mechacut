@@ -14,11 +14,21 @@ the paragraph and activates the one-word catalog line on merge day.)*
 
 ## EN
 
-**If you run Hermes, your agent has already failed a task that had exactly
-one correct answer.** It read `1,234` and never noticed the comma was a
-choice. It needed a sha256 it cannot compute — and **fabricated a plausible
-one**. It counted the days between two dates off by one, charged you a retry
-loop for the privilege, and delivered all of it as fact.
+**Ask an agent to produce a PDF and it will succeed.** It writes the code,
+fills the form, renders, delivers. Now ask it for 10,000 strictly identical
+copies — and it cannot promise you copy number two. Not "rarely." Cannot.
+Its output is a draw, not a fact: temperature, context drift, and the one
+checksum it never actually computed. Pinned at temperature 0 on our bench,
+the naked model still **invented a hash** (`9a2d9a2d9a2d…`) and presented it
+as fact.
+
+**And what does that cost you?** At the naked arm's measured 5-of-10 on ten
+everyday mechanical tasks, 10,000 correct copies bill as 20,000 generations —
+and our V17 bench measured what a failed retry really does: **×4 the bill,
+without converging**. Same workload through the bench: 22 consecutive calls,
+22 byte-identical responses, each carrying its own sha256 (`59140ebd…`), on
+the keyless free tier — 0€ until you need more than 30 a minute. One answer,
+infinite copies, receipts attached.
 
 The diagnosis has been said, in public, by four of the biggest names in the
 field, without coordinating:
@@ -162,12 +172,21 @@ own mistakes.
 
 ## FR
 
-**Si tu fais tourner Hermes, ton agent a déjà raté une tâche qui n'avait
-qu'une seule réponse juste.** Il a lu `1,234` sans remarquer que la virgule
-était un choix. Il lui fallait un sha256 qu'il ne sait pas calculer — et il
-en a **fabriqué un plausible**. Il a compté les jours entre deux dates avec
-un off-by-one, te l'a facturé en boucle de retries, et a livré le tout comme
-un fait.
+**Demande à un agent de produire un PDF : il y arrivera.** Il écrit le
+code, remplit le formulaire, rend le fichier, livre. Demande-lui maintenant
+10 000 copies strictement identiques — et il ne peut pas te promettre la
+deuxième. Pas « rarement » : pas. Sa sortie est un tirage, pas un fait :
+température, dérive de contexte, et ce checksum qu'il n'a jamais calculé.
+Épinglé à température 0 sur notre banc, le modèle nu **fabriquait encore un
+hash** (`9a2d9a2d9a2d…`) et le présentait comme un fait.
+
+**Et ça coûte quoi ?** À son taux mesuré de 5/10 sur dix tâches mécaniques
+du quotidien, 10 000 copies justes se facturent 20 000 générations — et
+notre banc V17 a mesuré ce que coûte un retry raté : **×4 la facture, sans
+jamais converger**. Le même besoin passé par le banc : 22 appels consécutifs,
+22 réponses byte-identiques, chacune portant son sha256 (`59140ebd…`), sur
+le palier gratuit sans clé — 0 € tant qu'on ne dépasse pas 30 à la minute.
+Une réponse, des copies infinies, reçus inclus.
 
 Le diagnostic, quatre des plus grands noms du domaine l'ont dit, en public,
 sans se concerter :
