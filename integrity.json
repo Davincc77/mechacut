@@ -5,6 +5,20 @@
   {
    "body": {
     "catalog": [
+     "openai/gpt-5.2"
+    ],
+    "ids": [
+     "openai/gpt-5.2:nitro"
+    ]
+   },
+   "name": "agent_modelid_nitro_absent_is_normal",
+   "path": "/api/v1/agent/modelid",
+   "sha256": "90a514ae3f7765684750c2f195ececf42771be6ada0112039e1102432522a396",
+   "status": 200
+  },
+  {
+   "body": {
+    "catalog": [
      "openai/gpt-5-mini"
     ],
     "ids": [
@@ -69,7 +83,7 @@
    },
    "name": "agent_modelid_v23_form_not_invocable",
    "path": "/api/v1/agent/modelid",
-   "sha256": "2fae94bb0d47fdd62625687f848d15f824d32dbd70e88f5ab60d82adf5bb0d0f",
+   "sha256": "dfb7cbb5d7d190d829ff52d5859b26ba74bd4d6e973f3aeef136d84f762b1e9f",
    "status": 200
   },
   {
@@ -83,7 +97,7 @@
    },
    "name": "agent_modelid_variant_free_is_the_id",
    "path": "/api/v1/agent/modelid",
-   "sha256": "18f2da8a4308ec0f417fe9d1753dba25aeb57e42604a15ad36344fec87950090",
+   "sha256": "b88842bd15e87f0165d952b6b54fca24cf50b896833482a6b8655dce0d47612f",
    "status": 200
   },
   {
@@ -1892,6 +1906,108 @@
    "name": "ledger_apply_payments_basic",
    "path": "/api/v1/ledger/apply-payments",
    "sha256": "9da546dc0206fc5a946c88534ff71ac64dc4fde980f4e066360b0b2a432a2947",
+   "status": 200
+  },
+  {
+   "body": {
+    "entries": []
+   },
+   "name": "ledger_summary_empty_refused",
+   "path": "/api/v1/ledger/summary",
+   "sha256": "5da4a68322df7cae836ade1ab794dfb91458829f0ed2db0c22a3982046085272",
+   "status": 400
+  },
+  {
+   "body": {
+    "entries": [
+     {
+      "amount": "1,234.56",
+      "date": "2026-09-05"
+     }
+    ]
+   },
+   "name": "ledger_summary_grouped_refused",
+   "path": "/api/v1/ledger/summary",
+   "sha256": "e4e28d414e4e70dc1585c995df77ddbf0c310caafe43d44e03219da1fdb7b22a",
+   "status": 400
+  },
+  {
+   "body": {
+    "entries": [
+     {
+      "amount": "1000.00",
+      "date": "2026-09-05"
+     },
+     {
+      "amount": "-40.50",
+      "date": "2026-09-20"
+     },
+     {
+      "amount": "-600.25",
+      "date": "2026-11-02"
+     },
+     {
+      "amount": "12.55",
+      "date": "2026-11-30"
+     },
+     {
+      "amount": "-0.05",
+      "date": "2026-12-15"
+     }
+    ],
+    "opening_balance": "-3.50"
+   },
+   "name": "ledger_summary_negative_opening",
+   "path": "/api/v1/ledger/summary",
+   "sha256": "b5f4f9c805ff76ae43c842d5345423a13c16450214322db954fdb15909ba194d",
+   "status": 200
+  },
+  {
+   "body": {
+    "entries": [
+     {
+      "amount": "1000.00",
+      "date": "2026-09-05"
+     },
+     {
+      "amount": "-40.50",
+      "date": "2026-09-20"
+     },
+     {
+      "amount": "-600.25",
+      "date": "2026-11-02"
+     },
+     {
+      "amount": "12.55",
+      "date": "2026-11-30"
+     },
+     {
+      "amount": "-0.05",
+      "date": "2026-12-15"
+     }
+    ]
+   },
+   "name": "ledger_summary_run_chain",
+   "path": "/api/v1/ledger/summary",
+   "sha256": "883c19f94eb8551faad63ea1a0bc38841a57b754774320d11a17c2b8c697f465",
+   "status": 200
+  },
+  {
+   "body": {
+    "entries": [
+     {
+      "amount": "10.00",
+      "date": "2026-12-31"
+     },
+     {
+      "amount": "-10.00",
+      "date": "2027-01-01"
+     }
+    ]
+   },
+   "name": "ledger_summary_year_boundary",
+   "path": "/api/v1/ledger/summary",
+   "sha256": "fc5dcce744bd4096180f5ee77b0f73a7c2c51757f0814915da72c910812a15bc",
    "status": 200
   },
   {

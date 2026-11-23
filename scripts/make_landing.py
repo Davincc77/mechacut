@@ -926,18 +926,15 @@ TR = {
                        "fenêtre du frigo",
   "everyday.e18.say": "La presse grave la règle en dur : « à manger "
                       "avant lundi 30 novembre » (NBC, 19 nov) à côté "
-                      "de « pas plus de trois jours, 72 heures "
-                      "optimales » (ky3, le même jour) — périmé au 1er "
-                      "décembre et déjà contradictoire. Les deux pages "
-                      "FSIS se contredisent sur le congélateur (2-6 "
-                      "mois contre 3-4) : l'outil rend l'UNION des deux "
-                      "fenêtres publiées, les deux ancres citées, la "
-                      "règle des 2 heures STRICTE depuis cooked_at (2 h "
-                      "pile passe, 2 h 01 jette), le 4ᵉ jour nommé "
-                      "LAST_DAY — et la qualité nommée qualité : sûre "
-                      "indéfiniment à −18 °C. Les dates sont des "
-                      "arguments ; 74 °C (165 °F) au thermomètre, le "
-                      "jus au bouillon franc.",
+                      "de « trois jours, 72 heures optimales » (ky3) — "
+                      "périmé dès le 1er décembre. Les deux pages FSIS "
+                      "se contredisent sur le congélateur (2-6 mois "
+                      "contre 3-4) : l'outil rend l'UNION des deux "
+                      "fenêtres, les deux ancres citées, la règle des "
+                      "2 heures STRICTE depuis cooked_at (2 h pile "
+                      "passe, 2 h 01 jette), le 4ᵉ jour nommé LAST_DAY "
+                      "— sûre indéfiniment à −18 °C, la qualité nommée "
+                      "qualité.",
   "everyday.e19.name": "Trois plats veulent le four — le compte à "
                        "rebours, les conflits nommés",
   "everyday.e19.say": "Huit timelines de Thanksgiving 2026 publient "

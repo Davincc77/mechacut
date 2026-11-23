@@ -25,6 +25,13 @@ SAY = {
         "en": "-25% then -20% on 81.90 — final price, exact",
         "fr": "-25 % puis -20 % sur 81,90 € — prix final exact",
         "pt": "-25% e depois -20% em 81,90 — preço final exato"},
+    "/api/v1/ledger/summary": {
+        "en": "sum my journal entries by month and carry the "
+              "running balance",
+        "fr": "résume mon grand livre par mois avec le solde "
+              "reporté",
+        "pt": "resuma meu livro-razão por mês com o saldo "
+              "acumulado"},
     "/api/v1/chart": {
         "en": "bar chart of these sales figures",
         "fr": "fais-moi un histogramme de ces ventes",

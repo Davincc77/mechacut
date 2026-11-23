@@ -419,3 +419,85 @@ def money_apply_payments(invoices, payments):
             "unapplied_total": _fmt2(pay_total - applied_total),
             "open_total": _fmt2(open_total),
             "count": len(out_rows)}
+
+
+MAX_SUMMARY_MONTHS = 1200
+
+
+def money_ledger_summary(entries, opening_balance="0"):
+    """Monthly rollup of a journal with a running balance (ROADMAP-FINANCE
+    1.3, the bilan arithmetic of Ponte's _annual — by_month sums — sucked
+    and upgraded: Ponte adds floats and rounds each month; here every
+    figure is exact Decimal, the chain is addition only, so a closed
+    month's balance is a FACT, never a rounding survivor).
+
+    Entries: {date ISO day, amount signed plain decimal STRING} —
+    positive is inflow, negative is outflow; the sign IS the direction,
+    there is no debit/credit flag to disagree with it. opening_balance
+    (default "0") is the carryforward in; the same chain walks out.
+
+    The report is CALENDAR-CONTINUOUS: every month between the first
+    and the last entry is emitted, months with no entry render a
+    zero-activity row that still carries the balance — a hole in a
+    balance chain is how audits get lost. Beyond MAX_SUMMARY_MONTHS
+    the calendar itself is refused by name (chunk by year upstream).
+
+    Refusals, never guesses: empty ledger (parallel to aging and
+    apply-payments — an empty table of zeros is not a summary), zero
+    amount (typo or stub), sub-cent (num/round upstream), grouped
+    locale forms (num/parse upstream), slashed or impossible dates
+    (_iso_day). The suite never reads a wall clock here: months come
+    from the entries, and only from the entries.
+    """
+    if not isinstance(entries, list) or not entries:
+        raise MoneyError("entries must be a non-empty list — a summary "
+                         "of nothing is a table of zeros, refused like "
+                         "in aging and apply-payments")
+    open_bal = _money2(opening_balance, "opening_balance")
+    rows = []
+    for i, e in enumerate(entries):
+        d = _iso_day(e["date"], "entries[%d].date" % i)
+        a = _money2(e["amount"], "entries[%d].amount" % i)
+        if a == 0:
+            raise MoneyError("entries[%d].amount is zero — a zero entry "
+                             "is a typo or a stub, neither belongs in a "
+                             "summary (apply-payments refuses it too)" % i)
+        rows.append((d, a))
+    first = min(d for d, _ in rows)
+    last = max(d for d, _ in rows)
+    span = (last.year - first.year) * 12 + (last.month - first.month) + 1
+    if span > MAX_SUMMARY_MONTHS:
+        raise MoneyError("%d months between the first and the last "
+                         "entry (> %d) — the calendar chain is refused, "
+                         "not truncated; summarize by year and add the "
+                         "opening of each year" % (span,
+                                                   MAX_SUMMARY_MONTHS))
+    per = {}
+    for d, a in rows:
+        k = per.setdefault((d.year, d.month),
+                           [Decimal(0), Decimal(0), 0])
+        if a > 0:
+            k[0] += a
+        else:
+            k[1] += -a
+        k[2] += 1
+    months = []
+    bal = open_bal
+    cur = (first.year, first.month)
+    end = (last.year, last.month)
+    while cur <= end:
+        inflow, outflow, count = per.get(cur, (Decimal(0), Decimal(0), 0))
+        net = inflow - outflow
+        bal = bal + net
+        months.append({"month": "%04d-%02d" % cur, "count": count,
+                       "inflow": _fmt2(inflow), "outflow": _fmt2(outflow),
+                       "net": _fmt2(net), "closing_balance": _fmt2(bal)})
+        cur = (cur[0] + 1, 1) if cur[1] == 12 else (cur[0], cur[1] + 1)
+    total_in = sum((Decimal(m["inflow"]) for m in months), Decimal(0))
+    total_out = sum((Decimal(m["outflow"]) for m in months), Decimal(0))
+    return {"opening_balance": _fmt2(open_bal), "months": months,
+            "months_emitted": len(months),
+            "totals": {"count": len(rows), "inflow": _fmt2(total_in),
+                       "outflow": _fmt2(total_out),
+                       "net": _fmt2(total_in - total_out)},
+            "closing_balance": _fmt2(bal)}

@@ -1,0 +1,7 @@
+{
+ "name": "ledger_summary_empty_refused",
+ "path": "/api/v1/ledger/summary",
+ "body": {
+  "entries": []
+ }
+}

@@ -165,6 +165,12 @@ TABLE = (
      "reconcile reconciliation payment apply fifo invoice outstanding "
      "rapprochement paiement facture lettrage relance impayé "
      "comptable ledger cash clearing unapplied leftover"),
+    ("ledger_summary", "/api/v1/ledger/summary", "numbers",
+     "monthly ledger summary with running balance chain",
+     "summary monthly running closing carryforward totals journal "
+     "grand livre report "
+     "resume mensuel solde cloture clôture "
+     "balancete mensal razao livro encerramento resumo conta razão"),
     ("money_split", "/api/v1/money/split", "numbers",
      "cent-exact split, closed remainder rule",
      "money split bill participants cents remainder share friends evenly "

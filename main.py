@@ -62,6 +62,7 @@ POST /api/v1/units/convert    closed families, exact rational factors
 POST /api/v1/money/prorate    amount x covered/cycle days, rounded last (paid)
 POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/61-90/90+ (free)
 POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, cent-exact (free)
+POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
 Bundle 4.3 — spell-out (TOOLS-50 #30):
@@ -331,7 +332,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="0.99.0",
+    version="1.0.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1547,6 +1548,51 @@ def run_ledger_apply_payments(args: dict):
 @app.post("/api/v1/ledger/apply-payments")
 def api_ledger_apply_payments(req: LedgerApplyPaymentsRequest):
     body, err = run_ledger_apply_payments(req.model_dump())
+    return err if err else body
+
+
+class LedgerSummaryEntry(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    date: str
+    amount: str
+
+
+class LedgerSummaryRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    entries: List[LedgerSummaryEntry]
+    opening_balance: Optional[str] = None
+
+
+def run_ledger_summary(args: dict):
+    try:
+        req = LedgerSummaryRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    if not req.entries:
+        return None, bad_request(
+            [{"field": "entries",
+              "message": "no entries — a summary of nothing is a "
+                         "table of zeros, refused like in aging and "
+                         "apply-payments",
+              "expected": "at least one journal entry"}])
+    try:
+        out = money.money_ledger_summary(
+            [e.model_dump() for e in req.entries],
+            req.opening_balance if req.opening_balance is not None
+            else "0")
+    except money.MoneyError as e:
+        return None, bad_request(
+            [{"field": "entries", "message": str(e),
+              "expected": "date ISO YYYY-MM-DD; amount signed plain "
+                          "decimal string at most 2 places; optional "
+                          "opening_balance same form"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/ledger/summary")
+def api_ledger_summary(req: LedgerSummaryRequest):
+    body, err = run_ledger_summary(req.model_dump())
     return err if err else body
 
 
@@ -5516,6 +5562,7 @@ TOOL_RUN = {
            "json_coerce": run_json_coerce,
            "money_bogo": run_money_bogo,
            "ledger_apply_payments": run_ledger_apply_payments,
+           "ledger_summary": run_ledger_summary,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
            "food_poultry": run_food_poultry,
@@ -8609,7 +8656,13 @@ MCP_TOOLS = [
             "and the pasted annuaire, NEVER the GET — invocability is "
             "a ping this grammar refuses to fake. openclaw #20522/"
             "#45294, litellm #37271/#14807 asked for exactly this by "
-            "name. Free, EN/FR/PT tags, golden sha."
+            "name. Variant suffixes are TYPED from the closed "
+            "published table: catalog variants (:free, :batch — "
+            "Batch-API-only, our V23 mirage explained) must not "
+            "be stripped, routing variants (:nitro, :floor, "
+            ":exacto, :online) are ABSENT from any /models list "
+            "by design — that absence is not an error to fix. "
+            "Free, EN/FR/PT tags, golden sha."
         ),
         "inputSchema": {
             "type": "object",
@@ -8849,6 +8902,52 @@ MCP_TOOLS = [
                             "id": {"type": "string"},
                         },
                     },
+                },
+            },
+        },
+    },
+    {
+        "name": "ledger_summary",
+        "description": (
+            "Monthly rollup of a signed journal with a RUNNING "
+            "BALANCE chain: every month between first and last entry "
+            "is emitted (an empty month still carries the balance — "
+            "no holes in a chain). Exact Decimal, cent-level only: "
+            "sub-cent and grouped forms refused with a pointer, zero "
+            "entries and zero amounts refused by name, calendar "
+            "beyond 1200 months refused, never truncated. Sign is "
+            "the direction: + inflow, - outflow. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["entries"],
+            "additionalProperties": False,
+            "properties": {
+                "entries": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["date", "amount"],
+                        "additionalProperties": False,
+                        "properties": {
+                            "date": {
+                                "type": "string",
+                                "description": "ISO calendar day "
+                                               "YYYY-MM-DD",
+                            },
+                            "amount": {
+                                "type": "string",
+                                "description": "signed plain decimal "
+                                               "string, cent-level "
+                                               "(+ in, - out)",
+                            },
+                        },
+                    },
+                },
+                "opening_balance": {
+                    "type": "string",
+                    "description": "carryforward in, same form as "
+                                   "amount (default '0')",
                 },
             },
         },

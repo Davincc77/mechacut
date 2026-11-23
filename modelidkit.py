@@ -80,6 +80,40 @@ MAX_CATALOG = 4000
 MAX_ID_LEN = 200
 SUGGEST_MAX_DISTANCE = 3
 
+# Variantes publiées — table FERMÉE, source : OpenRouter,
+# docs/guides/routing/model-variants/overview (consultée le
+# 23-nov-2026). Deux CLASSES au comportement catalogue OPPOSÉ :
+# les catalog variants sont des ENTRÉES DU MODELE (elles existent
+# dans GET /models et leur id complet doit être envoyé tel quel),
+# les routing variants ne sont JAMAIS listées (elles s'appliquent à
+# la requête ; les chercher au catalogue est un faux alarme).
+# La découverte radar du 23-nov — deux mirages portant « :batch »,
+# listés mais morts en appel direct — est exactement la phrase
+# publiée : « The Batch API takes the base model slug and resolves
+# the :batch entry itself »… « inference requests fail because
+# there is no endpoint to route to » quand l'entrée est appelée en
+# sync. Le TYPE est un CHAMP, pas un étage de plus dans l'échelle.
+VARIANT_CATALOG = {
+    "free": ("active",
+             "catalog variant: free-tier entry with its own rate "
+             "limits, endpoints and zero price — it is NOT the base "
+             "entry; do not strip the suffix to compare, pricing and "
+             "context differ"),
+    "batch": ("active",
+              "catalog variant served by the Batch API only: the "
+              "Batch API takes the BASE slug and resolves :batch "
+              "itself — a sync chat call on the suffixed id has no "
+              "endpoint to route to (our own V23 mirage, published)"),
+    "thinking": ("deprecated",
+                 "catalog variant, deprecated: reasoning enabled by "
+                 "default on models that shipped the endpoint — use "
+                 "the reasoning parameter instead"),
+    "extended": ("deprecated",
+                 "catalog variant, deprecated: larger-context entry, "
+                 "currently offered by no model"),
+}
+VARIANT_ROUTING = ("nitro", "floor", "exacto", "online")
+
 VERDICTS = ("OK", "EMPTY", "HAS_SPACE", "BAD_CHAR", "BAD_VARIANT",
             "BAD_SLASH", "NO_ORG", "PREFIX_KEPT", "CASE_DRIFT",
             "PUNCT_DRIFT", "VARIANT_DECOR", "NOT_IN_CATALOG")
@@ -122,6 +156,44 @@ def _structural(raw):
     if base.startswith("/") or base.endswith("/") or "//" in base:
         return "BAD_SLASH"
     return None
+
+
+# Serves du TYPE — publié dans chaque résultat portant un suffixe
+# structurellement sain. Additif pur : le ladder, la grammaire et la
+# guarantee ne bougent pas, un id sans suffixe ne gagne AUCUN champ
+# (les pins existantes restent octet pour octet).
+_ROUTING_SERVES = (
+    "routing variant — never an entry in the models catalog; it only "
+    "changes how the request is routed. Absent from the catalog is "
+    "NORMAL, not an error to fix: the catalog holds the base id")
+_UNKNOWN_SERVES = (
+    "suffix not in the published closed table (catalog/routing) — "
+    "refuse to guess: ping the full id nowhere trustingly, ask the "
+    "gateway docs. The guarantee field still holds: this is a "
+    "grammar, never invocability")
+
+
+def _variant_info(raw):
+    """TYPE de la variante pour un id structurellement sain. Renvoie
+    None si aucun marqueur ; les empilés (:a:b) meurent déjà en
+    BAD_VARIANT dans _structural et n'arrivent jamais ici."""
+    marks = [i for i, c in enumerate(raw) if c in ":#"]
+    if not marks or len(marks) > 1:
+        # aucun suffixe, ou empilé (:a:b) — l'empilé est déjà mort en
+        # BAD_VARIANT dans _structural ; pas de champ sur un cadavre.
+        return None
+    k = marks[0]
+    marker, suffix = raw[k], raw[k + 1:]
+    low = suffix.lower()
+    if low in VARIANT_CATALOG:
+        status, serves = VARIANT_CATALOG[low]
+        cls = "catalog"
+    elif low in VARIANT_ROUTING:
+        status, serves, cls = "published", _ROUTING_SERVES, "routing"
+    else:
+        status, serves, cls = "unpublished", _UNKNOWN_SERVES, "unknown"
+    return {"marker": marker, "suffix": suffix, "class": cls,
+            "status": status, "serves": serves}
 
 
 def _levenshtein(a, b):
@@ -247,8 +319,11 @@ def run_modelid(args):
         verdict, suggest = _judge(raw, cat, cat_sorted)
         if verdict == "OK":
             n_ok += 1
-        results.append({"id": raw, "verdict": verdict,
-                        "suggest": suggest})
+        entry = {"id": raw, "verdict": verdict, "suggest": suggest}
+        info = _variant_info(raw)
+        if info is not None:
+            entry["variant"] = info
+        results.append(entry)
     return {
         "grammar": GRAMMAR,
         "guarantee": GUARANTEE,

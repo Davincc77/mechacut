@@ -1,0 +1,12 @@
+{
+ "name": "ledger_summary_grouped_refused",
+ "path": "/api/v1/ledger/summary",
+ "body": {
+  "entries": [
+   {
+    "date": "2026-09-05",
+    "amount": "1,234.56"
+   }
+  ]
+ }
+}

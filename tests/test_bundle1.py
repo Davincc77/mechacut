@@ -318,7 +318,8 @@ def test_mcp_exposes_bundle1():
                       'money_unitprice',
                       'agent_modelid',
                       'food_poultry', 'food_leftovers',
-                      'food_ovenschedule', 'ledger_apply_payments']  # queue 23-11 bundle73
+                      'food_ovenschedule', 'ledger_apply_payments',
+                          'ledger_summary']  # queue 23-11 bundle74
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 2,
                                   "method": "tools/call",
                                   "params": {"name": "json_repair",

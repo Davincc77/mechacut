@@ -1,0 +1,16 @@
+{
+ "name": "ledger_summary_year_boundary",
+ "path": "/api/v1/ledger/summary",
+ "body": {
+  "entries": [
+   {
+    "date": "2026-12-31",
+    "amount": "10.00"
+   },
+   {
+    "date": "2027-01-01",
+    "amount": "-10.00"
+   }
+  ]
+ }
+}
