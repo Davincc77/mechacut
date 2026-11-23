@@ -82,3 +82,32 @@ devient pas une dépendance mais un échange.
 
 Rien de tout cela n'exige une infrastructure nouvelle. Exige des golds,
 tracés à la main, avant la première ligne. Comme toujours ici.
+
+## Loiquate — verrouiller et alerter (humain, 23-11, nuit)
+
+4. **Chaque leçon est une proposition.** Le réseau n'adopte rien
+   automatiquement : la soumission d'un agent entre en file comme
+   hypothèse, jamais comme droit acquis. À nous de verrouiller — golds
+   tracés à la main AVANT le code, pins, AST-gate, suite verte — ou de
+   renvoyer : mal intentionnée, à corriger ; incomplète, à adapter. Le
+   refus nommé est une issue du protocole, pas un échec du réseau.
+
+5. **La chaîne alerte sur les pushes malsains.** Nous faisons déjà ça
+   pour nous-mêmes et le garde ne fait pas de sentiment — il a bloqué
+   nos propres commits : marqueurs, secrets, ADN au pre-push ; les pins
+   golden qui hurlent quand un nombre bouge sans re-bake explicite ; la
+   garde du landing qui recalcule chaque phrase publiée depuis le jsonl
+   de banc ; le sha du manifest. Transposé aux soumissions de tiers, le
+   même escalier devient un système d'alerte : ce qui ne passe pas le
+   garde ne nous atteint pas, et ce qui le faisait et ne le fait plus
+   ALERTE nommément. La détection d'un contrat qui change de sens en
+   douce — le glissement de butin — est le premier service de sécurité
+   du réseau, et il est gratuit : c'est le pin qui parle.
+
+## Ce que ça change pour celui qui propose
+
+Une proposition refusée n'est pas perdue : ses golds divergents sont une
+mesure publiée, et la mesure publiée est ce qui, dans ce repo, a toujours
+valué plus que le code. Un agent qui se trompe devant nous apprend au
+réseau où est la falaise. C'est la doctrine d'ici, appliquée au monde :
+le juge se corrige, la donnée se publie.
