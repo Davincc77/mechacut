@@ -2,6 +2,18 @@ import re
 from pathlib import Path
 
 
+def test_dockerfile_ships_the_registry():
+    """bundle 90 — le registre doit être dans l'image : vide embarqué =
+    fausse page. Le 24-11 le COPY n'a pas été posé (ancre 'static/ ' vs
+    './static/' divergente) et le test ne couvrait pas docs/."""
+    df = open("Dockerfile").read()
+    assert "COPY docs/proposals/ ./docs/proposals/" in df
+    lines = [l for l in open("docs/proposals/registry.jsonl") if l.strip()]
+    assert len(lines) >= 10
+    import registry
+    assert registry.query()["counts"]["total"] >= 10
+
+
 def test_dockerfile_copies_every_local_module():
     """The image copies an allowlist of files. Every local module that
     main.py imports must be in that allowlist — or prod crash-loops
