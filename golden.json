@@ -1,4 +1,10 @@
 {
+  "agent_contexttax_dominant_dollars_pin": "200:b2f39918d6d666e0ec97c37d0de38c2fcd3e1592fe2b0e157031a4cbac906a03",
+  "agent_contexttax_dup_refused": "400:143ed774fa5365f3ad84e40eff6bbff401044b2f238bc47c9f32026b72bc764a",
+  "agent_contexttax_empty_listing_pin": "200:d49e1406ddaf4096eacb049e157f765d6ba5d47e2f5976e6d72e0839542e827f",
+  "agent_contexttax_overflow_pin": "200:2bc52162722d7f3255728711a0746b8b6a1b29595f316f2c72cd6b84cb6c096c",
+  "agent_contexttax_utf8_pin": "200:de02560018d8a13f36b2d35104bca9cbf8cb49d30f243bd3282f705e4d30f141",
+  "agent_contexttax_v1_pin": "200:d8586d97dcf2e296c394b320e9bbd9b17fa1b34e5e521f36f8a9b6afbdfe098e",
   "agent_mcpaudit_clean": "200:e8db4d1addab02c199580b5fac28d1b18315aeb73a1ebf3e15f882db9333dbb8",
   "agent_mcpaudit_gitlab286": "200:05d70bb8bc4460ec19cc4a03155a0d0e6fea149aedca106fddc9c07d0b7f8217",
   "agent_mcpaudit_sep986_slash": "200:3aa3377da0319256458b3c6b7bb3eb4ecdd32bb06d39ef6978c88ae23d31b324",

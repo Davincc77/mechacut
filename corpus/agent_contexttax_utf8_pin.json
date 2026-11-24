@@ -1,0 +1,7 @@
+{
+  "body": {
+    "tools": [{"name": "café", "description": "qui?"}]
+  },
+  "name": "agent_contexttax_utf8_pin",
+  "path": "/api/v1/agent/context-tax"
+}

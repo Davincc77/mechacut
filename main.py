@@ -284,6 +284,7 @@ import retrykit
 import omnibuskit
 import mcpauditkit
 import mcpsurfacekit
+import contexttaxkit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -371,7 +372,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.21.0",
+    version="1.22.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2308,6 +2309,36 @@ def run_agent_mcp_surface(args: dict):
 @app.post("/api/v1/agent/mcp-surface")
 def api_agent_mcp_surface(req: AgentMcpSurfaceRequest):
     body, err = run_agent_mcp_surface(req.model_dump())
+    return err if err else body
+
+
+class AgentContextTaxRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tools: List[Dict[str, Any]]
+    window: Optional[int] = None
+    turns: Optional[int] = None
+    input_per_mtok: Optional[str] = None
+
+
+def run_agent_context_tax(args: dict):
+    try:
+        req = AgentContextTaxRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = contexttaxkit.context_tax(req.tools, req.window,
+                                        req.turns, req.input_per_mtok)
+    except contexttaxkit.ContextTaxError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/context-tax")
+def api_agent_context_tax(req: AgentContextTaxRequest):
+    body, err = run_agent_context_tax(req.model_dump())
     return err if err else body
 
 
@@ -6739,6 +6770,7 @@ TOOL_RUN = {
            "agent_retrybudget": run_agent_retrybudget,
            "agent_mcpaudit": run_agent_mcp_audit,
            "agent_mcpsurface": run_agent_mcp_surface,
+           "agent_contexttax": run_agent_context_tax,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
@@ -10806,6 +10838,73 @@ MCP_TOOLS = [
                     "description": "the previous tools/list array to "
                                    "diff against; omit for a pure "
                                    "fingerprint to pin",
+                },
+            },
+        },
+    },
+    {
+        "name": "agent_contexttax",
+        "description": (
+            "What does YOUR pasted MCP tools/list cost the context "
+            "window. Exact canonical chars and bytes per tool; "
+            "token_estimate = ceil(chars/4), the published floor "
+            "estimator quoted with its error declared (median public "
+            "server ~4.8k tokens, heaviest ~241k — larger than a "
+            "200k window by itself). Split by field — name, title, "
+            "description, inputSchema, outputSchema, annotations, "
+            "execution — plus pasted unknown keys NAMED (a pasted "
+            "'instructions' key is text the server makes you pay "
+            "for: the tool-poisoning class now has a bill). "
+            "Counterfactuals computed, not argued: names-only (the "
+            "tool-search claim, 'seul le NOM est chargé') with its "
+            "multiplier, and drop-descriptions (r/mcp: the cost "
+            "lives in descriptions, not tool counts). Charged PER "
+            "TURN (Irolla 2026: 'the tool list is not paid once'): "
+            "estimate x turns; dollars ONLY if you pass your own "
+            "price as a decimal-string argument — no stored model-"
+            "price table. Window verdicts CLOSED FITS/"
+            "OVERFLOWS_WINDOW against your window argument (default "
+            "200000, named as the cited scale, not a vendor "
+            "ceiling). Flag SINGLE_TOOL_DOMINANT when one tool "
+            "carries >= half the chars. Ranks chars desc, ties = "
+            "pasted order; top 100 detailed, the rest folded into a "
+            "named aggregate. Duplicate or empty tool names refused "
+            "(spec: unique per server — shadowing); ceiling 5000 "
+            "tools, family threshold with mcp-surface. Never fetches, "
+            "never launches the server: pasted listing only. Sisters: "
+            "/agent/mcp-audit says REJECTED, /agent/mcp-surface says "
+            "CHANGED — this one says HOW MUCH. Free under 32 KB, "
+            "x402 above: a 529 KB tools/list is exactly what this "
+            "tool measures."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["tools"],
+            "additionalProperties": False,
+            "properties": {
+                "tools": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                    "description": "the pasted tools/list array, in "
+                                   "the order the server returned it",
+                },
+                "window": {
+                    "type": "integer",
+                    "description": "your context window in tokens, "
+                                   "default 200000 (the scale every "
+                                   "cited run measures against)",
+                },
+                "turns": {
+                    "type": "integer",
+                    "description": "turns the definitions ride "
+                                   "(charged every turn), default 1",
+                },
+                "input_per_mtok": {
+                    "type": "string",
+                    "description": "YOUR price per million input "
+                                   "tokens, decimal string (e.g. "
+                                   "\"2\" for $2/M) — an argument, "
+                                   "never a stored table",
                 },
             },
         },

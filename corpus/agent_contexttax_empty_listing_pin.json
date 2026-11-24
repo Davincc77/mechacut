@@ -1,0 +1,5 @@
+{
+  "body": {"tools": [], "window": 500},
+  "name": "agent_contexttax_empty_listing_pin",
+  "path": "/api/v1/agent/context-tax"
+}

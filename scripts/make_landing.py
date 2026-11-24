@@ -2569,6 +2569,13 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "annotations canoniquées à leurs défauts publics de la "
             "spec, l'angle mort du AI SDK fermé ; ordre compris "
             "dans le contrat",
+        "agent_contexttax":
+            "ce que coûte LA VOTRE : la liste d'outils MCP collée "
+            "mesurée en octets et tokens (estimateur publié chars÷4, "
+            "plancher déclaré), par outil et par champ — contre-fait "
+            "names-only chiffré, facture PAR TOUR, dollars si VOUS "
+            "portez votre prix ; mcp-audit dit REJETÉ, mcp-surface "
+            "dit CHANGÉ, ici on dit COMBIEN",
         "agent_retrybudget":
             "re-tenter cet échec est-il rationnel ? taxonomie "
             "fermée, plafond de hachage, budget de session, backoff "
@@ -2937,6 +2944,13 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "anotações canonizadas com os padrões publicados da "
             "spec, o ponto cego do AI SDK fechado; a ordem entra no "
             "contrato",
+        "agent_contexttax":
+            "quanto custa A SUA: a lista de ferramentas MCP colada, "
+            "medida em bytes e tokens (estimador publicado chars÷4, "
+            "piso declarado), por ferramenta e por campo — "
+            "contrafactual names-only cifrado, conta POR TURNO, "
+            "dólares se VOCÊ trouxer o preço; mcp-audit diz REJEITADO, "
+            "mcp-surface diz MUDOU, aqui se diz QUANTO",
         "agent_retrybudget":
             "repetir esta falha é racional? taxonomia fechada, teto "
             "de hash, orçamento de sessão, backoff determinístico",

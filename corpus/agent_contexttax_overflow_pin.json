@@ -1,0 +1,10 @@
+{
+  "body": {
+    "tools": [
+      {"name": "x", "description": "Say hi", "inputSchema": {"type": "object"}}
+    ],
+    "window": 10
+  },
+  "name": "agent_contexttax_overflow_pin",
+  "path": "/api/v1/agent/context-tax"
+}

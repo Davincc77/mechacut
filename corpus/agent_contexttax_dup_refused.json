@@ -1,0 +1,5 @@
+{
+  "body": {"tools": [{"name": "get_user"}, {"name": "get_user"}]},
+  "name": "agent_contexttax_dup_refused",
+  "path": "/api/v1/agent/context-tax"
+}

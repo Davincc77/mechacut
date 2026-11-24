@@ -231,6 +231,23 @@ CASES = [
     ("combien de temps garder mes factures en France", None),
     ("as notas fiscais brasileiras quanto tempo guardar", None),
     ("what is HMRC", None),
+    # bundle 101 — découvrabilité de la context-tax (douleur DEV,
+    # douze mesures externes nov-2026) x3 langues + le verbatim du
+    # fil dplouffe + deux FRONTIÈRES : « tokens in this text » reste
+    # à text_count (compter n'est pas facturer), et la blague sur le
+    # coût des tokens meurt — la forme fermée b98 gouverne nos mots.
+    ("how many tokens does this mcp server tool list cost my agent "
+     "every turn", "agent_contexttax"),
+    ("combien de tokens coûte la liste d'outils de ce serveur mcp "
+     "à chaque tour", "agent_contexttax"),
+    ("quantos tokens a lista de ferramentas desse servidor mcp "
+     "custa a cada turno", "agent_contexttax"),
+    ("an eBay MCP server spends 40% of my context window on its "
+     "tool list", "agent_contexttax"),
+    ("mon tools/list fait 500ko combien de tokens par tour ca me "
+     "coute", "agent_contexttax"),
+    ("how many tokens are in this text", "text_count"),
+    ("raconte-moi une blague sur le coût des tokens", None),
 ]
 
 

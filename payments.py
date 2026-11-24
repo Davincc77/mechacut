@@ -81,6 +81,7 @@ PRICES = {
 # 🟡 capped routes: free under CAP_BYTES, then priced per call.
 CAP_ROUTES = {
     "/api/v1/validate": "500",
+    "/api/v1/agent/context-tax": "500",
     "/api/v1/json/patch": "500",
     "/api/v1/csv/fix": "500",
     "/api/v1/csv/types": "500",

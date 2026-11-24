@@ -1,0 +1,13 @@
+{
+  "body": {
+    "tools": [
+      {"name": "alpha", "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "inputSchema": {"type": "object", "properties": {"p": {"type": "string"}}}},
+      {"name": "beta"}
+    ],
+    "input_per_mtok": "2",
+    "turns": 10,
+    "window": 200000
+  },
+  "name": "agent_contexttax_dominant_dollars_pin",
+  "path": "/api/v1/agent/context-tax"
+}

@@ -1,0 +1,9 @@
+{
+  "body": {
+    "tools": [
+      {"name": "x", "description": "Say hi", "inputSchema": {"type": "object"}}
+    ]
+  },
+  "name": "agent_contexttax_v1_pin",
+  "path": "/api/v1/agent/context-tax"
+}

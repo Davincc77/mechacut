@@ -60,6 +60,13 @@ SAY = {
               "depuis le relevé que j'avais épinglé ?",
         "pt": "o que mudou na lista de ferramentas MCP desde a "
               "leitura que eu tinha fixado?"},
+    "/api/v1/agent/context-tax": {
+        "en": "how many tokens does this MCP server's tool list "
+              "cost my agent, every turn?",
+        "fr": "combien de tokens la liste d'outils de ce serveur "
+              "MCP coûte à mon agent, à chaque tour ?",
+        "pt": "quantos tokens a lista de ferramentas desse servidor "
+              "MCP custa para meu agente, a cada turno?"},
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",

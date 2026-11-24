@@ -254,6 +254,13 @@ TABLE = (
      "destructive changed "
      "impressao digital superficie ferramentas mudou mcp "
      "deriva anotacoes padroes leitura anterior"),
+    ("agent_contexttax", "/api/v1/agent/context-tax", "checks",
+     "what the pasted MCP tools/list COSTS the window: chars/4 floor "
+     "estimate per tool, name/description/schema split, names-only "
+     "counterfactual, per-turn bill, $ at YOUR price argument",
+     "context tax token cost charge bill burn waste window overflow "
+     "fits turn definition description instruction "
+     "coute couter taxe fenetre tour quanto custa taxa janela turno"),
     ("shop_discount_audit", "/api/v1/shop/discount-audit", "checks",
      "Omnibus thirty-day rule: is the crossed-out price legal? "
      "reference, true percent, verdict named",
