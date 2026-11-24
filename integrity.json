@@ -82,6 +82,75 @@
   },
   {
    "body": {
+    "tools": [
+     {
+      "name": "a"
+     },
+     {
+      "name": "a"
+     }
+    ]
+   },
+   "name": "agent_mcpsurface_dup_refused",
+   "path": "/api/v1/agent/mcp-surface",
+   "sha256": "39a79ed208fc4d0e482c753cbcf6b446e9013c1d32e4a43e67c36b45f07508fc",
+   "status": 400
+  },
+  {
+   "body": {
+    "baseline": [
+     {
+      "annotations": {
+       "readOnlyHint": true
+      },
+      "name": "get_user"
+     }
+    ],
+    "tools": [
+     {
+      "name": "get_user"
+     }
+    ]
+   },
+   "name": "agent_mcpsurface_flip_drift",
+   "path": "/api/v1/agent/mcp-surface",
+   "sha256": "50c4628c685c2e6fff1ee27972903dd9a2522f2ddb603233f1c6a7b52e7515c0",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "description": "fetch one user record by its id",
+      "inputSchema": {
+       "properties": {
+        "id": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "id"
+       ],
+       "type": "object"
+      },
+      "name": "get_user"
+     },
+     {
+      "annotations": {
+       "readOnlyHint": true
+      },
+      "description": "search issues by query",
+      "name": "search_issues"
+     }
+    ]
+   },
+   "name": "agent_mcpsurface_pin_clean",
+   "path": "/api/v1/agent/mcp-surface",
+   "sha256": "65ccb9e8d8d7928db090e27737835fd382a4db858df61817d3fa25828ec18da9",
+   "status": 200
+  },
+  {
+   "body": {
     "catalog": [
      "openai/gpt-5.2"
     ],

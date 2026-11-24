@@ -78,6 +78,7 @@ GET  /api/v1/agent/proposals     public registry as data: arrivals, statuses, th
 GET  /proposals                  registry page — last arrivals, bench results, proofs (free)
 POST /api/v1/agent/retry-budget  error class + hash count + budget -> REPEAT/MUTATE/ABORT (free)
 POST /api/v1/agent/mcp-audit     pasted tools/list -> named wire-shape findings; no fetch, no subprocess (free)
+POST /api/v1/agent/mcp-surface   pasted tools/list (+baseline) -> per-tool and surface SHA-256, named drift CLEAN/DRIFT/REORDERED (free)
 POST /api/v1/shop/discount-audit price history + announced cut -> Omnibus 30-day legality verdict (free)
 POST /api/v1/ledger/summary   journal entries -> monthly totals + running balance (free)
 POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
@@ -280,6 +281,7 @@ import addparsekit
 import retrykit
 import omnibuskit
 import mcpauditkit
+import mcpsurfacekit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -365,7 +367,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.17.0",
+    version="1.18.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2275,6 +2277,33 @@ def run_agent_mcp_audit(args: dict):
 @app.post("/api/v1/agent/mcp-audit")
 def api_agent_mcp_audit(req: AgentMcpAuditRequest):
     body, err = run_agent_mcp_audit(req.model_dump())
+    return err if err else body
+
+
+class AgentMcpSurfaceRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tools: List[Dict[str, Any]]
+    baseline: Optional[List[Dict[str, Any]]] = None
+
+
+def run_agent_mcp_surface(args: dict):
+    try:
+        req = AgentMcpSurfaceRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = mcpsurfacekit.mcp_surface(req.tools, req.baseline)
+    except mcpsurfacekit.SurfaceError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/mcp-surface")
+def api_agent_mcp_surface(req: AgentMcpSurfaceRequest):
+    body, err = run_agent_mcp_surface(req.model_dump())
     return err if err else body
 
 
@@ -6612,6 +6641,7 @@ TOOL_RUN = {
            "proposals_registry": lambda a: registry.query(name=a.get("name") or None, status=a.get("status") or None, latest=a.get("latest")),
            "agent_retrybudget": run_agent_retrybudget,
            "agent_mcpaudit": run_agent_mcp_audit,
+           "agent_mcpsurface": run_agent_mcp_surface,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
@@ -10416,6 +10446,54 @@ MCP_TOOLS = [
         },
     },
     {
+        "name": "agent_mcpsurface",
+        "description": (
+            "Pin and diff the tool SURFACE of an MCP server from "
+            "pasted tools/list results. Each tool gets a SHA-256 over "
+            "the canonical form of the contract fields (name, title, "
+            "description, inputSchema, outputSchema, execution, and "
+            "annotations normalized to the PUBLIC spec defaults "
+            "readOnlyHint false / destructiveHint true / idempotentHint "
+            "false / openWorldHint true — so a hint flip that changes "
+            "no text is still visible: the AI-SDK fingerprint's blind "
+            "class, counted at 524 flips on 189 servers in three "
+            "weeks). The surface digest is ORDER-SENSITIVE on purpose "
+            "(spec 2026-07-28 makes deterministic order contractual). "
+            "Pass the previous listing as baseline and the answer "
+            "carries verdict CLEAN/REORDERED/DRIFT with per-tool kinds "
+            "added/removed/changed, the changed field names and "
+            "hint_flips old→new. icons and _meta are excluded BY NAME; "
+            "unknown pasted keys ARE hashed — a new 'instructions' key "
+            "moves the digest (the tool-poisoning class). Duplicate or "
+            "missing tool names are refused (spec: unique per server — "
+            "shadowing). Ceiling 5000 tools per listing. Static pasted "
+            "listing only: never fetches, never launches the server. "
+            "Sister to /agent/mcp-audit (which judges whether a client "
+            "would REJECT the listing; this one says whether it "
+            "CHANGED). Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["tools"],
+            "additionalProperties": False,
+            "properties": {
+                "tools": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                    "description": "the pasted tools/list array, in "
+                                   "the order the server returned it",
+                },
+                "baseline": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                    "description": "the previous tools/list array to "
+                                   "diff against; omit for a pure "
+                                   "fingerprint to pin",
+                },
+            },
+        },
+    },
+    {
         "name": "shop_discount_audit",
         "description": (
             "Is that crossed-out price legal? Omnibus Directive "
@@ -10923,6 +11001,7 @@ def index(request: Request):
             "/api/v1/date/civil": "POST instant + zone -> civil date, year shift named, server zone never read (free)",
             "/api/v1/agent/retry-budget": "POST error class + attempt + hashes -> REPEAT/MUTATE/ABORT, deterministic backoff (free)",
             "/api/v1/agent/mcp-audit": "POST pasted tools/list + initialize? -> named wire-shape findings, 18 rules, no fetch no subprocess (free)",
+            "/api/v1/agent/mcp-surface": "POST pasted tools/list (+baseline) -> per-tool + surface SHA-256 fingerprints, named drift CLEAN/DRIFT/REORDERED, annotations spec-defaulted, no fetch no subprocess (free)",
             "/api/v1/shop/discount-audit": "POST price history + announced cut -> Omnibus 30-day legality verdict (free)",
             "/api/v1/money/split": "POST total + participants -> cent-exact split",
             "/api/v1/number/spell": "POST amount -> words FR/EN/PT for legal mentions (free < 32 KB)",

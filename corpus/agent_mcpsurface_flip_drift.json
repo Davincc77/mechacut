@@ -1,0 +1,19 @@
+{
+  "body": {
+    "baseline": [
+      {
+        "annotations": {
+          "readOnlyHint": true
+        },
+        "name": "get_user"
+      }
+    ],
+    "tools": [
+      {
+        "name": "get_user"
+      }
+    ]
+  },
+  "name": "agent_mcpsurface_flip_drift",
+  "path": "/api/v1/agent/mcp-surface"
+}

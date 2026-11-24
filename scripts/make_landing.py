@@ -903,7 +903,6 @@ TR = {
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour tout le monde",
       "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
-      "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
   "everyday.intro": "Pas de code, pas de jargon. Dix-neuf choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
@@ -2427,10 +2426,12 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "la liste d'outils MCP collée jugée contre des "
             "règles de rejet nommées, avant qu'un client ne "
             "la descarte en silence",
-        "agent_mcpaudit":
-            "a lista de ferramentas MCP colada, julgada "
-            "contra regras de rejeição nomeadas, antes de um "
-            "cliente descartá-la em silêncio",
+        "agent_mcpsurface":
+            "empreinte SHA-256 de la surface d'outils MCP collée, "
+            "puis dérive NOMMÉE contre un relevé antérieur — "
+            "annotations canoniquées à leurs défauts publics de la "
+            "spec, l'angle mort du AI SDK fermé ; ordre compris "
+            "dans le contrat",
         "agent_retrybudget":
             "re-tenter cet échec est-il rationnel ? taxonomie "
             "fermée, plafond de hachage, budget de session, backoff "
@@ -2789,6 +2790,16 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "cabeçalhos Retry-After e X-RateLimit-* lidos (delta-seconds ou IMF-fixdate estrito); em contradição, ambas as esperas são NOMEADAS, nunca escolhidas; now é argumento, nunca relógio de parede",
         "number_words_pair":
             "forma por extenso e forma numérica conferidas uma contra a outra — trinta (40) recusa: AGREE/MISMATCH/NO_PAIR, os dois valores guardados",
+        "agent_mcpaudit":
+            "a lista de ferramentas MCP colada, julgada "
+            "contra regras de rejeição nomeadas, antes de um "
+            "cliente descartá-la em silêncio",
+        "agent_mcpsurface":
+            "impressão SHA-256 da superfície de ferramentas MCP "
+            "colada e deriva NOMEADA contra uma leitura anterior — "
+            "anotações canonizadas com os padrões publicados da "
+            "spec, o ponto cego do AI SDK fechado; a ordem entra no "
+            "contrato",
         "agent_retrybudget":
             "repetir esta falha é racional? taxonomia fechada, teto "
             "de hash, orçamento de sessão, backoff determinístico",

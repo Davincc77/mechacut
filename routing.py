@@ -242,6 +242,18 @@ TABLE = (
      "invisible wire paste claude mcpaudit outils absents "
      "chargement vide protocole auditoria ferramentas "
      "silenciosa descricao ausente vazia"),
+    ("agent_mcpsurface", "/api/v1/agent/mcp-surface", "checks",
+     "pasted MCP tools/list fingerprinted per tool and as an ordered "
+     "surface; baseline diff names ADDED/REMOVED/CHANGED plus "
+     "REORDERED, annotation flips visible without any text change",
+     "mcp tools list listing surface fingerprint fingerprints digest "
+     "sha drift changed change pin pinned rug pull annotations "
+     "readonly hint flipped order toolslist "
+     "empreinte surface liste listing outils mcp change modifie "
+     "derive releve epingle silencieuse annotations defauts "
+     "destructive changed "
+     "impressao digital superficie ferramentas mudou mcp "
+     "deriva anotacoes padroes leitura anterior"),
     ("shop_discount_audit", "/api/v1/shop/discount-audit", "checks",
      "Omnibus thirty-day rule: is the crossed-out price legal? "
      "reference, true percent, verdict named",

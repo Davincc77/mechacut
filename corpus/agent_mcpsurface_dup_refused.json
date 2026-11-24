@@ -1,0 +1,14 @@
+{
+  "body": {
+    "tools": [
+      {
+        "name": "a"
+      },
+      {
+        "name": "a"
+      }
+    ]
+  },
+  "name": "agent_mcpsurface_dup_refused",
+  "path": "/api/v1/agent/mcp-surface"
+}

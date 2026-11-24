@@ -53,6 +53,13 @@ SAY = {
               "rembourse la différence et jusqu'à quand ?",
         "pt": "paguei 100 e caiu para 80 — quem me devolve a "
               "diferença e até quando?"},
+    "/api/v1/agent/mcp-surface": {
+        "en": "did that MCP server's tool list change under me "
+              "since the listing I pinned last week?",
+        "fr": "qu'est-ce qui a changé dans la liste d'outils MCP "
+              "depuis le relevé que j'avais épinglé ?",
+        "pt": "o que mudou na lista de ferramentas MCP desde a "
+              "leitura que eu tinha fixado?"},
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",

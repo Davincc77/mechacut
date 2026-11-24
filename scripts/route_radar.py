@@ -127,6 +127,27 @@ CASES = [
      None),
     ("435 articles et puis la vie, le temps, les gens", None),
     ("raconte-moi une blague sur les soldes légaux", None),
+    # bundle 97 — découvrabilité de l'agent-family NEUVE : la
+    # question de SURFACE (« a-t-il changé ? ») et celle du JUGE
+    # (« va-t-il rejeter ? ») ne doivent jamais se croiser ; le
+    # leurre « empreintes digitales » protège le mot FR « empreinte »
+    # — un leurre qui route = une fausse promesse (OVERMATCH).
+    ("le listing d'outils MCP a changé depuis mon relevé épinglé",
+     "mcpsurface"),
+    ("did the MCP tools list change since I pinned it — fingerprints",
+     "mcpsurface"),
+    ("a lista de ferramentas MCP mudou desde a última leitura",
+     "mcpsurface"),
+    ("LISTING OUTILS MCP A CHANGÉ DÉRIVE EMPREINTE", "mcpsurface"),
+    ("mon tools/list a un inputSchema vide — le client va-t-il le "
+     "rejeter", "mcpaudit"),
+    ("fais-moi une blague sur les empreintes digitales", None),
+    # EN : « fingerprints » EST un mot du NOM ssh_fingerprint
+    # (poids 4, pluriel plié) — la blague anglaise route, mesuré CE
+    # cycle. Ce n'est PAS un leurre libre : douleur OVERMATCH de la
+    # famille ssh, consignée à la file, non encodée ici comme « doit
+    # mourir » tant que le routeur ne plie pas les formes
+    # « tell/joke about » comme il plie « blague ».
 ]
 
 

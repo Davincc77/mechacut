@@ -1,0 +1,30 @@
+{
+  "body": {
+    "tools": [
+      {
+        "description": "fetch one user record by its id",
+        "inputSchema": {
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "type": "object"
+        },
+        "name": "get_user"
+      },
+      {
+        "annotations": {
+          "readOnlyHint": true
+        },
+        "description": "search issues by query",
+        "name": "search_issues"
+      }
+    ]
+  },
+  "name": "agent_mcpsurface_pin_clean",
+  "path": "/api/v1/agent/mcp-surface"
+}
