@@ -262,4 +262,4 @@ def test_route_and_surfaces():
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 1,
                                   "method": "tools/list"})
     names = [t["name"] for t in r.json()["result"]["tools"]]
-    assert "shop_legal_guarantee" in names and len(names) == 174
+    assert "shop_legal_guarantee" in names and len(names) == 175  # +money_keep_records_uk bundle100

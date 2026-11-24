@@ -423,9 +423,10 @@ def test_everyday_chip_baked_three_languages():
     # resize 24-11 bundle99 : la grille compte 24 cartes (le mot
     # « Nineteen » datait de e19 ; e20-e23 avaient dérivé le compte —
     # dérive mesurée, corrigée avec e24, précédent b73).
-    assert "Twenty-four" in en["everyday.intro"]
-    assert "Vingt-quatre" in fr["everyday.intro"]
-    assert "Vinte e quatro" in pt["everyday.intro"]
+    # resize 24-11 bundle100 : VINGT-CINQ (e25 keep-records-uk).
+    assert "Twenty-five" in en["everyday.intro"]
+    assert "Vingt-cinq" in fr["everyday.intro"]
+    assert "Vinte e cinco" in pt["everyday.intro"]
 
 
 def test_golden_contains_eleven_new_pins():

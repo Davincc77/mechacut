@@ -1,0 +1,10 @@
+{
+ "name": "money_keep_records_uk_vat_future_event_oss",
+ "path": "/api/v1/money/keep-records-uk",
+ "body": {
+  "record_kind": "vat_invoice",
+  "issued_on": "2026-11-24",
+  "scheme": "oss",
+  "as_of": "2026-11-24"
+ }
+}

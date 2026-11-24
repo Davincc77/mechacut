@@ -85,6 +85,7 @@ POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-b
 POST /api/v1/shop/return-deadline    retailer + purchase date -> published holiday RETURN deadline, provenance and conflicts named (free)
 POST /api/v1/shop/pricedrop-refund   purchase + drop dates/prices -> who OWES the difference, by when, in which money — closed 2026 BF table (free)
 POST /api/v1/shop/legal-guarantee    delivered_on + FR/UK -> dated STATUTORY warranty clocks (24m/12m, vices 2y+20y, UK 30-day/6m/6y-5y), conflicts named (free)
+POST /api/v1/money/keep-records-uk   record_kind + official anchor -> earliest lawful DESTROY date (VAT 3 anchors/6y/10y, s388 3y/6y by form, SA 5y after 31-Jan deadline + 15m very-late, PAYE 3y), "or longer if" carried BLOCKED (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -287,6 +288,7 @@ import evalkit
 import shipdeadkit
 import returndeadkit
 import guaranteekit
+import retentionkit
 import pricedroprefundkit
 import money
 import numfmt
@@ -369,7 +371,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.20.0",
+    version="1.21.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2551,6 +2553,61 @@ def run_shop_legal_guarantee(args: dict):
 @app.post("/api/v1/shop/legal-guarantee")
 def api_shop_legal_guarantee(req: ShopLegalGuaranteeRequest):
     body, err = run_shop_legal_guarantee(req.model_dump())
+    return err if err else body
+
+
+class MoneyKeepRecordsUkRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    record_kind: str
+    issued_on: Optional[str] = None
+    prepared_on: Optional[str] = None
+    last_entry_on: Optional[str] = None
+    claim_on: Optional[str] = None
+    financial_year_end_on: Optional[str] = None
+    made_on: Optional[str] = None
+    tax_year_end_on: Optional[str] = None
+    deadline_on: Optional[str] = None
+    filed_on: Optional[str] = None
+    entity: Optional[str] = None
+    scheme: Optional[str] = None
+    vatmoss_used: Optional[bool] = None
+    return_late: Optional[bool] = None
+    compliance_check_open: Optional[bool] = None
+    spans_periods: Optional[bool] = None
+    asset_beyond_six_years: Optional[bool] = None
+    as_of: Optional[str] = None
+
+
+def run_money_keep_records_uk(args: dict):
+    try:
+        req = MoneyKeepRecordsUkRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = retentionkit.keep_records(
+            req.record_kind, issued_on=req.issued_on,
+            prepared_on=req.prepared_on, last_entry_on=req.last_entry_on,
+            claim_on=req.claim_on,
+            financial_year_end_on=req.financial_year_end_on,
+            made_on=req.made_on, tax_year_end_on=req.tax_year_end_on,
+            deadline_on=req.deadline_on, filed_on=req.filed_on,
+            entity=req.entity, scheme=req.scheme,
+            vatmoss_used=req.vatmoss_used, return_late=req.return_late,
+            compliance_check_open=req.compliance_check_open,
+            spans_periods=req.spans_periods,
+            asset_beyond_six_years=req.asset_beyond_six_years,
+            as_of=req.as_of)
+    except retentionkit.RetentionError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/keep-records-uk")
+def api_money_keep_records_uk(req: MoneyKeepRecordsUkRequest):
+    body, err = run_money_keep_records_uk(req.model_dump())
     return err if err else body
 
 
@@ -6688,6 +6745,7 @@ TOOL_RUN = {
            "shop_return_deadline": run_shop_return_deadline,
            "shop_pricedrop_refund": run_shop_pricedrop_refund,
            "shop_legal_guarantee": run_shop_legal_guarantee,
+           "money_keep_records_uk": run_money_keep_records_uk,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -10371,6 +10429,141 @@ MCP_TOOLS = [
                 "as_of": {"type": "string",
                           "description": "ISO YYYY-MM-DD day to "
                                          "count days_left from"},
+            },
+        },
+    },
+    {
+        "name": "money_keep_records_uk",
+        "description": (
+            "UK records-retention DATES, not prose: one record_kind "
+            "plus its OFFICIAL anchor returns the earliest lawful "
+            "destruction date, computed from GOV.UK/HMRC text "
+            "replayed verbatim. VAT counts six years from three "
+            "DIFFERENT anchors the manuals name — DATE OF ISSUE for "
+            "invoices (a document describing a FUTURE event still "
+            "counts from issue, CH15200), PREPARATION for summaries, "
+            "LAST ENTRY for ledgers and daybooks; ten years under "
+            "OSS/MOSS; bad-debt claim papers four years from the "
+            "CLAIM (ten if VATMOSS). Limited company: six years from "
+            "the end of the last financial year, with the four 'or "
+            "longer if' conditions carried BLOCKED, never guessed "
+            "(late return, open compliance check, multi-period "
+            "transaction, long-lived asset). Companies Act s.388(4) "
+            "counts the SAME accounting records three years (private) "
+            "or six (public) from the date MADE — a separate clock, "
+            "and the official arbitrage travels with it: 'apply the "
+            "longer retention period' (CH15400, page stamped Updated "
+            "23 November 2026). Self Assessment: five years after the "
+            "31 January submission DEADLINE (both official examples "
+            "replayed), plus the second clock when a return is filed "
+            "more than four years late: fifteen months from sending. "
+            "PAYE/CIS/expenses: three years from the 5 April tax-year "
+            "end — any other end date is refused citing ITA 2007 "
+            "s.4(3). Refused BY NAME carrying their facts: the "
+            "22-month personal shorthand (archived PDF), National "
+            "Minimum Wage, employment contracts (limitation is "
+            "/shop/legal-guarantee), GDPR (a duty to DELETE, the "
+            "opposite clock), France. Warranty windows are "
+            "/shop/legal-guarantee; holiday returns are "
+            "/shop/return-deadline. No clock, no network, no advice. "
+            "Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["record_kind"],
+            "additionalProperties": False,
+            "properties": {
+                "record_kind": {"type": "string",
+                                "description": "closed table: "
+                                               "vat_invoice | "
+                                               "vat_summary | "
+                                               "vat_series | "
+                                               "vat_bad_debt_claim | "
+                                               "company_tax_records | "
+                                               "companies_act_accounting"
+                                               " | self_assessment | "
+                                               "paye | cis | "
+                                               "expenses_benefits — "
+                                               "unknown kinds return "
+                                               "their named refusal"},
+                "issued_on": {"type": "string",
+                              "description": "vat_invoice: the date "
+                                             "ON THE DOCUMENT — a "
+                                             "future-event invoice "
+                                             "still counts from it"},
+                "prepared_on": {"type": "string",
+                                "description": "vat_summary: date the "
+                                               "balance sheet or "
+                                               "trading account was "
+                                               "prepared"},
+                "last_entry_on": {"type": "string",
+                                  "description": "vat_series: date of "
+                                                 "the last entry in "
+                                                 "the ledger or book"},
+                "claim_on": {"type": "string",
+                             "description": "vat_bad_debt_claim: date "
+                                            "the claim was made"},
+                "financial_year_end_on": {"type": "string",
+                                          "description": "company_tax_"
+                                          "records: end of the last "
+                                          "company financial year the "
+                                          "records relate to"},
+                "made_on": {"type": "string",
+                            "description": "companies_act_accounting "
+                                           "(required there; optional "
+                                           "on company_tax_records to "
+                                           "bring the s.388 row into "
+                                           "the max)"},
+                "tax_year_end_on": {"type": "string",
+                                    "description": "paye | cis | "
+                                    "expenses_benefits and "
+                                    "self_assessment: the 5 April "
+                                    "closing the year — ITA 2007 "
+                                    "s.4(3) says so and other days "
+                                    "are refused"},
+                "deadline_on": {"type": "string",
+                                "description": "self_assessment "
+                                "alternative: the 31 January online "
+                                "submission deadline itself"},
+                "filed_on": {"type": "string",
+                             "description": "self_assessment: when "
+                                             "the return was actually "
+                                             "sent — past deadline+4y "
+                                             "opens the 15-month "
+                                             "clock"},
+                "entity": {"type": "string",
+                           "description": "private | public — "
+                           "s.388(4) branches the period on the form; "
+                           "LLP refused (modifications not replayed)"},
+                "scheme": {"type": "string",
+                           "description": "vat_*: none | oss | moss "
+                                          "— OSS/MOSS lifts the "
+                                          "clock to ten years"},
+                "vatmoss_used": {"type": "boolean",
+                                 "description": "vat_bad_debt_claim: "
+                                 "ten years instead of four"},
+                "return_late": {"type": "boolean",
+                                "description": "company_tax_records: "
+                                "extension without a published date — "
+                                "carried BLOCKED"},
+                "compliance_check_open": {"type": "boolean",
+                                          "description": "company_tax_"
+                                          "records: retention runs to "
+                                          "unconditionality — BLOCKED, "
+                                          "never invented"},
+                "spans_periods": {"type": "boolean",
+                                  "description": "company_tax_records"
+                                  ": multi-period transaction moves "
+                                  "the anchor — BLOCKED"},
+                "asset_beyond_six_years": {"type": "boolean",
+                                           "description": "company_"
+                                           "tax_records: long-lived "
+                                           "asset — BLOCKED, the "
+                                           "lifetime is yours"},
+                "as_of": {"type": "string",
+                          "description": "ISO YYYY-MM-DD day to "
+                                         "count days_left from — "
+                                         "never a wall clock"},
             },
         },
     },

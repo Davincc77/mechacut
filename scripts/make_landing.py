@@ -364,7 +364,7 @@ TR = {
                  "the full manual:",
     "everyday.h2": "For everyone",
       "everyday.open": "Expand the proofs — real server outputs, no mockups.",
-  "everyday.intro": "No code, no jargon. Twenty-four things a normal person "
+  "everyday.intro": "No code, no jargon. Twenty-five things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -577,7 +577,32 @@ TR = {
                       "US and AU are refused by name: no federal "
                       "countable window; 'reasonable time' is not "
                       "a date.",
-  "nav.kit": "Kit",
+    "everyday.e25.name": "Can I shred this folder? — the UK drawer "
+                       "hides FOUR clocks",
+  "everyday.e25.say": "\u201cSix years\u201d is ONE phrase for four "
+                      "different dates: VAT invoices count from "
+                      "the date ON THE DOCUMENT (even a paper "
+                      "describing a future event \u2014 the HMRC "
+                      "manual says so in those words), a limited "
+                      "company counts from the END of the financial "
+                      "year it relates to, Companies Act s.388 "
+                      "counts the same records THREE years if "
+                      "private, SIX if a plc \u2014 from the date "
+                      "MADE \u2014 and Self Assessment counts five "
+                      "years from a 31 January deadline that is on "
+                      "no document at all. The official examples "
+                      "are replayed: a 2022-23 return sent by 31 "
+                      "January 2024 keeps the paper until 31 "
+                      "January 2029, shred from 1 February. The "
+                      "four \u201cor longer if\u201d cases (late "
+                      "return, open compliance check) come back "
+                      "BLOCKED with their published reason \u2014 "
+                      "no invented date ever. The CH15400 minima "
+                      "table (replayed the day after it was "
+                      "updated, 23 November 2026) travels with the "
+                      "arbitrage: when two rules touch one paper, "
+                      "the LONGER governs.",
+"nav.kit": "Kit",
   "kit.h2": "The suite on your disk",
   "kit.creed": "The protocol is not the transport \u2014 it is the birth certificate of the tool.",
   "kit.intro": "The free transforms are not only an API. They are a suite: an agent can install them on its own machine, call them locally, and \u2014 the part no marketplace does \u2014 build new tools on the same gates. curl becomes kit call; a repeated task becomes a proposed contract; a proposal becomes a published tool only if its golds were drawn before its code.",
@@ -923,7 +948,7 @@ TR = {
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour tout le monde",
       "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
-  "everyday.intro": "Pas de code, pas de jargon. Vingt-quatre choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Vingt-cinq choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
                     "réelle du serveur, pas une maquette.",
@@ -1146,7 +1171,32 @@ TR = {
                       "États-Unis et Australie refusés par nom : "
                       "pas de fenêtre fédérale comptable ; « "
                       "reasonable time » n'est pas une date.",
-  "nav.kit": "Kit",
+    "everyday.e25.name": "Puis-je jeter ce dossier ? — le carton "
+                       "britannique cache QUATRE horloges",
+  "everyday.e25.say": "« Six ans » est UNE phrase pour quatre "
+                      "dates différentes : la facture TVA compte "
+                      "depuis la date ÉCRITE SUR LE DOCUMENT (même "
+                      "un papier décrivant un événement futur — le "
+                      "manuel de HMRC l’écrit), la limited company "
+                      "depuis la CLÔTURE de l’exercice concerné, la "
+                      "Companies Act s.388 compte les mêmes pièces "
+                      "TROIS ans si private, SIX si plc — depuis "
+                      "la date de CRÉATION — et le Self Assessment "
+                      "cinq ans depuis une deadline du 31 janvier "
+                      "qui ne figure sur aucun document. Les "
+                      "exemples officiels sont rejoués : déclaration "
+                      "2022-23 envoyée avant le 31 janvier 2024 → "
+                      "dossier gardé jusqu’au 31 janvier 2029, "
+                      "destruction permise le 1er février. Les quatre "
+                      "« ou plus si » (retard de déclaration, "
+                      "contrôle ouvert) reviennent BLOCKED avec "
+                      "leur raison publiée — jamais de date "
+                      "inventée. La table des minima CH15400 "
+                      "(rejouée au lendemain de sa mise à jour, "
+                      "23 novembre 2026) voyage avec son "
+                      "arbitrage : deux règles sur une même pièce, "
+                      "c’est la PLUS LONGUE qui gouverne.",
+"nav.kit": "Kit",
   "kit.h2": "La suite sur votre disque",
   "kit.creed": "Le protocole n'est pas le transport \u2014 c'est l'acte de naissance de l'outil.",
   "kit.intro": "Les transformations libres ne sont pas seulement une API. Elles sont une suite : un agent peut l'installer sur sa propre machine, l'appeler en local et \u2014 c'est la partie qu'aucun marché ne fait \u2014 construire de nouveaux outils sur les mêmes portes. curl devient kit call ; une tâche répétée devient une proposition de contrat ; la proposition ne devient un outil publié que si ses golds furent tracés avant son code.",
@@ -1488,7 +1538,7 @@ TR = {
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para todo mundo",
       "everyday.open": "Expandir as provas — saídas reais do servidor, não maquetes.",
-  "everyday.intro": "Sem código, sem jargão. Vinte e quatro coisas que "
+  "everyday.intro": "Sem código, sem jargão. Vinte e cinco coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -1697,7 +1747,33 @@ TR = {
                       "12 meses), as DUAS datas viajam nomeadas. "
                       "EUA e Austrália recusados por nome: sem "
                       "janela federal contável.",
-  "nav.kit": "Kit",
+    "everyday.e25.name": "Posso descartar esta pasta? — a gaveta "
+                       "britânica esconde QUATRO relógios",
+  "everyday.e25.say": "\u201cSeis anos\u201d é UMA frase para "
+                      "quatro datas diferentes: a fatura de VAT "
+                      "conta da data ESCRITA NO DOCUMENTO (mesmo "
+                      "um papel descrevendo evento futuro — o "
+                      "manual da HMRC diz isso), a limited company "
+                      "conta do FIM do exercício, a Companies Act "
+                      "s.388 conta as mesmas peças TRÊS anos se "
+                      "private, SEIS se plc — desde a CRIAÇÃO — "
+                      "e o Self Assessment cinco anos a partir de "
+                      "um prazo de 31 de janeiro que não está em "
+                      "documento nenhum. Os exemplos oficiais são "
+                      "refeitos: declaração 2022-23 enviada até 31 "
+                      "de janeiro de 2024 → papel guardado até 31 "
+                      "de janeiro de 2029, descartar a partir de "
+                      "1º de fevereiro. Os quatro \u201cou mais "
+                      "se\u201d (atraso, verificação aberta) voltam "
+                      "BLOCKED com a razão publicada — nunca "
+                      "data inventada. A tabela de mínimos CH15400 "
+                      "(refeita um dia depois de atualizada, 23 de "
+                      "novembro de 2026) viaja com a regra: duas "
+                      "normas sobre a mesma peça, a MAIS LONGA "
+                      "governa. O Reino Unido é a jurisdição "
+                      "aqui — notas fiscais do Brasil seguem "
+                      "outra lei.",
+"nav.kit": "Kit",
   "kit.h2": "A suíte no seu disco",
   "kit.creed": "O protocolo não é o transporte \u2014 é a certidão de nascimento da ferramenta.",
   "kit.intro": "As transformações livres não são só uma API. São uma suíte: um agente pode instalá-la na própria máquina, chamá-la localmente e \u2014 a parte que nenhum mercado faz \u2014 construir ferramentas novas sobre os mesmos portões. curl vira kit call; tarefa repetida vira proposta de contrato; a proposta vira ferramenta publicada apenas se seus golds foram traçados antes do código.",
@@ -3261,7 +3337,8 @@ W = {
                    "travels in the row",
       "warr": "\u2192 statutory conformity until %s (%s) \u00b7 "
               "hidden-defect clock to %s from the DISCOVERY \u2014 "
-              "the shop window died Jan 15, the law did not"},
+              "the shop window died Jan 15, the law did not",
+           "rec": "\u2192 keep until %s \u00b7 shred from %s \u00b7 the official 2022-23 example, replayed"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "returndead": "\u2192 retour jusqu'au %s (%s) \u00b7 chez "
@@ -3278,6 +3355,7 @@ W = {
                    "vices cachés jusqu'au %s depuis la DÉCOUVERTE "
                    "\u2014 la vitrine a fermé le 15 janvier, la loi "
                    "non",
+           "rec": "\u2192 garder jusqu'au %s \u00b7 d\u00e9truire d\u00e8s le %s \u00b7 l'exemple officiel 2022-23, rejou\u00e9",
            "word": "\u2192 \u00ab %s \u00bb",
            "iban": "\u2192 cl\u00e9 de contr\u00f4le valide \u00b7 %s",
            "page": "\u2192 page autonome (%s octets) \u00b7 Ctrl-P = PDF",
@@ -3326,6 +3404,7 @@ W = {
            "warr": "\u2192 conformidade legal at\u00e9 %s (%s) \u00b7 "
                    "v\u00edcios at\u00e9 %s desde a DESCOBERTA \u2014 "
                    "a loja fechou 15 de janeiro, a lei n\u00e3o",
+           "rec": "\u2192 guardar at\u00e9 %s \u00b7 descartar a partir de %s \u00b7 o exemplo oficial 2022-23, refeito",
            "pricedrop": "\u2192 %s a reclamar at\u00e9 %s (%s) \u00b7 a "
                         "janela \u00e9 data publicada, a classe da "
                         "fonte viaja na linha",
@@ -3544,6 +3623,11 @@ _EVERYDAY_CALLS = [
          d["conformite_action_by"]["date"],
          d["conformite_action_by"]["weekday"],
          d["vices"]["action_by"])),
+    ("/api/v1/money/keep-records-uk",
+     {"record_kind": "self_assessment",
+      "tax_year_end_on": "2023-04-05"},
+     "rec", lambda d, L_: (d["retain_until"],
+                           d["safe_destroy_on"])),
 ]
 
 

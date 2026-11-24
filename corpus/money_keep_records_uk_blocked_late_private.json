@@ -1,0 +1,11 @@
+{
+ "name": "money_keep_records_uk_blocked_late_private",
+ "path": "/api/v1/money/keep-records-uk",
+ "body": {
+  "record_kind": "company_tax_records",
+  "financial_year_end_on": "2023-12-31",
+  "entity": "private",
+  "made_on": "2023-11-10",
+  "return_late": true
+ }
+}

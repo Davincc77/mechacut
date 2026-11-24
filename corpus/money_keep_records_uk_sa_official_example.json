@@ -1,0 +1,8 @@
+{
+ "name": "money_keep_records_uk_sa_official_example",
+ "path": "/api/v1/money/keep-records-uk",
+ "body": {
+  "record_kind": "self_assessment",
+  "tax_year_end_on": "2023-04-05"
+ }
+}

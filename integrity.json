@@ -2753,6 +2753,51 @@
   },
   {
    "body": {
+    "entity": "private",
+    "financial_year_end_on": "2023-12-31",
+    "made_on": "2023-11-10",
+    "record_kind": "company_tax_records",
+    "return_late": true
+   },
+   "name": "money_keep_records_uk_blocked_late_private",
+   "path": "/api/v1/money/keep-records-uk",
+   "sha256": "70b966108855e4d5578ae859cbd2f867565165fd5b3007d6862c691289e2d74e",
+   "status": 200
+  },
+  {
+   "body": {
+    "record_kind": "paye",
+    "tax_year_end_on": "2026-04-06"
+   },
+   "name": "money_keep_records_uk_paye_april6_refused",
+   "path": "/api/v1/money/keep-records-uk",
+   "sha256": "67dc01dde892210ffda8555595b2e4ca153ae47bc0d9960e4e61d3b8d0df2d38",
+   "status": 400
+  },
+  {
+   "body": {
+    "record_kind": "self_assessment",
+    "tax_year_end_on": "2023-04-05"
+   },
+   "name": "money_keep_records_uk_sa_official_example",
+   "path": "/api/v1/money/keep-records-uk",
+   "sha256": "c9551ebc921b0bc27cf3b5f5e990ed3a0c38c7f2abd904064ad56c1e2d2d2fda",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-24",
+    "issued_on": "2026-11-24",
+    "record_kind": "vat_invoice",
+    "scheme": "oss"
+   },
+   "name": "money_keep_records_uk_vat_future_event_oss",
+   "path": "/api/v1/money/keep-records-uk",
+   "sha256": "4a387e5c3993fa3e1e3281053b3a5440ecabb066e5d68b9afdd90ee0fc107e14",
+   "status": 200
+  },
+  {
+   "body": {
     "currency": "USD",
     "floor": "1.0",
     "routes": [

@@ -318,6 +318,18 @@ TABLE = (
      "constructeur fabricant "
      "garantia legal defeito prazo fran\u00e7a reino unido "
      "conformidade vicio"),
+    ("money_keep_records_uk", "/api/v1/money/keep-records-uk",
+     "numbers",
+     "UK retention clocks from official anchors -> earliest lawful "
+     "destroy date, VAT three anchors, s388 by form, extensions "
+     "BLOCKED not guessed",
+     "keep records retention destroy shred dispose paperwork how long "
+     "vat invoice paye cis self assessment companies act six years "
+     "hmrc oss moss bad debt deadline filed throw away shoebox archive "
+     "conservation jeter garder archives facture paperasse delai "
+     "destruction combien de temps classeur royaume uni "
+     "guardar documentos descartar tempo de guarda reino unido "
+     "destruicao"),
     ("invoice_validate_totals", "/api/v1/invoice/validate-totals",
      "checks",
      "declared invoice totals vs exact arithmetic, signed deltas",
@@ -1293,6 +1305,23 @@ def route(query, top=5):
     # a joke about X » (file n°7, ssh_fingerprint OVERMATCH) meurt
     # par la MÊME règle, en trois langues, sans verbes ni LM.
     joke = False
+    # CLASSE b100 — veto de JURIDICTION NOMMÉE : un outil dont le NOM
+    # déclare une juridiction (« _uk ») ne doit JAMAIS être routé par
+    # une requête qui en nomme une AUTRE. Douleur OVERMATCH pêchée
+    # AVANT push par mes propres leurres : « combien de temps garder
+    # mes factures en France » et « as notas fiscais brasileiras
+    # quanto tempo guardar » routaient money_keep_records_uk — une
+    # promesse fausse (le module refuse la France et le Brésil PAR
+    # NOM, mais le routeur, lui, avait déjà promis). Liste fermée,
+    # zéro LM ; la requête honnête passe par le token UK (« HMRC »,
+    # « Royaume-Uni », « limited company ») et reste admise ; sans
+    # lui, elle meurt en NO_MATCH CONSIGNÉ à la file (la douleur
+    # réelle FR est un futur outil, pas un prêt).
+    FOREIGN = ("france", "francais", "francaise", "frances", "french",
+               "brasil", "brasileira", "brasileiro", "alemanha",
+               "germany", "deutschland", "espana", "espanha",
+               "italia", "italy", "quebec")
+    foreign = False
     for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
         if t in ("blague", "blagues", "joke", "jokes", "piada",
                  "piadas"):
@@ -1306,6 +1335,8 @@ def route(query, top=5):
         # phrase. test_bundle81 la verrouille statiquement.
         if t.isdigit():
             continue
+        if t in FOREIGN or _stem(t) in FOREIGN:
+            foreign = True
         st = _stem(t)
         if st not in seen:
             seen.add(st)
@@ -1314,6 +1345,8 @@ def route(query, top=5):
         return []
     scored = []
     for idx, (name, path, pack, purpose, tags) in enumerate(TABLE):
+        if foreign and name.endswith("_uk"):
+            continue
         tail = path[len("/api/v1/"):]
         # nsegs STEMÉS comme les tags et le query — sinon un nom au
         # pluriel ne matche jamais JAMAIS son propre mot (bug pêché

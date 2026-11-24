@@ -45,7 +45,11 @@ def test_manifest_token_budget():
     # per tool; the real ceiling is the byte budget + dense fold in the
     # routing module — line count is only a proxy, resized here as the
     # catalogue grows past its original 95-tool shape
-    assert len(lines) < 216   # resize 24-11 bundle99 (+shop_legal_guarantee)
+    assert len(lines) < 217   # resize 24-11 bundle100 (+money_keep_records_uk)
+    # : 216 lignes MESUREES, 8 864 octets < 9 000 — le budget serre a
+    # 136 octets : LE PROCHAIN OUTIL debranchera le dense-fold, a resizer
+    # en mesure franche ou a couper une ligne de tete (decision de cycle,
+    # pas de ce lot). precedent 215/8 805 (bundle99).
     # : 215 lignes MESUREES, 8 805 octets < 9 000 — le dense-fold a
     # bel et bien servi (le resize b97 avait prédit le débordement de
     # la ligne frontière). Le budget octets reste le vrai plafond
@@ -97,7 +101,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 182   # +shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97 ; 180 avec shop_pricedrop_refund
+    assert seen == len(routing.TABLE) == 183   # +money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
     # (23-11 bundle96) ; était 179 avec agent_mcpaudit (bundle92)
 
 

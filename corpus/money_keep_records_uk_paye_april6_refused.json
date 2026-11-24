@@ -1,0 +1,8 @@
+{
+ "name": "money_keep_records_uk_paye_april6_refused",
+ "path": "/api/v1/money/keep-records-uk",
+ "body": {
+  "record_kind": "paye",
+  "tax_year_end_on": "2026-04-06"
+ }
+}

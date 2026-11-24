@@ -208,6 +208,29 @@ CASES = [
     ("faut-il payer la garantie prolongée à 40 euros pour le "
      "sèche-linge", None),
     ("tell me a joke about the legal guarantee", None),
+    # b100 — keep-records-uk : la famille des horloges de RETENTION,
+    # et le veto de juridiction NOMMÉE (classe b98 portée à l'outil
+    # qui se nomme) : une requête qui dit « France » ou « brasileiras »
+    # ne doit RIEN promettre du UK-only ; la requête honnête passe par
+    # le token UK (HMRC / limited company / Reino Unido). La bordure
+    # garantie-vs-papier : « garder la facture d'un objet encore
+    # sous garantie » EST une question de dossier — keep_records,
+    # avec la garantie en second attendu (top-2, pas top-1).
+    ("can I shred this year's HMRC invoices now", "money_keep_records_uk"),
+    ("when can I destroy my limited company accounting records",
+     "money_keep_records_uk"),
+    ("do I need to keep a VAT invoice that describes a future payment",
+     "money_keep_records_uk"),
+    ("puis-je jeter mes factures HMRC de 2020", "money_keep_records_uk"),
+    ("quand détruire la comptabilité d'une private company UK",
+     "money_keep_records_uk"),
+    ("por quanto tempo guardar documentos da HMRC no Reino Unido",
+     "money_keep_records_uk"),
+    ("my gift is still under warranty — how long must I keep the "
+     "invoice", "money_keep_records_uk"),
+    ("combien de temps garder mes factures en France", None),
+    ("as notas fiscais brasileiras quanto tempo guardar", None),
+    ("what is HMRC", None),
 ]
 
 

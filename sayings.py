@@ -530,6 +530,17 @@ SAY = {
         "pt": "o presente quebra em 16 de janeiro: a janela da loja "
               "morreu, a garantia legal da França e do Reino Unido "
               "continua — datas contadas ao dia"},
+    "/api/v1/money/keep-records-uk": {
+        "en": "can I shred this drawer? — every UK clock from its "
+              "official anchor: the earliest lawful destruction "
+              "date, to the day",
+        "fr": "puis-je jeter ce classeur ? — chaque horloge du "
+              "Royaume-Uni part de son ancre officielle (émission, "
+              "clôture, deadline) : la date de destruction permise, "
+              "jour pour jour",
+        "pt": "posso descartar esta pasta? — cada prazo do Reino "
+              "Unido conta da âncora oficial: a data em que o "
+              "documento pode ser destruído, ao dia"},
     "/api/v1/agent/retry-budget": {
         "en": "same 429 three times running — retry it, change it, "
               "or stop?",

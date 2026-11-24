@@ -324,6 +324,7 @@ def test_mcp_exposes_bundle1():
                           'shop_return_deadline',
                           'shop_pricedrop_refund',
                           'shop_legal_guarantee',
+                          'money_keep_records_uk',
                           'invoice_validate_totals', 'check_allowlist',
                           'loop_doom_check', 'agent_retrybudget',
                           'agent_mcpaudit', 'agent_mcpsurface', 'shop_discount_audit', 'net_ratelimit', 'number_words_pair', 'date_window', 'date_deemed', 'agent_propose', 'text_fold_report', 'text_novel_words', 'address_parse', 'date_civil', 'proposals_registry']  # queue 23-11 bundles 82-84, 92 ; bundle97 mcpsurface ; bundle99 legal_guarantee (ordre MCP_TOOLS = aprés pricedrop)
