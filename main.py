@@ -84,6 +84,7 @@ POST /api/v1/ledger/summary   journal entries -> monthly totals + running balanc
 POST /api/v1/shop/shipping-deadline  carrier + service (+transit) -> last ship-by day Christmas 2026, source conflicts named (free)
 POST /api/v1/shop/return-deadline    retailer + purchase date -> published holiday RETURN deadline, provenance and conflicts named (free)
 POST /api/v1/shop/pricedrop-refund   purchase + drop dates/prices -> who OWES the difference, by when, in which money — closed 2026 BF table (free)
+POST /api/v1/shop/legal-guarantee    delivered_on + FR/UK -> dated STATUTORY warranty clocks (24m/12m, vices 2y+20y, UK 30-day/6m/6y-5y), conflicts named (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -285,6 +286,7 @@ import mcpsurfacekit
 import evalkit
 import shipdeadkit
 import returndeadkit
+import guaranteekit
 import pricedroprefundkit
 import money
 import numfmt
@@ -367,7 +369,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.19.0",
+    version="1.20.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2511,6 +2513,44 @@ def run_shop_pricedrop_refund(args: dict):
 @app.post("/api/v1/shop/pricedrop-refund")
 def api_shop_pricedrop_refund(req: ShopPriceDropRefundRequest):
     body, err = run_shop_pricedrop_refund(req.model_dump())
+    return err if err else body
+
+
+class ShopLegalGuaranteeRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    jurisdiction: str
+    delivered_on: str
+    condition: Optional[str] = None
+    nation: Optional[str] = None
+    discovered_on: Optional[str] = None
+    claim_requested_on: Optional[str] = None
+    sold_on: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_shop_legal_guarantee(args: dict):
+    try:
+        req = ShopLegalGuaranteeRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = guaranteekit.legal_guarantee(
+            req.jurisdiction, req.delivered_on,
+            condition=req.condition, nation=req.nation,
+            discovered_on=req.discovered_on,
+            claim_requested_on=req.claim_requested_on,
+            sold_on=req.sold_on, as_of=req.as_of)
+    except guaranteekit.WarrantError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/legal-guarantee")
+def api_shop_legal_guarantee(req: ShopLegalGuaranteeRequest):
+    body, err = run_shop_legal_guarantee(req.model_dump())
     return err if err else body
 
 
@@ -6647,6 +6687,7 @@ TOOL_RUN = {
            "shop_shipping_deadline": run_shop_shipping_deadline,
            "shop_return_deadline": run_shop_return_deadline,
            "shop_pricedrop_refund": run_shop_pricedrop_refund,
+           "shop_legal_guarantee": run_shop_legal_guarantee,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -10248,6 +10289,85 @@ MCP_TOOLS = [
                              "description": "ISO-4217 echo; EUR "
                                             "default for FR rows, "
                                             "USD for US"},
+                "as_of": {"type": "string",
+                          "description": "ISO YYYY-MM-DD day to "
+                                         "count days_left from"},
+            },
+        },
+    },
+    {
+        "name": "shop_legal_guarantee",
+        "description": (
+            "STATUTORY warranty clocks for one delivery date, FR and "
+            "UK, from replayed official text: FR — conformity action "
+            "runs 2 years from the day of delivery ('2 ans à partir "
+            "du jour de la délivrance'), presumption 24 months new, "
+            "12 months used, and refurbished is returned as the NAMED "
+            "self-contradiction of F11094 (both dates, never "
+            "averaged); vices cachés run 2 years from DISCOVERY, "
+            "capped 20 years from the SALE; claim date opens the "
+            "30-day remedy and 14-day refund clocks (10/20/50% "
+            "surcharge tiers). UK — 30-day short-term right to reject "
+            "(s.22(3) 'first day after these have all happened'), "
+            "six-month reversed burden (s.19(14) — a proof rule, not "
+            "a deadline), limitation six years for England/Wales/NI "
+            "vs FIVE for Scotland, both dates shipped when no nation "
+            "is passed. Verdicts closed: WITHIN_PRESUMPTION / "
+            "IN_WINDOW_BURDEN_YOURS / CONFORMITE_CLOSED / REJECT_"
+            "WINDOW_OPEN / PAST_REJECT_IN_PRESUMPTION / "
+            "PAST_BURDEN_YOURS_IN_LIMITATION / LIMITATION_PASSED / "
+            "CAP_PASSED_BEFORE_DISCOVERY. US/AU/BR/IE refused BY "
+            "NAME carrying their fact (no federal countable window; "
+            "'reasonable time' is not countable). Commercial holiday "
+            "windows are /shop/return-deadline. No clock, no "
+            "network, no legal advice. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["jurisdiction", "delivered_on"],
+            "additionalProperties": False,
+            "properties": {
+                "jurisdiction": {"type": "string",
+                                 "description": "fr | uk — every "
+                                                "number is that "
+                                                "country's statute"},
+                "delivered_on": {"type": "string",
+                                 "description": "ISO YYYY-MM-DD: FR "
+                                                "day of délivrance; "
+                                                "UK the day all of "
+                                                "s.22(3)(a)(b)(c) "
+                                                "completed (assumption "
+                                                "named in the answer)"},
+                "condition": {"type": "string",
+                              "description": "new (default) | used "
+                                             "| refurbished — FR "
+                                             "branches the "
+                                             "presumption on it; UK "
+                                             "statute does not"},
+                "nation": {"type": "string",
+                           "description": "UK only: england | wales "
+                                          "| scotland | northern-"
+                                          "ireland — six years vs "
+                                          "five; pass it or both "
+                                          "dates travel"},
+                "discovered_on": {"type": "string",
+                                  "description": "ISO date the "
+                                                 "defect appeared — "
+                                                 "opens the verdicts "
+                                                 "and the FR vices "
+                                                 "clocks"},
+                "claim_requested_on": {"type": "string",
+                                       "description": "ISO date you "
+                                                      "asked the "
+                                                      "seller (FR "
+                                                      "only: +30-day "
+                                                      "remedy, +14-"
+                                                      "day refund)"},
+                "sold_on": {"type": "string",
+                            "description": "ISO date of the SALE — "
+                                           "anchors the 20-year vices "
+                                           "cap; absent, delivered_on "
+                                           "proxies (named)"},
                 "as_of": {"type": "string",
                           "description": "ISO YYYY-MM-DD day to "
                                          "count days_left from"},

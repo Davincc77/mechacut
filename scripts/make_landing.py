@@ -364,7 +364,7 @@ TR = {
                  "the full manual:",
     "everyday.h2": "For everyone",
       "everyday.open": "Expand the proofs — real server outputs, no mockups.",
-  "everyday.intro": "No code, no jargon. Nineteen things a normal person "
+  "everyday.intro": "No code, no jargon. Twenty-four things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -557,6 +557,26 @@ TR = {
                       "claim deadline, the amount and the refund "
                       "mode, with the source class on every row. It "
                       "never fetches a price.",
+  "everyday.e24.name": "The gift broke AFTER the return window — "
+                       "what does the LAW still owe you, to the day",
+  "everyday.e24.say": "Christmas gift, delivered Dec 25, dies Jan "
+                      "16: the shop's goodwill window closed Jan 15 "
+                      "and the press stops answering here. The "
+                      "statute doesn't. France: the conformity "
+                      "guarantee runs 2 years from DELIVERY, the "
+                      "hidden-defect clock 2 years from DISCOVERY "
+                      "under a 20-year cap — three different "
+                      "anchors under the word 'garantie'. UK: "
+                      "three clocks again, 30 days to reject, six "
+                      "months of reversed burden (a PROOF rule, "
+                      "not a deadline), six years to sue — five in "
+                      "Scotland. Every answer is dated from your "
+                      "one input; where the official page "
+                      "contradicts itself (refurbished goods, "
+                      "24 vs 12 months), BOTH dates travel named. "
+                      "US and AU are refused by name: no federal "
+                      "countable window; 'reasonable time' is not "
+                      "a date.",
   "nav.kit": "Kit",
   "kit.h2": "The suite on your disk",
   "kit.creed": "The protocol is not the transport \u2014 it is the birth certificate of the tool.",
@@ -903,7 +923,7 @@ TR = {
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour tout le monde",
       "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
-  "everyday.intro": "Pas de code, pas de jargon. Dix-neuf choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Vingt-quatre choses qu'un humain "
                     "demande à son agent un mardi après-midi "
                     "\u2014 chaque réponse ci-dessous est la sortie "
                     "réelle du serveur, pas une maquette.",
@@ -1103,6 +1123,29 @@ TR = {
                       "r\u00e9clamation, le montant et la monnaie "
                       "du remboursement, classe de source sur chaque "
                       "ligne. Elle ne fetch aucun prix.",
+  "everyday.e24.name": "Le cadeau est mort APRÈS le délai de "
+                       "retour — que vous doit encore la LOI, jour "
+                       "pour jour",
+  "everyday.e24.say": "Cadeau livré le 25 décembre, en panne le 16 "
+                      "janvier : la vitrine a fermé le 15 et la "
+                      "presse ne répond plus. La loi, si. En "
+                      "France, la garantie de conformité court 2 "
+                      "ans depuis la DÉLIVRANCE, les vices cachés "
+                      "2 ans depuis la DÉCOUVERTE, sous un plafond "
+                      "de 20 ans depuis la vente — trois ancres "
+                      "différentes sous le seul mot « garantie ». "
+                      "Au Royaume-Uni, trois horloges encore : 30 "
+                      "jours pour rejeter, six mois de charge de "
+                      "la preuve INVERSÉE (une règle de preuve, "
+                      "pas une échéance), six ans pour agir — cinq "
+                      "en Écosse. Chaque réponse est datée depuis "
+                      "votre seule date livrée ; quand la page "
+                      "officielle se contredit elle-même (le "
+                      "reconditionné : 24 ou 12 mois), les DEUX "
+                      "dates voyagent, nommées, jamais moyennées. "
+                      "États-Unis et Australie refusés par nom : "
+                      "pas de fenêtre fédérale comptable ; « "
+                      "reasonable time » n'est pas une date.",
   "nav.kit": "Kit",
   "kit.h2": "La suite sur votre disque",
   "kit.creed": "Le protocole n'est pas le transport \u2014 c'est l'acte de naissance de l'outil.",
@@ -1445,7 +1488,7 @@ TR = {
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para todo mundo",
       "everyday.open": "Expandir as provas — saídas reais do servidor, não maquetes.",
-  "everyday.intro": "Sem código, sem jargão. Dezenove coisas que "
+  "everyday.intro": "Sem código, sem jargão. Vinte e quatro coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -1636,6 +1679,24 @@ TR = {
                       "veredicto, o prazo do pedido, o valor e a "
                       "forma do reembolso, com a classe de fonte em "
                       "cada linha. Ela nunca busca pre\u00e7os.",
+  "everyday.e24.name": "O presente quebrou DEPOIS do prazo de "
+                       "troca — o que a LEI ainda deve, ao dia",
+  "everyday.e24.say": "Presente entregue em 25 de dezembro, morto "
+                      "em 16 de janeiro: a janela da loja fechou "
+                      "dia 15 e a imprensa cala. A lei não. Na "
+                      "França, a conformidade corre 2 anos desde a "
+                      "ENTREGA e os vícios ocultos 2 anos desde a "
+                      "DESCOBERTA, sob teto de 20 anos da venda — "
+                      "três âncoras sob a mesma palavra. No Reino "
+                      "Unido, três relógios: 30 dias para rejeitar, "
+                      "seis meses de ônus invertido (regra de "
+                      "prova, não prazo), seis anos para agir — "
+                      "cinco na Escócia. Resposta datada a partir "
+                      "de uma única data sua; quando a página "
+                      "oficial se contradiz (recondicionado: 24 ou "
+                      "12 meses), as DUAS datas viajam nomeadas. "
+                      "EUA e Austrália recusados por nome: sem "
+                      "janela federal contável.",
   "nav.kit": "Kit",
   "kit.h2": "A suíte no seu disco",
   "kit.creed": "O protocolo não é o transporte \u2014 é a certidão de nascimento da ferramenta.",
@@ -3197,7 +3258,10 @@ W = {
                   "cut %s%%, not the announced 30%%",
       "pricedrop": "\u2192 owed %s \u00b7 claim by %s (%s) \u00b7 the "
                    "window is a published date, the source class "
-                   "travels in the row"},
+                   "travels in the row",
+      "warr": "\u2192 statutory conformity until %s (%s) \u00b7 "
+              "hidden-defect clock to %s from the DISCOVERY \u2014 "
+              "the shop window died Jan 15, the law did not"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "returndead": "\u2192 retour jusqu'au %s (%s) \u00b7 chez "
@@ -3210,6 +3274,10 @@ W = {
            "pricedrop": "\u2192 %s \u00e0 r\u00e9clamer avant le %s "
                         "(%s) \u00b7 la fen\u00eatre est une date "
                         "publi\u00e9e, la classe de source voyage",
+           "warr": "\u2192 conformité légale jusqu'au %s (%s) \u00b7 "
+                   "vices cachés jusqu'au %s depuis la DÉCOUVERTE "
+                   "\u2014 la vitrine a fermé le 15 janvier, la loi "
+                   "non",
            "word": "\u2192 \u00ab %s \u00bb",
            "iban": "\u2192 cl\u00e9 de contr\u00f4le valide \u00b7 %s",
            "page": "\u2192 page autonome (%s octets) \u00b7 Ctrl-P = PDF",
@@ -3255,6 +3323,9 @@ W = {
                          "janeiro \u00bb nunca diz isso",
            "auditcut": "\u2192 %s \u00b7 refer\u00eancia legal %s \u00b7 "
                        "corte real %s%%, n\u00e3o os 30%% anunciados",
+           "warr": "\u2192 conformidade legal at\u00e9 %s (%s) \u00b7 "
+                   "v\u00edcios at\u00e9 %s desde a DESCOBERTA \u2014 "
+                   "a loja fechou 15 de janeiro, a lei n\u00e3o",
            "pricedrop": "\u2192 %s a reclamar at\u00e9 %s (%s) \u00b7 a "
                         "janela \u00e9 data publicada, a classe da "
                         "fonte viaja na linha",
@@ -3466,6 +3537,13 @@ _EVERYDAY_CALLS = [
      "pricedrop", lambda d, L_: (
          d["refund_amount"], d["claim_by"],
          d["claim_by_weekday"])),
+    ("/api/v1/shop/legal-guarantee",
+     {"jurisdiction": "FR", "delivered_on": "2026-12-25",
+      "discovered_on": "2027-01-16", "as_of": "2027-01-16"},
+     "warr", lambda d, L_: (
+         d["conformite_action_by"]["date"],
+         d["conformite_action_by"]["weekday"],
+         d["vices"]["action_by"])),
 ]
 
 

@@ -519,6 +519,17 @@ SAY = {
         "pt": "o cliente carrega 3 das 12 ferramentas — cole a "
               "lista e receba os motivos com nome, sem executar o "
               "servidor"},
+    "/api/v1/shop/legal-guarantee": {
+        "en": "gift faulty on 16 January — the shop window died, "
+              "the LAW didn't: your 30-day, six-month and six-year "
+              "dates, to the day",
+        "fr": "le cadeau tombe en panne le 16 janvier : la fenêtre "
+              "du magasin est morte, la garantie légale court "
+              "encore — vos dates de 2 ans, de présomption et de "
+              "forclusion, jour pour jour",
+        "pt": "o presente quebra em 16 de janeiro: a janela da loja "
+              "morreu, a garantia legal da França e do Reino Unido "
+              "continua — datas contadas ao dia"},
     "/api/v1/agent/retry-budget": {
         "en": "same 429 three times running — retry it, change it, "
               "or stop?",

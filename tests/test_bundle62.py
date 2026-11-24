@@ -270,6 +270,6 @@ def test_e15_landing_card_baked_three_languages():
     # resize 22-11 bundle66: la grille passe a seize puces ;
     # resize 23-11 bundle73 : e19 (ovenschedule) — dix-neuf, compte
     # recalé sur le nombre réel de cartes (e17/e18 avaient dérivé).
-    for doc, word in ((en, "Nineteen"), (fr, "Dix-neuf"),
-                      (pt, "Dezenove")):
+    for doc, word in ((en, "Twenty-four"), (fr, "Vingt-quatre"),
+                      (pt, "Vinte e quatro")):
         assert word in doc["everyday.intro"]

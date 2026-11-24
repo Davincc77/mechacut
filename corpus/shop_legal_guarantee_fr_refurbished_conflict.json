@@ -1,0 +1,9 @@
+{
+ "name": "shop_legal_guarantee_fr_refurbished_conflict",
+ "path": "/api/v1/shop/legal-guarantee",
+ "body": {
+  "jurisdiction": "FR",
+  "delivered_on": "2026-12-25",
+  "condition": "refurbished"
+ }
+}

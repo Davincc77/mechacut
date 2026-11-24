@@ -1,0 +1,11 @@
+{
+ "name": "shop_legal_guarantee_uk_six_month_edge",
+ "path": "/api/v1/shop/legal-guarantee",
+ "body": {
+  "jurisdiction": "UK",
+  "delivered_on": "2026-12-25",
+  "nation": "scotland",
+  "discovered_on": "2027-06-24",
+  "as_of": "2027-06-24"
+ }
+}

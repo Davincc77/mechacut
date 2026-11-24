@@ -46,6 +46,8 @@ UA = ("mechacut-radar/1.0 (growth-loop; contact: "
 NOUS = "https://inference-api.nousresearch.com/v1"
 RADAR_DIR = os.path.join(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__))), "docs", "RADAR")
+# bundle 99 (S) — continuite du miroir --catalog entre scans impayes.
+CATALOG_FILE = os.path.join(RADAR_DIR, "latest_catalog.json")
 
 # ---------------- lentille 1 : le corpus. Chaque cas = (texte,
 # attente). attente : nom de fiche/route cherche dans le top, ou
@@ -179,6 +181,33 @@ CASES = [
     ("me faz uma piada sobre prazos de devolução", None),
     ("le meilleur prix Fnac me doit la différence après la baisse",
      "pricedrop"),
+    # bundle 99 — découvrabilité des horloges LÉGALES + la frontière
+    # double qu'elles ouvrent : le retour COMMERCIAL ne doit pas
+    # voler l'horloge légale, et « retourner ce qui ne plaît pas »
+    # (aucun défaut) ne doit PAS basculer sur la garantie — un
+    # leurre qui route = une promesse fausse. La question de
+    # VALEUR (« faut-il payer ») ne prescrit aucune date : None.
+    # Le leurre blague × garantie teste la forme fermée b98 sur la
+    # FAMILLE neuve, pas seulement sur les retours.
+    ("mon cadeau est en panne le 16 janvier, la garantie légale "
+     "jusqu'à quand", "legal_guarantee"),
+    ("vices cachés lave-linge acheté à Noël délai pour agir",
+     "legal_guarantee"),
+    ("the tv I got as a gift in December broke in March, statutory "
+     "rights how long", "legal_guarantee"),
+    ("faulty present consumer rights act six months burden scotland",
+     "legal_guarantee"),
+    ("garantie de conformité 24 mois présomption occasion",
+     "legal_guarantee"),
+    ("presente com defeito depois do prazo da troca garantia legal",
+     "legal_guarantee"),
+    ("je veux retourner le cadeau de Noël qui ne me plaît pas, "
+     "pas de panne", "return_deadline"),
+    ("le magasin dit que la garantie du constructeur est finie, "
+     "et la loi", "legal_guarantee"),
+    ("faut-il payer la garantie prolongée à 40 euros pour le "
+     "sèche-linge", None),
+    ("tell me a joke about the legal guarantee", None),
 ]
 
 
@@ -319,14 +348,46 @@ def main():
     argv = sys.argv[1:]
     os.makedirs(RADAR_DIR, exist_ok=True)
     rows = probe_router(None)
+    # --- douleur d'OUTIL n°5/8, fix bundle 99 (S) : un scan sans
+    # --catalog ecrasait latest.json SANS les lignes catalogue, donc
+    # le miroir paye (1 cycle sur 4) perdait sa continuite : le
+    # paiement suivant re-decouvrait ses mirages comme « NOUVELLE »
+    # au lieu de les suivre. Le miroir vit desormais dans
+    # latest_catalog.json, ecrit AU SEUL scan paye, et toute la
+    # vue latest.json le charrie jusqu'au prochain paiement —
+    # marque via=catalog-mirror, jamais compte dans les douleurs du
+    # scan courant.
+    mirror = []
+    if os.path.exists(CATALOG_FILE):
+        try:
+            mirror = json.load(open(CATALOG_FILE))["rows"]
+        except Exception:
+            mirror = []
     if "--catalog" in argv:
-        rows += probe_catalog()
+        crows = probe_catalog()
+        rows += crows
+        mirror = []
+        with open(CATALOG_FILE, "w") as fh:
+            json.dump({"ts": datetime.now().isoformat(timespec="seconds"),
+                       "rows": crows}, fh, ensure_ascii=False, indent=1)
     scan = {"ts": datetime.now().isoformat(timespec="seconds"),
             "n": len(rows),
             "counts": {v: sum(1 for r in rows if r["verdict"] == v)
                        for v in sorted({r["verdict"] for r in rows})},
             "rows": rows}
     latest = os.path.join(RADAR_DIR, "latest.json")
+    stamp = scan["ts"].replace(":", "-").replace(" ", "_")
+    with open(os.path.join(RADAR_DIR, "scan-%s.json" % stamp),
+              "w") as fh:
+        json.dump(scan, fh, ensure_ascii=False, indent=1)
+    # latest.json = scan courant + miroir catalogue en veille ( marque
+    # via=catalog-mirror ) pour que le diff du prochain scan paye voie
+    # ses propres lignes comme PREV, pas comme decouvertes.
+    carried = [dict(r, via="catalog-mirror") for r in mirror]
+    latest_doc = {"ts": scan["ts"],
+                  "n": len(rows) + len(carried),
+                  "counts": scan["counts"],
+                  "rows": rows + carried}
     prev = {}
     if os.path.exists(latest):
         # clé (texte, want) : le corpus contient des lignes au MEME
@@ -336,12 +397,8 @@ def main():
         # ligne PT loja).
         prev = {(r["text"], r.get("want"), r.get("via")): r["verdict"]
                 for r in json.load(open(latest))["rows"]}
-    stamp = scan["ts"].replace(":", "-").replace(" ", "_")
-    with open(os.path.join(RADAR_DIR, "scan-%s.json" % stamp),
-              "w") as fh:
-        json.dump(scan, fh, ensure_ascii=False, indent=1)
     with open(latest, "w") as fh:
-        json.dump(scan, fh, ensure_ascii=False, indent=1)
+        json.dump(latest_doc, fh, ensure_ascii=False, indent=1)
     new_pain = [r for r in rows
                 if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
                 and prev.get((r["text"], r.get("want"),

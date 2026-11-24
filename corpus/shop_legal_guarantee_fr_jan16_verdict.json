@@ -1,0 +1,10 @@
+{
+ "name": "shop_legal_guarantee_fr_jan16_verdict",
+ "path": "/api/v1/shop/legal-guarantee",
+ "body": {
+  "jurisdiction": "FR",
+  "delivered_on": "2026-12-25",
+  "discovered_on": "2027-01-16",
+  "as_of": "2027-01-16"
+ }
+}

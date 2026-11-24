@@ -305,6 +305,19 @@ TABLE = (
      "garantie meilleur prix qui me doit ecart carte cadeau "
      "queda de preco depois comprar diferenca reembolso garantia "
      "melhor preco"),
+    ("shop_legal_guarantee", "/api/v1/shop/legal-guarantee",
+     "dates",
+     "statutory warranty clocks FR/UK from one delivery day: "
+     "24m/12m, vices 2y+20y, UK 30-day/6m/6y-5y, conflicts named",
+     "statutory warranty legal guarantee clocks conformity "
+     "defect faulty broken gift burden limitation reject "
+     "consumer rights act scotland six years "
+     "garantie legale vice cache vices caches caché défectueux "
+     "defenseux conforme delai panne cadeau presomption forclusion "
+     "deux ans reparation remboursement garantie l\u00e9gale loi "
+     "constructeur fabricant "
+     "garantia legal defeito prazo fran\u00e7a reino unido "
+     "conformidade vicio"),
     ("invoice_validate_totals", "/api/v1/invoice/validate-totals",
      "checks",
      "declared invoice totals vs exact arithmetic, signed deltas",

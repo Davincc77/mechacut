@@ -420,9 +420,12 @@ def test_everyday_chip_baked_three_languages():
     # resize 23-11 bundle73: le COMPTE était périmé (e17/e18 ajoutés
     # sans recompter — dérive mesurée) ; e19 (ovenschedule) le remet à
     # jour, et l'assertion porte désormais le compte réel des cartes.
-    assert "Nineteen" in en["everyday.intro"]
-    assert "Dix-neuf" in fr["everyday.intro"]
-    assert "Dezenove" in pt["everyday.intro"]
+    # resize 24-11 bundle99 : la grille compte 24 cartes (le mot
+    # « Nineteen » datait de e19 ; e20-e23 avaient dérivé le compte —
+    # dérive mesurée, corrigée avec e24, précédent b73).
+    assert "Twenty-four" in en["everyday.intro"]
+    assert "Vingt-quatre" in fr["everyday.intro"]
+    assert "Vinte e quatro" in pt["everyday.intro"]
 
 
 def test_golden_contains_eleven_new_pins():

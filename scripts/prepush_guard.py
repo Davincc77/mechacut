@@ -22,7 +22,11 @@ ROOT = subprocess.run(["git", "rev-parse", "--show-toplevel"],
 EXCLUDE = os.path.join(ROOT, ".git", "info", "exclude")
 
 SECRET_PATTERNS = [
-    re.compile(r"sk-[A-Za-z0-9_\-]{20,}"),
+    # borne nommee bundle99 : le motif nu matchait « mu-sk-says-grok-... »
+    # (URL d'article verbatim deja poussee) — une vraie cle sk- n'est
+    # jamais collees a une lettre, le lookbehind ferme le faux positif
+    # sans aveugler le garde.
+    re.compile(r"(?<![A-Za-z0-9])sk-[A-Za-z0-9_\-]{20,}"),
     re.compile(r"(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}"),
     re.compile(r"github_pat_[A-Za-z0-9_]{20,}"),
     re.compile(r"xox[bpars]-[A-Za-z0-9\-]{10,}"),

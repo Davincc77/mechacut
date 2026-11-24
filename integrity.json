@@ -3643,6 +3643,52 @@
   },
   {
    "body": {
+    "as_of": "2027-01-16",
+    "delivered_on": "2026-12-25",
+    "discovered_on": "2027-01-16",
+    "jurisdiction": "FR"
+   },
+   "name": "shop_legal_guarantee_fr_jan16_verdict",
+   "path": "/api/v1/shop/legal-guarantee",
+   "sha256": "b99ca11dd71b61d01b4b733ea6e4477c6a170868b28d2c27bd3cb840679841f2",
+   "status": 200
+  },
+  {
+   "body": {
+    "condition": "refurbished",
+    "delivered_on": "2026-12-25",
+    "jurisdiction": "FR"
+   },
+   "name": "shop_legal_guarantee_fr_refurbished_conflict",
+   "path": "/api/v1/shop/legal-guarantee",
+   "sha256": "c0a6aa5038495b6f98aaee1a45495be73eb7032d6ef0b6dcd5405ca08401bfba",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2027-06-24",
+    "delivered_on": "2026-12-25",
+    "discovered_on": "2027-06-24",
+    "jurisdiction": "UK",
+    "nation": "scotland"
+   },
+   "name": "shop_legal_guarantee_uk_six_month_edge",
+   "path": "/api/v1/shop/legal-guarantee",
+   "sha256": "3d8003463e67bc31488f3d8ec398e4beea26de0bcec0a6a37cca08cc2b7c5a36",
+   "status": 200
+  },
+  {
+   "body": {
+    "delivered_on": "2026-12-25",
+    "jurisdiction": "US"
+   },
+   "name": "shop_legal_guarantee_us_refused",
+   "path": "/api/v1/shop/legal-guarantee",
+   "sha256": "04913fb824b751eee9c619fbbcd43dc346e74ea99709c196173e2ce412da3354",
+   "status": 400
+  },
+  {
+   "body": {
     "drop_date": "2026-11-20",
     "new_price": "80.00",
     "purchase_date": "2026-11-05",

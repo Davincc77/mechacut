@@ -45,10 +45,11 @@ def test_manifest_token_budget():
     # per tool; the real ceiling is the byte budget + dense fold in the
     # routing module — line count is only a proxy, resized here as the
     # catalogue grows past its original 95-tool shape
-    assert len(lines) < 215   # resize 24-11 bundle97 (+agent_mcpsurface)
-    # : 214 lignes MESUREES, 8 740 octets < 9 000 — le budget octets
-    # est le vrai plafond et il serre (260 restants) : le prochain
-    # lot border line débordera, le dense-fold routing le porte déjà.
+    assert len(lines) < 216   # resize 24-11 bundle99 (+shop_legal_guarantee)
+    # : 215 lignes MESUREES, 8 805 octets < 9 000 — le dense-fold a
+    # bel et bien servi (le resize b97 avait prédit le débordement de
+    # la ligne frontière). Le budget octets reste le vrai plafond
+    # et il serre à 195. Suite du précédent 214 (bundle97).
     # Leçon du lot : les golds d'un test qui FIGE un plafond suivent
     # la mesure, jamais l'à-peu-près (précédent 197/214 bundle89).
     # shipping_deadline, +invoice_validate_totals) : 197 lignes, le
@@ -96,7 +97,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 181   # +agent_mcpsurface bundle97 ; 180 avec shop_pricedrop_refund
+    assert seen == len(routing.TABLE) == 182   # +shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97 ; 180 avec shop_pricedrop_refund
     # (23-11 bundle96) ; était 179 avec agent_mcpaudit (bundle92)
 
 
