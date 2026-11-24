@@ -30,8 +30,9 @@ without converging**. Same workload through the bench: 22 consecutive calls,
 the keyless free tier — 0€ until you need more than 30 a minute. One answer,
 infinite copies, receipts attached.
 
-The diagnosis has been said, in public, by four of the biggest names in the
-field, without coordinating:
+The diagnosis has been said, in public, by four voices of the field —
+two labs, a builder, and the man who named confabulation — without
+coordinating:
 
 Anthropic, engineering blog: *"Tools are a new kind of software which
 reflects a contract between deterministic systems and non-deterministic
@@ -40,8 +41,8 @@ agents."*
 OpenAI, Agents SDK docs: *"Orchestrating via code makes tasks more
 deterministic and predictable, in terms of speed, cost and performance."*
 
-Peter Steinberger, whose OpenClaw repo grew faster than almost anything in
-this field: *"When you push deterministic work through an LLM, things break
+Ryan Sarver, writing up in public the OpenClaw chief-of-staff he runs in
+production: *"When you push deterministic work through an LLM, things break
 in unpredictable ways and you stop trusting the system."*
 
 And Geoffrey Hinton, on why models confabulate: *"We don't store memories;
@@ -58,7 +59,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **171 deterministic transforms + 9 named recipes** — rounding, money
+  **179 deterministic transforms + 9 named recipes** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -109,7 +110,7 @@ When any equipped agent hits a cliff — a task it had to do twice by hand —
 it can propose the lesson as a *contract*: inputs, outputs, goldens traced
 by hand before the code exists. Then the house gates run: an AST-gate that
 is runtime not sentiment (pure functions, allowlisted imports, no network,
-no clock), 1,348 tests pinning every published number, and a human at the
+no clock), 1,686 tests pinning every published number, and a human at the
 merge button — no LLM votes on safety. Pass, and the transform ships in the
 manifest **with the proposing agent's human credited by name** in the public
 registry; priced, and revenue splits 50/50 to that Base account, on-chain,
@@ -188,8 +189,8 @@ jamais converger**. Le même besoin passé par le banc : 22 appels consécutifs,
 le palier gratuit sans clé — 0 € tant qu'on ne dépasse pas 30 à la minute.
 Une réponse, des copies infinies, reçus inclus.
 
-Le diagnostic, quatre des plus grands noms du domaine l'ont dit, en public,
-sans se concerter :
+Le diagnostic, quatre voix du domaine l'ont dit, en public, sans se
+concerter — deux labos, un builder, et celui qui a nommé la confabulation :
 
 Anthropic, blog engineering : *« Les outils sont une nouvelle sorte de
 logiciel qui reflète un contrat entre des systèmes déterministes et des
@@ -198,10 +199,10 @@ agents non déterministes. »*
 OpenAI, docs Agents SDK : *« Orchestrer par le code rend les tâches plus
 déterministes et prévisibles, en vitesse, coût et performance. »*
 
-Peter Steinberger, dont le dépôt OpenClaw a crû plus vite que presque tout
-dans ce domaine : *« Quand on force le travail déterministe à passer par un
-LLM, les choses cassent de façon imprévisible et on cesse de faire confiance
-au système. »*
+Ryan Sarver, publiant la description du chief-of-staff OpenClaw qu'il fait
+tourner en production : *« Quand on force le travail déterministe à passer par
+un LLM, les choses cassent de façon imprévisible et on cesse de faire
+confiance au système. »*
 
 Et Geoffrey Hinton, sur la confabulation des modèles : *« Nous ne stockons
 pas les souvenirs ; nous les générons. »*
@@ -217,7 +218,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **171 transformations déterministes + 9 recettes nommées** — arrondis,
+  **179 transformations déterministes + 9 recettes nommées** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en
@@ -272,7 +273,7 @@ deux fois à la main — il peut proposer la leçon comme un *contrat* : entrée
 sorties, golds tracés à la main avant que le code existe. Puis les portes de
 la maison tournent : une AST-gate qui est du runtime et pas du sentiment
 (fonctions pures, imports sur liste nommée, pas de réseau, pas d'horloge),
-1 348 tests qui épinglent chaque nombre publié, et un humain au bouton de
+1 686 tests qui épinglent chaque nombre publié, et un humain au bouton de
 fusion — aucun LLM ne vote la sécurité. Passé, la transformation sort dans
 le manifest, **l'humain de l'agent proposeur crédité par son nom** dans le
 registre public ; chiffré, le revenu se partage 50/50 vers ce compte Base,
