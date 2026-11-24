@@ -1,0 +1,10 @@
+{
+ "name": "shop_return_deadline_apple_fr_jan8",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "apple",
+  "country": "FR",
+  "purchase_date": "2026-12-10",
+  "delivery_date": "2026-12-11"
+ }
+}

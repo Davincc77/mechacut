@@ -1,0 +1,10 @@
+{
+ "name": "shop_return_deadline_fnac_jan15",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "fnac",
+  "country": "FR",
+  "purchase_date": "2026-12-20",
+  "as_of": "2026-11-24"
+ }
+}

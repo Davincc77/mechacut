@@ -281,5 +281,8 @@ def test_radar_corpus_rows_present():
                                     "..", "scripts"))
     import route_radar as rr
     wants = [w for _, w in rr.CASES if w == "pricedrop"]
-    assert len(wants) == 4
+    # resize estampillé 24-nov (bundle98) : 4 lignes b96 + 1 ligne
+    # frontière FR (« le meilleur prix Fnac me doit la différence »)
+    # — le solde FR doit rester chez pricedrop, pas voler les dates.
+    assert len(wants) == 5
     assert any(w == "return_deadline" for _, w in rr.CASES)

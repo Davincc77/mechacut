@@ -367,7 +367,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.18.0",
+    version="1.19.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -10112,9 +10112,10 @@ MCP_TOOLS = [
         "description": (
             "Holiday 2026-2027 RETURN deadline for a purchase date, "
             "from a cross-checked >=2-source table: retailer + "
-            "purchase_date (+ country US|UK, category, membership "
+            "purchase_date (+ country US|UK|FR, category, membership "
             "for bestbuy, channel, delivery_date when the rule "
-            "counts from receipt) -> return_by + weekday + rule "
+            "counts from receipt or the clause is a later-of) -> "
+            "return_by + weekday + rule "
             "applied. Provenance per row (published | press2); a "
             "pattern-vs-published conflict is returned NAMED, never "
             "averaged; single-source retailers are refused by name "
@@ -10129,13 +10130,16 @@ MCP_TOOLS = [
                 "retailer": {"type": "string",
                              "description": "amazon | walmart | "
                                             "target | bestbuy | "
-                                            "costco (US); amazon "
-                                            "(UK)"},
+                                            "costco | apple (US); "
+                                            "amazon (UK); fnac | "
+                                            "darty | boulanger | "
+                                            "dell | amazon | apple "
+                                            "(FR)"},
                 "purchase_date": {"type": "string",
                                   "description": "ISO YYYY-MM-DD, "
                                                  "season 2026 only"},
                 "country": {"type": "string",
-                            "description": "US (default) | UK"},
+                            "description": "US (default) | UK | FR"},
                 "category": {"type": "string",
                              "description": "general | electronics | "
                                             "entertainment | apple | "

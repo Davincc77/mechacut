@@ -292,7 +292,8 @@ TABLE = (
      "retour delai date limite retourner echange cadeau apres "
      "noel achat magasin delai de retour "
      "troca devolucao prazo ultimo dia devolver presente depois "
-     "do natal comprar"),
+     "do natal comprar "
+     "fnac darty boulanger dell cdiscount renvoyer renvoi livraison reception"),
     ("shop_pricedrop_refund", "/api/v1/shop/pricedrop-refund",
      "dates",
      "price drop after purchase: who owes you the difference, by "
@@ -1269,7 +1270,20 @@ def _stem(w):
 
 def route(query, top=5):
     toks, seen = [], set()
+    # FORME FERMÉE b98 — « blague / joke / piada » est un NOM de
+    # requête méta : mechacut ne produit AUCUNE blague, donc toute
+    # requête qui le contient est un NO_MATCH juré, quels que soient
+    # ses mots de contenu. Douleur pêchée CE cycle par mon propre
+    # leurre de corpus : « blague sur les retours de Noël » ROUTAIT
+    # (poids retour+noël > plancher T6 depuis l'extension FR b98) —
+    # un leurre qui route = promesse fausse. La classe EN « tell me
+    # a joke about X » (file n°7, ssh_fingerprint OVERMATCH) meurt
+    # par la MÊME règle, en trois langues, sans verbes ni LM.
+    joke = False
     for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
+        if t in ("blague", "blagues", "joke", "jokes", "piada",
+                 "piadas"):
+            joke = True
         if not t or t in STOP:
             continue
         # CLASSE b81 : un chiffre dans une requête est une DONNÉE,
@@ -1283,6 +1297,8 @@ def route(query, top=5):
         if st not in seen:
             seen.add(st)
             toks.append(st)
+    if joke:
+        return []
     scored = []
     for idx, (name, path, pack, purpose, tags) in enumerate(TABLE):
         tail = path[len("/api/v1/"):]

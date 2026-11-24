@@ -1,0 +1,10 @@
+{
+ "name": "shop_return_deadline_dell_later_of",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "dell",
+  "country": "FR",
+  "purchase_date": "2026-12-10",
+  "delivery_date": "2026-12-20"
+ }
+}

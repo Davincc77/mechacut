@@ -148,6 +148,37 @@ CASES = [
     # famille ssh, consignée à la file, non encodée ici comme « doit
     # mourir » tant que le routeur ne plie pas les formes
     # « tell/joke about » comme il plie « blague ».
+    # bundle 98 — découvrabilité FR des lignes officielles neuves
+    # (fnac/darty 15-jan, boulanger 31-jan fenêtre oct30→déc27,
+    # dell later-of, apple direct 8-jan REÇUS) + la frontière :
+    # « qui me doit la différence » reste à pricedrop, et la
+    # blague FR sur les retours meurt (stop-formage b95) — un
+    # leurre qui route = une promesse fausse.
+    ("jusqu'où retourner le cadeau de Noël acheté à la Fnac le 20 "
+     "décembre", "return_deadline"),
+    ("puis-je encore retourner le téléviseur acheté chez Darty "
+     "avant Noël", "return_deadline"),
+    ("le PC Dell reçu le 20 décembre, jusqu'à quand puis-je le "
+     "renvoyer", "return_deadline"),
+    ("jusqu'au 8 janvier inclus le cadeau Apple reçu à Noël",
+     "return_deadline"),
+    ("can I still return the Apple gift received on December 21",
+     "return_deadline"),
+    ("my Fnac Christmas purchase return deadline january",
+     "return_deadline"),
+    ("prazo de devolução do presente de Natal comprado na Fnac em "
+     "dezembro", "return_deadline"),
+    ("boulanger retour prolongé 31 janvier achat 27 décembre",
+     "return_deadline"),
+    ("raconte-moi une blague sur les retours de Noël", None),
+    # b98 — la FORME meurt, pas le poids : la blague EN qui était
+    # une douleur OVERMATCH (file n°7, ssh_fingerprint, pêchée b97)
+    # est encodée « doit mourir » DÈS QUE le fix existe — règle de
+    # grammaire fermée « blague|joke|piada », zéro LM.
+    ("tell me a joke about fingerprints", None),
+    ("me faz uma piada sobre prazos de devolução", None),
+    ("le meilleur prix Fnac me doit la différence après la baisse",
+     "pricedrop"),
 ]
 
 

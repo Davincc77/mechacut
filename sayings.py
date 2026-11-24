@@ -43,7 +43,7 @@ SAY = {
         "en": "can I still return the Christmas gift I bought at "
               "Target, and until when?",
         "fr": "jusqu'à quelle date peut-on encore retourner un "
-              "cadeau de Noël acheté chez Walmart ?",
+              "cadeau de Noël acheté à la Fnac ?",
         "pt": "qual o prazo para devolver um presente de Natal "
               "comprado na Amazon?"},
     "/api/v1/shop/pricedrop-refund": {

@@ -1,0 +1,10 @@
+{
+ "name": "shop_return_deadline_darty_marketplace_refused",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "darty",
+  "country": "FR",
+  "purchase_date": "2026-12-20",
+  "channel": "marketplace"
+ }
+}

@@ -3684,13 +3684,25 @@
   },
   {
    "body": {
+    "country": "FR",
+    "delivery_date": "2027-01-05",
+    "purchase_date": "2026-12-20",
+    "retailer": "amazon"
+   },
+   "name": "shop_return_deadline_amazon_fr_later_of",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "93b4638bce7285c7caa8bb87460dfa9b81b7dc6e8b3320b5446e844af0975349",
+   "status": 200
+  },
+  {
+   "body": {
     "as_of": "2026-11-23",
     "purchase_date": "2026-12-20",
     "retailer": "amazon"
    },
    "name": "shop_return_deadline_amazon_us_hard_date",
    "path": "/api/v1/shop/return-deadline",
-   "sha256": "b1b8b3ba61a8d22ad5977e4398f36d86b3e176b194b91cdfc2dc86a642076b5b",
+   "sha256": "842c58954d333990541040c09fb1d4d2d59a768ece2692e9be70e52543b93026",
    "status": 200
   },
   {
@@ -3701,7 +3713,30 @@
    },
    "name": "shop_return_deadline_apple_16_days_earlier",
    "path": "/api/v1/shop/return-deadline",
-   "sha256": "93d6503a202263a51273066182cb88c842bc48c98e75c8a618108a148252d6bb",
+   "sha256": "d03579604c285db5ca95c70760c116daa790a5ea93c865899fa93620bb142e87",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "FR",
+    "delivery_date": "2026-12-11",
+    "purchase_date": "2026-12-10",
+    "retailer": "apple"
+   },
+   "name": "shop_return_deadline_apple_fr_jan8",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "13d4bc0e2f6a2460e0bef4a04b4287bc18a27afe1053296862cd6d780ce32c5c",
+   "status": 200
+  },
+  {
+   "body": {
+    "delivery_date": "2026-12-21",
+    "purchase_date": "2026-12-20",
+    "retailer": "apple"
+   },
+   "name": "shop_return_deadline_apple_us_received",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "853af33b0dd3d003592a46cc3bf4a1b4e62510ae7d89375052a4440a1dc842e0",
    "status": 200
   },
   {
@@ -3712,7 +3747,65 @@
    },
    "name": "shop_return_deadline_bb_member_rolling",
    "path": "/api/v1/shop/return-deadline",
-   "sha256": "1f9b0fb2631c019833501376637688e34b3a68d41b22f4370f58db60f33b974a",
+   "sha256": "cd89f4de73e80f243656d0b9da724e5f9096a2c3b392d5ffa636665cfeb9a9d6",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "FR",
+    "purchase_date": "2026-12-27",
+    "retailer": "boulanger"
+   },
+   "name": "shop_return_deadline_boulanger_dec27_edge",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "c69d8316be7144d6b51b95b585a03c31e3cd904ad36e294135d767f77d62d5c8",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "FR",
+    "purchase_date": "2026-12-20",
+    "retailer": "cdiscount"
+   },
+   "name": "shop_return_deadline_cdiscount_refused",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "44d887c70cc32d898240a8169f8ffb17f969103b6eb6d8e085102984b0afedbf",
+   "status": 400
+  },
+  {
+   "body": {
+    "channel": "marketplace",
+    "country": "FR",
+    "purchase_date": "2026-12-20",
+    "retailer": "darty"
+   },
+   "name": "shop_return_deadline_darty_marketplace_refused",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "c00e95ec689447e6da6bf7034dbe10ff380c209586e3f732328ee3e146d1e919",
+   "status": 400
+  },
+  {
+   "body": {
+    "country": "FR",
+    "delivery_date": "2026-12-20",
+    "purchase_date": "2026-12-10",
+    "retailer": "dell"
+   },
+   "name": "shop_return_deadline_dell_later_of",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "6d191d5ae798c6d25afee7b67f9a6e31c16d73ab92e69945a3ba6a7db76510d8",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-24",
+    "country": "FR",
+    "purchase_date": "2026-12-20",
+    "retailer": "fnac"
+   },
+   "name": "shop_return_deadline_fnac_jan15",
+   "path": "/api/v1/shop/return-deadline",
+   "sha256": "1e7d4efc3d0efee9df8be48b386f93ded1ab4a35b6750e39b199c603f4805208",
    "status": 200
   },
   {
@@ -3746,7 +3839,7 @@
    },
    "name": "shop_return_deadline_uk_later_of",
    "path": "/api/v1/shop/return-deadline",
-   "sha256": "1622101b3f2100d6982ba9a2e1c044530c18f722456233de208a2b9ebb577a15",
+   "sha256": "25023d52a2e1ef00fc51fa160ef2ccdd404f122d4adabcfba77c2649b33c5878",
    "status": 200
   },
   {

@@ -1,0 +1,10 @@
+{
+ "name": "shop_return_deadline_amazon_fr_later_of",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "amazon",
+  "country": "FR",
+  "purchase_date": "2026-12-20",
+  "delivery_date": "2027-01-05"
+ }
+}

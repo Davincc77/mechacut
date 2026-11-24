@@ -1,0 +1,9 @@
+{
+ "name": "shop_return_deadline_boulanger_dec27_edge",
+ "path": "/api/v1/shop/return-deadline",
+ "body": {
+  "retailer": "boulanger",
+  "country": "FR",
+  "purchase_date": "2026-12-27"
+ }
+}
