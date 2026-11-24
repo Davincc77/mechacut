@@ -424,9 +424,9 @@ def test_everyday_chip_baked_three_languages():
     # « Nineteen » datait de e19 ; e20-e23 avaient dérivé le compte —
     # dérive mesurée, corrigée avec e24, précédent b73).
     # resize 24-11 bundle100 : VINGT-CINQ (e25 keep-records-uk).
-    assert "Twenty-five" in en["everyday.intro"]
-    assert "Vingt-cinq" in fr["everyday.intro"]
-    assert "Vinte e cinco" in pt["everyday.intro"]
+    assert "Twenty-six" in en["everyday.intro"]  # b102 gift-voucher=e26
+    assert "Vingt-six" in fr["everyday.intro"]
+    assert "Vinte e seis" in pt["everyday.intro"]
 
 
 def test_golden_contains_eleven_new_pins():

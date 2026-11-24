@@ -86,6 +86,7 @@ POST /api/v1/shop/return-deadline    retailer + purchase date -> published holid
 POST /api/v1/shop/pricedrop-refund   purchase + drop dates/prices -> who OWES the difference, by when, in which money — closed 2026 BF table (free)
 POST /api/v1/shop/legal-guarantee    delivered_on + FR/UK -> dated STATUTORY warranty clocks (24m/12m, vices 2y+20y, UK 30-day/6m/6y-5y), conflicts named (free)
 POST /api/v1/money/keep-records-uk   record_kind + official anchor -> earliest lawful DESTROY date (VAT 3 anchors/6y/10y, s388 3y/6y by form, SA 5y after 31-Jan deadline + 15m very-late, PAYE 3y), "or longer if" carried BLOCKED (free)
+POST /api/v1/shop/gift-voucher  purchase + printed expiry -> IE five-year deemed clocks (PAPER_DEAD_LAW_ALIVE), FR no-minimum verdict, €1 floor conflict named (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -290,6 +291,7 @@ import shipdeadkit
 import returndeadkit
 import guaranteekit
 import retentionkit
+import voucherkit
 import pricedroprefundkit
 import money
 import numfmt
@@ -372,7 +374,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.22.1",
+    version="1.23.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2639,6 +2641,45 @@ def run_money_keep_records_uk(args: dict):
 @app.post("/api/v1/money/keep-records-uk")
 def api_money_keep_records_uk(req: MoneyKeepRecordsUkRequest):
     body, err = run_money_keep_records_uk(req.model_dump())
+    return err if err else body
+
+
+class ShopGiftVoucherRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    jurisdiction: str
+    purchased_on: str
+    printed_expiry_on: Optional[str] = None
+    no_expiry_term: bool = False
+    excluded_class: Optional[str] = None
+    remaining_eur: Optional[str] = None
+    clash: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_shop_gift_voucher(args: dict):
+    try:
+        req = ShopGiftVoucherRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = voucherkit.gift_voucher(
+            req.jurisdiction, req.purchased_on,
+            printed_expiry_on=req.printed_expiry_on,
+            no_expiry_term=req.no_expiry_term,
+            excluded_class=req.excluded_class,
+            remaining_eur=req.remaining_eur,
+            clash=req.clash, as_of=req.as_of)
+    except voucherkit.VoucherError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/gift-voucher")
+def api_shop_gift_voucher(req: ShopGiftVoucherRequest):
+    body, err = run_shop_gift_voucher(req.model_dump())
     return err if err else body
 
 
@@ -6778,6 +6819,7 @@ TOOL_RUN = {
            "shop_pricedrop_refund": run_shop_pricedrop_refund,
            "shop_legal_guarantee": run_shop_legal_guarantee,
            "money_keep_records_uk": run_money_keep_records_uk,
+           "shop_gift_voucher": run_shop_gift_voucher,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -11173,6 +11215,121 @@ MCP_TOOLS = [
                     "refuse"]},
                 "latest": {"type": "integer", "minimum": 1,
                            "maximum": 100},
+            },
+        },
+    },
+    {
+        "name": "shop_gift_voucher",
+        "description": (
+            "Gift-voucher expiry DATES, jurisdiction-named, from "
+            "official text replayed 24-nov-2026. IE — Consumer "
+            "Protection (Gift Vouchers) Act 2019 (No. 38 of 2019), "
+            "Part 4A: expiry must be 'at least 5 years from the "
+            "date on which the contract was entered into' or the "
+            "term is DEEMED so, and the deemed term OVERRIDES the "
+            "printed one (66B(1)(b)+(c)) — a one-year print comes "
+            "back PAPER_DEAD_LAW_ALIVE, the JD Sports shape "
+            "(~\u20ac250,000 refunded July 2026, CCPC press "
+            "20-nov-2026). The expiry day itself still redeems: "
+            "66A(1) makes expiry 'the date AFTER which' the voucher "
+            "ceases. Commencement gate 2-Dec-2019 named (CCPC "
+            "business page). The euro floor ships WITH its "
+            "conflict: statute '€1 or more' (66B(4)), CCPC FAQ "
+            "'more than €1' — at exactly €1.00 the statute governs, "
+            "both texts travel, conflict named. Closed clash table: "
+            "forced-single-use (66B(3)), voucher-count caps "
+            "(66B(7)), name-mismatch fees (66B(6)), earlier "
+            "replacement expiry (66B(8)) — void, non-binding, "
+            "contract survives (66B(9)); the gift RECIPIENT holds "
+            "all rights and the clock stays on the CONTRACT date "
+            "(66B(10)). Eight exclusion classes shipped from "
+            "66A(2)(a)-(h) — loyalty, promo, return-credit (the "
+            "frontier with /shop/return-deadline), utility, "
+            "e-money (S.I. 183/2011)… — EXCLUDED_OUT_OF_SCOPE "
+            "computes no dates. FR replayed NEGATIVE: 'no law fixes "
+            "a minimum or maximum validity' — the printed date is "
+            "contractual (L111-1 disclosure frames it, not its "
+            "length); five-year prescription (art. 2224) has a "
+            "FLOATING anchor and is carried BLOCKED, never dated; "
+            "the '30 years' rumour is real-property prescription "
+            "(2227) — corrected here by name. UK/BR/US refused by "
+            "name, not replayed. Holiday returns are "
+            "/shop/return-deadline; warranty clocks are "
+            "/shop/legal-guarantee. No clock, no network, no "
+            "advice. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["jurisdiction", "purchased_on"],
+            "additionalProperties": False,
+            "properties": {
+                "jurisdiction": {"type": "string",
+                                 "description": "ie | ireland | "
+                                                "irlande | fr | "
+                                                "france — the two "
+                                                "replayed regimes; "
+                                                "uk/br/us answer "
+                                                "with their named "
+                                                "refusal"},
+                "purchased_on": {"type": "string",
+                                 "description": "ISO date the "
+                                                "CONTRACT was "
+                                                "entered — a gift "
+                                                "handed over later "
+                                                "moves nothing "
+                                                "(66B(10))"},
+                "printed_expiry_on": {"type": "string",
+                                      "description": "ISO expiry "
+                                                     "date printed "
+                                                     "on the "
+                                                     "voucher; "
+                                                     "omit when "
+                                                     "the contract "
+                                                     "is silent "
+                                                     "(then 66B(1)"
+                                                     "(b) deems "
+                                                     "five years)"},
+                "no_expiry_term": {"type": "boolean",
+                                   "description": "the contract "
+                                                  "expressly says "
+                                                  "'no expiry' "
+                                                  "(66B(1)(a)(ii)) "
+                                                  "— contradicts "
+                                                  "printed_expiry_on"},
+                "excluded_class": {"type": "string",
+                                   "description": "closed 66A(2) "
+                                                  "list: "
+                                                  "discount_date_"
+                                                  "period | "
+                                                  "loyalty | "
+                                                  "promotional | "
+                                                  "return_refund | "
+                                                  "utility | "
+                                                  "payment_instrument "
+                                                  "| emoney | "
+                                                  "not_a_gift"},
+                "remaining_eur": {"type": "string",
+                                  "description": "decimal "
+                                                 "remaining "
+                                                 "balance as a "
+                                                 "STRING ('1.00', "
+                                                 "never a float) — "
+                                                 "drives the "
+                                                 "\u20ac1 refund "
+                                                 "floor block"},
+                "clash": {"type": "string",
+                          "description": "what the counter did: "
+                                         "single_use_required | "
+                                         "voucher_count_limited | "
+                                         "name_mismatch_fee | "
+                                         "replacement_earlier_"
+                                         "expiry — each void "
+                                         "against a numbered "
+                                         "subsection (IE only)"},
+                "as_of": {"type": "string",
+                          "description": "ISO day to count days_"
+                                         "left / status from — "
+                                         "never a wall clock"},
             },
         },
     },

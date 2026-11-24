@@ -1,0 +1,8 @@
+{
+  "body": {
+    "jurisdiction": "ie",
+    "purchased_on": "2024-02-29"
+  },
+  "name": "shop_giftvoucher_silent_deemed_pin",
+  "path": "/api/v1/shop/gift-voucher"
+}

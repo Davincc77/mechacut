@@ -3791,6 +3791,85 @@
   },
   {
    "body": {
+    "as_of": "2026-11-24",
+    "jurisdiction": "IE",
+    "purchased_on": "2023-06-15",
+    "remaining_eur": "1.00"
+   },
+   "name": "shop_giftvoucher_boundary_eur1_pin",
+   "path": "/api/v1/shop/gift-voucher",
+   "sha256": "9bf4c2ca937f6cde54458cc5a05a5941b36624c1bbca604539ac5238c568728a",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-24",
+    "clash": "single_use_required",
+    "jurisdiction": "ie",
+    "purchased_on": "2025-12-18"
+   },
+   "name": "shop_giftvoucher_clash_void_pin",
+   "path": "/api/v1/shop/gift-voucher",
+   "sha256": "3672854a8e0e178d1066c9bcc95db813840431a9674b4d2749720be1f12fc78c",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-24",
+    "jurisdiction": "fr",
+    "printed_expiry_on": "2025-12-20",
+    "purchased_on": "2024-12-20"
+   },
+   "name": "shop_giftvoucher_fr_pin",
+   "path": "/api/v1/shop/gift-voucher",
+   "sha256": "3d5ce38675427e9cad28695d02600af98ed4cb6961b52af21779c6227388cb2e",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-24",
+    "jurisdiction": "ie",
+    "printed_expiry_on": "2026-11-01",
+    "purchased_on": "2025-11-01"
+   },
+   "name": "shop_giftvoucher_jd_pin",
+   "path": "/api/v1/shop/gift-voucher",
+   "sha256": "3b01ec73e67a4ae4c32f8212dee1b6ea9924d7400e1ab85c2d27516d88712003",
+   "status": 200
+  },
+  {
+   "body": {
+    "jurisdiction": "ireland",
+    "printed_expiry_on": "2020-12-01",
+    "purchased_on": "2019-12-01"
+   },
+   "name": "shop_giftvoucher_pre_commencement_pin",
+   "path": "/api/v1/shop/gift-voucher",
+   "sha256": "ed907d6b659eaa74639b84580a94cae611f0d2b317c4229ccab5dd6f05af5bc1",
+   "status": 200
+  },
+  {
+   "body": {
+    "jurisdiction": "ie",
+    "purchased_on": "2024-02-29"
+   },
+   "name": "shop_giftvoucher_silent_deemed_pin",
+   "path": "/api/v1/shop/gift-voucher",
+   "sha256": "ba55cebaa5c4a38ab9e00b03a375d950ec5948ee87c358cb03070abf5c584c82",
+   "status": 200
+  },
+  {
+   "body": {
+    "jurisdiction": "uk",
+    "purchased_on": "2025-01-10"
+   },
+   "name": "shop_giftvoucher_uk_refused",
+   "path": "/api/v1/shop/gift-voucher",
+   "sha256": "c5a9aa8827ae769ccb9bf59ba142915e1223927149caffff27373f14e9b137f8",
+   "status": 400
+  },
+  {
+   "body": {
     "as_of": "2027-01-16",
     "delivered_on": "2026-12-25",
     "discovered_on": "2027-01-16",

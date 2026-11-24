@@ -1,0 +1,9 @@
+{
+  "body": {
+    "jurisdiction": "ireland",
+    "purchased_on": "2019-12-01",
+    "printed_expiry_on": "2020-12-01"
+  },
+  "name": "shop_giftvoucher_pre_commencement_pin",
+  "path": "/api/v1/shop/gift-voucher"
+}

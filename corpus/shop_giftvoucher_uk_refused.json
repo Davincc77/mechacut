@@ -1,0 +1,8 @@
+{
+  "body": {
+    "jurisdiction": "uk",
+    "purchased_on": "2025-01-10"
+  },
+  "name": "shop_giftvoucher_uk_refused",
+  "path": "/api/v1/shop/gift-voucher"
+}

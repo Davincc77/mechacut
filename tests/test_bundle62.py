@@ -271,6 +271,6 @@ def test_e15_landing_card_baked_three_languages():
     # resize 23-11 bundle73 : e19 (ovenschedule) — dix-neuf, compte
     # recalé sur le nombre réel de cartes (e17/e18 avaient dérivé).
     # resize 24-11 bundle100 : la grille compte vingt-cinq cartes.
-    for doc, word in ((en, "Twenty-five"), (fr, "Vingt-cinq"),
-                      (pt, "Vinte e cinco")):
+    for doc, word in ((en, "Twenty-six"), (fr, "Vingt-six"),
+                      (pt, "Vinte e seis")):
         assert word in doc["everyday.intro"]

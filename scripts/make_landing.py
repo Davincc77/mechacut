@@ -364,7 +364,7 @@ TR = {
                  "the full manual:",
     "everyday.h2": "For everyone",
       "everyday.open": "Expand the proofs — real server outputs, no mockups.",
-  "everyday.intro": "No code, no jargon. Twenty-five things a normal person "
+  "everyday.intro": "No code, no jargon. Twenty-six things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -602,6 +602,28 @@ TR = {
                       "updated, 23 November 2026) travels with the "
                       "arbitrage: when two rules touch one paper, "
                       "the LONGER governs.",
+  "everyday.e26.name": "The gift voucher that 'expired' may be legally "
+                       "alive — Ireland counts from the BUY",
+  "everyday.e26.say": "Ireland, Consumer Protection (Gift Vouchers) "
+                      "Act 2019, text replayed: a printed expiry "
+                      "shorter than FIVE YEARS from the purchase day "
+                      "is not voided — it is DEEMED REPLACED by five "
+                      "years, and the legal date OVERRIDES the paper "
+                      "one (66B(1)(b)+(c)). That is the JD Sports "
+                      "shape: one-year vouchers, ~\u20ac250,000 "
+                      "refunded this July after the CCPC's 20 "
+                      "November call-in. A card received at Christmas "
+                      "starts no clock that day — the anchor is the "
+                      "contract date and the RECIPIENT holds every "
+                      "right (66B(10)). A leftover of \u20ac1 or "
+                      "more is a refund owed \u2014 and this tool "
+                      "ships the \u20ac1.00 boundary conflict by "
+                      "name: the Act says 'or more', the CCPC FAQ "
+                      "says 'more than'. France, replayed too: NO "
+                      "statutory minimum exists \u2014 the printed "
+                      "date is contractual, and the '30 years' rumour "
+                      "belongs to real-property prescription, refused "
+                      "here by name.",
 "nav.kit": "Kit",
   "kit.h2": "The suite on your disk",
   "kit.creed": "The protocol is not the transport \u2014 it is the birth certificate of the tool.",
@@ -948,10 +970,9 @@ TR = {
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour tout le monde",
       "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
-  "everyday.intro": "Pas de code, pas de jargon. Vingt-cinq choses qu'un humain "
-                    "demande à son agent un mardi après-midi "
-                    "\u2014 chaque réponse ci-dessous est la sortie "
-                    "réelle du serveur, pas une maquette.",
+  "everyday.intro": "Pas de code, pas de jargon. Vingt-six choses qu'un humain "
+                    "demande à son agent un mardi "
+                    "\u2014 chaque preuve ci-dessous est ouverte.",
   "everyday.e1.name": "Wi-Fi invit\u00e9s, un scan",
   "everyday.e1.say": "\u00ab Transforme le Wi-Fi en QR pour que les "
                      "invit\u00e9s arr\u00eatent de demander le mot de "
@@ -1104,14 +1125,14 @@ TR = {
                       "est un mensonge par omission : chez Target "
                       "la fen\u00eatre d'achat ferme le 24 d\u00e9c., "
                       "chez Best Buy la r\u00e8gle membres se coupe au "
-                      "4 d\u00e9c., et un blog publie les dates de l'an "
-                      "dernier d\u00e9cal\u00e9es d'un an comme \u00ab patron "
-                      "probable \u00bb pendant que Seller Central avait "
-                      "publi\u00e9 le texte 2026 mot pour mot. Ici : "
+                      "4 d\u00e9c., et un blog a republi\u00e9 les dates "
+                      "de l'an pass\u00e9 d\u00e9cal\u00e9es d'un an "
+                      "pendant que Seller Central "
+                      "publiait le texte 2026 mot pour mot. Ici : "
                       "ligne gard\u00e9e si deux sources concordent, "
-                      "provenance \u00e0 c\u00f4t\u00e9 (publi\u00e9 | presse), "
+                      "provenance par ligne, "
                       "convention de comptage nomm\u00e9e, refus nomm\u00e9 "
-                      "aux enseignes mono-sources \u2014 avec le fait "
+                      "aux mono-sources \u2014 avec le fait "
                       "candidat. \u00ab Au plus tard des deux \u00bb exige "
                       "la date de livraison : jamais de devinette.",
   "everyday.e22.name": "Le prix barr\u00e9 est-il L\u00c9GAL \u2014 "
@@ -1120,82 +1141,89 @@ TR = {
   "everyday.e22.say": "La loi nomme la r\u00e9f\u00e9rence : le prix "
                       "le PLUS BAS appliqu\u00e9 par le magasin sur "
                       "les 30 jours pr\u00e9c\u00e9dents (directive "
-                      "2019/2161 art. 6a) \u2014 et une promo du "
-                      "week-end ABAISSE cette r\u00e9f\u00e9rence "
-                      "m\u00eame si le prix est remont\u00e9 depuis "
-                      "(CJEU C-330/23). 100 \u2192 80 \u2192 100 "
+                      "2019/2161 art. 6a) \u2014 une promo du "
+                      "week-end l'ABAISSE m\u00eame si le prix est "
+                      "remont\u00e9 depuis (CJEU C-330/23). 100 "
+                      "\u2192 80 \u2192 100 "
                       "\u2192 70 = remise de 12,5 %, pas 30 %. "
-                      "Sweep de la Commission, mars 2026 : 30 % des "
+                      "Sweep Commission, mars 2026 : 30 % des "
                       "314 commerces contr\u00f4l\u00e9s se trompent "
                       "de r\u00e9f\u00e9rence ; l'Espagne a "
-                      "amend\u00e9 sept sites jusqu'\u00e0 350 000 "
-                      "\u20ac. Collez l'historique du magasin et la "
-                      "date : la machine rend la r\u00e9f\u00e9rence "
+                      "amend\u00e9 jusqu'\u00e0 350 000 "
+                      "\u20ac. L'historique et la date en entr\u00e9e : "
+                      "la machine rend la r\u00e9f\u00e9rence "
                       "l\u00e9gale, le vrai pourcentage, verdict "
-                      "nomm\u00e9. Elle ne fetch aucun prix.",
+                      "nomm\u00e9 \u2014 z\u00e9ro fetch de prix.",
   "everyday.e23.name": "Le prix a BAISS\u00c9 apr\u00e8s votre achat "
                        "\u2014 qui doit la diff\u00e9rence, jusqu'\u00e0 quand, en quelle monnaie",
   "everyday.e23.say": "Achet\u00e9 100, affich\u00e9 80 aujourd'hui. "
                       "Aucune loi n'oblige au remboursement \u2014 "
-                      "mais les garanties publi\u00e9es par les "
-                      "enseignes oui, et leurs fen\u00eatres sont des "
+                      "les garanties publi\u00e9es des enseignes oui, "
+                      "et leurs fen\u00eatres sont des "
                       "DATES : Target 24 d\u00e9c, Best Buy 15 janv, "
-                      "Costco 30 jours, Fnac-Darty la campagne elle-"
-                      "m\u00eame (carte cadeau, pas esp\u00e8ces), "
-                      "Amazon rien du tout. Collez les dates d'achat "
-                      "et de baisse et les deux prix \u2014 la "
-                      "machine rend le verdict, la date limite de "
-                      "r\u00e9clamation, le montant et la monnaie "
-                      "du remboursement, classe de source sur chaque "
-                      "ligne. Elle ne fetch aucun prix.",
+                      "Costco 30 jours, Fnac-Darty la campagne "
+                      "elle-m\u00eame (carte cadeau, pas esp\u00e8ces), "
+                      "Amazon rien. Achat, baisse, deux prix en "
+                      "entr\u00e9e \u2014 la "
+                      "machine rend le verdict, la date limite, le "
+                      "montant et la monnaie du remboursement, "
+                      "classe de source par ligne. Z\u00e9ro fetch.",
   "everyday.e24.name": "Le cadeau est mort APRÈS le délai de "
                        "retour — que vous doit encore la LOI, jour "
                        "pour jour",
   "everyday.e24.say": "Cadeau livré le 25 décembre, en panne le 16 "
-                      "janvier : la vitrine a fermé le 15 et la "
-                      "presse ne répond plus. La loi, si. En "
-                      "France, la garantie de conformité court 2 "
-                      "ans depuis la DÉLIVRANCE, les vices cachés "
-                      "2 ans depuis la DÉCOUVERTE, sous un plafond "
-                      "de 20 ans depuis la vente — trois ancres "
-                      "différentes sous le seul mot « garantie ». "
-                      "Au Royaume-Uni, trois horloges encore : 30 "
-                      "jours pour rejeter, six mois de charge de "
-                      "la preuve INVERSÉE (une règle de preuve, "
-                      "pas une échéance), six ans pour agir — cinq "
-                      "en Écosse. Chaque réponse est datée depuis "
-                      "votre seule date livrée ; quand la page "
-                      "officielle se contredit elle-même (le "
-                      "reconditionné : 24 ou 12 mois), les DEUX "
-                      "dates voyagent, nommées, jamais moyennées. "
-                      "États-Unis et Australie refusés par nom : "
-                      "pas de fenêtre fédérale comptable ; « "
+                      "janvier : vitrine fermée le 15, presse "
+                      "muette. La loi, si. En France, la conformité "
+                      "court 2 ans depuis la DÉLIVRANCE, les vices "
+                      "cachés 2 ans depuis la DÉCOUVERTE, plafond 20 "
+                      "ans depuis la vente — trois ancres sous le "
+                      "seul mot « garantie ». Au Royaume-Uni : 30 "
+                      "jours pour rejeter, six mois de preuve "
+                      "INVERSÉE (règle de preuve, pas "
+                      "échéance), six ans pour agir — cinq en "
+                      "Écosse. Tout part de la livraison ; quand "
+                      "la page officielle se contredit (reconditionné "
+                      ": 24 ou 12 mois), les DEUX dates voyagent, "
+                      "jamais moyennées. États-Unis et Australie "
+                      "refusés par nom : pas de date fédérale ; « "
                       "reasonable time » n'est pas une date.",
     "everyday.e25.name": "Puis-je jeter ce dossier ? — le carton "
                        "britannique cache QUATRE horloges",
-  "everyday.e25.say": "« Six ans » est UNE phrase pour quatre "
-                      "dates différentes : la facture TVA compte "
-                      "depuis la date ÉCRITE SUR LE DOCUMENT (même "
-                      "un papier décrivant un événement futur — le "
-                      "manuel de HMRC l’écrit), la limited company "
-                      "depuis la CLÔTURE de l’exercice concerné, la "
-                      "Companies Act s.388 compte les mêmes pièces "
-                      "TROIS ans si private, SIX si plc — depuis "
-                      "la date de CRÉATION — et le Self Assessment "
-                      "cinq ans depuis une deadline du 31 janvier "
-                      "qui ne figure sur aucun document. Les "
-                      "exemples officiels sont rejoués : déclaration "
-                      "2022-23 envoyée avant le 31 janvier 2024 → "
-                      "dossier gardé jusqu’au 31 janvier 2029, "
-                      "destruction permise le 1er février. Les quatre "
-                      "« ou plus si » (retard de déclaration, "
-                      "contrôle ouvert) reviennent BLOCKED avec "
-                      "leur raison publiée — jamais de date "
-                      "inventée. La table des minima CH15400 "
-                      "(rejouée au lendemain de sa mise à jour, "
-                      "23 novembre 2026) voyage avec son "
-                      "arbitrage : deux règles sur une même pièce, "
-                      "c’est la PLUS LONGUE qui gouverne.",
+  "everyday.e25.say": "« Six ans » est UNE phrase pour quatre dates "
+                      "différentes : la TVA compte depuis la "
+                      "date ÉCRITE SUR LE DOCUMENT (HMRC l’écrit, "
+                      "événement futur compris), la limited company "
+                      "depuis la CLÔTURE "
+                      "de l’exercice concerné, la Companies Act "
+                      "s.388 compte les mêmes pièces TROIS ans si "
+                      "private, SIX si plc — depuis la date de "
+                      "CRÉATION — et le Self Assessment cinq ans "
+                      "depuis une deadline du 31 janvier qui ne "
+                      "figure sur aucun papier. Exemple officiel "
+                      "rejoué : 2022-23 envoyée avant le 31 janvier "
+                      "2024 → gardé jusqu’au 31 janvier 2029, "
+                      "destruction dès le "
+                      "1er février. Les « ou plus si » reviennent "
+                      "BLOCKED avec leur raison publiée — jamais de "
+                      "date inventée. La table des minima CH15400 "
+                      "voyage avec son arbitrage : deux règles sur "
+                      "une pièce, la PLUS LONGUE gouverne.",
+  "everyday.e26.name": "Carte cadeau « périmée » ? Peut-être vivante "
+                       "— l'ancre est l'ACHAT",
+  "everyday.e26.say": "Irlande, Gift Vouchers Act 2019 "
+                      "(rejoué) : une date imprimée plus "
+                      "courte que cinq ans depuis l’achat n’est pas "
+                      "annulée — elle est REMPLACÉE d’office par cinq "
+                      "ans depuis le contrat, et le légal "
+                      "COUVRE le papier (66B(1)(b)+(c)). La "
+                      "forme JD Sports : bons d’un an, \u2248250 000 € "
+                      "rendus en juillet. L’horloge part de l’achat, "
+                      "pas du jour du cadeau ; le porteur tient tous "
+                      "les droits (66B(10)). Un solde d’1 € ou plus "
+                      "est un dû. France, rejouée : AUCUNE durée "
+                      "légale ; le mythe des « 30 ans » est une "
+                      "prescription immobilière (art. 2227), refusée "
+                      "ici.",
 "nav.kit": "Kit",
   "kit.h2": "La suite sur votre disque",
   "kit.creed": "Le protocole n'est pas le transport \u2014 c'est l'acte de naissance de l'outil.",
@@ -1538,7 +1566,7 @@ TR = {
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para todo mundo",
       "everyday.open": "Expandir as provas — saídas reais do servidor, não maquetes.",
-  "everyday.intro": "Sem código, sem jargão. Vinte e cinco coisas que "
+  "everyday.intro": "Sem código, sem jargão. Vinte e seis coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -1773,6 +1801,26 @@ TR = {
                       "governa. O Reino Unido é a jurisdição "
                       "aqui — notas fiscais do Brasil seguem "
                       "outra lei.",
+  "everyday.e26.name": "O vale-presente « vencido » pode estar vivo "
+                       "— na Irlanda conta-se da COMPRA",
+  "everyday.e26.say": "Irlanda, Consumer Protection (Gift Vouchers) "
+                      "Act 2019, texto rejogado: validade impressa "
+                      "menor que CINCO ANS desde a compra não some — "
+                      "é SUBSTITUÍDA por cinco anos e a data legal "
+                      "COBRE o papel (66B(1)(b)+(c)). É a forma JD "
+                      "Sports: vales de um ano, \u2248\u20ac250.000 "
+                      "devolvidos em julho após a notificação do "
+                      "CCPC de 20 de novembro. O presente recebido "
+                      "no Natal não liga relógio nesse dia: a âncora "
+                      "é a data do contrato e quem segura o vale tem "
+                      "TODOS os direitos (66B(10)). Saldo de \u20ac1 "
+                      "ou mais é reembolso devido — e a ferramenta "
+                      "leva o conflito da fronteira \u20ac1: a lei "
+                      "diz « or more », a FAQ do CCPC « more than ». "
+                      "França, rejogada: nenhuma duração legal — a "
+                      "data vale se informada, e o boato dos « 30 "
+                      "anos » é prescrição imobiliária, recusada "
+                      "aqui por nome.",
 "nav.kit": "Kit",
   "kit.h2": "A suíte no seu disco",
   "kit.creed": "O protocolo não é o transporte \u2014 é a certidão de nascimento da ferramenta.",
@@ -2576,6 +2624,14 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "names-only chiffré, facture PAR TOUR, dollars si VOUS "
             "portez votre prix ; mcp-audit dit REJETÉ, mcp-surface "
             "dit CHANGÉ, ici on dit COMBIEN",
+        "shop_gift_voucher":
+            "la carte cadeau « périmée » d'un an est REMPLACÉE "
+            "d'office par cinq ans depuis l'achat — le légal couvre "
+            "le papier (loi irlandaise 2019 rejouée, forme JD "
+            "Sports) ; solde d'1 € ou plus = dû, frontière 1 € en "
+            "conflit NOMMÉ ; France rejouée NÉGATIVE : aucune durée "
+            "légale, le mythe des « 30 ans » est immobilier, refusé "
+            "par nom",
         "agent_retrybudget":
             "re-tenter cet échec est-il rationnel ? taxonomie "
             "fermée, plafond de hachage, budget de session, backoff "
@@ -2951,6 +3007,14 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "contrafactual names-only cifrado, conta POR TURNO, "
             "dólares se VOCÊ trouxer o preço; mcp-audit diz REJEITADO, "
             "mcp-surface diz MUDOU, aqui se diz QUANTO",
+        "shop_gift_voucher":
+            "o vale-presente « vencido » de um ano é SUBSTITUÍDO por "
+            "cinco anos desde a compra — a data legal COBRE o papel "
+            "(Lei irlandesa de 2019 rejogada, forma JD Sports); "
+            "saldo de €1 ou mais é reembolso devido, fronteira €1 "
+            "com conflito NOMEADO; França rejogada NEGATIVA: "
+            "nenhuma duração legal, e o boato dos « 30 anos » é "
+            "prescrição imobiliária, recusada por nome",
         "agent_retrybudget":
             "repetir esta falha é racional? taxonomia fechada, teto "
             "de hash, orçamento de sessão, backoff determinístico",
@@ -3352,7 +3416,10 @@ W = {
       "warr": "\u2192 statutory conformity until %s (%s) \u00b7 "
               "hidden-defect clock to %s from the DISCOVERY \u2014 "
               "the shop window died Jan 15, the law did not",
-           "rec": "\u2192 keep until %s \u00b7 shred from %s \u00b7 the official 2022-23 example, replayed"},
+           "rec": "\u2192 keep until %s \u00b7 shred from %s \u00b7 the official 2022-23 example, replayed",
+           "vouch": "\u2192 the law reads ALIVE to %s \u00b7 %s days left "
+                    "\u00b7 the printed date had stolen %s \u2014 Act "
+                    "2019 overrides the paper"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "returndead": "\u2192 retour jusqu'au %s (%s) \u00b7 chez "
@@ -3369,7 +3436,10 @@ W = {
                    "vices cachés jusqu'au %s depuis la DÉCOUVERTE "
                    "\u2014 la vitrine a fermé le 15 janvier, la loi "
                    "non",
-           "rec": "\u2192 garder jusqu'au %s \u00b7 d\u00e9truire d\u00e8s le %s \u00b7 l'exemple officiel 2022-23, rejou\u00e9",
+           "rec": "\u2192 garder jusqu'au %s \u00b7 détruire dès le %s \u00b7 l'exemple officiel 2022-23, rejoué",
+           "vouch": "\u2192 la loi dit VIVANT jusqu'au %s \u00b7 %s jours "
+                    "\u00b7 le papier volait %s \u2014 la loi 2019 "
+                    "couvre l'imprimé",
            "word": "\u2192 \u00ab %s \u00bb",
            "iban": "\u2192 cl\u00e9 de contr\u00f4le valide \u00b7 %s",
            "page": "\u2192 page autonome (%s octets) \u00b7 Ctrl-P = PDF",
@@ -3418,7 +3488,10 @@ W = {
            "warr": "\u2192 conformidade legal at\u00e9 %s (%s) \u00b7 "
                    "v\u00edcios at\u00e9 %s desde a DESCOBERTA \u2014 "
                    "a loja fechou 15 de janeiro, a lei n\u00e3o",
-           "rec": "\u2192 guardar at\u00e9 %s \u00b7 descartar a partir de %s \u00b7 o exemplo oficial 2022-23, refeito",
+           "rec": "\u2192 guardar até %s \u00b7 descartar a partir de %s \u00b7 o exemplo oficial 2022-23, refeito",
+           "vouch": "\u2192 a lei diz VIVO até %s \u00b7 %s dias \u00b7 o "
+                    "papel roubava %s dias \u2014 a Lei 2019 cobre o "
+                    "impresso",
            "pricedrop": "\u2192 %s a reclamar at\u00e9 %s (%s) \u00b7 a "
                         "janela \u00e9 data publicada, a classe da "
                         "fonte viaja na linha",
@@ -3642,6 +3715,12 @@ _EVERYDAY_CALLS = [
       "tax_year_end_on": "2023-04-05"},
      "rec", lambda d, L_: (d["retain_until"],
                            d["safe_destroy_on"])),
+    ("/api/v1/shop/gift-voucher",
+     {"jurisdiction": "ie", "purchased_on": "2025-11-01",
+      "printed_expiry_on": "2026-11-01", "as_of": "2026-11-24"},
+     "vouch", lambda d, L_: (d["legal_expiry_on"],
+                             str(d["days_left"]),
+                             d["paper_vs_law"]["days_the_printed_date_stole"])),
 ]
 
 

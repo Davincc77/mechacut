@@ -1,0 +1,10 @@
+{
+  "body": {
+    "jurisdiction": "ie",
+    "purchased_on": "2025-11-01",
+    "printed_expiry_on": "2026-11-01",
+    "as_of": "2026-11-24"
+  },
+  "name": "shop_giftvoucher_jd_pin",
+  "path": "/api/v1/shop/gift-voucher"
+}

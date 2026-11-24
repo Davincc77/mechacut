@@ -1,0 +1,10 @@
+{
+  "body": {
+    "jurisdiction": "IE",
+    "purchased_on": "2023-06-15",
+    "remaining_eur": "1.00",
+    "as_of": "2026-11-24"
+  },
+  "name": "shop_giftvoucher_boundary_eur1_pin",
+  "path": "/api/v1/shop/gift-voucher"
+}

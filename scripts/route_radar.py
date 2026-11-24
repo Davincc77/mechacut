@@ -248,6 +248,33 @@ CASES = [
      "coute", "agent_contexttax"),
     ("how many tokens are in this text", "text_count"),
     ("raconte-moi une blague sur le coût des tokens", None),
+    # b102 — la douleur que /shop/gift-voucher répare, x3 langues
+    # (verbatim RTÉ 20-nov : « vouchers given from last Christmas »)
+    # + les vetoes de juridiction NOMMÉE (b102) et la blague (b98).
+    ("the gift voucher I got for last Christmas expired, shop says "
+     "too late, bought in Dublin 2024", "shop_gift_voucher"),
+    ("gift card expired but I heard five years is the law",
+     "shop_gift_voucher"),
+    ("ma carte cadeau a expiré, le magasin dit que c'est mort — "
+     "j'ai acheté à Dublin", "shop_gift_voucher"),
+    ("bon cadeau périmé en France, y a-t-il une durée légale ?",
+     "shop_gift_voucher"),
+    ("meu cartão-presente irlandês venceu, a loja diz que acabou",
+     "shop_gift_voucher"),
+    ("vale-presente da JD Sports expirou, comprei em Dublin",
+     "shop_gift_voucher"),
+    ("meu vale-presente brasileiro expirou", None),
+    ("gift voucher expired in London", None),
+    ("mon voucher a expiré à Londres", None),
+    ("mon bon d'achat a expiré en Irlande du Nord", None),
+    ("tell me a joke about expired gift vouchers", None),
+    ("raconte-moi une blague sur les cartes cadeaux", None),
+    # frontière jurée : le cadeau-RETOUR et le prix-payé-en-voucher
+    # ne sont PAS la validité du voucher — aiguilles des frères.
+    ("can I still return the Christmas gift I bought at fnac",
+     "shop_return_deadline"),
+    ("the price dropped after I paid, they offer a gift card "
+     "refund, who owes me", "shop_pricedrop_refund"),
 ]
 
 

@@ -1050,7 +1050,17 @@ TABLE = (
      "oven countdown preheat conflict serve four plan du four "
      "minuterie forno assado sequencia cronograma temperatura "
      "température"),
-
+    ("shop_gift_voucher", "/api/v1/shop/gift-voucher", "dates",
+     "gift voucher clocks: IE five-year floor, deemed override, "
+     "EUR1 refund floor, conflicts named; FR no statutory minimum",
+     "gift voucher expired expiry expires validity dead card "
+     "deemed five years refund balance one euro single use stack "
+     "limit name lost stolen replacement durable irish ireland "
+     "jd ccpc "
+     "carte cadeau expire expiree perime perimee valide validite "
+     "duree solde irlande geste commercial remboursee bon "
+     "cartao presente vale venceu expirou validade duracao "
+     "irlanda saldo"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)
@@ -1097,9 +1107,13 @@ def manifest_text(version):
         "one-call pipelines: GET /api/v1/recipes or POST /api/v1/pipeline | "
         'find tools: GET /route?q="your task words" | '
         "proposal registry: GET /proposals (HTML) or "
-        "/api/v1/agent/proposals?name=…&status=…&latest=N",
+        "/api/v1/agent/proposals?name=…&status=…&latest=N | "
         "not here: storyboards, shot lists, scene breakdowns "
         "-> sister product moovicut.studio",
+        # b102 elagage MESURE (consigne b101 « le prochain outil
+        # debranche le dense-fold ou elague une ligne de tete ») :
+        # la ligne soeur est FUSIONNEE dans discovery, pas coupee —
+        # 217 lignes <218, contenu preserve, budget octets suit.
     ]
     by_pack = {}
     for name, path, pack, purpose, _tags in TABLE:
@@ -1329,6 +1343,33 @@ def route(query, top=5):
                "germany", "deutschland", "espana", "espanha",
                "italia", "italy", "quebec")
     foreign = False
+    # CLASSE b102 — veto IN-TABLE : /shop/gift-voucher answerne
+    # IRLANDE et FRANCE (seules rejouées) — un pays HORS table nommé
+    # SANS ancre de la table ne doit pas prescrire l'outil : le
+    # module répondrait par un refus et le routeur aurait déjà promis
+    # (la leçon b100 rejouée à l'envers). Irlande DU NORD = UK, pas
+    # la République — l'ancre « irland* » voisine de « nord » est
+    # annulée NOMMÉE, liste fermée, zéro LM. Le pronom anglais « us »
+    # n'est PAS dans le vocabulaire : un mot trop courant tuerait
+    # des requêtes honnêtes (faute b81 des tags-« 1 »). RACINES, pas
+    # mots entiers — « irlandês », « française », « brasileria »
+    # passent tous les filets (« brit* » attrape britain/british).
+    V_OUT = ("brasil", "brazil", "usa", "united", "state", "etats",
+             "unis", "america", "amerique", "england", "angleterre",
+             "scotland", "ecoss", "australia", "australie", "japan",
+             "japon", "china", "chine", "canada", "espan", "portug",
+             "angola", "mozambic", "mexic", "russie", "russia",
+             "brit", "german", "alemanh", "deutsch",
+             # villes ANGLAISES — « it expired in London » nomme la
+             # juridiction sans le mot « UK » (pêché par mon propre
+             # leurre b102 : London routait l'outil)
+             "london", "londres", "belfast", "manchester", "york",
+             "glasgow", "edinburgh", "cardiff")
+    V_OUT_EXACT = {"uk", "gb", "wales"}
+    V_IN_P = ("irland", "franc")  # france/francais/irish-irlandaise
+    V_IN = {"ie", "fr", "irl", "eire", "dublin", "ccpc", "paris",
+            "cork", "galway"}
+    vforeign = vtabled = vnord = False
     for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
         if t in ("blague", "blagues", "joke", "jokes", "piada",
                  "piadas"):
@@ -1344,15 +1385,25 @@ def route(query, top=5):
             continue
         if t in FOREIGN or _stem(t) in FOREIGN:
             foreign = True
+        if t.startswith(V_OUT) or t in V_OUT_EXACT:
+            vforeign = True
+        if t.startswith(V_IN_P) or t in V_IN:
+            vtabled = True
+        if t == "nord":
+            vnord = True
         st = _stem(t)
         if st not in seen:
             seen.add(st)
             toks.append(st)
     if joke:
         return []
+    voucher_ok = vtabled and not vnord
     scored = []
     for idx, (name, path, pack, purpose, tags) in enumerate(TABLE):
         if foreign and name.endswith("_uk"):
+            continue
+        if name == "shop_gift_voucher" and (vforeign or vnord) \
+                and not voucher_ok:
             continue
         tail = path[len("/api/v1/"):]
         # nsegs STEMÉS comme les tags et le query — sinon un nom au

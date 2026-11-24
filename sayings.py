@@ -555,4 +555,11 @@ SAY = {
               "core, muter ou abandonner ?",
         "pt": "o mesmo erro tres vezes seguidas — repetir, mudar "
               "ou parar?"},
+    "/api/v1/shop/gift-voucher": {
+        "en": "€50 gift voucher from Dublin, printed dead last "
+              "month — five-year law: alive or not?",
+        "fr": "carte cadeau de 50 € achetée à Dublin, périmée sur "
+              "le papier — la loi des cinq ans la ravive ?",
+        "pt": "vale-presente de 50 € comprado em Dublin, vencido no "
+              "papel — a lei dos cinco anos vale aqui?"},
 }
