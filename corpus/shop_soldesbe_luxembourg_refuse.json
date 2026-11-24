@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldesbe_luxembourg_refuse",
+ "path": "/api/v1/shop/soldes-be",
+ "body": {
+  "year": 2027,
+  "territory": "luxembourg"
+ }
+}

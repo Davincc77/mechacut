@@ -1,0 +1,9 @@
+{
+ "name": "shop_soldesbe_attente2027_bornes_pin",
+ "path": "/api/v1/shop/soldes-be",
+ "body": {
+  "year": 2027,
+  "season": "both",
+  "as_of": "2027-01-01"
+ }
+}

@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldesbe_gate2014_hiver_refuse",
+ "path": "/api/v1/shop/soldes-be",
+ "body": {
+  "year": 2014,
+  "season": "hiver"
+ }
+}

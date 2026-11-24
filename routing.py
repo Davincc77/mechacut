@@ -1081,6 +1081,18 @@ TABLE = (
      "mayotte saint pierre barthelemy moselle nice metz perpignan "
      "saldos epoca verao inverno franca sales sale france winter "
      "summer start january june official"),
+    ("shop_soldes_be", "/api/v1/shop/soldes-be", "dates",
+     "belgian sale windows dated from art. VI.25 CDE: the sunday "
+     "clause both seasons, the one-month standstill enumerated not "
+     "guessed, corona reports 2020-2021 carried verbatim, an "
+     "overruled clause kept visible, france and luxembourg pointed "
+     "to their own tables",
+     "soldes belgique belgie solden opruiming schlussverkauf periode "
+     "attente pre-soldes presoldes sperperiode hiver ete janvier "
+     "juillet aout debut cloture clause dimanche report prolongation "
+     "bruxelles brussel antwerpen belgium sales sale dates winter "
+     "summer january august royal decree livre vi "
+     "saldos belgica verao inverno epoca espera janeiro agosto"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)
@@ -1126,10 +1138,13 @@ def manifest_text(version):
           "x402; paid=x402 from call one. every POST response "
           "carries sha256; every 400 carries field+expected — the "
           "error IS the repair prompt; ambiguous refusals name "
-          "their readings.",
-        # b104, même consigne : les POINTEURS voyagent tous, la prose
-        # de tete est serree (detail/pack/pipelines/find/proposals).
-        "detail: /tools/<name>.json | pack install: /SKILL-<pack>.md | "
+          "their readings. "
+          # b105 elagage MESURE (consigne b104 « FR a 23 octets du
+          # plafond : le lot suivant HUMAIN paie prose + elagage ») :
+          # la ligne de POINTEURS « detail: » est FUSIONNEE dans la
+          # ligne de tete — tout le contenu voyage, 217 lignes, le
+          # +shop_soldes_be ne debranche rien.
+          "detail: /tools/<name>.json | pack install: /SKILL-<pack>.md | "
         "pipelines: GET /api/v1/recipes, POST /api/v1/pipeline | "
         'find: GET /route?q="task words" | '
         "proposals: /proposals (HTML), /api/v1/agent/proposals | "
@@ -1413,7 +1428,17 @@ def route(query, top=5):
                   "genev", "zurich", "amsterdam", "berlin",
                   "madrid", "lisbon", "dublin")
     V_SOLD_EXACT = {"uk", "gb", "usa", "ie"}
-    vforeign = vtabled = vnord = vsoldes_out = False
+    # CLASSE b105 — la Belgique a SON outil (/shop/soldes-be) : les
+    # mots belges tuent toujours la fenetre FR (vsoldes_out, rien ne
+    # change pour elle) mais ne tuent plus l'outil BE ; a l'envers,
+    # nommer la France (vtabled) ou tout autre calendrier (vsoldes_out)
+    # sans mot belge ne doit JAMAIS prescrire l'outil BE — le module
+    # repondrait un 400 et le routeur aurait promis (lecon b100/102/103).
+    # RACINES fermees, zero LM. « be » seul n'y entre pas : c'est un
+    # verbe anglais, la lecon des stopwords b98.
+    V_BE = ("belg", "bruxel", "brussel", "solden", "opruiming",
+            "schlus")
+    vforeign = vtabled = vnord = vsoldes_out = vbename = False
     for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
         if t in ("blague", "blagues", "joke", "jokes", "piada",
                  "piadas"):
@@ -1435,6 +1460,8 @@ def route(query, top=5):
             vtabled = True
         if t.startswith(V_SOLD_OUT) or t in V_SOLD_EXACT:
             vsoldes_out = True
+        if t.startswith(V_BE):
+            vbename = True
         if t == "nord":
             vnord = True
         st = _stem(t)
@@ -1452,6 +1479,9 @@ def route(query, top=5):
                 and not voucher_ok:
             continue
         if name == "shop_soldes_window" and vsoldes_out:
+            continue
+        if name == "shop_soldes_be" and (vsoldes_out or vtabled) \
+                and not vbename:
             continue
         tail = path[len("/api/v1/"):]
         # nsegs STEMÉS comme les tags et le query — sinon un nom au

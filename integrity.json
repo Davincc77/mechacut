@@ -4293,6 +4293,118 @@
   },
   {
    "body": {
+    "as_of": "2027-01-01",
+    "season": "both",
+    "year": 2027
+   },
+   "name": "shop_soldesbe_attente2027_bornes_pin",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "dee8f1e8025ace06233d7bf26bf35f698c44d9e3310f33e5a94d0a48ea011e15",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "printemps",
+    "year": 2027
+   },
+   "name": "shop_soldesbe_badseason_refuse",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "dcf80d0c62ce17721bee20c4c6e25119c16ebeeed0320f1e8b42f2e456796f1c",
+   "status": 400
+  },
+  {
+   "body": {
+    "season": "ete",
+    "year": 2018
+   },
+   "name": "shop_soldesbe_ete2018_clause_pin",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "4f1cc69f8c0eb034180c848428235e7b770212e727f3b74297606e84516a2ccd",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "ete",
+    "year": 2020
+   },
+   "name": "shop_soldesbe_ete2020_report_pin",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "268e517a0c21d3510b1409e1406fa8dcc46dc5df6647fc630f46827b67b0df39",
+   "status": 200
+  },
+  {
+   "body": {
+    "territory": "france",
+    "year": 2027
+   },
+   "name": "shop_soldesbe_france_refuse",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "01b811354e7a4ae829b82a9d73494543f821b414da06b798dc931b7a74e55207",
+   "status": 400
+  },
+  {
+   "body": {
+    "season": "ete",
+    "year": 2029
+   },
+   "name": "shop_soldesbe_future2029_clause_pin",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "5455a1470505ff1c717a7ad361dcfc988f994f6eca5c75769bcd6fa119a4025d",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "hiver",
+    "year": 2014
+   },
+   "name": "shop_soldesbe_gate2014_hiver_refuse",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "fd6048a83736f4e344015a092e88e93dcbf4759809b35466f436794975f3d00f",
+   "status": 400
+  },
+  {
+   "body": {
+    "season": "hiver",
+    "year": 2016
+   },
+   "name": "shop_soldesbe_hiver2016_pin",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "9c46855203ef2eed55aa6ece0c7de1fa34bedf938053c9ca37eebed98978aae5",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "hiver",
+    "year": 2021
+   },
+   "name": "shop_soldesbe_hiver2021_double_pin",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "b00484372b7596cb6deacd9cc70c6ddeced65447e5df5860e042aca8277718cf",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-24",
+    "season": "hiver",
+    "year": 2027
+   },
+   "name": "shop_soldesbe_hiver2027_clause_pin",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "cc24c61bde6c4954738e675736d4cae3d7caa0e0927703b9deba2590519aefdb",
+   "status": 200
+  },
+  {
+   "body": {
+    "territory": "luxembourg",
+    "year": 2027
+   },
+   "name": "shop_soldesbe_luxembourg_refuse",
+   "path": "/api/v1/shop/soldes-be",
+   "sha256": "e60c565d2374eead315ce5dfa978c1c2675e56e59b43c0025256de2947184574",
+   "status": 400
+  },
+  {
+   "body": {
     "season": "hiver",
     "territory": "reunion",
     "year": 2021

@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldesbe_future2029_clause_pin",
+ "path": "/api/v1/shop/soldes-be",
+ "body": {
+  "year": 2029,
+  "season": "ete"
+ }
+}

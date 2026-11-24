@@ -88,6 +88,7 @@ POST /api/v1/shop/legal-guarantee    delivered_on + FR/UK -> dated STATUTORY war
 POST /api/v1/money/keep-records-uk   record_kind + official anchor -> earliest lawful DESTROY date (VAT 3 anchors/6y/10y, s388 3y/6y by form, SA 5y after 31-Jan deadline + 15m very-late, PAYE 3y), "or longer if" carried BLOCKED (free)
 POST /api/v1/shop/gift-voucher  purchase + printed expiry -> IE five-year deemed clocks (PAPER_DEAD_LAW_ALIVE), FR no-minimum verdict, €1 floor conflict named (free)
 POST /api/v1/shop/soldes-window year + territory -> LEGAL sale windows dated from the 2019 arrêté: advance clauses both seasons, 7 annual derogations 2020-2026 carried verbatim, annex versioned, ouvré ambiguity named (free)
+POST /api/v1/shop/soldes-be year + season -> BELGIAN sale windows from art. VI.25 CDE: sunday clause dated both seasons, one-month standstill enumerated, corona reports 2020-2021 verbatim, overruled clause kept visible (free)
 POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the update: chars+token delta per tool, signed moved fields, global vs per-tool sum stated, FITS->OVERFLOWS transition named, $ at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
@@ -296,6 +297,7 @@ import guaranteekit
 import retentionkit
 import voucherkit
 import soldeskit
+import soldesbekit
 import pricedroprefundkit
 import money
 import numfmt
@@ -378,7 +380,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.25.0",
+    version="1.26.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2747,6 +2749,37 @@ def run_shop_soldes_window(args: dict):
 @app.post("/api/v1/shop/soldes-window")
 def api_shop_soldes_window(req: ShopSoldesWindowRequest):
     body, err = run_shop_soldes_window(req.model_dump())
+    return err if err else body
+
+
+class ShopSoldesBeRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    year: int
+    territory: Optional[str] = None
+    season: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_shop_soldes_be(args: dict):
+    try:
+        req = ShopSoldesBeRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = soldesbekit.soldes_be(
+            req.year, territory=req.territory,
+            season=req.season, as_of=req.as_of)
+    except soldesbekit.SoldesBeError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/soldes-be")
+def api_shop_soldes_be(req: ShopSoldesBeRequest):
+    body, err = run_shop_soldes_be(req.model_dump())
     return err if err else body
 
 
@@ -6914,6 +6947,7 @@ TOOL_RUN = {
            "money_keep_records_uk": run_money_keep_records_uk,
            "shop_gift_voucher": run_shop_gift_voucher,
            "shop_soldes_window": run_shop_soldes_window,
+           "shop_soldes_be": run_shop_soldes_be,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -11597,8 +11631,83 @@ MCP_TOOLS = [
                              "description": "hiver | ete | "\
                                             "both (default both)"},
                 "as_of": {"type": "string",
-                            "description": "ISO day for status "\
-                                           "and days_to_start — "\
+                            "description": "ISO day for status "
+                                           "and days_to_start — "
+                                           "never a wall clock"},
+            },
+        },
+    },
+    {
+        "name": "shop_soldes_be",
+        "description": (
+            "Belgian SALE WINDOWS as DATES, computed from art. "
+            "VI.25 \u00a7 1er CDE ( Livre VI, in force since "
+            "31-May-2014, text coordonn\u00e9 relev\u00e9 21-Jan-2026): "
+            "'du 3 janvier au 31 janvier; lorsque le 3 janvier est "
+            "un dimanche, la période prend cours le 2 janvier' and "
+            "the summer twin '1er juillet / 30 juin si dimanche'. "
+            "The clauses are Dated, not remembered: winter 2016 "
+            "opened Saturday 2 January (press replayed), winter 2027 "
+            "opens the same way \u2014 and the SPF names the "
+            "one-month standstill 'du 2 d\u00e9cembre au 1er "
+            "janvier' while some press still prints 3 December: the "
+            "next-day boundary, caught in the act. Summer's clause "
+            "fired in 2018; its standstill is the ENUMERATED 'du 31 "
+            "mai au 29 juin' \u2014 a named text that beats the "
+            "generic formula (which would say 30 May), and the "
+            "divergence travels in the answer. Then the two corona "
+            "years, each with its verbatim and Moniteur numac: "
+            "\u00e9t\u00e9 2020 moved to 1-31 August (loi "
+            "27-mai-2020, art. 4); winter 2021 REPORTED to Monday "
+            "4 January (AR 10-d\u00e9c-2020: no Saturday crowd "
+            "opening \u2014 the Sunday clause FIRED but was "
+            "OVERRULED, and both facts travel) then PROLONGED to "
+            "15 February by a LOI (02-f\u00e9vr-2021 \u2014 the "
+            "King was capped at one month by \u00a7 2; press "
+            "titles said 14 February, the adopted text says 15, "
+            "the conflict is dated). Standstill of a reported year "
+            "is DERIVED and says so. Eligibility (30 days on sale, "
+            "still held at the start), the sectoral ban "
+            "(habillement/maroquinerie/chaussures, no announced "
+            "cuts or discount titles during the wait), the "
+            "braderie exception (\u2264 4 days, \u00a7 4) and the "
+            "liquidation escape (\u00a7 5) ride the answer as "
+            "verbatim. The 20-May-2026 Conseil d'\u00c9tat "
+            "annulments are carried as a NAMED conflict \u2014 the "
+            "tool dates, it does not plead. Gate: Livre VI only "
+            "(\u2264 2014 winters refused with the 1991-law facts); "
+            "France is refused by name pointing at /shop/"
+            "soldes-window; Luxembourg is refused by name: its "
+            "dates are set EACH YEAR by r\u00e8glement "
+            "grand-ducal \u2014 no formula, no invented date. "
+            "as_of is an argument. No network, free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["year"],
+            "additionalProperties": False,
+            "properties": {
+                "year": {"type": "integer",
+                           "description": "2014..9999 \u2014 the "
+                                          "Livre VI in-force gate "
+                                          "(31-05-2014): winters "
+                                          "before 2015 refused "
+                                          "with the 1991-law fact"},
+                "territory": {"type": "string",
+                                "description": "optional, closed: "
+                                               "belgique aliases "
+                                               "only; foreign "
+                                               "calendars refused "
+                                               "by name carrying "
+                                               "their fact"},
+                "season": {"type": "string",
+                             "description": "hiver | ete | both "
+                                            "(default both)"},
+                "as_of": {"type": "string",
+                            "description": "ISO day for phase "
+                                           "UPCOMING|IN_ATTENTE|"
+                                           "IN_PROGRESS|ENDED and "
+                                           "the day counts \u2014 "
                                            "never a wall clock"},
             },
         },

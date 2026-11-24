@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldesbe_ete2018_clause_pin",
+ "path": "/api/v1/shop/soldes-be",
+ "body": {
+  "year": 2018,
+  "season": "ete"
+ }
+}

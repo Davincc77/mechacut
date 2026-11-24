@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldesbe_hiver2021_double_pin",
+ "path": "/api/v1/shop/soldes-be",
+ "body": {
+  "year": 2021,
+  "season": "hiver"
+ }
+}

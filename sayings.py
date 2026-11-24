@@ -580,4 +580,16 @@ SAY = {
         "pt": "os saldos de inverno 2027 na França começam dia 6 "
               "ou 13 de janeiro? a data vem do arrêté, não do "
               "site de calendário"},
+    "/api/v1/shop/soldes-be": {
+        "en": "Belgian winter sales 2027: Saturday 2 January or "
+              "the 3rd? and when does the one-month standstill "
+              "close — 1 January or 2 January? the Livre VI says, "
+              "the press splits",
+        "fr": "soldes d'hiver 2027 en Belgique : samedi 2 ou "
+              "dimanche 3 janvier ? et l'attente du 2 décembre au "
+              "1er janvier ou du 3 ? le Livre VI tranche, la "
+              "presse hésite",
+        "pt": "os saldos de inverno 2027 na Bélgica: sábado 2 ou "
+              "domingo 3 de janeiro? e a espera termina 1 ou 2 de "
+              "janeiro? o Livro VI decide, a imprensa erra"},
 }

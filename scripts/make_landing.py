@@ -364,7 +364,7 @@ TR = {
                  "the full manual:",
     "everyday.h2": "For everyone",
       "everyday.open": "Expand the proofs — real server outputs, no mockups.",
-  "everyday.intro": "No code, no jargon. Twenty-seven things a normal person "
+  "everyday.intro": "No code, no jargon. Twenty-eight things a normal person "
                     "asks an agent on a Tuesday — every answer below is "
                     "the server's real output, not a mockup.",
   "everyday.e1.name": "Guest Wi-Fi, one scan",
@@ -653,6 +653,38 @@ TR = {
                       "Years before 2020: refused with art. 4. "
                       "as_of is an argument \u2014 \u00ab43 days left\u00bb "
                       "is arithmetic, not a clock.",
+  "everyday.e28.name": "Belgian sales dates: the SUNDAY clause "
+                       "IS the date — 2027 opens Saturday "
+                       "January 2, and the standstill closes "
+                       "January 1",
+  "everyday.e28.say": "Livre VI CDE replayed (in force "
+                      "31-May-2014): winter runs 3-31 January, "
+                      "from the 2ND when the 3rd is a Sunday — "
+                      "lived 2016, coming 2027 — and the SPF "
+                      "names the one-month standstill «du 2 "
+                      "décembre au 1er janvier» while some press "
+                      "still prints 3 December: the next-day "
+                      "boundary, in the act. Summer: 1-31 July, "
+                      "from June 30 on a Sunday July 1 — lived "
+                      "2018; its standstill is the NAMED «du 31 "
+                      "mai au 29 juin», which beats the generic "
+                      "formula (30 May): the named text governs. "
+                      "Corona years, each with its verbatim and "
+                      "numac: été 2020 moved to 1-31 August (loi "
+                      "27-mai-2020); winter 2021 REPORTED to "
+                      "Monday 4 January (AR 10-déc-2020 — the "
+                      "Sunday clause FIRED and was OVERRULED; "
+                      "both facts travel), then PROLONGED to 15 "
+                      "February by a LOI (02-févr-2021; the press "
+                      "said 14). Winters before 2015 refused "
+                      "with the 1991-law facts; France and "
+                      "Luxembourg refused by name — France is a "
+                      "different law, Luxembourg is dated EACH "
+                      "YEAR by grand-ducal decree: no formula, "
+                      "no invented date. The Conseil d'État "
+                      "annulled three fines on 20-May-2026; the "
+                      "dates still stand — this tool dates, it "
+                      "does not plead.",
 "nav.kit": "Kit",
   "kit.h2": "The suite on your disk",
   "kit.creed": "The protocol is not the transport \u2014 it is the birth certificate of the tool.",
@@ -732,7 +764,7 @@ TR = {
   "Vision", "nav.api": "Contrat",
   "pill": "v{ver} · {n_tools} transformations · {n_recipes} recettes",
   "hero1": "Le sens s'apprend.",
-  "hero.why": "<strong>Pourquoi le déterminisme ?</strong> Parce qu'une réponse juste qui change à chaque exécution n'est pas une réponse — c'est un dé. Rendons les mêmes octets à la même question et l'agent devient auditable : chaque réponse porte son empreinte, chaque erreur nomme le champ fautif, ce que vous testez le matin est ce que vous vendez le soir.",
+  "hero.why": "<strong>Pourquoi le déterminisme ?</strong> Une réponse juste qui change à chaque exécution n'est pas une réponse — c'est un dé. À la même question, les mêmes octets : l'agent devient auditable, chaque réponse porte son empreinte, chaque erreur nomme le champ fautif — ce que vous testez le matin est ce que vous vendez le soir.",
   "hero2": "La mécanique se sait.",
   "hero3": "La compétence ne s'apprend pas. Elle se sert.",
   "lede": "Une suite de <strong>{n_tools} transformations "
@@ -999,7 +1031,7 @@ TR = {
                  "\u2014 elle devient le manuel complet :",
     "everyday.h2": "Pour tout le monde",
       "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
-  "everyday.intro": "Pas de code, pas de jargon. Vingt-sept choses qu'un humain "
+  "everyday.intro": "Pas de code, pas de jargon. Vingt-huit choses qu'un humain "
                     "demande à son agent un mardi "
                     "\u2014 chaque preuve ci-dessous est ouverte.",
   "everyday.e1.name": "Wi-Fi invit\u00e9s, un scan",
@@ -1025,57 +1057,55 @@ TR = {
   "everyday.e7.name": "Un tiers du g\u00e2teau, sans arrondi cach\u00e9",
   "everyday.e7.say": "\u00ab Mon g\u00e2teau pour 6, je le veux pour 2 "
                      "\u2014 400 g de farine, 5 \u0153ufs ? \u00bb 400 "
-                     "\u00d7 1/3 = 133 1/3 g exacts, 135 g \u00e0 la "
-                     "balance. Les \u0153ufs sont dits, pas devin\u00e9s.",
+                     "\u00d7 1/3 = 133 1/3 g exacts, peser 135 g. "
+                     "Les \u0153ufs sont dits, pas devin\u00e9s.",
   "everyday.e8.name": "Un mardi sur deux, à l'heure",
-  "everyday.e8.say": "« Club de lecture un mardi sur deux à 19 h — "
-                     "les quatre prochaines dates ? » 3 et 17 nov., "
-                     "1er et 15 déc. : tous les quinze jours veut dire "
-                     "SAUTER les semaines du milieu, et le moteur les "
-                     "nomme.",
+  "everyday.e8.say": "Club de lecture un mardi sur deux à 19 h — les quatre prochaines dates ? 3 et 17 nov., 1er et 15 déc. : quinze jours veut dire SAUTER les semaines du milieu — le moteur les nomme.",
   "everyday.e9.name": "Un pied, trois bonnes réponses",
   "everyday.e9.say": "EU 42⅔ ou 42,5 ? Les deux tableaux arrondissent : le millimètre est exact, les candidats demi et tiers sont écrits, la dérive entre systèmes est un nombre dit — jamais un seul numéro confiant.",
   "everyday.e10.name": "Vol retardé — qui me doit quoi",
-  "everyday.e10.say": "Vol en retard de 3 h 20 — la DATE DU VOL choisit la règle : avant le 23 oct. 2027 l'ancien EC261 + jurisprudence, après la table codifiée « PLUS DE trois heures ». Mêmes faits de part et d'autre, réponses différentes. € ou £, délai de recours en vraie date.",
+  "everyday.e10.say": "Vol retardé de 3 h 20 — la DATE DU VOL choisit la règle : avant le 23 oct. 2027 l'ancien EC261 + jurisprudence, après la table codifiée « PLUS DE trois heures ». Mêmes faits, réponses différentes. € ou £, délai de recours en vraie date.",
   "everyday.e11.name": "Mon sac passera-t-il la porte",
   "everyday.e11.say": "Mon sac 40×18×12, vol en novembre 2027 — la DATE DU VOL décide : la règle 2027 plafonne le sous-siège à 40×30×15, avant rien n'est fixé. Rotation compte — faces triées, jamais l'ordre tapé.",
   "everyday.e12.name": "Deux tarifs, un seul chiffre honnête",
-  "everyday.e12.say": "La bascule = (écart de fixe × jours) ÷ (écart de prix), en fraction EXACTE : 4 623⅓ kWh là où l'article écrit « environ 4 623 ». « Jamais » est aussi une réponse, nommée, quand un plan gagne sur les deux parties.",
+  "everyday.e12.say": "La bascule = (écart de fixe × jours) ÷ (écart de prix), en fraction EXACTE : 4 623⅓ kWh là où l'article écrit « environ 4 623 ». « Jamais » est une réponse, nommée, quand un plan gagne sur les deux parties.",
   "everyday.e13.name": "Ce que vaut vraiment un point",
-  "everyday.e13.say": "29 000 points pour un vol à 438 € moins 5,60 € de taxes : le 1,49 affiché cache l'exact 1081/725 = 1,491034… La soustraction passe AVANT la division ; c'est VOTRE plancher qui décide.",
+  "everyday.e13.say": "29 000 points, un vol à 438 € moins 5,60 € de taxes : le 1,49 affiché cache l'exact 1081/725 = 1,491034… ; soustraction AVANT division ; c'est VOTRE plancher qui décide.",
   "everyday.e14.name": "Le poids vraiment factur\u00e9, les deux "
                        "cha\u00eenes imprim\u00e9es",
-  "everyday.e14.say": "Deux transporteurs facturent 6 kg et 5 kg pour la même boîte 40×30×25 — personne n'a tort : 30 000 cm³ ÷ 5 000 = 6 pile, ÷ 6 000 = 5 pile. Les tables transporteurs POURRISSENT (USPS 166→139 en juillet 2026) : le diviseur reste VOTRE argument, jamais notre mémoire.",
+  "everyday.e14.say": "Deux transporteurs facturent 6 kg et 5 kg pour la même boîte 40×30×25 — personne n'a tort : 30 000 cm³ ÷ 5 000 = 6 pile, ÷ 6 000 = 5 pile. Les tables transporteurs POURRISSENT (USPS 166→139 en juillet 2026) : le diviseur reste VOTRE argument.",
   "everyday.e15.name": "L'affiche dit 50 % — la note, jamais",
-  "everyday.e15.say": "Deux sweats à 60 € et 40 €, « le deuxième à −50 % » : ni 50 ni 25 — la remise porte sur le MOINCHER (règle de détail publiée), la paire rend 80 sur 100 = −20 %. À prix égaux −25 %, BOGO gratuit −50 %, coupon −30 % par dessus −47,5 %, jamais 55.",
+  "everyday.e15.say": "Deux sweats à 60 € et 40 €, « le deuxième à −50 % » : ni 50 ni 25 — la remise porte sur le MOINS CHER (règle publiée), la paire rend 80 sur 100 = −20 %. À prix égaux −25 %, BOGO gratuit −50 %, coupon −30 % par dessus −47,5 %, jamais 55.",
   "everyday.e16.name": "Le 500 g est devenu 400 g — au même prix",
   "everyday.e16.say": "Perdre 1/5 du produit (500→400 g, même étiquette), c'est +1/4 au kilo : 20 % contre 25 %, deux dénominateurs. Le « 2 pour 7 $ » de pots de 15 oz perd 40,3509 % à l'once contre le pot de 24 oz — la fraction tranche, pas l'œil.",
   "everyday.e17.name": "Thanksgiving : à quelle heure la dinde sort du congélateur",
-  "everyday.e17.say": "Huit calculateurs de nov. 2026 citent la même table USDA et se contredisent sur la dinde de 16 lb. Règle nommée : au plus tard = four moins le bout long du créneau ; pas avant = moins la garde de 1 à 2 jours. Heures = arguments, jamais l'horloge ; cuit est 165 °F à la sonde.",
+  "everyday.e17.say": "Huit calculateurs de nov. 2026 citent la même table USDA et se contredisent sur la dinde de 16 lb. Règle nommée : au plus tard = four moins le bout long ; pas avant = moins la garde de 1 à 2 jours. Heures = arguments, jamais l'horloge ; cuit = 165 °F à la sonde.",
   "everyday.e18.name": "La dinde en restes — quel jour ferme la fenêtre du frigo",
-  "everyday.e18.say": "« À manger avant lundi 30 novembre » (NBC, 19 nov) côtoie « trois jours, 72 h optimales » (ky3) — même dinde ; FSIS se contredit au congélateur (2-6 vs 3-4 mois). L'outil rend l'UNION des fenêtres, deux ancres citées, 2 h STRICTES depuis cooked_at (2 h pile passe, 2 h 01 jette), 4ᵉ jour nommé LAST_DAY, qualité nommée qualité.",
+  "everyday.e18.say": "« À manger avant lundi 30 novembre » (NBC, 19 nov) côtoie « trois jours, 72 h optimales » (ky3) — même dinde ; FSIS se contredit au congélateur (2-6 vs 3-4 mois). L'outil rend l'UNION des fenêtres, deux ancres citées, 2 h STRICTES depuis cooked_at (2 h pile passe, 2 h 01 jette), 4ᵉ jour nommé LAST_DAY.",
   "everyday.e19.name": "Trois plats veulent le four — le compte à rebours, conflits nommés",
-  "everyday.e19.say": "Huit timelines 2026 publient le même dîner avec des repos de 20 à 60 minutes, 325 ou 350 °F — personne ne compte les 45 minutes de préchauffage. Calcul à REBOURS depuis l'heure de service (argument, jamais l'horloge) : un four, un plat à la fois, repos dehors ; entrée à la minute de la sortie à autre consigne = conflit nommé ; « 180 » sans unité = refusé ; repos au-delà de 2 h = zone FSIS.",
+  "everyday.e19.say": "Huit timelines 2026 publient le même dîner avec des repos de 20 à 60 minutes, 325 ou 350 °F — personne ne compte les 45 minutes de préchauffage. Calcul à REBOURS depuis l'heure de service (argument, jamais l'horloge) : un four, un plat à la fois, repos dehors ; sortie à autre consigne = conflit nommé ; « 180 » sans unité = refusé ; repos au-delà de 2 h = zone FSIS.",
   "everyday.e20.name": "Dates limites d'envoi de Noël — ≥2 sources, divergente nommée",
-  "everyday.e20.say": "Six tableaux du 13 au 21 nov. 2026 se contredisent : un syndicat imprime FedEx Saver, 2Day, Overnight un jour plus tard — sa cible est le 25, pas le 24. Ligne gardée si ≥2 sources concordent ; divergente nommée ; UPS Ground refusé, pas de date unique. Fenêtre close le 23 déc.",
+  "everyday.e20.say": "Six tableaux des 13-21 nov. 2026 se contredisent : un syndicat imprime FedEx Saver, 2Day, Overnight un jour plus tard — sa cible est le 25, pas le 24. Ligne gardée si ≥2 sources concordent ; divergente nommée ; UPS Ground refusé (pas de date unique). Fenêtre close le 23 déc.",
   "everyday.e21.name": "Retours des fêtes — ≥2 sources, provenance par ligne",
-  "everyday.e21.say": "Le titre « jusqu'au 31 janvier » est un mensonge par omission : Target ferme l'achat le 24 déc., Best Buy coupe sa règle membres au 4 déc., un blog a republié les dates passées DÉCALÉES pendant que Seller Central publiait le texte 2026. Ligne gardée si deux sources concordent ; provenance par ligne ; mono-sources refusées avec le fait candidat. « Au plus tard des deux » exige la livraison.",
+  "everyday.e21.say": "Le titre « jusqu'au 31 janvier » est un mensonge par omission : Target ferme l'achat le 24 déc., Best Buy coupe sa règle membres au 4 déc., un blog a republié les dates passées DÉCALÉES pendant que Seller Central publiait le texte 2026. Deux sources concordantes par ligne ; provenance ; mono-sources refusées avec le fait candidat.",
   "everyday.e22.name": "Le prix barré est-il LÉGAL ? règle Omnibus des 30 jours",
-  "everyday.e22.say": "Référence légale : le prix le PLUS BAS des 30 jours précédents (directive 2019/2161 art. 6a) — une promo du week-end l'ABAISSE même si le prix est remonté (CJEU C-330/23). 100 → 80 → 100 → 70 = 12,5 %, pas 30 %. Sweep Commission mars 2026 : 30 % des 314 commerces se trompent ; jusqu'à 350 000 € d'amende en Espagne. Historique en entrée, référence et vrai pourcentage en sortie.",
+  "everyday.e22.say": "Référence légale : le prix le PLUS BAS des 30 jours précédents (directive 2019/2161 art. 6a) — une promo du week-end l'ABAISSE même si le prix est remonté (CJEU C-330/23). 100 → 80 → 100 → 70 = 12,5 %, pas 30 %. Sweep mars 2026 : 30 % des 314 commerces se trompent ; jusqu'à 350 000 € d'amende en Espagne.",
   "everyday.e23.name": "Le prix a BAISSÉ après l'achat — qui doit la différence",
-  "everyday.e23.say": "Acheté 100, affiché 80. Aucune loi n'oblige au remboursement — les garanties publiées oui, fenêtres = DATES : Target 24 déc, Best Buy 15 janv, Costco 30 jours, Fnac-Darty la campagne elle-même (carte cadeau, pas espèces), Amazon rien. Verdict, date limite, montant, monnaie — classe de source par ligne. Zéro fetch.",
+  "everyday.e23.say": "Acheté 100, affiché 80. Aucune loi n'oblige au remboursement — les garanties publiées oui, fenêtres = DATES : Target 24 déc, Best Buy 15 janv, Costco 30 jours, Fnac-Darty la campagne elle-même (carte cadeau, pas espèces), Amazon rien. Verdict, date, montant, monnaie — classe de source par ligne.",
   "everyday.e24.name": "Le cadeau mort APRÈS le retour — ce que la LOI doit, jour pour jour",
-  "everyday.e24.say": "Cadeau livré le 25 décembre, en panne le 16 : vitrine fermée le 15, presse muette ; la loi, si. France : conformité 2 ans depuis la DÉLIVRANCE, vices cachés 2 ans depuis la DÉCOUVERTE, plafond 20 ans depuis la vente — 3 ancres sous « garantie ». UK : 30 jours pour rejeter, six mois de preuve INVERSÉE (règle de preuve, pas échéance), six ans — cinq en Écosse. Page officielle contradictoire (reconditionné 24 ou 12 mois) : les DEUX dates voyagent. US/AU refusés par nom.",
+  "everyday.e24.say": "Cadeau livré le 25 décembre, en panne le 16 : vitrine fermée le 15, presse muette ; la loi, si. France : conformité 2 ans depuis la DÉLIVRANCE, vices cachés 2 ans depuis la DÉCOUVERTE, plafond 20 ans. UK : 30 jours pour rejeter, six mois de preuve INVERSÉE (preuve, pas échéance), six ans — cinq en Écosse. Page officielle contradictoire (reconditionné 24 ou 12) : les DEUX dates voyagent. US/AU refusés par nom.",
     "everyday.e25.name": "Puis-je jeter ce dossier ? — QUATRE horloges dans le carton",
-  "everyday.e25.say": "« Six ans » = QUATRE dates : TVA depuis la date ÉCRITE SUR LE DOCUMENT (événement futur compris, HMRC l'écrit), limited company depuis la CLÔTURE, s.388 TROIS ans si private, SIX si plc — depuis la CRÉATION —, Self Assessment cinq ans depuis le 31 janvier, deadline sans papier. Exemple officiel : 2022-23 avant le 31 janvier 2024 → gardé jusqu'au 31 janvier 2029, détruit dès le 1er février. Les « ou plus si » reviennent BLOCKED ; CH15400 : la PLUS LONGUE gouverne.",
+  "everyday.e25.say": "« Six ans » = QUATRE dates : TVA depuis la date ÉCRITE SUR LE DOCUMENT (événement futur compris, HMRC l'écrit), limited company depuis la CLÔTURE, s.388 TROIS ans si private, SIX si plc — depuis la CRÉATION —, SA cinq ans depuis le 31 janvier, deadline sans papier. Exemple officiel 2022-23 : gardé jusqu'au 31 janvier 2029. Les « ou plus si » reviennent BLOCKED ; CH15400 : la PLUS LONGUE gouverne.",
   "everyday.e26.name": "Carte cadeau « périmée » ? Peut-être vivante — l'ACHAT ancre",
-  "everyday.e26.say": "Irlande, Gift Vouchers Act 2019 rejoué : date imprimée plus courte que cinq ans depuis l'achat = REMPLACÉE d'office par cinq ans — le légal COUVRE le papier (66B(1)(b)+(c)). JD Sports : bons d'un an, ≈250 000 € rendus en juillet. Horloge depuis l'achat ; porteur tient tous les droits (66B(10)). Solde d'1 € ou plus : dû. France : AUCUNE durée légale ; mythe des « 30 ans » = immobilier (art. 2227), refusé.",
+  "everyday.e26.say": "Irlande, Gift Vouchers Act 2019 rejoué : date imprimée plus courte que cinq ans depuis l'achat = REMPLACÉE d'office par cinq ans — le légal COUVRE le papier (66B(1)(b)+(c)). JD Sports : ≈250 000 € rendus en juillet. Porteur tient tous les droits (66B(10)). Solde d'1 € ou plus : dû. France : AUCUNE durée légale ; « 30 ans » = immobilier (2227), refusé.",
   "everyday.e27.name": "Les soldes sont UNE LOI, pas une mémoire — 2027 : 6 janvier",
-  "everyday.e27.say": "Arrêté du 27 mai 2019 rejoué : hiver = 2e mercredi de janvier à 8 h, avancé au 1er si le 2e tombe après le 12 (2027 : 6 janvier ; « 9 février » = clause ratée). Été = dernier mercredi de juin, avant-dernier si après le 28 (2027 : 23 juin). Quatre semaines, début compté. Sept dérogations verbatim : été 2020 15 juillet ; hiver 2021 20 janvier puis six semaines ; Moselle seule au 26 juin 2021 ; Guadeloupe jeudi 7 octobre ; canicule 2023/2026 cinq semaines. « Jour ouvré » non défini : 2027 porte lundi 4 premier, samedi 2 nommé. Avant 2020 et hors France : refusé par nom.",
+  "everyday.e27.say": "Arrêté du 27 mai 2019 rejoué : hiver = 2e mercredi de janvier à 8 h, avancé au 1er si le 2e tombe après le 12 (2027 : 6 janvier ; « 9 février » = clause ratée). Été = dernier mercredi de juin, avant-dernier si après le 28 (2027 : 23 juin). Quatre semaines, début compté. Sept dérogations verbatim : été 2020 15 juillet ; hiver 2021 six semaines ; Moselle seule au 26 juin 2021 ; Guadeloupe 7 octobre ; canicule 2023/2026 cinq semaines. « Jour ouvré » non défini : 2027 lundi 4 premier, samedi 2 nommé. Avant 2020 et hors France : refusé.",
+  "everyday.e28.name": "Soldes en Belgique : le dimanche fait la loi — 2027 samedi 2 janvier, attente jusqu'au 1er",
+  "everyday.e28.say": "Livre VI rejoué : hiver du 3 au 31 janvier, DU 2 SI le 3 est dimanche — vécu 2016, 2027 ; attente NOMMÉE « du 2 décembre au 1er janvier » — la presse écrit 3 décembre : borne du lendemain ratée. Été du 1er au 31 juillet, du 30 JUIN si dimanche — vécu 2018 ; attente « du 31 mai au 29 juin » : le texte bat la formule (30 mai). Corona verbatim : été 2020 reporté 1er-31 août (loi 27-05-2020) ; hiver 2021 au LUNDI 4 (AR 10-12-2020 — clause du dimanche tirée PUIS écrasée, les deux faits voyagent), prolongé au 15 FÉVRIER par LOI (02-02-2021 ; titres : 14). Avant 2015 refusé avec la loi de 1991 ; France/Luxembourg refusés par nom (Luxembourg : règlement annuel). CE 20-05-2026 : amendes annulées, dates tenues — le tool date, il ne plaide pas.",
 "nav.kit": "Kit",
   "kit.h2": "La suite sur votre disque",
   "kit.creed": "Le protocole n'est pas le transport \u2014 c'est l'acte de naissance de l'outil.",
-  "kit.intro": "Les transformations libres ne sont pas qu'une API : elles sont une suite. Un agent l'installe sur sa machine, l'appelle en local et \u2014 ce qu'aucun marché ne fait \u2014 bâtit des outils neufs sur les mêmes portes. curl devient kit call ; une tâche répétée devient proposition de contrat ; la proposition ne devient outil publié que si ses golds furent tracés avant son code.",
+  "kit.intro": "Les transformations libres ne sont pas qu'une API : une suite. Un agent l'installe sur sa machine, l'appelle en local et — ce qu'aucun marché ne fait — bâtit des outils neufs sur les mêmes portes. curl devient kit call ; une tâche répétée devient proposition de contrat ; la proposition ne devient outil publié que si ses golds furent tracés avant son code.",
   "kit.c1.sum": "Installer \u2014 la suite basique sur la machine",
   "kit.c1.foot": "Sha vérifié, pas de daemon, pas d'auto-update, pas de réseau dans le moteur. Le sans-état est le contrat : l'humain décide quand le kit bouge.",
   "kit.c2.sum": "Appeler \u2014 consulter avant d'agir",
@@ -1414,7 +1444,7 @@ TR = {
                  "at\u00e9 o menor \u2014 ela vira o manual completo:",
     "everyday.h2": "Para todo mundo",
       "everyday.open": "Expandir as provas — saídas reais do servidor, não maquetes.",
-  "everyday.intro": "Sem código, sem jargão. Vinte e sete coisas que "
+  "everyday.intro": "Sem código, sem jargão. Vinte e oito coisas que "
                     "uma pessoa pede ao agente numa terça — cada "
                     "resposta abaixo é a saída real do servidor, "
                     "não uma maquete.",
@@ -1559,6 +1589,8 @@ TR = {
                        "LEI, n\u00e3o mem\u00f3ria \u2014 2027 abre a 6 de "
                        "janeiro",
   "everyday.e27.say": "O arrêté de 27 de maio de 2019 rejogado: inverno abre na 2ª quarta de janeiro às 8h, ANTECIPADO se a 2ª cai após o dia 12 — 2027: 6 de janeiro; quem imprime «9 de fevereiro» perdeu a cláusula. Verão idem: última quarta de junho, penúltima se a última cai após o 28 — 2027: 23 de junho. Quatro semanas contando o dia de abertura. As sete derrogações anuais com o texto: verão 2020 a 15 de julho; inverno 2021 a 20 de janeiro e depois SEIS SEMANAS; Mosela sozinha a 26 de junho de 2021; Guadalupe a 7 de outubro de 2021; canícula 2023 e 2026 a cinco semanas. «Primeiro dia útil» sem definição: em 2027 segunda 4 primeiro, sábado 2 nomeado. Antes de 2020 e estrangeiro recusados por nome; contagem é subtração, não relógio.",
+  "everyday.e28.name": "Saldos na Bélgica: o domingo muda a data — 2027 abre sábado 2 de janeiro",
+  "everyday.e28.say": "Livre VI rejogado (vigente desde 31-05-2014): inverno de 3 a 31 de janeiro, do DIA 2 se o dia 3 cai domingo — vivido 2016, 2027; a espera de um mês é NOMEADA «de 2 de dezembro a 1º de janeiro» — a imprensa imprime 3 de dezembro e perde a borda do dia seguinte. Verão de 1º a 31 de julho, de 30 de JUNHO se 1º cai domingo — vivido 2018; espera nomeada «de 31 de maio a 29 de junho»: o texto vence a fórmula (30 de maio). Corona com o texto: verão 2020 adiada para 1º-31 de agosto (lei 27-05-2020); inverno 2021 adiado para segunda 4 de janeiro (AR 10-12-2020 — a cláusula do domingo ACIONADA e depois DESATIVADA: os dois fatos viajam), prorrogado até 15 de fevereiro por LEI (02-02-2021; os títulos diziam 14). Invernos antes de 2015 recusados com a lei de 1991; França e Luxemburgo recusados pelo nome com seu fato: o Luxemburgo é datado A CADA ANO por règlement grand-ducal. O Conseil d'Estado anulou três multas em 20-05-2026; as datas ficam — a ferramenta marca, não advoga.",
 "nav.kit": "Kit",
   "kit.h2": "A suíte no seu disco",
   "kit.creed": "O protocolo não é o transporte \u2014 é a certidão de nascimento da ferramenta.",
@@ -2356,13 +2388,15 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "spec, l'angle mort du AI SDK fermé ; ordre compris "
             "dans le contrat",
         "agent_contexttax":
-            "combien coûte VOTRE liste MCP collée, octets et tokens (estimateur chars÷4 publié, plancher déclaré), par outil et champ — contre-fait names-only chiffré, facture PAR TOUR, dollars à VOTRE prix ; mcp-audit dit REJETÉ, mcp-surface CHANGÉ — ici COMBIEN",
+            "combien coûte VOTRE liste MCP collée, octets et tokens (estimateur chars÷4 publié, plancher déclaré), par outil et champ — names-only chiffré, facture PAR TOUR, dollars à VOTRE prix ; mcp-audit dit REJETÉ, mcp-surface CHANGÉ — ici COMBIEN",
         "agent_costdiff":
             "le PRIX DE L'UPDATE : deux listings MCP collés, surplus de tokens par outil et champ signé, % du côté avant ; delta global et somme par outil avec divergence CHIFFRÉE ; mcp-surface dit CHANGÉ, context-tax COMBIEN — ici DE COMBIEN À COMBIEN",
         "shop_gift_voucher":
-            "carte cadeau « périmée » d'un an REMPLACÉE d'office par cinq ans depuis l'achat — le légal couvre le papier (Irlande 2019) ; solde d'1 € ou plus = dû, frontière 1 € en conflit NOMMÉ ; France NÉGATIVE : aucune durée légale, mythe des « 30 ans » = immobilier, refusé par nom",
+            "carte cadeau « périmée » d'un an REMPLACÉE d'office par cinq ans depuis l'achat — le légal couvre le papier (Irlande 2019) ; solde d'1 € ou plus = dû, frontière 1 € en conflit NOMMÉ ; France : aucune durée légale, mythe des « 30 ans » = immobilier, refusé",
         "shop_soldes_window":
-            "dates légales depuis l'arrêté du 27 mai 2019 rejoué : clauses d'avance aux deux saisons (2027 : 6 janvier pas 13, 23 juin pas 30), sept dérogations au verbatim (hiver 2021 à six semaines, Moselle seule au 26 juin 2021), annexe versionnée, « ouvré » ambigu nommé ; hors France refusé par nom",
+            "sept dérogations verbatim (hiver 2021 six semaines, Moselle seule au 26 juin 2021), annexe versionnée, « ouvré » nommé ; hors France refusé par nom",
+        "shop_soldes_be":
+            "dates légales belges (art. VI.25 CDE) : clause du dimanche datée (2027 : samedi 2 janvier), attente NOMMÉE (du 2 décembre au 1er janvier), reports corona 2020-2021 verbatim, clause écartée visible ; France/Luxembourg refusés par nom",
         "agent_retrybudget":
             "re-tenter cet échec est-il rationnel ? taxonomie "
             "fermée, plafond de hachage, budget de session, backoff "
@@ -2481,13 +2515,13 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "date_recurrence":
             "RRULE déroulé en dates — sous-ensemble RFC 5545 fermé, mois invalides sautés LISTÉS, ancrage du DTSTART déclaré, COUNT ou UNTIL jamais les deux, refus nommés, cap 500",
         "date_tz_ambiguity":
-            "Heure murale + zone → single | fold | gap : heures qui n'existent pas (spring forward) ou existent DEUX FOIS (fall back), chaque instant UTC nommé, offset + abréviation, règle PEP 495 dite, voisins du trou rendus — le verdict que date/tz applique en silence, cron_next ne le signale pas",
+            "Heure murale + zone → single | fold | gap : heures qui n'existent pas (spring forward) ou DEUX FOIS (fall back), chaque instant UTC nommé, offset + abréviation, règle PEP 495 dite, voisins du trou rendus — le verdict que date/tz applique en silence et que cron/next ne signale pas",
         "date_tz_anchor":
-            "Heure murale ÉCRITE dans la zone du job, ANCRÉE dans sa zone : chaque instant UTC candidat, dérive SIGNÉE en minutes (positif = en retard), deux horloges relues ; l'offset gagne (Composio #4148) ; single/fold/gap rendus par date/tz_ambiguity APPELÉ, jamais dupliqué",
+            "Heure murale ÉCRITE dans la zone du job, ANCRÉE dans sa zone : chaque instant UTC candidat, dérive SIGNÉE en minutes (positif = en retard) ; l'offset gagne (Composio #4148) ; single/fold/gap rendus par date/tz_ambiguity APPELÉ, jamais dupliqué",
         "money_flight_comp":
             "Date de vol = TABLE de compensation : 261/2004 + Sturgeon/Nelson avant 2027-10-23, (UE) 2026/2202 APRÈS (seuil « EXCEEDING 3 h » STRICT, 180 min pile ne paye pas), UK261 £220/350/520 + ligne officielle £260 sous 4 h, plafond intra-UE €400 nommé, réductions = options « le transporteur PEUT », forclusion 9 mois, date exacte",
         "date_week":
-            "Semaine ISO aller-retour ; année ISO SÉPARÉE du %Y ; W53 par THÉORÈME (53 jeudis ⟺ 1er janvier jeudi, ou mercredi + bissextile ; zéro table) ; semaine inexistante refusée, artefact %Y-W%V nommé ; conventions Excel/US côte à côte (%U %W WEEKNUM), notes PostgreSQL/Snowflake",
+            "Semaine ISO aller-retour ; année ISO SÉPARÉE du %Y ; W53 par THÉORÈME (53 jeudis ⟺ 1er janvier jeudi, ou mercredi + bissextile ; zéro table) ; semaine inexistante refusée, artefact %Y-W%V nommé ; conventions Excel/US côte à côte",
         "units_shoe_size":
             "Pointures en millimètres exacts — jamais publiés en fractions (barleycorn 127/15, Paris point 20/3) ; demi ET tiers candidats de grille ; dérive entre systèmes DITE, jamais un numéro confiant unique ; charts marques hors contrat",
         "net_sri":
@@ -2681,21 +2715,21 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "eth_receipt":
             "logs + effets attendus → verdict de correspondance",
         "money_baggage":
-            "Date du vol = palier LOI (40×30×15 sous le siège GRATUIT dès 2027-10-23, RIEN avant — chaque compagnie décide) ; casier : AUCUNE taille légale ; gabarits EN ARGUMENTS, jamais fetchus ; ajustement PAR DIMENSION avec ROTATION (40×18×30 passe dans 40×30×20) ; « cumul 100cm/7kg » (presse) en affirmation TESTÉE (55+40+20=115), jamais en règle",
+            "; casier : AUCUNE taille légale ; gabarits EN ARGUMENTS, jamais fetchus ; PAR DIMENSION avec ROTATION (40×18×30 passe dans 40×30×20) ; « cumul 100cm/7kg » TESTÉ (55+40+20=115), jamais règle",
         "csv_excel_damage":
-            "Ce qu'Excel DÉTRUIT au double-clic, PRÉDIT avant : zéros de tête (02134→2134), mur des 15 chiffres (…1111→…1110), notation sci (1E5→100000), dates forcées (SEPT2, MARCH1, « 3-4 » = 4 mars EN / 3 avril EU — locale ARGUMENT, année par as_of), formes de formule (=-+@), pleine chasse ; règles = trois interrupteurs Microsoft nommés ; import colonne-Texte PRESCRIT ; csv/fix répare — ici on PRÉDIT",
+            "règles = trois interrupteurs Microsoft nommés ; import colonne-Texte PRESCRIT ; csv/fix répare, ici on PRÉDIT",
         "money_crossover":
-            "Prix de reviens de DEUX tarifs à composantes (unitaire + fixe) : bascule en FRACTION EXACTE — sept calculateurs publiés arrondissent Δ fixe avant division — d'où leurs contradictions ; conventions de jours NOMMÉES (mensuel ×12 exact jamais 30 ; journalier ×365, ×366 si bissextile fourni ; « semaine » refusée) ; DOMINATION rendue « never » ; km si consommation FOURNIE ; frais one-off = mois de payback, hors bascule",
+            "— sept calculateurs publiés arrondissent Δ fixe avant diviser ; conventions de jours NOMMÉES (mensuel ×12 jamais 30 ; journalier ×365, ×366 si bissextile fourni ; « semaine » refusée) ; DOMINATION « never » ; km si conso FOURNIE ; one-off en mois de payback, hors bascule",
         "money_points":
-            "Combien vaut un POINT : cpp = (prix cash − reste cash − rewards forgoes) / points × 100 en FRACTION EXACTE (1081/725, la presse dit 1.49) ; voies triées côte à côte, égalités nommées, verdict contre FLOOR fourni, solde × cpp, retour pts/$ × cpp ; jamais de table",
+            "Combien vaut un POINT : cpp = (prix cash − reste − rewards forgoes) / points × 100 en FRACTION EXACTE (1081/725, presse 1.49) ; voies triées, égalités nommées, verdict contre FLOOR fourni, solde × cpp, retour pts/$ × cpp ; jamais de table",
         "csv_excel_display":
-            "Ce qu'Excel AFFICHE d'une valeur STOCKÉE (code numFmt) : virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → $1,000 — attaque mesurée arXiv 2611.05806 : six extracteurs python aveugles) ; table Microsoft rejouée (« #.0,, »→12.2, « (000) »→(012), « 0% »→50%) ; arrondi demi-vers-le-large dit ; locale en ARGUMENT (les séparateurs du fichier sont des symboles — ingénieur Microsoft) ; General/dates/couleurs refusés PAR LE NOM ; style rendu — prédiction d'import : autre route",
+            "Ce qu'Excel AFFICHE d'une valeur STOCKÉE (code numFmt) : virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → $1,000 — mesuré arXiv 2611.05806, six extracteurs aveugles) ; table Microsoft rejouée (« #.0,, »→12.2, « (000) »→(012), « 0% »→50%) ; demi-vers-le-large dit ; locale en ARGUMENT (les séparateurs sont des symboles) ; General/dates/couleurs refusés PAR LE NOM ; rendu ≠ import",
         "ship_dimweight":
-            "Le poids VRAIMENT facturé : dimensions AU POUCE SUPÉRIEUR avant volume, volume ÷ diviseur (unité DECLAREE — le piège mm÷139 x16,4 devient impossible), max(actual, dimensionnel), ceil au palier, plafond. rollo 35 lb vs amzprep 34,5 sur les MÊMES pouces : la fraction 4800/139 tranche, chaque étape nommée ; tables transporteurs EN ARGUMENTS (USPS 166→139 le 12-juil-2026 = elles pourrissent)",
+            "rollo 35 lb vs amzprep 34,5 sur les MÊMES pouces : la fraction 4800/139 tranche, étape nommée ; tables EN ARGUMENTS (USPS 166→139 le 12-07-2026 : elles pourrissent",
         "json_coerce":
-            "Répare les ARGUMENTS qu'un lecteur STRICT refuse : 8.0→8 (serde « invalid type: floating point 2500.0, expected u64 », 11/11 tours mesurés) ; exposants et fractions vraies TELS QUELS ; 'false' en chaîne refusé PAR LE NOM (piège truthy) ; string→number si cast_strings=on ; '007' JAMAIS (zéros de tête = payload) ; clés dupliquées refusées ; notation d'origine CONSERVÉE",
+            "; exposants/fractions TELS QUELS ; 'false' chaîne refusé PAR LE NOM (truthy) ; string→number si cast_strings=on ; '007' JAMAIS (zéros de tête = payload) ; clés dupliquées refusées ; notation CONSERVÉE",
         "money_bogo":
-            "Le pourcentage que la CAISSE applique sous « BUY ONE GET ONE 50 % » : remise sur le MOINS CHER des deux (règle publiée : 60+40 rend 20 % sur 100, ni 25 ni 50) ; prix égaux = 25 % de la paire JAMAIS 50 ; l'article impair se paie PLEIN (paires DONNÉES, jamais devinées) ; coupon EMPILE en produit de facteurs (25 puis 30 = 47,5, jamais 55) ; trace/paire, fraction exacte à côté",
+            ": remise sur le MOINS CHER des deux (règle publiée : 60+40 rend 20 % sur 100, ni 25 ni 50) ; prix égaux = 25 % JAMAIS 50 ; l'impair se paie PLEIN (paires DONNÉES) ; coupon EMPILE (25 puis 30 = 47,5, jamais 55) ; trace/paire, fraction exacte",
         "agent_modelid":
             "audit des ids de modèle contre un catalogue collé — verdicts nommés, did-you-mean à une distance nommée, ne jure jamais avoir fait le GET (V23)",
         "food_poultry":
@@ -2739,6 +2773,8 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "vale-presente « vencido » de um ano é SUBSTITUÍDO por cinco anos desde a compra — a data legal COBRE o papel (Lei irlandesa de 2019 rejogada, forma JD Sports); saldo de €1 ou mais é devido, fronteira €1 com conflito NOMEADO; França NEGATIVA: nenhuma duração legal, o boato dos « 30 anos » é imobiliário, recusado por nome",
         "shop_soldes_window":
             "as datas legais dos saldos na França vêm do arrêté de 27 de maio de 2019 rejogado: cláusulas de antecipação nas duas estações (2027: 6 de janeiro, não 13; 23 de junho, não 30), sete derrogações anuais com o texto — inverno 2021 em SEIS SEMANAS, Mosela sozinha a 26 de junho de 2021 — anexo versionado; antes de 2020 e fora da França, recusado por nome",
+        "shop_soldes_be":
+            "as datas legais dos saldos belgas pela regra do art. VI.25 CDE: cláusula do domingo datada (2027: sábado 2 de janeiro), espera de um mês NOMEADA (2 de dezembro a 1º de janeiro), adiamentos da corona 2020-2021 com o texto, cláusula desativada mas visível; França e Luxemburgo recusados pelo nome",
         "agent_retrybudget":
             "repetir esta falha é racional? taxonomia fechada, teto "
             "de hash, orçamento de sessão, backoff determinístico",
@@ -3146,7 +3182,8 @@ W = {
                     "2019 overrides the paper",
            "window": "\u2192 winter 2027 opens %s at 8 h \u00b7 the "
                      "second Wednesday (%s) fell after the 12th: "
-                     "ADVANCED \u00b7 %s days to go"},
+                     "ADVANCED \u00b7 %s days to go",
+           "be": "\u2192 winter 2027 opens %s \u00b7 standstill since %s \u00b7 %s days to go"},
     "fr": {"qr": "QR v%s \u00b7 %s\u00d7%s modules \u00b7 SVG imprimable, "
                  "d\u00e9terministe",
            "returndead": "\u2192 retour jusqu'au %s (%s) \u00b7 chez "
@@ -3168,6 +3205,7 @@ W = {
                     "\u00b7 le papier volait %s \u2014 la loi 2019 "
                     "couvre l'imprimé",
            "window": "→ hiver 2027 : %s, 8 h · 2e mercredi (%s) après le 12 : AVANCÉ · dans %s jours",
+           "be": "→ hiver 2027 : %s · attente depuis %s · dans %s jours",
            "word": "\u2192 \u00ab %s \u00bb",
            "iban": "\u2192 cl\u00e9 de contr\u00f4le valide \u00b7 %s",
            "page": "\u2192 page autonome (%s octets) \u00b7 Ctrl-P = PDF",
@@ -3262,7 +3300,8 @@ W = {
       "ovenschedule": "\u2192 forno ligado %s, peru de fora %s · "
                       "conflitos de temperatura: %d — nenhum "
                       "cronograma avisa isso",
-      "deadline": "\u2192 \u00faltimo envio %s (%s) \u00b7 a fonte divergente publica %s \u2014 nomeada, nunca m\u00e9dia"},
+      "deadline": "\u2192 \u00faltimo envio %s (%s) \u00b7 a fonte divergente publica %s \u2014 nomeada, nunca m\u00e9dia",
+      "be": "\u2192 inverno 2027: %s \u00b7 espera desde %s \u00b7 em %s dias"},
 }
 
 
@@ -3459,6 +3498,11 @@ _EVERYDAY_CALLS = [
                               d["windows"][0]["rule"][
                                   "second_wednesday"],
                               str(d["windows"][0]["days_to_start"]))),
+    ("/api/v1/shop/soldes-be",
+     {"year": 2027, "season": "hiver", "as_of": "2026-11-24"},
+     "be", lambda d, L_: (d["windows"][0]["start"],
+                          d["windows"][0]["waiting"]["start"],
+                          str(d["windows"][0]["days_to_start"]))),
 ]
 
 

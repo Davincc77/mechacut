@@ -324,10 +324,34 @@ CASES = [
      "shop_soldes_window"),
     ("data dos saldos de verão na frança 2027",
      "shop_soldes_window"),
-    ("quand commencent les soldes en belgique", None),
+    # CLASSE b105 — la Belgique a SON outil : la ligne b103
+    # (« rien ne doit être prescrit ») devient une want positive,
+    # la douleur fermée PAR LE LOT. Aiguilles x3 langues + la
+    # clause vécue + l'attente à la borne du lendemain + le report
+    # 2021. Gardes : « france » nominatif reste chez window ;
+    # luxembourg/suisse/joke continuent de ne RIEN prescrire.
+    ("quand commencent les soldes en belgique", "shop_soldes_be"),
+    ("soldes belgique 2027 samedi 2 ou dimanche 3 janvier",
+     "shop_soldes_be"),
+    ("période d'attente soldes belgique 2 décembre 1er janvier",
+     "shop_soldes_be"),
+    ("winter sales belgium 2027 january 2 sunday clause",
+     "shop_soldes_be"),
+    ("belgian summer sales june 30 standstill period",
+     "shop_soldes_be"),
+    ("saldos na bélgica 2027 janeiro período de espera",
+     "shop_soldes_be"),
+    ("data dos saldos de inverno na belgica 2027",
+     "shop_soldes_be"),
+    ("wanneer zijn de solden 2027 in belgië", "shop_soldes_be"),
+    ("report des soldes belges 4 janvier 2021 prolongés quinze février",
+     "shop_soldes_be"),
+    ("les soldes d'hiver 2027 en france c'est le 6 ou le 13",
+     "shop_soldes_window"),
     ("quando começam os saldos em portugal", None),
     ("les soldes d'hiver au luxembourg 2027", None),
     ("tell me a joke about the french sales calendar", None),
+    ("blague sur le calendrier des soldes belges", None),
     # frontière jurée : le MONNAIE-solde reste chez les frères. La
     # première version de cette ligne (« mon solde de carte cadeau
     # remboursement ») était une PIÈCE À PILE : pricedrop et
