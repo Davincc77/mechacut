@@ -1,12 +1,14 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 179 + 9, vérifiés live 24-11, prod 1.26.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 180 + 9, vérifiés live 24-11 soir, prod 1.27.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
 (b) ripoint 170→171 et prod 1.16.0→1.17.0 après bundle96 ; (c) 24-11 : 171→179,
-prod 1.26.0, suite 1 686 (comptes lus sur l'en-tête du manifest live, jamais de mémoire).
+prod 1.26.0, suite 1 686 ; (d) 24-11 soir : 179→180 (agent/tool-trim, bundle106),
+prod 1.27.0, suite 1 720, pins 322 (comptes lus sur l'en-tête du manifest live,
+jamais de mémoire).
 
 ---
 
@@ -20,7 +22,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **179 transforms + 9 named chain recipes**, stateless, keyless at
+agents: **180 transforms + 9 named chain recipes**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -80,7 +82,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **179 transforms + 9 recettes-chaînes nommées**,
+déterministes pour agents : **180 transforms + 9 recettes-chaînes nommées**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette

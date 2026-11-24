@@ -59,7 +59,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **179 deterministic transforms + 9 named recipes** — rounding, money
+  **180 deterministic transforms + 9 named recipes** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -218,7 +218,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **179 transformations déterministes + 9 recettes nommées** — arrondis,
+  **180 transformations déterministes + 9 recettes nommées** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en
