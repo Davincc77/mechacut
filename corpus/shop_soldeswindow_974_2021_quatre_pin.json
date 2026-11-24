@@ -1,0 +1,9 @@
+{
+ "name": "shop_soldeswindow_974_2021_quatre_pin",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2021,
+  "territory": "reunion",
+  "season": "hiver"
+ }
+}

@@ -4137,6 +4137,124 @@
   },
   {
    "body": {
+    "season": "hiver",
+    "territory": "reunion",
+    "year": 2021
+   },
+   "name": "shop_soldeswindow_974_2021_quatre_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "d0b1492d2c550723225a941f582aeaa50b3b0c76a372f6449a9cf2b8ff02977b",
+   "status": 200
+  },
+  {
+   "body": {
+    "territory": "belgique",
+    "year": 2027
+   },
+   "name": "shop_soldeswindow_belgique_refuse",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "d9ed55b938c06df9c598d742c7db36ed29c4605d6aadd63c27972197233e2667",
+   "status": 400
+  },
+  {
+   "body": {
+    "territory": "metropole",
+    "year": 2028
+   },
+   "name": "shop_soldeswindow_bornes2028_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "9b5562ad60bc0625c11d90d8c608d212beee41c7360ff441a47c8d5b5e2139ca",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "ete",
+    "territory": "metropole",
+    "year": 2026
+   },
+   "name": "shop_soldeswindow_canicule2026_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "2ee9c53ad1c3db82c510b3d9372d9882725d4ecf6ac400625f6b9fda3609a2cc",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "hiver",
+    "territory": "moselle",
+    "year": 2027
+   },
+   "name": "shop_soldeswindow_est2027_conflit_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "c19a62bbeaf77d881be62a2cbf27320ef57ca508a6e6bf4c7af19abc01505cf9",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "ete",
+    "territory": "alpes-maritimes",
+    "year": 2020
+   },
+   "name": "shop_soldeswindow_ete2020_etendue_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "ddc57805d877e4b376a39fc864dc14843feb58de5ac0727199b34076be799319",
+   "status": 200
+  },
+  {
+   "body": {
+    "year": 2019
+   },
+   "name": "shop_soldeswindow_gate2019_refuse",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "19dd36979184ba0bdd4d18dc8049c78ee215d2db42dff34095e36f41a59f34c0",
+   "status": 400
+  },
+  {
+   "body": {
+    "season": "hiver",
+    "territory": "metropole",
+    "year": 2021
+   },
+   "name": "shop_soldeswindow_hiver2021_six_sem_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "efe73db7ba69e8986afec4aebd271b00bdea3bbc3f89094bef2402349bb26196",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-24",
+    "season": "hiver",
+    "territory": "metropole",
+    "year": 2027
+   },
+   "name": "shop_soldeswindow_metro2027_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "fcee1e893e354e30ba52e06f36904695a75b71d968cd8902eda558a029675484",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "ete",
+    "territory": "57",
+    "year": 2021
+   },
+   "name": "shop_soldeswindow_moselle_seule_2021_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "bfd58b36b9e3a3483352078408ed0a0ae7cadc4e746e8193da4be9de0ab6cefc",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "hiver",
+    "territory": "saint-pierre-et-miquelon",
+    "year": 2025
+   },
+   "name": "shop_soldeswindow_spm_borne_apres_pin",
+   "path": "/api/v1/shop/soldes-window",
+   "sha256": "8d6e62137b3a7d36c296805cb5fbf153ee46189111deb7c2de774a6e807fb2b8",
+   "status": 200
+  },
+  {
+   "body": {
     "by": [
      {
       "dir": "desc",

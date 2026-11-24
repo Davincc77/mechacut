@@ -1,0 +1,9 @@
+{
+ "name": "shop_soldeswindow_spm_borne_apres_pin",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2025,
+  "territory": "saint-pierre-et-miquelon",
+  "season": "hiver"
+ }
+}

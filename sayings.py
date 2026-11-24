@@ -562,4 +562,14 @@ SAY = {
               "le papier — la loi des cinq ans la ravive ?",
         "pt": "vale-presente de 50 € comprado em Dublin, vencido no "
               "papel — a lei dos cinco anos vale aqui?"},
+    "/api/v1/shop/soldes-window": {
+        "en": "winter sales 2027 in France: Wednesday January 6 — "
+              "or the 13th? the arrête decides, not the calendar "
+              "site",
+        "fr": "soldes d'hiver 2027 : mercredi 6 janvier à 8 h ou "
+              "13 ? et en Moselle, samedi 2 ou lundi 4 ? l'arrêté "
+              "tranche, la presse hésite",
+        "pt": "os saldos de inverno 2027 na França começam dia 6 "
+              "ou 13 de janeiro? a data vem do arrêté, não do "
+              "site de calendário"},
 }

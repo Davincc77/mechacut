@@ -327,7 +327,7 @@ def test_mcp_exposes_bundle1():
                           'money_keep_records_uk',
                           'invoice_validate_totals', 'check_allowlist',
                           'loop_doom_check', 'agent_retrybudget',
-                          'agent_mcpaudit', 'agent_mcpsurface', 'agent_contexttax', 'shop_discount_audit', 'net_ratelimit', 'number_words_pair', 'date_window', 'date_deemed', 'agent_propose', 'text_fold_report', 'text_novel_words', 'address_parse', 'date_civil', 'proposals_registry', 'shop_gift_voucher']  # b102 gift-voucher en queue MCP_TOOLS ; queue 23-11 bundles 82-84, 92 ; bundle97 mcpsurface ; bundle99 legal_guarantee ; bundle101 context-tax (ordre MCP_TOOLS = aprés pricedrop)
+                          'agent_mcpaudit', 'agent_mcpsurface', 'agent_contexttax', 'shop_discount_audit', 'net_ratelimit', 'number_words_pair', 'date_window', 'date_deemed', 'agent_propose', 'text_fold_report', 'text_novel_words', 'address_parse', 'date_civil', 'proposals_registry', 'shop_gift_voucher', 'shop_soldes_window']  # b103 soldes-window en queue ; b102 gift-voucher ; queue 23-11 bundles 82-84, 92 ; bundle97 mcpsurface ; bundle99 legal_guarantee ; bundle101 context-tax (ordre MCP_TOOLS = aprés pricedrop)
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 2,
                                   "method": "tools/call",
                                   "params": {"name": "json_repair",

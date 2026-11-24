@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldeswindow_bornes2028_pin",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2028,
+  "territory": "metropole"
+ }
+}

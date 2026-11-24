@@ -1,0 +1,7 @@
+{
+ "name": "shop_soldeswindow_gate2019_refuse",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2019
+ }
+}

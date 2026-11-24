@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldeswindow_belgique_refuse",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2027,
+  "territory": "belgique"
+ }
+}

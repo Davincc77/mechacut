@@ -1,0 +1,9 @@
+{
+ "name": "shop_soldeswindow_ete2020_etendue_pin",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2020,
+  "territory": "alpes-maritimes",
+  "season": "ete"
+ }
+}

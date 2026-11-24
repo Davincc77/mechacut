@@ -1,0 +1,9 @@
+{
+ "name": "shop_soldeswindow_hiver2021_six_sem_pin",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2021,
+  "territory": "metropole",
+  "season": "hiver"
+ }
+}

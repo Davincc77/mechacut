@@ -739,7 +739,7 @@ TABLE = (
      # leftovers, restante chez partage). « quantos » JAMAIS pris
      # (interrogatif, loi c129b4d). Un seul de ces mots = 3 < plancher
      # T6 : la loi anti-mot-incidentel tient, la phrase complète = 18.
-     "remaining stock shop inventory sold of the rest du reste "
+     "remaining stock shop inventory of the rest du reste "
      "afternoon pourcentage apres-midi combien restent il reste "
      "quantite restante vendas restantes restando depois "
      "loja vendeu manha manh tarde resto restam"),
@@ -1061,6 +1061,18 @@ TABLE = (
      "duree solde irlande geste commercial remboursee bon "
      "cartao presente vale venceu expirou validade duracao "
      "irlanda saldo"),
+    ("shop_soldes_window", "/api/v1/shop/soldes-window", "dates",
+     "sale windows dated from the 2019 arr\u00eate: advance clauses "
+     "both seasons, seven annual derogations 2020-2026 verbatim, "
+     "versioned annex, ouvr\u00e9 ambiguity named, foreign calendars "
+     "refused",
+     "soldes window arrete dates legal hiver ete debut fin "
+     "ouverture cloture quand commencent prolongation derogation "
+     "report semaines canicule mercredi premier deuxieme dernier "
+     "france lorraine corse guadeloupe martinique guyane reunion "
+     "mayotte saint pierre barthelemy moselle nice metz perpignan "
+     "saldos epoca verao inverno franca sales sale france winter "
+     "summer start january june official"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)
@@ -1097,17 +1109,20 @@ def manifest_text(version):
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_"))),
+        # b103 elagage MESURE (consigne b102 « le prochain outil
+        # elague une ligne de tete de VRAI ») : les lignes TIERS et
+        # CONTRAT-FRANC sont FUSIONNEES en une seule, tout le contenu
+        # voyage — 217 lignes <218 avec +shop_soldes_window.
         "tiers: free=keyless 30/min; cap=free under 32KB then x402; "
-        "paid=x402 from call one.",
-        "every POST response carries sha256; every 400 carries "
-        "field+expected on every refusal — the error IS "
+        "paid=x402 from call one. every POST response carries "
+        "sha256; every 400 carries field+expected — the error IS "
         "the repair prompt; ambiguous refusals name their readings.",
         "detail on demand: GET /tools/<name>.json | "
         "install one pack: GET /SKILL-<pack>.md | "
         "one-call pipelines: GET /api/v1/recipes or POST /api/v1/pipeline | "
         'find tools: GET /route?q="your task words" | '
-        "proposal registry: GET /proposals (HTML) or "
-        "/api/v1/agent/proposals?name=…&status=…&latest=N | "
+        "proposal registry: GET /proposals (HTML) | "
+        "/api/v1/agent/proposals | "
         "not here: storyboards, shot lists, scene breakdowns "
         "-> sister product moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
@@ -1369,7 +1384,26 @@ def route(query, top=5):
     V_IN_P = ("irland", "franc")  # france/francais/irish-irlandaise
     V_IN = {"ie", "fr", "irl", "eire", "dublin", "ccpc", "paris",
             "cork", "galway"}
-    vforeign = vtabled = vnord = False
+    # CLASSE b103 — veto IN-TABLE pour /shop/soldes-window : la table
+    # ne rejoue que l'arrêté FRANÇAIS du 27 mai 2019. Une requête qui
+    # nomme un autre calendrier (Belgique, Luxembourg, Suisse,
+    # Québec, UK, US, Portugal, Brésil…) ne doit PAS prescrire cet
+    # outil : le module répondrait un refus 400 et le routeur aurait
+    # déjà promis (leçon b100/b102 rejouée). RACINES + villes des
+    # juridictions étrangères, liste close, zéro LM. « france » et
+    # les territoires d'outre-mer N'ENTRENT PAS ici : ils sont la
+    # table.
+    V_SOLD_OUT = ("belg", "luxemb", "suiss", "quebe", "canad",
+                  "ontario", "royaume", "united", "etats",
+                  "angleterre", "england", "brit", "irlande",
+                  "irlandais", "espag", "portug", "brasil",
+                  "brazil", "bresil", "italia", "deutsch",
+                  "german", "mexique", "maroc", "algerie",
+                  "tunisie", "senegal", "montreal", "bruxell",
+                  "genev", "zurich", "amsterdam", "berlin",
+                  "madrid", "lisbon", "dublin")
+    V_SOLD_EXACT = {"uk", "gb", "usa", "ie"}
+    vforeign = vtabled = vnord = vsoldes_out = False
     for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
         if t in ("blague", "blagues", "joke", "jokes", "piada",
                  "piadas"):
@@ -1389,6 +1423,8 @@ def route(query, top=5):
             vforeign = True
         if t.startswith(V_IN_P) or t in V_IN:
             vtabled = True
+        if t.startswith(V_SOLD_OUT) or t in V_SOLD_EXACT:
+            vsoldes_out = True
         if t == "nord":
             vnord = True
         st = _stem(t)
@@ -1404,6 +1440,8 @@ def route(query, top=5):
             continue
         if name == "shop_gift_voucher" and (vforeign or vnord) \
                 and not voucher_ok:
+            continue
+        if name == "shop_soldes_window" and vsoldes_out:
             continue
         tail = path[len("/api/v1/"):]
         # nsegs STEMÉS comme les tags et le query — sinon un nom au

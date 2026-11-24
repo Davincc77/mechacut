@@ -87,6 +87,7 @@ POST /api/v1/shop/pricedrop-refund   purchase + drop dates/prices -> who OWES th
 POST /api/v1/shop/legal-guarantee    delivered_on + FR/UK -> dated STATUTORY warranty clocks (24m/12m, vices 2y+20y, UK 30-day/6m/6y-5y), conflicts named (free)
 POST /api/v1/money/keep-records-uk   record_kind + official anchor -> earliest lawful DESTROY date (VAT 3 anchors/6y/10y, s388 3y/6y by form, SA 5y after 31-Jan deadline + 15m very-late, PAYE 3y), "or longer if" carried BLOCKED (free)
 POST /api/v1/shop/gift-voucher  purchase + printed expiry -> IE five-year deemed clocks (PAPER_DEAD_LAW_ALIVE), FR no-minimum verdict, €1 floor conflict named (free)
+POST /api/v1/shop/soldes-window year + territory -> LEGAL sale windows dated from the 2019 arrêté: advance clauses both seasons, 7 annual derogations 2020-2026 carried verbatim, annex versioned, ouvré ambiguity named (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -292,6 +293,7 @@ import returndeadkit
 import guaranteekit
 import retentionkit
 import voucherkit
+import soldeskit
 import pricedroprefundkit
 import money
 import numfmt
@@ -374,7 +376,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.23.0",
+    version="1.24.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2683,6 +2685,37 @@ def api_shop_gift_voucher(req: ShopGiftVoucherRequest):
     return err if err else body
 
 
+class ShopSoldesWindowRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    year: int
+    territory: Optional[str] = None
+    season: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_shop_soldes_window(args: dict):
+    try:
+        req = ShopSoldesWindowRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = soldeskit.soldes_window(
+            req.year, territory=req.territory or "metropole",
+            season=req.season, as_of=req.as_of)
+    except soldeskit.SoldesError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/soldes-window")
+def api_shop_soldes_window(req: ShopSoldesWindowRequest):
+    body, err = run_shop_soldes_window(req.model_dump())
+    return err if err else body
+
+
 class InvoiceValidateLine(BaseModel):
     model_config = ConfigDict(extra="forbid")
     id: Optional[str] = None
@@ -4983,13 +5016,38 @@ def _router_out(out: dict):
 @app.post("/api/v1/router/plan")
 def api_router_plan(req: RouterTextRequest):
     """Symptôme → prescription mesurée (fiche, créneaux, transport,
-    preuve). Ne calcule rien, ne devine rien."""
+    preuve). Ne calcule rien, ne devine rien.
+
+    Garde b103 (douleur pêchée par le radar du lot soldes-window) :
+    l'entrée chaine-soldes2 vit sur des mots comme « solde », « baisse
+    », « puis » — une QUESTION DE CALENDRIER (« quand commencent les
+    soldes 2027 ») la déclenchait et le plan promettait l'arithmétique
+    des remises sans un seul nombre dans la phrase. Un plan qui ne
+    peut extraire AUCUN créneau ne prescrit pas : il nomme le candidat
+    refusé et les créneaux manquants — le même contrat qu'à
+    l'application (R4), zéro LM, borne close : ZERO extrait = refus;
+    PARTIEL = prescription avec la liste à remplir.
+    """
     d = annuaire.load(strict=False)  # runtime : preuves citées, garde d'existence au commit
     entree, _ = annuaire.trouver(req.texte, d)
     out = {"match": entree is not None,
            "regles_transport": [r["loi"] for r in d["regles_transport"]]}
     if entree:
         p = entree["prescription"]
+        fiche = p.get("fiche")
+        if fiche:
+            slots, manques, ambigus = routeur.extraire(fiche, req.texte)
+            if slots == {} and manques:
+                out["match"] = False
+                out["entree"] = entree["id"]
+                out["note"] = (
+                    "prescription %s REFUSEE : aucun creneau extractible"
+                    " — manquants %s. Le plan ne promet pas ce que"
+                    " l'application ne saurait pas calculer (R4) ; le"
+                    " candidat est nomme, ses creneaux aussi : une"
+                    " phrase de calcul doit porter ses nombres." %
+                    (fiche, ", ".join(manques)))
+                return _router_out(out)
         out.update(entree=entree["id"], prescription=p,
                    preuve=list(entree["preuve"]),
                    prompt_lm=routeur.prompt_routee(p, req.texte))
@@ -6820,6 +6878,7 @@ TOOL_RUN = {
            "shop_legal_guarantee": run_shop_legal_guarantee,
            "money_keep_records_uk": run_money_keep_records_uk,
            "shop_gift_voucher": run_shop_gift_voucher,
+           "shop_soldes_window": run_shop_soldes_window,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -11330,6 +11389,106 @@ MCP_TOOLS = [
                           "description": "ISO day to count days_"
                                          "left / status from — "
                                          "never a wall clock"},
+            },
+        },
+    },
+    {
+        "name": "shop_soldes_window",
+        "description": (
+            "French SALE WINDOWS as DATES, computed from the "
+            "arr\u00eate replayed 24-nov-2026 (arr\u00eat\u00e9 du "
+            "27 mai 2019, NOR ECOI1911930A, in force since 1-Jan-"
+            "2020 art. 4). The grammar is CLOSED and BOTH seasons "
+            "carry an advance clause: winter starts the SECOND "
+            "Wednesday of January 08:00, ADVANCED to the first when "
+            "that second Wednesday falls AFTER the 12th — strict, "
+            "2028-01-12 stays, 2027-01-13 moves to Jan 6 (the "
+            "calendar site printing 'until Tuesday 9 February' for "
+            "2027 applied the clause's absence: the pain caught in "
+            "the act). Summer starts the LAST Wednesday of June "
+            "08:00, moved back to the penultimate when the last "
+            "falls after the 28th — so \u00e9t\u00e9 2027 opens "
+            "June 23, not June 30. Duration is art. 3: four weeks, "
+            "the start day COUNTED (end = start + 27, verified "
+            "against four official vectors). Then the part no "
+            "calendar site carries: SEVEN annual derogations, each "
+            "shipped with its verbatim and its JORF — \u00e9t\u00e9 "
+            "2020 fixed to Wed 15 July (arr\u00eat\u00e9 10-juin-2020, "
+            "also named for 06/2A/2B/66); winter 2021 fixed to Wed "
+            "20 January (arr\u00eat\u00e9 23-d\u00e9c-2020, + 54/55/"
+            "57/88/971) then PORT\u00c9E \u00c0 SIX SEMAINES "
+            "(arr\u00eat\u00e9 15-f\u00e9vr-2021 — 20 janv -> 2 "
+            "mars; La R\u00e9union, Saint-Barth\u00e9lemy and "
+            "Saint-Martin EXCLUDED by name, four weeks); "
+            "\u00e9t\u00e9 2021 fixed to 30 June — with MOSSELLE "
+            "alone at 26 June (arr\u00eat\u00e9 15-juin-2021, the "
+            "line no press table copies); Guadeloupe "
+            "\u00e9t\u00e9 2021 moved to Thursday 7 October "
+            "(arr\u00eat\u00e9 23-sept-2021); \u00e9t\u00e9 2023 "
+            "and \u00e9t\u00e9 2026 CARRIED TO FIVE WEEKS "
+            "(arr\u00eat\u00e9s 6-juill-2023, 3-juill-2026 — "
+            "canicule; service-public A15000: 'devaient se "
+            "terminer le 21 juillet [...] jusqu'au mardi 28 "
+            "juillet'), scoped by PREDICATE on the text, not by "
+            "memory: 2026 counts d\u00e9partements whose date "
+            "comes from Article 1, which is why Moselle's SUMMER "
+            "gets five weeks while Corsica keeps four. The annex "
+            "is VERSIONED: the 21-avril-2023 arr\u00eat\u00e9 "
+            "(in force 17 May 2023) removed rows 06, 66, 973 — "
+            "windows beginning before it keep the initial line "
+            "(Perpignan \u00e9t\u00e9 2022 July 6; guyane hiver "
+            "2023 Jan 4), after it the common rule (moneyvox's "
+            "'Guyane 5 October 2023' recycled an ABROGATED line "
+            "— the press artifact this tool exists to refuse). "
+            "East-4 d\u00e9partements open 'premier jour ouvr\u00e9' "
+            "— the word is undefined: strict OUVR\u00c9 (Mon-Fri, "
+            "1er excluded) is first, the OUVRABLE reading ("
+            "Saturday counts, what tpeactu/france.fr print) "
+            "travels as a NAMED conflict only when the two dates "
+            "differ — which is 2027 (Jan 2 vs Jan 4), not every "
+            "year. Saint-Pierre counts 'premier mercredi APR\u00c8S "
+            "le 15 janvier' — after STRICT: 2025-01-15 IS the "
+            "Wednesday, so the window opens the 22nd. "
+            "Territory is the CLOSED annex table (codes, names, "
+            "cities, 'lorraine', 'corse' fan out); foreign "
+            "calendars — Belgium, Luxembourg, Switzerland, "
+            "Quebec, UK — are REFUSED BY NAME: this table replays "
+            "only the French arr\u00eat\u00e9 and lends dates no "
+            "memory. Years before 2020 are refused with art. 4 "
+            "verbatim. as_of is an argument: 'Dans 43 jours' is "
+            "arithmetic, not a clock. No network, no wall clock, "
+            "no shopping advice. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["year"],
+            "additionalProperties": False,
+            "properties": {
+                "year": {"type": "integer",
+                           "description": "2020..9999 — the "\
+                                          "arr\u00eat\u00e9's art. "\
+                                          "4 gate; before 2020 "\
+                                          "prefectal arr\u00eat\u00e9s "\
+                                          "governed, not replayed"},
+                "territory": {"type": "string",
+                                "description": "metropole | "\
+                                               "06|2A|2B|54|55|"
+                                               "57|66|88|971|972|"
+                                               "973|974|975|976|"
+                                               "977|978 | names | "
+                                               "lorraine|corse — "\
+                                               "closed table; "\
+                                               "foreign names "\
+                                               "refused by their "\
+                                               "fact of being "\
+                                               "out of table"},
+                "season": {"type": "string",
+                             "description": "hiver | ete | "\
+                                            "both (default both)"},
+                "as_of": {"type": "string",
+                            "description": "ISO day for status "\
+                                           "and days_to_start — "\
+                                           "never a wall clock"},
             },
         },
     },

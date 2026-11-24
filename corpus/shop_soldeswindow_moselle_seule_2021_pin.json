@@ -1,0 +1,9 @@
+{
+ "name": "shop_soldeswindow_moselle_seule_2021_pin",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2021,
+  "territory": "57",
+  "season": "ete"
+ }
+}

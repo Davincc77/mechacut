@@ -1,0 +1,9 @@
+{
+ "name": "shop_soldeswindow_canicule2026_pin",
+ "path": "/api/v1/shop/soldes-window",
+ "body": {
+  "year": 2026,
+  "territory": "metropole",
+  "season": "ete"
+ }
+}

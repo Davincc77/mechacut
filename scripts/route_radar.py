@@ -70,10 +70,17 @@ CASES = [
      "partage"),
     ("split 3829: first gets 2/5, second 1/6 of the rest",
      "partage"),
-    ("-25 % puis -20 % sur 81,90 — prix final", "soldes"),
+    ("-25 % puis -20 % sur 81,90 — prix final", "soldes2"),
     # RE-DÉCLARÉE 23-11 cycle 14h56 : la want « soldes » n'a jamais
     # désigné un outil du catalogue — l'artefact comparatif vit chez
     # money_discount ; la want dit maintenant le nom vrai.
+    # RE-DÉCLARÉE 24-11 b103 : « soldes » est DÉSONNAIS un sous-mot
+    # de shop_soldes_window — la ligne-prix doit nommer sa fiche.
+    # « soldes2 » tranche les DEUX surfaces : sous-mot de
+    # recipe_soldes2 (route) et fiche exacte du plan ; ma première
+    # re-déclaration « recipe_soldes » était juste pour la route et
+    # fausse au plan — douleur pêchée par mon propre garde, guérie
+    # dans le corpus, pas dans le routeur.
     ("is 30% off plus another 20% the same as 50% off on 89.90",
      "discount"),
     # les deux outils du cycle — garde de leur propre douleur
@@ -275,6 +282,43 @@ CASES = [
      "shop_return_deadline"),
     ("the price dropped after I paid, they offer a gift card "
      "refund, who owes me", "shop_pricedrop_refund"),
+    # CLASSE b103 — /shop/soldes-window : la douleur « le calendrier
+    # se trompe d'une semaine sur 2027 » (6 janv.->2 févr. vs « 9
+    # février » pêché à midi sur lecalendrier). Aiguilles x3 langues
+    # + les dérogations elles-mêmes, car c'est ELLES la valeur.
+    # Leurre et frontière : la Belgique/Luxembourg/Portugal nomment
+    # un AUTRE calendrier — veto b103, RIEN ne doit être prescrit.
+    ("quand commencent les soldes d'hiver 2027",
+     "shop_soldes_window"),
+    ("les soldes d'été 2027 débutent-ils le 23 ou le 30 juin",
+     "shop_soldes_window"),
+    ("soldes lorraine 2027 ouvré samedi 2 ou lundi 4",
+     "shop_soldes_window"),
+    ("prolongation des soldes d'été 2026 canicule cinq semaines",
+     "shop_soldes_window"),
+    ("soldes d'hiver 2021 reportés au 20 janvier six semaines",
+     "shop_soldes_window"),
+    ("when do the french winter sales 2027 start january 6 or 13",
+     "shop_soldes_window"),
+    ("sales dates france 2027 summer start date official",
+     "shop_soldes_window"),
+    ("quando começam os saldos de inverno 2027 na frança",
+     "shop_soldes_window"),
+    ("data dos saldos de verão na frança 2027",
+     "shop_soldes_window"),
+    ("quand commencent les soldes en belgique", None),
+    ("quando começam os saldos em portugal", None),
+    ("les soldes d'hiver au luxembourg 2027", None),
+    ("tell me a joke about the french sales calendar", None),
+    # frontière jurée : le MONNAIE-solde reste chez les frères. La
+    # première version de cette ligne (« mon solde de carte cadeau
+    # remboursement ») était une PIÈCE À PILE : pricedrop et
+    # gift-voucher tie-raient à 9/9 et l'ordre TABLE décidait le
+    # top1 — une phrase ambiguë n'est pas un test à want unique, la
+    # douleur était dans mon corpus, pas dans le routeur. La ligne
+    # nomme maintenant le domaine : expiration + Dublin = voucher.
+    ("le solde restant de ma carte cadeau expirée — Dublin, remboursement",
+     "shop_gift_voucher"),
 ]
 
 
