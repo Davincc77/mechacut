@@ -1,0 +1,21 @@
+{
+  "body": {
+    "budget": 8,
+    "budget_pct": 10,
+    "tools": [
+      {
+        "name": "a"
+      },
+      {
+        "description": "x",
+        "name": "b"
+      },
+      {
+        "description": "yy",
+        "name": "c"
+      }
+    ]
+  },
+  "name": "agent_tooltrim_both_refuse_pin",
+  "path": "/api/v1/agent/tool-trim"
+}

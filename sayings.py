@@ -75,6 +75,13 @@ SAY = {
               "m'a coûté ?",
         "pt": "quantos tokens a mais por turno meu servidor MCP "
               "custou com a nova versão da lista de ferramentas?"},
+    "/api/v1/agent/tool-trim": {
+        "en": "115 tools, 200k window — which servers do I "
+              "disconnect to fit, and what does it save?",
+        "fr": "115 outils, fenêtre 200k — lesquels débrancher pour "
+              "tenir, et combien ça rend ?",
+        "pt": "115 ferramentas, janela 200k — quais desligar para "
+              "caber, e quanto eu economizo?"},
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",

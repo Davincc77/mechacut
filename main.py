@@ -90,6 +90,7 @@ POST /api/v1/shop/gift-voucher  purchase + printed expiry -> IE five-year deemed
 POST /api/v1/shop/soldes-window year + territory -> LEGAL sale windows dated from the 2019 arrêté: advance clauses both seasons, 7 annual derogations 2020-2026 carried verbatim, annex versioned, ouvré ambiguity named (free)
 POST /api/v1/shop/soldes-be year + season -> BELGIAN sale windows from art. VI.25 CDE: sunday clause dated both seasons, one-month standstill enumerated, corona reports 2020-2021 verbatim, overruled clause kept visible (free)
 POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the update: chars+token delta per tool, signed moved fields, global vs per-tool sum stated, FITS->OVERFLOWS transition named, $ at YOUR price (free under 32 KB, x402 above)
+POST /api/v1/agent/tool-trim  pasted tools/list + budget -> WHICH tools to disconnect, idle-first closed ranking in exact fractions, re-count of the survivors at the sister's canon, FITS/STILL_OVER with the overage named, $ saved at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -290,6 +291,7 @@ import mcpauditkit
 import mcpsurfacekit
 import contexttaxkit
 import costdiffkit
+import tooltrimkit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -380,7 +382,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.26.0",
+    version="1.27.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2379,6 +2381,42 @@ def run_agent_cost_diff(args: dict):
 @app.post("/api/v1/agent/cost-diff")
 def api_agent_cost_diff(req: AgentCostDiffRequest):
     body, err = run_agent_cost_diff(req.model_dump())
+    return err if err else body
+
+
+class AgentToolTrimRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tools: List[Dict[str, Any]]
+    budget: Optional[int] = None
+    budget_pct: Optional[int] = None
+    window: Optional[int] = None
+    keep: Optional[List[str]] = None
+    usage: Optional[Dict[str, int]] = None
+    turns: Optional[int] = None
+    input_per_mtok: Optional[str] = None
+
+
+def run_agent_tool_trim(args: dict):
+    try:
+        req = AgentToolTrimRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = tooltrimkit.tool_trim(req.tools, req.budget,
+                                    req.budget_pct, req.window,
+                                    req.keep, req.usage, req.turns,
+                                    req.input_per_mtok)
+    except tooltrimkit.ToolTrimError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/tool-trim")
+def api_agent_tool_trim(req: AgentToolTrimRequest):
+    body, err = run_agent_tool_trim(req.model_dump())
     return err if err else body
 
 
@@ -6938,6 +6976,7 @@ TOOL_RUN = {
            "agent_mcpsurface": run_agent_mcp_surface,
            "agent_contexttax": run_agent_context_tax,
            "agent_costdiff": run_agent_cost_diff,
+           "agent_tooltrim": run_agent_tool_trim,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
@@ -11151,6 +11190,100 @@ MCP_TOOLS = [
                                    "tokens, decimal string — an "
                                    "argument, never a stored "
                                    "table",
+                },
+            },
+        },
+    },
+    {
+        "name": "agent_tooltrim",
+        "description": (
+            "Which MCP tools to DISCONNECT to fit a token budget, "
+            "and the exact re-count after: paste one tools/list, "
+            "optionally the calls_30d your logs measured, and the "
+            "budget (tokens, or a percent of the window — the "
+            "published 10% auto-load rule). Drops fall in CLOSED "
+            "classes in exact fractions, never floats: IDLE_30J "
+            "first (paying every turn, never used — the rule "
+            "practitioners publish from their own session logs), "
+            "then worst cost-per-call, then NEVER what was not "
+            "measured: UNKNOWN tools are cut last and flagged "
+            "UNKNOWN_CUTS. keep protects names; a keep floor that "
+            "misses the budget alone returns STILL_OVER with the "
+            "overage chiffré, not advice. The re-count is the "
+            "sister's own arithmetic — ceil of the survivor chars "
+            "/4, the published floor estimator quoted — so pasting "
+            "the survivors into /agent/context-tax MUST return the "
+            "identical number; global vs sum-of-ceilings travel "
+            "together and the divergence is stated (b101/b104 "
+            "law). Ties: chars desc, then name ascending (declared). "
+            "Verdicts CLOSE: FITS_AS_IS (nothing to cut — savings "
+            "are zero, and the tool says so), TRIMMED_FITS, "
+            "STILL_OVER. Saving repeats EVERY turn (the list is not "
+            "paid once); dollars only if you pass your own decimal "
+            "price — no stored price table. Ceiling 5000 tools, "
+            "duplicate/empty names refused (shadowing, family); "
+            "top 100 plan rows, the rest folded. Never fetches, "
+            "never reads your logs: pasted listing only. Sisters: "
+            "context-tax says HOW MUCH, cost-diff says the price "
+            "in between — this one says WHAT TO CUT. Free under "
+            "32 KB, x402 above."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["tools"],
+            "additionalProperties": False,
+            "properties": {
+                "tools": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                    "description": "the pasted tools/list array "
+                                   "(same shape /agent/context-tax "
+                                   "measures)",
+                },
+                "budget": {
+                    "type": "integer",
+                    "description": "tokens the definitions may "
+                                   "occupy — exclusive with "
+                                   "budget_pct",
+                },
+                "budget_pct": {
+                    "type": "integer",
+                    "description": "budget as a percent of the "
+                                   "window, 1..100 (e.g. 10 — the "
+                                   "published auto-load rule); "
+                                   "floored, exclusive with budget",
+                },
+                "window": {
+                    "type": "integer",
+                    "description": "your context window in tokens, "
+                                   "default 200000",
+                },
+                "keep": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "tool names you refuse to "
+                                   "disconnect; each must appear "
+                                   "in tools",
+                },
+                "usage": {
+                    "type": "object",
+                    "description": "tool name -> calls over the "
+                                   "last 30 days, from YOUR logs; "
+                                   "absent name = UNKNOWN class, "
+                                   "never ranked ahead of measured "
+                                   "idle",
+                },
+                "turns": {
+                    "type": "integer",
+                    "description": "turns the saved listing would "
+                                   "have ridden (default 1)",
+                },
+                "input_per_mtok": {
+                    "type": "string",
+                    "description": "YOUR price per million input "
+                                   "tokens, decimal string (e.g. "
+                                   "\"2\") — an argument, never a "
+                                   "stored table",
                 },
             },
         },

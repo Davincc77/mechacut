@@ -269,6 +269,13 @@ TABLE = (
      "the update more expensive extra since between two listings "
      "surcout plus addition added ajout nouvelle version mis a jour "
      "quanto a mais custo nova versao cobrou acrrescimo"),
+    ("agent_tooltrim", "/api/v1/agent/tool-trim", "checks",
+     "WHICH tools to cut for a budget: idle-first ranking in exact "
+     "fractions, re-count at the sister's canon, FITS/STILL_OVER",
+     "trim cut remove disable disconnect idle unused tools fit "
+     "budget which to drop plan "
+     "debrancher retirer couper desactiver outils tenir "
+     "remover desligar ferramentas ociosas caber orcamento"),
     ("shop_discount_audit", "/api/v1/shop/discount-audit", "checks",
      "Omnibus thirty-day rule: is the crossed-out price legal? "
      "reference, true percent, verdict named",
@@ -1135,10 +1142,10 @@ def manifest_text(version):
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
         + "tiers: free=keyless 30/min; cap=free under 32KB then "
-          "x402; paid=x402 from call one. every POST response "
-          "carries sha256; every 400 carries field+expected — the "
+          "x402; paid=x402 from call one. every POST carries "
+          "sha256; every 400 names field+expected — the "
           "error IS the repair prompt; ambiguous refusals name "
-          "their readings. "
+          "readings. "
           # b105 elagage MESURE (consigne b104 « FR a 23 octets du
           # plafond : le lot suivant HUMAIN paie prose + elagage ») :
           # la ligne de POINTEURS « detail: » est FUSIONNEE dans la
@@ -1146,7 +1153,7 @@ def manifest_text(version):
           # +shop_soldes_be ne debranche rien.
           "detail: /tools/<name>.json | pack install: /SKILL-<pack>.md | "
         "pipelines: GET /api/v1/recipes, POST /api/v1/pipeline | "
-        'find: GET /route?q="task words" | '
+        'find: /route?q="task words" | '
         "proposals: /proposals (HTML), /api/v1/agent/proposals | "
         "not here: storyboards, shot lists, scene breakdowns "
         "-> sister moovicut.studio",
@@ -1177,9 +1184,16 @@ def manifest_text(version):
 
     body = render(True, None)
     if len(body.encode()) > 8800:
-        body = render(False, "NOTE: folded to dense mode (portability "
-                             "budget <8.8KB); purpose: /route?q= or "
-                             "/tools/<name>.json")
+        # b106 elagage MESURE (consigne b105 « le manifest a encore
+        # 3 octets — la prochaine fusion de tete est a prevoir ») :
+        # la ligne NOTE du dense-fold est FUSIONNEE dans la tete —
+        # le drapeau « folded to dense mode » vit (test_bundle0 le
+        # lit), les deux pointeurs de purpose vivent, 217 lignes.
+        body = render(False, None)
+        ls = body.split("\n")
+        ls[0] += (" | folded to dense mode (<8.8KB): purpose "
+                  "/route?q= or /tools/<name>.json")
+        body = "\n".join(ls)
     return body + "# sha256=" + _sha(body.rstrip("\n")) + "\n"
 
 

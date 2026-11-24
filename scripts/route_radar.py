@@ -361,6 +361,26 @@ CASES = [
     # nomme maintenant le domaine : expiration + Dublin = voucher.
     ("le solde restant de ma carte cadeau expirée — Dublin, remboursement",
      "shop_gift_voucher"),
+    # CLASSE b106 — « quoi débrancher » : le lot DEV ferme sa douleur
+    # de routeur AVANT push (aiguilles x3 langues, verbatim des fils
+    # r/ClaudeCode et r/mcp du soir). Gardes testés : le COMBIEN reste
+    # chez context-tax (b101), l'ÉCART chez cost-diff (b104), le
+    # CHANGÉ chez mcp-surface, le rationnel-de-relance chez
+    # retry-budget ; la blague de trim et l'électroménager débranché
+    # ne prescrivent RIEN (forme b98 + phrase sans outil ni budget).
+    ("which MCP tools should I disconnect to fit my context budget",
+     "agent_tooltrim"),
+    ("trop d outils MCP branchés lesquels couper pour tenir le budget",
+     "agent_tooltrim"),
+    ("quais ferramentas desligar para caber no orcamento",
+     "agent_tooltrim"),
+    ("115 tools 43000 tokens what to trim before disconnecting",
+     "agent_tooltrim"),
+    ("is my tool list over budget on a 60k local window",
+     "agent_tooltrim"),
+    ("je veux débrancher mon lave-vaisselle", None),
+    ("tell me a joke about trimming hedges", None),
+    ("piada sobre desligar ferramentas", None),
 ]
 
 

@@ -1,0 +1,27 @@
+{
+  "body": {
+    "budget": 5,
+    "keep": [
+      "b"
+    ],
+    "tools": [
+      {
+        "name": "a"
+      },
+      {
+        "description": "x",
+        "name": "b"
+      },
+      {
+        "description": "yy",
+        "name": "c"
+      }
+    ],
+    "usage": {
+      "a": 0,
+      "b": 3
+    }
+  },
+  "name": "agent_tooltrim_still_over_keep_pin",
+  "path": "/api/v1/agent/tool-trim"
+}

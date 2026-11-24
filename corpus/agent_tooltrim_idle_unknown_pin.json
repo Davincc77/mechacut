@@ -1,0 +1,25 @@
+{
+  "body": {
+    "budget": 30,
+    "tools": [
+      {
+        "description": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "name": "big"
+      },
+      {
+        "description": "y",
+        "name": "small"
+      },
+      {
+        "description": "zzzz",
+        "name": "mid"
+      }
+    ],
+    "usage": {
+      "mid": 100,
+      "small": 1
+    }
+  },
+  "name": "agent_tooltrim_idle_unknown_pin",
+  "path": "/api/v1/agent/tool-trim"
+}

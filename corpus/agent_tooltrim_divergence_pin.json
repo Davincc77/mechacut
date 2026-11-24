@@ -1,0 +1,18 @@
+{
+  "body": {
+    "budget": 7,
+    "tools": [
+      {
+        "name": "ab"
+      },
+      {
+        "name": "ac"
+      },
+      {
+        "name": "ad"
+      }
+    ]
+  },
+  "name": "agent_tooltrim_divergence_pin",
+  "path": "/api/v1/agent/tool-trim"
+}

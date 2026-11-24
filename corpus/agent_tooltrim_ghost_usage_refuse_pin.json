@@ -1,0 +1,23 @@
+{
+  "body": {
+    "budget": 8,
+    "tools": [
+      {
+        "name": "a"
+      },
+      {
+        "description": "x",
+        "name": "b"
+      },
+      {
+        "description": "yy",
+        "name": "c"
+      }
+    ],
+    "usage": {
+      "zz": 1
+    }
+  },
+  "name": "agent_tooltrim_ghost_usage_refuse_pin",
+  "path": "/api/v1/agent/tool-trim"
+}
