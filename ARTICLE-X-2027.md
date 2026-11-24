@@ -22,7 +22,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **180 transforms + 9 named chain recipes**, stateless, keyless at
+agents: **180 transforms + 9 named chain recipes, and growing**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -82,7 +82,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **180 transforms + 9 recettes-chaînes nommées**,
+déterministes pour agents : **180 transforms + 9 recettes-chaînes nommées, et ça grandit**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette
