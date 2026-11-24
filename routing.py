@@ -261,6 +261,14 @@ TABLE = (
      "context tax token cost charge bill burn waste window overflow "
      "fits turn definition description instruction "
      "coute couter taxe fenetre tour quanto custa taxa janela turno"),
+    ("agent_costdiff", "/api/v1/agent/cost-diff", "checks",
+     "the PRICE OF THE UPDATE: two pasted tools/list readings, token "
+     "delta per tool, % of the before side, signed moved fields, "
+     "FITS->OVERFLOWS transition named, delta per turn, $ at YOUR price",
+     "cost diff delta grew increase update version upgrade price of "
+     "the update more expensive extra since between two listings "
+     "surcout plus addition added ajout nouvelle version mis a jour "
+     "quanto a mais custo nova versao cobrou acrrescimo"),
     ("shop_discount_audit", "/api/v1/shop/discount-audit", "checks",
      "Omnibus thirty-day rule: is the crossed-out price legal? "
      "reference, true percent, verdict named",
@@ -1104,27 +1112,29 @@ def manifest_text(version):
     it fits, dense table when it does not — names+paths+tiers always,
     purposes on demand via /route and /tools/<name>.json."""
     head = [
+        # b104 elagage MESURE (consigne b103 « elague des l'annonce ») :
+        # la ligne de TITRE et la ligne TIERS sont FUSIONNEES en une
+        # seule, tout le contenu voyage — 217 lignes <218 avec
+        # +agent_costdiff, octets <9 000 avec la NOTE dense resseree
+        # a claim constant (les deux pointeurs de purpose vivent).
         "mechacut.studio %s — %d deterministic transforms "
-        "+ %d named recipes." %
+        "+ %d named recipes. " %
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
-         sum(1 for e in TABLE if e[0].startswith("recipe_"))),
-        # b103 elagage MESURE (consigne b102 « le prochain outil
-        # elague une ligne de tete de VRAI ») : les lignes TIERS et
-        # CONTRAT-FRANC sont FUSIONNEES en une seule, tout le contenu
-        # voyage — 217 lignes <218 avec +shop_soldes_window.
-        "tiers: free=keyless 30/min; cap=free under 32KB then x402; "
-        "paid=x402 from call one. every POST response carries "
-        "sha256; every 400 carries field+expected — the error IS "
-        "the repair prompt; ambiguous refusals name their readings.",
-        "detail on demand: GET /tools/<name>.json | "
-        "install one pack: GET /SKILL-<pack>.md | "
-        "one-call pipelines: GET /api/v1/recipes or POST /api/v1/pipeline | "
-        'find tools: GET /route?q="your task words" | '
-        "proposal registry: GET /proposals (HTML) | "
-        "/api/v1/agent/proposals | "
+         sum(1 for e in TABLE if e[0].startswith("recipe_")))
+        + "tiers: free=keyless 30/min; cap=free under 32KB then "
+          "x402; paid=x402 from call one. every POST response "
+          "carries sha256; every 400 carries field+expected — the "
+          "error IS the repair prompt; ambiguous refusals name "
+          "their readings.",
+        # b104, même consigne : les POINTEURS voyagent tous, la prose
+        # de tete est serree (detail/pack/pipelines/find/proposals).
+        "detail: /tools/<name>.json | pack install: /SKILL-<pack>.md | "
+        "pipelines: GET /api/v1/recipes, POST /api/v1/pipeline | "
+        'find: GET /route?q="task words" | '
+        "proposals: /proposals (HTML), /api/v1/agent/proposals | "
         "not here: storyboards, shot lists, scene breakdowns "
-        "-> sister product moovicut.studio",
+        "-> sister moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
         # debranche le dense-fold ou elague une ligne de tete ») :
         # la ligne soeur est FUSIONNEE dans discovery, pas coupee —

@@ -1,0 +1,19 @@
+{
+  "body": {
+    "tools_before": [
+      {
+        "name": "a",
+        "description": "hi"
+      }
+    ],
+    "tools_after": [
+      {
+        "name": "a"
+      }
+    ],
+    "turns": 2,
+    "input_per_mtok": "3"
+  },
+  "name": "agent_costdiff_dollars_shrink_pin",
+  "path": "/api/v1/agent/cost-diff"
+}

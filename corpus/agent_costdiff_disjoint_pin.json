@@ -1,0 +1,16 @@
+{
+  "body": {
+    "tools_before": [
+      {
+        "name": "solo_old"
+      }
+    ],
+    "tools_after": [
+      {
+        "name": "solo_new"
+      }
+    ]
+  },
+  "name": "agent_costdiff_disjoint_pin",
+  "path": "/api/v1/agent/cost-diff"
+}

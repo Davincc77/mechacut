@@ -1,0 +1,18 @@
+{
+  "body": {
+    "tools_before": [
+      {
+        "name": "a"
+      }
+    ],
+    "tools_after": [
+      {
+        "name": "a",
+        "description": "hi"
+      }
+    ],
+    "window": 3
+  },
+  "name": "agent_costdiff_window_transition_pin",
+  "path": "/api/v1/agent/cost-diff"
+}

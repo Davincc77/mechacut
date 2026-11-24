@@ -88,6 +88,7 @@ POST /api/v1/shop/legal-guarantee    delivered_on + FR/UK -> dated STATUTORY war
 POST /api/v1/money/keep-records-uk   record_kind + official anchor -> earliest lawful DESTROY date (VAT 3 anchors/6y/10y, s388 3y/6y by form, SA 5y after 31-Jan deadline + 15m very-late, PAYE 3y), "or longer if" carried BLOCKED (free)
 POST /api/v1/shop/gift-voucher  purchase + printed expiry -> IE five-year deemed clocks (PAPER_DEAD_LAW_ALIVE), FR no-minimum verdict, €1 floor conflict named (free)
 POST /api/v1/shop/soldes-window year + territory -> LEGAL sale windows dated from the 2019 arrêté: advance clauses both seasons, 7 annual derogations 2020-2026 carried verbatim, annex versioned, ouvré ambiguity named (free)
+POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the update: chars+token delta per tool, signed moved fields, global vs per-tool sum stated, FITS->OVERFLOWS transition named, $ at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -287,6 +288,7 @@ import omnibuskit
 import mcpauditkit
 import mcpsurfacekit
 import contexttaxkit
+import costdiffkit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -376,7 +378,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.24.0",
+    version="1.25.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2343,6 +2345,38 @@ def run_agent_context_tax(args: dict):
 @app.post("/api/v1/agent/context-tax")
 def api_agent_context_tax(req: AgentContextTaxRequest):
     body, err = run_agent_context_tax(req.model_dump())
+    return err if err else body
+
+
+class AgentCostDiffRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tools_before: List[Dict[str, Any]]
+    tools_after: List[Dict[str, Any]]
+    window: Optional[int] = None
+    turns: Optional[int] = None
+    input_per_mtok: Optional[str] = None
+
+
+def run_agent_cost_diff(args: dict):
+    try:
+        req = AgentCostDiffRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = costdiffkit.cost_diff(req.tools_before, req.tools_after,
+                                    req.window, req.turns,
+                                    req.input_per_mtok)
+    except costdiffkit.CostDiffError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/cost-diff")
+def api_agent_cost_diff(req: AgentCostDiffRequest):
+    body, err = run_agent_cost_diff(req.model_dump())
     return err if err else body
 
 
@@ -6870,6 +6904,7 @@ TOOL_RUN = {
            "agent_mcpaudit": run_agent_mcp_audit,
            "agent_mcpsurface": run_agent_mcp_surface,
            "agent_contexttax": run_agent_context_tax,
+           "agent_costdiff": run_agent_cost_diff,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
@@ -11006,6 +11041,82 @@ MCP_TOOLS = [
                                    "tokens, decimal string (e.g. "
                                    "\"2\" for $2/M) — an argument, "
                                    "never a stored table",
+                },
+            },
+        },
+    },
+    {
+        "name": "agent_costdiff",
+        "description": (
+            "The PRICE OF THE UPDATE: two pasted MCP tools/list "
+            "readings in, the token bill between them out. Same "
+            "canon, same estimator as /agent/context-tax (ceil of "
+            "chars/4, published floor, error declared) so the "
+            "subtraction means something: classes ADDED/REMOVED/"
+            "CHANGED/SAME by name, per-tool delta in chars and "
+            "tokens, percentage of the BEFORE-side estimate (None "
+            "for an added tool — nothing was paid before; -100.00 "
+            "for a removed one), and a CHANGED tool carries its "
+            "moved_fields SIGNED per contract field (the r/mcp "
+            "case: same 27 tools, 8497->22k tokens, the schema "
+            "detail alone). Global delta is ceil(after_total/4) - "
+            "ceil(before_total/4), never the sum of per-tool "
+            "ceilings — both numbers travel and the divergence is "
+            "stated, not hidden. Window verdict FITS/OVERFLOWS_"
+            "WINDOW on EACH side with a closed transition name: "
+            "FITS_TO_OVERFLOWS is the story testdino told about "
+            "Playwright MCP 0.0.41->0.0.85 (+78%, unannounced). "
+            "Delta rides EVERY turn (Irolla); dollars only if you "
+            "pass your own decimal price — sign included, a "
+            "listing that shrank saves real money. Movers sorted "
+            "|delta_chars| desc, ties = name ascending (a diff has "
+            "no shared pasted order — the rule is declared), top "
+            "100 detailed, the rest folded. Both sides validated "
+            "with the sister's refusals: 5000-entry ceiling, "
+            "duplicate and empty names refused (shadowing). Flags: "
+            "EMPTY_BEFORE/AFTER/BOTH (empty listings are a state, "
+            "not an error), DISJOINT_LISTINGS (a replacement, not "
+            "an update), NO_CHANGES. Never fetches, never "
+            "launches: pasted listings only. Sisters: mcp-surface "
+            "says WHAT changed, context-tax says HOW MUCH one "
+            "listing costs — this one says the price in between. "
+            "Free under 32 KB, x402 above."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["tools_before", "tools_after"],
+            "additionalProperties": False,
+            "properties": {
+                "tools_before": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                    "description": "the older pasted tools/list "
+                                   "reading",
+                },
+                "tools_after": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                    "description": "the newer pasted tools/list "
+                                   "reading",
+                },
+                "window": {
+                    "type": "integer",
+                    "description": "your context window in tokens, "
+                                   "default 200000 (the cited "
+                                   "scale, verdict on each side)",
+                },
+                "turns": {
+                    "type": "integer",
+                    "description": "turns the definitions ride — "
+                                   "the delta is billed per turn "
+                                   "too, default 1",
+                },
+                "input_per_mtok": {
+                    "type": "string",
+                    "description": "YOUR price per million input "
+                                   "tokens, decimal string — an "
+                                   "argument, never a stored "
+                                   "table",
                 },
             },
         },

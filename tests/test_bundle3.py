@@ -225,7 +225,8 @@ def test_mcp_dates_tools():
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 1,
                                   "method": "tools/list"})
     names = [t["name"] for t in r.json()["result"]["tools"]]
-    assert len(names) == 178  # +shop_soldes_window bundle103 ;
+    assert len(names) == 179  # +agent_costdiff bundle104 ;
+    # 178 avec shop_soldes_window bundle103 ;
     # 177 avec shop_gift_voucher bundle102 ;
     # 176 avec agent_contexttax bundle101 ;
     # 175 avec money_keep_records_uk bundle100 ;

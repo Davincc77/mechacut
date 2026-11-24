@@ -1,0 +1,31 @@
+{
+  "body": {
+    "tools_before": [
+      {
+        "name": "alpha",
+        "description": "Say hi",
+        "inputSchema": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "beta",
+        "description": "Add",
+        "inputSchema": {
+          "type": "object"
+        }
+      }
+    ],
+    "tools_after": [
+      {
+        "name": "alpha",
+        "description": "Say hi, loudly",
+        "inputSchema": {
+          "type": "object"
+        }
+      }
+    ]
+  },
+  "name": "agent_costdiff_removed_pct_pin",
+  "path": "/api/v1/agent/cost-diff"
+}

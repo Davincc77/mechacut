@@ -1,0 +1,15 @@
+{
+  "body": {
+    "tools_before": [
+      {
+        "name": "a"
+      },
+      {
+        "name": "a"
+      }
+    ],
+    "tools_after": []
+  },
+  "name": "agent_costdiff_dup_refused",
+  "path": "/api/v1/agent/cost-diff"
+}

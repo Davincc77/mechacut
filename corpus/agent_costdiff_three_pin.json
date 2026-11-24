@@ -1,0 +1,45 @@
+{
+  "body": {
+    "tools_before": [
+      {
+        "name": "alpha",
+        "description": "Say hi",
+        "inputSchema": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "beta",
+        "description": "Add",
+        "inputSchema": {
+          "type": "object"
+        }
+      }
+    ],
+    "tools_after": [
+      {
+        "name": "alpha",
+        "description": "Say hi, loudly",
+        "inputSchema": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "beta",
+        "description": "Add",
+        "inputSchema": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "gamma",
+        "description": "New tool",
+        "inputSchema": {
+          "type": "object"
+        }
+      }
+    ]
+  },
+  "name": "agent_costdiff_three_pin",
+  "path": "/api/v1/agent/cost-diff"
+}

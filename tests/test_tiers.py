@@ -36,6 +36,7 @@ def test_tier_tables_are_exact():
     assert payments.CAP_ROUTES == {"/api/v1/json/patch": "500",
                                    "/api/v1/validate": "500",
                                    "/api/v1/agent/context-tax": "500",
+                                   "/api/v1/agent/cost-diff": "500",
                                    "/api/v1/csv/fix": "500",
                                    "/api/v1/csv/types": "500",
                                    "/api/v1/format/convert": "500",
@@ -120,5 +121,5 @@ def test_bundle2_tiers(paywall):
 def test_pricing_info_publishes_caps(paywall):
     body = client.get("/").json()
     info = body["payments"]
-    assert len(info["capped_routes"]) == 21    # +1 24-11: agent/context-tax (gros listings collés, 🟡) ; 20 = table/sql_dump
+    assert len(info["capped_routes"]) == 22    # +1 24-11: agent/cost-diff (deux listings collés, 🟡) ; 21 agent/context-tax ; 20 = table/sql_dump
     assert "32768" in info["mode"]

@@ -82,6 +82,7 @@ PRICES = {
 CAP_ROUTES = {
     "/api/v1/validate": "500",
     "/api/v1/agent/context-tax": "500",
+    "/api/v1/agent/cost-diff": "500",
     "/api/v1/json/patch": "500",
     "/api/v1/csv/fix": "500",
     "/api/v1/csv/types": "500",

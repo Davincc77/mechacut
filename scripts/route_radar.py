@@ -255,6 +255,24 @@ CASES = [
      "coute", "agent_contexttax"),
     ("how many tokens are in this text", "text_count"),
     ("raconte-moi une blague sur le coût des tokens", None),
+    # bundle 104 — le PRIX DE L'UPDATE : trois langues x want
+    # agent_costdiff + le verbatim testdino + DEUX FRONTIÈRES de
+    # famille payées au test : « what changed » sans vocabulaire de
+    # prix reste chez mcp-surface (digest, pas facture), et le
+    # single-listing « combien coûte » reste chez context-tax. La
+    # blague sur le surcoût meurt par la forme b98.
+    ("what did the mcp update cost my tool list in extra tokens",
+     "agent_costdiff"),
+    ("quel surcoût de tokens la nouvelle version du serveur mcp a "
+     "ajouté à ma liste d'outils", "agent_costdiff"),
+    ("quanto a nova versão do meu servidor mcp custou a mais em "
+     "tokens na lista de ferramentas", "agent_costdiff"),
+    ("the update of my mcp server grew the tool list by 13k tokens — "
+     "what is the delta per tool", "agent_costdiff"),
+    ("what changed in my mcp tool list since the reading i pinned",
+     "agent_mcpsurface"),
+    ("blague sur le prix de la nouvelle version de la liste "
+     "d'outils", None),
     # b102 — la douleur que /shop/gift-voucher répare, x3 langues
     # (verbatim RTÉ 20-nov : « vouchers given from last Christmas »)
     # + les vetoes de juridiction NOMMÉE (b102) et la blague (b98).

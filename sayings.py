@@ -67,6 +67,14 @@ SAY = {
               "MCP coûte à mon agent, à chaque tour ?",
         "pt": "quantos tokens a lista de ferramentas desse servidor "
               "MCP custa para meu agente, a cada turno?"},
+    "/api/v1/agent/cost-diff": {
+        "en": "how many extra tokens per turn did the update to my "
+              "MCP server's tool list cost me?",
+        "fr": "combien de tokens en plus par tour la "
+              "nouvelle liste d'outils de mon serveur MCP "
+              "m'a coûté ?",
+        "pt": "quantos tokens a mais por turno meu servidor MCP "
+              "custou com a nova versão da lista de ferramentas?"},
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",
