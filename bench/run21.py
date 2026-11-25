@@ -56,7 +56,7 @@ OURS = "https://mechacut.studio"
 THEIRS = "https://computefirst.net/mcp"
 UA = {"Content-Type": "application/json",
       "Accept": "application/json, text/event-stream",
-      "User-Agent": "mechacut-bench/21 (github.com/Davincc77/mechacut)"}
+      "User-Agent": "mechacut-bench/21 (github.com/mechacut/mechacut)"}
 
 SHA_GOLD = ("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61"
             "f20015ad")

@@ -152,7 +152,7 @@ def post(fiche, slots):
         data=json.dumps({"slots": slots}).encode(),
         headers={"Content-Type": "application/json",
                  "User-Agent": "mechacut-bench/22.0 (research; contact: "
-                               "github.com/Davincc77/mechacut)"})
+                               "github.com/mechacut/mechacut)"})
     try:
         out = json.loads(urllib.request.urlopen(req, timeout=30).read())
     except urllib.error.HTTPError as e:
