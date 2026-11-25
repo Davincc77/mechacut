@@ -1,0 +1,8 @@
+{
+ "name": "schedule_holidays_lu_2026_pin",
+ "path": "/api/v1/schedule/holidays",
+ "body": {
+  "country": "lu",
+  "year": 2026
+ }
+}

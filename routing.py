@@ -1101,9 +1101,9 @@ TABLE = (
      "summer january august royal decree livre vi "
      "saldos belgica verao inverno epoca espera janeiro agosto"),
     ("shop_withdrawal", "/api/v1/shop/withdrawal", "dates",
-     "statutory 14-day withdrawal dated: next-day start, weekend "
-     "and holiday advance on the cited L3133-1 table, late-info "
-     "twelve months, exceptions as named classes",
+     "withdrawal dated FR BE LU: one parcel, three grammars — "
+     "Saturday advances FR/BE, SURVIVES LU, twelve months when info "
+     "missing, exceptions as named classes",
      "withdrawal retraction retract withdraw withdraws revocation "
      "revoke change my mind online order cooling off "
      "fourteen days received parcel expiry advance holiday "
@@ -1441,7 +1441,18 @@ def route(query, top=5):
              "scotland", "ecoss", "australia", "australie", "japan",
              "japon", "china", "chine", "canada", "espan", "portug",
              "angola", "mozambic", "mexic", "russie", "russia",
-             "brit", "german", "alemanh", "deutsch",
+             "brit", "german", "deutsch",
+             # b108 — l'Allemagne nommée dans nos trois langues de
+             # surface manquait au veto : la classe « ville nomme la
+             # juridiction » (b102) avait son trou pays. Une RACINE
+             # rend l'adjectif et le pays : « allemande », « Alemania »,
+             # « Alemanha » — le trou « rétractation allemande » datait
+             # la France sur une question d'Allemagne. « allemagne »
+             # (le nom FR) ne partage pas la racine : il voyage avec —
+             # comme l'adjectif français à deux L, « allemande » — il
+             # ne partage AUCUNE racine avec « aleman » (a-l-l-e contre
+             # a-l-e) : chaque graphie voyage par son nom.
+             "aleman", "allemagne", "allemand",
              # villes ANGLAISES — « it expired in London » nomme la
              # juridiction sans le mot « UK » (pêché par mon propre
              # leurre b102 : London routait l'outil)
@@ -1482,6 +1493,7 @@ def route(query, top=5):
             "schlus")
     vforeign = vtabled = vnord = vsoldes_out = vbename = False
     viirish = vfr = False
+    vlux = vbelg = False
     for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
         if t in ("blague", "blagues", "joke", "jokes", "piada",
                  "piadas"):
@@ -1507,9 +1519,12 @@ def route(query, top=5):
             vbename = True
         if t == "nord":
             vnord = True
-        # b107 — la rétractation est la LOI FRANÇAISE rejouée : toute
-        # juridiction NOMMÉE autre que la France tue la ligne avant
-        # qu'elle ne promette (classe soldes-be b105, leçon b100/102).
+        # b107 — la rétractation était la loi française seule : toute
+        # juridiction NOMMÉE autre tuait la ligne. b108 — LU (L. 221-3/
+        # L. 222-9) et BE (VI.47-VI.53 + C. civ. I.7) sont rejouées
+        # AUSSI : un Luxembourg ou une Belgique nommés laissent vivre
+        # la ligne (c'est LEURS grammaires qu'ils demandent) ; tout
+        # autre pays nommé la tue toujours avant qu'elle ne promette.
         # Irlande entre par V_IN (gift-voucher) : elle a ICI son drapeau.
         if t.startswith(("irland",)) or t in ("ie", "irl", "eire",
                                               "dublin", "cork",
@@ -1517,6 +1532,15 @@ def route(query, top=5):
             viirish = True
         if t.startswith("franc") or t in ("fr", "paris"):
             vfr = True
+        if t.startswith(("luxemb", "lëtzebuerg")) or t in (
+                "lux", "esch", "wiltz", "diekirch", "grevenmacher",
+                "vianden", "clervaux", "grand-duche", "groussherzogtum"):
+            vlux = True
+        if t.startswith(("belg",)) or t in (
+                "brussel", "bruxelles", "antwerpen", "antwerp", "gent",
+                "ghent", "liege", "liège", "namur", "bruges", "brugge",
+                "leuven", "louvain", "charleroi", "wallonie", "brabant"):
+            vbelg = True
         st = _stem(t)
         if st not in seen:
             seen.add(st)
@@ -1536,8 +1560,14 @@ def route(query, top=5):
         if name == "shop_soldes_be" and (vsoldes_out or vtabled) \
                 and not vbename:
             continue
-        if name == "shop_withdrawal" and (vforeign or vsoldes_out
-                                          or viirish) and not vfr:
+        # b108 — LU et BE sont rejouées : nommées, elles laissent la
+        # ligne VIVRE (le veto ne survit que pour les pays SANS table).
+        # Un pays de V_SOLD_OUT qui n'est NI LU NI BE (Suisse, Québec,
+        # Canada…) continue de tuer — pas de grammaire, pas de promesse.
+        if name == "shop_withdrawal" and (
+                vforeign or viirish or
+                (vsoldes_out and not (vlux or vbelg))) \
+                and not (vfr or vlux or vbelg):
             continue
         tail = path[len("/api/v1/"):]
         # nsegs STEMÉS comme les tags et le query — sinon un nom au

@@ -228,12 +228,17 @@ def test_unknown_class_refused_by_name():
 
 
 def test_refuse_other_country_named():
-    r = post({"start_date": "2026-11-24", "country": "be"})
+    # b108 a change l'attendu : be|lu sont des lois REJOUEES des ce
+    # cycle (gate legilux+ejustice paye 25-11) — le refus par nom
+    # reste pour les NON-rejoues : uk (CCA 2015) et br (CDC, 7 jours).
+    r = post({"start_date": "2026-11-24", "country": "uk"})
     assert r.status_code == 400
     e = r.json()["errors"][0]
-    assert e["field"] == "country" and e["expected"] == "fr"
+    assert e["field"] == "country"
+    assert e["expected"] == "fr | be | lu"
     assert "1182" not in e["message"]           # pas de prose de mémoire
     assert "CDC art. 49" in e["message"]        # le BR est NOMMÉ
+    assert "CCA 2015" in e["message"]           # l'UK est NOMMÉ
 
 
 def test_refuse_in_store_carries_the_statute():
@@ -343,12 +348,22 @@ def test_needles_top1_x3_langues():
 
 
 def test_foreign_jurisdictions_die_before_promising():
+    # b108 a REMPLACÉ deux des trois vectors : la Belgique et le
+    # Luxembourg sont des lois rejouées DÉSORMAIS (gate legilux+
+    # ejustice payé 25-11, VI.47/53 + L. 221-3/222-9) — ils routent
+    # et datent. Le Brésil reste MORT (CDC art. 49, sept jours, non
+    # rejoué) ; l'Allemagne et l'Espagne rejoignent le refus.
     for q in ("me arrependi da compra no brasil 7 dias prazo",
-              "14 day cooling off period in belgium online order",
-              "withdrawal right luxembourg distance selling"):
+              "withdrawal right germany distance selling",
+              "retractación alemania plazo devolución"):
         names = [t["tool"] for t in
                  client.get("/route", params={"q": q}).json()["tools"]]
         assert "shop_withdrawal" not in names, q
+    # l'inverse exact, au test : LU et BE nommés VIVENT chez la soeur
+    for q in ("14 day cooling off period in belgium online order",
+              "withdrawal right luxembourg distance selling"):
+        tools = client.get("/route", params={"q": q}).json()["tools"]
+        assert tools and tools[0]["tool"] == "shop_withdrawal", q
 
 
 def test_sisters_gardent_leurs_aiguilles():

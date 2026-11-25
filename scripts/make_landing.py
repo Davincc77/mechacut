@@ -1485,9 +1485,9 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "agent_costdiff":
             "le PRIX DE L'UPDATE : deux listings MCP collés, surplus par outil et champ signé, % du côté avant ; delta global et somme par outil, divergence CHIFFRÉE ; ici DE COMBIEN À COMBIEN",
         "agent_tooltrim":
-            "QUOI DÉBRANCHER pour tenir le budget : IDLE-d'abord en fractions exactes, re-compte au canon de la sœur — même nombre chez context-tax ; FITS/STILL_OVER, RESTE chiffré ; la fratrie dit COMBIEN, ici QUOI ENLEVER",
+            "QUOI DÉBRANCHER pour tenir le budget : IDLE-d'abord en fractions exactes, re-compte au canon context-tax ; FITS/STILL_OVER, RESTE chiffré ; la fratrie dit COMBIEN, ici QUOI ENLEVER",
         "shop_gift_voucher":
-            "carte cadeau « périmée » d'un an REMPLACÉE d'office par cinq ans depuis l'achat — le légal couvre le papier (Irlande 2019) ; solde d'1 € ou plus = dû, frontière 1 € en conflit NOMMÉ ; France : AUCUNE durée légale, mythe « 30 ans » = immobilier",
+            "carte cadeau « périmée » REMPLACÉE d'office par cinq ans depuis l'achat — le légal couvre le papier (Irlande 2019) ; solde d'1 € ou plus = dû, frontière 1 € en conflit NOMMÉ ; France : AUCUNE durée légale, mythe « 30 ans » = immobilier",
         "shop_soldes_window":
             "sept dérogations verbatim (hiver 2021 six semaines, Moselle seule au 26 juin 2021), annexe versionnée, « ouvré » nommé ; hors France refusé par nom",
         "shop_soldes_be":
@@ -1611,7 +1611,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "date_tz_anchor":
             "Heure murale ÉCRITE dans la zone du job, ANCRÉE dedans : chaque instant UTC candidat, dérive SIGNÉE en minutes (positif = en retard) ; l'offset gagne (Composio #4148) ; single/fold/gap rendus par date/tz_ambiguity APPELÉ",
         "money_flight_comp":
-            "Date de vol = TABLE : 261/2004 + Sturgeon/Nelson avant 2027-10-23, (UE) 2026/2202 APRÈS (« EXCEEDING 3 h » STRICT, 180 min pile ne paye pas), UK261 £220/350/520 + ligne £260 sous 4 h, plafond intra-UE €400, forclusion 9 mois, date exacte",
+            "Date de vol = TABLE : 261/2004 + Sturgeon/Nelson avant 2027-10-23, (UE) 2026/2202 APRÈS (« EXCEEDING 3 h » STRICT, 180 min pile ne paye pas), UK261 £220/350/520 + ligne £260 sous 4 h, plafond intra-UE €400, forclusion 9 mois",
         "date_week":
             "Semaine ISO aller-retour ; année ISO SÉPARÉE du %Y ; W53 par THÉORÈME (53 jeudis ⟺ 1er janvier jeudi, ou mercredi + bissextile ; zéro table) ; artefact %Y-W%V nommé ; Excel/US côte à côte",
         "units_shoe_size":
@@ -1639,7 +1639,9 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "ics_validate":
             "lint VCALENDAR : les MUST de RFC 5545 en erreurs, les SHOULD en avertissements",
         "schedule_holidays":
-            "jours fériés légaux FR BR PT DE US avec la loi citée sur chaque ligne",
+            "jours fériés légaux FR BE LU BR PT DE US avec la loi citée sur chaque ligne",
+        "shop_withdrawal":
+            "rétractation FR BE LU : un colis, trois grammaires — samedi avancé FR/BE, SURVIVANT au LU ; douze mois si info absente ; exceptions nommées",
         "web_cache":
             "texte Cache-Control → action RFC 9111, fraîcheur, directives inertes",
         "gzip_roundtrip":
@@ -1811,11 +1813,11 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "csv_excel_damage":
             "règles = trois interrupteurs Microsoft nommés ; import colonne-Texte PRESCRIT ; csv/fix répare, ici on PRÉDIT",
         "money_crossover":
-            "sept calculateurs publiés arrondissent Δ fixe avant diviser ; conventions de jours NOMMÉES (mensuel ×12 jamais 30 ; journalier ×365, ×366 si bissextile fourni ; « semaine » refusée) ; DOMINATION « never » ; km si conso FOURNIE ; one-off en mois de payback",
+            "sept calculateurs publiés arrondissent Δ fixe avant diviser ; conventions de jours NOMMÉES (mensuel ×12 jamais 30 ; journalier ×365/×366 bissextile ; « semaine » refusée) ; DOMINATION « never » ; km si conso FOURNIE ; one-off en mois de payback",
         "money_points":
             "Combien vaut un POINT : cpp = (prix cash − reste − rewards forgoes) / points × 100 en FRACTION EXACTE (1081/725) ; voies triées, égalités nommées, verdict contre FLOOR fourni ; jamais de table",
         "csv_excel_display":
-            "Ce qu'Excel AFFICHE d'une valeur STOCKÉE (numFmt) : virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → $1,000 — arXiv 2611.05806, six extracteurs aveugles) ; table Microsoft rejouée (« #.0,, »→12.2, « (000) »→(012), « 0% »→50%) ; demi-vers-le-large dit ; locale en ARGUMENT ; General/dates/couleurs refusés PAR NOM ; rendu ≠ import",
+            "Ce qu'Excel AFFICHE d'une valeur STOCKÉE (numFmt) : virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → $1,000 — arXiv 2611.05806, 6 extracteurs aveugles) ; table Microsoft rejouée ; demi-vers-le-large dit ; locale en ARGUMENT ; General/dates/couleurs refusés PAR NOM ; rendu ≠ import",
         "ship_dimweight":
             "poids volumétrique : diviseur en ARGUMENT (5 000 vs 6 000 = deux factures), faces triées, plafond porteur refusé par nom si hors table",
         "json_coerce":
@@ -1829,7 +1831,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "food_leftovers":
             "fenêtre des restes, USDA FSIS : seuil 2h, 3-4 jours frigo, 2-6 mois congélateur (UNION des deux pages FSIS) — temps en ARGUMENTS, jamais l'horloge, jamais de tables inventées",
         "food_ovenschedule":
-            "un four, des plats, une heure de service : compte à rebours à l'envers, conflits de température nommés, jamais d'horloge murale — les timelines web ne vérifient rien de tout ça",
+            "un four, des plats, une heure de service : compte à rebours à l'envers, conflits de température nommés, jamais d'horloge murale",
     },    "pt": {
         "address_parse":
             "endereço postal → país, CEP validado contra 50 gramáticas, linhas restantes; ambiguidade NOMEADA, nunca adivinhada",
@@ -2018,7 +2020,9 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "ics_validate":
             "lint de VCALENDAR: MUSTs da RFC 5545 como erros, SHOULDs como avisos",
         "schedule_holidays":
-            "feriados legais FR BR PT DE US com a lei citada em cada linha",
+            "feriados legais FR BE LU BR PT DE US com a lei citada em cada linha",
+        "shop_withdrawal":
+            "retratação FR BE LU : um pacote, três gramáticas — sábado avança FR/BE, SOBREVIVE no LU ; doze meses sem informação ; exceções nomeadas",
         "web_cache":
             "texto Cache-Control → ação RFC 9111, frescor, diretivas inertes",
         "gzip_roundtrip":

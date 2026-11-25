@@ -1,0 +1,8 @@
+{
+ "name": "shop_withdrawal_lu_europe2028_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2028-04-25",
+  "country": "lu"
+ }
+}

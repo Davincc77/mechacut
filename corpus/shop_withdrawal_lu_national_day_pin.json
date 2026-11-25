@@ -1,0 +1,8 @@
+{
+ "name": "shop_withdrawal_lu_national_day_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2026-06-09",
+  "country": "lu"
+ }
+}

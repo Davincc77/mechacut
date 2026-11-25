@@ -1,0 +1,8 @@
+{
+ "name": "shop_withdrawal_be_armistice_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2026-10-28",
+  "country": "be"
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "name": "shop_withdrawal_be_second_clock_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2026-06-24",
+  "country": "be",
+  "notified": "2026-07-07"
+ }
+}

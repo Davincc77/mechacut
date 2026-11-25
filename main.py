@@ -383,7 +383,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.28.0",
+    version="1.29.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -8869,16 +8869,20 @@ MCP_TOOLS = [
                         "required": ["text"]}},
     {
         "name": "schedule_holidays",
-        "description": "National legal holiday calendars FR BR PT DE US: "
-                       "every day cites its statute (L3133-1, Lei 662, "
-                       "CT 234o, 5 USC 6103 with the weekend-observance "
-                       "shift), Easter from the Gregorian computus "
+        "description": "National legal holiday calendars FR BE LU BR "
+                       "PT DE US: every day cites its statute (L3133-1, "
+                       "COTRAV L. 232-6 + loi du 25 avril 2019 for the "
+                       "LU Europe-day, SPF Emploi list for the 10 BE "
+                       "days, Lei 662, CT 234o, 5 USC 6103 with the "
+                       "weekend-observance shift), Easter from the "
+                       "Gregorian computus "
                        "verified against the US Census table for all of "
                        "2000-2099. Pass `on` for a yes/no verdict. "
                        "Regional extras declared, never invented. Free.",
         "inputSchema": {"type": "object", "properties": {
             "country": {"type": "string",
-                        "enum": ["FR", "BR", "PT", "DE", "US"]},
+                        "enum": ["FR", "BE", "LU", "BR", "PT", "DE",
+                                 "US"]},
             "year": {"type": "integer", "minimum": 1900, "maximum": 2099},
             "on": {"type": "string"}},
             "required": ["country"]}},
@@ -11890,25 +11894,30 @@ MCP_TOOLS = [
         "name": "shop_withdrawal",
         "description": (
             "The statutory 14-day WITHDRAWAL (change-of-mind) "
-            "window as DATES, from one day: French law, Code de la "
-            "consommation section 6 replayed verbatim (L221-18 "
-            "start per contract family, L221-19 the calendar "
-            "grammar anchored to regulation 1182/71/CEE: start day "
-            "not counted, expiry at the last hour of day 14, "
-            "Saturday/Sunday/legal-holiday advances to the first "
-            "business day, holidays from our own cited L3133-1 "
-            "table), L221-20 twelve-month extension when the "
-            "withdrawal information was missing (plus a new "
-            "14-day period when it arrives late), L221-23/24 "
-            "return and refund clocks WITHOUT the advance rule "
-            "(divergence named, never averaged), L221-28 thirteen "
-            "closed exception classes with the verbatim clause. "
-            "start_date + kind goods|services|off_premises|"
-            "subscriptions + optional notified/info_date/"
-            "product_class/as_of \u2014 verdict OPEN|FINAL_DAY|"
-            "EXPIRED|NOT_WITHDRAWABLE. In-store refused by name "
-            "(no automatic right); BE/LU/BR/UK refused, not "
-            "replayed; the shop's voluntary window is "
+            "window as DATES, from one day: THREE REPLAYED "
+            "counting grammars on the same parcel. FR (Code de "
+            "la consommation L221-18/28: next-day start, "
+            "Saturday/Sunday/legal-holiday advances on the cited "
+            "L3133-1 table, L221-20 twelve months when the "
+            "information was missing plus a new 14-day period "
+            "when it arrives late, L221-23/24 clocks WITHOUT the "
+            "advance, thirteen exception classes verbatim); LU "
+            "(L. 221-3 + L. 222-9: business day = all days except "
+            "Sundays and legal holidays per the official guichet."
+            "lu glossaire and ITM D9a3 — a SATURDAY deadline "
+            "SURVIVES, holiday table COTRAV L. 232-6 incl. 23 "
+            "juin and 9 mai); BE (VI.47-VI.53 + VI.67 with the "
+            "new Civil Code art. I.7 §§ 1/3/4: lendemain start, "
+            "Saturday EXCLUDED from jours ouvrables, the advance "
+            "carries onto the second clocks, and VI.53 14° paris "
+            "et loteries — a 14th class with no FR/LU twin). "
+            "start_date + country fr|be|lu + kind goods|services|"
+            "off_premises|subscriptions + optional notified/"
+            "info_date/product_class/as_of \u2014 verdict OPEN|"
+            "FINAL_DAY|EXPIRED|NOT_WITHDRAWABLE. In-store refused "
+            "by name in all three (no automatic right); BR and UK "
+            "refused by name (CDC art. 49 runs SEVEN days; CCA "
+            "2015 not replayed); the shop's voluntary window is "
             "return-deadline, broken goods is legal-guarantee. "
             "No network, no clock. Free."
         ),
@@ -11968,10 +11977,10 @@ MCP_TOOLS = [
                                          "an argument, never the "
                                          "wall clock"},
                 "country": {"type": "string",
-                            "description": "fr only \u2014 the "
-                                           "replayed statute; "
-                                           "others refused by "
-                                           "name"},
+                            "description": "fr | be | lu \u2014 the "
+                                           "three replayed "
+                                           "statutes; others "
+                                           "refused by name"},
             },
         },
     },

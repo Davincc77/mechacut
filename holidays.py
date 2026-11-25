@@ -2,6 +2,13 @@
 
 Every rule cites its published legal basis; nothing here is folklore:
   FR — Code du travail L3133-1 (Légifrance), 11 fêtes légales
+  BE — jours fériés légaux : 10, liste officielle SPF Emploi
+       (emploi.belgique.be, relu 25-11-2026), cadre loi du 5
+       décembre 1918 ; dimanches mobiles = Pâques occidentale
+       (table recopiée ITM, commune FR/BE/LU)
+  LU — 11 jours fériés légaux : COTRAV art. L. 232-6 + loi du
+       25 avril 2019 (Journée de l'Europe) — listes ITM D9a2 et
+       guichet.lu, relues 25-11-2026
   BR — Lei nº 662/1949 (redação Lei 10.607/2002) + Lei 6.802/1980
        (12 de outubro); Sexta-Feira Santa = feriado religioso de
        descanso remunerado (Lei 605/1949, via Lei 9.093/1995).
@@ -63,13 +70,28 @@ def _nth_weekday(year, month, weekday, n):
 
 _FIXED = {
     "FR": [((1, 1), "Jour de l'An", "L3133-1 1°"),
-           ((1, 5), "Fête du travail", "L3133-1 3°"),
+           ((5, 1), "Fête du travail", "L3133-1 3°"),
            ((5, 8), "Victoire 1945", "L3133-1 4°"),
            ((7, 14), "Fête nationale", "L3133-1 7°"),
            ((8, 15), "Assomption", "L3133-1 8°"),
            ((11, 1), "Toussaint", "L3133-1 9°"),
            ((11, 11), "Armistice 1918", "L3133-1 10°"),
            ((12, 25), "Noël", "L3133-1 11°")],
+    "LU": [((1, 1), "Nouvel An", "COTRAV L. 232-6"),
+           ((5, 1), "Fête du travail", "COTRAV L. 232-6"),
+           ((5, 9), "Journée de l'Europe", "loi du 25 avril 2019 (COTRAV L. 232-6)"),
+           ((6, 23), "Jour de la célébration publique de l'anniversaire du Grand-Duc", "COTRAV L. 232-6"),
+           ((8, 15), "Assomption", "COTRAV L. 232-6"),
+           ((11, 1), "Toussaint", "COTRAV L. 232-6"),
+           ((12, 25), "Premier jour de Noël", "COTRAV L. 232-6"),
+           ((12, 26), "Deuxième jour de Noël (Saint-Étienne)", "COTRAV L. 232-6")],
+    "BE": [((1, 1), "Nieuwjaar / 1er janvier", "liste SPF Emploi (loi du 5 déc. 1918, cadre)"),
+           ((5, 1), "Dag van de Arbeid / Fête du travail", "liste SPF Emploi (loi du 5 déc. 1918, cadre)"),
+           ((7, 21), "Nationale feestdag / Fête nationale", "liste SPF Emploi (loi du 5 déc. 1918, cadre)"),
+           ((8, 15), "Onze-Lieve-Vrouw-Hemelvaart / Assomption", "liste SPF Emploi (loi du 5 déc. 1918, cadre)"),
+           ((11, 1), "Allerheiligen / Toussaint", "liste SPF Emploi (loi du 5 déc. 1918, cadre)"),
+           ((11, 11), "Wapenstilstand / Armistice 1918", "liste SPF Emploi (loi du 5 déc. 1918, cadre)"),
+           ((12, 25), "Eerste kerstdag / Noël", "liste SPF Emploi (loi du 5 déc. 1918, cadre)")],
     "BR": [((1, 1), "Confraternização Universal", "Lei 662/1949 art 1º"),
            ((4, 21), "Tiradentes", "Lei 662/1949 art 1º"),
            ((5, 1), "Dia do Trabalhador", "Lei 662/1949 art 1º"),
@@ -98,6 +120,12 @@ _MOVING = {
     "FR": [(1, "Lundi de Pâques", "L3133-1 2°"),
            (39, "Ascension", "L3133-1 5°"),
            (50, "Lundi de Pentecôte", "L3133-1 6°")],
+    "LU": [(1, "Lundi de Pâques", "COTRAV L. 232-6"),
+           (39, "Ascension", "COTRAV L. 232-6"),
+           (50, "Lundi de Pentecôte", "COTRAV L. 232-6")],
+    "BE": [(1, "Paasmaandag / Lundi de Pâques", "liste SPF Emploi (loi du 5 déc. 1918, cadre)"),
+           (39, "Hemelvaart / Ascension", "liste SPF Emploi (loi du 5 déc. 1918, cadre)"),
+           (50, "Pinkstermaandag / Lundi de Pentecôte", "liste SPF Emploi (loi du 5 déc. 1918, cadre)")],
     "BR": [(-2, "Sexta-Feira Santa",
             "Lei 605/1949 (feriado religioso; Lei 9.093/1995)")],
     "PT": [(-2, "Sexta-feira Santa (Paixão do Senhor)", "CT 234º/1"),
@@ -119,6 +147,18 @@ _NOTES = {
           "only and says so.",
     "PT": "Autonomous regions (Açores/Madeira) add holidays.",
     "FR": "Alsace-Moselle adds Good Friday and December 26.",
+    "LU": "11 legal holidays (COTRAV L. 232-6 + loi du 25 avril 2019). "
+          "Saturday IS a business day (jour ouvrable) per the official "
+          "glossaire guichet.lu and ITM D9a3 — only Sundays and legal "
+          "holidays are not. Employers may substitute local/professional "
+          "days keeping 11 — the legal list is what returns.",
+    "BE": "10 federal legal holidays (liste SPF Emploi; regional/"
+          "community days — 28 September FWB, 11 July Flanders, 1 July "
+          "BC — are NOT federal and do not enter). Substitution days "
+          "per joint committee (e.g. Saint-Éloi 1 December, CP 104) "
+          "are not folded in. For deadlines the new Civil Code art. "
+          "I.7 §3 (loi du 28 avril 2022) excludes Saturdays from "
+          "jours ouvrables.",
 }
 # US built by its own rules (date arithmetic + observance shift)
 _US_LAW = [
@@ -174,9 +214,10 @@ def holidays(country, year):
                 "holidays": _us_holidays(year),
                 "count": len(_us_holidays(year))}
     if c not in _FIXED:
-        raise HolidayError("country %r outside the closed set (FR BR PT "
-                           "DE US); this calendar is law, not vibes — "
-                           "other countries ship when sourced" % country)
+        raise HolidayError("country %r outside the closed set (FR BE "
+                           "LU BR PT DE US); this calendar is law, not "
+                           "vibes — other countries ship when sourced"
+                           % country)
     e = easter(year)
     days = [{"date": date(year, m, dd).isoformat(), "name": n,
              "law": law} for (m, dd), n, law in _FIXED[c]]

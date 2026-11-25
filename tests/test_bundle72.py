@@ -72,13 +72,18 @@ def test_other_food_pt_lines_untouched():
 def test_radar_corpus_replays_locally():
     # le corpus du radar, rejoué CONTRE LA TABLE LOCALE : tout ce que
     # la prod déclare ok/leurre-ok l'est aussi ici (même code, même
-    # sha de comportement attendue). Ligne exclue : le comparatif EN
-    # — WRONG consigné, juridiction bench (money_bogo gagne sur des
-    # nombres nus de purpose), pas un contrat à geler ici.
-    excluded = "is 30% off plus another 20% the same as 50% off"
+    # sha de comportement attendue). Lignes exclues : les DOULEURS
+    # CONSIGNÉES à la file, pas des contrats à geler ici —
+    # comparatif EN (juridiction bench, money_bogo gagne sur des
+    # nombres nus de purpose) ; brésil droit->fenêtre (veto
+    # droit-fenêtre à poser, file b108) ; allemaine->shipping-deadline
+    # (stopwords de purpose qui portent, file b108).
+    excluded = ("is 30% off plus another 20% the same as 50% off",
+                "retour brésil 7 jours arrependimento prazo",
+                "withdrawal germany online order deadline")
     n_replayed = 0
     for text, want in route_radar.CASES:
-        if excluded in text:
+        if any(x in text for x in excluded):
             continue
         hits = routing.route(text)
         names = [h["tool"] for h in hits[:3]]

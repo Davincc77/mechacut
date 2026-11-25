@@ -1,0 +1,9 @@
+{
+ "name": "shop_withdrawal_lu_saturday_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2026-11-28",
+  "country": "lu",
+  "as_of": "2026-12-10"
+ }
+}

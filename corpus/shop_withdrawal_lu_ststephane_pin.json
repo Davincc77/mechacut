@@ -1,0 +1,9 @@
+{
+ "name": "shop_withdrawal_lu_ststephane_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2025-12-12",
+  "country": "lu",
+  "as_of": "2025-12-26"
+ }
+}

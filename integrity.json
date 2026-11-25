@@ -3882,12 +3882,32 @@
   },
   {
    "body": {
+    "country": "be",
+    "year": 2026
+   },
+   "name": "schedule_holidays_be_2026_pin",
+   "path": "/api/v1/schedule/holidays",
+   "sha256": "ec3d715f40917c34540e7a5997a01c80fb99b3f8aaa8cc9114060eb883ea93b4",
+   "status": 200
+  },
+  {
+   "body": {
     "country": "FR",
     "year": 2026
    },
    "name": "schedule_holidays_fr2026",
    "path": "/api/v1/schedule/holidays",
-   "sha256": "e42cf0372838aa06c9d6da5f8b00339ffb1dea894d2fb10a19338a5664e00d01",
+   "sha256": "bdf6d8249023335153eed780ac25e8b571dacd70033ff40809482d00a90aa9c9",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "lu",
+    "year": 2026
+   },
+   "name": "schedule_holidays_lu_2026_pin",
+   "path": "/api/v1/schedule/holidays",
+   "sha256": "93c0e5047e9a315f90cf7e6b48819ddd8f2d6df157ba41d8c9fb1de5b7376e73",
    "status": 200
   },
   {
@@ -4697,12 +4717,56 @@
   {
    "body": {
     "country": "be",
+    "start_date": "2026-10-28"
+   },
+   "name": "shop_withdrawal_be_armistice_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "dc58e462b7ea302f31adbee75a545abfa87aaa273924b82c7f685f0ee8520bb1",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-30",
+    "country": "be",
+    "product_class": "betting_lottery",
+    "start_date": "2026-11-24"
+   },
+   "name": "shop_withdrawal_be_betting_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "c2713faded35d4260962d994b48e918162255abd381eda0ce752ff0d75545276",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "be",
     "start_date": "2026-11-24"
    },
    "name": "shop_withdrawal_be_refuse_pin",
    "path": "/api/v1/shop/withdrawal",
-   "sha256": "e9a1193fb810de79fba428dee56b1410eb63c92856a36e53c05c1cc1ea92705e",
-   "status": 400
+   "sha256": "f5cd80dafad5eacb1232f5cabc5546fa419c8abab07121ec2ebc79fe8e37dec0",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-12-10",
+    "country": "be",
+    "start_date": "2026-11-28"
+   },
+   "name": "shop_withdrawal_be_saturday_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "823ce9d36fbd2b5ee47d98c407ab45185171deb04e01e4d1634f05ff0667b286",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "be",
+    "notified": "2026-07-07",
+    "start_date": "2026-06-24"
+   },
+   "name": "shop_withdrawal_be_second_clock_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "d33614067b13fa091ae03539d174bb19af7ec8d5a409a667809691f2fe17f4e5",
+   "status": 200
   },
   {
    "body": {
@@ -4750,6 +4814,48 @@
    "path": "/api/v1/shop/withdrawal",
    "sha256": "e77aaef871550f3da0696524f3c4f3b16e86b1769db03154b36b06b3ba107ba2",
    "status": 400
+  },
+  {
+   "body": {
+    "country": "lu",
+    "start_date": "2028-04-25"
+   },
+   "name": "shop_withdrawal_lu_europe2028_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "c91bb05a67f4006745b5a97c72c31925b5bedd0e1780d09bd2fb82579615044b",
+   "status": 200
+  },
+  {
+   "body": {
+    "country": "lu",
+    "start_date": "2026-06-09"
+   },
+   "name": "shop_withdrawal_lu_national_day_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "c18171666ad2001f192686aefe3a2734c028bfe5019d9bc7de44d243a626edd1",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-12-10",
+    "country": "lu",
+    "start_date": "2026-11-28"
+   },
+   "name": "shop_withdrawal_lu_saturday_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "cb35bca2691696542caa23fcd8eb6dca8935f89353c8bf267e03353c464a9fe6",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2025-12-26",
+    "country": "lu",
+    "start_date": "2025-12-12"
+   },
+   "name": "shop_withdrawal_lu_ststephane_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "c90d66d4235912f91f2666c3d17e125e1b71ddcf312e2bedd860345feabdf91d",
+   "status": 200
   },
   {
    "body": {

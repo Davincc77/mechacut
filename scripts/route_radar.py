@@ -399,6 +399,33 @@ CASES = [
     ("rétractation d'un achat immobilier signé chez le notaire", None),
     ("raconte-moi une blague sur la rétractation", None),
     ("piada sobre desligar ferramentas", None),
+    # CLASSE b108 — « mêmes mots, autres grammaires » : LU et BE sont
+    # des lois rejouées (L. 221-3 + L. 222-9 ; VI.47-53 + C. civ. I.7),
+    # elles routent et DATENT. Le leurre vendu la veille
+    # (« soldes d'hiver au luxembourg ») reste MORT : la fenêtre
+    # soldes LU n'est pas construite (rang 2 de la file) — le verbe
+    # rétractation seul ne doit jamais la faire vivre.
+    ("colis reçu samedi au luxembourg, jusqu'à quand puis-je me "
+     "rétracter", "shop_withdrawal"),
+    ("achat en ligne belgique délai rétractation après réception",
+     "shop_withdrawal"),
+    ("withdrawal luxembourg parcel arrived saturday deadline",
+     "shop_withdrawal"),
+    ("retratação belgique prazo de desistir depois da entrega",
+     "shop_withdrawal"),
+    # leurre de juridiction, version b108 : l'Allemagne nommée dans
+    # sa propre langue d'adjectif tue la ligne (trou « alemanh » sans
+    # « allemand » corrigé ce cycle, racines au veto)
+    ("rétractation colis allemagne 14 jours", None),
+    # DOULEURS PÊCHES NON ENCORE FERMÉES (consignées à la file — la
+    # machine ne ment pas pour faire vert) :
+    # brésil : question de DROIT (CDC art. 49, 7 jours, non rejoué)
+    # qui route la fenêtre enseigne — WRONG attendu, fermé au cycle
+    # qui posera le veto droit-fenêtre.
+    ("retour brésil 7 jours arrependimento prazo", None),
+    # idem EN : « withdrawal germany ... » ne doit rien prescrire —
+    # l'Allemagne est hors closed set.
+    ("withdrawal germany online order deadline", None),
 ]
 
 
