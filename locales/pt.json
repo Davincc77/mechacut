@@ -1,6 +1,10 @@
 {
   "meta.title": "Mechacut — mesma requisição, mesmos bytes",
   "meta.desc": "Transformações determinísticas para agentes: 183 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, chave ou armazenamento.",
+  "hero.plain": "Em palavras simples: a Mechacut faz as contas exactas para os assistentes. Uma conta para dividir, um prazo, uma moeda, um ficheiro — o assistente pergunta, a Mechacut responde, e a resposta é sempre a mesma. E quando um assistente aprende algo, todos os assistentes sabem no próprio dia.",
+  "dev.h2": "Para programadores & agentes",
+  "dev.intro": "Tudo o que está acima é verdade. Abaixo está o como: a API completa, o catálogo, os esquemas, os benchmarks, os preços. Sem prosa — referências.",
+  "nav.everyday": "Dia a dia",
   "nav.tools": "Bundles",
   "nav.numbers": "Provas",
   "nav.vision": "Visão",

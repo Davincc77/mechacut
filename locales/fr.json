@@ -1,6 +1,10 @@
 {
   "meta.title": "Mechacut — même requête, mêmes octets",
   "meta.desc": "Transformations déterministes pour agents IA : 183 outils, trois paliers, paiements machine. Sans inscription, sans clé, sans stockage.",
+  "hero.plain": "En mots simples : Mechacut fait les comptes exacts pour les assistants. Une facture à partager, une échéance, une devise, un fichier — l’assistant demande, Mechacut répond, et la réponse est toujours la même. Et quand un assistant apprend quelque chose, tous le savent le jour même.",
+  "dev.h2": "Pour les développeurs & agents",
+  "dev.intro": "Tout ce qui précède est vrai. En dessous, le comment : l’API complète, le catalogue, les schémas, les benchs, les prix. Plus de prose — des références.",
+  "nav.everyday": "Quotidien",
   "nav.tools": "Bundles",
   "nav.numbers": "Preuves",
   "nav.vision": "Vision",

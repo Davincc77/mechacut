@@ -1,6 +1,10 @@
 {
   "meta.title": "Mechacut — same request, same bytes",
   "meta.desc": "Deterministic transforms for AI agents: 183 tools, three tiers, machine payments. No signup, no key, no storage.",
+  "hero.plain": "In plain words: Mechacut does the exact counting for AI assistants. Splitting a bill, a due date, a currency, a file — the assistant asks, Mechacut answers, and the answer is always the same. And when one assistant learns something new, every assistant gets it the same day.",
+  "dev.h2": "For developers & agents",
+  "dev.intro": "Everything above was true. Below is how: the full API, the tool catalogue, the schemas, the benchmarks, the pricing. No prose — references.",
+  "nav.everyday": "Everyday",
   "nav.tools": "Bundles",
   "nav.numbers": "Proof",
   "nav.vision": "Vision",

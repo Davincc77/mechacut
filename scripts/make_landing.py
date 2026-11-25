@@ -103,6 +103,10 @@ TR =   {
  "en": {
   'meta.title': 'Mechacut — same request, same bytes',
   'meta.desc': 'Deterministic transforms for AI agents: 183 tools, three tiers, machine payments. No signup, no key, no storage.',
+  'hero.plain': 'In plain words: Mechacut does the exact counting for AI assistants. Splitting a bill, a due date, a currency, a file — the assistant asks, Mechacut answers, and the answer is always the same. And when one assistant learns something new, every assistant gets it the same day.',
+  'dev.h2': 'For developers & agents',
+  'dev.intro': 'Everything above was true. Below is how: the full API, the tool catalogue, the schemas, the benchmarks, the pricing. No prose — references.',
+  'nav.everyday': 'Everyday',
   'nav.tools': 'Bundles',
   'nav.numbers': 'Proof',
   'nav.vision': 'Vision',
@@ -342,6 +346,10 @@ TR =   {
  "fr": {
   'meta.title': 'Mechacut — même requête, mêmes octets',
   'meta.desc': 'Transformations déterministes pour agents IA : 183 outils, trois paliers, paiements machine. Sans inscription, sans clé, sans stockage.',
+  'hero.plain': 'En mots simples : Mechacut fait les comptes exacts pour les assistants. Une facture à partager, une échéance, une devise, un fichier — l’assistant demande, Mechacut répond, et la réponse est toujours la même. Et quand un assistant apprend quelque chose, tous le savent le jour même.',
+  'dev.h2': 'Pour les développeurs & agents',
+  'dev.intro': 'Tout ce qui précède est vrai. En dessous, le comment : l’API complète, le catalogue, les schémas, les benchs, les prix. Plus de prose — des références.',
+  'nav.everyday': 'Quotidien',
   'nav.tools': 'Bundles',
   'nav.numbers': 'Preuves',
   'nav.vision': 'Vision',
@@ -581,6 +589,10 @@ TR =   {
  "pt": {
   'meta.title': 'Mechacut — mesma requisição, mesmos bytes',
   'meta.desc': 'Transformações determinísticas para agentes: 183 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, chave ou armazenamento.',
+  'hero.plain': 'Em palavras simples: a Mechacut faz as contas exactas para os assistentes. Uma conta para dividir, um prazo, uma moeda, um ficheiro — o assistente pergunta, a Mechacut responde, e a resposta é sempre a mesma. E quando um assistente aprende algo, todos os assistentes sabem no próprio dia.',
+  'dev.h2': 'Para programadores & agentes',
+  'dev.intro': 'Tudo o que está acima é verdade. Abaixo está o como: a API completa, o catálogo, os esquemas, os benchmarks, os preços. Sem prosa — referências.',
+  'nav.everyday': 'Dia a dia',
   'nav.tools': 'Bundles',
   'nav.numbers': 'Provas',
   'nav.vision': 'Visão',
@@ -866,6 +878,13 @@ TEMPLATE = """<!DOCTYPE html>
     --gold: #d4af37; --line: #232323; --card: #121212;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  body::before { content:""; position:fixed; inset:0; z-index:-2; background:#0a0c12 url(/static/brand/bg-hero.jpg) no-repeat right center / cover; }
+  body::after { content:""; position:fixed; inset:0; z-index:-1; background:rgba(10,12,18,.74); }
+  .plain { font-size:1.06em; color:var(--ink); max-width:640px; }
+  .qa { display:grid; gap:10px; max-width:760px; margin:18px 0 10px; }
+  .qrow { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:11px 15px; margin:0; }
+  .qrow b { display:block; margin-top:5px; color:var(--gold); font-size:.9em; }
+  .devhead { margin:34px 0 6px; padding-top:26px; border-top:1px solid var(--line); }
   body { background: var(--bg); color: var(--fg);
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     line-height: 1.6; -webkit-font-smoothing: antialiased; }
@@ -1064,6 +1083,7 @@ TEMPLATE = """<!DOCTYPE html>
       MechaCut
     </div>
     <nav>
+      <a href="#everyday">{{nav.everyday}}</a>
       <a href="#bundles">{{nav.tools}}</a>
       <a href="#bench">{{nav.numbers}}</a>
       <a href="#market">{{nav.market}}</a>
@@ -1086,6 +1106,7 @@ TEMPLATE = """<!DOCTYPE html>
       <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
       <p class="creed">{{hero3}}<span class="sig"> — C.V.</span></p>
       <p class="lede">{{lede}}</p>
+      <p class="plain">{{hero.plain}}</p>
       <p class="why">{{hero.why}}</p>
       <div class="demo">
         <div class="dh"><span>{{demo.title}}</span></div>
@@ -1095,6 +1116,17 @@ TEMPLATE = """<!DOCTYPE html>
         </div>
         <pre id="dout" data-err="{{demo.err}}">{{demo.hint}}</pre>
       </div>
+    </section>
+
+    <section class="section" id="everyday">
+      <h2>{{everyday.h2}}</h2>
+      <p class="tiers" style="color:var(--muted);max-width:720px">{{everyday.intro}} {{everyday.open}}</p>
+      {{everyday_grid}}
+    </section>
+
+    <section class="devhead">
+      <h2>{{dev.h2}}</h2>
+      <p class="tiers" style="color:var(--muted)">{{dev.intro}}</p>
     </section>
 
     <section class="section" id="bundles">
@@ -1384,8 +1416,6 @@ TEMPLATE = """<!DOCTYPE html>
         <button class="copybtn" data-for="connectcmd" data-copied="{{panel.copied}}">{{panel.copy}}</button>
       </div>
     </section>
-
-    {{everyday_grid}}
 
     <section class="section x402" id="x402">
       <h2>{{x402.h2}}</h2>

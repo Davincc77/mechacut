@@ -386,7 +386,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.34.1",
+    version="1.34.2",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -12364,7 +12364,7 @@ def misses():
 _BRAND_DIR = Path(__file__).resolve().parent / "static" / "brand"
 _BRAND_TYPES = {"banner-16x9.jpg": "image/jpeg", "banner-ultrawide.jpg": "image/jpeg",
                 "logo-mark.png": "image/png", "favicon-512.png": "image/png",
-                "banner-2560.jpg": "image/jpeg"}
+                "banner-2560.jpg": "image/jpeg", "bg-hero.jpg": "image/jpeg"}
 
 
 _FONT_DIR = Path(__file__).resolve().parent / "static" / "fonts"

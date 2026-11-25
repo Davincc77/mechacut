@@ -23,6 +23,13 @@
     --gold: #d4af37; --line: #232323; --card: #121212;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  body::before { content:""; position:fixed; inset:0; z-index:-2; background:#0a0c12 url(/static/brand/bg-hero.jpg) no-repeat right center / cover; }
+  body::after { content:""; position:fixed; inset:0; z-index:-1; background:rgba(10,12,18,.74); }
+  .plain { font-size:1.06em; color:var(--ink); max-width:640px; }
+  .qa { display:grid; gap:10px; max-width:760px; margin:18px 0 10px; }
+  .qrow { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:11px 15px; margin:0; }
+  .qrow b { display:block; margin-top:5px; color:var(--gold); font-size:.9em; }
+  .devhead { margin:34px 0 6px; padding-top:26px; border-top:1px solid var(--line); }
   body { background: var(--bg); color: var(--fg);
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     line-height: 1.6; -webkit-font-smoothing: antialiased; }
@@ -226,6 +233,7 @@
       MechaCut
     </div>
     <nav>
+      <a href="#everyday">{{nav.everyday}}</a>
       <a href="#bundles">{{nav.tools}}</a>
       <a href="#bench">{{nav.numbers}}</a>
       <a href="#market">{{nav.market}}</a>
@@ -248,6 +256,7 @@
       <h1>{{hero1}}<br><span class="dim">{{hero2}}</span></h1>
       <p class="creed">{{hero3}}<span class="sig"> — C.V.</span></p>
       <p class="lede">{{lede}}</p>
+      <p class="plain">{{hero.plain}}</p>
       <p class="why">{{hero.why}}</p>
       <div class="demo">
         <div class="dh"><span>{{demo.title}}</span></div>
@@ -257,6 +266,17 @@
         </div>
         <pre id="dout" data-err="{{demo.err}}">{{demo.hint}}</pre>
       </div>
+    </section>
+
+    <section class="section" id="everyday">
+      <h2>{{everyday.h2}}</h2>
+      <p class="tiers" style="color:var(--muted);max-width:720px">{{everyday.intro}} {{everyday.open}}</p>
+      {{everyday_grid}}
+    </section>
+
+    <section class="devhead">
+      <h2>{{dev.h2}}</h2>
+      <p class="tiers" style="color:var(--muted)">{{dev.intro}}</p>
     </section>
 
     <section class="section" id="bundles">
@@ -546,8 +566,6 @@
         <button class="copybtn" data-for="connectcmd" data-copied="{{panel.copied}}">{{panel.copy}}</button>
       </div>
     </section>
-
-    {{everyday_grid}}
 
     <section class="section x402" id="x402">
       <h2>{{x402.h2}}</h2>
