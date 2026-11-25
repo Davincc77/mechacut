@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 184 + 9, vérifiés live 25-11 16h25, prod 1.34.4).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 185 + 9, vérifiés live 25-11 19h45, prod 1.34.5).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -75,6 +75,29 @@ garde de fratrie pêchée PENDANT le build : mon tag « jours ouvrables »
 volait une phrase de comptage — retirée, et le trou rendu à date_calc qui
 n'avait AUCUN mot français de comptage (douleur NO_MATCH pêchée par mon
 propre test). Aiguilles x3 langues fermées EN PROD par le scan du cycle.)
+(k) 25-11 19h45 : 184→185 (/agent/mcp-list-completeness, bundle113 — TON
+CLIENT MCP A-T-IL VU TOUTES LES PAGES : SEPT CLIENTS, SIX MOIS, LE MÊME
+SILENCE — anything-llm #6935 (« the server remains marked as running »,
+fix mergé #6937 dont les trois règles fermées sont la spec du module :
+page vide et cursor vide ne finissent pas, cursor répété rejeté), Codex
+#28858 ouvert (« the other 2,642 are uncallable », pages 64/64/10), Claude
+Code #23179/#48126/#66537, Claude.ai web #87 (21 déclarés, 15 vus),
+vercel/ai #19240, openwiki #565 — toutes issues LUES À L'API GitHub, pas
+aux snippets ; LA LOI relue verbatim AUX DEUX VERSIONS DU SPEC (raw
+GitHub) : la clause « an empty string is a valid cursor and thus MUST NOT
+be treated as the end of results » existe en 2026-07-28, PAS en
+2025-06-18 — le piège a été NOMMÉ dans le spec, pas deviné ; les curseurs
+voyagent comparés octet à octet, JAMAIS parsés (opacité MUST : « 64 »
+n'est pas l'offset 64) ; le manque vs ton nombre déclaré devient NOMBRE
+(74 / 8 / 6 selon les trois repros), NOMS si tu déclares les tiens,
+jamais inventés ; l'oracle main a PÊCHÉ DEUX BÊTES avant module (ordre de
+sortie = sévérité déclarée, et son propre double-comptage in-page/across)
+— doctrine b112 rejouée. prod 1.34.5, suite 1 952, pins 383 (+9
+adds-only, vecteurs PUBLICS), manifest 209 lignes / 8 990 octets lus live
+— ligne payée par élagage mesuré à claims constants (label « tiers: »
+coupé, « /route?q=words » du milieu coupé — il vit dans le tail, précédent
+b112) ; landing x3 re-bakée dans le commit, PT élagué à l'annonce comme
+promis (FR 177 271 / EN 179 356 / PT 180 927).)
 
 ---
 
@@ -88,7 +111,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **184 transforms + 9 named chain recipes, and growing**, stateless, keyless at
+agents: **185 transforms + 9 named chain recipes, and growing**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -148,7 +171,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **184 transforms + 9 recettes-chaînes nommées, et ça grandit**,
+déterministes pour agents : **185 transforms + 9 recettes-chaînes nommées, et ça grandit**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette
