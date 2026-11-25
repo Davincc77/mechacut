@@ -1128,10 +1128,9 @@ TABLE = (
      "extrapolated past the last act",
      "soldes luxembourg lëtzebuerg winter summer sale sales "
      "date legale ouverture cloture "
-     "quand commencent reglement grand-ducal memorial "
-     "hiver ete janvier juin juillet wanter "
-     "saldos luxemburgo datas verao inverno janeiro junho julho "
-     "quando comecam data "
+     "reglement grand-ducal memorial "
+     "hiver ete wanter "
+     "saldos luxemburgo datas verao inverno "
      "luxemburger luxembourgish "
      "esch diekirch wiltz vianden groussherzogtum"),
 )
@@ -1203,7 +1202,9 @@ def manifest_text(version):
           # contenu voyage ; « named » coupe de la tete (adjectif,
           # les recettes sont nommees PAR LEUR LIGNE) ; « scene »
           # tombe de la classe not-here (« breakdowns » reste, classe
-          # identique). Mesure : 207 lignes / 8 995 octets.
+          # identique). Mesure LIVE 25-11 10h55 : 206 lignes /
+          # 8 995 octets (splitlines — la méthode des cycles
+          # précédents).
           "detail: /tools/<name>.json | "
         "pipelines: /api/v1/recipes, POST /api/v1/pipeline | "
         'find: /route?q="task words" | '
@@ -1661,6 +1662,19 @@ def route(query, top=5):
         if name == "shop_soldes_lu" and (vsoldes_out or vtabled
                 or vbename) and not vlux:
             continue
+        # b110 LEÇON PÊCHÉE PAR MON PROPRE RADAR À LA FERMETURE : la
+        # première table des tags portait « quand commencent » et les
+        # mois (janvier|juin|juillet|x) — 6 points volés sur une
+        # phrase SANS PAYS : « les soldes d'été 2027 débutent-ils le
+        # 23 ou le 30 juin » (ligne b103 du radar, want window)
+        # tombait TOP1_WRONG vers LU. La frontière jurée b105 ne vit
+        # que si les mots COMMUNS ne surclasse aucune table : les
+        # mois et les verbes d'ouverture restent chez window et be
+        # (leurs tags n'ont jamais porté « quand commencent ») ; la
+        # ligne LU ne garde que ses noms propres. Radar de fermeture
+        # rejoué APRES la correction — c'est lui qui l'a trouvée,
+        # jamais la batterie : l'outillage ment le moins sur son
+        # propre travail (playbook §outillage).
         # b108 — LU et BE sont rejouées : nommées, elles laissent la
         # ligne VIVRE (le veto ne survit que pour les pays SANS table).
         # Un pays de V_SOLD_OUT qui n'est NI LU NI BE (Suisse, Québec,

@@ -346,6 +346,24 @@ def test_sans_pays_trois_tables_vivent():
     assert "shop_soldes_window" in tools
 
 
+def test_mots_communs_ne_surclassent_aucune_table():
+    # RADAR 11h17 — la RÉGRESSION pêchée par le scan de fermeture,
+    # épinglée pour de bon : « les soldes d'été 2027 débutent-ils le
+    # 23 ou le 30 juin » (ligne b103 du corpus, want window) était
+    # devenue TOP1_WRONG parce que MES tags LU portaient « quand
+    # commencent » + « juin » — 6 points volés à une phrase sans
+    # pays. Les tags LU sont revenus aux noms propres ; la fenêtre
+    # été reste jurée chez la sœur, comme son hiver.
+    assert top1("les soldes d'été 2027 débutent-ils le 23 ou le "
+                "30 juin") == "shop_soldes_window"
+    assert top1("quand commencent les soldes d'hiver 2027") == \
+        "shop_soldes_window"
+    # et les aiguilles du lot vivent SANS les mois ni les verbes :
+    for q in ("soldes luxembourg janvier 2027",
+              "les soldes d'hiver au luxembourg 2027"):
+        assert top1(q) == "shop_soldes_lu", q
+
+
 # ------------------------------------------------------------- endpoint API
 from fastapi.testclient import TestClient  # noqa: E402
 
