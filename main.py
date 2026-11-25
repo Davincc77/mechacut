@@ -386,7 +386,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.34.2",
+    version="1.34.3",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -643,7 +643,8 @@ async def browser_door(request: Request, call_next):
 
     FREE_PAGES = ("/route", "/route/resolve", "/agent/manifest",
                   "/mcp", "/openapi.json", "/recipes", "/proposals",
-                  "/PAYOUTS", "/SKILL-KIT.md", "/SKILL-MINI.md")
+                  "/PAYOUTS", "/SKILL-KIT.md", "/SKILL-MINI.md",
+                  "/SKILL-NETWORK.md")
 
     def free_target(p):
         if p in FREE_PAGES or p.startswith("/SKILL-") \
@@ -6027,6 +6028,12 @@ def api_payouts_doc():
             "PAYOUTS.md").read_text(encoding="utf-8")
 
 
+
+@app.get("/SKILL-NETWORK.md", response_class=PlainTextResponse)
+def skill_network_md():
+    """The network doctrine, served where the agents are: propose in
+    your own language — the gate judges bytes, not prose."""
+    return (Path(__file__).parent / "SKILL-NETWORK.md").read_text()
 
 @app.get("/SKILL-MINI.md", response_class=PlainTextResponse)
 def skill_mini_md():
