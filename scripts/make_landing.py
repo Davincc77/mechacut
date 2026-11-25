@@ -881,6 +881,10 @@ TEMPLATE = """<!DOCTYPE html>
   body::before { content:""; position:fixed; inset:0; z-index:-2; background:#0a0c12 url(/static/brand/bg-hero.jpg) no-repeat right center / cover; }
   body::after { content:""; position:fixed; inset:0; z-index:-1; background:rgba(10,12,18,.74); }
   .plain { font-size:1.06em; color:var(--ink); max-width:640px; }
+  .thesis { border-left:3px solid var(--gold); background:var(--card); border-radius:0 12px 12px 0; padding:14px 18px; margin:16px 0; max-width:660px; }
+  .thesis .th2 { margin:0; font-size:1.12em; font-weight:800; }
+  .thesis .tcreed { margin:8px 0 6px; color:var(--gold); font-weight:700; font-size:1.05em; }
+  .thesis a { color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:.86em; }
   .qa { display:grid; gap:10px; max-width:760px; margin:18px 0 10px; }
   .qrow { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:11px 15px; margin:0; }
   .qrow b { display:block; margin-top:5px; color:var(--gold); font-size:.9em; }
@@ -1108,6 +1112,11 @@ TEMPLATE = """<!DOCTYPE html>
       <p class="lede">{{lede}}</p>
       <p class="plain">{{hero.plain}}</p>
       <p class="why">{{hero.why}}</p>
+      <div class="thesis">
+        <p class="th2">{{network.h2}}</p>
+        <p class="tcreed">{{network.creed}}</p>
+        <a href="#network">{{nav.network}} →</a>
+      </div>
       <div class="demo">
         <div class="dh"><span>{{demo.title}}</span></div>
         <div class="dr">

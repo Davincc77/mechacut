@@ -9,7 +9,7 @@
   "nav.numbers": "Proof",
   "nav.vision": "Vision",
   "nav.api": "Contract",
-  "pill": "v1.34.2 · 183 transforms · 9 recipes",
+  "pill": "v1.34.3 · 183 transforms · 9 recipes",
   "hero1": "Meaning is learned.",
   "hero.why": "<strong>Why determinism?</strong> Because a right answer that changes on every run is not an answer — it is a dice roll. A machine that returns the same bytes for the same question makes agents auditable: every response carries its checksum, every error names the offending field, and what you test in the morning is what you ship at night.",
   "demo.title": "ASK THE BENCH — live, keyless, same bytes every run",
