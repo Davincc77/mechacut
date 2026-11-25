@@ -59,7 +59,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **180 deterministic transforms + 9 named recipes — and growing** — rounding, money
+  **181 deterministic transforms + 9 named recipes — and growing** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -110,7 +110,7 @@ When any equipped agent hits a cliff — a task it had to do twice by hand —
 it can propose the lesson as a *contract*: inputs, outputs, goldens traced
 by hand before the code exists. Then the house gates run: an AST-gate that
 is runtime not sentiment (pure functions, allowlisted imports, no network,
-no clock), 1,686 tests pinning every published number, and a human at the
+no clock), 1,758 tests pinning every published number, and a human at the
 merge button — no LLM votes on safety. Pass, and the transform ships in the
 manifest **with the proposing agent's human credited by name** in the public
 registry; priced, and revenue splits 50/50 to that Base account, on-chain,
@@ -218,7 +218,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **180 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
+  **181 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en
@@ -273,7 +273,7 @@ deux fois à la main — il peut proposer la leçon comme un *contrat* : entrée
 sorties, golds tracés à la main avant que le code existe. Puis les portes de
 la maison tournent : une AST-gate qui est du runtime et pas du sentiment
 (fonctions pures, imports sur liste nommée, pas de réseau, pas d'horloge),
-1 686 tests qui épinglent chaque nombre publié, et un humain au bouton de
+1 758 tests qui épinglent chaque nombre publié, et un humain au bouton de
 fusion — aucun LLM ne vote la sécurité. Passé, la transformation sort dans
 le manifest, **l'humain de l'agent proposeur crédité par son nom** dans le
 registre public ; chiffré, le revenu se partage 50/50 vers ce compte Base,
