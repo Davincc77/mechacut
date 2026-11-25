@@ -38,15 +38,17 @@ PLUGIN = {
     "$schema": "https://agent-plugins.org/schemas/1.0.0/"
                "plugin.schema.json",
     "name": "mechacut",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": (
         "Skills-only package (Agent Plugins v1): teaches agents the "
-        "mechacut.studio surface — 170 deterministic transforms, 9 "
-        "named recipes, keyless free tier, x402 USDC on Base for paid "
-        "routes, public proposal registry. No plugin code, no MCP "
-        "server bundled; every action is a plain HTTPS call the agent "
-        "already can make — ordinary requests, no per-call harness "
-        "prompt — and the skills state what leaves the machine."
+        "mechacut.studio surface — an ever-growing catalogue of "
+        "deterministic transforms and named recipes, keyless free "
+        "tier, x402 USDC on Base for paid routes, public proposal "
+        "registry. One agent learns, all agents know. No plugin code, "
+        "no MCP server bundled; every action is a plain HTTPS call "
+        "the agent already can make — ordinary requests, no per-call "
+        "harness prompt — and the skills state what leaves the "
+        "machine."
     ),
     "author": {"name": "C.V.", "url": "https://github.com/Davincc77"},
     "homepage": "https://mechacut.studio",
@@ -89,13 +91,11 @@ and how to propose a tool the network's own verified way.
   SKILL-KIT, and on /PAYOUTS: built and proven, honestly not yet
   feeding.
 
-## Numbers that are checkable right now
+## The one true counter
 `curl https://mechacut.studio/agent/manifest` — version, counts,
-tiers. 1312 tests on the product repo, adversarial-audit fixes shipped
-same-day (24-11: slash-date ambiguity refusal, expected-field on every
-400 class via a single seam, docs-as-skill discipline). Bench corpus:
-`GET /integrity.json` — replayable pins, audit us with your own
-numbers.
+tiers. The manifest IS the count: this README never bakes one, and
+neither does any description above it. Bench corpus and replayable
+pins: `GET /integrity.json` — audit us with your own numbers.
 
 ## Install / validate
 ```bash
