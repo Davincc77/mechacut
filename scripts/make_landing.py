@@ -110,6 +110,10 @@ TR =   {
   'pill': 'v{ver} · {n_tools} transforms · {n_recipes} recipes',
   'hero1': 'Meaning is learned.',
   'hero.why': '<strong>Why determinism?</strong> Because a right answer that changes on every run is not an answer — it is a dice roll. A machine that returns the same bytes for the same question makes agents auditable: every response carries its checksum, every error names the offending field, and what you test in the morning is what you ship at night.',
+  'demo.title': 'ASK THE BENCH — live, keyless, same bytes every run',
+  'demo.run': 'Run',
+  'demo.hint': 'press Run — the answer below comes from the real endpoint, not a screenshot',
+  'demo.err': 'network hiccup — the endpoint still answers: POST /api/v1/num/round',
   'hero2': 'Mechanics are known.',
   'hero3': 'Competence is not learned. It is served.',
   'lede': 'A suite of <strong>{n_tools} deterministic transforms</strong> for AI agents — {n_free} free forever, {n_cap} free under 32 KB then pay-per-call, {n_paid} machine-payable — plus {n_recipes} one-call recipes, free. The model stops guessing what a checksum can prove.',
@@ -342,6 +346,10 @@ TR =   {
   'pill': 'v{ver} · {n_tools} transformations · {n_recipes} recettes',
   'hero1': "Le sens s'apprend.",
   'hero.why': "<strong>Pourquoi le déterminisme ?</strong> Une réponse juste qui change à chaque exécution EST un dé. Même question, mêmes octets : l'agent devient auditable — chaque réponse porte son empreinte, chaque erreur nomme le champ. Testé le matin, vendu le soir.",
+  'demo.title': 'DANS LE BANC — en direct, sans clé, mêmes octets à chaque appel',
+  'demo.run': 'Exécuter',
+  'demo.hint': "exécutez — la réponse vient du vrai endpoint, pas d'une capture",
+  'demo.err': "réseau hésitant — l'endpoint répond : POST /api/v1/num/round",
   'hero2': 'La mécanique se sait.',
   'hero3': "La compétence ne s'apprend pas. Elle se sert.",
   'lede': "Chaque réponse est la sortie réelle d'un endpoint GET, figée à la build. Aucune ligne touchée par un humain, aucune générée à la volée. Les pannes sont épinglées aussi, avec leur code. Des nombres, pas des promesses — vérifiables à l'œil.",
@@ -574,6 +582,10 @@ TR =   {
   'pill': 'v{ver} · {n_tools} transformações · {n_recipes} receitas',
   'hero1': 'Significado se aprende.',
   'hero.why': '<strong>Por que determinismo?</strong> Porque uma resposta certa que muda a cada execução não é uma resposta — é um dado lançado. Mesma pergunta, mesmos bytes tornam agentes auditáveis: cada resposta traz sua impressão, cada erro nomeia o campo, e o que você testa de manhã é o que entrega à noite.',
+  'demo.title': 'NO BANCO — ao vivo, sem chave, mesmos bytes a cada chamada',
+  'demo.run': 'Rodar',
+  'demo.hint': 'rode — a resposta vem do endpoint real, não de uma captura',
+  'demo.err': 'rede instável — o endpoint responde: POST /api/v1/num/round',
   'hero2': 'Mecânica se conhece.',
   'hero3': 'Competência não se aprende. Serve-se.',
   'lede': 'Suíte de <strong>{n_tools} transformações determinísticas</strong> para agentes — {n_free} grátis para sempre, {n_cap} grátis até 32 KB e depois por chamada, {n_paid} pagáveis por máquina — mais {n_recipes} receitas de chamada única. O modelo para de adivinhar o que um checksum prova.',
@@ -999,6 +1011,20 @@ TEMPLATE = """<!DOCTYPE html>
     font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase;
     color: var(--gold); border: 1px solid #3a3320; background: #14110a;
     padding: 5px 12px; border-radius: 999px; margin-bottom: 18px; }
+  .demo { border: 1px solid var(--line); border-radius: 12px;
+    background: var(--card); margin: 26px 0 8px; }
+  .demo .dh { padding: 11px 16px; border-bottom: 1px solid var(--line);
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+    letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
+  .demo .dr { display: flex; gap: 10px; padding: 14px 16px; flex-wrap: wrap; }
+  .demo input { flex: 1 1 240px; background: #0d0d0d; border: 1px solid var(--line);
+    border-radius: 8px; color: var(--fg); font-family: "IBM Plex Mono", monospace;
+    font-size: 13.5px; padding: 10px 12px; }
+  .demo input:focus { outline: 1px solid var(--gold); }
+  .demo button { background: var(--gold); color: #0b0b0d; border: 0; border-radius: 8px;
+    font-weight: 600; font-size: 14px; padding: 10px 18px; min-height: 40px; cursor: pointer; }
+  .demo pre { margin: 0; border: 0; border-top: 1px solid var(--line);
+    border-radius: 0 0 12px 12px; min-height: 64px; }
   .tcard .tp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
   .mcard{border-left:2px solid var(--gold);padding:14px 18px;background:var(--card);border-radius:0 10px 10px 0}
@@ -1009,6 +1035,7 @@ TEMPLATE = """<!DOCTYPE html>
 .bcard{border:1px solid var(--line,#232b3d);border-radius:10px;margin:10px 0;background:var(--card,#121724)}\n.bcard summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--ink,#e8ecf4);list-style-position:outside}\n.bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}\n.bcard .bbody{padding:4px 18px 16px}\n.bgroup{color:var(--gold,#ffcf5c);margin:30px 0 8px;font-size:1.08em;letter-spacing:.02em}\n</style>
 </head>
 <body>
+<div id="prog"></div>
 <div class="wrap">
 
   <header class="top">
@@ -1040,6 +1067,14 @@ TEMPLATE = """<!DOCTYPE html>
       <p class="creed">{{hero3}}<span class="sig"> — C.V.</span></p>
       <p class="lede">{{lede}}</p>
       <p class="why">{{hero.why}}</p>
+      <div class="demo">
+        <div class="dh"><span>{{demo.title}}</span></div>
+        <div class="dr">
+          <input id="dexpr" value='{"value": 2.675, "decimals": 2}' spellcheck="false" aria-label="payload">
+          <button id="drun" type="button">{{demo.run}}</button>
+        </div>
+        <pre id="dout" data-err="{{demo.err}}">{{demo.hint}}</pre>
+      </div>
     </section>
 
     <section class="section" id="market">
@@ -1499,6 +1534,24 @@ TEMPLATE = """<!DOCTYPE html>
     });
   });
   apply();
+})();
+
+(function () {
+  var run = document.getElementById("drun"); if (!run) return;
+  var out = document.getElementById("dout"), inp = document.getElementById("dexpr");
+  run.addEventListener("click", function () {
+    out.textContent = "\u2026";
+    fetch("/api/v1/num/round", { method: "POST",
+      headers: { "content-type": "application/json" }, body: inp.value || "{}" })
+      .then(function (r) { return r.json().then(function (j) { return [r.status, j]; }); })
+      .then(function (res) { out.textContent = res[0] + " " + JSON.stringify(res[1], null, 1); })
+      .catch(function () { out.textContent = out.getAttribute("data-err"); });
+  });
+  var p = document.getElementById("prog");
+  addEventListener("scroll", function () {
+    var d = document.documentElement;
+    p.style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + "%";
+  });
 })();
 </script>
 </body>
