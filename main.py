@@ -12626,7 +12626,8 @@ def misses():
 _BRAND_DIR = Path(__file__).resolve().parent / "static" / "brand"
 _BRAND_TYPES = {"banner-16x9.jpg": "image/jpeg", "banner-ultrawide.jpg": "image/jpeg",
                 "logo-mark.png": "image/png", "favicon-512.png": "image/png",
-                "banner-2560.jpg": "image/jpeg", "bg-hero.jpg": "image/jpeg"}
+                "banner-2560.jpg": "image/jpeg", "bg-hero.jpg": "image/jpeg",
+                "wordmark.jpg": "image/jpeg"}
 
 
 _FONT_DIR = Path(__file__).resolve().parent / "static" / "fonts"

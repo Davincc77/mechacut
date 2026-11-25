@@ -878,9 +878,9 @@ TEMPLATE = """<!DOCTYPE html>
     --gold: #d4af37; --line: #232323; --card: #121212;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body::before { content:""; position:fixed; inset:0; z-index:-2; background:#0a0c12 url(/static/brand/bg-hero.jpg) no-repeat right center / cover; }
+  body::before { content:""; position:fixed; inset:0; z-index:-2; background:#0a0c12 url(/static/brand/bg-hero.jpg) no-repeat center top / cover; }
   body::after { content:""; position:fixed; inset:0; z-index:-1; background:rgba(10,12,18,.74); }
-  .plain { font-size:1.06em; color:var(--ink); max-width:640px; }
+  .plain { font-size:1.06em; color:var(--ink); max-width:880px; }
   .thesis { border-left:3px solid var(--gold); background:var(--card); border-radius:0 12px 12px 0; padding:14px 18px; margin:16px 0; max-width:660px; }
   .thesis .th2 { margin:0; font-size:1.12em; font-weight:800; }
   .thesis .tcreed { margin:8px 0 6px; color:var(--gold); font-weight:700; font-size:1.05em; }
@@ -913,9 +913,9 @@ TEMPLATE = """<!DOCTYPE html>
     font-size: clamp(30px, 5vw, 50px); line-height: 1.05; letter-spacing: -.5px;
     margin-bottom: 16px; }
   h1 .dim { color: var(--muted); }
-  .why { font-size: 15px; font-weight: 400; line-height: 1.6; max-width: 680px; margin: 14px 0 0; color: var(--muted); }
+  .why { font-size: 15px; font-weight: 400; line-height: 1.6; max-width: 880px; margin: 14px 0 0; color: var(--muted); }
   .why strong { color: var(--gold); font-weight: 600; }
-  .lede { font-size: 16px; color: var(--muted); max-width: 700px; margin-bottom: 36px; }
+  .lede { font-size: 16px; color: var(--muted); max-width: 880px; margin-bottom: 36px; }
   .lede strong { color: var(--fg); font-weight: 500; }
   .creed { font-size: 17px; font-style: italic; color: var(--fg);
     max-width: 680px; margin: 2px 0 26px; }
@@ -1083,8 +1083,7 @@ TEMPLATE = """<!DOCTYPE html>
 
   <header class="top">
     <div class="brand">
-      <img src="/static/brand/favicon-512.png" width="26" height="26" alt="Mechacut" style="border-radius:50%">
-      MechaCut
+<img src="/static/brand/wordmark.jpg" height="40" alt="Mechacut — deterministic transforms suite" style="border-radius:9px">
     </div>
     <nav>
       <a href="#everyday">{{nav.everyday}}</a>
