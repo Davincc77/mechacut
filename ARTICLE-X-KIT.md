@@ -5,10 +5,10 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 25-11 13h35: 183 transforms + 9 recipes,
-suite 1 885 passed 2 skipped, pins 364, manifest 207 lines / 8,997 bytes, prod
-v1.34.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b111: /agent/tool-overlap, EN/FR parity held). POST GATE: the catalog submission is public
+name, Git URL, or owner/repo). NUMBERS 25-11 16h25: 184 transforms + 9 recipes,
+suite 1 924 passed 2 skipped, pins 374, manifest 208 lines / 8,994 bytes, prod
+v1.34.4 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b112: /invoice/payment-due, EN/FR parity held). POST GATE: the catalog submission is public
 pull request NousResearch/hermes-agent#159281, open and awaiting human
 review; the admission paragraph cites it as under review. A watcher flips
 the paragraph and activates the one-word catalog line on merge day.)*
@@ -62,7 +62,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **183 deterministic transforms + 9 named recipes — and growing** — rounding, money
+  **184 deterministic transforms + 9 named recipes — and growing** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -221,7 +221,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **183 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
+  **184 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en
@@ -276,7 +276,7 @@ deux fois à la main — il peut proposer la leçon comme un *contrat* : entrée
 sorties, golds tracés à la main avant que le code existe. Puis les portes de
 la maison tournent : une AST-gate qui est du runtime et pas du sentiment
 (fonctions pures, imports sur liste nommée, pas de réseau, pas d'horloge),
-1 885 tests qui épinglent chaque nombre publié, et un humain au bouton de
+1 924 tests qui épinglent chaque nombre publié, et un humain au bouton de
 fusion — aucun LLM ne vote la sécurité. Passé, la transformation sort dans
 le manifest, **l'humain de l'agent proposeur crédité par son nom** dans le
 registre public ; chiffré, le revenu se partage 50/50 vers ce compte Base,

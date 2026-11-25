@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 183 + 9, vérifiés live 25-11 13h35, prod 1.34.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 184 + 9, vérifiés live 25-11 16h25, prod 1.34.4).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -43,7 +43,38 @@ la ligne neuve payée par élagage mesuré à claims constants (note b111 dans
 routing.py) ; Anthropic : conflit de nom publié, AUCUNE longueur publiée — le
 module ne jure pas ce que la source ne publie pas (test d'honnêteté). Les
 tranches vitrine de la soeur (brand 1.31.1, network 1.32.0, hero 1.33.0-1) ont
-rebaissé les pages : FR 171 187 / EN 174 601 / PT 175 306 build, marge revenue.)
+rebaissé les pages : FR 171 187 / EN 174 601 / PT 175 306 build, marge revenue.
+(i-bis) 25-11 après-midi : la soeur pose le logo disque (1.34.1), la thèse en tête
+et le bench en accordéons (1.34.2), la grille quotidienne VINGT-SEPT cartes câblée
+et la coupure « For developers & agents » (1.34.2 bis), puis rétracte son intro
+« douze » — compter à la source, pas au screenshot ; suite 1 885 tenue, merge
+tenu dans les deux sens (re-génération depuis LEUR make_landing — additif,
+jamais merge à la main).)
+(j) 25-11 16h25 : 183→184 (/invoice/payment-due, bundle112 — LES QUATRE
+LECTURES D'UN NET 30, LE REPORT NOMMÉ PAR ACTE : le gate A CORRIGÉ LA FILE,
+deuxième fois classe b110 — civ. 1343 lu à la source est la libération au
+NOMINAL, la France FACTURE n'a aucun texte de report en vigueur (1342-1343-5
+lus, anciens 1235-1244-1 abrogés ord. 2016-131, loi 1925 abrogée 2007) : le
+vide est un VERDICT, la clause tranche — et le report FR existe par INSTRUMENT :
+com_l511_79 roule la lettre de change au prochain OUVRABLE, le samedi compte
+(L. 3133-1) ; face, § 193 BGB roule le samedi par LA LOI (verbatim lu),
+BFDA 1971 s.1(4) roule les bank holidays (table gov.uk lue LIVE, 2026-2028,
+hors table NO_TABLE refusé — proclamé jamais prédit) ; couche TARGET2 page BCE
+lue : le rail ferme, la dette court (directive 2011/7 art. 3 lus), fermeture
+samedi ABSORBÉE nommée (2027-05-01) ; rail GBP : texte CHAPS non lu = aucune
+colonne promise. L'oracle tracé main a été PÊCHÉ DEUX FOIS par la machine
+(25-déc oublié du jeu TARGET ; ASCENSION 14-mai oubliée du count — 17-juin
+est le nombre) et corrigé avant build ; les DIVergences deviennent nombres :
+2 jours sur le samedi 6-juin, 8 jours ouvrable-vs-ouvré dans le même pays,
+15 jours l'exemple d'État DGCCRF lui-même, 0 jour la fermeture absorbée ;
+aucune moyenne rendue — test de thèse. prod 1.34.4, suite 1 924, pins 374
+(+10 adds-only), manifest 208 lignes / 8 994 octets lus live — ligne neuve
+payée par élagage mesuré à claims constants (« deterministic » tombe de la
+tête, le certificateur est le tracteur sha256 ; note b112 routing.py) ;
+garde de fratrie pêchée PENDANT le build : mon tag « jours ouvrables »
+volait une phrase de comptage — retirée, et le trou rendu à date_calc qui
+n'avait AUCUN mot français de comptage (douleur NO_MATCH pêchée par mon
+propre test). Aiguilles x3 langues fermées EN PROD par le scan du cycle.)
 
 ---
 
@@ -57,7 +88,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **183 transforms + 9 named chain recipes, and growing**, stateless, keyless at
+agents: **184 transforms + 9 named chain recipes, and growing**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -117,7 +148,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **183 transforms + 9 recettes-chaînes nommées, et ça grandit**,
+déterministes pour agents : **184 transforms + 9 recettes-chaînes nommées, et ça grandit**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette
