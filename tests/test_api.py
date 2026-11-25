@@ -160,6 +160,11 @@ def test_mcp():
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 1, "method": "initialize"})
     assert r.status_code == 200
     assert r.json()["result"]["serverInfo"]["name"] == "mechacut"
+    # version single-source (consigne 24-11 : un serverInfo fige mentait de
+    # 34 bundles — 0.93.0 vs manifest live). L'oracle est le manifest lui-meme.
+    si_ver = r.json()["result"]["serverInfo"]["version"]
+    manifest_ver = client.get("/agent/manifest").text.split(" ")[1]
+    assert si_ver == manifest_ver, (si_ver, manifest_ver)
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 2, "method": "tools/list"})
     names = [t["name"] for t in r.json()["result"]["tools"]]
     assert names[:3] == ["chart_from_data", "reshape_json", "validate_json"]
