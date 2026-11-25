@@ -893,7 +893,7 @@ TEMPLATE = """<!DOCTYPE html>
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     line-height: 1.6; -webkit-font-smoothing: antialiased; }
   .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
-  .brandmark { position:fixed; top:14px; left:16px; z-index:60; }
+  .brandmark { position:fixed; top:14px; left:max(16px, calc(50vw - 703px)); z-index:60; }
   .brandmark img { display:block; border-radius:12px; height:104px; width:auto; }
   header.top { display: flex; align-items: center; justify-content: flex-end;
     padding: 20px 18px; border-bottom: 1px solid var(--line);
