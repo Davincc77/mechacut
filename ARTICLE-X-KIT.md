@@ -150,12 +150,12 @@ you can read right now. That is not a tagline; it is checkable on GitHub.
 
 ```bash
 curl https://mechacut.studio/agent/manifest          # the whole surface, keyless, right now
-hermes plugins install Davincc77/mechacut-plugin     # via Git — live today
+hermes plugins install mechacut/plugin     # via Git — live today
 # hermes plugins install mechacut                    # via the catalog, merge day
 ```
 
 Zero-terminal route, same result: the desktop app's Plugins panel →
-**Install from Git** → paste `Davincc77/mechacut-plugin` — the card appears,
+**Install from Git** → paste `mechacut/plugin` — the card appears,
 you flip it to Activated, pinned to an exact commit. Either way what you
 install is markdown: no binaries, no install scripts.
 
@@ -318,12 +318,12 @@ tagline : c'est vérifiable sur GitHub.
 
 ```bash
 curl https://mechacut.studio/agent/manifest          # toute la surface, sans clé, maintenant
-hermes plugins install Davincc77/mechacut-plugin     # via Git — live aujourd'hui
+hermes plugins install mechacut/plugin     # via Git — live aujourd'hui
 # hermes plugins install mechacut                    # via le catalogue, au jour du merge
 ```
 
 Sans terminal, même résultat : panneau Plugins de l'app desktop →
-**Installer depuis Git** → colle `Davincc77/mechacut-plugin` — la carte
+**Installer depuis Git** → colle `mechacut/plugin` — la carte
 apparaît, tu bascules sur Activé, épinglée à un commit exact. Dans les deux
 cas tu installes du markdown : pas de binaire, pas de script d'installation.
 

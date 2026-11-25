@@ -50,7 +50,7 @@ PLUGIN = {
     ),
     "author": {"name": "C.V.", "url": "https://github.com/Davincc77"},
     "homepage": "https://mechacut.studio",
-    "repository": "https://github.com/Davincc77/mechacut-plugin",
+    "repository": "https://github.com/mechacut/plugin",
     "license": "MIT",
     "keywords": ["determinism", "math", "dates", "money", "units",
                  "sha256", "x402", "registry", "tools", "skills-only"],
@@ -100,7 +100,7 @@ numbers.
 ## Install / validate
 ```bash
 hermes plugins validate .            # the catalog CI gate
-hermes plugins install Davincc77/mechacut-plugin
+hermes plugins install mechacut/plugin
 ```
 """
 
