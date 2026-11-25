@@ -1,46 +1,54 @@
-# LinkedIn article — Mechacut (EN, standard member)
-# Gate: every number below was curl-verified on 2026-11-25 against prod (see FACTS-CHECK at the end).
+# LinkedIn article v2 — Mechacut (EN, standard member)
+# Angle humain validé 25-11 (dictée): PDF byte-identity → transactions (STP).
+# Gate: every number curl-verified 2026-11-25 against prod (FACTS-CHECK at the end).
 # No surface counts in prose (house doctrine): the CTA manifest IS the counter.
 # Cover image: static/brand/banner-2560.jpg (official kit).
 
-YOUR AI ASSISTANT CAN WRITE YOU A POEM.
-IT CANNOT SPLIT €87 FOUR WAYS.
+CAN YOUR AI PROMISE YOU 10,000 IDENTICAL PDFs?
+IT CANNOT EVEN PROMISE YOU ONE.
 
-Last week I watched someone ask a chatbot to split a restaurant bill. Four people, €87. The assistant said €21.75 — correct — and then, unprompted, worked out a tip and quietly rounded 2.675 down to 2.67. The school rule says 2.68. Nobody noticed. Nobody could.
+So we measured it. Same document, two clean browser sessions, byte-for-byte comparison. Inside the same second: identical. Eight seconds later: four bytes differ — all of them inside two date stamps the renderer writes for you. Normalize those two fields and ten thousand copies of the same invoice collapse into a single checksum.
 
-That gap — between "sounds right" and "is right" — is where AI is losing money in production. Not at the poetry. At the arithmetic.
+The determinism was already there. Nobody had asked for the proof.
 
-**The invoice that is eight days apart from itself**
+**Now apply that to money**
 
-Take the phrase "Net 30." It sits on millions of invoices. Ask what it means for an invoice dated Saturday, June 6, in Germany: the civil code (§ 193 BGB) rolls the due date to the next business day — Monday the 8th. Ask the same question in France: France has no statutory rollover for invoices at all — the date stands. The only French text that rolls a date concerns bills of exchange, and it counts Saturday as a working day.
+Every invoice PDF is a receipt for a transaction. And finance already has an old, unforgiving metric for exactly this: straight-through processing — the share of payments that flow end to end with zero human touch. Every touch is a leak: a queue, a re-key, an escalation, a day.
 
-Same word. Different law. And here is the part that made us build a machine around it: "30 working days" and "30 business days," in one country, on one invoice, land eight days apart — June 9 versus June 17. The French administration's own published example admits two due dates fifteen days apart. Both are correct.
+Where do the touches come from? Almost never from malice or bad will. They come from software that guesses:
 
-When your assistant answers "it's due June 30," which reading did it pick? It won't tell you. It picked one — or worse, it averaged.
+- a total that adds up one cent off because two systems rounded 2.675 differently (the school rule says 2.68; the model rolled its dice);
+- an IBAN copied with one transposed digit, discovered when the wire bounces — and the fee arrives with the news;
+- "Net 30" read four different ways by four competent people: German law (§ 193 BGB) rolls a Saturday due date to Monday; French invoice law rolls nothing at all; French bill-of-exchange law rolls to the next working day — Saturday counts; and "30 working days" versus "30 business days," in one country, on one invoice, land eight days apart.
+- an amount converted at a rate nobody recorded, so the answer cannot be audited a week later.
+
+Each guess is a coin flip. Multiply by ten thousand documents and you get a queue. That is not a technology problem. It is an architecture problem: we let neural networks do arithmetic.
 
 **What we built instead**
 
-Mechacut (mechacut.studio) is a suite of deterministic transforms that AI assistants call the way a calculator is a surface: same request, same bytes, every time. Three rules we refuse to break:
+Mechacut (mechacut.studio) is a suite of deterministic transforms that AI assistants call the way a calculator is a surface: same request, same bytes, every time. The accounting spine is live today — invoice totals, ledger payments, aging buckets, canonical JSON, money columns in CSV, IBAN validation, currency conversion that names the rate it used. Three rules we refuse to break:
 
-1. **Every answer carries its checksum.** Two identical calls return the same sha256. An auditor can replay your agent's whole day and diff it. Auditability by construction, not by promise.
+1. **Every answer carries its checksum.** Two identical calls return the same sha256. An auditor — or a regulator — can replay your institution's whole day and diff it. Auditability by construction, not by promise.
 
-2. **Every error names the field and the fix.** A wrong call comes back with the offending field and the expected shape. The error is the repair prompt — a machine can self-correct in one round trip, which is why our retries cost bytes, not dollars.
+2. **Every error names the field and the fix.** A malformed call comes back with the offending field and the expected shape. The error is the repair prompt, which is why retries cost bytes instead of dollars. On our published bench, a retry loop on a systematically wrong answer multiplies the bill ×4 without ever converging. A deterministic call cannot have that conversation.
 
-3. **The catalogue is fed by agents, judged by bytes.** When an agent posts what it kept getting wrong, and the public bench accepts the fix, every agent gets it the same day. Seven shipped tools came from walls other people's agents posted. We did not write them first.
+3. **The catalogue is fed by agents, judged by bytes.** When an agent posts the task it keeps failing, and the public bench accepts the fix, every agent gets it the same day. Seven shipped tools came from walls other people's agents posted. We did not write them first.
 
-**The numbers, with the failures**
+**The honest number**
 
-On our published bench, a 7-billion-parameter model scores 0% on a chain of mechanical tasks. Given one relay line to the suite, the same model scores 100%. A half-billion-parameter model drops from 4,020 tokens to 1,413 on the same job and passes 6/6 where it passed 0/6. We also publish the rows that still fail — a capability ceiling, measured, is a result.
+You will ask: how many more transactions would flow? We refuse to answer that with a made-up percentage — nobody outside your institution has your logs. What we can give you is measured: a 7-billion-parameter model scores 0% on a chain of mechanical tasks; given one relay line to the suite, the same model scores 100%. A half-billion model drops from 4,020 tokens to 1,413 on the same job and passes 6/6 where it passed 0/6. The failing rows are published too — a measured ceiling is a result, not a bug.
 
-No account. No API key. The free tier is keyless; agents can pay per call in USDC on Base. The live count of everything, with the pricing tier of each surface, is one curl:
+The straight-through gain is your arithmetic to run: take the last hundred payments that fell into a manual queue and replay the deciding field — the total, the date, the IBAN, the rate — through one deterministic call. If the answer arrives with a checksum and a named rule, your queue had a guessing problem, not a staffing problem.
+
+No account. No API key. Free tier keyless; agents can pay per call in USDC on Base. The live count of every surface, with its pricing tier, is one curl:
 
 curl https://mechacut.studio/agent/manifest
 
-**Why this matters beyond invoices**
+**Why this matters beyond banking**
 
 We put human beings on the Moon with 4 KB of RAM and 72 KB of ROM. The flight code was deterministic, verified, byte-identical on every call. We did not ask the computer to improvise the trajectory.
 
-Somewhere along the way, software started improvising its arithmetic — and we called it intelligence. It is not intelligence. It is a guess with confidence. The next leap for AI agents is not a bigger guess. It is knowing which work should never be computed by a neural network at all.
+Somewhere along the way, software started improvising its arithmetic — and we called it intelligence. It is not intelligence. It is a guess with confidence. The next leap is not a bigger guess. It is knowing which work should never be computed by a neural network at all.
 
 Determinism took us to the Moon. Determinism will take AI to production.
 
@@ -48,13 +56,13 @@ Determinism took us to the Moon. Determinism will take AI to production.
 
 ---
 # FACTS-CHECK (not for publication — archive discipline)
-- 2.675 → 2.68 (school rule): site demo, POST num/round {"value":2.675,"places":2} = "2.68", verified live 25-11.
-- § 193 BGB rolls Sat 6 June → Mon 8 June: /invoice/payment-due gold (bundle112, BGB read verbatim); route live (400 on malformed body verified 25-11).
-- FR: no statutory invoice rollover (1342-1343-5 read article by article; L. 511-79 COM rolls bills of exchange, Saturday counts): bundle112 gate.
-- 30 ouvrables → 9 June vs 30 ouvrés → 17 June (8 days): bundle112 oracle, corrected for Ascension 14 May.
-- DGCCRF example 30 Apr vs 15 May (15 days): replayed state example, published test.
-- 0% → 100% (7B, bench v6); 4,020 → 1,413 tokens (0.5B); 0/6 → 6/6 (v9): bench tables on mechacut.studio (accordéons "Benchmarks, or what we looked for").
-- 7 shipped tools from agent proposals: GET /api/v1/agent/proposals?status=shipped → 7 entries, names listed, verified 25-11 17:2x.
-- keyless free tier 30/min; x402 USDC on Base: manifest line 1, verified.
-- AGC Block II 4 KB RAM / 72 KB ROM: Apollo Guidance Computer published specs (36,864 rope words).
-- No surface counts in prose (house doctrine 25-11): manifest is the counter. No mention: Nous catalog PR (pending), x402-list (unverified), revenue split (factory deployed, per-tool splitters not registered).
+- PDF byte-stability: measured 24-11 (scratch/xpdf): same-second runs identical sha; +8s → 4 bytes differ, all in /CreationDate+/ModDate; length-preserving normalization → identical again; no random /ID; /Producer carries the engine version. Published as an X reply (dobbinsdownload thread). Chrome m158, Skia.
+- 2.675 → 2.68 school rule: live demo num/round {"value":2.675,"places":2}.
+- Net 30 four readings + 8 days (9 vs 17 June, Ascension corrected) + FR no statutory invoice rollover + L. 511-79 Saturday counts: /invoice/payment-due golds (bundle112 gate, texts read verbatim).
+- Retry ×4 without converging: bench D82 (tool-call traces, V22b) — published.
+- 0%→100% (v6), 4020→1413 (0.5b), 0/6→6/6 (v9): bench tables live on the landing.
+- 7 shipped from agent walls: GET /api/v1/agent/proposals?status=shipped → 7 (re-verified 25-11 23h).
+- Accounting tools live: invoice_validate_totals, ledger_apply_payments, ledger_summary, money_aging, json_canonical, csv_money_columns, validate_iban, num_fx — all present in manifest 1.35.0 (grepped 25-11).
+- x402 USDC on Base + keyless free 30/min: manifest line 1.
+- AGC Block II 4 KB / 72 KB: published specs.
+- Deliberate silences: Nous PR (open), x402-list (probes 0), revenue split (factory live, per-tool splitters unregistered), STP percentages (none claimed — reader's own logs).
