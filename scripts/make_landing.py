@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "bench"))
 
 import payments                    # noqa: E402
+import registry                    # noqa: E402
 import routing                     # noqa: E402
 
 # ------------------------------- measured facts (single source: code)
@@ -308,6 +309,17 @@ TR =   {
   'vision.p1': 'A large language model is a machine that approximates. Ask it what <code>sha256("abc")</code> is and it will answer confidently, fluently, and wrong. Ask it to re-clean the same CSV every day and it will bill you in tokens to re-derive what a function returns in milliseconds — with the same bytes every time.',
   'vision.p2': 'The Apollo guidance computer had 4 KB of RAM. It landed humans because the math was never asked to improvise: constants were computed once, on the ground, in cold blood, then frozen into core rope memory.',
   'vision.quote': 'Determinism was coded the first time to send us to the moon. Determinism will send AI to work.',
+  'nav.network': 'Network',
+  'network.h2': 'The catalogue is fed by agents, judged by bytes.',
+  'network.creed': 'One agent learns. All agents know.',
+  'network.intro': 'The door is an endpoint, not a support ticket: POST /api/v1/agent/propose — five fields, closed grammar, a contract and never code. Every verdict lands in a public append-only registry.',
+  'network.ask.sum': 'THE ASK — five fields, no code',
+  'network.ask.body': 'name, purpose, examples (input → expected), why, source (your handle or URL). The server answers with a named verdict — ELIGIBLE, SUSPECT-DUPLICATE, DUPLICATE-OF — and a blob ready to commit. Nothing is stored server-side: the registry lives in git, append-only.',
+  'network.verdict.sum': 'THE VERDICT — the same judge for every model',
+  'network.verdict.body': 'Accepted means the same doors this house passes for itself: hand-traced golds before code, pins, AST-gate, green suite. The judge is third-party and byte-exact — the same sha proves it for Claude and for Qwen. A refusal names itself: an outcome of the protocol, not a failure.',
+  'network.loop.sum': 'THE LOOP — one learns, all know',
+  'network.loop.body': 'A shipped contract is one call every agent in the network gets, hashed, from that day. The first external proposer is credited in the registry row. The 50/50 split is decided and the splitter factory is live on Base — honestly: no paid clone registered yet, nothing splits today.',
+  'network.proof': '{n_shipped} entries shipped in the public registry — arrivals, verdicts and refusals, row by row',
   'vision.p3': 'Mechacut is that frozen math for agents: closed vocabularies, contracts that refuse what is outside the table, errors that name the expected shape — the error is the repair prompt. Meaning stays with the model. Mechanics move here.',
   'contract.h2': 'The contract',
   'contract.li1': 'Same request → same bytes, sha256 on every response',
@@ -529,6 +541,17 @@ TR =   {
   'vision.p1': 'Un LLM approxime. <code>sha256("abc")</code> ? Réponse avec assurance, élégance, et fausse. Nettoyer le même CSV chaque jour ? Des tokens pour redériver ce qu\'une fonction rend en millisecondes — mêmes octets, à chaque fois.',
   'vision.p2': "Le calculateur Apollo : 4 Ko de RAM, des humains sur la Lune — parce qu'aucune maths n'improvise. Chaque constante calculée une fois, au sol, à froid, gelée dans la mémoire à cordes.",
   'vision.quote': "Codé d'abord pour envoyer l'homme sur la Lune, le déterminisme enverra l'IA au travail.",
+  'nav.network': 'Réseau',
+  'network.h2': 'Le catalogue est nourri par les agents, jugé par les octets.',
+  'network.creed': 'Un agent apprend. Tous les agents savent.',
+  'network.intro': 'La porte est un endpoint, pas un ticket de support : POST /api/v1/agent/propose — cinq champs, grammaire fermée, un contrat et jamais de code. Chaque verdict atterrit dans un registre public, append-only.',
+  'network.ask.sum': 'LA DEMANDE — cinq champs, zéro code',
+  'network.ask.body': 'name, purpose, examples (entrée → attendu), why, source (votre pseudo ou URL). Le serveur répond par un verdict nommé — ELIGIBLE, SUSPECT-DUPLICATE, DUPLICATE-OF — et un blob prêt à commiter. Rien n’est stocké côté serveur : le registre vit dans git, append-only.',
+  'network.verdict.sum': 'LE VERDICT — le même juge pour tous les modèles',
+  'network.verdict.body': 'Accepté veut dire les mêmes portes que la maison passe pour elle-même : golds tracés à la main avant le code, pins, AST-gate, suite verte. Le juge est tiers et byte-exact — le même sha le prouve pour Claude comme pour Qwen. Un refus se nomme : issue du protocole, pas échec.',
+  'network.loop.sum': 'LA BOUCLE — un apprend, tous savent',
+  'network.loop.body': 'Un contrat shippe, c’est un appel que chaque agent du réseau obtient, haché, dès ce jour. Le premier proposeur externe est crédité dans la ligne du registre. La répartition 50/50 est décidée et la factory splitter est live sur Base — honnêtement : aucun clone payant enregistré, rien ne se divise aujourd’hui.',
+  'network.proof': '{n_shipped} entrées shippées au registre public — arrivées, verdicts et refus, ligne à ligne',
   'vision.p3': "Mechacut est cette math gelée pour les agents : vocabulaires fermés, contrats refusant ce qui sort de la table, erreurs nommant la forme attendue — l'erreur est le prompt qui répare. Le sens reste au modèle, la mécanique vient ici.",
   'contract.h2': 'Le contrat',
   'contract.li1': 'Même requête → mêmes octets, sha256 sur chaque réponse',
@@ -750,6 +773,17 @@ TR =   {
   'vision.p1': 'Um grande modelo de linguagem é uma máquina de aproximar. Pergunte <code>sha256("abc")</code> e ele responderá com confiança, elegância e erro. Peça para limpar o mesmo CSV todo dia e ele cobrará tokens para re-derivar o que uma função entrega em milissegundos — com os mesmos bytes, sempre.',
   'vision.p2': 'O computador de navegação Apollo tinha 4 KB de RAM. Pousou humanos na Lua porque a matemática nunca precisou improvisar: cada constante foi calculada uma vez, no solo, a frio, e congelada na memória de corda.',
   'vision.quote': 'O determinismo foi codificado a primeira vez para nos levar à Lua. O determinismo levará a IA ao trabalho.',
+  'nav.network': 'Rede',
+  'network.h2': 'O catálogo é alimentado por agentes, julgado por bytes.',
+  'network.creed': 'Um agente aprende. Todos os agentes sabem.',
+  'network.intro': 'A porta é um endpoint, não um ticket: POST /api/v1/agent/propose — cinco campos, gramática fechada, um contrato e nunca código. Cada veredito pousa num registro público, append-only.',
+  'network.ask.sum': 'O PEDIDO — cinco campos, zero código',
+  'network.ask.body': 'name, purpose, examples (entrada → esperado), why, source (seu handle ou URL). O servidor devolve um veredito nomeado — ELIGIBLE, SUSPECT-DUPLICATE, DUPLICATE-OF — e um blob pronto para commit. Nada fica no servidor: o registro vive no git, append-only.',
+  'network.verdict.sum': 'O VEREDITO — o mesmo juiz para todo modelo',
+  'network.verdict.body': 'Aceito são as mesmas portas que esta casa passa para si: golds traçados à mão antes do código, pins, AST-gate, suíte verde. O juiz é terceiro e byte-exato — o mesmo sha vale para Claude e Qwen. Recusa nomeada é desfecho do protocolo.',
+  'network.loop.sum': 'O CICLO — um aprende, todos sabem',
+  'network.loop.body': 'Um contrato aceito vira uma chamada para cada agente da rede, com hash, desde o dia do merge. O primeiro proponente externo é creditado na linha do registro. Divisão 50/50 decidida e a fábrica splitter está live na Base — honesto: nenhum clone pago registrado, nada divide hoje.',
+  'network.proof': '{n_shipped} entradas enviadas ao registro público — chegadas, vereditos e recusas, linha a linha',
   'vision.p3': 'Mechacut é essa matemática congelada para agentes: vocabulários fechados, contratos que recusam o que está fora da tabela, erros que nomeiam a forma esperada — o erro é o prompt que conserta. O significado fica com o modelo. A mecânica se muda para cá.',
   'contract.h2': 'O contrato',
   'contract.li1': 'Mesma requisição → mesmos bytes, sha256 em cada resposta',
@@ -982,6 +1016,7 @@ TEMPLATE = """<!DOCTYPE html>
       <a href="#bundles">{{nav.tools}}</a>
       <a href="#bench">{{nav.numbers}}</a>
       <a href="#market">{{nav.market}}</a>
+      <a href="#network">{{nav.network}}</a>
       <a href="#kit">{{nav.kit}}</a>
       <a href="#build">{{nav.build}}</a>
       <a href="#vision">{{nav.vision}}</a>
@@ -1246,6 +1281,25 @@ TEMPLATE = """<!DOCTYPE html>
         </div>
       </details>
           </section>
+
+    <section class="section" id="network">
+      <h2>{{network.h2}}</h2>
+      <p class="quote">{{network.creed}}</p>
+      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{network.intro}}</p>
+      <details class="bcard">
+        <summary>{{network.ask.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.ask.body}}</p></div>
+      </details>
+      <details class="bcard">
+        <summary>{{network.verdict.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.verdict.body}}</p></div>
+      </details>
+      <details class="bcard">
+        <summary>{{network.loop.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.loop.body}}</p></div>
+      </details>
+      <p class="tiers" style="margin-top: 14px;"><a href="/proposals">{{network.proof}}</a></p>
+    </section>
 
 <section class="section build" id="build">
       <h2>{{build.h2}}</h2>
@@ -2773,11 +2827,11 @@ def catalog_grid(lang):
         purp = PURPOSES.get(lang, {}).get(name, purpose)
         purp = purp.replace("&", "&amp;").replace("<", "&lt;")
         cards.append(
-            '<button class="tcard" data-pack="%s" data-tier="%s" '
-            'data-top="%s" data-tool="%s" data-hay="%s"><span class="tierdot" '
+            '<button class="tcard" data-pack="%s" data-tier="%s"%s'
+            ' data-tool="%s" data-hay="%s"><span class="tierdot" '
             'title="%s %s — %s">%s'
             '</span> <code>%s</code><span class="tp">%s</span></button>'
-            % (pack, tier, "1" if name in TOP10 else "0", name, hay, BADGE[tier], TIER_CHIP[lang][tier],
+            % (pack, tier, ' data-top="1"' if name in TOP10 else '', name, hay, BADGE[tier], TIER_CHIP[lang][tier],
                TIER_RULE[lang][tier], BADGE[tier], name, purp))
     packs = " · ".join('<a href="/SKILL-%s.md">%s</a>' % (pk, pk)
                        for pk in routing.PACKS)
@@ -3222,6 +3276,8 @@ def main():
                n_free=N_FREE, n_cap=N_CAP, n_paid=N_PAID)
     fmt.update({k: v for k, v in HUB.items()
                 if isinstance(v, (int, str))})
+    fmt["n_shipped"] = sum(1 for e in registry.load()
+                           if e["status"] == "shipped")
     r12 = next((r for r in BENCH12 if r[0] == "0.5b"), None)
     if r12:
         (nk, tk), (_cd, tc), (rl, tr) = r12[1]
