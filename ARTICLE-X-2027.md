@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 181 + 9, vérifiés live 25-11 01h, prod 1.28.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 181 + 9, vérifiés live 25-11 06h, prod 1.29.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -9,7 +9,12 @@ dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
 prod 1.26.0, suite 1 686 ; (d) 24-11 soir : 179→180 (agent/tool-trim, bundle106),
 prod 1.27.0, suite 1 720, pins 322 ; (e) 25-11 01h : 180→181 (shop/withdrawal,
 bundle107), prod 1.28.0, suite 1 758, pins 331, manifest 205 lignes / 8 988
-octets (comptes lus sur l'en-tête du manifest live, jamais de mémoire).
+octets (comptes lus sur l'en-tête du manifest live, jamais de mémoire) ;
+(f) 25-11 06h : 181 INCHANGÉS — bundle108 fait entrer la Belgique et le
+Luxembourg sur l'entrée /shop/withdrawal existante (pays en argument,
+zéro ligne manifeste neuve), prod 1.29.0, suite 1 784, pins 341, manifest
+205 lignes / 8 988 octets vérifiés live ; table des jours fériés
+FR/BE/LU/BR/PT/DE/US — le compte des pins lu sur /integrity.json live.
 
 ---
 
