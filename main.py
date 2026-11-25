@@ -384,7 +384,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.31.0",
+    version="1.31.1",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -12271,6 +12271,20 @@ def misses():
 
 
 # ---------------------------------------------------------------- index
+
+_BRAND_DIR = Path(__file__).resolve().parent / "static" / "brand"
+_BRAND_TYPES = {"banner-16x9.jpg": "image/jpeg", "banner-ultrawide.jpg": "image/jpeg",
+                "logo-mark.png": "image/png", "favicon-512.png": "image/png"}
+
+
+@app.get("/static/brand/{name}")
+def brand_asset(name: str):
+    """Brand kit — closed allowlist: no path, no traversal, unknown name = 404."""
+    if name not in _BRAND_TYPES or not (_BRAND_DIR / name).is_file():
+        return JSONResponse(status_code=404, content={"error": "not_found"})
+    return Response(content=(_BRAND_DIR / name).read_bytes(),
+                    media_type=_BRAND_TYPES[name])
+
 
 @app.get("/")
 def index(request: Request):

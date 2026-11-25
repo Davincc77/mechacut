@@ -543,7 +543,7 @@ TR =   {
  },
  "pt": {
   'meta.title': 'Mechacut — mesma requisição, mesmos bytes',
-  'meta.desc': 'Transformações determinísticas para agentes de IA: 182 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, sem chave, sem armazenamento.',
+  'meta.desc': 'Transformações determinísticas para agentes: 182 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, chave ou armazenamento.',
   'nav.tools': 'Bundles',
   'nav.numbers': 'Provas',
   'nav.vision': 'Visão',
@@ -553,7 +553,7 @@ TR =   {
   'hero.why': '<strong>Por que determinismo?</strong> Porque uma resposta certa que muda a cada execução não é uma resposta — é um dado lançado. Mesma pergunta, mesmos bytes tornam agentes auditáveis: cada resposta traz sua impressão, cada erro nomeia o campo, e o que você testa de manhã é o que entrega à noite.',
   'hero2': 'Mecânica se conhece.',
   'hero3': 'Competência não se aprende. Serve-se.',
-  'lede': 'Uma suíte de <strong>{n_tools} transformações determinísticas</strong> para agentes de IA — {n_free} grátis para sempre, {n_cap} grátis abaixo de 32 KB e depois pagas por chamada, {n_paid} pagáveis por máquina — mais {n_recipes} receitas de chamada única, grátis. O modelo para de adivinhar o que um checksum prova.',
+  'lede': 'Suíte de <strong>{n_tools} transformações determinísticas</strong> para agentes — {n_free} grátis para sempre, {n_cap} grátis até 32 KB e depois por chamada, {n_paid} pagáveis por máquina — mais {n_recipes} receitas de chamada única. O modelo para de adivinhar o que um checksum prova.',
   'bundles.h2': 'O catálogo',
   'bundles.creed': 'Um modelo calcula. Um servidor sabe.',
   'cat.search': 'busque uma ferramenta ou seu problema…',
@@ -572,7 +572,7 @@ TR =   {
   'bench9.intro': 'Uma frase vaga (em francês), seis campos obrigatórios — valores com 2 decimais, percentuais, datas únicas, URL, e-mail, total. Expectativas calculadas à mão antes de rodar. O servidor monta o cartão (/intent/card); o modelo repassa uma linha e a resposta nunca passa por ele.',
   'bench9.with': 'com o cartão de intenção',
   'bench9.foot': 'A linha 0.5B reproduziu em uma segunda rodada independente. Três chamadas iguais → um único sha256. A variante autônoma (o modelo escolhe a ferramenta) também marca 6/6. Sementes, scripts, falhas: bench/results_v9.jsonl.\n',
-  'bench10.intro': 'Dezoito tarefas com UMA resposta certa cada — dígitos de controle GS1, um SHA-256, descontos em cascata, uma coluna de valores que prova o próprio ponto decimal. Dois modelos gratuitos e LOCAIS, zero gasto de API: o harness verifica que cada rota chamada é gratuita. Os gabaritos saíram das specs publicadas ANTES de qualquer modelo rodar.',
+  'bench10.intro': 'Dezoito tarefas com UMA resposta certa — dígitos GS1, um SHA-256, descontos em cascata, uma coluna que prova o próprio ponto decimal. Dois modelos grátis e LOCAIS, zero gasto de API: o harness verifica que cada rota é gratuita. Os gabaritos saíram das specs publicadas ANTES de qualquer modelo.',
   'bench10.with': 'com uma chamada-relé',
   'bench10.foot': 'As falhas nuas se reproduzem num segundo passe independente: 18/18 vereditos idênticos — a temp 0, repetir não converge, repete. Execuções brutas: bench/results_v10.jsonl, método: bench/FINDINGS-V10.md.\n',
   'bench.v23.sum': 'Um 1,7B treinado para agentes resolveu {v23_chain}/{v23_chain_cells} correntes nu por ${v23_cost} — nosso muro era o TREINAMENTO, não o tamanho; e o cadeado recusou {v23_refused} respostas certas pelos nomes.',
@@ -634,7 +634,7 @@ TR =   {
   'bench12.code': 'escreve Python',
   'bench12.relay': 'relé Mechacut',
   'bench12.foot': 'O 8B falha no RELÉ por tagarelice de protocolo, não por matemática — por isso a ficha de intenção escreve a linha por ele. Nu, o 0.5B inventou 89000098; em relé, 9/10 com mediana de 0,2 s. Bruto: bench/results_v12.jsonl, método: bench/FINDINGS-V12.md.\n',
-  'bench.intro': 'Uma tarefa congelada (seed 20261120): CSV sujo + JSON quebrado + lista de URLs → um YAML canônico, resposta espera fixada por sha256. O mesmo modelo local fraco (Qwen 2.5, temperatura 0), um braço sozinho, um braço guiando o Mechacut. Fracassos publicados também — o 0.5B falha nos dois braços, e teto de capacidade é resultado.',
+  'bench.intro': 'Tarefa congelada (seed 20261120): CSV sujo + JSON quebrado + lista de URLs → YAML canônico, espera fixada por sha256. O mesmo modelo local fraco (Qwen 2.5, temperatura 0), um braço sozinho, um braço guiando o Mechacut. Fracassos publicados também — o 0.5B falha nos dois braços, e teto de capacidade é resultado.',
   'bench.model': 'modelo',
   'bench.alone': 'sozinho',
   'bench.with': 'com mechacut',
@@ -719,7 +719,7 @@ TR =   {
   'nav.kit': 'Kit',
   'kit.h2': 'A suíte no seu disco',
   'kit.creed': 'O protocolo não é o transporte — é a certidão de nascimento da ferramenta.',
-  'kit.intro': 'As transformações livres não são só uma API. São uma suíte: um agente pode instalá-la na própria máquina, chamá-la localmente e — a parte que nenhum mercado faz — construir ferramentas novas sobre os mesmos portões. curl vira kit call; tarefa repetida vira proposta de contrato; a proposta vira ferramenta publicada só se os golds foram traçados antes do código.',
+  'kit.intro': 'As transformações livres não são só uma API: são uma suíte. Um agente pode instalá-la, chamá-la localmente e — o que nenhum mercado faz — construir ferramentas sobre os mesmos portões. curl vira kit call; tarefa repetida vira contrato; o contrato vira ferramenta só se os golds foram traçados antes do código.',
   'kit.c1.sum': 'Instalar — a suíte básica na máquina',
   'kit.c1.foot': 'Sha verificado, sem daemon, sem auto-update, sem rede dentro do motor. O sem-estado é o contrato: o humano decide quando o kit se move.',
   'kit.c2.sum': 'Chamar — consultar antes de agir',
@@ -793,6 +793,9 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{meta.title}}</title>
 <meta name="description" content="{{meta.desc}}">
+<meta property="og:image" content="https://mechacut.studio/static/brand/banner-16x9.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mechacut.studio/static/brand/banner-16x9.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23141414'/><path d='M20 70 L40 45 L55 55 L80 25' stroke='%23d4af37' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
