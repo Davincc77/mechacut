@@ -1104,14 +1104,16 @@ TABLE = (
      "statutory 14-day withdrawal dated: next-day start, weekend "
      "and holiday advance on the cited L3133-1 table, late-info "
      "twelve months, exceptions as named classes",
-     "withdrawal retraction retract change my mind cooling off "
+     "withdrawal retraction retract withdraw withdraws revocation "
+     "revoke change my mind online order cooling off "
      "fourteen days received parcel expiry advance holiday "
      "solded occasion distance online "
      "retractation retracter retracte retractes delai changer avis "
      "quatorze jours reception recu colis distance internet solde "
      "occasion prorogation feries date limite loi "
      "retractation france "
-     "retratacao arrependimento francia prazo quatorze dias desistir "
+     "retratacao retratacoes desistencia desisto desiste arrependimento "
+     "francia prazo quatorze dias desistir "
      "lei francesa feriado fim de semana contagem"),
 )
 
