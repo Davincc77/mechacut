@@ -28,7 +28,7 @@
   "bundles.intro": "Même requête, mêmes octets — chaque réponse porte son sha256. Installez un pack, ou lisez le manifeste entier en une requête et laissez <code>GET /route</code> choisir.",
   "tiers.h2": "Trois paliers, zéro compte",
   "tiers.intro": "Les agents ne lisent pas les pages de tarifs — le prix est dans le protocole : route gratuite sans clé, plafonnée sous 32 Ko, ailleurs un <code>402</code> honnête, défi x402 USDC sur Base réglé par facilitateur. Entre un serveur et un robot, il n'y a que des prix et des reçus.",
-  "bench.h2": "Mesuré, pas promis",
+  "bench.h2": "Benchmarks, ou ce que nous cherchions :",
   "bench.creed": "Le mur, c'est la FORME, pas la taille — et nous avons chiffré la porte.",
   "bench9.intro": "Phrase française volontairement floue, six champs requis — montants à 2 décimales, pourcentages, dates uniques, URL, email, total. Attentes calculées à la main avant exécution. Serveur construit la fiche (/intent/card) ; relais n'écrit qu'une ligne — la réponse ne le traverse jamais.",
   "bench9.with": "avec la fiche d'intention",

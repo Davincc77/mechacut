@@ -28,7 +28,7 @@
   "bundles.intro": "Mesma requisição, mesmos bytes — cada resposta carrega seu sha256. Instale um pack, ou leia o manifesto inteiro em uma requisição e deixe <code>GET /route</code> escolher.",
   "tiers.h2": "Três níveis, zero contas",
   "tiers.intro": "Agentes não leem páginas de preço — então o preço está no protocolo: uma rota grátis responde sem chave, uma rota com teto responde grátis abaixo de 32 KB, qualquer outra recebe um <code>402</code> honesto — desafio x402 USDC na Base liquidado por facilitador. Entre um servidor e um robô, só existem preços e recibos.",
-  "bench.h2": "Medido, não prometido",
+  "bench.h2": "Benchmarks, ou o que procurávamos:",
   "bench.creed": "O muro é a FORMA, não o tamanho — e nós precificamos a porta.",
   "bench9.intro": "Uma frase vaga (em francês), seis campos obrigatórios — valores com 2 decimais, percentuais, datas únicas, URL, e-mail, total. Expectativas calculadas à mão antes de rodar. O servidor monta o cartão (/intent/card); o modelo repassa uma linha e a resposta nunca passa por ele.",
   "bench9.with": "com o cartão de intenção",

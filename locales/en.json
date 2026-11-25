@@ -28,7 +28,7 @@
   "bundles.intro": "Same request, same bytes — every response carries its own sha256. Install one pack, or read the whole manifest in one request and let <code>GET /route</code> pick.",
   "tiers.h2": "Three tiers, no accounts",
   "tiers.intro": "Agents do not read pricing pages — so the price is in the protocol: a free route answers keyless, a capped route answers free under 32 KB, anything else gets an honest <code>402</code> with an x402 USDC-on-Base challenge, settled by a facilitator. Between a server and a robot, only prices and receipts exist.",
-  "bench.h2": "Measured, not promised",
+  "bench.h2": "Benchmarks, or what we looked for:",
   "bench.creed": "The wall is FORM, not size — and we priced the door.",
   "bench9.intro": "One deliberately vague French sentence, six required fields — money sorted to 2 decimals, percents, unique dates, URL, email, total. Expectations hand-computed before any run. The server builds the card (/intent/card); the model relays one line and the answer never passes through it.",
   "bench9.with": "with the intake card",

@@ -208,6 +208,12 @@
 .bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}
 .bcard .bbody{padding:4px 18px 16px}
 .bgroup{color:var(--gold,#ffcf5c);margin:30px 0 8px;font-size:1.08em;letter-spacing:.02em}
+.bgroupd{border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--card)}
+.bgroupd>summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--gold);list-style:none;display:flex;justify-content:space-between;align-items:center}
+.bgroupd>summary::-webkit-details-marker{display:none}
+.bgroupd>summary::after{content:'+';font-family:'IBM Plex Mono',monospace;font-size:18px}
+.bgroupd[open]>summary::after{content:'3'}
+.bgroupd .bin{padding:0 14px 12px}
 </style>
 </head>
 <body>
@@ -281,7 +287,26 @@
 {{market_grid}}
     </section>
 
-    <section class="section" id="kit">
+    <section class="section" id="network">
+      <h2>{{network.h2}}</h2>
+      <p class="quote">{{network.creed}}</p>
+      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{network.intro}}</p>
+      <details class="bcard">
+        <summary>{{network.ask.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.ask.body}}</p></div>
+      </details>
+      <details class="bcard">
+        <summary>{{network.verdict.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.verdict.body}}</p></div>
+      </details>
+      <details class="bcard">
+        <summary>{{network.loop.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.loop.body}}</p></div>
+      </details>
+      <p class="tiers" style="margin-top: 14px;"><a href="/proposals">{{network.proof}}</a></p>
+    </section>
+
+<section class="section" id="kit">
       <h2>{{kit.h2}}</h2>
       <p class="quote">{{kit.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{kit.intro}}</p>
@@ -332,7 +357,7 @@
       <h2>{{bench.h2}}</h2>
       <p class="quote">{{bench.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
-      <h3 class="bgroup">{{bench.g1}}</h3>
+      <details class="bgroupd"><summary>{{bench.g1}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v6</span>{{bench.v6.sum}}</summary>
         <div class="bbody">
@@ -378,7 +403,7 @@
           <p class="tiers" style="margin-top: 12px;">{{bench12.foot}}</p>
         </div>
       </details>
-            <h3 class="bgroup">{{bench.g2}}</h3>
+            </div></details><details class="bgroupd"><summary>{{bench.g2}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v15</span>{{bench.v15.sum}}</summary>
         <div class="bbody">
@@ -436,7 +461,7 @@
           <p class="tiers" style="margin-top: 12px;">{{bench.v23.foot}}</p>
         </div>
       </details>
-            <h3 class="bgroup">{{bench.g3}}</h3>
+            </div></details><details class="bgroupd"><summary>{{bench.g3}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v16</span>{{bench.v16.sum}}</summary>
         <div class="bbody">
@@ -466,7 +491,7 @@
           <p class="tiers" style="color: var(--muted);">{{bench.v22b.foot}}</p>
         </div>
       </details>
-            <h3 class="bgroup">{{bench.g4}}</h3>
+            </div></details><details class="bgroupd"><summary>{{bench.g4}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v13</span>{{bench.v13.sum}}</summary>
         <div class="bbody">
@@ -479,7 +504,7 @@
           <p class="tiers" style="color: var(--muted);">{{bench.v14.foot}}</p>
         </div>
       </details>
-            <h3 class="bgroup">{{bench.g5}}</h3>
+            </div></details><details class="bgroupd"><summary>{{bench.g5}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
         <div class="bbody">
@@ -498,26 +523,7 @@
       </details>
           </section>
 
-    <section class="section" id="network">
-      <h2>{{network.h2}}</h2>
-      <p class="quote">{{network.creed}}</p>
-      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{network.intro}}</p>
-      <details class="bcard">
-        <summary>{{network.ask.sum}}</summary>
-        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.ask.body}}</p></div>
-      </details>
-      <details class="bcard">
-        <summary>{{network.verdict.sum}}</summary>
-        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.verdict.body}}</p></div>
-      </details>
-      <details class="bcard">
-        <summary>{{network.loop.sum}}</summary>
-        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.loop.body}}</p></div>
-      </details>
-      <p class="tiers" style="margin-top: 14px;"><a href="/proposals">{{network.proof}}</a></p>
-    </section>
-
-<section class="section build" id="build">
+    </div></details><section class="section build" id="build">
       <h2>{{build.h2}}</h2>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{build.intro}}</p>
       <div class="playgrid">

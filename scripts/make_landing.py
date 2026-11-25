@@ -130,7 +130,7 @@ TR =   {
   'bundles.intro': 'Same request, same bytes — every response carries its own sha256. Install one pack, or read the whole manifest in one request and let <code>GET /route</code> pick.',
   'tiers.h2': 'Three tiers, no accounts',
   'tiers.intro': 'Agents do not read pricing pages — so the price is in the protocol: a free route answers keyless, a capped route answers free under 32 KB, anything else gets an honest <code>402</code> with an x402 USDC-on-Base challenge, settled by a facilitator. Between a server and a robot, only prices and receipts exist.',
-  'bench.h2': 'Measured, not promised',
+  'bench.h2': 'Benchmarks, or what we looked for:',
   'bench.creed': 'The wall is FORM, not size — and we priced the door.',
   'bench9.intro': 'One deliberately vague French sentence, six required fields — money sorted to 2 decimals, percents, unique dates, URL, email, total. Expectations hand-computed before any run. The server builds the card (/intent/card); the model relays one line and the answer never passes through it.',
   'bench9.with': 'with the intake card',
@@ -369,7 +369,7 @@ TR =   {
   'bundles.intro': 'Même requête, mêmes octets — chaque réponse porte son sha256. Installez un pack, ou lisez le manifeste entier en une requête et laissez <code>GET /route</code> choisir.',
   'tiers.h2': 'Trois paliers, zéro compte',
   'tiers.intro': "Les agents ne lisent pas les pages de tarifs — le prix est dans le protocole : route gratuite sans clé, plafonnée sous 32 Ko, ailleurs un <code>402</code> honnête, défi x402 USDC sur Base réglé par facilitateur. Entre un serveur et un robot, il n'y a que des prix et des reçus.",
-  'bench.h2': 'Mesuré, pas promis',
+  'bench.h2': 'Benchmarks, ou ce que nous cherchions :',
   'bench.creed': "Le mur, c'est la FORME, pas la taille — et nous avons chiffré la porte.",
   'bench9.intro': "Phrase française volontairement floue, six champs requis — montants à 2 décimales, pourcentages, dates uniques, URL, email, total. Attentes calculées à la main avant exécution. Serveur construit la fiche (/intent/card) ; relais n'écrit qu'une ligne — la réponse ne le traverse jamais.",
   'bench9.with': "avec la fiche d'intention",
@@ -608,7 +608,7 @@ TR =   {
   'bundles.intro': 'Mesma requisição, mesmos bytes — cada resposta carrega seu sha256. Instale um pack, ou leia o manifesto inteiro em uma requisição e deixe <code>GET /route</code> escolher.',
   'tiers.h2': 'Três níveis, zero contas',
   'tiers.intro': 'Agentes não leem páginas de preço — então o preço está no protocolo: uma rota grátis responde sem chave, uma rota com teto responde grátis abaixo de 32 KB, qualquer outra recebe um <code>402</code> honesto — desafio x402 USDC na Base liquidado por facilitador. Entre um servidor e um robô, só existem preços e recibos.',
-  'bench.h2': 'Medido, não prometido',
+  'bench.h2': 'Benchmarks, ou o que procurávamos:',
   'bench.creed': 'O muro é a FORMA, não o tamanho — e nós precificamos a porta.',
   'bench9.intro': 'Uma frase vaga (em francês), seis campos obrigatórios — valores com 2 decimais, percentuais, datas únicas, URL, e-mail, total. Expectativas calculadas à mão antes de rodar. O servidor monta o cartão (/intent/card); o modelo repassa uma linha e a resposta nunca passa por ele.',
   'bench9.with': 'com o cartão de intenção',
@@ -1046,7 +1046,13 @@ TEMPLATE = """<!DOCTYPE html>
   .mcard cite{display:block;margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);font-style:normal}
   .mcard cite b{color:var(--gold);font-weight:400}
   .mcard cite a{color:var(--muted)}
-.bcard{border:1px solid var(--line,#232b3d);border-radius:10px;margin:10px 0;background:var(--card,#121724)}\n.bcard summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--ink,#e8ecf4);list-style-position:outside}\n.bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}\n.bcard .bbody{padding:4px 18px 16px}\n.bgroup{color:var(--gold,#ffcf5c);margin:30px 0 8px;font-size:1.08em;letter-spacing:.02em}\n</style>
+.bcard{border:1px solid var(--line,#232b3d);border-radius:10px;margin:10px 0;background:var(--card,#121724)}\n.bcard summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--ink,#e8ecf4);list-style-position:outside}\n.bcard summary .bv{color:var(--gold,#ffcf5c);margin-right:10px}\n.bcard .bbody{padding:4px 18px 16px}\n.bgroup{color:var(--gold,#ffcf5c);margin:30px 0 8px;font-size:1.08em;letter-spacing:.02em}
+.bgroupd{border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--card)}
+.bgroupd>summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--gold);list-style:none;display:flex;justify-content:space-between;align-items:center}
+.bgroupd>summary::-webkit-details-marker{display:none}
+.bgroupd>summary::after{content:'+';font-family:'IBM Plex Mono',monospace;font-size:18px}
+.bgroupd[open]>summary::after{content:'\2013'}
+.bgroupd .bin{padding:0 14px 12px}\n</style>
 </head>
 <body>
 <div id="prog"></div>
@@ -1119,7 +1125,26 @@ TEMPLATE = """<!DOCTYPE html>
 {{market_grid}}
     </section>
 
-    <section class="section" id="kit">
+    <section class="section" id="network">
+      <h2>{{network.h2}}</h2>
+      <p class="quote">{{network.creed}}</p>
+      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{network.intro}}</p>
+      <details class="bcard">
+        <summary>{{network.ask.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.ask.body}}</p></div>
+      </details>
+      <details class="bcard">
+        <summary>{{network.verdict.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.verdict.body}}</p></div>
+      </details>
+      <details class="bcard">
+        <summary>{{network.loop.sum}}</summary>
+        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.loop.body}}</p></div>
+      </details>
+      <p class="tiers" style="margin-top: 14px;"><a href="/proposals">{{network.proof}}</a></p>
+    </section>
+
+<section class="section" id="kit">
       <h2>{{kit.h2}}</h2>
       <p class="quote">{{kit.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{kit.intro}}</p>
@@ -1170,7 +1195,7 @@ TEMPLATE = """<!DOCTYPE html>
       <h2>{{bench.h2}}</h2>
       <p class="quote">{{bench.creed}}</p>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{bench.intro}}</p>
-      <h3 class="bgroup">{{bench.g1}}</h3>
+      <details class="bgroupd"><summary>{{bench.g1}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v6</span>{{bench.v6.sum}}</summary>
         <div class="bbody">
@@ -1216,7 +1241,7 @@ TEMPLATE = """<!DOCTYPE html>
           <p class="tiers" style="margin-top: 12px;">{{bench12.foot}}</p>
         </div>
       </details>
-            <h3 class="bgroup">{{bench.g2}}</h3>
+            </div></details><details class="bgroupd"><summary>{{bench.g2}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v15</span>{{bench.v15.sum}}</summary>
         <div class="bbody">
@@ -1274,7 +1299,7 @@ TEMPLATE = """<!DOCTYPE html>
           <p class="tiers" style="margin-top: 12px;">{{bench.v23.foot}}</p>
         </div>
       </details>
-            <h3 class="bgroup">{{bench.g3}}</h3>
+            </div></details><details class="bgroupd"><summary>{{bench.g3}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v16</span>{{bench.v16.sum}}</summary>
         <div class="bbody">
@@ -1304,7 +1329,7 @@ TEMPLATE = """<!DOCTYPE html>
           <p class="tiers" style="color: var(--muted);">{{bench.v22b.foot}}</p>
         </div>
       </details>
-            <h3 class="bgroup">{{bench.g4}}</h3>
+            </div></details><details class="bgroupd"><summary>{{bench.g4}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v13</span>{{bench.v13.sum}}</summary>
         <div class="bbody">
@@ -1317,7 +1342,7 @@ TEMPLATE = """<!DOCTYPE html>
           <p class="tiers" style="color: var(--muted);">{{bench.v14.foot}}</p>
         </div>
       </details>
-            <h3 class="bgroup">{{bench.g5}}</h3>
+            </div></details><details class="bgroupd"><summary>{{bench.g5}}</summary><div class="bin">
           <details class="bcard">
         <summary><span class="bv">v19</span>{{bench.v19.sum}}</summary>
         <div class="bbody">
@@ -1336,26 +1361,7 @@ TEMPLATE = """<!DOCTYPE html>
       </details>
           </section>
 
-    <section class="section" id="network">
-      <h2>{{network.h2}}</h2>
-      <p class="quote">{{network.creed}}</p>
-      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{network.intro}}</p>
-      <details class="bcard">
-        <summary>{{network.ask.sum}}</summary>
-        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.ask.body}}</p></div>
-      </details>
-      <details class="bcard">
-        <summary>{{network.verdict.sum}}</summary>
-        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.verdict.body}}</p></div>
-      </details>
-      <details class="bcard">
-        <summary>{{network.loop.sum}}</summary>
-        <div class="bbody"><p class="tiers" style="color: var(--muted);">{{network.loop.body}}</p></div>
-      </details>
-      <p class="tiers" style="margin-top: 14px;"><a href="/proposals">{{network.proof}}</a></p>
-    </section>
-
-<section class="section build" id="build">
+    </div></details><section class="section build" id="build">
       <h2>{{build.h2}}</h2>
       <p class="tiers" style="color: var(--muted); max-width: 720px;">{{build.intro}}</p>
       <div class="playgrid">

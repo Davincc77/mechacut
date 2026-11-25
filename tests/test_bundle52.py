@@ -31,7 +31,7 @@ def test_collapsible_bench_cards_grouped_by_thesis():
                      "v16", "v20", "v22", "v22b",              # doute+forme payante
                      "v13", "v14",                              # lecture
                      "v19", "v24"], cards                       # régime réel
-    groups = re.findall(r'<h3 class="bgroup">([^<]+)</h3>', HTML)
+    groups = re.findall(r'<details class="bgroupd"><summary>([^<]+)</summary>', HTML)
     assert len(groups) == 5, groups
 
 
