@@ -248,6 +248,28 @@
       </div>
     </section>
 
+    <section class="section" id="bundles">
+      <h2>{{bundles.h2}}</h2>
+      <p class="quote">{{bundles.creed}}</p>
+      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{bundles.intro}}</p>
+      <div class="catbar">
+        <input id="catsearch" type="search" placeholder="{{cat.search}}" aria-label="{{cat.search}}">
+        <span class="cathits" id="cathits" data-tpl="{{cat.hits}}"></span>
+      </div>
+      <div id="cattray">
+{{bundles_grid}}
+      </div>
+    </section>
+    <aside class="tpanel" id="tpanel" hidden>
+      <div class="tphead">
+        <code id="tpname"></code><span class="sp"></span>
+        <button id="tpcopy" data-copied="{{panel.copied}}">{{panel.copy}}</button>
+        <button id="tpclose">{{panel.close}} &#10005;</button>
+      </div>
+      <div id="tptry" hidden></div>
+      <pre id="tpbody"></pre>
+    </aside>
+
     <section class="section" id="market">
       <h2>{{market.h2}}</h2>
       <p class="quote">{{market.creed}}</p>
@@ -295,27 +317,6 @@
       <p class="tiers" style="margin-top: 10px;">{{kit.propose}}</p>
     </section>
 
-    <section class="section" id="bundles">
-      <h2>{{bundles.h2}}</h2>
-      <p class="quote">{{bundles.creed}}</p>
-      <p class="tiers" style="color: var(--muted); max-width: 720px; margin-bottom: 26px;">{{bundles.intro}}</p>
-      <div class="catbar">
-        <input id="catsearch" type="search" placeholder="{{cat.search}}" aria-label="{{cat.search}}">
-        <span class="cathits" id="cathits" data-tpl="{{cat.hits}}"></span>
-      </div>
-      <div id="cattray">
-{{bundles_grid}}
-      </div>
-    </section>
-    <aside class="tpanel" id="tpanel" hidden>
-      <div class="tphead">
-        <code id="tpname"></code><span class="sp"></span>
-        <button id="tpcopy" data-copied="{{panel.copied}}">{{panel.copy}}</button>
-        <button id="tpclose">{{panel.close}} &#10005;</button>
-      </div>
-      <div id="tptry" hidden></div>
-      <pre id="tpbody"></pre>
-    </aside>
 
     <section class="section tiers" id="tiers">
       <h2>{{tiers.h2}}</h2>
