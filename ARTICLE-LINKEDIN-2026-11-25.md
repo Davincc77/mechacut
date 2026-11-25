@@ -36,6 +36,10 @@ Mechacut (mechacut.studio) is a suite of deterministic transforms that AI assist
 
 **The honest number**
 
+A trade on Coinbase Exchange is matched in microseconds — the exchange publishes sub-millisecond P99, and its own measurement paper reports a median request-response of 76 microseconds. So why does money still take days?
+
+Because it does, by regulation and by routine. The US securities market settled at T+2 until May 28, 2024, when it shortened to T+1 — settlement is literally measured in business days. On the corporate side the analyst benchmarks are blunter still: the average invoice takes 8 to 9 days to process end to end, close to one in five stops for a human decision, and the median payment is sent fifteen days after the invoice arrives. The match is instant. The paperwork around the match is the bottleneck — and the paperwork is precisely where software has been allowed to guess.
+
 You will ask: how many more transactions would flow? We refuse to answer that with a made-up percentage — nobody outside your institution has your logs. What we can give you is measured: a 7-billion-parameter model scores 0% on a chain of mechanical tasks; given one relay line to the suite, the same model scores 100%. A half-billion model drops from 4,020 tokens to 1,413 on the same job and passes 6/6 where it passed 0/6. The failing rows are published too — a measured ceiling is a result, not a bug.
 
 The straight-through gain is your arithmetic to run: take the last hundred payments that fell into a manual queue and replay the deciding field — the total, the date, the IBAN, the rate — through one deterministic call. If the answer arrives with a checksum and a named rule, your queue had a guessing problem, not a staffing problem.
@@ -66,3 +70,7 @@ Determinism took us to the Moon. Determinism will take AI to production.
 - x402 USDC on Base + keyless free 30/min: manifest line 1.
 - AGC Block II 4 KB / 72 KB: published specs.
 - Deliberate silences: Nous PR (open), x402-list (probes 0), revenue split (factory live, per-tool splitters unregistered), STP percentages (none claimed — reader's own logs).
+- Coinbase 76 µs median / sub-ms P99: Starbase measurement paper via Pico/Corvil write-up (pico.net, Oct 2026) + Coinbase QCon SF talk (Frank Yu, published Apr 2026, via syntaqx books page); SRE23 USENIX slides: ~1 µs processing, RTT medians <50 µs on optimized infra.
+- T+1: SEC press release 2024-62 (May 21, 2024), compliance May 28, 2024; investor.gov bulletin (T+2 since 2017, T+1 from 2024-05-28).
+- Invoice 8.2–9.2 days, exceptions 14–18.4%, touchless 32.6%: Ardent Partners State of ePayables 2025 (publ. Jan 2026, via docsumo sourced-figures page) + AP Metrics That Matter 2025 (via apexanalytix, Mar 2025).
+- Median payment sent 15.0 days after receipt: APQC Open Standards Benchmarking (2,226 orgs, via docsumo benchmarks page).
