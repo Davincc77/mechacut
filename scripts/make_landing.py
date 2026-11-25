@@ -326,6 +326,9 @@ TR =   {
   'network.proof': '{n_shipped} entries shipped in the public registry — arrivals, verdicts and refusals, row by row',
   'vision.p3': 'Mechacut is that frozen math for agents: closed vocabularies, contracts that refuse what is outside the table, errors that name the expected shape — the error is the repair prompt. Meaning stays with the model. Mechanics move here.',
   'contract.h2': 'The contract',
+  'x402.sum': 'How a machine pays — 402, EIP-3009, facilitator, proof header',
+  'vision.sum': 'Why determinism, why now — Apollo, 4 KB, and the dice',
+  'contract.sum': 'The five promises, verbatim',
   'contract.li1': 'Same request → same bytes, sha256 on every response',
   'contract.li2': 'No signup, no API key, no rate wall below 30 req/min',
   'contract.li3': 'No storage: the only state is a 1-minute window, a 60-minute ledger and a payment-nonce replay set',
@@ -562,6 +565,9 @@ TR =   {
   'network.proof': '{n_shipped} entrées shippées au registre public — arrivées, verdicts et refus, ligne à ligne',
   'vision.p3': "Mechacut est cette math gelée pour les agents : vocabulaires fermés, contrats refusant ce qui sort de la table, erreurs nommant la forme attendue — l'erreur est le prompt qui répare. Le sens reste au modèle, la mécanique vient ici.",
   'contract.h2': 'Le contrat',
+  'x402.sum': 'Comment une machine paie — 402, EIP-3009, facilitateur, preuve',
+  'vision.sum': 'Pourquoi le déterminisme, pourquoi maintenant — Apollo, 4 Ko, le dé',
+  'contract.sum': 'Les cinq promesses, verbatim',
   'contract.li1': 'Même requête → mêmes octets, sha256 sur chaque réponse',
   'contract.li2': 'Sans inscription, sans clé, sans mur de débit sous 30 req/min',
   'contract.li3': "Zéro stockage : le seul état est une fenêtre d'une minute, un registre de 60 minutes et un jeu de nonces de paiement",
@@ -798,6 +804,9 @@ TR =   {
   'network.proof': '{n_shipped} entradas enviadas ao registro público — chegadas, vereditos e recusas, linha a linha',
   'vision.p3': 'Mechacut é essa matemática congelada para agentes: vocabulários fechados, contratos que recusam o que está fora da tabela, erros que nomeiam a forma esperada — o erro é o prompt que conserta. O significado fica com o modelo. A mecânica se muda para cá.',
   'contract.h2': 'O contrato',
+  'x402.sum': 'Como uma máquina paga — 402, EIP-3009, facilitador, prova',
+  'vision.sum': 'Por que determinismo, por que agora — Apollo, 4 KB, o dado',
+  'contract.sum': 'As cinco promessas, verbatim',
   'contract.li1': 'Mesma requisição → mesmos bytes, sha256 em cada resposta',
   'contract.li2': 'Sem cadastro, sem chave, sem muro de taxa abaixo de 30 req/min',
   'contract.li3': 'Zero armazenamento: o único estado é uma janela de 1 minuto, um registro de 60 minutos e um conjunto de nonces de pagamento',
@@ -1369,21 +1378,34 @@ TEMPLATE = """<!DOCTYPE html>
 
     <section class="section x402" id="x402">
       <h2>{{x402.h2}}</h2>
+      <details class="bcard">
+        <summary>{{x402.sum}}</summary>
+        <div class="bbody">
       <p>{{x402.p1}}</p>
       <p>{{x402.p2}}</p>
       <p>{{x402.bankr}}</p>
+        </div>
+      </details>
     </section>
 
     <section class="section vision" id="vision">
       <h2>{{vision.h2}}</h2>
+      <details class="bcard">
+        <summary>{{vision.sum}}</summary>
+        <div class="bbody">
       <p>{{vision.p1}}</p>
       <p>{{vision.p2}}</p>
       <div class="quote">{{vision.quote}}</div>
       <p>{{vision.p3}}</p>
+        </div>
+      </details>
     </section>
 
     <section class="section" id="contract">
       <h2>{{contract.h2}}</h2>
+      <details class="bcard" open>
+        <summary>{{contract.sum}}</summary>
+        <div class="bbody">
       <ul class="contract">
         <li>{{contract.li1}}</li>
         <li>{{contract.li2}}</li>
@@ -1396,6 +1418,8 @@ TEMPLATE = """<!DOCTYPE html>
       <p style="color: var(--muted); font-size: 15px; margin-top: 18px;">
         {{agents.hint}} — <a href="/mcp">/mcp</a> · <a href="/SKILL.md">/SKILL.md</a> · <a href="/openapi.json">/openapi.json</a>
       </p>
+        </div>
+      </details>
     </section>
   </main>
 
