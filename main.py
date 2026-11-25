@@ -2164,8 +2164,10 @@ why, every refusal its name. Query any status:
 <th>the bench said</th></tr>%s</table>
 <p style=\"font-size:13px;opacity:.7\">To monetize a shipped contract,
 its proposer must have provided <code>base_account</code> (EIP-55, on
-Base); format verified, responsibility not ours. Split: 50/50, splitter
-contract not yet deployed — said, not hidden.</p>
+Base); format verified, responsibility not ours. Split: 50/50 — the SplitterFactory is
+LIVE on Base mainnet (0xFB209Eb982baA11Ff18CAF1ef22f29729DC3709a, bytecode
+verified at 3,864 octets, 25-11): mechanics and per-tool addresses in
+<code>/PAYOUTS</code>. Said, not hidden — and now said TRUE.</p>
 </body></html>""" % (_esc(chips), "\n".join(rows))
     return HTMLResponse(body)
 
