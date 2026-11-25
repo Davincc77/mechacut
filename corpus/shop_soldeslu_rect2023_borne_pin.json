@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldeslu_rect2023_borne_pin",
+ "path": "/api/v1/shop/soldes-lu",
+ "body": {
+  "year": 2023,
+  "season": "ete"
+ }
+}

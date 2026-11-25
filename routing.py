@@ -1118,6 +1118,22 @@ TABLE = (
      "francia prazo quatorze dias desistir "
      "lei francesa feriado fim de semana contagem "
      "encomenda recebida compra desistencia posso terça terca"),
+    ("shop_soldes_lu", "/api/v1/shop/soldes-lu", "dates",
+     "luxembourg sale windows dated BY ACT: the loi du 23-12-2016 "
+     "hands both periods to a grand-ducal decree EVERY YEAR "
+     "— zero formule; ten replayed acts 2018..2027, two "
+     "rectifications of two kinds (weekday label 2018, the bound "
+     "itself 2023), the 2021 chain of three acts with its dead "
+     "postponement, no waiting period unlike Belgium, never "
+     "extrapolated past the last act",
+     "soldes luxembourg lëtzebuerg winter summer sale sales "
+     "date legale ouverture cloture "
+     "quand commencent reglement grand-ducal memorial "
+     "hiver ete janvier juin juillet wanter "
+     "saldos luxemburgo datas verao inverno janeiro junho julho "
+     "quando comecam data "
+     "luxemburger luxembourgish "
+     "esch diekirch wiltz vianden groussherzogtum"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)
@@ -1155,7 +1171,7 @@ def manifest_text(version):
         # +agent_costdiff, octets <9 000 avec la NOTE dense resseree
         # a claim constant (les deux pointeurs de purpose vivent).
         "mechacut.studio %s — %d deterministic transforms "
-        "+ %d named recipes. " %
+        "+ %d recipes. " %
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
@@ -1181,11 +1197,18 @@ def manifest_text(version):
           # SUPPRIMEES — 16 octets et 16 lignes rendus au budget,
           # chaque pack garde son en-tete. Mesure : 205 lignes /
           # 8 988 octets avec la ligne shop_withdrawal incluse.
-          "detail: /tools/<name>.json | packs: /SKILL-<pack>.md | "
+          # b110 elagage MESURE (la ligne shop_soldes_lu paie ses
+          # 46 octets) : le POINTEUR « packs: » est SUPPRIME — chaque
+          # en-tete de pack rend son propre /SKILL-<pack>.md, le
+          # contenu voyage ; « named » coupe de la tete (adjectif,
+          # les recettes sont nommees PAR LEUR LIGNE) ; « scene »
+          # tombe de la classe not-here (« breakdowns » reste, classe
+          # identique). Mesure : 207 lignes / 8 995 octets.
+          "detail: /tools/<name>.json | "
         "pipelines: /api/v1/recipes, POST /api/v1/pipeline | "
         'find: /route?q="task words" | '
         "proposals: /proposals, /api/v1/agent/proposals | "
-        "not here: storyboards, shot lists, scene breakdowns "
+        "not here: storyboards, shot lists, breakdowns "
         "-> sister moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
         # debranche le dense-fold ou elague une ligne de tete ») :
@@ -1620,6 +1643,23 @@ def route(query, top=5):
             continue
         if name == "shop_soldes_be" and (vsoldes_out or vtabled) \
                 and not vbename:
+            continue
+        # CLASSE b110 — le Luxembourg a SON outil : destination des
+        # refus NOMMÉS des deux sœurs (vetos b103/b105 tenus — le
+        # relai promettait, voici la table). Un calendrier nommé SANS
+        # mot luxembourgeois tue la ligne LU (le module répondrait un
+        # 400 et le routeur aurait promis — leçon b100/b102) ;
+        # « luxemburgo » vote par la MÊME racine « luxemb » du
+        # drapeau vlux — la douleur PT pêchée par la sonde du lot
+        # (« saldos luxemburgo datas » routait chart_from_data, le
+        # stem « datas »→« data ») meurt guérie : la table LU score
+        # saldos+luxemburgo+datas et repasse devant. Les mots belges
+        # tuent LU, les mots LU tuent BE et window — chaque table ne
+        # joue que chez elle, et « soldes 2027 » sans pays continue de
+        # vivre pour les trois : c'est la demande qui les sépare, pas
+        # le routeur qui devine.
+        if name == "shop_soldes_lu" and (vsoldes_out or vtabled
+                or vbename) and not vlux:
             continue
         # b108 — LU et BE sont rejouées : nommées, elles laissent la
         # ligne VIVRE (le veto ne survit que pour les pays SANS table).

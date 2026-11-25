@@ -606,4 +606,21 @@ SAY = {
         "pt": "os saldos de inverno 2027 na Bélgica: sábado 2 ou "
               "domingo 3 de janeiro? e a espera termina 1 ou 2 de "
               "janeiro? o Livro VI decide, a imprensa erra"},
+    "/api/v1/shop/soldes-lu": {
+        "en": "Luxembourg has no rule — every date comes from an "
+              "act: winter 2026/2027 runs Saturday 2 to Saturday "
+              "30 January; and summer 2023? the Official Journal "
+              "printed a Sunday end until it rectified, the press "
+              "had it right all along",
+        "fr": "au Luxembourg, chaque date vient d'un règlement "
+              "grand-ducal, jamais d'une formule : hiver 2026/2027 "
+              "du samedi 2 au samedi 30 janvier — et l'été 2023 ? "
+              "le Mémorial imprimait « samedi 23 juillet », un "
+              "dimanche ; le rectificatif dit 22, la presse l'a "
+              "toujours su",
+        "pt": "no Luxemburgo cada data vem de um ato, nunca de "
+              "uma regra: o inverno 2026/2027 vai de sábado 2 a "
+              "30 de janeiro; e o verão 2023? o Jornal Oficial "
+              "imprimia 23 (um domingo) até o retificativo dizer "
+              "22 — a imprensa acertava desde o começo"},
 }

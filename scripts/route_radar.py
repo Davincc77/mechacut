@@ -349,7 +349,16 @@ CASES = [
     ("les soldes d'hiver 2027 en france c'est le 6 ou le 13",
      "shop_soldes_window"),
     ("quando começam os saldos em portugal", None),
-    ("les soldes d'hiver au luxembourg 2027", None),
+    # CLASSE b110 — le leurre vendu par b108 (« les soldes d'hiver au
+    # luxembourg ») devient une AIGUILLE : la table LU est construite,
+    # le relai des sœurs a sa destination. Aiguilles x3 langues du lot
+    # + la douleur PT pêchée par la sonde (« datas » volé par chart).
+    ("les soldes d'hiver au luxembourg 2027", "shop_soldes_lu"),
+    ("soldes luxembourg janvier 2027", "shop_soldes_lu"),
+    ("quand commencent les soldes au luxembourg", "shop_soldes_lu"),
+    ("luxembourg sale dates winter 2027", "shop_soldes_lu"),
+    ("saldos luxemburgo datas 2027", "shop_soldes_lu"),
+    ("reglement grand-ducal soldes 2027 luxembourg", "shop_soldes_lu"),
     ("tell me a joke about the french sales calendar", None),
     ("blague sur le calendrier des soldes belges", None),
     # frontière jurée : le MONNAIE-solde reste chez les frères. La
@@ -402,9 +411,10 @@ CASES = [
     # CLASSE b108 — « mêmes mots, autres grammaires » : LU et BE sont
     # des lois rejouées (L. 221-3 + L. 222-9 ; VI.47-53 + C. civ. I.7),
     # elles routent et DATENT. Le leurre vendu la veille
-    # (« soldes d'hiver au luxembourg ») reste MORT : la fenêtre
-    # soldes LU n'est pas construite (rang 2 de la file) — le verbe
-    # rétractation seul ne doit jamais la faire vivre.
+    # (« soldes d'hiver au luxembourg ») est VIVANT depuis b110 —
+    # converti en aiguille plus haut ; le verbe rétractation seul ne
+    # doit jamais faire vivre la FENÊTRE soldes (autres mots, autre
+    # table), la frontière reste jouée par les vetos.
     ("colis reçu samedi au luxembourg, jusqu'à quand puis-je me "
      "rétracter", "shop_withdrawal"),
     ("achat en ligne belgique délai rétractation après réception",

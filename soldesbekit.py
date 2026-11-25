@@ -92,9 +92,9 @@ par nom portant leur fait : france → /shop/soldes-window (arrêté du
 27-05-2019, DEUXIÈME mercredi, quatre semaines, annexe de départements
 — une grammaire différente, pas une variante) ; luxembourg → dates
 fixées CHAQUE ANNÉE par règlement grand-ducal (loi du 23-12-2016,
-art. 4 (4) : « Un règlement grand-ducal fixe chaque année les dates
+art. 1er § 4 : « Un règlement grand-ducal fixe chaque année les dates
 d'ouverture et de clôture des deux périodes ») — table datée par acte,
-non fermée, en file (/shop/soldes-lu).
+non fermée ; ses dates vivent sous /shop/soldes-lu (b110).
 """
 
 import datetime as _date
@@ -218,9 +218,10 @@ _REFUSE_NOMMES = {
                "departements) — grammaire DIFFERENTE, voir "
                "/shop/soldes-window"),
     "luxembourg": ("le Luxembourg fixe ses dates CHAQUE ANNEE par "
-                   "reglement grand-ducal (loi du 23-12-2016 art. 4 (4)) "
-                   "— table datee par acte, non fermee, en file sous "
-                   "/shop/soldes-lu ; zéro date pretee a la memoire"),
+                   "reglement grand-ducal (loi du 23-12-2016 art. 1er "
+                   "§ 4) — table datee par acte, non fermee : ses "
+                   "dates vivent sous /shop/soldes-lu ; zero date "
+                   "pretee a la memoire"),
 }
 _REFUSE_GEN = (
     "luxemb", "suiss", "quebe", "canad", "ontario", "montreal",

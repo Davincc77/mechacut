@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldeslu_chaine2021_pin",
+ "path": "/api/v1/shop/soldes-lu",
+ "body": {
+  "year": 2021,
+  "season": "hiver"
+ }
+}

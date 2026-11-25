@@ -301,6 +301,7 @@ import retentionkit
 import voucherkit
 import soldeskit
 import soldesbekit
+import soldeslukit
 import pricedroprefundkit
 import money
 import numfmt
@@ -383,7 +384,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.30.0",
+    version="1.31.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2858,6 +2859,37 @@ def run_shop_soldes_be(args: dict):
 @app.post("/api/v1/shop/soldes-be")
 def api_shop_soldes_be(req: ShopSoldesBeRequest):
     body, err = run_shop_soldes_be(req.model_dump())
+    return err if err else body
+
+
+class ShopSoldesLuRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    year: int
+    territory: Optional[str] = None
+    season: Optional[str] = None
+    as_of: Optional[str] = None
+
+
+def run_shop_soldes_lu(args: dict):
+    try:
+        req = ShopSoldesLuRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = soldeslukit.soldes_lu(
+            req.year, territory=req.territory,
+            season=req.season, as_of=req.as_of)
+    except soldeslukit.SoldesLuError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/soldes-lu")
+def api_shop_soldes_lu(req: ShopSoldesLuRequest):
+    body, err = run_shop_soldes_lu(req.model_dump())
     return err if err else body
 
 
@@ -7027,6 +7059,7 @@ TOOL_RUN = {
            "shop_gift_voucher": run_shop_gift_voucher,
            "shop_soldes_window": run_shop_soldes_window,
            "shop_soldes_be": run_shop_soldes_be,
+           "shop_soldes_lu": run_shop_soldes_lu,
            "shop_withdrawal": run_shop_withdrawal,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
@@ -11855,9 +11888,9 @@ MCP_TOOLS = [
             "tool dates, it does not plead. Gate: Livre VI only "
             "(\u2264 2014 winters refused with the 1991-law facts); "
             "France is refused by name pointing at /shop/"
-            "soldes-window; Luxembourg is refused by name: its "
-            "dates are set EACH YEAR by r\u00e8glement "
-            "grand-ducal \u2014 no formula, no invented date. "
+            "soldes-window; Luxembourg is refused by name \u2014 its "
+            "dates are DATED BY ACT and live on their own card: "
+            "/shop/soldes-lu \u2014 no formula, no invented date. "
             "as_of is an argument. No network, free."
         ),
         "inputSchema": {
@@ -11887,6 +11920,81 @@ MCP_TOOLS = [
                                            "IN_PROGRESS|ENDED and "
                                            "the day counts \u2014 "
                                            "never a wall clock"},
+            },
+        },
+    },
+    {
+        "name": "shop_soldes_lu",
+        "description": (
+            "Luxembourg SALE WINDOWS as DATES from the ACTES "
+            "themselves \u2014 the law of 23-Dec-2016 art. 1 \u00a7 4 "
+            "says a r\u00e8glement grand-ducal fixes the opening and "
+            "closing dates EVERY YEAR: no second-Wednesday rule, no "
+            "Sunday clause, no formula. The grammar IS the act. Ten "
+            "replayed RGDS (M\u00e9m. A-807/2017 through A-330/2026) "
+            "date the years 2018..2027, each period with its act, its "
+            "M\u00e9morial number, its verbatim. Two RECTIFICATIFS of "
+            "TWO DIFFERENT KINDS travel named: the 2017 one fixes a "
+            "WEEKDAY LABEL only ('samedi, le 29 juin 2018' was a "
+            "Friday \u2014 same date, corrected name, M\u00e9m. "
+            "A-928); the 2023 one fixes the BOUNDARY itself "
+            "('samedi, le 23 juillet 2023' was a Sunday \u2014 the "
+            "Official Journal printed a false end, the rectification "
+            "A-96 says Saturday 22 July: the press and the "
+            "government communique had said 22 from the start, so "
+            "quoting A-511 without A-96 contradicts the State). The "
+            "2021 corona chain is THREE acts, one of them DEAD: "
+            "RGD 08-Oct-2020 fixed 2-30 January; RGD 30-Dec-2020 "
+            "POSTPONED to a later date WITHOUT naming one (no date "
+            "invented); RGD 13-Jan-2021 ABROGATED that postponement "
+            "and recabled Wednesday 20-Jan \u2192 Wednesday 17-Feb "
+            "inclusive. Divergence named, not averaged: the 2016 law "
+            "knows NO waiting period (zero 'attente' in the replayed "
+            "text \u2014 Belgium plays a one-month standstill, "
+            "France's old 7-day advertising window lived in the "
+            "repealed 2002 law). The one-month cap rides as a "
+            "VERIFIED invariant: no replayed period exceeds 30 days. "
+            "Gates: winters/summers \u2264 2017 refused with the "
+            "2002-law facts (RGD 15-Sep-2016 dated the old regime "
+            "\u2014 replayed via the official Chamber dossier, the "
+            "legilux ELI of that act 404s, source named); \u2265 "
+            "2028 refused because the next act is not signed yet "
+            "\u2014 zero extrapolation, the parcelmonitor lesson; "
+            "France and Belgium pointed to their own tables, other "
+            "calendars refused by name. as_of is an argument. No "
+            "network, free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["year"],
+            "additionalProperties": False,
+            "properties": {
+                "year": {"type": "integer",
+                           "description": "2018..2027 \u2014 the "
+                                          "bracketed-by-acts window; "
+                                          "year Y answers 'hiver "
+                                          "(Y-1)/Y' + '\u00e9t\u00e9 "
+                                          "Y' as the acts label "
+                                          "them; \u22642017 refused "
+                                          "with the 2002-law facts, "
+                                          "\u22652028 refused "
+                                          "because no act exists"},
+                "territory": {"type": "string",
+                                "description": "optional, closed: "
+                                               "luxembourg aliases "
+                                               "only; foreign "
+                                               "calendars refused "
+                                               "by name carrying "
+                                               "their fact"},
+                "season": {"type": "string",
+                             "description": "hiver | ete | both "
+                                            "(default both)"},
+                "as_of": {"type": "string",
+                            "description": "ISO day for status "
+                                           "UPCOMING|IN_PROGRESS|"
+                                           "ENDED and the day "
+                                           "counts \u2014 never a "
+                                           "wall clock"},
             },
         },
     },

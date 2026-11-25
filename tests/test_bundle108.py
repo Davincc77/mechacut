@@ -399,7 +399,11 @@ def test_ten_new_pins_are_replayable():
     # 331 pins vivants + 10 neufs, adds-only : RIEN perdu.
     # b109 relève ce total global : 341 + 3 dialectes neufs (adds-
     # only, la pin V23 remplacee PAR CONCEPTION comme celle de b108).
-    assert len(g) == 344
+    # b110 relève à 355 : +11 pins soldes-lu (adds-only, zero retiree ;
+    # la pin shop_soldesbe_luxembourg_refuse REMPLACEE par contrat
+    # change — le pointeur « en file » devient « vivent sous », gate
+    # paye 25-11, consigne dans le message du commit).
+    assert len(g) == 355
 
 
 def test_fr_response_byte_contract():

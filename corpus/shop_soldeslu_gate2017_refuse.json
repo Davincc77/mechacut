@@ -1,0 +1,7 @@
+{
+ "name": "shop_soldeslu_gate2017_refuse",
+ "path": "/api/v1/shop/soldes-lu",
+ "body": {
+  "year": 2017
+ }
+}

@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldeslu_terrebelgique_refuse",
+ "path": "/api/v1/shop/soldes-lu",
+ "body": {
+  "year": 2027,
+  "territory": "belgique"
+ }
+}

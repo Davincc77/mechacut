@@ -1,0 +1,7 @@
+{
+ "name": "shop_soldeslu_hiver2027_pin",
+ "path": "/api/v1/shop/soldes-lu",
+ "body": {
+  "year": 2027
+ }
+}

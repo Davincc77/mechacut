@@ -4639,7 +4639,114 @@
    },
    "name": "shop_soldesbe_luxembourg_refuse",
    "path": "/api/v1/shop/soldes-be",
-   "sha256": "e60c565d2374eead315ce5dfa978c1c2675e56e59b43c0025256de2947184574",
+   "sha256": "84d6b05c0cc36110add0f33bca2be37a7fe39de2503330a26b42558174b70d6d",
+   "status": 400
+  },
+  {
+   "body": {
+    "season": "printemps",
+    "year": 2027
+   },
+   "name": "shop_soldeslu_badseason_refuse",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "dcf80d0c62ce17721bee20c4c6e25119c16ebeeed0320f1e8b42f2e456796f1c",
+   "status": 400
+  },
+  {
+   "body": {
+    "season": "hiver",
+    "year": 2021
+   },
+   "name": "shop_soldeslu_chaine2021_pin",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "641ecba9a22281bef4eec2c59907f63139ec726c20199c5eb0b0d62a3639b9bd",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "ete",
+    "year": 2026
+   },
+   "name": "shop_soldeslu_ete2026_dimanche_pin",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "5a5b3863f247e885cfa5851b4a408788f283cb02fe788c53f978502f5d2de9a4",
+   "status": 200
+  },
+  {
+   "body": {
+    "year": 2028
+   },
+   "name": "shop_soldeslu_future2028_refuse",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "4190100f19cd349d9e009b15b240ae5590311ffb75e9a0190807304b5eca11e0",
+   "status": 400
+  },
+  {
+   "body": {
+    "year": 2017
+   },
+   "name": "shop_soldeslu_gate2017_refuse",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "35785c2632303a03ba17aff8d53188c4e5e83c932db6532b3083b6c389170d67",
+   "status": 400
+  },
+  {
+   "body": {
+    "year": 2027
+   },
+   "name": "shop_soldeslu_hiver2027_pin",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "2473d8dd88eea73442a33997092078159ba76a6fd4554979500f2be54b10a64f",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "ete",
+    "year": 2018
+   },
+   "name": "shop_soldeslu_rect2018_label_pin",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "464d9937f4f1018891f4b160d5bd7c4581de6bb88035d9829b8cd83a2411c250",
+   "status": 200
+  },
+  {
+   "body": {
+    "season": "ete",
+    "year": 2023
+   },
+   "name": "shop_soldeslu_rect2023_borne_pin",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "d8cd2cf70aaa570996cba3a7278fbed77b749e2c1fca12fb90cafe2f5fc4c3f2",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-25",
+    "year": 2026
+   },
+   "name": "shop_soldeslu_status2026_pin",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "891815e8bc2a05703e796418b2a6b944ec3c222bf2a13e18858c749c8f53e79f",
+   "status": 200
+  },
+  {
+   "body": {
+    "territory": "belgique",
+    "year": 2027
+   },
+   "name": "shop_soldeslu_terrebelgique_refuse",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "ccc9a6e61ef62ee67cb9fb3ce29785a68fa423b825e165e383197aed0bbfe24b",
+   "status": 400
+  },
+  {
+   "body": {
+    "territory": "france",
+    "year": 2027
+   },
+   "name": "shop_soldeslu_terrefrance_refuse",
+   "path": "/api/v1/shop/soldes-lu",
+   "sha256": "f7cdbf397653c0c70c1ced645ae803d8530904dee7bac5101d2f5ac85f5282ca",
    "status": 400
   },
   {

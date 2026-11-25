@@ -1,0 +1,8 @@
+{
+ "name": "shop_soldeslu_ete2026_dimanche_pin",
+ "path": "/api/v1/shop/soldes-lu",
+ "body": {
+  "year": 2026,
+  "season": "ete"
+ }
+}
