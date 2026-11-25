@@ -878,7 +878,7 @@ TEMPLATE = """<!DOCTYPE html>
     --gold: #d4af37; --line: #232323; --card: #121212;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body::before { content:""; position:fixed; top:0; bottom:0; left:8px; width:calc(50vw + 494px); z-index:-2; background:url(/static/brand/bg-hero.jpg) no-repeat left top / 100% auto; }
+  body::before { content:""; position:fixed; top:0; bottom:0; left:8px; width:calc(50vw + 494px); z-index:-2; background:url(/static/brand/bg-hero.jpg?v=25-11b) no-repeat left top / 100% auto; }
   body::after { content:""; position:fixed; inset:0; z-index:-1; background:rgba(10,12,18,.74); }
   .plain { font-size:1.06em; color:var(--ink); max-width:880px; }
   .thesis { border-left:3px solid var(--gold); background:var(--card); border-radius:0 12px 12px 0; padding:14px 18px; margin:16px 0; max-width:660px; }
