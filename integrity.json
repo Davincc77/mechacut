@@ -4696,6 +4696,95 @@
   },
   {
    "body": {
+    "country": "be",
+    "start_date": "2026-11-24"
+   },
+   "name": "shop_withdrawal_be_refuse_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "e9a1193fb810de79fba428dee56b1410eb63c92856a36e53c05c1cc1ea92705e",
+   "status": 400
+  },
+  {
+   "body": {
+    "start_date": "2026-12-11"
+   },
+   "name": "shop_withdrawal_christmas_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "bd437f2042be25601693453e75c49ae0a13c10e89462fac85c3ae2c28dc72230",
+   "status": 200
+  },
+  {
+   "body": {
+    "start_date": "2026-11-24"
+   },
+   "name": "shop_withdrawal_goods_plain_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "a396f313e01b0b27bb89e5046211a1e5995dd613c00f54f7d703fa996ee9f7c1",
+   "status": 200
+  },
+  {
+   "body": {
+    "start_date": "2026-04-24"
+   },
+   "name": "shop_withdrawal_holiday_chain_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "1d9c7343151d6b9f1d9e06e1815fdb86f26c18d5ced48e07ac671c83c102ade6",
+   "status": 200
+  },
+  {
+   "body": {
+    "info_missing": true,
+    "start_date": "2026-01-15"
+   },
+   "name": "shop_withdrawal_info12m_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "75e26e84ebc1cc4b5f5134f54434ca4451a6f364e41b253a08c6449d9639512c",
+   "status": 200
+  },
+  {
+   "body": {
+    "kind": "in_store",
+    "start_date": "2026-11-24"
+   },
+   "name": "shop_withdrawal_instore_refuse_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "e77aaef871550f3da0696524f3c4f3b16e86b1769db03154b36b06b3ba107ba2",
+   "status": 400
+  },
+  {
+   "body": {
+    "kind": "services",
+    "notified": "2026-12-01",
+    "start_date": "2026-11-17"
+   },
+   "name": "shop_withdrawal_notified_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "cc595cd8d287e9fd595c5a2c96d130ec2da49e1af3e2d4901fa680c4e761457f",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-06-01",
+    "info_date": "2026-05-30",
+    "start_date": "2026-01-15"
+   },
+   "name": "shop_withdrawal_restart_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "b236dc3cb7d5bb20214ad834978b0222631db4c6aaa05836d669e1364eadf947",
+   "status": 200
+  },
+  {
+   "body": {
+    "as_of": "2026-11-25",
+    "start_date": "2026-11-21"
+   },
+   "name": "shop_withdrawal_saturday_pin",
+   "path": "/api/v1/shop/withdrawal",
+   "sha256": "9598b4db47ca94d4691a3caa0ce0ce3a183bc3214ae1997f8136ef8518be8e1c",
+   "status": 200
+  },
+  {
+   "body": {
     "by": [
      {
       "dir": "desc",

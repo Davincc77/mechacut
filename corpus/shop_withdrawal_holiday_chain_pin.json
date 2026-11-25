@@ -1,0 +1,7 @@
+{
+ "name": "shop_withdrawal_holiday_chain_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2026-04-24"
+ }
+}

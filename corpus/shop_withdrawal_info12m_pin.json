@@ -1,0 +1,8 @@
+{
+ "name": "shop_withdrawal_info12m_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2026-01-15",
+  "info_missing": true
+ }
+}

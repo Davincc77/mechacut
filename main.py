@@ -292,6 +292,7 @@ import mcpsurfacekit
 import contexttaxkit
 import costdiffkit
 import tooltrimkit
+import withdrawalkit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -382,7 +383,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.27.0",
+    version="1.28.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2417,6 +2418,45 @@ def run_agent_tool_trim(args: dict):
 @app.post("/api/v1/agent/tool-trim")
 def api_agent_tool_trim(req: AgentToolTrimRequest):
     body, err = run_agent_tool_trim(req.model_dump())
+    return err if err else body
+
+
+class ShopWithdrawalRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    start_date: str
+    kind: Optional[str] = None
+    notified: Optional[str] = None
+    info_missing: Optional[bool] = None
+    info_date: Optional[str] = None
+    product_class: Optional[str] = None
+    as_of: Optional[str] = None
+    country: Optional[str] = None
+
+
+def run_shop_withdrawal(args: dict):
+    try:
+        req = ShopWithdrawalRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = withdrawalkit.withdrawal(
+            req.start_date, kind=req.kind or "goods",
+            notified=req.notified,
+            info_missing=bool(req.info_missing),
+            info_date=req.info_date,
+            product_class=req.product_class,
+            as_of=req.as_of, country=req.country or "fr")
+    except withdrawalkit.WithdrawalError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/shop/withdrawal")
+def api_shop_withdrawal(req: ShopWithdrawalRequest):
+    body, err = run_shop_withdrawal(req.model_dump())
     return err if err else body
 
 
@@ -6987,6 +7027,7 @@ TOOL_RUN = {
            "shop_gift_voucher": run_shop_gift_voucher,
            "shop_soldes_window": run_shop_soldes_window,
            "shop_soldes_be": run_shop_soldes_be,
+           "shop_withdrawal": run_shop_withdrawal,
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
@@ -11842,6 +11883,95 @@ MCP_TOOLS = [
                                            "IN_PROGRESS|ENDED and "
                                            "the day counts \u2014 "
                                            "never a wall clock"},
+            },
+        },
+    },
+    {
+        "name": "shop_withdrawal",
+        "description": (
+            "The statutory 14-day WITHDRAWAL (change-of-mind) "
+            "window as DATES, from one day: French law, Code de la "
+            "consommation section 6 replayed verbatim (L221-18 "
+            "start per contract family, L221-19 the calendar "
+            "grammar anchored to regulation 1182/71/CEE: start day "
+            "not counted, expiry at the last hour of day 14, "
+            "Saturday/Sunday/legal-holiday advances to the first "
+            "business day, holidays from our own cited L3133-1 "
+            "table), L221-20 twelve-month extension when the "
+            "withdrawal information was missing (plus a new "
+            "14-day period when it arrives late), L221-23/24 "
+            "return and refund clocks WITHOUT the advance rule "
+            "(divergence named, never averaged), L221-28 thirteen "
+            "closed exception classes with the verbatim clause. "
+            "start_date + kind goods|services|off_premises|"
+            "subscriptions + optional notified/info_date/"
+            "product_class/as_of \u2014 verdict OPEN|FINAL_DAY|"
+            "EXPIRED|NOT_WITHDRAWABLE. In-store refused by name "
+            "(no automatic right); BE/LU/BR/UK refused, not "
+            "replayed; the shop's voluntary window is "
+            "return-deadline, broken goods is legal-guarantee. "
+            "No network, no clock. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["start_date"],
+            "additionalProperties": False,
+            "properties": {
+                "start_date": {"type": "string",
+                               "description": "ISO YYYY-MM-DD of "
+                                              "the legal start: "
+                                              "receipt for goods "
+                                              "(LAST parcel when "
+                                              "split; FIRST for "
+                                              "regular), "
+                                              "conclusion for "
+                                              "services and "
+                                              "off-premises"},
+                "kind": {"type": "string",
+                         "description": "goods | services | "
+                                        "off_premises | "
+                                        "subscriptions (default "
+                                        "goods); in_store refused "
+                                        "by name"},
+                "notified": {"type": "string",
+                             "description": "ISO day the "
+                                            "withdrawal was "
+                                            "communicated \u2192 "
+                                            "return_by + refund_by "
+                                            "(14 calendar days, "
+                                            "no advance \u2014 "
+                                            "divergence named)"},
+                "info_missing": {"type": "boolean",
+                                 "description": "the withdrawal "
+                                                "information was "
+                                                "not supplied \u2192 "
+                                                "L221-20 twelve-"
+                                                "month extension"},
+                "info_date": {"type": "string",
+                              "description": "ISO day the late "
+                                             "information arrived "
+                                             "(implies "
+                                             "info_missing) \u2192 "
+                                             "new 14-day period "
+                                             "inside the "
+                                             "prolongation"},
+                "product_class": {"type": "string",
+                                  "description": "one of the 13 "
+                                                 "L221-28 classes "
+                                                 "\u2192 "
+                                                 "NOT_WITHDRAWABLE "
+                                                 "with the "
+                                                 "verbatim clause"},
+                "as_of": {"type": "string",
+                          "description": "ISO day for OPEN/"
+                                         "FINAL_DAY/EXPIRED \u2014 "
+                                         "an argument, never the "
+                                         "wall clock"},
+                "country": {"type": "string",
+                            "description": "fr only \u2014 the "
+                                           "replayed statute; "
+                                           "others refused by "
+                                           "name"},
             },
         },
     },

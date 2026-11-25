@@ -82,6 +82,13 @@ SAY = {
               "tenir, et combien ça rend ?",
         "pt": "115 ferramentas, janela 200k — quais desligar para "
               "caber, e quanto eu economizo?"},
+    "/api/v1/shop/withdrawal": {
+        "en": "parcel arrived Tuesday — what is the real last day "
+              "to change my mind, weekends and holidays counted?",
+        "fr": "reçu mardi — jusqu'à quand puis-je me rétracter, "
+              "fériés comptés ?",
+        "pt": "recebi o pacote terça — até que dia posso desistir "
+              "pela lei francesa, contando fim de semana e feriado?"},
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",

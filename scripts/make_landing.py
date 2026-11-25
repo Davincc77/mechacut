@@ -98,1548 +98,669 @@ PACK_TITLE = {
            "extract": "Extração e seleção", "logic": "Lógica e ordem"},
 }
 
-TR = {
+TR =   {
  "en": {
-  "meta.title": "Mechacut — same request, same bytes",
-  "meta.desc": "Deterministic transforms for AI agents: 53 tools, three "
-               "tiers, machine payments. No signup, no key, no storage.",
-  "nav.tools": "Bundles", "nav.numbers": "Proof", "nav.vision": "Vision",
-  "nav.api": "Contract",
-  "pill": "v{ver} · {n_tools} transforms · {n_recipes} recipes",
-  "hero1": "Meaning is learned.",
-  "hero.why": "<strong>Why determinism?</strong> Because a right answer that changes on every run is not an answer — it is a dice roll. A machine that returns the same bytes for the same question makes agents auditable: every response carries its checksum, every error names the offending field, and what you test in the morning is what you ship at night.",
-  "hero2": "Mechanics are known.",
-  "hero3": "Competence is not learned. It is served.",
-  "lede": "A suite of <strong>{n_tools} deterministic transforms</strong> "
-          "for AI agents — {n_free} free forever, {n_cap} free under "
-          "32 KB then pay-per-call, {n_paid} machine-payable — plus "
-          "{n_recipes} one-call recipes, free. The model stops guessing "
-          "what a checksum can prove.",
-  "bundles.h2": "The catalogue",
-  "bundles.creed": "A model computes. A server knows.",
-  "cat.search": "search a tool or your problem…",
-  "cat.hits": "~n~ of ~t~ tools",
-  "panel.copy": "copy curl",
-  "panel.copied": "copied",
-  "panel.close": "close",
-  "panel.say": "dis to your agent:",
-  "panel.got": "the server answered:",
-  "nav.menu": "menu",
-  "bundles.intro": "Same request, same bytes — every response carries its "
-                   "own sha256. Install one pack, or read the whole "
-                   "manifest in one request and let <code>GET /route</code> pick.",
-  "tiers.h2": "Three tiers, no accounts",
-  "tiers.intro": "Agents do not read pricing pages — so the price is in "
-                 "the protocol: a free route answers keyless, a capped "
-                 "route answers free under 32 KB, anything else gets an "
-                 "honest <code>402</code> with an x402 USDC-on-Base "
-                 "challenge, settled by a facilitator. Between a server "
-                 "and a robot, only prices and receipts exist.",
-  "bench.h2": "Measured, not promised",
-  "bench.creed": "The wall is FORM, not size — and we priced the door.",
-  "bench9.intro": "One deliberately vague French sentence, six required "
-                  "fields — money sorted to 2 decimals, percents, unique "
-                  "dates, URL, email, total. Expectations hand-computed "
-                  "before any run. The server builds the card "
-                  "(/intent/card); the model relays one line and the "
-                  "answer never passes through it.",
-  "bench9.with": "with the intake card",
-  "bench9.foot": "The 0.5B row reproduced on an independent second pass. "
-                 "Three identical live calls returned one sha256. The "
-                 "autonomous variant (the model picks the tool itself, no "
-                 "card played by the harness) also scores 6/6. Seeds, "
-                 "scripts, failures: bench/results_v9.jsonl.\n",
-  "bench10.intro": "Eighteen tasks with ONE right answer each — GS1 check "
-                   "digits, a SHA-256, chained discounts, a money column "
-                   "that proves its own decimal comma. Two free LOCAL "
-                   "models, no API spend: the harness asserts every route "
-                   "it calls is free. Golds were computed from the "
-                   "published specs before any model ran.",
-  "bench10.with": "with one relay call",
-  "bench10.foot": "Naked failures reproduce on an independent second "
-                  "pass, 18/18 verdicts identical — at temp 0 a retry "
-                  "never converges, it repeats. Raw runs: "
-                  "bench/results_v10.jsonl, method: "
-                  "bench/FINDINGS-V10.md.\n",
-        "bench.v23.sum": "A 1.7B trained for agents solved "
-                        "{v23_chain}/{v23_chain_cells} chains naked for "
-                        "${v23_cost} — our wall was TRAINING, not size; "
-                        "and the lock refused {v23_refused} right "
-                        "answers over their names.",
-        "bench.v23.intro": "The cross-family replication: the same 20 "
-                           "seeded problems, the same arms as v20, one "
-                           "model of another lineage (LFM3-1.7B, "
-                           "tri-hybrid, post-trained for tool calls). "
-                           "Nude {v23_n_all}/20, relayed {v23_s_all}/20, "
-                           "locked {v23_l_all}/20. Nothing here refutes "
-                           "v19: answering right once is not answering "
-                           "with the same byte thirty days running.",
-        "bench.v23.arm": "arm", "bench.v23.wins": "right /20",
-        "bench.v23.usd": "cost",
-        "bench.v23.foot": "Raw: bench/results_v23_lfm3.jsonl · method: "
-                          "bench/FINDINGS-V23.md · $ at frozen "
-                          "per-token prices.\n",
-        "bench.v20.sum": "The wall is AIM: llama 8B went "
-                         "{v20_8b_s}→{v20_8b_l}/20 with a target lock; "
-                         "the 7B signed its first {v20_7b_l}/20.",
-        "bench.v20.intro": "The promise of v17, measured: the answer "
-                           "must name the quantity it returns. Nude, "
-                           "the 8B computed right and answered beside "
-                           "it — {v20_aside} of its misses carried "
-                           "another quantity of the chain; the lock "
-                           "converted {v20_aside_conv}. {v20_cells} "
-                           "cells, and the naked arm replays v15 "
-                           "exactly ({v20_replay}).",
-        "bench.v20.model": "model", "bench.v20.naked": "naked",
-        "bench.v20.locked": "with the lock",
-        "bench.v20.foot": "Raw: bench/results_v20_target_lock.jsonl · "
-                          "method: bench/FINDINGS-V20.md.\n",
-        "bench.g1": "What they miss is executing, not thinking",
-        "bench.g2": "The wall is a SHAPE — and shapes are a training target",
-        "bench.g3": "Nobody says \"I'm not sure\" — paying more doesn't dodge the "
-                        "shape",
-        "bench.g4": "Reading is the ceiling no tool breaks",
-        "bench.g5": "The real regime: thirty days of the same job",
-        "bench.v11.sum": "Fifteen hostile tasks: the 7B goes {v11_7b_nu} to "
-                        "{v11_7b_relay} relayed; the 8B {v11_8b_nu} to "
-                        "{v11_8b_relay}.",
-        "bench.v11.foot": "Raw: bench/results_v11.jsonl · method: "
-                        "bench/FINDINGS-V11.md",
-        "bench.f5.sum": "{f5_wins}/{f5_cells} chain attempts with the fiche — "
-                        "criterion ≥19 PASSED; {f5_repairs} repaired by a named "
-                        "refusal; the 7B alone {f5_7b}.",
-        "bench.f5.foot": "Raw: bench/results_f5_accept.jsonl · method: "
-                        "bench/FINDINGS-F5.md",
-        "bench.v13.sum": "The negative result, published first: on real GSM8K the "
-                        "relay card falls to {v13_relay_05b}/20 for the 0.5B — "
-                        "asking the model for the decomposition still leaves it "
-                        "doing the decomposition.",
-        "bench.v13.foot": "Raw: bench/results_v13_gsm8k.jsonl · method: "
-                        "bench/FINDINGS-V13.md",
-        "bench.v14.sum": "Strict skill: {v14_breaks}/{v14_cells} protocol breaks — "
-                        "the class the form can guarantee — while reading stays "
-                        "free.",
-        "bench.v14.foot": "Raw: bench/results_v14_skill.jsonl · method: "
-                        "bench/FINDINGS-V14.md",
-        "bench.v22.sum": "Three frontier models answer {v22_nu} naked — one at "
-                        "{v22_best}, another at {v22_worst}. Through the frozen "
-                        "fiche: {v22_fiche}. Paying more doesn't change the shape.",
-        "bench.v22.foot": "Raw: bench/results_v22.jsonl · method: "
-                        "bench/FINDINGS-V22.md",
-        "bench.v22b.sum": "Five passes at agent temperature: {v22b_ok}/{v22b_cells} "
-                        "right — the SAME program twice: {v22b_stable}/14. The "
-                        "server: {v22b_shas} sha per problem.",
-        "bench.v22b.foot": "Raw: bench/results_v22b.jsonl · method: "
-                        "bench/FINDINGS-V22.md",
-        "bench.v24.sum": "Thirty days of the same CSV with a model that CAN do "
-                        "chains: {v24_sil}/{v24_days} days of empty answers after "
-                        "8,192 reasoning tokens, {v24_ok} right, billed ${v24_usd}. "
-                        "The machine: {v24_m_ok} at $0.00.",
-        "bench.f7.sum": "EN/PT copies of the seven chains: {f7_wins}/{f7_cells} — "
-                        "criterion ≥19 passed; {f7_rep} of them won by the named "
-                        "refusal. PT copy at 4/7 vs FR's 0/7 on the 0.5B: the "
-                        "reading ceiling belongs to model × language × form.",
-        "bench.f7.foot": "Raw: bench/results_f7_accept.jsonl · frozen criterion: bench/FINDINGS-F7.md",
-        "bench.v24.foot": "Raw: bench/results_v24_lfm3_30days.jsonl · the amendment "
-                        "lives in git history (run24 amendé)",
-        "bench.v19.sum": "{v19_wins}/{v19_days} attempts right for the models — "
-                        "machine: {v19_m_ok}/{v19_m_days} days on one identical "
-                        "hash; {v19_drift} different outputs from one model in 30 "
-                        "days.",
-        "bench.v19.intro": "The same dirty CSV cleaned 30 days in a "
-                        "row. Six-rule spec, a gold file written BY "
-                        "HAND before the harness, a retry arm that "
-                        "only ever sees its own format — never the "
-                        "answer. Temperature 0.7: the real regime of "
-                        "agents, disclosed.",
-        "bench.v19.arm": "arm", "bench.v19.right": "right days /30",
-        "bench.v19.distinct": "distinct outputs",
-        "bench.v19.foot": "Raw: bench/results_v19_csv_bill.jsonl · "
-                        "method + dollars: bench/FINDINGS-V19.md · "
-                        "replay: python bench/run19.py",
-        "bench.v17.sum": "Retry ×5 on a systematic miss: "
-                        "{v17_retry_wins}/{v17_retry_cells} chains "
-                        "fixed — the same mistake, ×5 the price.",
-        "bench.v17.intro": "Three arms, the same 20 fresh problems, "
-                        "every token counted: answer naked, retry "
-                        "five times, or hand the calculation to the "
-                        "server. Cells: {v17_cells}.",
-        "bench.v17.nu": "naked", "bench.v17.retry": "retry ×5",
-        "bench.v17.relay": "server does it (ok · tokens/right)",
-        "bench.v17.foot": "Raw: bench/results_v17_tokens.jsonl · "
-                        "bench/FINDINGS-V17.md · replay: python "
-                        "bench/run17.py",
-        "bench.v16.sum": "{v16_wrong} wrong answers in {v16_runs} "
-                        "runs — 'I'm not sure' said {v16_doubt} "
-                        "times.",
-        "bench.v16.intro": "Everyday word problems, freshly "
-                        "generated, each model asked to mark its own "
-                        "confidence honestly. They failed the same "
-                        "way every time: confidently.",
-        "bench.v16.foot": "Raw: bench/results_v16_calibration.jsonl · "
-                        "bench/FINDINGS-V16.md · generator: "
-                        "bench/gen16.py (seeded, double oracle).",
-        "bench.v15.sum": "The wall is a SHAPE: {v15_alone_wins}/"
-                        "{v15_cells} chain attempts solved naked or "
-                        "retried — {v15_best_arm}/{v15_arm_cells} by "
-                        "the best server arm.",
-        "bench.v15.intro": "The full matrix: 5 transports × 4 free "
-                        "models × 20 seeded problems (400 cells), "
-                        "hypotheses committed BEFORE the first run, "
-                        "failed predictions published first.",
-        "bench.v15.foot": "Raw: bench/results_v15_matrix.jsonl · "
-                        "bench/FINDINGS-V15.md · replay: python "
-                        "bench/run15.py && python bench/score15.py",
-        "bench.v12.sum": "{v12_zero} alone → {v12_hero} with one "
-                        "relay call. The zero becomes the hero.",
-        "bench.v10.sum": "One right answer each: {v10_alone} alone → "
-                        "{v10_server} relayed — at $0, audited by "
-                        "the harness itself.",
-        "bench.v9.sum": "One vague sentence, six keys: {v9_alone} → "
-                        "{v9_card} with the intake card.",
-        "bench.v6.sum": "The first matrix — naked vs relay. Every "
-                        "row, harness and failure: "
-                        "bench/FINDINGS.md.",
-  "bench12.intro": "Ten exact calculations (7834×9217, 0.1+0.2, chained "
-                   "percentages…) × four FREE local models × three arms: "
-                   "answering naked, writing Python, or relaying one "
-                   "expression to math/calc. Scores shown; the code arm's "
-                   "answers are float, the relay's are exact — same "
-                   "table, different physics.",
-  "bench12.code": "writes Python",
-  "bench12.relay": "relays to Mechacut",
-  "bench12.foot": "The 8B fails RELAY on protocol babble, not math — "
-                  "which is why the intake card writes the line for it. "
-                  "The 0.5B invented 89000098 naked and posts 9/10 "
-                  "relayed at 0.2 s median. Raw: bench/results_v12.jsonl, "
-                  "method: bench/FINDINGS-V12.md.\n",
-  "bench.intro": "A frozen task (seed 20261120): dirty CSV + broken JSON + "
-                 "URL list → one canonical YAML, expected answer pinned by "
-                 "sha256. Same weak local model (Qwen 2.5, temperature 0), "
-                 "one arm alone, one arm driving Mechacut. We publish the "
-                 "failures too — the 0.5B fails both arms, and a "
-                 "capability ceiling is a result.",
-  "bench.model": "model", "bench.alone": "alone", "bench.with": "with "
-                 "mechacut", "bench.tokens": "tokens consumed",
-  "bench.foot": "The 7B goes from 0 % to 100 % in a single pipeline call. "
-                "Every run, every token, is in bench/results.jsonl.",
-    "nav.build": "Build",
-      "nav.market": "Market",
-      "market.h2": "They say it too",
-      "market.creed": "The big houses converged on the same sentence — only the delivery differs.",
-  "build.h2": "What you can build tonight",
-  "build.intro": "You have a free small model on your machine. Here are "
-                 "three things to make it do — the quoted lines are what "
-                 "you say to your agent, the answers below are what the "
-                 "server really returned. No account, no card, no prayer.",
-  "build.r1.name": "The tax-ID gate",
-  "build.r1.say": "\u201cIs my client\u2019s VAT number FR40303265045 "
-                  "valid for the invoice?\u201d",
-  "build.r1.got": "{{ \"valid\": true, \"algorithm\": \"EU VAT "
-                  "check-digit rule for FR (published)\" }}",
-  "build.r1.why": "Alone, a 0.5B model computes check digits — and gets "
-                  "them wrong. Here the digits decide, so the invoice "
-                  "does not die at the accountant\u2019s. Every country\u2019s "
-                  "flavour lives on its own page: CNPJ for Brazil, SIREN "
-                  "and TVA for France.",
-  "build.r2.name": "The leak guard",
-  "build.r2.say": "\u201cScan this log before I paste it into a "
-                  "chatbot.\u201d",
-  "build.r2.got": "2 findings \u2192 seed [SEED_PHRASE] and key "
-                  "[OPENAI_KEY_1]",
-  "build.r2.why": "The scan answers with positions, never the value; the "
-                  "mask never returns the key. The secret came here for "
-                  "safekeeping — it stays safe from us too.",
-  "build.r3.name": "The incident relay",
-  "build.r3.say": "\u201crel\u00e8ve les montants et dates de cette note "
-                  "d\u2019incident\u201d \u2014 said in French, to a "
-                  "0.5B.",
-  "build.r3.got": "money [3200.00, 12450.75] \u00b7 6/6 keys in 320 "
-                  "tokens (alone: 0/6)",
-  "build.r3.why": "That is bench v9 verbatim: same task, same model, one "
-                  "relay line. Every run is in bench/results_v9.jsonl — "
-                  "replay it yourself.",
-  "build.connect": "Or skip the story and wire it now: paste this ONE "
-                 "line into ANY agent, even the smallest — it becomes "
-                 "the full manual:",
-    "everyday.h2": "For everyone",
-      "everyday.open": "Expand the proofs — real server outputs, no mockups.",
-  "everyday.intro": "No code, no jargon. Twenty-eight things a normal person "
-                    "asks an agent on a Tuesday — every answer below is "
-                    "the server's real output, not a mockup.",
-  "everyday.e1.name": "Guest Wi-Fi, one scan",
-  "everyday.e1.say": "\u201cTurn our Wi-Fi into a QR so guests stop "
-                    "asking the password.\u201d",
-  "everyday.e2.name": "The check, in words",
-  "everyday.e2.say": "\u201cWrite $1,234.56 in words for the check — "
-                    "the bank rejects typos.\u201d",
-  "everyday.e3.name": "IBAN before the wire",
-  "everyday.e3.say": "\u201cDid I copy this IBAN right? A bounced "
-                    "wire costs $45.\u201d",
-  "everyday.e4.name": "Recipe to printable page",
-  "everyday.e4.say": "\u201cMake my recipe notes a clean page \u2014 "
-                    "I want a PDF for the fridge.\u201d",
-  "everyday.e5.name": "Counting the days",
-  "everyday.e5.say": "\u201cHow many days until our trip?\u201d",
-  "everyday.e6.name": "Sale math the register will not do",
-  "everyday.e6.say": "\u201cMinus 30 %, then another 20 % \u2014 that "
-                     "is 50 % off, right?\u201d It is 44 %.",
-  "everyday.e7.name": "A third of the cake, nothing rounded in the dark",
-  "everyday.e7.say": "\u201cThis 6-serving cake, I want it for 2 \u2014 "
-                     "400 g flour, 5 eggs?\u201d 400 \u00d7 1/3 = 133 1/3 g "
-                     "exact, 135 g to weigh. The eggs are stated, not "
-                     "guessed.",
-  "everyday.e8.name": "Every other Tuesday, on the dot",
-  "everyday.e8.say": "\u201cBook club every other Tuesday at 7 \u2014 "
-                     "the next four dates?\u201d Nov 3, 17, Dec 1, 15: "
-                     "every two weeks means SKIPPING the weeks between \u2014 "
-                     "and the skipped weeks are named, not guessed.",
-  "everyday.e9.name": "One foot, three right answers",
-  "everyday.e9.say": "\u201cEU 42 2/3 or 42.5 \u2014 which one am I?\u201d "
-                     "Both charts round: the millimetre is exact, the "
-                     "half-size and third-size candidates are all "
-                     "printed, and the drift between systems is a "
-                     "stated number. Never one confident size.",
-  "everyday.e10.name": "Delayed flight — who owes me what",
-  "everyday.e10.say": "\u201cMy flight landed 3 h 20 late \u2014 what "
-                      "am I actually owed?\u201d The FLIGHT DATE picks "
-                      "the rule: before 2027-10-23 the old EC261 + "
-                      "case-law; on or after it, the new codified "
-                      "\u2018EXCEEDING three hours\u2019 table. Same "
-                      "facts either side of that line can pay "
-                      "differently. \u20ac or \u00a3, with the claim "
-                      "deadline as a real date.",
-  "everyday.e11.name": "Will my bag pass the gate",
-  "everyday.e11.say": "\u201cMy bag is 40\u00d718\u00d712, flight in "
-                      "November 2027 \u2014 free under the seat? The "
-                      "FLIGHT DATE decides: the 2027 law caps the "
-                      "under-seat item at 40\u00d730\u00d715, nothing "
-                      "before it. Rotation counts \u2014 faces sorted, "
-                      "never the order you typed.",
-  "everyday.e12.name": "The two tariffs, one honest number",
-  "everyday.e12.say": "\u201cPlan A is cheaper per kWh, plan B is "
-                      "cheaper per month \u2014 when does A really "
-                      "win?\u201d The crossover is (fixed gap \u00d7 "
-                      "days) \u00f7 (rate gap) \u2014 and the exact "
-                      "fraction, not the web's rounded intermediate: "
-                      "4,623\u2153 kWh where the article says \u201cabout "
-                      "4,623\u201d. \u201cNever\u201d is also an answer, "
-                      "named, when one plan wins on both parts.",
-  "everyday.e13.name": "What a point is really worth",
-  "everyday.e13.say": "\u201c29,000 points for a $438 flight minus "
-                      "$5.60 taxes — how much is a point, really?\u201d "
-                      "cpp = (cash − taxes) ÷ points × 100: the "
-                      "printed 1.49 hides the exact 1081/725 = "
-                      "1.491034…, subtracted BEFORE dividing. And the "
-                      "floor that says take-it-or-pay-cash is yours, "
-                      "never a stale table.",
-  "everyday.e14.name": "The billed weight, both chains printed",
-  "everyday.e14.say": "\u201cTwo carriers bill 6 kg and 5 kg for my "
-                      "40×30×25 box — who is wrong?\u201d Neither: "
-                      "30 000 cm³ ÷ 5 000 = 6 exactly, ÷ 6 000 = 5 "
-                      "exactly — two divisors, one honest chain, each "
-                      "step named. And carrier tables ROT (USPS moved "
-                      "166 → 139 in July 2026), so the divisor stays "
-                      "YOUR argument — never our memory.",
-  "everyday.e15.name": "The BOGO sign says 50 % — the bill does not",
-  "everyday.e15.say": "\u201cBuy one, get the second 50 % off — a "
-                      "$60 and a $40 hoodie, am I at −50, −25?\u201d "
-                      "Neither: the % hits the CHEAPER item (published "
-                      "retail rule), so the pair is 80 of 100 = −20 %. "
-                      "Equal prices would be −25 %, BOGO free −50 %, "
-                      "and a −30 coupon on top gives −47.5, never 55 — "
-                      "percentages multiply.",
-  "everyday.e16.name": "The 500 g pack became 400 g — at the same price",
-  "everyday.e16.say": "\u201c\u221220 % on the package?\u201d Not the "
-                      "same number as the shelf: losing 1/5 of the "
-                      "product costs +1/4 per unit (20 % vs 25 % — two "
-                      "denominators, 500 and 400). \u201c2 for $7\u201d "
-                      "of 15 oz jars vs one 24 oz at $3.99? The eye "
-                      "says promo, the exact fraction says the single "
-                      "jar wins — the bundle pays 40.3509 % more per "
-                      "ounce. And \u201c1 lb 4 oz\u201d IS 20 oz: the "
-                      "coupon was right, the cashier wasn\u2019t.",
-  "everyday.e17.name": "Thanksgiving Thursday: what time does the turkey leave the freezer",
-  "everyday.e17.say": "Eight calculators of Nov 2026 cite the same "
-                      "USDA table yet disagree: one puts the 16 lb bird "
-                      "in the fridge by Sat 21 10:00, the other says the "
-                      "long end means the 20th? This tool decides by a "
-                      "named rule: put in by = oven minus the long end "
-                      "of the published bracket; not before = minus the "
-                      "1-to-2-day hold. Hours are arguments, never the "
-                      "wall clock. And done is 165\u00b0F at the "
-                      "thermometer \u2014 the real judge.",
-  "everyday.e18.name": "The turkey is leftovers now \u2014 which day "
-                       "does the fridge window close",
-  "everyday.e18.say": "The press prints the rule in stone: \u201ceat "
-                      "it by Monday Nov 30\u201d (NBC, 19-Nov) next to "
-                      "\u201cno more than three days, 72 hours "
-                      "optimal\u201d (ky3, same day) \u2014 expired on "
-                      "Dec 1 and already disagreeing. The two FSIS "
-                      "pages themselves fight about the freezer (2-6 "
-                      "months vs 3-4): this tool renders the UNION of "
-                      "both published windows with both anchors, the "
-                      "2-hour gate STRICT from cooked_at (exactly 2 h "
-                      "passes, 2 h 01 discards), the 4th day named "
-                      "LAST_DAY \u2014 and quality labelled quality: "
-                      "safe indefinitely at 0\u00b0F. Dates are "
-                      "arguments; 165\u00b0F is the judge, gravy a "
-                      "rolling boil.",
-  "everyday.e19.name": "Three dishes want the oven — the countdown, "
-                       "every conflict named",
-  "everyday.e19.say": "Eight 2026 timelines publish the same dinner "
-                      "with rests of 20 to 60 minutes, 325 or 350 °F "
-                      "— and nobody counts the preheat that "
-                      "eats 45 minutes. Scheduled BACKWARDS from your "
-                      "serve_at (an argument, never the wall clock): "
-                      "one oven, one dish, rests outside; a dish "
-                      "entering the instant the previous leaves at "
-                      "another setting is a named conflict; a bare "
-                      "180 without a unit is refused; rest beyond 2 h "
-                      "hits the FSIS danger zone — same rule as "
-                      "the leftovers window.",
-  "everyday.e20.name": "Christmas ship-by dates \u2014 \u22652 sources "
-                     "per row, the outlier NAMED",
-  "everyday.e20.say": "Six holiday tables published Nov 13\u201321, "
-                      "2026 disagree: one syndicate prints FedEx "
-                      "Saver, 2Day and Overnight a full day later \u2014 "
-                      "silently, because its target is Dec 25, not "
-                      "Dec 24. This table keeps only rows where \u22652 "
-                      "sources agree, names the dissenter WITH its "
-                      "reason, derives every weekday from the "
-                      "calendar the press itself cites, refuses UPS "
-                      "Ground (zone-dependent \u2014 no single date "
-                      "exists) and never extrapolates a year. as_of "
-                      "is an argument: \u00ab how many days are left "
-                      "\u00bb is arithmetic, not a clock. The window "
-                      "dies Dec 23.",
-  "everyday.e21.name": "Holiday RETURN deadlines \u2014 \u22652 sources, "
-                     "provenance class on every row",
-  "everyday.e21.say": "The shared January-31 headline is a lie of "
-                      "omission: Target's purchase window closes Dec "
-                      "24, Best Buy's member rule splits at Dec 4, "
-                      "and parcelmonitor publishes last year's dates "
-                      "shifted by one as \u0027likely pattern\u0027 while "
-                      "Seller Central had published the 2026 text "
-                      "verbatim. This table keeps only rows with two "
-                      "concordant sources, carries provenance "
-                      "(published|press), names the Day-1 counting "
-                      "convention, refuses single-source retailers "
-                      "WITH the candidate fact, and never lets "
-                      "\u0027whichever is later\u0027 quietly become a "
-                      "guess: delivery date is an argument.",
-  "everyday.e22.name": "Is that crossed-out price LEGAL \u2014 the "
-                     "Omnibus 30-day rule, audited from your own "
-                     "history",
-  "everyday.e22.say": "EU law names the reference: the LOWEST price "
-                      "the shop applied in the previous 30 days "
-                      "(Directive 2019/2161 art. 6a) \u2014 and a "
-                      "weekend sale lowers that floor even after the "
-                      "price went back up (CJEU C-330/23). 100 "
-                      "\u2192 80 \u2192 100 \u2192 70 is a 12.5% cut, "
-                      "not 30%. The Commission's March 2026 sweep: "
-                      "30% of 314 traders got the reference wrong; "
-                      "Spain fined seven shops up to 350,000 EUR. "
-                      "Paste the shop's own price history and the "
-                      "cut's date \u2014 the machine returns the "
-                      "legal reference, the true percentage and a "
-                      "named verdict. It never fetches a price.",
-  "everyday.e23.name": "Price DROPPED after you paid — who owes the "
-                       "difference, by when, in which money",
-  "everyday.e23.say": "You bought at 100, the shop now shows 80. No "
-                      "law forces a refund — but the shops' own "
-                      "published guarantees do, and those windows "
-                      "are DATES: Target Dec 24, Best Buy Jan 15, "
-                      "Costco 30 days, Fnac-Darty the campaign "
-                      "itself (gift card, not cash), Amazon nothing "
-                      "at all. Paste purchase + drop dates and both "
-                      "prices — the machine returns the verdict, the "
-                      "claim deadline, the amount and the refund "
-                      "mode, with the source class on every row. It "
-                      "never fetches a price.",
-  "everyday.e24.name": "The gift broke AFTER the return window — "
-                       "what does the LAW still owe you, to the day",
-  "everyday.e24.say": "Christmas gift, delivered Dec 25, dies Jan "
-                      "16: the shop's goodwill window closed Jan 15 "
-                      "and the press stops answering here. The "
-                      "statute doesn't. France: the conformity "
-                      "guarantee runs 2 years from DELIVERY, the "
-                      "hidden-defect clock 2 years from DISCOVERY "
-                      "under a 20-year cap — three different "
-                      "anchors under the word 'garantie'. UK: "
-                      "three clocks again, 30 days to reject, six "
-                      "months of reversed burden (a PROOF rule, "
-                      "not a deadline), six years to sue — five in "
-                      "Scotland. Every answer is dated from your "
-                      "one input; where the official page "
-                      "contradicts itself (refurbished goods, "
-                      "24 vs 12 months), BOTH dates travel named. "
-                      "US and AU are refused by name: no federal "
-                      "countable window; 'reasonable time' is not "
-                      "a date.",
-    "everyday.e25.name": "Can I shred this folder? — the UK drawer "
-                       "hides FOUR clocks",
-  "everyday.e25.say": "\u201cSix years\u201d is ONE phrase for four "
-                      "different dates: VAT invoices count from "
-                      "the date ON THE DOCUMENT (even a paper "
-                      "describing a future event \u2014 the HMRC "
-                      "manual says so in those words), a limited "
-                      "company counts from the END of the financial "
-                      "year it relates to, Companies Act s.388 "
-                      "counts the same records THREE years if "
-                      "private, SIX if a plc \u2014 from the date "
-                      "MADE \u2014 and Self Assessment counts five "
-                      "years from a 31 January deadline that is on "
-                      "no document at all. The official examples "
-                      "are replayed: a 2022-23 return sent by 31 "
-                      "January 2024 keeps the paper until 31 "
-                      "January 2029, shred from 1 February. The "
-                      "four \u201cor longer if\u201d cases (late "
-                      "return, open compliance check) come back "
-                      "BLOCKED with their published reason \u2014 "
-                      "no invented date ever. The CH15400 minima "
-                      "table (replayed the day after it was "
-                      "updated, 23 November 2026) travels with the "
-                      "arbitrage: when two rules touch one paper, "
-                      "the LONGER governs.",
-  "everyday.e26.name": "The gift voucher that 'expired' may be legally "
-                       "alive — Ireland counts from the BUY",
-  "everyday.e26.say": "Ireland, Consumer Protection (Gift Vouchers) "
-                      "Act 2019, text replayed: a printed expiry "
-                      "shorter than FIVE YEARS from the purchase day "
-                      "is not voided — it is DEEMED REPLACED by five "
-                      "years, and the legal date OVERRIDES the paper "
-                      "one (66B(1)(b)+(c)). That is the JD Sports "
-                      "shape: one-year vouchers, ~\u20ac250,000 "
-                      "refunded this July after the CCPC's 20 "
-                      "November call-in. A card received at Christmas "
-                      "starts no clock that day — the anchor is the "
-                      "contract date and the RECIPIENT holds every "
-                      "right (66B(10)). A leftover of \u20ac1 or "
-                      "more is a refund owed \u2014 and this tool "
-                      "ships the \u20ac1.00 boundary conflict by "
-                      "name: the Act says 'or more', the CCPC FAQ "
-                      "says 'more than'. France, replayed too: NO "
-                      "statutory minimum exists \u2014 the printed "
-                      "date is contractual, and the '30 years' rumour "
-                      "belongs to real-property prescription, refused "
-                      "here by name.",
-  "everyday.e27.name": "French sales dates are a LAW, not a "
-                       "memory — 2027 opens Wednesday January "
-                       "6, and the law itself moved 2021",
-  "everyday.e27.say": "The arr\u00eate du 27 mai 2019, replayed: "
-                      "winter opens the second Wednesday of "
-                      "January at 8 h, ADVANCED to the first "
-                      "when the second falls after the 12th \u2014 "
-                      "2027 opens January 6, and every site "
-                      "printing \u00ab9 f\u00e9vrier\u00bb dropped the "
-                      "clause. Summer carries its own: last "
-                      "Wednesday of June, penultimate when the "
-                      "last falls after the 28th \u2014 2027 opens "
-                      "June 23. Four weeks, the start day "
-                      "counted. And the seven annual "
-                      "derogations no press table copies: "
-                      "\u00e9t\u00e9 2020 fixed to July 15; winter 2021 "
-                      "fixed to January 20 then CARRIED TO SIX "
-                      "WEEKS; Moselle opening June 26 ALONE; "
-                      "Guadeloupe moved to Thursday October 7, "
-                      "2021; the heatwaves carried 2023 and "
-                      "2026 to five weeks. The four eastern "
-                      "departments open \u00abpremier jour ouvr\u00e9\u00bb "
-                      "\u2014 an undefined word: for 2027 both "
-                      "windows travel, Monday 4 first, Saturday "
-                      "2 named, never averaged. Belgium, "
-                      "Luxembourg, Quebec: refused by name. "
-                      "Years before 2020: refused with art. 4. "
-                      "as_of is an argument \u2014 \u00ab43 days left\u00bb "
-                      "is arithmetic, not a clock.",
-  "everyday.e28.name": "Belgian sales dates: the SUNDAY clause "
-                       "IS the date — 2027 opens Saturday "
-                       "January 2, and the standstill closes "
-                       "January 1",
-  "everyday.e28.say": "Livre VI CDE replayed (in force "
-                      "31-May-2014): winter runs 3-31 January, "
-                      "from the 2ND when the 3rd is a Sunday — "
-                      "lived 2016, coming 2027 — and the SPF "
-                      "names the one-month standstill «du 2 "
-                      "décembre au 1er janvier» while some press "
-                      "still prints 3 December: the next-day "
-                      "boundary, in the act. Summer: 1-31 July, "
-                      "from June 30 on a Sunday July 1 — lived "
-                      "2018; its standstill is the NAMED «du 31 "
-                      "mai au 29 juin», which beats the generic "
-                      "formula (30 May): the named text governs. "
-                      "Corona years, each with its verbatim and "
-                      "numac: été 2020 moved to 1-31 August (loi "
-                      "27-mai-2020); winter 2021 REPORTED to "
-                      "Monday 4 January (AR 10-déc-2020 — the "
-                      "Sunday clause FIRED and was OVERRULED; "
-                      "both facts travel), then PROLONGED to 15 "
-                      "February by a LOI (02-févr-2021; the press "
-                      "said 14). Winters before 2015 refused "
-                      "with the 1991-law facts; France and "
-                      "Luxembourg refused by name — France is a "
-                      "different law, Luxembourg is dated EACH "
-                      "YEAR by grand-ducal decree: no formula, "
-                      "no invented date. The Conseil d'État "
-                      "annulled three fines on 20-May-2026; the "
-                      "dates still stand — this tool dates, it "
-                      "does not plead.",
-"nav.kit": "Kit",
-  "kit.h2": "The suite on your disk",
-  "kit.creed": "The protocol is not the transport \u2014 it is the birth certificate of the tool.",
-  "kit.intro": "The free transforms are not only an API. They are a suite: an agent can install them on its own machine, call them locally, and \u2014 the part no marketplace does \u2014 build new tools on the same gates. curl becomes kit call; a repeated task becomes a proposed contract; a proposal becomes a published tool only if its golds were drawn before its code.",
-  "kit.c1.sum": "Install \u2014 the base suite on the machine",
-  "kit.c1.foot": "Verified sha, no daemon, no auto-update, no network inside the engine. Stateless is the contract: the human decides when the kit moves.",
-  "kit.c2.sum": "Call \u2014 consult before acting",
-  "kit.c2.foot": "The skill asks the directory first. Same canon, same refusals, same golds as the datacenter \u2014 what is verified here is verified there, byte for byte.",
-  "kit.c3.sum": "Build \u2014 the second time, write the tool",
-  "kit.c3.foot": "Golds drawn BEFORE the code, AST-gate, pin-gate. Status: proposed, attested, network-verified \u2014 the kit grows locally, the proof grows back to the network. A lesson is a proposal; the bench locks it.",
-  "kit.howto.p1": "Install the skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 drop the file into your agent (CLAUDE.md, AGENTS.md, skills/). ~1,000 tokens, sized for small models.",
-  "kit.howto.p2": "Make it consult first: before acting, the agent describes the problem in one sentence to /route/resolve \u2014 the directory returns the tool that already exists, or says none does.",
-  "kit.howto.p3": "Call: stateless POSTs, keyless on free; the response carries its sha256, the refusal carries field + expected + example. Everything on this page works right now: one line installs the skill file, the directory answers, the free calls need no key.",
-  "kit.plain.sum": "Not a developer? No problem \u2014 we translate.",
-  "kit.plain.p1": "Open your usual AI assistant (Claude, ChatGPT, Grok, Copilot\u2026).",
-  "kit.plain.p2": "Send it this message: \u0022Read https://mechacut.studio/SKILL-MINI.md and follow it for my calculations.\u0022 Nothing to install, nothing to pay, no account.",
-  "kit.plain.p3": "Then ask your real task: \u002230% then 20% discount \u2014 what is that really?\u0022, \u0022how many days overdue is this invoice?\u0022 The numbers no longer come from its head \u2014 they come from the suite, and they are the same for everyone.",
-  "kit.plain.p4": "Did you ask for something the suite cannot do? Propose it \u0022 in plain words on the same page \u2014 every proposal is public, its verdict too: shipped, waiting, or refused with the reason named, at /proposals.",
-  "kit.dev.sum": "For developers \u2014 three lines, no account",
-  "kit.propose": "Propose a tool: POST /api/v1/agent/propose — a contract, never code; duplicate named, evidence shown, eligibility returned as a commit-ready blob. Nothing stored server-side. Protocol skill: /SKILL-KIT.md",
-  "bench.d82.sum": "Tool-call traces, judged: the same agent motion was re-emitted identically 0 out of 14 times (V22b) and a retry multiplied the bill \u00d74 without converging (V17) \u2014 loop/doom-check now says DOOM, CYCLIC or STORM on canonical bytes, thresholds named.",
-  "bench.d82.foot": "Identity on canonical (tool, args): key order never hides a loop. Two identical calls are not a loop \u2014 the threshold is stated, never guessed. All signals reported, the verdict is the most severe. Sources: bench/FINDINGS-V17.md \u00b7 run22b.",
-  "bench.e76.sum": "The bench judge became a route: eval/compare returns OK or WRONG with divergences named \u2014 2.5 versus \"2.50\" is never a disagreement, floats are never an argument.",
-  "bench.e76.foot": "Rule born from the V2 judge incident (it copied its own expectation): same quantity is never a divergence; a different quantity is named by pointer, kind, expected, got. Exact Decimal, never float.",
-  "bench.a79.sum": "Policy as closed grammar: check/allowlist returns ALLOW, DENY or AMBIGUOUS \u2014 the most specific rule wins, ties go to the human, silence never authorizes.",
-  "bench.a79.foot": "A regex-shaped action is refused, not evaluated: a gate that interprets is a backdoor. Exact Decimal amounts, ISO currency table, default deny true. Same law as the directory's R3, another domain.",
-"x402.h2": "Machine payments",
-  "x402.p1": "The paying path is four bytes of protocol: the server "
-             "answers <code>402</code> with requirements; the agent signs "
-             "an EIP-3009 USDC transfer; a facilitator verifies and "
-             "settles; the response replays proof in "
-             "<code>X-PAYMENT-RESPONSE</code>. The server holds no keys.",
-  "x402.p2": "Replayed payments are refused. Errors on paid routes stay "
-             "free. The ledger of every refusal is public: "
-             "<a href=\"/misses.json\">/misses.json</a>.",
-  "x402.bankr": "Same endpoints, second home: four paid transforms are also deployed on <a href=\"https://bankr.bot\">Bankr</a> x402 Cloud \u2014 identical code paths, identical sha256, paid through the Bankr rails: <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data\">chart</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json\">reshape</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json\">validate</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join\">csv-join</a>. The other 68 live only here, free tier included.",
-  "vision.h2": "Why determinism, why now",
-  "vision.p1": "A large language model is a machine that approximates. "
-               "Ask it what <code>sha256(\"abc\")</code> is and it will "
-               "answer confidently, fluently, and wrong. Ask it to "
-               "re-clean the same CSV every day and it will bill you in "
-               "tokens to re-derive what a function returns in "
-               "milliseconds — with the same bytes every time.",
-  "vision.p2": "The Apollo guidance computer had 4 KB of RAM. It landed "
-               "humans because the math was never asked to improvise: "
-               "constants were computed once, on the ground, in cold "
-               "blood, then frozen into core rope memory.",
-  "vision.quote": "Determinism was coded the first time to send us to the "
-                  "moon. Determinism will send AI to work.",
-  "vision.p3": "Mechacut is that frozen math for agents: closed "
-               "vocabularies, contracts that refuse what is outside the "
-               "table, errors that name the expected shape — the error is "
-               "the repair prompt. Meaning stays with the model. "
-               "Mechanics move here.",
-  "contract.h2": "The contract",
-  "contract.li1": "Same request → same bytes, sha256 on every response",
-  "contract.li2": "No signup, no API key, no rate wall below 30 req/min",
-  "contract.li3": "No storage: the only state is a 1-minute window, a "
-                  "60-minute ledger and a payment-nonce replay set",
-  "contract.li4": "Closed vocabularies — everything outside the table is "
-                  "refused, named, pointed at its expected shape",
-  "contract.li5": "Errors that repair: field, message, expected, always",
-  "contract.li6": "x402 machine payments: USDC on Base, facilitator "
-                  "verified, zero human in the loop",
-  "agents.line": "Speak agent: MCP tools, GET /agent/manifest ("
-                 "the whole suite in one request), GET /route?q=…, "
-                 "POST /api/v1/pipeline.",
-  "agents.hint": "install one pack",
-  "footer.family": "Mechacut is part of the C.V. family — see moovicut.",
+  'meta.title': 'Mechacut — same request, same bytes',
+  'meta.desc': 'Deterministic transforms for AI agents: 181 tools, three tiers, machine payments. No signup, no key, no storage.',
+  'nav.tools': 'Bundles',
+  'nav.numbers': 'Proof',
+  'nav.vision': 'Vision',
+  'nav.api': 'Contract',
+  'pill': 'v{ver} · {n_tools} transforms · {n_recipes} recipes',
+  'hero1': 'Meaning is learned.',
+  'hero.why': '<strong>Why determinism?</strong> Because a right answer that changes on every run is not an answer — it is a dice roll. A machine that returns the same bytes for the same question makes agents auditable: every response carries its checksum, every error names the offending field, and what you test in the morning is what you ship at night.',
+  'hero2': 'Mechanics are known.',
+  'hero3': 'Competence is not learned. It is served.',
+  'lede': 'A suite of <strong>{n_tools} deterministic transforms</strong> for AI agents — {n_free} free forever, {n_cap} free under 32 KB then pay-per-call, {n_paid} machine-payable — plus {n_recipes} one-call recipes, free. The model stops guessing what a checksum can prove.',
+  'bundles.h2': 'The catalogue',
+  'bundles.creed': 'A model computes. A server knows.',
+  'cat.search': 'search a tool or your problem…',
+  'cat.hits': '~n~ of ~t~ tools',
+  'panel.copy': 'copy curl',
+  'panel.copied': 'copied',
+  'panel.close': 'close',
+  'panel.say': 'dis to your agent:',
+  'panel.got': 'the server answered:',
+  'nav.menu': 'menu',
+  'bundles.intro': 'Same request, same bytes — every response carries its own sha256. Install one pack, or read the whole manifest in one request and let <code>GET /route</code> pick.',
+  'tiers.h2': 'Three tiers, no accounts',
+  'tiers.intro': 'Agents do not read pricing pages — so the price is in the protocol: a free route answers keyless, a capped route answers free under 32 KB, anything else gets an honest <code>402</code> with an x402 USDC-on-Base challenge, settled by a facilitator. Between a server and a robot, only prices and receipts exist.',
+  'bench.h2': 'Measured, not promised',
+  'bench.creed': 'The wall is FORM, not size — and we priced the door.',
+  'bench9.intro': 'One deliberately vague French sentence, six required fields — money sorted to 2 decimals, percents, unique dates, URL, email, total. Expectations hand-computed before any run. The server builds the card (/intent/card); the model relays one line and the answer never passes through it.',
+  'bench9.with': 'with the intake card',
+  'bench9.foot': 'The 0.5B row reproduced on an independent second pass. Three identical live calls returned one sha256. The autonomous variant (the model picks the tool itself, no card played by the harness) also scores 6/6. Seeds, scripts, failures: bench/results_v9.jsonl.\n',
+  'bench10.intro': 'Eighteen tasks with ONE right answer each — GS1 check digits, a SHA-256, chained discounts, a money column that proves its own decimal comma. Two free LOCAL models, no API spend: the harness asserts every route it calls is free. Golds were computed from the published specs before any model ran.',
+  'bench10.with': 'with one relay call',
+  'bench10.foot': 'Naked failures reproduce on an independent second pass, 18/18 verdicts identical — at temp 0 a retry never converges, it repeats. Raw runs: bench/results_v10.jsonl, method: bench/FINDINGS-V10.md.\n',
+  'bench.v23.sum': 'A 1.7B trained for agents solved {v23_chain}/{v23_chain_cells} chains naked for ${v23_cost} — our wall was TRAINING, not size; and the lock refused {v23_refused} right answers over their names.',
+  'bench.v23.intro': 'The cross-family replication: the same 20 seeded problems, the same arms as v20, one model of another lineage (LFM3-1.7B, tri-hybrid, post-trained for tool calls). Nude {v23_n_all}/20, relayed {v23_s_all}/20, locked {v23_l_all}/20. Nothing here refutes v19: answering right once is not answering with the same byte thirty days running.',
+  'bench.v23.arm': 'arm',
+  'bench.v23.wins': 'right /20',
+  'bench.v23.usd': 'cost',
+  'bench.v23.foot': 'Raw: bench/results_v23_lfm3.jsonl · method: bench/FINDINGS-V23.md · $ at frozen per-token prices.\n',
+  'bench.v20.sum': 'The wall is AIM: llama 8B went {v20_8b_s}→{v20_8b_l}/20 with a target lock; the 7B signed its first {v20_7b_l}/20.',
+  'bench.v20.intro': 'The promise of v17, measured: the answer must name the quantity it returns. Nude, the 8B computed right and answered beside it — {v20_aside} of its misses carried another quantity of the chain; the lock converted {v20_aside_conv}. {v20_cells} cells, and the naked arm replays v15 exactly ({v20_replay}).',
+  'bench.v20.model': 'model',
+  'bench.v20.naked': 'naked',
+  'bench.v20.locked': 'with the lock',
+  'bench.v20.foot': 'Raw: bench/results_v20_target_lock.jsonl · method: bench/FINDINGS-V20.md.\n',
+  'bench.g1': 'What they miss is executing, not thinking',
+  'bench.g2': 'The wall is a SHAPE — and shapes are a training target',
+  'bench.g3': 'Nobody says "I\'m not sure" — paying more doesn\'t dodge the shape',
+  'bench.g4': 'Reading is the ceiling no tool breaks',
+  'bench.g5': 'The real regime: thirty days of the same job',
+  'bench.v11.sum': 'Fifteen hostile tasks: the 7B goes {v11_7b_nu} to {v11_7b_relay} relayed; the 8B {v11_8b_nu} to {v11_8b_relay}.',
+  'bench.v11.foot': 'Raw: bench/results_v11.jsonl · method: bench/FINDINGS-V11.md',
+  'bench.f5.sum': '{f5_wins}/{f5_cells} chain attempts with the fiche — criterion ≥19 PASSED; {f5_repairs} repaired by a named refusal; the 7B alone {f5_7b}.',
+  'bench.f5.foot': 'Raw: bench/results_f5_accept.jsonl · method: bench/FINDINGS-F5.md',
+  'bench.v13.sum': 'The negative result, published first: on real GSM8K the relay card falls to {v13_relay_05b}/20 for the 0.5B — asking the model for the decomposition still leaves it doing the decomposition.',
+  'bench.v13.foot': 'Raw: bench/results_v13_gsm8k.jsonl · method: bench/FINDINGS-V13.md',
+  'bench.v14.sum': 'Strict skill: {v14_breaks}/{v14_cells} protocol breaks — the class the form can guarantee — while reading stays free.',
+  'bench.v14.foot': 'Raw: bench/results_v14_skill.jsonl · method: bench/FINDINGS-V14.md',
+  'bench.v22.sum': "Three frontier models answer {v22_nu} naked — one at {v22_best}, another at {v22_worst}. Through the frozen fiche: {v22_fiche}. Paying more doesn't change the shape.",
+  'bench.v22.foot': 'Raw: bench/results_v22.jsonl · method: bench/FINDINGS-V22.md',
+  'bench.v22b.sum': 'Five passes at agent temperature: {v22b_ok}/{v22b_cells} right — the SAME program twice: {v22b_stable}/14. The server: {v22b_shas} sha per problem.',
+  'bench.v22b.foot': 'Raw: bench/results_v22b.jsonl · method: bench/FINDINGS-V22.md',
+  'bench.v24.sum': 'Thirty days of the same CSV with a model that CAN do chains: {v24_sil}/{v24_days} days of empty answers after 8,192 reasoning tokens, {v24_ok} right, billed ${v24_usd}. The machine: {v24_m_ok} at $0.00.',
+  'bench.f7.sum': "EN/PT copies of the seven chains: {f7_wins}/{f7_cells} — criterion ≥19 passed; {f7_rep} of them won by the named refusal. PT copy at 4/7 vs FR's 0/7 on the 0.5B: the reading ceiling belongs to model × language × form.",
+  'bench.f7.foot': 'Raw: bench/results_f7_accept.jsonl · frozen criterion: bench/FINDINGS-F7.md',
+  'bench.v24.foot': 'Raw: bench/results_v24_lfm3_30days.jsonl · the amendment lives in git history (run24 amendé)',
+  'bench.v19.sum': '{v19_wins}/{v19_days} attempts right for the models — machine: {v19_m_ok}/{v19_m_days} days on one identical hash; {v19_drift} different outputs from one model in 30 days.',
+  'bench.v19.intro': 'The same dirty CSV cleaned 30 days in a row. Six-rule spec, a gold file written BY HAND before the harness, a retry arm that only ever sees its own format — never the answer. Temperature 0.7: the real regime of agents, disclosed.',
+  'bench.v19.arm': 'arm',
+  'bench.v19.right': 'right days /30',
+  'bench.v19.distinct': 'distinct outputs',
+  'bench.v19.foot': 'Raw: bench/results_v19_csv_bill.jsonl · method + dollars: bench/FINDINGS-V19.md · replay: python bench/run19.py',
+  'bench.v17.sum': 'Retry ×5 on a systematic miss: {v17_retry_wins}/{v17_retry_cells} chains fixed — the same mistake, ×5 the price.',
+  'bench.v17.intro': 'Three arms, the same 20 fresh problems, every token counted: answer naked, retry five times, or hand the calculation to the server. Cells: {v17_cells}.',
+  'bench.v17.nu': 'naked',
+  'bench.v17.retry': 'retry ×5',
+  'bench.v17.relay': 'server does it (ok · tokens/right)',
+  'bench.v17.foot': 'Raw: bench/results_v17_tokens.jsonl · bench/FINDINGS-V17.md · replay: python bench/run17.py',
+  'bench.v16.sum': "{v16_wrong} wrong answers in {v16_runs} runs — 'I'm not sure' said {v16_doubt} times.",
+  'bench.v16.intro': 'Everyday word problems, freshly generated, each model asked to mark its own confidence honestly. They failed the same way every time: confidently.',
+  'bench.v16.foot': 'Raw: bench/results_v16_calibration.jsonl · bench/FINDINGS-V16.md · generator: bench/gen16.py (seeded, double oracle).',
+  'bench.v15.sum': 'The wall is a SHAPE: {v15_alone_wins}/{v15_cells} chain attempts solved naked or retried — {v15_best_arm}/{v15_arm_cells} by the best server arm.',
+  'bench.v15.intro': 'The full matrix: 5 transports × 4 free models × 20 seeded problems (400 cells), hypotheses committed BEFORE the first run, failed predictions published first.',
+  'bench.v15.foot': 'Raw: bench/results_v15_matrix.jsonl · bench/FINDINGS-V15.md · replay: python bench/run15.py && python bench/score15.py',
+  'bench.v12.sum': '{v12_zero} alone → {v12_hero} with one relay call. The zero becomes the hero.',
+  'bench.v10.sum': 'One right answer each: {v10_alone} alone → {v10_server} relayed — at $0, audited by the harness itself.',
+  'bench.v9.sum': 'One vague sentence, six keys: {v9_alone} → {v9_card} with the intake card.',
+  'bench.v6.sum': 'The first matrix — naked vs relay. Every row, harness and failure: bench/FINDINGS.md.',
+  'bench12.intro': "Ten exact calculations (7834×9217, 0.1+0.2, chained percentages…) × four FREE local models × three arms: answering naked, writing Python, or relaying one expression to math/calc. Scores shown; the code arm's answers are float, the relay's are exact — same table, different physics.",
+  'bench12.code': 'writes Python',
+  'bench12.relay': 'relays to Mechacut',
+  'bench12.foot': 'The 8B fails RELAY on protocol babble, not math — which is why the intake card writes the line for it. The 0.5B invented 89000098 naked and posts 9/10 relayed at 0.2 s median. Raw: bench/results_v12.jsonl, method: bench/FINDINGS-V12.md.\n',
+  'bench.intro': 'A frozen task (seed 20261120): dirty CSV + broken JSON + URL list → one canonical YAML, expected answer pinned by sha256. Same weak local model (Qwen 2.5, temperature 0), one arm alone, one arm driving Mechacut. We publish the failures too — the 0.5B fails both arms, and a capability ceiling is a result.',
+  'bench.model': 'model',
+  'bench.alone': 'alone',
+  'bench.with': 'with mechacut',
+  'bench.tokens': 'tokens consumed',
+  'bench.foot': 'The 7B goes from 0 % to 100 % in a single pipeline call. Every run, every token, is in bench/results.jsonl.',
+  'nav.build': 'Build',
+  'nav.market': 'Market',
+  'market.h2': 'They say it too',
+  'market.creed': 'The big houses converged on the same sentence — only the delivery differs.',
+  'build.h2': 'What you can build tonight',
+  'build.intro': 'You have a free small model on your machine. Here are three things to make it do — the quoted lines are what you say to your agent, the answers below are what the server really returned. No account, no card, no prayer.',
+  'build.r1.name': 'The tax-ID gate',
+  'build.r1.say': '“Is my client’s VAT number FR40303265045 valid for the invoice?”',
+  'build.r1.got': '{{ "valid": true, "algorithm": "EU VAT check-digit rule for FR (published)" }}',
+  'build.r1.why': 'Alone, a 0.5B model computes check digits — and gets them wrong. Here the digits decide, so the invoice does not die at the accountant’s. Every country’s flavour lives on its own page: CNPJ for Brazil, SIREN and TVA for France.',
+  'build.r2.name': 'The leak guard',
+  'build.r2.say': '“Scan this log before I paste it into a chatbot.”',
+  'build.r2.got': '2 findings → seed [SEED_PHRASE] and key [OPENAI_KEY_1]',
+  'build.r2.why': 'The scan answers with positions, never the value; the mask never returns the key. The secret came here for safekeeping — it stays safe from us too.',
+  'build.r3.name': 'The incident relay',
+  'build.r3.say': '“relève les montants et dates de cette note d’incident” — said in French, to a 0.5B.',
+  'build.r3.got': 'money [3200.00, 12450.75] · 6/6 keys in 320 tokens (alone: 0/6)',
+  'build.r3.why': 'That is bench v9 verbatim: same task, same model, one relay line. Every run is in bench/results_v9.jsonl — replay it yourself.',
+  'build.connect': 'Or skip the story and wire it now: paste this ONE line into ANY agent, even the smallest — it becomes the full manual:',
+  'everyday.h2': 'For everyone',
+  'everyday.open': 'Expand the proofs — real server outputs, no mockups.',
+  'everyday.intro': "No code, no jargon. Twenty-seven things a normal person asks an agent on a Tuesday — every answer below is the server's real output, not a mockup.",
+  'everyday.e1.name': 'Guest Wi-Fi, one scan',
+  'everyday.e1.say': '“Turn our Wi-Fi into a QR so guests stop asking the password.”',
+  'everyday.e2.name': 'The check, in words',
+  'everyday.e2.say': '“Write $1,234.56 in words for the check — the bank rejects typos.”',
+  'everyday.e3.name': 'IBAN before the wire',
+  'everyday.e3.say': '“Did I copy this IBAN right? A bounced wire costs $45.”',
+  'everyday.e4.name': 'Recipe to printable page',
+  'everyday.e4.say': '“Make my recipe notes a clean page — I want a PDF for the fridge.”',
+  'everyday.e5.name': 'Counting the days',
+  'everyday.e5.say': '“How many days until our trip?”',
+  'everyday.e6.name': 'Sale math the register will not do',
+  'everyday.e6.say': '“Minus 30 %, then another 20 % — that is 50 % off, right?” It is 44 %.',
+  'everyday.e7.name': 'A third of the cake, nothing rounded in the dark',
+  'everyday.e7.say': '“This 6-serving cake, I want it for 2 — 400 g flour, 5 eggs?” 400 × 1/3 = 133 1/3 g exact, 135 g to weigh. The eggs are stated, not guessed.',
+  'everyday.e8.name': 'Every other Tuesday, on the dot',
+  'everyday.e8.say': '“Book club every other Tuesday at 7 — the next four dates?” Nov 3, 17, Dec 1, 15: every two weeks means SKIPPING the weeks between — and the skipped weeks are named, not guessed.',
+  'everyday.e9.name': 'One foot, three right answers',
+  'everyday.e9.say': '“EU 42 2/3 or 42.5 — which one am I?” Both charts round: the millimetre is exact, the half-size and third-size candidates are all printed, and the drift between systems is a stated number. Never one confident size.',
+  'everyday.e10.name': 'Delayed flight — who owes me what',
+  'everyday.e10.say': '“My flight landed 3 h 20 late — what am I actually owed?” The FLIGHT DATE picks the rule: before 2027-10-23 the old EC261 + case-law; on or after it, the new codified ‘EXCEEDING three hours’ table. Same facts either side of that line can pay differently. € or £, with the claim deadline as a real date.',
+  'everyday.e11.name': 'Will my bag pass the gate',
+  'everyday.e11.say': '“My bag is 40×18×12, flight in November 2027 — free under the seat? The FLIGHT DATE decides: the 2027 law caps the under-seat item at 40×30×15, nothing before it. Rotation counts — faces sorted, never the order you typed.',
+  'everyday.e12.name': 'The two tariffs, one honest number',
+  'everyday.e12.say': "“Plan A is cheaper per kWh, plan B is cheaper per month — when does A really win?” The crossover is (fixed gap × days) ÷ (rate gap) — and the exact fraction, not the web's rounded intermediate: 4,623⅓ kWh where the article says “about 4,623”. “Never” is also an answer, named, when one plan wins on both parts.",
+  'everyday.e13.name': 'What a point is really worth',
+  'everyday.e13.say': '“29,000 points for a $438 flight minus $5.60 taxes — how much is a point, really?” cpp = (cash − taxes) ÷ points × 100: the printed 1.49 hides the exact 1081/725 = 1.491034…, subtracted BEFORE dividing. And the floor that says take-it-or-pay-cash is yours, never a stale table.',
+  'everyday.e14.name': 'The billed weight, both chains printed',
+  'everyday.e14.say': '“Two carriers bill 6 kg and 5 kg for my 40×30×25 box — who is wrong?” Neither: 30 000 cm³ ÷ 5 000 = 6 exactly, ÷ 6 000 = 5 exactly — two divisors, one honest chain, each step named. And carrier tables ROT (USPS moved 166 → 139 in July 2026), so the divisor stays YOUR argument — never our memory.',
+  'everyday.e15.name': 'The BOGO sign says 50 % — the bill does not',
+  'everyday.e15.say': '“Buy one, get the second 50 % off — a $60 and a $40 hoodie, am I at −50, −25?” Neither: the % hits the CHEAPER item (published retail rule), so the pair is 80 of 100 = −20 %. Equal prices would be −25 %, BOGO free −50 %, and a −30 coupon on top gives −47.5, never 55 — percentages multiply.',
+  'everyday.e16.name': 'The 500 g pack became 400 g — at the same price',
+  'everyday.e16.say': '“−20 % on the package?” Not the same number as the shelf: losing 1/5 of the product costs +1/4 per unit (20 % vs 25 % — two denominators, 500 and 400). “2 for $7” of 15 oz jars vs one 24 oz at $3.99? The eye says promo, the exact fraction says the single jar wins — the bundle pays 40.3509 % more per ounce. And “1 lb 4 oz” IS 20 oz: the coupon was right, the cashier wasn’t.',
+  'everyday.e17.name': 'Thanksgiving turkey: the freezer clock AND the leftover window',
+  'everyday.e17.say': "Two clocks, one turkey. Fridge math (8 November 2026 calendars disagree on the same USDA table): in by = oven − longest tail, not before = − 1-2 day rest; hours are ARGUMENTS, never the wall clock; done = 165 °F at the probe. Leftovers: 'eat by Monday 30 November' (NBC) vs 'three days, 72 hours is the optimum' (ky3); FSIS contradicts itself on the freezer (2-6 vs 3-4 months) — the tool returns the UNION, two dated anchors, and 2 h STRICT since cooked_at (2 h flat passes, 2 h 01 discards), day 4 = LAST_DAY, quality named quality.",
+  'everyday.e18.name': 'Three dishes want the oven — the countdown, every conflict named',
+  'everyday.e18.say': 'Eight 2026 timelines publish the same dinner with rests of 20 to 60 minutes, 325 or 350 °F — and nobody counts the preheat that eats 45 minutes. Scheduled BACKWARDS from your serve_at (an argument, never the wall clock): one oven, one dish, rests outside; a dish entering the instant the previous leaves at another setting is a named conflict; a bare 180 without a unit is refused; rest beyond 2 h hits the FSIS danger zone — same rule as the leftovers window.',
+  'everyday.e19.name': 'Christmas ship-by dates — ≥2 sources per row, the outlier NAMED',
+  'everyday.e19.say': 'Six holiday tables published Nov 13–21, 2026 disagree: one syndicate prints FedEx Saver, 2Day and Overnight a full day later — silently, because its target is Dec 25, not Dec 24. This table keeps only rows where ≥2 sources agree, names the dissenter WITH its reason, derives every weekday from the calendar the press itself cites, refuses UPS Ground (zone-dependent — no single date exists) and never extrapolates a year. as_of is an argument: « how many days are left » is arithmetic, not a clock. The window dies Dec 23.',
+  'everyday.e20.name': 'Holiday RETURN deadlines — ≥2 sources, provenance class on every row',
+  'everyday.e20.say': "The shared January-31 headline is a lie of omission: Target's purchase window closes Dec 24, Best Buy's member rule splits at Dec 4, and parcelmonitor publishes last year's dates shifted by one as 'likely pattern' while Seller Central had published the 2026 text verbatim. This table keeps only rows with two concordant sources, carries provenance (published|press), names the Day-1 counting convention, refuses single-source retailers WITH the candidate fact, and never lets 'whichever is later' quietly become a guess: delivery date is an argument.",
+  'everyday.e21.name': 'Is that crossed-out price LEGAL — the Omnibus 30-day rule, audited from your own history',
+  'everyday.e21.say': "EU law names the reference: the LOWEST price the shop applied in the previous 30 days (Directive 2019/2161 art. 6a) — and a weekend sale lowers that floor even after the price went back up (CJEU C-330/23). 100 → 80 → 100 → 70 is a 12.5% cut, not 30%. The Commission's March 2026 sweep: 30% of 314 traders got the reference wrong; Spain fined seven shops up to 350,000 EUR. Paste the shop's own price history and the cut's date — the machine returns the legal reference, the true percentage and a named verdict. It never fetches a price.",
+  'everyday.e22.name': 'Price DROPPED after you paid — who owes the difference, by when, in which money',
+  'everyday.e22.say': "You bought at 100, the shop now shows 80. No law forces a refund — but the shops' own published guarantees do, and those windows are DATES: Target Dec 24, Best Buy Jan 15, Costco 30 days, Fnac-Darty the campaign itself (gift card, not cash), Amazon nothing at all. Paste purchase + drop dates and both prices — the machine returns the verdict, the claim deadline, the amount and the refund mode, with the source class on every row. It never fetches a price.",
+  'everyday.e23.name': 'The gift broke AFTER the return window — what does the LAW still owe you, to the day',
+  'everyday.e23.say': "Christmas gift, delivered Dec 25, dies Jan 16: the shop's goodwill window closed Jan 15 and the press stops answering here. The statute doesn't. France: the conformity guarantee runs 2 years from DELIVERY, the hidden-defect clock 2 years from DISCOVERY under a 20-year cap — three different anchors under the word 'garantie'. UK: three clocks again, 30 days to reject, six months of reversed burden (a PROOF rule, not a deadline), six years to sue — five in Scotland. Every answer is dated from your one input; where the official page contradicts itself (refurbished goods, 24 vs 12 months), BOTH dates travel named. US and AU are refused by name: no federal countable window; 'reasonable time' is not a date.",
+  'everyday.e24.name': 'Can I shred this folder? — the UK drawer hides FOUR clocks',
+  'everyday.e24.say': '“Six years” is ONE phrase for four different dates: VAT invoices count from the date ON THE DOCUMENT (even a paper describing a future event — the HMRC manual says so in those words), a limited company counts from the END of the financial year it relates to, Companies Act s.388 counts the same records THREE years if private, SIX if a plc — from the date MADE — and Self Assessment counts five years from a 31 January deadline that is on no document at all. The official examples are replayed: a 2022-23 return sent by 31 January 2024 keeps the paper until 31 January 2029, shred from 1 February. The four “or longer if” cases (late return, open compliance check) come back BLOCKED with their published reason — no invented date ever. The CH15400 minima table (replayed the day after it was updated, 23 November 2026) travels with the arbitrage: when two rules touch one paper, the LONGER governs.',
+  'everyday.e25.name': "The gift voucher that 'expired' may be legally alive — Ireland counts from the BUY",
+  'everyday.e25.say': "Ireland, Consumer Protection (Gift Vouchers) Act 2019, text replayed: a printed expiry shorter than FIVE YEARS from the purchase day is not voided — it is DEEMED REPLACED by five years, and the legal date OVERRIDES the paper one (66B(1)(b)+(c)). That is the JD Sports shape: one-year vouchers, ~€250,000 refunded this July after the CCPC's 20 November call-in. A card received at Christmas starts no clock that day — the anchor is the contract date and the RECIPIENT holds every right (66B(10)). A leftover of €1 or more is a refund owed — and this tool ships the €1.00 boundary conflict by name: the Act says 'or more', the CCPC FAQ says 'more than'. France, replayed too: NO statutory minimum exists — the printed date is contractual, and the '30 years' rumour belongs to real-property prescription, refused here by name.",
+  'everyday.e26.name': 'Sale dates, two grammars: France and Belgium',
+  'everyday.e26.say': "Two replayed calendars. France (arrete 27-May-2019): winter = 2nd Wednesday of January 8h, advanced when the 2nd falls after the 12th (2027: 6 January; the site printing 9 February lost the clause); summer = last Wednesday of June, the penultimate when the last falls after the 28th (2027: 23 June); four weeks, start day counted; seven derogations verbatim (Moselle alone on 26 June 2021; winter 2021 SIX WEEKS; Guadeloupe 7 October; heatwaves 2023 and 2026 five weeks); the word 'ouvré' is undefined: 2027 ships Monday 4 first, Saturday 2 named. Belgium (art. VI.25 CDE): winter 3-31 January, from the 2ND when the 3rd is a Sunday — lived 2016, coming 2027 — the SPF names the standstill «du 2 décembre au 1er janvier» while the press prints 3 December; summer 1-31 July, 30 June when July 1 is a Sunday — lived 2018; corona years: summer 2020 moved to 1-31 August, winter 2021 REPORTED to Monday 4 January, the clause fired and was overruled, then PROLONGED to 15 February by a LOI — headlines said 14. Luxembourg refused by name: dated EACH YEAR by grand-ducal decree. Conseil d'État 20-May-2026: fines annulled, dates stand.",
+  'everyday.e27.name': 'Received Tuesday — until WHEN can you change your mind',
+  'everyday.e27.say': "The law hands out its own calendar: section 6 replayed verbatim from legifrance 25-Nov — L221-18 names the start (receipt of the goods, conclusion of the service); L221-19: next day = day 1, midnight ends day 14, and a Saturday, Sunday or holiday pushes to the first business day, on OUR named L3133-1 table. Tuesday delivery 24 November → Tuesday 8 December; a Saturday 5 deadline → Monday 7; 8 May, Victoire 1945 → Monday 11. Missing information buys +12 months (L221-20); late delivery restarts a full 14 days. 13 exceptions quoted by clause (made-to-order, sealed hygiene goods, auctions). Sales, second-hand and destocking: the right still runs (article F10485). In-store: NO automatic right — refused by name. The shop's extra weeks are a different clock: /shop/return-deadline.",
+  'nav.kit': 'Kit',
+  'kit.h2': 'The suite on your disk',
+  'kit.creed': 'The protocol is not the transport — it is the birth certificate of the tool.',
+  'kit.intro': 'The free transforms are not only an API. They are a suite: an agent can install them on its own machine, call them locally, and — the part no marketplace does — build new tools on the same gates. curl becomes kit call; a repeated task becomes a proposed contract; a proposal becomes a published tool only if its golds were drawn before its code.',
+  'kit.c1.sum': 'Install — the base suite on the machine',
+  'kit.c1.foot': 'Verified sha, no daemon, no auto-update, no network inside the engine. Stateless is the contract: the human decides when the kit moves.',
+  'kit.c2.sum': 'Call — consult before acting',
+  'kit.c2.foot': 'The skill asks the directory first. Same canon, same refusals, same golds as the datacenter — what is verified here is verified there, byte for byte.',
+  'kit.c3.sum': 'Build — the second time, write the tool',
+  'kit.c3.foot': 'Golds drawn BEFORE the code, AST-gate, pin-gate. Status: proposed, attested, network-verified — the kit grows locally, the proof grows back to the network. A lesson is a proposal; the bench locks it.',
+  'kit.howto.p1': 'Install the skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> — drop the file into your agent (CLAUDE.md, AGENTS.md, skills/). ~1,000 tokens, sized for small models.',
+  'kit.howto.p2': 'Make it consult first: before acting, the agent describes the problem in one sentence to /route/resolve — the directory returns the tool that already exists, or says none does.',
+  'kit.howto.p3': 'Call: stateless POSTs, keyless on free; the response carries its sha256, the refusal carries field + expected + example. Everything on this page works right now: one line installs the skill file, the directory answers, the free calls need no key.',
+  'kit.plain.sum': 'Not a developer? No problem — we translate.',
+  'kit.plain.p1': 'Open your usual AI assistant (Claude, ChatGPT, Grok, Copilot…).',
+  'kit.plain.p2': 'Send it this message: "Read https://mechacut.studio/SKILL-MINI.md and follow it for my calculations." Nothing to install, nothing to pay, no account.',
+  'kit.plain.p3': 'Then ask your real task: "30% then 20% discount — what is that really?", "how many days overdue is this invoice?" The numbers no longer come from its head — they come from the suite, and they are the same for everyone.',
+  'kit.plain.p4': 'Did you ask for something the suite cannot do? Propose it " in plain words on the same page — every proposal is public, its verdict too: shipped, waiting, or refused with the reason named, at /proposals.',
+  'kit.dev.sum': 'For developers — three lines, no account',
+  'kit.propose': 'Propose a tool: POST /api/v1/agent/propose — a contract, never code; duplicate named, evidence shown, eligibility returned as a commit-ready blob. Nothing stored server-side. Protocol skill: /SKILL-KIT.md',
+  'bench.d82.sum': 'Tool-call traces, judged: the same agent motion was re-emitted identically 0 out of 14 times (V22b) and a retry multiplied the bill ×4 without converging (V17) — loop/doom-check now says DOOM, CYCLIC or STORM on canonical bytes, thresholds named.',
+  'bench.d82.foot': 'Identity on canonical (tool, args): key order never hides a loop. Two identical calls are not a loop — the threshold is stated, never guessed. All signals reported, the verdict is the most severe. Sources: bench/FINDINGS-V17.md · run22b.',
+  'bench.e76.sum': 'The bench judge became a route: eval/compare returns OK or WRONG with divergences named — 2.5 versus "2.50" is never a disagreement, floats are never an argument.',
+  'bench.e76.foot': 'Rule born from the V2 judge incident (it copied its own expectation): same quantity is never a divergence; a different quantity is named by pointer, kind, expected, got. Exact Decimal, never float.',
+  'bench.a79.sum': 'Policy as closed grammar: check/allowlist returns ALLOW, DENY or AMBIGUOUS — the most specific rule wins, ties go to the human, silence never authorizes.',
+  'bench.a79.foot': "A regex-shaped action is refused, not evaluated: a gate that interprets is a backdoor. Exact Decimal amounts, ISO currency table, default deny true. Same law as the directory's R3, another domain.",
+  'x402.h2': 'Machine payments',
+  'x402.p1': 'The paying path is four bytes of protocol: the server answers <code>402</code> with requirements; the agent signs an EIP-3009 USDC transfer; a facilitator verifies and settles; the response replays proof in <code>X-PAYMENT-RESPONSE</code>. The server holds no keys.',
+  'x402.p2': 'Replayed payments are refused. Errors on paid routes stay free. The ledger of every refusal is public: <a href="/misses.json">/misses.json</a>.',
+  'x402.bankr': 'Same endpoints, second home: four paid transforms are also deployed on <a href="https://bankr.bot">Bankr</a> x402 Cloud — identical code paths, identical sha256, paid through the Bankr rails: <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data">chart</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json">reshape</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json">validate</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join">csv-join</a>. The rest live only here, free tier included.',
+  'vision.h2': 'Why determinism, why now',
+  'vision.p1': 'A large language model is a machine that approximates. Ask it what <code>sha256("abc")</code> is and it will answer confidently, fluently, and wrong. Ask it to re-clean the same CSV every day and it will bill you in tokens to re-derive what a function returns in milliseconds — with the same bytes every time.',
+  'vision.p2': 'The Apollo guidance computer had 4 KB of RAM. It landed humans because the math was never asked to improvise: constants were computed once, on the ground, in cold blood, then frozen into core rope memory.',
+  'vision.quote': 'Determinism was coded the first time to send us to the moon. Determinism will send AI to work.',
+  'vision.p3': 'Mechacut is that frozen math for agents: closed vocabularies, contracts that refuse what is outside the table, errors that name the expected shape — the error is the repair prompt. Meaning stays with the model. Mechanics move here.',
+  'contract.h2': 'The contract',
+  'contract.li1': 'Same request → same bytes, sha256 on every response',
+  'contract.li2': 'No signup, no API key, no rate wall below 30 req/min',
+  'contract.li3': 'No storage: the only state is a 1-minute window, a 60-minute ledger and a payment-nonce replay set',
+  'contract.li4': 'Closed vocabularies — everything outside the table is refused, named, pointed at its expected shape',
+  'contract.li5': 'Errors that repair: field, message, expected, always',
+  'contract.li6': 'x402 machine payments: USDC on Base, facilitator verified, zero human in the loop',
+  'agents.line': 'Speak agent: MCP tools, GET /agent/manifest (the whole suite in one request), GET /route?q=…, POST /api/v1/pipeline.',
+  'agents.hint': 'install one pack',
+  'footer.family': 'Mechacut is part of the C.V. family — see moovicut.',
  },
  "fr": {
-  "meta.title": "Mechacut — même requête, mêmes octets",
-  "meta.desc": "Transformations déterministes pour agents IA : 53 outils, "
-               "trois paliers, paiements machine. Sans inscription, sans "
-               "clé, sans stockage.",
-  "nav.tools": "Bundles", "nav.numbers": "Preuves", "nav.vision":
-  "Vision", "nav.api": "Contrat",
-  "pill": "v{ver} · {n_tools} transformations · {n_recipes} recettes",
-  "hero1": "Le sens s'apprend.",
-  "hero.why": "<strong>Pourquoi le déterminisme ?</strong> Une réponse juste qui change à chaque exécution n'est pas une réponse — c'est un dé. À la même question, les mêmes octets : l'agent devient auditable, chaque réponse porte son empreinte, chaque erreur nomme le champ fautif — ce que vous testez le matin est ce que vous vendez le soir.",
-  "hero2": "La mécanique se sait.",
-  "hero3": "La compétence ne s'apprend pas. Elle se sert.",
-  "lede": "Une suite de <strong>{n_tools} transformations "
-          "déterministes</strong> pour agents IA — {n_free} gratuites à "
-          "jamais, {n_cap} sous 32 Ko puis payables à l\u2019appel, "
-          "{n_paid} par machine — {n_recipes} recettes "
-          "en appel unique, gratuites. Le modèle arrête de "
-          "deviner ce qu\u2019une somme de contrôle prouve.",
-  "bundles.h2": "Le catalogue",
-  "bundles.creed": "Un modèle calcule. Un serveur sait.",
-  "cat.search": "chercher un outil ou votre problème…",
-  "cat.hits": "~n~ outils sur ~t~",
-  "panel.copy": "copier curl",
-  "panel.copied": "copié",
-  "panel.close": "fermer",
-  "panel.say": "dis à ton agent :",
-  "panel.got": "le serveur a répondu :",
-  "nav.menu": "menu",
-  "bundles.intro": "Même requête, mêmes octets — chaque réponse porte son "
-                   "sha256. Installez un pack, ou lisez le manifeste entier "
-                   "en une requête et laissez <code>GET /route</code> choisir.",
-  "tiers.h2": "Trois paliers, zéro compte",
-  "tiers.intro": "Les agents ne lisent pas les pages de tarifs — donc le prix est dans le protocole : route gratuite sans clé, route plafonnée gratuite sous 32 Ko, ailleurs un <code>402</code> honnête avec défi x402 USDC sur Base, réglé par facilitateur. Entre un serveur et un robot, il n'y a que des prix et des reçus.",
-  "bench.h2": "Mesuré, pas promis",
-  "bench.creed": "Le mur, c'est la FORME, pas la taille — et nous avons chiffré la porte.",
-  "bench9.intro": "Une phrase française volontairement floue, six champs "
-                  "requis — montants triés à 2 décimales, pourcentages, "
-                  "dates uniques, URL, email, total. Attentes calculées à "
-                  "la main avant toute exécution. Le serveur construit la "
-                  "fiche (/intent/card) ; le modèle relais une ligne et la "
-                  "réponse ne le traverse jamais.",
-  "bench9.with": "avec la fiche d'intention",
-  "bench9.foot": "La ligne 0.5B reproduite lors d'un second passage "
-                 "indépendant. Trois appels live identiques → un seul "
-                 "sha256. La variante autonome (le modèle choisit l'outil "
-                 "lui-même) marque aussi 6/6. Graines, scripts, échecs : "
-                 "bench/results_v9.jsonl.\n",
-  "bench10.intro": "Dix-huit tâches à réponse UNIQUE — chiffres de "
-                   "contrôle GS1, un SHA-256, remises en cascade, une "
-                   "colonne de montants qui prouve elle-même sa virgule. "
-                   "Deux modèles gratuits et LOCAUX, zéro dépense d'API : "
-                   "le harnais vérifie que chaque route appelée est "
-                   "gratuite. Les réponses justes ont été calculées à "
-                   "partir des specs publiées AVANT tout appel modèle.",
-  "bench10.with": "avec un seul appel-relais",
-  "bench10.foot": "Les échecs nus se reproduisent à l'identique lors "
-                  "d'un second passage indépendant : 18/18 verdicts "
-                  "inchangés — à temp 0, recommencer ne converge pas, "
-                  "ça répète. Exécutions brutes : "
-                  "bench/results_v10.jsonl, méthode : "
-                  "bench/FINDINGS-V10.md.\n",
-        "bench.v23.sum": "Un 1,7 B entraîné pour les agents a résolu "
-                        "{v23_chain}/{v23_chain_cells} chaînes à nu pour "
-                        "${v23_cost} — notre mur était l'ENTRAÎNEMENT, "
-                        "pas la taille ; et le verrou a refusé "
-                        "{v23_refused} bonnes réponses pour leurs noms.",
-        "bench.v23.intro": "La réplication hors-famille : les mêmes 20 "
-                           "problèmes seedés, les mêmes bras que v20, un "
-                           "modèle d'une autre lignée (LFM3-1.7B, "
-                           "tri-hybride, post-entraîné au tool calling). "
-                           "Nu {v23_n_all}/20, relayé {v23_s_all}/20, "
-                           "verrouillé {v23_l_all}/20. Rien ici ne "
-                           "réfute v19 : répondre juste une fois n'est "
-                           "pas répondre au même octet trente jours de "
-                           "suite.",
-        "bench.v23.arm": "bras", "bench.v23.wins": "justes /20",
-        "bench.v23.usd": "coût",
-        "bench.v23.foot": "Brut : bench/results_v23_lfm3.jsonl · "
-                          "méthode : bench/FINDINGS-V23.md · $ aux "
-                          "tarifs par token gelés.\n",
-        "bench.v20.sum": "Le mur est une CIBLE : le llama 8B passe de "
-                         "{v20_8b_s} à {v20_8b_l}/20 avec le verrou de "
-                         "cible ; le 7B signe son premier "
-                         "{v20_7b_l}/20.",
-        "bench.v20.intro": "La promesse de v17 mesurée : la réponse "
-                           "doit nommer la quantité qu'elle rend. Nu, "
-                           "le 8B calculait juste et répondait à côté — "
-                           "{v20_aside} de ses fautes portaient une "
-                           "autre quantité de la chaîne, le verrou en a "
-                           "converti {v20_aside_conv}. {v20_cells} "
-                           "cellules, et le bras nu rejoue v15 à "
-                           "l'identique ({v20_replay}).",
-        "bench.v20.model": "modèle", "bench.v20.naked": "nu",
-        "bench.v20.locked": "avec verrou",
-        "bench.v20.foot": "Brut : bench/results_v20_target_lock.jsonl · "
-                          "méthode : bench/FINDINGS-V20.md.\n",
-        "bench.g1": "Ce qu'ils ratent n'est pas de réfléchir — c'est d'exécuter",
-        "bench.g2": "Le mur est une FORME — et les formes sont un objectif "
-                        "d'entraînement",
-        "bench.g3": "Personne ne dit « je ne suis pas sûr » — payer plus "
-                        "n'esquive pas la forme",
-        "bench.g4": "La lecture est le plafond qu'aucun outil ne franchit",
-        "bench.g5": "Le régime réel : trente jours du même job",
-        "bench.v11.sum": "Quinze tâches hostiles : le 7B passe de {v11_7b_nu} à "
-                        "{v11_7b_relay} en relais ; le 8B de {v11_8b_nu} à "
-                        "{v11_8b_relay}.",
-        "bench.v11.foot": "Brut : bench/results_v11.jsonl · méthode : "
-                        "bench/FINDINGS-V11.md",
-        "bench.f5.sum": "{f5_wins}/{f5_cells} tentatives en chaîne avec la fiche — "
-                        "critère ≥19 PASSÉ ; {f5_repairs} réparées par un refus "
-                        "nommé ; le 7B seul {f5_7b}.",
-        "bench.f5.foot": "Brut : bench/results_f5_accept.jsonl · méthode : "
-                        "bench/FINDINGS-F5.md",
-        "bench.v13.sum": "Le résultat négatif, publié en premier : sur GSM8K réel, "
-                        "la fiche-relais s'effondre à {v13_relay_05b}/20 pour le "
-                        "0.5B — demander la décomposition au modèle, c'est encore "
-                        "la lui laisser faire.",
-        "bench.v13.foot": "Brut : bench/results_v13_gsm8k.jsonl · méthode : "
-                        "bench/FINDINGS-V13.md",
-        "bench.v14.sum": "Skill stricte : {v14_breaks}/{v14_cells} ruptures de "
-                        "protocole — la seule classe que la forme garantit — la "
-                        "lecture, elle, reste libre.",
-        "bench.v14.foot": "Brut : bench/results_v14_skill.jsonl · méthode : "
-                        "bench/FINDINGS-V14.md",
-        "bench.v22.sum": "Trois modèles frontière, {v22_nu} justes nus — l'un "
-                        "{v22_best}, l'autre {v22_worst}. Par la fiche gelée : "
-                        "{v22_fiche}. Payer plus ne change pas la forme.",
-        "bench.v22.foot": "Brut : bench/results_v22.jsonl · méthode : "
-                        "bench/FINDINGS-V22.md",
-        "bench.v22b.sum": "Cinq passes au régime des agents : {v22b_ok}/{v22b_cells} "
-                        "justes — le MÊME programme deux fois : {v22b_stable}/14. "
-                        "Le serveur : {v22b_shas} sha par problème.",
-        "bench.v22b.foot": "Brut : bench/results_v22b.jsonl · méthode : "
-                        "bench/FINDINGS-V22.md",
-        "bench.v24.sum": "Trente jours sur le même CSV avec un modèle QUI SAIT les "
-                        "chaînes : {v24_sil}/{v24_days} jours de réponse vide après "
-                        "8 192 tokens de raisonnement, {v24_ok} justes, facturés "
-                        "${v24_usd}. La machine : {v24_m_ok} à 0,00 $.",
-        "bench.f7.sum": "Les sept chaînes recopiées EN/PT : {f7_wins}/{f7_cells} — "
-                        "critère ≥19 PASSÉ ; {f7_rep} gagnées par le refus nommé. "
-                        "Le 0.5b copie 4/7 en PT là où le FR le mettait à 0/7 : le "
-                        "plafond de lecture est du modèle × langue × forme.",
-        "bench.f7.foot": "Brut : bench/results_f7_accept.jsonl · critère gelé : bench/FINDINGS-F7.md",
-        "bench.v24.foot": "Brut : bench/results_v24_lfm3_30days.jsonl · l'amendement "
-                        "est dans l'historique git (run24 amendé)",
-        "bench.v19.sum": "{v19_wins}/{v19_days} tentatives justes pour les modèles — "
-                        "machine : {v19_m_ok}/{v19_m_days} jours sur un même octet "
-                        "; {v19_drift} sorties différentes pour un seul modèle en "
-                        "30 jours.",
-        "bench.v19.intro": "Le même CSV sale nettoyé 30 jours de suite. "
-                        "Spéc à six règles, gold ÉCRIT À LA MAIN avant "
-                        "le banc, un bras retry qui ne voit que sa "
-                        "propre forme — jamais la réponse. Température "
-                        "0,7 : le régime réel des agents, publié.",
-        "bench.v19.arm": "bras", "bench.v19.right": "jours justes /30",
-        "bench.v19.distinct": "sorties distinctes",
-        "bench.v19.foot": "Brut : bench/results_v19_csv_bill.jsonl · "
-                        "méthode + dollars : bench/FINDINGS-V19.md · "
-                        "rejeu : python bench/run19.py",
-        "bench.v17.sum": "Retry ×5 sur une erreur systématique : "
-                        "{v17_retry_wins}/{v17_retry_cells} chaînes "
-                        "réparées — la même faute, 5× le prix.",
-        "bench.v17.intro": "Trois bras, les mêmes 20 problèmes neufs, "
-                        "chaque token compté : répondre nu, recommencer "
-                        "cinq fois, ou donner le calcul au serveur. "
-                        "Cellules : {v17_cells}.",
-        "bench.v17.nu": "nu", "bench.v17.retry": "retry ×5",
-        "bench.v17.relay": "serveur (ok · tokens/juste)",
-        "bench.v17.foot": "Brut : bench/results_v17_tokens.jsonl · "
-                        "bench/FINDINGS-V17.md · rejeu : python "
-                        "bench/run17.py",
-        "bench.v16.sum": "{v16_wrong} fautes en {v16_runs} runs — "
-                        "« je ne suis pas sûr » dit {v16_doubt} fois.",
-        "bench.v16.intro": "Des problèmes du quotidien générés à la "
-                        "volée, chaque modèle prié de marquer "
-                        "honnêtement sa confiance. Ils ont échoué "
-                        "toujours de la même façon : avec assurance.",
-        "bench.v16.foot": "Brut : bench/results_v16_calibration.jsonl "
-                        "· bench/FINDINGS-V16.md · générateur : "
-                        "bench/gen16.py (seedé, double oracle).",
-        "bench.v15.sum": "Le mur a une FORME : {v15_alone_wins}/"
-                        "{v15_cells} tentatives en chaîne nues ou en "
-                        "retry — {v15_best_arm}/{v15_arm_cells} avec "
-                        "le meilleur bras serveur.",
-        "bench.v15.intro": "La matrice complète : 5 transports × 4 "
-                        "modèles gratuits × 20 problèmes seedés "
-                        "(400 cellules), hypothèses commitées AVANT la "
-                        "première cellule, prédictions ratées publiées "
-                        "en premier.",
-        "bench.v15.foot": "Brut : bench/results_v15_matrix.jsonl · "
-                        "bench/FINDINGS-V15.md · rejeu : python "
-                        "bench/run15.py && python bench/score15.py",
-        "bench.v12.sum": "{v12_zero} seul → {v12_hero} avec un seul "
-                        "relais. Le zéro devient héros.",
-        "bench.v10.sum": "Une seule bonne réponse chacun : {v10_alone} "
-                        "seul → {v10_server} relayé — à 0 $, audité "
-                        "par le banc lui-même.",
-        "bench.v9.sum": "Une phrase vague, six clés : {v9_alone} → "
-                        "{v9_card} avec la carte d'intention.",
-        "bench.v6.sum": "La première matrice — nu vs relais. Chaque "
-                        "ligne, chaque harnais, chaque échec : "
-                        "bench/FINDINGS.md.",
-  "bench12.intro": "Dix calculs exacts (7834×9217, 0.1+0.2, pourcentages "
-                   "en chaîne…) × quatre modèles locaux GRATUITS × trois "
-                   "bras : répondre nu, écrire du Python, ou relayer une "
-                   "expression vers math/calc. Même tableau, deux "
-                   "physiques : le bras code rend du flottant, le relais "
-                   "rend de l'exact.",
-  "bench12.code": "écrit du Python",
-  "bench12.relay": "relais Mechacut",
-  "bench12.foot": "Le 8B échoue au RELAIS sur le babil protocole, pas "
-                  "sur les maths — c'est pourquoi la fiche d'intention "
-                  "écrit la ligne à sa place. Nu, le 0.5B inventait "
-                  "89000098 ; relayé, il sort 9/10 en 0,2 s médian. "
-                  "Brut : bench/results_v12.jsonl, méthode : "
-                  "bench/FINDINGS-V12.md.\n",
-  "bench.intro": "Une tâche gelée (seed 20261120) : CSV sale + JSON cassé "
-                 "+ liste d'URLs → un YAML canonique, réponse attendue "
-                 "épinglée par sha256. Même modèle local faible (Qwen "
-                 "2.5, température 0), un bras seul, un bras avec "
-                 "Mechacut. On publie aussi les échecs — le 0.5B échoue "
-                 "aux deux bras, et un plafond de capacité est un "
-                 "résultat.",
-  "bench.model": "modèle", "bench.alone": "seul", "bench.with": "avec "
-                 "mechacut", "bench.tokens": "tokens consommés",
-  "bench.foot": "Le 7B passe de 0 % à 100 % en un seul appel pipeline. "
-                "Chaque exécution, chaque token, est dans "
-                "bench/results.jsonl.",
-    "nav.build": "Construire",
-      "nav.market": "Eux aussi",
-      "market.h2": "Ils le disent aussi",
-      "market.creed": "Les grandes maisons ont convergé sur la même phrase — seule la façon de la livrer diffère.",
-  "build.h2": "Ce que tu peux construire ce soir",
-  "build.intro": "Tu as un petit modèle gratuit sur ta machine. Voici trois choses à lui faire faire — les phrases citées sont celles que tu dis à l’agent, les réponses sont celles du serveur, vraiment rendues. Pas de compte, pas de carte, pas de prière.",
-  "build.r1.name": "Le contr\u00f4le de TVA (France)",
-  "build.r1.say": "\u00ab Le num\u00e9ro de TVA de mon client, "
-                  "FR40303265045, est-il valide pour la facture ? \u00bb",
-  "build.r1.got": "{{ \"valid\": true, \"algorithm\": \"EU VAT "
-                  "check-digit rule for FR (published)\" }}",
-  "build.r1.why": "Seul, un 0.5B \u00ab calcule \u00bb la cl\u00e9 de "
-                  "contr\u00f4le \u2014 et se trompe. Ici ce sont les "
-                  "chiffres qui d\u00e9cident : la facture ne meurt pas "
-                  "chez le comptable.",
-"build.r2.name": "Le garde-fuite",
-  "build.r2.say": "\u00ab Scanne ce log avant que je le colle dans un "
-                  "chatbot. \u00bb",
-  "build.r2.got": "2 findings \u2192 graine [SEED_PHRASE] et cl\u00e9 "
-                  "[OPENAI_KEY_1]",
-  "build.r2.why": "Le scan r\u00e9pond des positions, jamais la valeur ; "
-                  "le masque ne renvoie jamais la cl\u00e9. Le secret est "
-                  "venu ici — et il reste prot\u00e9g\u00e9 m\u00eame de "
-                  "nous.",
-  "build.r3.name": "Le relai d\u2019incident",
-  "build.r3.say": "\u00ab rel\u00e8ve les montants et dates de cette note "
-                  "d\u2019incident \u00bb \u2014 dit en fran\u00e7ais,\u00e0 un 0.5B.",
-  "build.r3.got": "money [3200.00, 12450.75] \u00b7 6/6 en 320 tokens "
-                  "(seul : 0/6)",
-  "build.r3.why": "C\u2019est le bench v9, \u00e0 l\u2019identique : "
-                  "m\u00eame t\u00e2che, m\u00eame mod\u00e8le, une "
-                  "ligne de relai. Toutes les ex\u00e9cutions sont dans "
-                  "bench/results_v9.jsonl — rejoue-les.",
-  "build.connect": "Ou branche-le tout de suite : colle CETTE ligne "
-                 "dans n'importe quel agent, m\u00eame le plus petit "
-                 "\u2014 elle devient le manuel complet :",
-    "everyday.h2": "Pour tout le monde",
-      "everyday.open": "Dérouler les preuves — sorties réelles du serveur, pas des maquettes.",
-  "everyday.intro": "Pas de code, pas de jargon. Vingt-huit choses qu'un humain "
-                    "demande à son agent un mardi "
-                    "\u2014 chaque preuve ci-dessous est ouverte.",
-  "everyday.e1.name": "Wi-Fi invit\u00e9s, un scan",
-  "everyday.e1.say": "\u00ab Transforme le Wi-Fi en QR pour que les "
-                     "invit\u00e9s arr\u00eatent de demander le mot de "
-                     "passe. \u00bb",
-  "everyday.e2.name": "Le ch\u00e8que, en lettres",
-  "everyday.e2.say": "\u00ab \u00c9cris 1 234,56 \u20ac en toutes "
-                     "lettres pour le ch\u00e8que \u2014 la banque "
-                     "refuse les approximations. \u00bb",
-  "everyday.e3.name": "IBAN avant le virement",
-  "everyday.e3.say": "\u00ab J'ai bien recopi\u00e9 cet IBAN ? 60 \u20ac "
-                     "de frais si le virement rebondit. \u00bb",
-  "everyday.e4.name": "Recette en page imprimable",
-  "everyday.e4.say": "\u00ab Mets mes notes de recette en page propre "
-                     "\u2014 je veux un PDF pour le frigo. \u00bb",
-  "everyday.e5.name": "Compter les jours",
-  "everyday.e5.say": "\u00ab Combien de jours avant les "
-                     "vacances ? \u00bb",
-  "everyday.e6.name": "Le compte que la caisse ne fera pas",
-  "everyday.e6.say": "\u00ab -30 % puis -20 %, \u00e7a fait -50 %, "
-                     "non ? \u00bb En fait -44 %.",
-  "everyday.e7.name": "Un tiers du g\u00e2teau, sans arrondi cach\u00e9",
-  "everyday.e7.say": "\u00ab Mon g\u00e2teau pour 6, je le veux pour 2 "
-                     "\u2014 400 g de farine, 5 \u0153ufs ? \u00bb 400 "
-                     "\u00d7 1/3 = 133 1/3 g exacts, peser 135 g. "
-                     "Les \u0153ufs sont dits, pas devin\u00e9s.",
-  "everyday.e8.name": "Un mardi sur deux, à l'heure",
-  "everyday.e8.say": "Club de lecture un mardi sur deux à 19 h — les quatre prochaines dates ? 3 et 17 nov., 1er et 15 déc. : quinze jours veut dire SAUTER les semaines du milieu — le moteur les nomme.",
-  "everyday.e9.name": "Un pied, trois bonnes réponses",
-  "everyday.e9.say": "EU 42⅔ ou 42,5 ? Les deux tableaux arrondissent : le millimètre est exact, les candidats demi et tiers sont écrits, la dérive entre systèmes est un nombre dit — jamais un seul numéro confiant.",
-  "everyday.e10.name": "Vol retardé — qui me doit quoi",
-  "everyday.e10.say": "Vol retardé de 3 h 20 — la DATE DU VOL choisit la règle : avant le 23 oct. 2027 l'ancien EC261 + jurisprudence, après la table codifiée « PLUS DE trois heures ». Mêmes faits, réponses différentes. € ou £, délai de recours en vraie date.",
-  "everyday.e11.name": "Mon sac passera-t-il la porte",
-  "everyday.e11.say": "Mon sac 40×18×12, vol en novembre 2027 — la DATE DU VOL décide : la règle 2027 plafonne le sous-siège à 40×30×15, avant rien n'est fixé. Rotation compte — faces triées, jamais l'ordre tapé.",
-  "everyday.e12.name": "Deux tarifs, un seul chiffre honnête",
-  "everyday.e12.say": "La bascule = (écart de fixe × jours) ÷ (écart de prix), en fraction EXACTE : 4 623⅓ kWh là où l'article écrit « environ 4 623 ». « Jamais » est une réponse, nommée, quand un plan gagne sur les deux parties.",
-  "everyday.e13.name": "Ce que vaut vraiment un point",
-  "everyday.e13.say": "29 000 points, un vol à 438 € moins 5,60 € de taxes : le 1,49 affiché cache l'exact 1081/725 = 1,491034… ; soustraction AVANT division ; c'est VOTRE plancher qui décide.",
-  "everyday.e14.name": "Le poids vraiment factur\u00e9, les deux "
-                       "cha\u00eenes imprim\u00e9es",
-  "everyday.e14.say": "Deux transporteurs facturent 6 kg et 5 kg pour la même boîte 40×30×25 — personne n'a tort : 30 000 cm³ ÷ 5 000 = 6 pile, ÷ 6 000 = 5 pile. Les tables transporteurs POURRISSENT (USPS 166→139 en juillet 2026) : le diviseur reste VOTRE argument.",
-  "everyday.e15.name": "L'affiche dit 50 % — la note, jamais",
-  "everyday.e15.say": "Deux sweats à 60 € et 40 €, « le deuxième à −50 % » : ni 50 ni 25 — la remise porte sur le MOINS CHER (règle publiée), la paire rend 80 sur 100 = −20 %. À prix égaux −25 %, BOGO gratuit −50 %, coupon −30 % par dessus −47,5 %, jamais 55.",
-  "everyday.e16.name": "Le 500 g est devenu 400 g — au même prix",
-  "everyday.e16.say": "Perdre 1/5 du produit (500→400 g, même étiquette), c'est +1/4 au kilo : 20 % contre 25 %, deux dénominateurs. Le « 2 pour 7 $ » de pots de 15 oz perd 40,3509 % à l'once contre le pot de 24 oz — la fraction tranche, pas l'œil.",
-  "everyday.e17.name": "Thanksgiving : à quelle heure la dinde sort du congélateur",
-  "everyday.e17.say": "Huit calculateurs de nov. 2026 citent la même table USDA et se contredisent sur la dinde de 16 lb. Règle nommée : au plus tard = four moins le bout long ; pas avant = moins la garde de 1 à 2 jours. Heures = arguments, jamais l'horloge.",
-  "everyday.e18.name": "La dinde en restes — quel jour ferme la fenêtre du frigo",
-  "everyday.e18.say": "« À manger avant lundi 30 novembre » (NBC, 19 nov) côtoie « trois jours, 72 h optimales » (ky3) — même dinde ; FSIS se contredit au congélateur (2-6 vs 3-4 mois). L'outil rend l'UNION des fenêtres, deux ancres citées, 2 h STRICTES depuis cooked_at (2 h pile passe, 2 h 01 jette), 4ᵉ jour nommé LAST_DAY.",
-  "everyday.e19.name": "Trois plats veulent le four — le compte à rebours, conflits nommés",
-  "everyday.e19.say": "Huit timelines 2026 publient le même dîner avec des repos de 20 à 60 minutes, 325 ou 350 °F — personne ne compte les 45 minutes de préchauffage. Calcul à REBOURS depuis l'heure de service (argument, jamais l'horloge) : un four, un plat à la fois, repos dehors ; sortie à autre consigne = conflit nommé ; « 180 » sans unité = refusé ; repos > 2 h = zone FSIS.",
-  "everyday.e20.name": "Dates limites d'envoi de Noël — ≥2 sources, divergente nommée",
-  "everyday.e20.say": "Six tableaux des 13-21 nov. 2026 se contredisent : un syndicat imprime FedEx Saver, 2Day, Overnight un jour plus tard — sa cible est le 25, pas le 24. Ligne gardée si ≥2 sources concordent ; divergente nommée ; UPS Ground refusé (pas de date unique). Fenêtre close le 23 déc.",
-  "everyday.e21.name": "Retours des fêtes — ≥2 sources, provenance par ligne",
-  "everyday.e21.say": "Le titre « jusqu'au 31 janvier » est un mensonge par omission : Target ferme l'achat le 24 déc., Best Buy coupe sa règle membres au 4 déc., un blog a republié les dates passées DÉCALÉES pendant que Seller Central publiait le texte 2026. Deux sources par ligne ; provenance ; mono-sources refusées avec le fait candidat. « Au plus tard des deux » exige la livraison.",
-  "everyday.e22.name": "Le prix barré est-il LÉGAL ? règle Omnibus des 30 jours",
-  "everyday.e22.say": "Référence légale : le prix le PLUS BAS des 30 jours précédents (directive 2019/2161 art. 6a) — une promo du week-end l'ABAISSE même si le prix est remonté (CJEU C-330/23). 100 → 80 → 100 → 70 = 12,5 %, pas 30 %. Sweep mars 2026 : 30 % des 314 commerces se trompent ; jusqu'à 350 000 € d'amende en Espagne. Historique en entrée, référence et vrai pourcentage en sortie.",
-  "everyday.e23.name": "Le prix a BAISSÉ après l'achat — qui doit la différence",
-  "everyday.e23.say": "Acheté 100, affiché 80. Aucune loi n'oblige au remboursement — les garanties publiées oui, fenêtres = DATES : Target 24 déc, Best Buy 15 janv, Costco 30 jours, Fnac-Darty la campagne elle-même (carte cadeau, pas espèces), Amazon rien. Verdict, date, montant, monnaie — classe de source par ligne. Zéro fetch.",
-  "everyday.e24.name": "Le cadeau mort APRÈS le retour — ce que la LOI doit, jour pour jour",
-  "everyday.e24.say": "Cadeau livré le 25 décembre, en panne le 16 : vitrine fermée le 15, presse muette ; la loi, si. France : conformité 2 ans depuis la DÉLIVRANCE, vices cachés 2 ans depuis la DÉCOUVERTE, plafond 20 ans. UK : 30 jours pour rejeter, six mois de preuve INVERSÉE, six ans — cinq en Écosse. Page officielle contradictoire (24 ou 12 mois) : les DEUX dates voyagent. US/AU refusés par nom.",
-    "everyday.e25.name": "Puis-je jeter ce dossier ? — QUATRE horloges dans le carton",
-  "everyday.e25.say": "« Six ans » = QUATRE dates : TVA depuis la date ÉCRITE SUR LE DOCUMENT (événement futur compris, HMRC l'écrit), limited company depuis la CLÔTURE, s.388 TROIS ans si private, SIX si plc depuis la CRÉATION, SA cinq ans depuis le 31 janvier. Exemple officiel 2022-23 : gardé jusqu'au 31 janvier 2029. Les « ou plus si » reviennent BLOCKED ; CH15400 : la PLUS LONGUE gouverne.",
-  "everyday.e26.name": "Carte cadeau « périmée » ? Peut-être vivante — l'ACHAT ancre",
-  "everyday.e26.say": "Irlande, Gift Vouchers Act 2019 rejoué : date imprimée plus courte que cinq ans depuis l'achat = REMPLACÉE d'office par cinq ans — le légal COUVRE le papier (66B(1)(b)+(c)). JD Sports : ≈250 000 € rendus en juillet. Porteur tient tous les droits (66B(10)). Solde d'1 € ou plus : dû. France : AUCUNE durée légale ; « 30 ans » = immobilier, refusé.",
-  "everyday.e27.name": "Les soldes sont UNE LOI, pas une mémoire — 2027 : 6 janvier",
-  "everyday.e27.say": "Arrêté du 27 mai 2019 rejoué : hiver = 2e mercredi de janvier à 8 h, avancé au 1er si le 2e tombe après le 12 (2027 : 6 janvier ; « 9 février » = clause ratée). Été = dernier mercredi de juin, avant-dernier si après le 28 (2027 : 23 juin). Quatre semaines, début compté. Sept dérogations verbatim : été 2020 15 juillet ; hiver 2021 six semaines ; Moselle au 26 juin ; Guadeloupe 7 octobre ; canicules 2023/2026 cinq semaines. « Jour ouvré » non défini : 2027 lundi 4 premier, samedi 2 nommé. Avant 2020, hors France : refusé.",
-  "everyday.e28.name": "Soldes en Belgique : le dimanche fait la loi — 2027 samedi 2 janvier, attente jusqu'au 1er",
-  "everyday.e28.say": "Livre VI rejoué : hiver du 3 au 31 janvier, DU 2 SI le 3 est dimanche — vécu 2016, 2027 ; attente « du 2 décembre au 1er janvier » — la presse écrit 3 décembre : borne ratée. Été du 1er au 31 juillet, du 30 JUIN si dimanche — vécu 2018 ; attente du 31 mai au 29 juin : le texte bat la formule. Corona : été 2020 1er-31 août (loi 27-05-2020) ; hiver 2021 au LUNDI 4 (AR 10-12-2020 — clause tirée PUIS écrasée, les deux voyagent), prolongé au 15 FÉVRIER par LOI (02-02-2021 ; titres : 14). Avant 2015 refusé, loi de 1991 au fait ; France/Luxembourg refusés par nom (Luxembourg : règlement annuel). CE 20-05-2026 : amendes annulées, dates tenues — le tool date, ne plaide pas.",
-"nav.kit": "Kit",
-  "kit.h2": "La suite sur votre disque",
-  "kit.creed": "Le protocole n'est pas le transport \u2014 c'est l'acte de naissance de l'outil.",
-  "kit.intro": "Les transformations libres ne sont pas qu'une API : une suite. L'agent l'installe, l'appelle en local et — ce qu'aucun marché ne fait — bâtit des outils neufs sur les mêmes portes. curl devient kit call ; une tâche répétée devient proposition ; la proposition devient outil publié seulement si ses golds furent tracés avant le code.",
-  "kit.c1.sum": "Installer \u2014 la suite basique sur la machine",
-  "kit.c1.foot": "Sha vérifié, pas de daemon, pas d'auto-update, pas de réseau dans le moteur. Le sans-état est le contrat : l'humain décide quand le kit bouge.",
-  "kit.c2.sum": "Appeler \u2014 consulter avant d'agir",
-  "kit.c2.foot": "La skill interroge l'annuaire d'abord. Même canon, mêmes refus, mêmes golds qu'au datacenter \u2014 ce qui est vérifié ici l'est là-bas, octet pour octet.",
-  "kit.c3.sum": "Construire \u2014 dès la deuxième fois, écrire l'outil",
-  "kit.c3.foot": "Golds tracés AVANT le code, AST-gate, pin-gate. Statuts : proposé, attesté, réseau-vérifié \u2014 le kit grandit localement, la preuve repousse au réseau. Une leçon est une proposition ; le banc la verrouille.",
-  "kit.howto.p1": "Installer la skill : <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 déposer le fichier chez l'agent (CLAUDE.md, AGENTS.md, skills/). ~1 000 jetons, calibré pour les petits modèles.",
-  "kit.howto.p2": "Le faire consulter d'abord : avant d'agir, l'agent décrit son problème en une phrase à /route/resolve \u2014 l'annuaire rend l'outil qui existe déjà, ou dit qu'aucun n'existe.",
-  "kit.howto.p3": "Appeler : POST sans état, sans clé sur le libre ; la réponse porte son sha256, le refus porte champ + attendu + exemple. Tout ce qui tient sur cette page fonctionne déjà : une ligne installe le fichier de skill, l’annuaire répond, les appels libres vont sans clé.",
-  "kit.plain.sum": "Vous n'êtes pas développeurs ? Pas grave, on traduit.",
-  "kit.plain.p1": "Ouvrez votre assistant IA habituel (Claude, ChatGPT, Grok, Copilot\u2026).",
-  "kit.plain.p2": "Envoyez-lui ce message : \u0022 Lis https://mechacut.studio/SKILL-MINI.md et suis-le pour tous mes calculs.\u0022 Rien à installer, rien à payer, pas de compte.",
-  "kit.plain.p3": "Demandez ensuite votre véritable tâche : \u0022 30 % puis 20 % de remise, ça fait combien réellement ?\u0022, \u0022 cette facture est en retard de combien de jours ?\u0022 Les chiffres ne sortent plus de sa tête \u2014 ils sortent de la suite, et ils sont les mêmes pour tout le monde.",
-  "kit.plain.p4": "Vous avez demandé quelque chose que la suite ne sait pas faire ? Proposez-le en mots simples \u2014 chaque proposition est publique, et son verdict aussi : livré, en banc, ou refusé avec la raison nommée, sur /proposals.",
-  "kit.dev.sum": "Pour les développeurs \u2014 trois lignes, sans compte",
-  "kit.propose": "Proposer un outil : POST /api/v1/agent/propose — un contrat, jamais du code ; doublon nommé, preuve affichée, éligibilité rendue en blob prêt au commit. Rien n'est stocké côté serveur. Skill du protocole : /SKILL-KIT.md",
-  "bench.d82.sum": "Traces d'appels d'outils jugées : le même geste d'agent n'a jamais été réémis à l'identique (0 sur 14, V22b) et un retry a multiplié la facture ×4 sans converger (V17) \u2014 loop/doom-check dit désormais DOOM, CYCLIC ou STORM sur des bytes canoniques, seuils nommés.",
-  "bench.d82.foot": "Identité en (outil, args) canoniques : l'ordre des clés ne cache jamais une boucle. Deux appels identiques ne sont pas une boucle \u2014 le seuil est dit, jamais deviné. Tous les signaux rapportés, verdict le plus grave. Sources : bench/FINDINGS-V17.md · run22b.",
-  "bench.e76.sum": "Le juge du banc est devenu route : eval/compare rend OK ou WRONG avec les divergences nommées \u2014 2,5 contre \u00222.50\u0022 n'est jamais un désaccord, les flottants ne sont jamais un argument.",
-  "bench.e76.foot": "Règle née de l'incident du juge V2 (il recopiait son attente) : même quantité n'est jamais une divergence ; quantité différente est nommée par pointer, kind, expected, got. Decimal exact, jamais float.",
-  "bench.a79.sum": "La politique en grammaire fermée : check/allowlist rend ALLOW, DENY ou AMBIGUOUS \u2014 la règle la plus spécifique gagne, l'égalité remonte à l'humain, le silence n'autorise jamais.",
-  "bench.a79.foot": "Une action en forme de regex est refusée, pas évaluée : un gate qui interprète est une porte dérobée. Montants Decimal exacts, table devises ISO, default deny vrai. Même loi que R3 de l'annuaire, autre domaine.",
-"x402.h2": "Paiements machine",
-  "x402.p1": "Le payant tient en quatre octets de protocole : le serveur répond <code>402</code> avec ses exigences ; l'agent signe un transfert USDC EIP-3009 ; un facilitateur vérifie et règle ; la réponse rejoue la preuve dans <code>X-PAYMENT-RESPONSE</code>. Aucune clé côté serveur.",
-  "x402.p2": "Les paiements rejoués sont refusés. Les erreurs sur routes "
-             "payantes restent gratuites. Le registre de chaque refus est "
-             "public : <a href=\"/misses.json\">/misses.json</a>.",
-  "x402.bankr": "M\\u00eames endpoints, second domicile : quatre transforms payants aussi sur le x402 Cloud de <a href=\\\"https://bankr.bot\\\">Bankr</a> \\u2014 m\\u00eames chemins, m\\u00eames sha256, rails Bankr : <a href=\\\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data\\\">chart</a> &middot; <a href=\\\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json\\\">reshape</a> &middot; <a href=\\\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json\\\">validate</a> &middot; <a href=\\\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join\\\">csv-join</a>. Les 68 autres vivent ici, gratuit compris.",
-  "vision.h2": "Pourquoi le déterminisme, pourquoi maintenant",
-  "vision.p1": "Un grand modèle de langage approxime. <code>sha256(\"abc\")</code> ? Il répondra avec assurance, élégance, et faux. Nettoyer le même CSV tous les jours ? Des tokens facturés pour redériver ce qu'une fonction rend en millisecondes — mêmes octets, chaque fois.",
-  "vision.p2": "L'ordinateur de guidage Apollo avait 4 Ko de RAM. Il a "
-               "posé des humains sur la Lune parce que les maths n'ont "
-               "jamais eu à improviser : chaque constante a été calculée "
-               "une fois, au sol, à froid, puis gelée dans la mémoire à "
-               "cordes tressées.",
-  "vision.quote": "Le déterminisme a été codé la première fois pour nous "
-                  "envoyer sur la Lune. Le déterminisme enverra l'IA au "
-                  "travail.",
-  "vision.p3": "Mechacut est cette math gelée pour les agents : vocabulaires fermés, contrats qui refusent ce qui sort de la table, erreurs qui nomment la forme attendue — l'erreur est le prompt qui répare. Le sens reste avec le modèle ; la mécanique déménage ici.",
-  "contract.h2": "Le contrat",
-  "contract.li1": "Même requête → mêmes octets, sha256 sur chaque réponse",
-  "contract.li2": "Sans inscription, sans clé, sans mur de débit sous "
-                  "30 req/min",
-  "contract.li3": "Zéro stockage : le seul état est une fenêtre d'une "
-                  "minute, un registre de 60 minutes et un jeu de nonces "
-                  "de paiement",
-  "contract.li4": "Vocabulaires fermés — tout ce qui sort de la table est "
-                  "refusé, nommé, renvoyé à sa forme attendue",
-  "contract.li5": "Des erreurs qui réparent : champ, message, attendu, "
-                  "toujours",
-  "contract.li6": "Paiements machine x402 : USDC sur Base, vérifiés par "
-                  "facilitateur, zéro humain dans la boucle",
-  "agents.line": "Parlez agent : outils MCP, GET /agent/manifest ("
-                 "toute la suite en une requête), GET /route?q=…, "
-                 "POST /api/v1/pipeline.",
-  "agents.hint": "installez un pack",
-  "footer.family": "Mechacut fait partie de la famille C.V. — voir moovicut.",
+  'meta.title': 'Mechacut — même requête, mêmes octets',
+  'meta.desc': 'Transformations déterministes pour agents IA : 181 outils, trois paliers, paiements machine. Sans inscription, sans clé, sans stockage.',
+  'nav.tools': 'Bundles',
+  'nav.numbers': 'Preuves',
+  'nav.vision': 'Vision',
+  'nav.api': 'Contrat',
+  'pill': 'v{ver} · {n_tools} transformations · {n_recipes} recettes',
+  'hero1': "Le sens s'apprend.",
+  'hero.why': "<strong>Pourquoi le déterminisme ?</strong> Une réponse juste qui change à chaque exécution EST un dé. Même question, mêmes octets : l'agent devient auditable, chaque réponse porte son empreinte, chaque erreur nomme le champ — testé le matin, vendu le soir.",
+  'hero2': 'La mécanique se sait.',
+  'hero3': "La compétence ne s'apprend pas. Elle se sert.",
+  'lede': "Chaque réponse est la sortie réelle d'un endpoint GET, figée à la build de cette page. Aucune ligne n'a été touchée par un humain, aucune n'est générée à la volée. Les pannes sont épinglées aussi, avec leur code. Ce sont des nombres, pas des promesses — et c'est vérifiable à l'œil.",
+  'bundles.h2': 'Le catalogue',
+  'bundles.creed': 'Un modèle calcule. Un serveur sait.',
+  'cat.search': 'chercher un outil ou votre problème…',
+  'cat.hits': '~n~ outils sur ~t~',
+  'panel.copy': 'copier curl',
+  'panel.copied': 'copié',
+  'panel.close': 'fermer',
+  'panel.say': 'dis à ton agent :',
+  'panel.got': 'le serveur a répondu :',
+  'nav.menu': 'menu',
+  'bundles.intro': 'Même requête, mêmes octets — chaque réponse porte son sha256. Installez un pack, ou lisez le manifeste entier en une requête et laissez <code>GET /route</code> choisir.',
+  'tiers.h2': 'Trois paliers, zéro compte',
+  'tiers.intro': "Les agents ne lisent pas les pages de tarifs — le prix est donc dans le protocole : route gratuite sans clé, plafonnée gratuite sous 32 Ko, ailleurs un <code>402</code> honnête avec défi x402 USDC sur Base, réglé par facilitateur. Entre un serveur et un robot, il n'y a que des prix et des reçus.",
+  'bench.h2': 'Mesuré, pas promis',
+  'bench.creed': "Le mur, c'est la FORME, pas la taille — et nous avons chiffré la porte.",
+  'bench9.intro': "Phrase française volontairement floue, six champs requis — montants triés à 2 décimales, pourcentages, dates uniques, URL, email, total. Attentes calculées à la main avant exécution. Le serveur construit la fiche (/intent/card) ; le relais n'écrit qu'une ligne, la réponse ne le traverse jamais.",
+  'bench9.with': "avec la fiche d'intention",
+  'bench9.foot': "La ligne 0.5B reproduite lors d'un second passage indépendant. Trois appels live identiques → un seul sha256. La variante autonome (le modèle choisit l'outil lui-même) marque aussi 6/6. Graines, scripts, échecs : bench/results_v9.jsonl.\n",
+  'bench10.intro': "Dix-huit tâches à réponse UNIQUE — contrôles GS1, un SHA-256, remises en cascade, une colonne qui prouve elle-même sa virgule. Deux modèles gratuits et LOCAUX, zéro dépense d'API : le harnais vérifie que chaque route appelée est gratuite. Réponses justes calculées sur specs publiées, AVANT tout appel modèle.",
+  'bench10.with': 'avec un seul appel-relais',
+  'bench10.foot': "Les échecs nus se reproduisent à l'identique lors d'un second passage indépendant : 18/18 verdicts inchangés — à temp 0, recommencer ne converge pas, ça répète. Exécutions brutes : bench/results_v10.jsonl, méthode : bench/FINDINGS-V10.md.\n",
+  'bench.v23.sum': "Un 1,7 B entraîné pour les agents a résolu {v23_chain}/{v23_chain_cells} chaînes à nu pour ${v23_cost} — notre mur était l'ENTRAÎNEMENT, pas la taille ; et le verrou a refusé {v23_refused} bonnes réponses pour leurs noms.",
+  'bench.v23.intro': "Deux suites publiées le même jour, six tâches chacune : le même 0.5B local, nu contre relayé. Les scores sont des compteurs bruts du harnais, zéro retouche — et les échecs des deux bras restent dans le tableau. Le serveur construit la fiche ; le relais n'écrit qu'une ligne, la réponse ne le traverse jamais.",
+  'bench.v23.arm': 'bras',
+  'bench.v23.wins': 'justes /20',
+  'bench.v23.usd': 'coût',
+  'bench.v23.foot': 'Brut : bench/results_v23_lfm3.jsonl · méthode : bench/FINDINGS-V23.md · $ aux tarifs par token gelés.\n',
+  'bench.v20.sum': 'Le mur est une CIBLE : le llama 8B passe de {v20_8b_s} à {v20_8b_l}/20 avec le verrou de cible ; le 7B signe son premier {v20_7b_l}/20.',
+  'bench.v20.intro': "Promesse de v17 mesurée : la réponse doit nommer la quantité qu'elle rend. Nu, le 8B calculait juste et répondait à côté — {v20_aside} de ses fautes portaient une autre quantité de la chaîne, le verrou en a converti {v20_aside_conv}. {v20_cells} cellules, et le bras nu rejoue v15 à l'identique ({v20_replay}).",
+  'bench.v20.model': 'modèle',
+  'bench.v20.naked': 'nu',
+  'bench.v20.locked': 'avec verrou',
+  'bench.v20.foot': 'Brut : bench/results_v20_target_lock.jsonl · méthode : bench/FINDINGS-V20.md.\n',
+  'bench.g1': "Ce qu'ils ratent n'est pas de réfléchir — c'est d'exécuter",
+  'bench.g2': "Le mur est une FORME — et les formes sont un objectif d'entraînement",
+  'bench.g3': "Personne ne dit « je ne suis pas sûr » — payer plus n'esquive pas la forme",
+  'bench.g4': "La lecture est le plafond qu'aucun outil ne franchit",
+  'bench.g5': 'Le régime réel : trente jours du même job',
+  'bench.v11.sum': 'Quinze tâches hostiles : le 7B passe de {v11_7b_nu} à {v11_7b_relay} en relais ; le 8B de {v11_8b_nu} à {v11_8b_relay}.',
+  'bench.v11.foot': 'Brut : bench/results_v11.jsonl · méthode : bench/FINDINGS-V11.md',
+  'bench.f5.sum': '{f5_wins}/{f5_cells} tentatives en chaîne avec la fiche — critère ≥19 PASSÉ ; {f5_repairs} réparées par un refus nommé ; le 7B seul {f5_7b}.',
+  'bench.f5.foot': 'Brut : bench/results_f5_accept.jsonl · méthode : bench/FINDINGS-F5.md',
+  'bench.v13.sum': "Le résultat négatif, publié en premier : sur GSM8K réel, la fiche-relais s'effondre à {v13_relay_05b}/20 pour le 0.5B — demander la décomposition au modèle, c'est encore la lui laisser faire.",
+  'bench.v13.foot': 'Brut : bench/results_v13_gsm8k.jsonl · méthode : bench/FINDINGS-V13.md',
+  'bench.v14.sum': 'Skill stricte : {v14_breaks}/{v14_cells} ruptures de protocole — la seule classe que la forme garantit — la lecture, elle, reste libre.',
+  'bench.v14.foot': 'Brut : bench/results_v14_skill.jsonl · méthode : bench/FINDINGS-V14.md',
+  'bench.v22.sum': "Trois modèles frontière, {v22_nu} justes nus — l'un {v22_best}, l'autre {v22_worst}. Par la fiche gelée : {v22_fiche}. Payer plus ne change pas la forme.",
+  'bench.v22.foot': 'Brut : bench/results_v22.jsonl · méthode : bench/FINDINGS-V22.md',
+  'bench.v22b.sum': 'Cinq passes au régime des agents : {v22b_ok}/{v22b_cells} justes — le MÊME programme deux fois : {v22b_stable}/14. Le serveur : {v22b_shas} sha par problème.',
+  'bench.v22b.foot': 'Brut : bench/results_v22b.jsonl · méthode : bench/FINDINGS-V22.md',
+  'bench.v24.sum': 'Trente jours sur le même CSV avec un modèle QUI SAIT les chaînes : {v24_sil}/{v24_days} jours de réponse vide après 8 192 tokens de raisonnement, {v24_ok} justes, facturés ${v24_usd}. La machine : {v24_m_ok} à 0,00 $.',
+  'bench.f7.sum': 'Les sept chaînes recopiées EN/PT : {f7_wins}/{f7_cells} — critère ≥19 PASSÉ ; {f7_rep} gagnées par le refus nommé. Le 0.5b copie 4/7 en PT là où le FR le mettait à 0/7 : le plafond de lecture est du modèle × langue × forme.',
+  'bench.f7.foot': 'Brut : bench/results_f7_accept.jsonl · critère gelé : bench/FINDINGS-F7.md',
+  'bench.v24.foot': "Brut : bench/results_v24_lfm3_30days.jsonl · l'amendement est dans l'historique git (run24 amendé)",
+  'bench.v19.sum': '{v19_wins}/{v19_days} tentatives justes pour les modèles — machine : {v19_m_ok}/{v19_m_days} jours sur un même octet ; {v19_drift} sorties différentes pour un seul modèle en 30 jours.',
+  'bench.v19.intro': 'Le même CSV sale nettoyé 30 jours de suite. Spéc à six règles, gold ÉCRIT À LA MAIN avant le banc, un bras retry qui ne voit que sa propre forme — jamais la réponse. Température 0,7 : le régime réel des agents, publié.',
+  'bench.v19.arm': 'bras',
+  'bench.v19.right': 'jours justes /30',
+  'bench.v19.distinct': 'sorties distinctes',
+  'bench.v19.foot': 'Brut : bench/results_v19_csv_bill.jsonl · méthode + dollars : bench/FINDINGS-V19.md · rejeu : python bench/run19.py',
+  'bench.v17.sum': 'Retry ×5 sur une erreur systématique : {v17_retry_wins}/{v17_retry_cells} chaînes réparées — la même faute, 5× le prix.',
+  'bench.v17.intro': 'Trois bras, les mêmes 20 problèmes neufs, chaque token compté : répondre nu, recommencer cinq fois, ou donner le calcul au serveur. Cellules : {v17_cells}.',
+  'bench.v17.nu': 'nu',
+  'bench.v17.retry': 'retry ×5',
+  'bench.v17.relay': 'serveur (ok · tokens/juste)',
+  'bench.v17.foot': 'Brut : bench/results_v17_tokens.jsonl · bench/FINDINGS-V17.md · rejeu : python bench/run17.py',
+  'bench.v16.sum': '{v16_wrong} fautes en {v16_runs} runs — « je ne suis pas sûr » dit {v16_doubt} fois.',
+  'bench.v16.intro': 'Des problèmes du quotidien générés à la volée, chaque modèle prié de marquer honnêtement sa confiance. Ils ont échoué toujours de la même façon : avec assurance.',
+  'bench.v16.foot': 'Brut : bench/results_v16_calibration.jsonl · bench/FINDINGS-V16.md · générateur : bench/gen16.py (seedé, double oracle).',
+  'bench.v15.sum': 'Le mur a une FORME : {v15_alone_wins}/{v15_cells} tentatives en chaîne nues ou en retry — {v15_best_arm}/{v15_arm_cells} avec le meilleur bras serveur.',
+  'bench.v15.intro': 'La matrice complète : 5 transports × 4 modèles gratuits × 20 problèmes seedés (400 cellules), hypothèses commitées AVANT la première cellule, prédictions ratées publiées en premier.',
+  'bench.v15.foot': 'Brut : bench/results_v15_matrix.jsonl · bench/FINDINGS-V15.md · rejeu : python bench/run15.py && python bench/score15.py',
+  'bench.v12.sum': '{v12_zero} seul → {v12_hero} avec un seul relais. Le zéro devient héros.',
+  'bench.v10.sum': 'Une seule bonne réponse chacun : {v10_alone} seul → {v10_server} relayé — à 0 $, audité par le banc lui-même.',
+  'bench.v9.sum': "Une phrase vague, six clés : {v9_alone} → {v9_card} avec la carte d'intention.",
+  'bench.v6.sum': 'La première matrice — nu vs relais. Chaque ligne, chaque harnais, chaque échec : bench/FINDINGS.md.',
+  'bench12.intro': "Dix calculs exacts (7834×9217, 0.1+0.2, pourcentages en chaîne…) × quatre modèles locaux GRATUITS × trois bras : répondre nu, écrire du Python, ou relayer une expression vers math/calc. Même tableau, deux physiques : le bras code rend du flottant, le relais rend de l'exact.",
+  'bench12.code': 'écrit du Python',
+  'bench12.relay': 'relais Mechacut',
+  'bench12.foot': "Le 8B échoue au RELAIS sur le babil protocole, pas sur les maths — c'est pourquoi la fiche d'intention écrit la ligne à sa place. Nu, le 0.5B inventait 89000098 ; relayé, il sort 9/10 en 0,2 s médian. Brut : bench/results_v12.jsonl, méthode : bench/FINDINGS-V12.md.\n",
+  'bench.intro': 'Une tâche gelée (seed 20261120) : CSV sale + JSON cassé + URLs → un YAML canonique, réponse attendue épinglée sha256. Même modèle local faible (Qwen 2.5, température 0), un bras seul, un bras avec Mechacut. Les échecs sont publiés — le 0.5B échoue aux deux bras, un plafond de capacité est un résultat.',
+  'bench.model': 'modèle',
+  'bench.alone': 'seul',
+  'bench.with': 'avec mechacut',
+  'bench.tokens': 'tokens consommés',
+  'bench.foot': 'Le 7B passe de 0 % à 100 % en un seul appel pipeline. Chaque exécution, chaque token, est dans bench/results.jsonl.',
+  'nav.build': 'Construire',
+  'nav.market': 'Eux aussi',
+  'market.h2': 'Ils le disent aussi',
+  'market.creed': 'Les grandes maisons ont convergé sur la même phrase — seule la façon de la livrer diffère.',
+  'build.h2': 'Ce que tu peux construire ce soir',
+  'build.intro': 'Tu as un petit modèle gratuit sur ta machine. Voici trois choses à lui faire faire — les phrases citées sont celles que tu dis à l’agent, les réponses sont celles du serveur, vraiment rendues. Pas de compte, pas de carte, pas de prière.',
+  'build.r1.name': 'Le contrôle de TVA (France)',
+  'build.r1.say': '« Le numéro de TVA de mon client, FR40303265045, est-il valide pour la facture ? »',
+  'build.r1.got': '{{ "valid": true, "algorithm": "EU VAT check-digit rule for FR (published)" }}',
+  'build.r1.why': 'Seul, un 0.5B « calcule » la clé de contrôle — et se trompe. Ici ce sont les chiffres qui décident : la facture ne meurt pas chez le comptable.',
+  'build.r2.name': 'Le garde-fuite',
+  'build.r2.say': '« Scanne ce log avant que je le colle dans un chatbot. »',
+  'build.r2.got': '2 findings → graine [SEED_PHRASE] et clé [OPENAI_KEY_1]',
+  'build.r2.why': 'Le scan répond des positions, jamais la valeur ; le masque ne renvoie jamais la clé. Le secret est venu ici — et il reste protégé même de nous.',
+  'build.r3.name': 'Le relai d’incident',
+  'build.r3.say': '« relève les montants et dates de cette note d’incident » — dit en français,à un 0.5B.',
+  'build.r3.got': 'money [3200.00, 12450.75] · 6/6 en 320 tokens (seul : 0/6)',
+  'build.r3.why': 'C’est le bench v9, à l’identique : même tâche, même modèle, une ligne de relai. Toutes les exécutions sont dans bench/results_v9.jsonl — rejoue-les.',
+  'build.connect': "Ou branche-le tout de suite : colle CETTE ligne dans n'importe quel agent, même le plus petit — elle devient le manuel complet :",
+  'everyday.h2': 'Pour tout le monde',
+  'everyday.open': 'Dérouler les preuves — sorties réelles du serveur, pas des maquettes.',
+  'everyday.intro': "Pas de code. Vingt-sept choses qu'un humain sans IDE règle en un tour et vérifie à l'œil.",
+  'everyday.e1.name': 'Wi-Fi invités, un scan',
+  'everyday.e1.say': '« Transforme le Wi-Fi en QR pour que les invités arrêtent de demander le mot de passe. »',
+  'everyday.e2.name': 'Le chèque, en lettres',
+  'everyday.e2.say': '« Écris 1 234,56 € en toutes lettres pour le chèque — la banque refuse les approximations. »',
+  'everyday.e3.name': 'IBAN avant le virement',
+  'everyday.e3.say': "« J'ai bien recopié cet IBAN ? 60 € de frais si le virement rebondit. »",
+  'everyday.e4.name': 'Recette en page imprimable',
+  'everyday.e4.say': '« Mets mes notes de recette en page propre — je veux un PDF pour le frigo. »',
+  'everyday.e5.name': 'Compter les jours',
+  'everyday.e5.say': '« Combien de jours avant les vacances ? »',
+  'everyday.e6.name': 'Le compte que la caisse ne fera pas',
+  'everyday.e6.say': '« -30 % puis -20 %, ça fait -50 %, non ? » En fait -44 %.',
+  'everyday.e7.name': 'Un tiers du gâteau, sans arrondi caché',
+  'everyday.e7.say': '« Mon gâteau pour 6, je le veux pour 2 — 400 g de farine, 5 œufs ? » 400 × 1/3 = 133 1/3 g exacts, peser 135 g. Les œufs sont dits, pas devinés.',
+  'everyday.e8.name': "Un mardi sur deux, à l'heure",
+  'everyday.e8.say': 'Club de lecture un mardi sur deux à 19 h — les quatre prochaines dates ? 3 et 17 nov., 1er et 15 déc. : quinze jours veut dire SAUTER les semaines du milieu — le moteur les nomme.',
+  'everyday.e9.name': 'Un pied, trois bonnes réponses',
+  'everyday.e9.say': 'EU 42⅔ ou 42,5 ? Les deux tableaux arrondissent : le millimètre est exact, les candidats demi et tiers sont écrits, la dérive entre systèmes est un nombre dit — jamais un seul numéro confiant.',
+  'everyday.e10.name': 'Vol retardé — qui me doit quoi',
+  'everyday.e10.say': "Vol retardé de 3 h 20 — la DATE DU VOL choisit la règle : avant le 23 oct. 2027 l'ancien EC261 + jurisprudence, après la table codifiée « PLUS DE trois heures ». Mêmes faits, réponses différentes. € ou £, délai de recours en vraie date.",
+  'everyday.e11.name': 'Mon sac passera-t-il la porte',
+  'everyday.e11.say': "Mon sac 40×18×12, vol en novembre 2027 — la DATE DU VOL décide : la règle 2027 plafonne le sous-siège à 40×30×15, avant rien n'est fixé. Rotation compte — faces triées, jamais l'ordre tapé.",
+  'everyday.e12.name': 'Deux tarifs, un seul chiffre honnête',
+  'everyday.e12.say': "La bascule = (écart de fixe × jours) ÷ (écart de prix), en fraction EXACTE : 4 623⅓ kWh là où l'article écrit « environ 4 623 ». « Jamais » est une réponse, nommée, quand un plan gagne sur les deux parties.",
+  'everyday.e13.name': 'Ce que vaut vraiment un point',
+  'everyday.e13.say': "29 000 points, un vol à 438 € moins 5,60 € de taxes : le 1,49 affiché cache l'exact 1081/725 = 1,491034… ; soustraction AVANT division ; c'est VOTRE plancher qui décide.",
+  'everyday.e14.name': 'Le poids vraiment facturé, les deux chaînes imprimées',
+  'everyday.e14.say': "Deux transporteurs facturent 6 kg et 5 kg pour la même boîte 40×30×25 — personne n'a tort : 30 000 cm³ ÷ 5 000 = 6 pile, ÷ 6 000 = 5 pile. Les tables transporteurs POURRISSENT (USPS 166→139 en juillet 2026) : le diviseur reste VOTRE argument.",
+  'everyday.e15.name': "L'affiche dit 50 % — la note, jamais",
+  'everyday.e15.say': 'Deux sweats à 60 € et 40 €, « le deuxième à −50 % » : ni 50 ni 25 — la remise porte sur le MOINS CHER (règle publiée), la paire rend 80 sur 100 = −20 %. À prix égaux −25 %, BOGO gratuit −50 %, coupon −30 % par dessus −47,5 %, jamais 55.',
+  'everyday.e16.name': 'Le 500 g est devenu 400 g — au même prix',
+  'everyday.e16.say': "Perdre 1/5 du produit (500→400 g, même étiquette), c'est +1/4 au kilo : 20 % contre 25 %, deux dénominateurs. Le « 2 pour 7 $ » de pots de 15 oz perd 40,3509 % à l'once contre le pot de 24 oz — la fraction tranche, pas l'œil.",
+  'everyday.e17.name': 'Dinde de Thanksgiving : congélateur ET restes, deux horloges',
+  'everyday.e17.say': "Deux horloges, une dinde. Réfrigération (8 calculateurs de nov. 2026 se contredisent sur la même table USDA) : au plus tard = four − bout long, pas avant = − garde 1-2 j ; heures = arguments ; fini = 165 °F à la sonde. Restes : « avant lundi 30 novembre » (NBC) vs « trois jours, 72 h » (ky3) ; FSIS se contredit au congélateur (2-6 vs 3-4 mois) — l'outil rend l'UNION, 2 h STRICTES depuis cooked_at (2 h pile passe, 2 h 01 jette), 4ᵉ jour = LAST_DAY.",
+  'everyday.e18.name': 'Trois plats veulent le four — le compte à rebours, conflits nommés',
+  'everyday.e18.say': "Huit timelines 2026, le même dîner, des repos de 20 à 60 min, 325 ou 350 °F — personne ne compte les 45 min de préchauffage. Calcul à REBOURS depuis l'heure de service (argument) : un four, un plat à la fois, repos dehors ; sortie à autre consigne = conflit nommé ; « 180 » sans unité = refusé ; repos > 2 h = zone FSIS.",
+  'everyday.e19.name': "Dates limites d'envoi de Noël — ≥2 sources, divergente nommée",
+  'everyday.e19.say': 'Six tableaux des 13-21 nov. 2026 se contredisent : un syndicat imprime FedEx Saver, 2Day, Overnight un jour plus tard — sa cible est le 25, pas le 24. Ligne si ≥2 sources concordantes ; divergente nommée ; UPS Ground refusé (pas de date unique). Fenêtre close le 23 déc.',
+  'everyday.e20.name': 'Retours des fêtes — ≥2 sources, provenance par ligne',
+  'everyday.e20.say': "« Jusqu'au 31 janvier » est un mensonge par omission : Target ferme l'achat le 24 déc., Best Buy coupe sa règle membres au 4 déc., un blog a republié les dates passées DÉCALÉES pendant que Seller Central publiait le 2026. ≥2 sources par ligne, provenance, mono-sources refusées avec le fait. « Au plus tard des deux » exige la livraison.",
+  'everyday.e21.name': 'Le prix barré est-il LÉGAL ? règle Omnibus des 30 jours',
+  'everyday.e21.say': "Référence légale : le prix le PLUS BAS des 30 jours précédents (dir. 2019/2161 art. 6a) — la promo du week-end l'ABAISSE (CJEU C-330/23). 100 → 80 → 100 → 70 = 12,5 %, pas 30 %. Sweep mars 2026 : 30 % des 314 commerces se trompent ; jusqu'à 350 000 € d'amende en Espagne. Historique en entrée, référence et vrai % en sortie.",
+  'everyday.e22.name': "Le prix a BAISSÉ après l'achat — qui doit la différence",
+  'everyday.e22.say': "Acheté 100, affiché 80. Aucune loi n'oblige au remboursement — les garanties publiées oui, fenêtres = DATES : Target 24 déc, Best Buy 15 janv, Costco 30 j, Fnac-Darty la campagne (carte cadeau, pas espèces), Amazon rien. Verdict, date, montant, monnaie — classe de source par ligne. Zéro fetch.",
+  'everyday.e23.name': 'Le cadeau mort APRÈS le retour — ce que la LOI doit, jour pour jour',
+  'everyday.e23.say': 'Cadeau livré le 25 décembre, en panne le 16 : fermeture le 15, presse muette ; la loi, si. France : conformité 2 ans depuis la DÉLIVRANCE, vices cachés 2 ans depuis la DÉCOUVERTE, plafond 20 ans. UK : 30 j pour rejeter, preuve INVERSÉE 6 mois, 6 ans — cinq en Écosse. Page officielle contradictoire : les DEUX dates voyagent. US/AU refusés par nom.',
+  'everyday.e24.name': 'Puis-je jeter ce dossier ? — QUATRE horloges dans le carton',
+  'everyday.e24.say': "« Six ans » = QUATRE dates : TVA depuis la date ÉCRITE (événement futur compris, HMRC l'écrit), limited company depuis la CLÔTURE, s.388 TROIS ans si private, SIX si plc depuis CRÉATION, SA cinq ans depuis le 31 janvier. Exemple officiel 2022-23 : gardé jusqu'au 31-01-2029. Les « ou plus si » reviennent BLOCKED ; CH15400 : la PLUS LONGUE gouverne.",
+  'everyday.e25.name': "Carte cadeau « périmée » ? Peut-être vivante — l'ACHAT ancre",
+  'everyday.e25.say': "Irlande — Gift Vouchers Act 2019 : date imprimée plus courte que cinq ans depuis l'achat = REMPLACÉE d'office de cinq ans — le légal couvre le papier (66B(1)(b)+(c)). JD Sports : ≈250 000 € rendus en juillet. Porteur tient tous les droits (66B(10)). Solde d'1 € ou plus : dû. France : AUCUNE durée ; « 30 ans » = immobilier, refusé.",
+  'everyday.e26.name': 'Les soldes sont UNE LOI : France et Belgique, deux grammaires',
+  'everyday.e26.say': 'France (arrêté 27-05-2019) : hiver = 2ᵉ mercredi janvier 8 h, avancé si le 2ᵉ > 12 (2027 : 6 janv. — « 9 février » = clause ratée) ; été = dernier mercredi juin, avant-dernier si > 28 (2027 : 23 juin) ; 4 semaines, début compté ; 7 dérogations verbatim (Moselle 26 juin 2021 ; hiver 2021 SIX SEMAINES ; Guadeloupe 7 oct. ; canicules 2023/2026 5 semaines) ; « ouvré » non défini : lundi 4 premier, samedi 2 nommé. Belgique (art. VI.25 CDE) : hiver 3–31 janv., DU 2 SI dimanche — 2016, 2027 ; attente « du 2 décembre au 1ᵉʳ janvier » (SPF — presse : 3) ; été 1–31 juil., 30 JUIN si dimanche — 2018 ; corona : été 2020 1er-31 août, hiver 2021 REPORTÉ au lundi 4 — clause écrasée — 15 FÉVRIER par LOI (titres : 14). Luxembourg refusé par nom : daté CHAQUE ANNÉE par arrêté. CE 20-05-2026 : amendes annulées, dates tenues.',
+  'everyday.e27.name': "Colis reçu mardi — jusqu'à QUAND changer d'avis",
+  'everyday.e27.say': 'Section 6 legifrance rejouée verbatim 25-11 : L221-18 nomme le départ (réception du bien, service conclu) ; L221-19 : lendemain = jour 1, fin minuit du 14ᵉ jour, samedi/dimanche/férié au premier ouvrable — table L3133-1 maison. Reçu 24 nov → 8 déc ; samedi 5 → lundi 7 ; 8 mai férié → lundi 11. Info manquante → +12 mois ; retard → 14 jours nouveaux. 13 exceptions verbatim (personnalisé, scellé hygiène, enchère). Soldes, occasion : le droit court (F10485). Magasin : AUCUN droit — refusé par nom. Fenêtre enseigne : autre horloge.',
+  'nav.kit': 'Kit',
+  'kit.h2': 'La suite sur votre disque',
+  'kit.creed': "Le protocole n'est pas le transport — c'est l'acte de naissance de l'outil.",
+  'kit.intro': "Un dossier, trois fichiers, aucune dépendance : SKILL.md (les tables ci-dessus, en prose), le serveur local (68 transforms, stdlib seule), et l'auto-diminution quand l'agent n'est pas connecté. Copiez, installez, vérifiez — le kit tient dans un dépôt de notes.",
+  'kit.c1.sum': 'Installer — la suite basique sur la machine',
+  'kit.c1.foot': "Sha vérifié, pas de daemon, pas d'auto-update, pas de réseau dans le moteur. Le sans-état est le contrat : l'humain décide quand le kit bouge.",
+  'kit.c2.sum': "Appeler — consulter avant d'agir",
+  'kit.c2.foot': "La skill interroge l'annuaire d'abord. Même canon, mêmes refus, mêmes golds qu'au datacenter — ce qui est vérifié ici l'est là-bas, octet pour octet.",
+  'kit.c3.sum': "Construire — dès la deuxième fois, écrire l'outil",
+  'kit.c3.foot': 'Golds tracés AVANT le code, AST-gate, pin-gate. Statuts : proposé, attesté, réseau-vérifié — le kit grandit localement, la preuve repousse au réseau. Une leçon est une proposition ; le banc la verrouille.',
+  'kit.howto.p1': "Installer la skill : <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> — déposer le fichier chez l'agent (CLAUDE.md, AGENTS.md, skills/). ~1 000 jetons, calibré pour les petits modèles.",
+  'kit.howto.p2': "Le faire consulter d'abord : avant d'agir, l'agent décrit son problème en une phrase à /route/resolve — l'annuaire rend l'outil qui existe déjà, ou dit qu'aucun n'existe.",
+  'kit.howto.p3': "Appeler : POST sans état, sans clé sur le libre ; la réponse porte son sha256, le refus champ + attendu + exemple. Tout tient sur cette page : une ligne installe le skill, l'annuaire répond, les appels libres vont sans clé.",
+  'kit.plain.sum': "Vous n'êtes pas développeurs ? Pas grave, on traduit.",
+  'kit.plain.p1': 'Ouvrez votre assistant IA habituel (Claude, ChatGPT, Grok, Copilot…).',
+  'kit.plain.p2': 'Envoyez-lui ce message : " Lis https://mechacut.studio/SKILL-MINI.md et suis-le pour tous mes calculs." Rien à installer, rien à payer, pas de compte.',
+  'kit.plain.p3': 'Puis demandez votre vraie tâche : "30 % puis 20 % de remise, ça fait combien ?", "cette facture est en retard de combien de jours ?" Les chiffres ne sortent plus de sa tête — ils sortent de la suite, identiques pour tout le monde.',
+  'kit.plain.p4': 'Vous avez demandé quelque chose que la suite ne sait pas faire ? Proposez-le en mots simples — chaque proposition est publique, et son verdict aussi : livré, en banc, ou refusé avec la raison nommée, sur /proposals.',
+  'kit.dev.sum': 'Pour les développeurs — trois lignes, sans compte',
+  'kit.propose': "Proposer un outil : POST /api/v1/agent/propose — un contrat, jamais du code ; doublon nommé, preuve affichée, éligibilité rendue en blob prêt au commit. Rien n'est stocké côté serveur. Skill du protocole : /SKILL-KIT.md",
+  'bench.d82.sum': "Traces d'appels d'outils jugées : le même geste d'agent n'a jamais été réémis à l'identique (0 sur 14, V22b) et un retry a multiplié la facture ×4 sans converger (V17) — loop/doom-check dit désormais DOOM, CYCLIC ou STORM sur des bytes canoniques, seuils nommés.",
+  'bench.d82.foot': "Identité en (outil, args) canoniques : l'ordre des clés ne cache jamais une boucle. Deux appels identiques ne sont pas une boucle — le seuil est dit, jamais deviné. Tous les signaux rapportés, verdict le plus grave. Sources : bench/FINDINGS-V17.md · run22b.",
+  'bench.e76.sum': 'Le juge du banc est devenu route : eval/compare rend OK ou WRONG avec les divergences nommées — 2,5 contre "2.50" n\'est jamais un désaccord, les flottants ne sont jamais un argument.',
+  'bench.e76.foot': "Règle née de l'incident du juge V2 (il recopiait son attente) : même quantité n'est jamais une divergence ; quantité différente est nommée par pointer, kind, expected, got. Decimal exact, jamais float.",
+  'bench.a79.sum': "La politique en grammaire fermée : check/allowlist rend ALLOW, DENY ou AMBIGUOUS — la règle la plus spécifique gagne, l'égalité remonte à l'humain, le silence n'autorise jamais.",
+  'bench.a79.foot': "Une action en forme de regex est refusée, pas évaluée : un gate qui interprète est une porte dérobée. Montants Decimal exacts, table devises ISO, default deny vrai. Même loi que R3 de l'annuaire, autre domaine.",
+  'x402.h2': 'Paiements machine',
+  'x402.p1': "Le payant tient en quatre octets de protocole : le serveur répond <code>402</code> avec ses exigences ; l'agent signe un transfert USDC EIP-3009 ; un facilitateur vérifie et règle ; la réponse rejoue la preuve dans <code>X-PAYMENT-RESPONSE</code>. Zéro clé côté serveur.",
+  'x402.p2': 'Les paiements rejoués sont refusés. Les erreurs sur routes payantes restent gratuites. Le registre de chaque refus est public : <a href="/misses.json">/misses.json</a>.',
+  'x402.bankr': 'Second domicile : quatre transforms payés aussi sur le x402 Cloud de <a href="https://bankr.bot">Bankr</a> \\u2014 mêmes chemins, mêmes sha256 : <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data">chart</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json">reshape</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json">validate</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join">csv-join</a>. Le reste ici, gratuit compris.',
+  'vision.h2': 'Pourquoi le déterminisme, pourquoi maintenant',
+  'vision.p1': 'Un LLM approxime. <code>sha256("abc")</code> ? Réponse avec assurance, élégance, et fausse. Nettoyer le même CSV chaque jour ? Des tokens pour redériver ce qu\'une fonction rend en millisecondes — mêmes octets, à chaque fois.',
+  'vision.p2': "Le calculateur Apollo : 4 Ko de RAM, des humains sur la Lune — parce qu'aucune maths n'improvise. Chaque constante calculée une fois, au sol, à froid, gelée dans la mémoire à cordes tressées.",
+  'vision.quote': "Codé d'abord pour envoyer l'homme sur la Lune, le déterminisme enverra l'IA au travail.",
+  'vision.p3': "Mechacut est cette math gelée pour les agents : vocabulaires fermés, contrats refusant ce qui sort de la table, erreurs nommant la forme attendue — l'erreur est le prompt qui répare. Le sens reste avec le modèle ; la mécanique déménage ici.",
+  'contract.h2': 'Le contrat',
+  'contract.li1': 'Même requête → mêmes octets, sha256 sur chaque réponse',
+  'contract.li2': 'Sans inscription, sans clé, sans mur de débit sous 30 req/min',
+  'contract.li3': "Zéro stockage : le seul état est une fenêtre d'une minute, un registre de 60 minutes et un jeu de nonces de paiement",
+  'contract.li4': 'Vocabulaires fermés — tout ce qui sort de la table est refusé, nommé, renvoyé à sa forme attendue',
+  'contract.li5': 'Des erreurs qui réparent : champ, message, attendu, toujours',
+  'contract.li6': 'Paiements machine x402 : USDC sur Base, vérifiés par facilitateur, zéro humain dans la boucle',
+  'agents.line': 'Parlez agent : outils MCP, GET /agent/manifest (toute la suite en une requête), GET /route?q=…, POST /api/v1/pipeline.',
+  'agents.hint': 'installez un pack',
+  'footer.family': 'Mechacut fait partie de la famille C.V. — voir moovicut.',
  },
  "pt": {
-  "meta.title": "Mechacut — mesma requisição, mesmos bytes",
-  "meta.desc": "Transformações determinísticas para agentes de IA: 53 "
-               "ferramentas, três níveis, pagamentos entre máquinas. Sem "
-               "cadastro, sem chave, sem armazenamento.",
-  "nav.tools": "Bundles", "nav.numbers": "Provas", "nav.vision": "Visão",
-  "nav.api": "Contrato",
-  "pill": "v{ver} · {n_tools} transformações · {n_recipes} receitas",
-  "hero1": "Significado se aprende.",
-  "hero.why": "<strong>Por que determinismo?</strong> Porque uma resposta certa que muda a cada execução não é uma resposta — é um dado lançado. Uma máquina que devolve os mesmos bytes para a mesma pergunta torna agentes auditáveis: cada resposta traz sua impressão, cada erro nomeia o campo culpado, e o que você testa de manhã é o que você entrega à noite.",
-  "hero2": "Mecânica se conhece.",
-  "hero3": "Competência não se aprende. Serve-se.",
-  "lede": "Uma suíte de <strong>{n_tools} transformações "
-          "determinísticas</strong> para agentes de IA — {n_free} grátis "
-          "para sempre, {n_cap} grátis abaixo de 32 KB e depois pagas "
-          "por chamada, {n_paid} pagáveis por máquina — mais "
-          "{n_recipes} receitas de chamada única, grátis. O modelo para "
-          "de adivinhar o que um checksum pode provar.",
-  "bundles.h2": "O catálogo",
-  "bundles.creed": "Um modelo calcula. Um servidor sabe.",
-  "cat.search": "busque uma ferramenta ou seu problema…",
-  "cat.hits": "~n~ ferramentas de ~t~",
-  "panel.copy": "copiar curl",
-  "panel.copied": "copiado",
-  "panel.close": "fechar",
-  "panel.say": "diga ao seu agente:",
-  "panel.got": "o servidor respondeu:",
-  "nav.menu": "menu",
-  "bundles.intro": "Mesma requisição, mesmos bytes — cada resposta carrega "
-                   "seu sha256. Instale um pack, ou leia o manifesto inteiro "
-                   "em uma requisição e deixe <code>GET /route</code> escolher.",
-  "tiers.h2": "Três níveis, zero contas",
-  "tiers.intro": "Agentes não leem páginas de preço — então o preço está "
-                 "no protocolo: uma rota grátis responde sem chave, uma "
-                 "rota com teto responde grátis abaixo de 32 KB, qualquer "
-                 "outra recebe um <code>402</code> honesto com desafio "
-                 "x402 USDC na Base, liquidado por um facilitador. Entre "
-                 "um servidor e um robô, só existem preços e recibos.",
-  "bench.h2": "Medido, não prometido",
-  "bench.creed": "O muro é a FORMA, não o tamanho — e nós precificamos a porta.",
-  "bench9.intro": "Uma frase vaga (em francês), seis campos obrigatórios — "
-                  "valores com 2 decimais, percentuais, datas únicas, URL, "
-                  "e-mail, total. Expectativas calculadas à mão antes de "
-                  "rodar. O servidor monta o cartão (/intent/card); o "
-                  "modelo repassa uma linha e a resposta nunca passa por "
-                  "ele.",
-  "bench9.with": "com o cartão de intenção",
-  "bench9.foot": "A linha 0.5B reproduziu em uma segunda rodada "
-                 "independente. Três chamadas iguais → um único sha256. A "
-                 "variante autônoma (o modelo escolhe a ferramenta) também "
-                 "marca 6/6. Sementes, scripts, falhas: "
-                 "bench/results_v9.jsonl.\n",
-  "bench10.intro": "Dezoito tarefas com UMA resposta certa cada — "
-                   "dígitos de controle GS1, um SHA-256, descontos em "
-                   "cascata, uma coluna de valores que prova o próprio "
-                   "ponto decimal. Dois modelos gratuitos e LOCAIS, "
-                   "zero gasto de API: o harness verifica que cada "
-                   "rota chamada é gratuita. Os gabaritos saíram das "
-                   "specs publicadas ANTES de qualquer modelo rodar.",
-  "bench10.with": "com uma chamada-relé",
-  "bench10.foot": "As falhas nuas se reproduzem num segundo passe "
-                  "independente: 18/18 vereditos idênticos — a temp 0, "
-                  "repetir não converge, repete. Execuções brutas: "
-                  "bench/results_v10.jsonl, método: "
-                  "bench/FINDINGS-V10.md.\n",
-        "bench.v23.sum": "Um 1,7B treinado para agentes resolveu "
-                        "{v23_chain}/{v23_chain_cells} correntes nu por "
-                        "${v23_cost} — nosso muro era o TREINAMENTO, "
-                        "não o tamanho; e o cadeado recusou "
-                        "{v23_refused} respostas certas pelos nomes.",
-        "bench.v23.intro": "A replicação fora da família: os mesmos 20 "
-                           "problemas com semente, os mesmos braços do "
-                           "v20, um modelo de outra linhagem (LFM3-1.7B, "
-                           "tri-híbrido, pós-treinado para tool "
-                           "calling). Nu {v23_n_all}/20, retransmitido "
-                           "{v23_s_all}/20, com cadeado "
-                           "{v23_l_all}/20. Nada aqui refuta o v19: "
-                           "acertar uma vez não é responder no mesmo "
-                           "byte trinta dias seguidos.",
-        "bench.v23.arm": "braço", "bench.v23.wins": "acertos /20",
-        "bench.v23.usd": "custo",
-        "bench.v23.foot": "Bruto: bench/results_v23_lfm3.jsonl · "
-                          "método: bench/FINDINGS-V23.md · $ a preços "
-                          "por token congelados.\n",
-        "bench.v20.sum": "O muro é um ALVO: o llama 8B vai de "
-                         "{v20_8b_s} para {v20_8b_l}/20 com o cadeado "
-                         "de alvo; o 7B fecha seu primeiro "
-                         "{v20_7b_l}/20.",
-        "bench.v20.intro": "A promessa de v17 medida: a resposta deve "
-                           "nomear a quantidade que devolve. Nu, o 8B "
-                           "calculava certo e respondia ao lado — "
-                           "{v20_aside} de seus erros traziam outra "
-                           "quantidade da cadeia, e o cadeado converteu "
-                           "{v20_aside_conv}. {v20_cells} células, e o "
-                           "braço nu reencena o v15 exatamente "
-                           "({v20_replay}).",
-        "bench.v20.model": "modelo", "bench.v20.naked": "nu",
-        "bench.v20.locked": "com cadeado",
-        "bench.v20.foot": "Bruto: bench/results_v20_target_lock.jsonl · "
-                          "método: bench/FINDINGS-V20.md.\n",
-        "bench.g1": "O que eles erram não é pensar — é executar",
-        "bench.g2": "O muro é uma FORMA — e formas são alvo de treino",
-        "bench.g3": "Ninguém diz «não tenho certeza» — pagar mais não desvia da "
-                        "forma",
-        "bench.g4": "A leitura é o teto que nenhuma ferramenta fura",
-        "bench.g5": "O regime real: trinta dias do mesmo trabalho",
-        "bench.v11.sum": "Quinze tarefas hostis: o 7B vai de {v11_7b_nu} a "
-                        "{v11_7b_relay} com relé; o 8B de {v11_8b_nu} a "
-                        "{v11_8b_relay}.",
-        "bench.v11.foot": "Bruto: bench/results_v11.jsonl · método: "
-                        "bench/FINDINGS-V11.md",
-        "bench.f5.sum": "{f5_wins}/{f5_cells} tentativas encadeadas com a ficha — "
-                        "critério ≥19 APROVADO; {f5_repairs} reparadas por recusa "
-                        "nomeada; o 7B sozinho {f5_7b}.",
-        "bench.f5.foot": "Bruto: bench/results_f5_accept.jsonl · método: "
-                        "bench/FINDINGS-F5.md",
-        "bench.v13.sum": "O resultado negativo, publicado primeiro: no GSM8K real o "
-                        "cartão-relé desaba a {v13_relay_05b}/20 no 0.5B — pedir a "
-                        "decomposição ao modelo ainda é deixá-la com o modelo.",
-        "bench.v13.foot": "Bruto: bench/results_v13_gsm8k.jsonl · método: "
-                        "bench/FINDINGS-V13.md",
-        "bench.v14.sum": "Skill estrita: {v14_breaks}/{v14_cells} rupturas de "
-                        "protocolo — a única classe que a forma garante — a leitura "
-                        "segue livre.",
-        "bench.v14.foot": "Bruto: bench/results_v14_skill.jsonl · método: "
-                        "bench/FINDINGS-V14.md",
-        "bench.v22.sum": "Três modelos fronteira respondem {v22_nu} nus — um "
-                        "{v22_best}, outro {v22_worst}. Pela ficha congelada: "
-                        "{v22_fiche}. Pagar mais não muda a forma.",
-        "bench.v22.foot": "Bruto: bench/results_v22.jsonl · método: "
-                        "bench/FINDINGS-V22.md",
-        "bench.v22b.sum": "Cinco passes no regime dos agentes: {v22b_ok}/{v22b_cells} "
-                        "certos — o MESMO programa duas vezes: {v22b_stable}/14. "
-                        "O servidor: {v22b_shas} sha por problema.",
-        "bench.v22b.foot": "Bruto: bench/results_v22b.jsonl · método: "
-                        "bench/FINDINGS-V22.md",
-        "bench.v24.sum": "Trinta dias no mesmo CSV com um modelo QUE SABE cadeias: "
-                        "{v24_sil}/{v24_days} dias de resposta vazia após 8.192 "
-                        "tokens de raciocínio, {v24_ok} certas, faturados "
-                        "${v24_usd}. A máquina: {v24_m_ok} a $0,00.",
-        "bench.f7.sum": "As sete cadeias copiadas EN/PT: {f7_wins}/{f7_cells} — "
-                        "critério ≥19 APROVADO; {f7_rep} ganhas pela recusa "
-                        "nomeada. O 0.5b copia 4/7 em PT onde o FR o punha a 0/7: o "
-                        "teto de leitura é do modelo × língua × forma.",
-        "bench.f7.foot": "Bruto: bench/results_f7_accept.jsonl · critério gelado: bench/FINDINGS-F7.md",
-        "bench.v24.foot": "Bruto: bench/results_v24_lfm3_30days.jsonl · a emenda está "
-                        "no histórico git (run24 amendado)",
-        "bench.v19.sum": "{v19_wins}/{v19_days} tentativas corretas para os modelos "
-                        "— máquina: {v19_m_ok}/{v19_m_days} dias no mesmo byte; "
-                        "{v19_drift} saídas diferentes de um só modelo em 30 dias.",
-        "bench.v19.intro": "O mesmo CSV sujo limpo 30 dias seguidos. "
-                        "Especificação de seis regras, gold ESCRITO À "
-                        "MÃO antes do banco, um braço retry que só vê "
-                        "sua própria forma — nunca a resposta. "
-                        "Temperatura 0,7: o regime real dos agentes, "
-                        "divulgado.",
-        "bench.v19.arm": "braço", "bench.v19.right": "dias certos /30",
-        "bench.v19.distinct": "saídas distintas",
-        "bench.v19.foot": "Bruto: bench/results_v19_csv_bill.jsonl · "
-                        "método + dólares: bench/FINDINGS-V19.md · "
-                        "replay: python bench/run19.py",
-        "bench.v17.sum": "Retry ×5 num erro sistemático: "
-                        "{v17_retry_wins}/{v17_retry_cells} cadeias "
-                        "consertadas — o mesmo erro, 5× o preço.",
-        "bench.v17.intro": "Três braços, os mesmos 20 problemas novos, "
-                        "cada token contado: responder nuo, tentar "
-                        "cinco vezes, ou entregar o cálculo ao "
-                        "servidor. Células: {v17_cells}.",
-        "bench.v17.nu": "nu", "bench.v17.retry": "retry ×5",
-        "bench.v17.relay": "servidor (ok · tokens/certo)",
-        "bench.v17.foot": "Bruto: bench/results_v17_tokens.jsonl · "
-                        "bench/FINDINGS-V17.md · replay: python "
-                        "bench/run17.py",
-        "bench.v16.sum": "{v16_wrong} erros em {v16_runs} execuções — "
-                        "«não tenho certeza» dito {v16_doubt} vezes.",
-        "bench.v16.intro": "Problemas do dia a dia gerados na hora, "
-                        "cada modelo convidado a marcar sua confiança "
-                        "com honestidade. Falharam sempre do mesmo "
-                        "modo: com certeza.",
-        "bench.v16.foot": "Bruto: bench/results_v16_calibration.jsonl "
-                        "· bench/FINDINGS-V16.md · gerador: "
-                        "bench/gen16.py (semeado, duplo oráculo).",
-        "bench.v15.sum": "O muro tem FORMA: {v15_alone_wins}/{v15_cells} "
-                        "tentativas em cadeia nuas ou com retry — "
-                        "{v15_best_arm}/{v15_arm_cells} com o melhor "
-                        "braço servidor.",
-        "bench.v15.intro": "A matriz completa: 5 transportes × 4 "
-                        "modelos gratuitos × 20 problemas semeado "
-                        "(400 células), hipóteses comitadas ANTES da "
-                        "primeira célula, previsões furadas "
-                        "publicadas primeiro.",
-        "bench.v15.foot": "Bruto: bench/results_v15_matrix.jsonl · "
-                        "bench/FINDINGS-V15.md · replay: python "
-                        "bench/run15.py && python bench/score15.py",
-        "bench.v12.sum": "{v12_zero} sozinho → {v12_hero} com um só "
-                        "relé. O zero vira herói.",
-        "bench.v10.sum": "Uma resposta certa cada: {v10_alone} sozinho "
-                        "→ {v10_server} com relé — a $0, auditado pelo "
-                        "próprio banco.",
-        "bench.v9.sum": "Uma frase vaga, seis chaves: {v9_alone} → "
-                        "{v9_card} com o cartão de intenção.",
-        "bench.v6.sum": "A primeira matriz — nu vs relé. Cada linha, "
-                        "cada harness, cada falha: bench/FINDINGS.md.",
-  "bench12.intro": "Dez cálculos exatos (7834×9217, 0.1+0.2, porcentagens "
-                   "em cadeia…) × quatro modelos locais GRATUITOS × três "
-                   "braços: responder nu, escrever Python, ou repassar uma "
-                   "expressão ao math/calc. Mesmo quadro, duas físicas: o "
-                   "braço código devolve float, o relé devolve exato.",
-  "bench12.code": "escreve Python",
-  "bench12.relay": "relé Mechacut",
-  "bench12.foot": "O 8B falha no RELÉ por tagarelice de protocolo, não "
-                  "por matemática — por isso a ficha de intenção escreve a "
-                  "linha por ele. Nu, o 0.5B inventou 89000098; em relé, "
-                  "9/10 com mediana de 0,2 s. Bruto: bench/"
-                  "results_v12.jsonl, método: bench/FINDINGS-V12.md.\n",
-  "bench.intro": "Uma tarefa congelada (seed 20261120): CSV sujo + JSON "
-                 "quebrado + lista de URLs → um YAML canônico, resposta "
-                 "espera fixada por sha256. O mesmo modelo local fraco "
-                 "(Qwen 2.5, temperatura 0), um braço sozinho, um braço "
-                 "guiando o Mechacut. Publicamos também os fracassos — o "
-                 "0.5B falha nos dois braços, e um teto de capacidade é "
-                 "um resultado.",
-  "bench.model": "modelo", "bench.alone": "sozinho", "bench.with": "com "
-                 "mechacut", "bench.tokens": "tokens consumidos",
-  "bench.foot": "O 7B vai de 0 % a 100 % em uma única chamada de "
-                "pipeline. Cada execução, cada token, está em "
-                "bench/results.jsonl.",
-    "nav.build": "Construir",
-      "nav.market": "Mercado",
-      "market.h2": "Eles também dizem",
-      "market.creed": "As grandes casas convergiram na mesma frase — só o modo de entregá-la difere.",
-  "build.h2": "O que voc\u00ea pode construir hoje",
-  "build.intro": "Voc\u00ea tem um modelo pequeno e gratuito na sua "
-                 "m\u00e1quina. Tr\u00eas coisas para fazer com ele — as "
-                 "frases citadas s\u00e3o o que voc\u00ea diz ao agente, "
-                 "as respostas s\u00e3o o que o servidor realmente "
-                 "devolveu. Sem conta, sem cart\u00e3o, sem reza.",
-  "build.r1.name": "A portaria da nota (Brasil)",
-  "build.r1.say": "\u201cO CNPJ 11.222.333/0001-81 do meu cliente \u00e9 "
-                  "v\u00e1lido para a nota?\u201d",
-  "build.r1.got": "{{ \"valid\": true, \"algorithm\": \"mod-11 double "
-                  "DV (Receita Federal)\" }}",
-  "build.r1.why": "Sozinho, um 0.5B \u201ccalcula\u201d d\u00edgitos de "
-                  "confer\u00eancia — e erra. Aqui os d\u00edgitos "
-                  "decidem: a nota n\u00e3o morre no contador.",
-  "build.r2.name": "O guarda-vazamento",
-  "build.r2.say": "\u201cEscaneie este log antes de eu colar num "
-                  "chatbot.\u201d",
-  "build.r2.got": "2 achados \u2192 semente [SEED_PHRASE] e chave "
-                  "[OPENAI_KEY_1]",
-  "build.r2.why": "O scan devolve posi\u00e7\u00f5es, nunca o valor; a "
-                  "m\u00e1scara nunca devolve a chave. O segredo veio "
-                  "guardar-se aqui — proteg\u00e9o at\u00e9 de n\u00f3s.",
-  "build.r3.name": "O r\u00e9lay do incidente",
-  "build.r3.say": "\u201crel\u00e8ve les montants et dates de cette note "
-                  "d\u2019incident\u201d \u2014 em franc\u00eas, para um "
-                  "0.5B.",
-  "build.r3.got": "money [3200.00, 12450.75] \u00b7 6/6 em 320 tokens "
-                  "(sozinho: 0/6)",
-  "build.r3.why": "\u00c9 o bench v9, igual: mesma tarefa, mesmo modelo, "
-                  "uma linha de relay. Cada execu\u00e7\u00e3o est\u00e1 "
-                  "em bench/results_v9.jsonl — reproduza voc\u00ea mesmo.",
-  "build.connect": "Ou ligue agora: cole ESTA linha em qualquer agente, "
-                 "at\u00e9 o menor \u2014 ela vira o manual completo:",
-    "everyday.h2": "Para todo mundo",
-      "everyday.open": "Expandir as provas — saídas reais do servidor, não maquetes.",
-  "everyday.intro": "Sem código, sem jargão. Vinte e oito coisas que "
-                    "uma pessoa pede ao agente numa terça — cada "
-                    "resposta abaixo é a saída real do servidor, "
-                    "não uma maquete.",
-  "everyday.e1.name": "Wi-Fi de visitas, um scan",
-  "everyday.e1.say": "\u201cColoca o Wi-Fi num QR para as pararem de "
-                     "perguntar a senha.\u201d",
-  "everyday.e2.name": "O cheque, por extenso",
-  "everyday.e2.say": "\u201cEscreva R$ 1.234,56 por extenso no cheque "
-                     "\u2014 o banco recusa erro.\u201d",
-  "everyday.e3.name": "IBAN antes da transfer\u00eancia",
-  "everyday.e3.say": "\u201cCopiei certo este IBAN? Se voltar, pago "
-                     "tarifa.\u201d",
-  "everyday.e4.name": "Receita em p\u00e1gina imprim\u00edvel",
-  "everyday.e4.say": "\u201cTransforma minhas anota\u00e7\u00f5es da "
-                     "receita numa p\u00e1gina limpa \u2014 quero o PDF "
-                     "para a geladeira.\u201d",
-  "everyday.e5.name": "Contando os dias",
-  "everyday.e5.say": "\u201cQuantos dias at\u00e9 a "
-                     "viagem?\u201d",
-  "everyday.e6.name": "A conta que o caixa não fará",
-  "everyday.e6.say": "\u201c-30 % e depois -20 % é -50 %, "
-                     "certo?\u201d \u00c9 -44 %.",
-  "everyday.e7.name": "Um terço do bolo, sem arredondar escondido",
-  "everyday.e7.say": "\u201cMeu bolo de 6 porções, quero para 2 — "
-                     "400 g de farinha, 5 ovos?\u201d 400 × 1/3 = "
-                     "133 1/3 g exato, 135 g na balança. Os ovos são "
-                     "ditos, não adivinhados.",
-  "everyday.e8.name": "Uma terça sim, outra não",
-  "everyday.e8.say": "“Clube do livro a cada duas terças às 19h — "
-                     "as próximas quatro datas?” 3 e 17 de nov., 1º e "
-                     "15 de dez.: quinzenal é PULAR as semanas do meio "
-                     "— e o motor nomeia os pulos.",
-  "everyday.e9.name": "Um pé, três respostas certas",
-  "everyday.e9.say": "“EU 42⅔ ou 42,5 — qual é o meu número?” As duas "
-                     "tabelas arredondam: o milímetro é exato, os "
-                     "candidatos de meia e de terço aparecem escritos, "
-                     "e a deriva entre sistemas é um número dito. "
-                     "Nunca um número único confiante.",
-  "everyday.e10.name": "Voo atrasado — quem me deve quanto",
-  "everyday.e10.say": "“Meu voo chegou 3h20 atrasado — quanto me "
-                      "devem de fato?” A DATA DO VOO escolhe a regra: "
-                      "antes de 23 out. 2027 o antigo EC261 + "
-                      "jurisprudência; depois, a nova tabela codificada "
-                      "“ACIMA DE três horas”. Mesmos fatos de cada lado "
-                      "dessa linha pagam diferente. € ou £, com o prazo "
-                      "de reclamar em data real.",
-  "everyday.e11.name": "Minha bagagem passa no portão",
-  "everyday.e11.say": "“Minha mala é 40×18×12, voo em novembro de "
-                      "2027 — grátis sob o assento?” A DATA DO VOO "
-                      "decide: a regra de 2027 limita o item sob o "
-                      "assento a 40×30×15; antes dela, nada é fixo. "
-                      "Rotação conta — faces ordenadas, nunca a ordem "
-                      "digitada.",
-  "everyday.e12.name": "Dois planos, um número honesto",
-  "everyday.e12.say": "“O plano A é mais barato por kWh, o B mais "
-                      "barato por mês — quando o A ganha de fato?” A "
-                      "virada = (diferença de fixo × dias) ÷ "
-                      "(diferença de preço), em fração EXATA: "
-                      "4.623⅓ kWh onde o artigo diz “cerca de "
-                      "4.623”. “Nunca” também é resposta, nomeada, "
-                      "quando um plano vence nos dois componentes.",
-  "everyday.e13.name": "Quanto vale um ponto de verdade",
-  "everyday.e13.say": "“29 000 pontos por um voo de R$ 438 menos R$ "
-                      "5,60 de taxas — quanto vale o ponto?” (438 − "
-                      "5,60) ÷ 29 000 × 100: o 1,49 impresso esconde o "
-                      "exato 1081/725 = 1,491034… Subtraia ANTES de "
-                      "dividir; é o SEU piso que diz “resgate” ou "
-                      "“pague em dinheiro”.",
-  "everyday.e14.name": "O peso de fato cobrado, as duas correntes "
-                       "impressas",
-  "everyday.e14.say": "“Duas transportadoras cobram 6 kg e 5 kg pela "
-                      "minha caixa 40×30×25 — quem erra?” Nenhuma: "
-                      "30 000 cm³ ÷ 5 000 = 6 exatos, ÷ 6 000 = 5 "
-                      "exatos — dois divisores, uma corrente honesta, "
-                      "cada passo nomeado. E as tabelas ESTRAGAM "
-                      "(USPS: 166→139 em julho de 2026); o divisor "
-                      "continua SEU argumento — nunca nossa memória.",
-  "everyday.e15.name": "A placa diz 50 % — a conta, nunca",
-  "everyday.e15.say": "“Compre um e leve o segundo com 50% off — duas "
-                      "camisetas de R$ 60 e R$ 40, quanto eu pago?” Nem "
-                      "50 nem 25: o desconto cai sobre a MAIS BARATA "
-                      "(regra de varejo publicada), o par sai por 80 de "
-                      "100 = −20 %. Preços iguais = −25 %; BOGO grátis = "
-                      "−50 %; e um cupom de −30 % por cima dá −47,5 %, "
-                      "nunca 55 — percentuais multiplicam.”",
-  "everyday.e16.name": "Os 500 g viraram 400 g — pelo mesmo preço",
-  "everyday.e16.say": "\u201c−20 % na embalagem?\u201d Não é o mesmo "
-                      "número da prateleira: perder 1/5 do produto "
-                      "custa +1/4 por quilo (20 % contra 25 % — dois "
-                      "denominadores, 500 e 400). E \u201c2 por "
-                      "R$ 7\u201d de potes de 15 oz perde 40,3509 % "
-                      "por onça para o pote único de 24 oz — a fração "
-                      "exata decide, não o olho.",
-  "everyday.e17.name": "Ação de graça quinta: a que horas tirar o peru do congelador",
-  "everyday.e17.say": "Oito calculadoras de nov. 2026 citam a mesma tabela USDA e se contradizem sobre o peru de 16 lb. Regra nomeada: no mais tardar = forno menos a ponta longa da faixa; não antes = menos a guarda de 1 a 2 dias. Horas são argumentos, nunca o relógio; pronto é 165 °F na sonda.",
-  "everyday.e18.name": "O peru virou sobra — que dia fecha a janela da "
-                       "geladeira",
-  "everyday.e18.say": "A imprensa grava « comer até segunda 30 de novembro » (NBC, 19 nov) ao lado de « três dias, 72 h ideais » (ky3) para o mesmo peru; as duas páginas FSIS brigam no freezer (2-6 vs 3-4 meses). A ferramenta devolve a UNIÃO das janelas com as duas âncoras citadas, a regra das 2 h ESTRICTA desde cooked_at (2 h exatas passa, 2 h 01 descarta), o 4º dia nomeado LAST_DAY; segura a −18 °C, qualidade nomeada qualidade.",
-  "everyday.e19.name": "Três pratos querem o forno — a contagem e os "
-                       "conflitos nomeados",
-  "everyday.e19.say": "Oito timelines 2026 publicam o mesmo jantar com descansos de 20 a 60 minutos, 325 ou 350 °F — e ninguém conta o pré-aquecimento que come 45 minutos. Cálculo AO CONTRÁRIO da hora de servir (argumento, nunca relógio): um forno, um prato por vez, descanso fora; entrada no minuto da saída em outra temperatura = conflito nomeado; «180» sem unidade = recusado; descanso além de 2 h = zona FSIS.",
-  "everyday.e20.name": "Prazos de envio do Natal \u2014 \u22652 fontes "
-                     "por linha, a divergente nomeada",
-  "everyday.e20.say": "Seis tabelas de 13 a 21/nov/2026 se "
-                      "contradizem: um sindicato imprime FedEx "
-                      "Saver, 2Day e Overnight um dia depois \u2014 a "
-                      "meta dele \u00e9 25, n\u00e3o 24. Linha s\u00f3 com "
-                      "\u22652 fontes concordantes; a divergente \u00e9 "
-                      "nomeada com o motivo. UPS Ground recusado: "
-                      "data \u00fanica n\u00e3o existe. as_of \u00e9 "
-                      "argumento, n\u00e3o rel\u00f3gio. Janela morre "
-                      "em 23/dez.",
-  "everyday.e21.name": "Prazos de DEVOLU\u00c7\u00c3O das festas \u2014 \u22652 "
-                     "fontes, classe de proven\u00e2ncia por linha",
-  "everyday.e21.say": "A manchete « até 31 de janeiro » é mentira por omissão: na Target a janela de compra fecha 24/dez, na Best Buy a regra de membros corta em 4/dez, e um blog republicou as datas do ano passado deslocadas enquanto o Seller Central publicava o texto 2026 literal. Linha só com duas fontes concordantes; proveniência por linha; convenção nomeada; fonte única recusada pelo nome, com o fato candidato. « O mais tarde dos dois » exige a data de entrega.",
-  "everyday.e22.name": "O pre\u00e7o riscado \u00e9 LEGAL \u2014 a "
-                     "regra Omnibus dos 30 dias, auditada do SEU "
-                     "hist\u00f3rico",
-  "everyday.e22.say": "A lei nomeia a referência: o preço MAIS BAIXO dos 30 dias anteriores (Diretiva 2019/2161 art. 6a) — promoção de fim de semana ABAIXA a referência mesmo se o preço subiu depois (TJUE C-330/23). 100 → 80 → 100 → 70 é 12,5%, não 30%. Varredura da Comissão, março de 2026: 30% de 314 lojas erram; a Espanha multou até 350.000 EUR. Histórico entra, referência e porcentagem real saem — nunca busca preços.",
-  "everyday.e23.name": "O pre\u00e7o CAIU depois da compra \u2014 quem "
-                       "deve a diferen\u00e7a, at\u00e9 quando, em que dinheiro",
-  "everyday.e23.say": "Comprou por 100, a loja mostra 80 agora. "
-                      "Nenhuma lei obriga o reembolso \u2014 mas as "
-                      "garantias publicadas das lojas sim, e essas "
-                      "janelas s\u00e3o DATAS: Target 24 dez, Best "
-                      "Buy 15 jan, Costco 30 dias, Amazon nada. Cole "
-                      "as datas da compra e da queda e os dois "
-                      "pre\u00e7os \u2014 a m\u00e1quina devolve o "
-                      "veredicto, o prazo do pedido, o valor e a "
-                      "forma do reembolso, com a classe de fonte em "
-                      "cada linha. Ela nunca busca pre\u00e7os.",
-  "everyday.e24.name": "O presente quebrou DEPOIS do prazo de "
-                       "troca — o que a LEI ainda deve, ao dia",
-  "everyday.e24.say": "Presente entregue em 25 de dezembro, morto em 16 de janeiro: a janela da loja fechou dia 15 e a imprensa cala; a lei não. França: conformidade 2 anos desde a ENTREGA, vícios ocultos 2 anos desde a DESCOBERTA, teto de 20 anos da venda — três âncoras. Reino Unido: 30 dias para rejeitar, seis meses de ônus INVERTIDO (prova, não prazo), seis anos para agir — cinco na Escócia. Página oficial se contradiz (recondicionado: 24 ou 12): as DUAS datas viajam. EUA e Austrália recusados por nome.",
-    "everyday.e25.name": "Posso descartar esta pasta? — a gaveta "
-                       "britânica esconde QUATRO relógios",
-  "everyday.e25.say": "«Seis anos» é UMA frase para quatro datas: VAT conta da data ESCRITA NO DOCUMENTO (evento futuro incluso — o manual da HMRC diz), limited company do FIM do exercício, Companies Act s.388 TRÊS anos se private, SEIS se plc — desde a CRIAÇÃO —, Self Assessment cinco anos do prazo de 31 de janeiro que não está em papel nenhum. Exemplo refeito: 2022-23 até 31 de janeiro de 2024 → guardar até 31 de janeiro de 2029, descartar de 1º de fevereiro. Os «ou mais se» voltam BLOCKED — nunca data inventada. CH15400: a MAIS LONGA governa. Jurisdição Reino Unido; notas do Brasil seguem outra lei.",
-  "everyday.e26.name": "O vale-presente « vencido » pode estar vivo "
-                       "— na Irlanda conta-se da COMPRA",
-  "everyday.e26.say": "Irlanda, Gift Vouchers Act 2019 rejogado: validade impressa menor que CINCO ANS desde a compra é SUBSTITUÍDA por cinco anos e a data legal COBRE o papel (66B(1)(b)+(c)). Forma JD Sports: vales de um ano, ≈€250.000 devolvidos em julho após a notificação do CCPC de 20 de novembro. A âncora é o contrato e quem segura o vale tem TODOS os direitos (66B(10)). Saldo de €1 ou mais é devido. França: nenhuma duração legal; o boato dos «30 anos» é prescrição imobiliária, recusado por nome.",
-  "everyday.e27.name": "As datas dos saldos na Fran\u00e7a s\u00e3o "
-                       "LEI, n\u00e3o mem\u00f3ria \u2014 2027 abre a 6 de "
-                       "janeiro",
-  "everyday.e27.say": "O arrêté de 27 de maio de 2019 rejogado: inverno abre na 2ª quarta de janeiro às 8h, ANTECIPADO se a 2ª cai após o dia 12 — 2027: 6 de janeiro; quem imprime «9 de fevereiro» perdeu a cláusula. Verão idem: última quarta de junho, penúltima se a última cai após o 28 — 2027: 23 de junho. Quatro semanas contando o dia de abertura. As sete derrogações anuais com o texto: verão 2020 a 15 de julho; inverno 2021 a 20 de janeiro e depois SEIS SEMANAS; Mosela sozinha a 26 de junho de 2021; Guadalupe a 7 de outubro de 2021; canícula 2023 e 2026 a cinco semanas. «Primeiro dia útil» sem definição: em 2027 segunda 4 primeiro, sábado 2 nomeado. Antes de 2020 e estrangeiro recusados por nome; contagem é subtração, não relógio.",
-  "everyday.e28.name": "Saldos na Bélgica: o domingo muda a data — 2027 abre sábado 2 de janeiro",
-  "everyday.e28.say": "Livre VI rejogado (vigente desde 31-05-2014): inverno de 3 a 31 de janeiro, do DIA 2 se o dia 3 cai domingo — vivido 2016, 2027; a espera de um mês é NOMEADA «de 2 de dezembro a 1º de janeiro» — a imprensa imprime 3 de dezembro e perde a borda do dia seguinte. Verão de 1º a 31 de julho, de 30 de JUNHO se 1º cai domingo — vivido 2018; espera nomeada «de 31 de maio a 29 de junho»: o texto vence a fórmula (30 de maio). Corona com o texto: verão 2020 adiada para 1º-31 de agosto (lei 27-05-2020); inverno 2021 adiado para segunda 4 de janeiro (AR 10-12-2020 — a cláusula do domingo ACIONADA e depois DESATIVADA: os dois fatos viajam), prorrogado até 15 de fevereiro por LEI (02-02-2021; os títulos diziam 14). Invernos antes de 2015 recusados com a lei de 1991; França e Luxemburgo recusados pelo nome com seu fato: o Luxemburgo é datado A CADA ANO por règlement grand-ducal. O Conseil d'Estado anulou três multas em 20-05-2026; as datas ficam — a ferramenta marca, não advoga.",
-"nav.kit": "Kit",
-  "kit.h2": "A suíte no seu disco",
-  "kit.creed": "O protocolo não é o transporte \u2014 é a certidão de nascimento da ferramenta.",
-  "kit.intro": "As transformações livres não são só uma API. São uma suíte: um agente pode instalá-la na própria máquina, chamá-la localmente e \u2014 a parte que nenhum mercado faz \u2014 construir ferramentas novas sobre os mesmos portões. curl vira kit call; tarefa repetida vira proposta de contrato; a proposta vira ferramenta publicada apenas se seus golds foram traçados antes do código.",
-  "kit.c1.sum": "Instalar \u2014 a suíte básica na máquina",
-  "kit.c1.foot": "Sha verificado, sem daemon, sem auto-update, sem rede dentro do motor. O sem-estado é o contrato: o humano decide quando o kit se move.",
-  "kit.c2.sum": "Chamar \u2014 consultar antes de agir",
-  "kit.c2.foot": "A skill consulta o diretório primeiro. Mesmo cânone, mesmas recusas, mesmos golds do datacenter \u2014 o que é verificado aqui é verificado lá, byte por byte.",
-  "kit.c3.sum": "Construir \u2014 na segunda vez, escrever a ferramenta",
-  "kit.c3.foot": "Golds traçados ANTES do código, AST-gate, pin-gate. Status: proposto, atestado, rede-verificado \u2014 o kit cresce localmente, a prova cresce de volta na rede. Uma lição é uma proposta; o banco a tranca.",
-  "kit.howto.p1": "Instalar a skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> \u2014 soltar o arquivo no agente (CLAUDE.md, AGENTS.md, skills/). ~1,000 tokens, calibrado para modelos pequenos.",
-  "kit.howto.p2": "Fazê-lo consultar primeiro: antes de agir, o agente descreve o problema em uma frase a /route/resolve \u2014 o diretório devolve a ferramenta que já existe, ou diz que não há.",
-  "kit.howto.p3": "Chamar: POSTs sem estado, sem chave no livre; a resposta traz seu sha256, a recusa traz campo + esperado + exemplo. Tudo o que há nesta página já funciona: uma linha instala o arquivo de skill, o diretório responde, as chamadas livres não têm chave.",
-  "kit.plain.sum": "Você não é desenvolvedor? Sem problema \u2014 a gente traduz.",
-  "kit.plain.p1": "Abra seu assistente de IA de sempre (Claude, ChatGPT, Grok, Copilot\u2026).",
-  "kit.plain.p2": "Envie esta mensagem: \u0022Leia https://mechacut.studio/SKILL-MINI.md e siga-o para os meus cálculos.\u0022 Nada para instalar, nada para pagar, sem conta.",
-  "kit.plain.p3": "Depois peça a tarefa real: \u002230% e depois 20% de desconto dá quanto?\u0022, \u0022quantos dias de atraso tem esta fatura?\u0022 Os números não saem mais da cabeça dele \u2014 saem da suíte, e são os mesmos para todos.",
-  "kit.plain.p4": "Pediu algo que a suíte não faz? Proponha em palavras simples \u2014 cada proposta é pública, e seu veredito também: entregue, em bancada ou recusado com o motivo nomeado, em /proposals.",
-  "kit.dev.sum": "Para desenvolvedores \u2014 três linhas, sem conta",
-  "kit.propose": "Proporcionar uma ferramenta: POST /api/v1/agent/propose — um contrato, nunca código; duplicado nomeado, evidência exibida, elegibilidade devolvida como blob pronto para commit. Nada é guardado no servidor. Skill do protocolo: /SKILL-KIT.md",
-  "bench.d82.sum": "Traces de chamadas julgadas: o mesmo gesto de agente nunca foi reemitido igual (0 de 14, V22b) e um retry multiplicou a fatura ×4 sem convergir (V17) \u2014 loop/doom-check agora diz DOOM, CYCLIC ou STORM sobre bytes canônicos, limiares nomeados.",
-  "bench.d82.foot": "Identidade em (ferramenta, args) canônicos: a ordem das chaves nunca esconde um loop. Duas chamadas iguais não são loop \u2014 o limiar é dito, nunca adivinhado. Todos os sinais reportados, veredito o mais grave. Fontes: bench/FINDINGS-V17.md · run22b.",
-  "bench.e76.sum": "O juiz do banco virou rota: eval/compare devolve OK ou WRONG com as divergências nomeadas \u2014 2.5 versus \u00222.50\u0022 nunca é discordância, floats nunca são argumento.",
-  "bench.e76.foot": "Regra nascida do incidente do juiz V2 (ele copiava a própria expectativa): mesma quantidade nunca é divergência; quantidade diferente é nomeada por pointer, kind, expected, got. Decimal exato, nunca float.",
-  "bench.a79.sum": "Política como gramática fechada: check/allowlist devolve ALLOW, DENY ou AMBIGUOUS \u2014 a regra mais específica vence, empate sobe ao humano, silêncio nunca autoriza.",
-  "bench.a79.foot": "Uma ação em forma de regex é recusada, não avaliada: um gate que interpreta é porta dos fundos. Valores Decimal exatos, tabela ISO de moedas, default deny verdadeiro. A mesma lei do R3 do diretório, outro domínio.",
-"x402.h2": "Pagamentos entre máquinas",
-  "x402.p1": "O caminho pago cabe em quatro bytes de protocolo: o "
-             "servidor responde <code>402</code> com os requisitos; o "
-             "agente assina uma transferência USDC EIP-3009; um "
-             "facilitador verifica e liquida; a resposta reproduz a prova "
-             "em <code>X-PAYMENT-RESPONSE</code>. O servidor não guarda "
-             "chaves.",
-  "x402.p2": "Pagamentos repetidos são recusados. Erros em rotas pagas "
-             "continuam grátis. O registro de cada recusa é público: "
-             "<a href=\"/misses.json\">/misses.json</a>.",
-  "x402.bankr": "Mesmos endpoints, segunda casa: quatro transforms pagos tamb\u00e9m est\u00e3o no x402 Cloud do <a href=\"https://bankr.bot\">Bankr</a> \u2014 mesmos caminhos de c\u00f3digo, mesmos sha256, pagos pelos trilhos Bankr: <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data\">chart</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json\">reshape</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json\">validate</a> &middot; <a href=\"https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join\">csv-join</a>. Os outros 68 vivem s\u00f3 aqui, tier gratuito incluso.",
-  "vision.h2": "Por que determinismo, por que agora",
-  "vision.p1": "Um grande modelo de linguagem é uma máquina de aproximar. "
-               "Pergunte <code>sha256(\"abc\")</code> e ele responderá "
-               "com confiança, elegância e erro. Peça para limpar o mesmo "
-               "CSV todo dia e ele cobrará tokens para re-derivar o que "
-               "uma função entrega em milissegundos — com os mesmos "
-               "bytes, sempre.",
-  "vision.p2": "O computador de navegação Apollo tinha 4 KB de RAM. Pousou "
-               "humanos na Lua porque a matemática nunca precisou "
-               "improvisar: cada constante foi calculada uma vez, no solo, "
-               "a frio, e congelada na memória de corda.",
-  "vision.quote": "O determinismo foi codificado a primeira vez para nos "
-                  "levar à Lua. O determinismo levará a IA ao trabalho.",
-  "vision.p3": "Mechacut é essa matemática congelada para agentes: "
-               "vocabulários fechados, contratos que recusam o que está "
-               "fora da tabela, erros que nomeiam a forma esperada — o "
-               "erro é o prompt que conserta. O significado fica com o "
-               "modelo. A mecânica se muda para cá.",
-  "contract.h2": "O contrato",
-  "contract.li1": "Mesma requisição → mesmos bytes, sha256 em cada "
-                  "resposta",
-  "contract.li2": "Sem cadastro, sem chave, sem muro de taxa abaixo de "
-                  "30 req/min",
-  "contract.li3": "Zero armazenamento: o único estado é uma janela de 1 "
-                  "minuto, um registro de 60 minutos e um conjunto de "
-                  "nonces de pagamento",
-  "contract.li4": "Vocabulários fechados — tudo fora da tabela é recusado, "
-                  "nomeado, apontado à forma esperada",
-  "contract.li5": "Erros que consertam: campo, mensagem, esperado, sempre",
-  "contract.li6": "Pagamentos x402 entre máquinas: USDC na Base, "
-                  "verificados por facilitador, zero humano no circuito",
-  "agents.line": "Fale agente: ferramentas MCP, GET /agent/manifest "
-                 "(a suíte inteira em uma requisição), GET /route?q=…, "
-                 "POST /api/v1/pipeline.",
-  "agents.hint": "instale um pack",
-  "footer.family": "Mechacut faz parte da família C.V. — veja moovicut.",
+  'meta.title': 'Mechacut — mesma requisição, mesmos bytes',
+  'meta.desc': 'Transformações determinísticas para agentes de IA: 53 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, sem chave, sem armazenamento.',
+  'nav.tools': 'Bundles',
+  'nav.numbers': 'Provas',
+  'nav.vision': 'Visão',
+  'nav.api': 'Contrato',
+  'pill': 'v{ver} · {n_tools} transformações · {n_recipes} receitas',
+  'hero1': 'Significado se aprende.',
+  'hero.why': '<strong>Por que determinismo?</strong> Porque uma resposta certa que muda a cada execução não é uma resposta — é um dado lançado. Uma máquina que devolve os mesmos bytes para a mesma pergunta torna agentes auditáveis: cada resposta traz sua impressão, cada erro nomeia o campo culpado, e o que você testa de manhã é o que você entrega à noite.',
+  'hero2': 'Mecânica se conhece.',
+  'hero3': 'Competência não se aprende. Serve-se.',
+  'lede': 'Uma suíte de <strong>{n_tools} transformações determinísticas</strong> para agentes de IA — {n_free} grátis para sempre, {n_cap} grátis abaixo de 32 KB e depois pagas por chamada, {n_paid} pagáveis por máquina — mais {n_recipes} receitas de chamada única, grátis. O modelo para de adivinhar o que um checksum pode provar.',
+  'bundles.h2': 'O catálogo',
+  'bundles.creed': 'Um modelo calcula. Um servidor sabe.',
+  'cat.search': 'busque uma ferramenta ou seu problema…',
+  'cat.hits': '~n~ ferramentas de ~t~',
+  'panel.copy': 'copiar curl',
+  'panel.copied': 'copiado',
+  'panel.close': 'fechar',
+  'panel.say': 'diga ao seu agente:',
+  'panel.got': 'o servidor respondeu:',
+  'nav.menu': 'menu',
+  'bundles.intro': 'Mesma requisição, mesmos bytes — cada resposta carrega seu sha256. Instale um pack, ou leia o manifesto inteiro em uma requisição e deixe <code>GET /route</code> escolher.',
+  'tiers.h2': 'Três níveis, zero contas',
+  'tiers.intro': 'Agentes não leem páginas de preço — então o preço está no protocolo: uma rota grátis responde sem chave, uma rota com teto responde grátis abaixo de 32 KB, qualquer outra recebe um <code>402</code> honesto com desafio x402 USDC na Base, liquidado por um facilitador. Entre um servidor e um robô, só existem preços e recibos.',
+  'bench.h2': 'Medido, não prometido',
+  'bench.creed': 'O muro é a FORMA, não o tamanho — e nós precificamos a porta.',
+  'bench9.intro': 'Uma frase vaga (em francês), seis campos obrigatórios — valores com 2 decimais, percentuais, datas únicas, URL, e-mail, total. Expectativas calculadas à mão antes de rodar. O servidor monta o cartão (/intent/card); o modelo repassa uma linha e a resposta nunca passa por ele.',
+  'bench9.with': 'com o cartão de intenção',
+  'bench9.foot': 'A linha 0.5B reproduziu em uma segunda rodada independente. Três chamadas iguais → um único sha256. A variante autônoma (o modelo escolhe a ferramenta) também marca 6/6. Sementes, scripts, falhas: bench/results_v9.jsonl.\n',
+  'bench10.intro': 'Dezoito tarefas com UMA resposta certa cada — dígitos de controle GS1, um SHA-256, descontos em cascata, uma coluna de valores que prova o próprio ponto decimal. Dois modelos gratuitos e LOCAIS, zero gasto de API: o harness verifica que cada rota chamada é gratuita. Os gabaritos saíram das specs publicadas ANTES de qualquer modelo rodar.',
+  'bench10.with': 'com uma chamada-relé',
+  'bench10.foot': 'As falhas nuas se reproduzem num segundo passe independente: 18/18 vereditos idênticos — a temp 0, repetir não converge, repete. Execuções brutas: bench/results_v10.jsonl, método: bench/FINDINGS-V10.md.\n',
+  'bench.v23.sum': 'Um 1,7B treinado para agentes resolveu {v23_chain}/{v23_chain_cells} correntes nu por ${v23_cost} — nosso muro era o TREINAMENTO, não o tamanho; e o cadeado recusou {v23_refused} respostas certas pelos nomes.',
+  'bench.v23.intro': 'A replicação fora da família: os mesmos 20 problemas com semente, os mesmos braços do v20, um modelo de outra linhagem (LFM3-1.7B, tri-híbrido, pós-treinado para tool calling). Nu {v23_n_all}/20, retransmitido {v23_s_all}/20, com cadeado {v23_l_all}/20. Nada aqui refuta o v19: acertar uma vez não é responder no mesmo byte trinta dias seguidos.',
+  'bench.v23.arm': 'braço',
+  'bench.v23.wins': 'acertos /20',
+  'bench.v23.usd': 'custo',
+  'bench.v23.foot': 'Bruto: bench/results_v23_lfm3.jsonl · método: bench/FINDINGS-V23.md · $ a preços por token congelados.\n',
+  'bench.v20.sum': 'O muro é um ALVO: o llama 8B vai de {v20_8b_s} para {v20_8b_l}/20 com o cadeado de alvo; o 7B fecha seu primeiro {v20_7b_l}/20.',
+  'bench.v20.intro': 'A promessa de v17 medida: a resposta deve nomear a quantidade que devolve. Nu, o 8B calculava certo e respondia ao lado — {v20_aside} de seus erros traziam outra quantidade da cadeia, e o cadeado converteu {v20_aside_conv}. {v20_cells} células, e o braço nu reencena o v15 exatamente ({v20_replay}).',
+  'bench.v20.model': 'modelo',
+  'bench.v20.naked': 'nu',
+  'bench.v20.locked': 'com cadeado',
+  'bench.v20.foot': 'Bruto: bench/results_v20_target_lock.jsonl · método: bench/FINDINGS-V20.md.\n',
+  'bench.g1': 'O que eles erram não é pensar — é executar',
+  'bench.g2': 'O muro é uma FORMA — e formas são alvo de treino',
+  'bench.g3': 'Ninguém diz «não tenho certeza» — pagar mais não desvia da forma',
+  'bench.g4': 'A leitura é o teto que nenhuma ferramenta fura',
+  'bench.g5': 'O regime real: trinta dias do mesmo trabalho',
+  'bench.v11.sum': 'Quinze tarefas hostis: o 7B vai de {v11_7b_nu} a {v11_7b_relay} com relé; o 8B de {v11_8b_nu} a {v11_8b_relay}.',
+  'bench.v11.foot': 'Bruto: bench/results_v11.jsonl · método: bench/FINDINGS-V11.md',
+  'bench.f5.sum': '{f5_wins}/{f5_cells} tentativas encadeadas com a ficha — critério ≥19 APROVADO; {f5_repairs} reparadas por recusa nomeada; o 7B sozinho {f5_7b}.',
+  'bench.f5.foot': 'Bruto: bench/results_f5_accept.jsonl · método: bench/FINDINGS-F5.md',
+  'bench.v13.sum': 'O resultado negativo, publicado primeiro: no GSM8K real o cartão-relé desaba a {v13_relay_05b}/20 no 0.5B — pedir a decomposição ao modelo ainda é deixá-la com o modelo.',
+  'bench.v13.foot': 'Bruto: bench/results_v13_gsm8k.jsonl · método: bench/FINDINGS-V13.md',
+  'bench.v14.sum': 'Skill estrita: {v14_breaks}/{v14_cells} rupturas de protocolo — a única classe que a forma garante — a leitura segue livre.',
+  'bench.v14.foot': 'Bruto: bench/results_v14_skill.jsonl · método: bench/FINDINGS-V14.md',
+  'bench.v22.sum': 'Três modelos fronteira respondem {v22_nu} nus — um {v22_best}, outro {v22_worst}. Pela ficha congelada: {v22_fiche}. Pagar mais não muda a forma.',
+  'bench.v22.foot': 'Bruto: bench/results_v22.jsonl · método: bench/FINDINGS-V22.md',
+  'bench.v22b.sum': 'Cinco passes no regime dos agentes: {v22b_ok}/{v22b_cells} certos — o MESMO programa duas vezes: {v22b_stable}/14. O servidor: {v22b_shas} sha por problema.',
+  'bench.v22b.foot': 'Bruto: bench/results_v22b.jsonl · método: bench/FINDINGS-V22.md',
+  'bench.v24.sum': 'Trinta dias no mesmo CSV com um modelo QUE SABE cadeias: {v24_sil}/{v24_days} dias de resposta vazia após 8.192 tokens de raciocínio, {v24_ok} certas, faturados ${v24_usd}. A máquina: {v24_m_ok} a $0,00.',
+  'bench.f7.sum': 'As sete cadeias copiadas EN/PT: {f7_wins}/{f7_cells} — critério ≥19 APROVADO; {f7_rep} ganhas pela recusa nomeada. O 0.5b copia 4/7 em PT onde o FR o punha a 0/7: o teto de leitura é do modelo × língua × forma.',
+  'bench.f7.foot': 'Bruto: bench/results_f7_accept.jsonl · critério gelado: bench/FINDINGS-F7.md',
+  'bench.v24.foot': 'Bruto: bench/results_v24_lfm3_30days.jsonl · a emenda está no histórico git (run24 amendado)',
+  'bench.v19.sum': '{v19_wins}/{v19_days} tentativas corretas para os modelos — máquina: {v19_m_ok}/{v19_m_days} dias no mesmo byte; {v19_drift} saídas diferentes de um só modelo em 30 dias.',
+  'bench.v19.intro': 'O mesmo CSV sujo limpo 30 dias seguidos. Especificação de seis regras, gold ESCRITO À MÃO antes do banco, um braço retry que só vê sua própria forma — nunca a resposta. Temperatura 0,7: o regime real dos agentes, divulgado.',
+  'bench.v19.arm': 'braço',
+  'bench.v19.right': 'dias certos /30',
+  'bench.v19.distinct': 'saídas distintas',
+  'bench.v19.foot': 'Bruto: bench/results_v19_csv_bill.jsonl · método + dólares: bench/FINDINGS-V19.md · replay: python bench/run19.py',
+  'bench.v17.sum': 'Retry ×5 num erro sistemático: {v17_retry_wins}/{v17_retry_cells} cadeias consertadas — o mesmo erro, 5× o preço.',
+  'bench.v17.intro': 'Três braços, os mesmos 20 problemas novos, cada token contado: responder nuo, tentar cinco vezes, ou entregar o cálculo ao servidor. Células: {v17_cells}.',
+  'bench.v17.nu': 'nu',
+  'bench.v17.retry': 'retry ×5',
+  'bench.v17.relay': 'servidor (ok · tokens/certo)',
+  'bench.v17.foot': 'Bruto: bench/results_v17_tokens.jsonl · bench/FINDINGS-V17.md · replay: python bench/run17.py',
+  'bench.v16.sum': '{v16_wrong} erros em {v16_runs} execuções — «não tenho certeza» dito {v16_doubt} vezes.',
+  'bench.v16.intro': 'Problemas do dia a dia gerados na hora, cada modelo convidado a marcar sua confiança com honestidade. Falharam sempre do mesmo modo: com certeza.',
+  'bench.v16.foot': 'Bruto: bench/results_v16_calibration.jsonl · bench/FINDINGS-V16.md · gerador: bench/gen16.py (semeado, duplo oráculo).',
+  'bench.v15.sum': 'O muro tem FORMA: {v15_alone_wins}/{v15_cells} tentativas em cadeia nuas ou com retry — {v15_best_arm}/{v15_arm_cells} com o melhor braço servidor.',
+  'bench.v15.intro': 'A matriz completa: 5 transportes × 4 modelos gratuitos × 20 problemas semeado (400 células), hipóteses comitadas ANTES da primeira célula, previsões furadas publicadas primeiro.',
+  'bench.v15.foot': 'Bruto: bench/results_v15_matrix.jsonl · bench/FINDINGS-V15.md · replay: python bench/run15.py && python bench/score15.py',
+  'bench.v12.sum': '{v12_zero} sozinho → {v12_hero} com um só relé. O zero vira herói.',
+  'bench.v10.sum': 'Uma resposta certa cada: {v10_alone} sozinho → {v10_server} com relé — a $0, auditado pelo próprio banco.',
+  'bench.v9.sum': 'Uma frase vaga, seis chaves: {v9_alone} → {v9_card} com o cartão de intenção.',
+  'bench.v6.sum': 'A primeira matriz — nu vs relé. Cada linha, cada harness, cada falha: bench/FINDINGS.md.',
+  'bench12.intro': 'Dez cálculos exatos (7834×9217, 0.1+0.2, porcentagens em cadeia…) × quatro modelos locais GRATUITOS × três braços: responder nu, escrever Python, ou repassar uma expressão ao math/calc. Mesmo quadro, duas físicas: o braço código devolve float, o relé devolve exato.',
+  'bench12.code': 'escreve Python',
+  'bench12.relay': 'relé Mechacut',
+  'bench12.foot': 'O 8B falha no RELÉ por tagarelice de protocolo, não por matemática — por isso a ficha de intenção escreve a linha por ele. Nu, o 0.5B inventou 89000098; em relé, 9/10 com mediana de 0,2 s. Bruto: bench/results_v12.jsonl, método: bench/FINDINGS-V12.md.\n',
+  'bench.intro': 'Uma tarefa congelada (seed 20261120): CSV sujo + JSON quebrado + lista de URLs → um YAML canônico, resposta espera fixada por sha256. O mesmo modelo local fraco (Qwen 2.5, temperatura 0), um braço sozinho, um braço guiando o Mechacut. Publicamos também os fracassos — o 0.5B falha nos dois braços, e um teto de capacidade é um resultado.',
+  'bench.model': 'modelo',
+  'bench.alone': 'sozinho',
+  'bench.with': 'com mechacut',
+  'bench.tokens': 'tokens consumidos',
+  'bench.foot': 'O 7B vai de 0 % a 100 % em uma única chamada de pipeline. Cada execução, cada token, está em bench/results.jsonl.',
+  'nav.build': 'Construir',
+  'nav.market': 'Mercado',
+  'market.h2': 'Eles também dizem',
+  'market.creed': 'As grandes casas convergiram na mesma frase — só o modo de entregá-la difere.',
+  'build.h2': 'O que você pode construir hoje',
+  'build.intro': 'Você tem um modelo pequeno e gratuito na sua máquina. Três coisas para fazer com ele — as frases citadas são o que você diz ao agente, as respostas são o que o servidor realmente devolveu. Sem conta, sem cartão, sem reza.',
+  'build.r1.name': 'A portaria da nota (Brasil)',
+  'build.r1.say': '“O CNPJ 11.222.333/0001-81 do meu cliente é válido para a nota?”',
+  'build.r1.got': '{{ "valid": true, "algorithm": "mod-11 double DV (Receita Federal)" }}',
+  'build.r1.why': 'Sozinho, um 0.5B “calcula” dígitos de conferência — e erra. Aqui os dígitos decidem: a nota não morre no contador.',
+  'build.r2.name': 'O guarda-vazamento',
+  'build.r2.say': '“Escaneie este log antes de eu colar num chatbot.”',
+  'build.r2.got': '2 achados → semente [SEED_PHRASE] e chave [OPENAI_KEY_1]',
+  'build.r2.why': 'O scan devolve posições, nunca o valor; a máscara nunca devolve a chave. O segredo veio guardar-se aqui — protegéo até de nós.',
+  'build.r3.name': 'O rélay do incidente',
+  'build.r3.say': '“relève les montants et dates de cette note d’incident” — em francês, para um 0.5B.',
+  'build.r3.got': 'money [3200.00, 12450.75] · 6/6 em 320 tokens (sozinho: 0/6)',
+  'build.r3.why': 'É o bench v9, igual: mesma tarefa, mesmo modelo, uma linha de relay. Cada execução está em bench/results_v9.jsonl — reproduza você mesmo.',
+  'build.connect': 'Ou ligue agora: cole ESTA linha em qualquer agente, até o menor — ela vira o manual completo:',
+  'everyday.h2': 'Para todo mundo',
+  'everyday.open': 'Expandir as provas — saídas reais do servidor, não maquetes.',
+  'everyday.intro': 'Sem código, sem jargão. Vinte e sete coisas que uma pessoa pede ao agente numa terça — cada resposta abaixo é a saída real do servidor, não uma maquete.',
+  'everyday.e1.name': 'Wi-Fi de visitas, um scan',
+  'everyday.e1.say': '“Coloca o Wi-Fi num QR para as pararem de perguntar a senha.”',
+  'everyday.e2.name': 'O cheque, por extenso',
+  'everyday.e2.say': '“Escreva R$ 1.234,56 por extenso no cheque — o banco recusa erro.”',
+  'everyday.e3.name': 'IBAN antes da transferência',
+  'everyday.e3.say': '“Copiei certo este IBAN? Se voltar, pago tarifa.”',
+  'everyday.e4.name': 'Receita em página imprimível',
+  'everyday.e4.say': '“Transforma minhas anotações da receita numa página limpa — quero o PDF para a geladeira.”',
+  'everyday.e5.name': 'Contando os dias',
+  'everyday.e5.say': '“Quantos dias até a viagem?”',
+  'everyday.e6.name': 'A conta que o caixa não fará',
+  'everyday.e6.say': '“-30 % e depois -20 % é -50 %, certo?” É -44 %.',
+  'everyday.e7.name': 'Um terço do bolo, sem arredondar escondido',
+  'everyday.e7.say': '“Meu bolo de 6 porções, quero para 2 — 400 g de farinha, 5 ovos?” 400 × 1/3 = 133 1/3 g exato, 135 g na balança. Os ovos são ditos, não adivinhados.',
+  'everyday.e8.name': 'Uma terça sim, outra não',
+  'everyday.e8.say': '“Clube do livro a cada duas terças às 19h — as próximas quatro datas?” 3 e 17 de nov., 1º e 15 de dez.: quinzenal é PULAR as semanas do meio — e o motor nomeia os pulos.',
+  'everyday.e9.name': 'Um pé, três respostas certas',
+  'everyday.e9.say': '“EU 42⅔ ou 42,5 — qual é o meu número?” As duas tabelas arredondam: o milímetro é exato, os candidatos de meia e de terço aparecem escritos, e a deriva entre sistemas é um número dito. Nunca um número único confiante.',
+  'everyday.e10.name': 'Voo atrasado — quem me deve quanto',
+  'everyday.e10.say': '“Meu voo chegou 3h20 atrasado — quanto me devem de fato?” A DATA DO VOO escolhe a regra: antes de 23 out. 2027 o antigo EC261 + jurisprudência; depois, a nova tabela codificada “ACIMA DE três horas”. Mesmos fatos de cada lado dessa linha pagam diferente. € ou £, com o prazo de reclamar em data real.',
+  'everyday.e11.name': 'Minha bagagem passa no portão',
+  'everyday.e11.say': '“Minha mala é 40×18×12, voo em novembro de 2027 — grátis sob o assento?” A DATA DO VOO decide: a regra de 2027 limita o item sob o assento a 40×30×15; antes dela, nada é fixo. Rotação conta — faces ordenadas, nunca a ordem digitada.',
+  'everyday.e12.name': 'Dois planos, um número honesto',
+  'everyday.e12.say': '“O plano A é mais barato por kWh, o B mais barato por mês — quando o A ganha de fato?” A virada = (diferença de fixo × dias) ÷ (diferença de preço), em fração EXATA: 4.623⅓ kWh onde o artigo diz “cerca de 4.623”. “Nunca” também é resposta, nomeada, quando um plano vence nos dois componentes.',
+  'everyday.e13.name': 'Quanto vale um ponto de verdade',
+  'everyday.e13.say': '“29 000 pontos por um voo de R$ 438 menos R$ 5,60 de taxas — quanto vale o ponto?” (438 − 5,60) ÷ 29 000 × 100: o 1,49 impresso esconde o exato 1081/725 = 1,491034… Subtraia ANTES de dividir; é o SEU piso que diz “resgate” ou “pague em dinheiro”.',
+  'everyday.e14.name': 'O peso de fato cobrado, as duas correntes impressas',
+  'everyday.e14.say': '“Duas transportadoras cobram 6 kg e 5 kg pela minha caixa 40×30×25 — quem erra?” Nenhuma: 30 000 cm³ ÷ 5 000 = 6 exatos, ÷ 6 000 = 5 exatos — dois divisores, uma corrente honesta, cada passo nomeado. E as tabelas ESTRAGAM (USPS: 166→139 em julho de 2026); o divisor continua SEU argumento — nunca nossa memória.',
+  'everyday.e15.name': 'A placa diz 50 % — a conta, nunca',
+  'everyday.e15.say': '“Compre um e leve o segundo com 50% off — duas camisetas de R$ 60 e R$ 40, quanto eu pago?” Nem 50 nem 25: o desconto cai sobre a MAIS BARATA (regra de varejo publicada), o par sai por 80 de 100 = −20 %. Preços iguais = −25 %; BOGO grátis = −50 %; e um cupom de −30 % por cima dá −47,5 %, nunca 55 — percentuais multiplicam.”',
+  'everyday.e16.name': 'Os 500 g viraram 400 g — pelo mesmo preço',
+  'everyday.e16.say': '“−20 % na embalagem?” Não é o mesmo número da prateleira: perder 1/5 do produto custa +1/4 por quilo (20 % contra 25 % — dois denominadores, 500 e 400). E “2 por R$ 7” de potes de 15 oz perde 40,3509 % por onça para o pote único de 24 oz — a fração exata decide, não o olho.',
+  'everyday.e17.name': 'Peru de Ação de Graças: congelador E sobras, dois relógios',
+  'everyday.e17.say': "Dois relógios, um peru. Geladeira (oito calculadoras de 2026 divergem na mesma tabela USDA): entrar até = forno − ponta longa; horas são ARGUMENTOS. Sobras: 'antes de 30 de novembro' (NBC) vs 'três dias, 72 h' (ky3); o FSIS se contradiz no congelador — a ferramenta devolve a UNIÃO, 2 h RÍGIDAS desde o cozimento (2 h exatas passam, 2 h 01 deitam), dia 4 = ÚLTIMO.",
+  'everyday.e18.name': 'Três pratos querem o forno — a contagem e os conflitos nomeados',
+  'everyday.e18.say': 'Oito timelines 2026 publicam o mesmo jantar com descansos de 20 a 60 minutos, 325 ou 350 °F — e ninguém conta o pré-aquecimento que come 45 minutos. Cálculo AO CONTRÁRIO da hora de servir (argumento, nunca relógio): um forno, um prato por vez, descanso fora; entrada no minuto da saída em outra temperatura = conflito nomeado; «180» sem unidade = recusado; descanso além de 2 h = zona FSIS.',
+  'everyday.e19.name': 'Prazos de envio do Natal — ≥2 fontes por linha, a divergente nomeada',
+  'everyday.e19.say': 'Seis tabelas de 13 a 21/nov/2026 se contradizem: um sindicato imprime FedEx Saver, 2Day e Overnight um dia depois — a meta dele é 25, não 24. Linha só com ≥2 fontes concordantes; a divergente é nomeada com o motivo. UPS Ground recusado: data única não existe. as_of é argumento, não relógio. Janela morre em 23/dez.',
+  'everyday.e20.name': 'Prazos de DEVOLUÇÃO das festas — ≥2 fontes, classe de provenância por linha',
+  'everyday.e20.say': 'A manchete « até 31 de janeiro » é mentira por omissão: na Target a janela de compra fecha 24/dez, na Best Buy a regra de membros corta em 4/dez, e um blog republicou as datas do ano passado deslocadas enquanto o Seller Central publicava o texto 2026 literal. Linha só com duas fontes concordantes; proveniência por linha; convenção nomeada; fonte única recusada pelo nome, com o fato candidato. « O mais tarde dos dois » exige a data de entrega.',
+  'everyday.e21.name': 'O preço riscado é LEGAL — a regra Omnibus dos 30 dias, auditada do SEU histórico',
+  'everyday.e21.say': 'A lei nomeia a referência: o preço MAIS BAIXO dos 30 dias anteriores (Diretiva 2019/2161 art. 6a) — promoção de fim de semana ABAIXA a referência mesmo se o preço subiu depois (TJUE C-330/23). 100 → 80 → 100 → 70 é 12,5%, não 30%. Varredura da Comissão, março de 2026: 30% de 314 lojas erram; a Espanha multou até 350.000 EUR. Histórico entra, referência e porcentagem real saem — nunca busca preços.',
+  'everyday.e22.name': 'O preço CAIU depois da compra — quem deve a diferença, até quando, em que dinheiro',
+  'everyday.e22.say': 'Comprou por 100, a loja mostra 80 agora. Nenhuma lei obriga o reembolso — mas as garantias publicadas das lojas sim, e essas janelas são DATAS: Target 24 dez, Best Buy 15 jan, Costco 30 dias, Amazon nada. Cole as datas da compra e da queda e os dois preços — a máquina devolve o veredicto, o prazo do pedido, o valor e a forma do reembolso, com a classe de fonte em cada linha. Ela nunca busca preços.',
+  'everyday.e23.name': 'O presente quebrou DEPOIS do prazo de troca — o que a LEI ainda deve, ao dia',
+  'everyday.e23.say': 'Presente entregue em 25 de dezembro, morto em 16 de janeiro: a janela da loja fechou dia 15 e a imprensa cala; a lei não. França: conformidade 2 anos desde a ENTREGA, vícios ocultos 2 anos desde a DESCOBERTA, teto de 20 anos da venda — três âncoras. Reino Unido: 30 dias para rejeitar, seis meses de ônus INVERTIDO (prova, não prazo), seis anos para agir — cinco na Escócia. Página oficial se contradiz (recondicionado: 24 ou 12): as DUAS datas viajam. EUA e Austrália recusados por nome.',
+  'everyday.e24.name': 'Posso descartar esta pasta? — a gaveta britânica esconde QUATRO relógios',
+  'everyday.e24.say': '«Seis anos» é UMA frase para quatro datas: VAT conta da data ESCRITA NO DOCUMENTO (evento futuro incluso — o manual da HMRC diz), limited company do FIM do exercício, Companies Act s.388 TRÊS anos se private, SEIS se plc — desde a CRIAÇÃO —, Self Assessment cinco anos do prazo de 31 de janeiro que não está em papel nenhum. Exemplo refeito: 2022-23 até 31 de janeiro de 2024 → guardar até 31 de janeiro de 2029, descartar de 1º de fevereiro. Os «ou mais se» voltam BLOCKED — nunca data inventada. CH15400: a MAIS LONGA governa. Jurisdição Reino Unido; notas do Brasil seguem outra lei.',
+  'everyday.e25.name': 'O vale-presente « vencido » pode estar vivo — na Irlanda conta-se da COMPRA',
+  'everyday.e25.say': 'Irlanda, Gift Vouchers Act 2019 rejogado: validade impressa menor que CINCO ANS desde a compra é SUBSTITUÍDA por cinco anos e a data legal COBRE o papel (66B(1)(b)+(c)). Forma JD Sports: vales de um ano, ≈€250.000 devolvidos em julho após a notificação do CCPC de 20 de novembro. A âncora é o contrato e quem segura o vale tem TODOS os direitos (66B(10)). Saldo de €1 ou mais é devido. França: nenhuma duração legal; o boato dos «30 anos» é prescrição imobiliária, recusado por nome.',
+  'everyday.e26.name': 'Saldos: as datas na França e na Bélgica',
+  'everyday.e26.say': 'Dois calendários rejogados. França (arrêté 27-05-2019): inverno = 2ª quarta de janeiro às 8h, antecipada se a 2ª cai após o dia 12 (2027: 6 de janeiro); verão = última quarta de junho, penúltima se a última cai após o 28 (2027: 23 de junho); quatro semanas contando a abertura; sete derrogações com o texto (Mosela sozinha a 26 de junho de 2021; inverno 2021 em SEIS SEMANAS). Bélgica (art. VI.25 CDE): inverno de 3 a 31 de janeiro, do DIA 2 se o 3 cai domingo — vivido 2016, 2027; a espera é NOMEADA «de 2 de dezembro a 1º de janeiro» enquanto a imprensa imprime 3; verão 1-31 de julho, 30 de JUNHO se 1º cai domingo — vivido 2018; corona: verão 2020 1-31 de agosto, inverno 2021 ADIADO para a segunda 4 — a cláusula disparou e foi anulada — e PROLONGADO a 15 de fevereiro por LEI; as manchetes diziam 14. Luxemburgo recusado pelo nome: datado A CADA ANO por arrêté grão-ducal.',
+  'everyday.e27.name': 'Recebeu terça — até QUANDO pode desistir',
+  'everyday.e27.say': 'A lei entrega o próprio calendário: seção 6 rejogada verbatim do legifrance 25-11 — L221-18 nomeia a partida (recebimento, conclusão do serviço); L221-19: o dia seguinte = dia 1, meia-noite fecha o dia 14, sábado, domingo e feriado caem no primeiro dia útil, na NOSSA tabela L3133-1. Recebido 24 de nov → 8 de dez; prazo sábado 5 → segunda 7; 8 de maio → segunda 11. Falta a informação: +12 meses; entrega atrasada: 14 dias novos. As 13 exceções citam a cláusula (sob medida, higiene lacrada, leilão). Promoção e usado: o direito corre (F10485). Loja física: NENHUM direito automático — recusado pelo nome. A janela frouxa da loja é outro relógio.',
+  'nav.kit': 'Kit',
+  'kit.h2': 'A suíte no seu disco',
+  'kit.creed': 'O protocolo não é o transporte — é a certidão de nascimento da ferramenta.',
+  'kit.intro': 'As transformações livres não são só uma API. São uma suíte: um agente pode instalá-la na própria máquina, chamá-la localmente e — a parte que nenhum mercado faz — construir ferramentas novas sobre os mesmos portões. curl vira kit call; tarefa repetida vira proposta de contrato; a proposta vira ferramenta publicada apenas se seus golds foram traçados antes do código.',
+  'kit.c1.sum': 'Instalar — a suíte básica na máquina',
+  'kit.c1.foot': 'Sha verificado, sem daemon, sem auto-update, sem rede dentro do motor. O sem-estado é o contrato: o humano decide quando o kit se move.',
+  'kit.c2.sum': 'Chamar — consultar antes de agir',
+  'kit.c2.foot': 'A skill consulta o diretório primeiro. Mesmo cânone, mesmas recusas, mesmos golds do datacenter — o que é verificado aqui é verificado lá, byte por byte.',
+  'kit.c3.sum': 'Construir — na segunda vez, escrever a ferramenta',
+  'kit.c3.foot': 'Golds traçados ANTES do código, AST-gate, pin-gate. Status: proposto, atestado, rede-verificado — o kit cresce localmente, a prova cresce de volta na rede. Uma lição é uma proposta; o banco a tranca.',
+  'kit.howto.p1': 'Instalar a skill: <code>curl https://mechacut.studio/SKILL-MINI.md -o SKILL.md</code> — soltar o arquivo no agente (CLAUDE.md, AGENTS.md, skills/). ~1,000 tokens, calibrado para modelos pequenos.',
+  'kit.howto.p2': 'Fazê-lo consultar primeiro: antes de agir, o agente descreve o problema em uma frase a /route/resolve — o diretório devolve a ferramenta que já existe, ou diz que não há.',
+  'kit.howto.p3': 'Chamar: POSTs sem estado, sem chave no livre; a resposta traz seu sha256, a recusa traz campo + esperado + exemplo. Tudo o que há nesta página já funciona: uma linha instala o arquivo de skill, o diretório responde, as chamadas livres não têm chave.',
+  'kit.plain.sum': 'Você não é desenvolvedor? Sem problema — a gente traduz.',
+  'kit.plain.p1': 'Abra seu assistente de IA de sempre (Claude, ChatGPT, Grok, Copilot…).',
+  'kit.plain.p2': 'Envie esta mensagem: "Leia https://mechacut.studio/SKILL-MINI.md e siga-o para os meus cálculos." Nada para instalar, nada para pagar, sem conta.',
+  'kit.plain.p3': 'Depois peça a tarefa real: "30% e depois 20% de desconto dá quanto?", "quantos dias de atraso tem esta fatura?" Os números não saem mais da cabeça dele — saem da suíte, e são os mesmos para todos.',
+  'kit.plain.p4': 'Pediu algo que a suíte não faz? Proponha em palavras simples — cada proposta é pública, e seu veredito também: entregue, em bancada ou recusado com o motivo nomeado, em /proposals.',
+  'kit.dev.sum': 'Para desenvolvedores — três linhas, sem conta',
+  'kit.propose': 'Proporcionar uma ferramenta: POST /api/v1/agent/propose — um contrato, nunca código; duplicado nomeado, evidência exibida, elegibilidade devolvida como blob pronto para commit. Nada é guardado no servidor. Skill do protocolo: /SKILL-KIT.md',
+  'bench.d82.sum': 'Traces de chamadas julgadas: o mesmo gesto de agente nunca foi reemitido igual (0 de 14, V22b) e um retry multiplicou a fatura ×4 sem convergir (V17) — loop/doom-check agora diz DOOM, CYCLIC ou STORM sobre bytes canônicos, limiares nomeados.',
+  'bench.d82.foot': 'Identidade em (ferramenta, args) canônicos: a ordem das chaves nunca esconde um loop. Duas chamadas iguais não são loop — o limiar é dito, nunca adivinhado. Todos os sinais reportados, veredito o mais grave. Fontes: bench/FINDINGS-V17.md · run22b.',
+  'bench.e76.sum': 'O juiz do banco virou rota: eval/compare devolve OK ou WRONG com as divergências nomeadas — 2.5 versus "2.50" nunca é discordância, floats nunca são argumento.',
+  'bench.e76.foot': 'Regra nascida do incidente do juiz V2 (ele copiava a própria expectativa): mesma quantidade nunca é divergência; quantidade diferente é nomeada por pointer, kind, expected, got. Decimal exato, nunca float.',
+  'bench.a79.sum': 'Política como gramática fechada: check/allowlist devolve ALLOW, DENY ou AMBIGUOUS — a regra mais específica vence, empate sobe ao humano, silêncio nunca autoriza.',
+  'bench.a79.foot': 'Uma ação em forma de regex é recusada, não avaliada: um gate que interpreta é porta dos fundos. Valores Decimal exatos, tabela ISO de moedas, default deny verdadeiro. A mesma lei do R3 do diretório, outro domínio.',
+  'x402.h2': 'Pagamentos entre máquinas',
+  'x402.p1': 'O caminho pago cabe em quatro bytes de protocolo: o servidor responde <code>402</code> com os requisitos; o agente assina uma transferência USDC EIP-3009; um facilitador verifica e liquida; a resposta reproduz a prova em <code>X-PAYMENT-RESPONSE</code>. O servidor não guarda chaves.',
+  'x402.p2': 'Pagamentos repetidos são recusados. Erros em rotas pagas continuam grátis. O registro de cada recusa é público: <a href="/misses.json">/misses.json</a>.',
+  'x402.bankr': 'Mesmos endpoints, segunda casa: quatro transforms pagos também estão no x402 Cloud do <a href="https://bankr.bot">Bankr</a> — mesmos caminhos de código, mesmos sha256, pagos pelos trilhos Bankr: <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/chart_from_data">chart</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/reshape_json">reshape</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/validate_json">validate</a> &middot; <a href="https://x402.bankr.bot/0x00f04a2a505116daf3b88eae17445d85bed4fbac/csv_join">csv-join</a>. Os demais vivem só aqui, tier gratuito incluso.',
+  'vision.h2': 'Por que determinismo, por que agora',
+  'vision.p1': 'Um grande modelo de linguagem é uma máquina de aproximar. Pergunte <code>sha256("abc")</code> e ele responderá com confiança, elegância e erro. Peça para limpar o mesmo CSV todo dia e ele cobrará tokens para re-derivar o que uma função entrega em milissegundos — com os mesmos bytes, sempre.',
+  'vision.p2': 'O computador de navegação Apollo tinha 4 KB de RAM. Pousou humanos na Lua porque a matemática nunca precisou improvisar: cada constante foi calculada uma vez, no solo, a frio, e congelada na memória de corda.',
+  'vision.quote': 'O determinismo foi codificado a primeira vez para nos levar à Lua. O determinismo levará a IA ao trabalho.',
+  'vision.p3': 'Mechacut é essa matemática congelada para agentes: vocabulários fechados, contratos que recusam o que está fora da tabela, erros que nomeiam a forma esperada — o erro é o prompt que conserta. O significado fica com o modelo. A mecânica se muda para cá.',
+  'contract.h2': 'O contrato',
+  'contract.li1': 'Mesma requisição → mesmos bytes, sha256 em cada resposta',
+  'contract.li2': 'Sem cadastro, sem chave, sem muro de taxa abaixo de 30 req/min',
+  'contract.li3': 'Zero armazenamento: o único estado é uma janela de 1 minuto, um registro de 60 minutos e um conjunto de nonces de pagamento',
+  'contract.li4': 'Vocabulários fechados — tudo fora da tabela é recusado, nomeado, apontado à forma esperada',
+  'contract.li5': 'Erros que consertam: campo, mensagem, esperado, sempre',
+  'contract.li6': 'Pagamentos x402 entre máquinas: USDC na Base, verificados por facilitador, zero humano no circuito',
+  'agents.line': 'Fale agente: ferramentas MCP, GET /agent/manifest (a suíte inteira em uma requisição), GET /route?q=…, POST /api/v1/pipeline.',
+  'agents.hint': 'instale um pack',
+  'footer.family': 'Mechacut faz parte da família C.V. — veja moovicut.',
  },
 }
 
@@ -3132,6 +2253,7 @@ W = {
                    "product, +%s%% per unit \u2014 two denominators",
       "poultry": "\u2192 16-lb bird into the fridge by %s, not "
                  "before %s",
+      "withdrawal": "\u2192 last day to change your mind: %s \u00b7 %s at as_of",
       "leftovers": "\u2192 Thanksgiving 2026 replay: eat by %s \u00b7 "
                    "band %s",
       "ovenschedule": "\u2192 oven on %s, bird out %s \u00b7 temp "
@@ -3210,6 +2332,7 @@ W = {
                    "d\u00e9nominateurs",
       "poultry": "\u2192 dinde 16 lb : cong\u00e9lateur avant %s, "
                  "jamais avant %s",
+      "withdrawal": "\u2192 dernier jour pour se r\u00e9tracter : %s \u00b7 %s au jour dit",
       "leftovers": "\u2192 replay thanksgiving 2026 : \u00e0 consommer "
                    "avant %s \u00b7 bande %s",
       "ovenschedule": "\u2192 four allum\u00e9 %s, dinde dehors %s \u00b7 "
@@ -3268,6 +2391,7 @@ W = {
                    "denominadores",
       "poultry": "\u2192 peru de 16 lb: geladeira at\u00e9 %s, nunca "
                  "antes de %s",
+      "withdrawal": "\u2192 \u00faltimo dia para desistir: %s \u00b7 %s na data dita",
       "leftovers": "\u2192 replay thanksgiving 2026: comer at\u00e9 %s "
                    "\u00b7 banda %s",
       "ovenschedule": "\u2192 forno ligado %s, peru de fora %s · "
@@ -3403,11 +2527,6 @@ _EVERYDAY_CALLS = [
      "poultry", lambda d, L_: (
          d["put_in_refrigerator"]["by"],
          d["put_in_refrigerator"]["not_before"])),
-    ("/api/v1/food/leftovers",
-     {"category": "turkey", "cooked_at": "2026-11-26T17:00",
-      "stored_at": "2026-11-26T19:00", "as_of": "2026-11-30"},
-     "leftovers", lambda d, L_: (
-         d["fridge"]["last_day"], d["as_of"]["band"])),
     ("/api/v1/food/ovenschedule",
      {"serve_at": "2026-11-26T16:00",
       "dishes": [
@@ -3471,11 +2590,10 @@ _EVERYDAY_CALLS = [
                               d["windows"][0]["rule"][
                                   "second_wednesday"],
                               str(d["windows"][0]["days_to_start"]))),
-    ("/api/v1/shop/soldes-be",
-     {"year": 2027, "season": "hiver", "as_of": "2026-11-24"},
-     "be", lambda d, L_: (d["windows"][0]["start"],
-                          d["windows"][0]["waiting"]["start"],
-                          str(d["windows"][0]["days_to_start"]))),
+    ("/api/v1/shop/withdrawal",
+     {"start_date": "2026-11-24", "as_of": "2026-11-25"},
+     "withdrawal", lambda d, L_: (
+         d["deadline"], d["verdict"])),
 ]
 
 

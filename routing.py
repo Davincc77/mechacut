@@ -1100,6 +1100,19 @@ TABLE = (
      "bruxelles brussel antwerpen belgium sales sale dates winter "
      "summer january august royal decree livre vi "
      "saldos belgica verao inverno epoca espera janeiro agosto"),
+    ("shop_withdrawal", "/api/v1/shop/withdrawal", "dates",
+     "statutory 14-day withdrawal dated: next-day start, weekend "
+     "and holiday advance on the cited L3133-1 table, late-info "
+     "twelve months, exceptions as named classes",
+     "withdrawal retraction retract change my mind cooling off "
+     "fourteen days received parcel expiry advance holiday "
+     "solded occasion distance online "
+     "retractation retracter retracte retractes delai changer avis "
+     "quatorze jours reception recu colis distance internet solde "
+     "occasion prorogation feries date limite loi "
+     "retractation france "
+     "retratacao arrependimento francia prazo quatorze dias desistir "
+     "lei francesa feriado fim de semana contagem"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)
@@ -1141,20 +1154,32 @@ def manifest_text(version):
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
-        + "tiers: free=keyless 30/min; cap=free under 32KB then "
-          "x402; paid=x402 from call one. every POST carries "
-          "sha256; every 400 names field+expected — the "
-          "error IS the repair prompt; ambiguous refusals name "
+        + "tiers: free=keyless 30/min; cap=free<32KB then "
+          "x402; paid=x402 from one. every POST carries "
+          "sha256; every 400 names field+expected — "
+          "error IS the repair prompt; refusals name "
           "readings. "
           # b105 elagage MESURE (consigne b104 « FR a 23 octets du
           # plafond : le lot suivant HUMAIN paie prose + elagage ») :
           # la ligne de POINTEURS « detail: » est FUSIONNEE dans la
           # ligne de tete — tout le contenu voyage, 217 lignes, le
           # +shop_soldes_be ne debranche rien.
-          "detail: /tools/<name>.json | pack install: /SKILL-<pack>.md | "
-        "pipelines: GET /api/v1/recipes, POST /api/v1/pipeline | "
+          # b107 elagage MESURE (consigne 23h50 « CE LOT PAIE UN VRAI
+          # ELAGUAGE ») : articles et qualificatifs de tete coupes a
+          # claim constant (« free under 32KB » -> « free<32KB »,
+          # « from call one » -> « from one », « the error » ->
+          # « error », « ambiguous refusals » -> « refusals »),
+          # « GET » retire de la ligne recipes (le find /route est
+          # deja nu — convention maison), « pack install: » ->
+          # « packs: », « (HTML) » coupe (le format n'a jamais routé
+          # personne), ET LES LIGNES VIDES entre blocs de pack sont
+          # SUPPRIMEES — 16 octets et 16 lignes rendus au budget,
+          # chaque pack garde son en-tete. Mesure : 205 lignes /
+          # 8 988 octets avec la ligne shop_withdrawal incluse.
+          "detail: /tools/<name>.json | packs: /SKILL-<pack>.md | "
+        "pipelines: /api/v1/recipes, POST /api/v1/pipeline | "
         'find: /route?q="task words" | '
-        "proposals: /proposals (HTML), /api/v1/agent/proposals | "
+        "proposals: /proposals, /api/v1/agent/proposals | "
         "not here: storyboards, shot lists, scene breakdowns "
         "-> sister moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
@@ -1173,7 +1198,6 @@ def manifest_text(version):
         for pack in PACKS:
             if pack not in by_pack:
                 continue
-            ls.append("")
             ls.append("[%s]  /SKILL-%s.md" % (pack, pack))
             for name, path, purpose in by_pack[pack]:
                 t = tier(path).split()[0]
@@ -1453,6 +1477,7 @@ def route(query, top=5):
     V_BE = ("belg", "bruxel", "brussel", "solden", "opruiming",
             "schlus")
     vforeign = vtabled = vnord = vsoldes_out = vbename = False
+    viirish = vfr = False
     for t in re.split(r"[^a-z0-9]+", _nw(query or "")):
         if t in ("blague", "blagues", "joke", "jokes", "piada",
                  "piadas"):
@@ -1478,6 +1503,16 @@ def route(query, top=5):
             vbename = True
         if t == "nord":
             vnord = True
+        # b107 — la rétractation est la LOI FRANÇAISE rejouée : toute
+        # juridiction NOMMÉE autre que la France tue la ligne avant
+        # qu'elle ne promette (classe soldes-be b105, leçon b100/102).
+        # Irlande entre par V_IN (gift-voucher) : elle a ICI son drapeau.
+        if t.startswith(("irland",)) or t in ("ie", "irl", "eire",
+                                              "dublin", "cork",
+                                              "galway", "ccpc"):
+            viirish = True
+        if t.startswith("franc") or t in ("fr", "paris"):
+            vfr = True
         st = _stem(t)
         if st not in seen:
             seen.add(st)
@@ -1496,6 +1531,9 @@ def route(query, top=5):
             continue
         if name == "shop_soldes_be" and (vsoldes_out or vtabled) \
                 and not vbename:
+            continue
+        if name == "shop_withdrawal" and (vforeign or vsoldes_out
+                                          or viirish) and not vfr:
             continue
         tail = path[len("/api/v1/"):]
         # nsegs STEMÉS comme les tags et le query — sinon un nom au

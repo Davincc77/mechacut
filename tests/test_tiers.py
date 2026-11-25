@@ -122,5 +122,5 @@ def test_bundle2_tiers(paywall):
 def test_pricing_info_publishes_caps(paywall):
     body = client.get("/").json()
     info = body["payments"]
-    assert len(info["capped_routes"]) == 23    # +1 24-11 tard: agent/tool-trim (listing collé, 🟡 comme les deux sœurs) ; +1 24-11: agent/cost-diff (deux listings collés, 🟡) ; 21 agent/context-tax ; 20 = table/sql_dump
+    assert len(info["capped_routes"]) == 23    # b107 vérifié : shop/withdrawal reste 🟢 FREE — entrée courte (dates), comme return-deadline et les sœurs soldes, pas un collage ; +1 24-11 tard: agent/tool-trim (listing collé, 🟡 comme les deux sœurs) ; +1 24-11: agent/cost-diff (deux listings collés, 🟡) ; 21 agent/context-tax ; 20 = table/sql_dump
     assert "32768" in info["mode"]

@@ -1,0 +1,9 @@
+{
+ "name": "shop_withdrawal_notified_pin",
+ "path": "/api/v1/shop/withdrawal",
+ "body": {
+  "start_date": "2026-11-17",
+  "kind": "services",
+  "notified": "2026-12-01"
+ }
+}
