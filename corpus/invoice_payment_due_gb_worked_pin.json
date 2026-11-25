@@ -1,0 +1,9 @@
+{
+ "name": "invoice_payment_due_gb_worked_pin",
+ "path": "/api/v1/invoice/payment-due",
+ "body": {
+  "invoice_date": "2026-05-01",
+  "terms": "30 business days",
+  "jurisdiction": "gb"
+ }
+}

@@ -96,6 +96,16 @@ SAY = {
               "fériés comptés ?",
         "pt": "recebi o pacote terça — até que dia posso desistir "
               "pela lei francesa, contando fim de semana e feriado?"},
+    "/api/v1/invoice/payment-due": {
+        "en": "invoice Friday 1 May, net 30 — the calendar says "
+              "31 May, my client swears 17 June, and Germany moves "
+              "the date by law. Which date is the REAL one?",
+        "fr": "facture vendredi 1er mai, net 30 — le calendrier dit "
+              "31 mai, le client jure 17 juin, l'Allemagne reporte "
+              "par la loi : quelle date est la vraie échéance ?",
+        "pt": "fatura sexta 1º de maio, net 30 — o calendário diz "
+              "31 de maio, o cliente jura 17 de junho e a Alemanha "
+              "adia por lei: qual é a data de vencimento real?"},
     "/api/v1/invoice/validate-totals": {
         "en": "the OCR read $1,204.50 as the total — do these lines "
               "actually add up to it?",

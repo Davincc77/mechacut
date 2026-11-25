@@ -1,0 +1,9 @@
+{
+ "name": "invoice_payment_due_sunday_de_pin",
+ "path": "/api/v1/invoice/payment-due",
+ "body": {
+  "invoice_date": "2026-05-01",
+  "terms": "net 30",
+  "jurisdiction": "de"
+ }
+}

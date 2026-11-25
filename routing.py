@@ -108,7 +108,8 @@ TABLE = (
     ("date_calc", "/api/v1/date/calc", "dates",
      "business days, add/sub, deltas",
      "date calculate business days add subtract duration delta weeks "
-     "holidays deadline months clamp age later echeance"),
+     "holidays deadline months clamp age later echeance "
+     "jours ouvrables ouvrable interval range between counting"),
     ("cron_next", "/api/v1/cron/next", "dates",
      "next N cron runs, tz pinned",
      "cron schedule next run time job fires expression five field star"),
@@ -286,6 +287,16 @@ TABLE = (
      "mauvais outil nomme "
      "colisao nomes ferramentas somem truncadas silencioso "
      "ferramenta errada atalho"),
+    ("invoice_payment_due", "/api/v1/invoice/payment-due", "dates",
+     "the real invoice due date: four readings, roll rule named per "
+     "law, TARGET2 settle layer",
+     "payment due deadline invoice terms net net30 eom "
+     "businessday workdays worked roll target2 settlement interest "
+     "late penalty fin de mois quote letter change "
+     "echeance facture paiement report "
+     "retard frais penite prazo vencimento fatura "
+     "uteis feriado zahlungsziel rechnung faelligkeit werktag "
+     "verzug"),
     ("shop_discount_audit", "/api/v1/shop/discount-audit", "checks",
      "Omnibus thirty-day rule: is the crossed-out price legal? "
      "reference, true percent, verdict named",
@@ -1192,7 +1203,7 @@ def manifest_text(version):
         # « -> sister moovicut.studio » -> « -> moovicut.studio » (-7,
         # « sister » se lit sur la landing et dans SKILL.md, le manifeste
         # porte le chemin). Mesure b111 : 207 lignes / 8 995 octets.
-        "mechacut.studio %s - %d deterministic transforms "
+        "mechacut.studio %s - %d transforms "
         "+ %d recipes. " %
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
@@ -1228,11 +1239,24 @@ def manifest_text(version):
           # identique). Mesure LIVE 25-11 10h55 : 206 lignes /
           # 8 995 octets (splitlines — la méthode des cycles
           # précédents).
-          "/tools/<name>.json | "
-        "pipelines: /api/v1/recipes, /api/v1/pipeline | "
-        'find: /route?q="words" | '
-        "proposals: /proposals, /api/v1/agent/proposals | "
-        "not here: storyboards, shot lists, breakdowns "
+          # b112 elagage MESURE (+invoice_payment_due, 55 octets a
+          # payer) : « deterministic » COUPE de la tete — adjectif,
+          # consigne b107, la certification du meme nom est le
+          # tracteur sha256 de fin + « POSTs carry sha256 » qui
+          # vivent ; le POINTEUR DU MILIEU « /tools/<name>.json | »
+          # SUPPRIME — le chemin vit DEJA dans le tail dense-fold
+          # (dédoublonnage, claim constant) ; « find: » coupe du
+          # pointeur route (le /route?q= nu est la convention
+          # maison depuis b107) et ses guillemets « "words" »
+          # tombent ; « folded to dense mode » devient « dense fold »
+          # (le drapeau se nomme lui-meme, test_bundle0 synchronise)
+          # ; « storyboards, shot lists, breakdowns » en SLASHES.
+          # Mesure b112 : 208 lignes / 8 99x octets — marge relevee
+          # a l'annonce, jamais de memoire.
+          "pipelines: /api/v1/recipes, /api/v1/pipeline; "
+        "/route?q=words; "
+        "proposals: /proposals, /api/v1/agent/proposals; "
+        "not here: storyboards/shot lists/breakdowns "
         "-> moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
         # debranche le dense-fold ou elague une ligne de tete ») :
@@ -1267,7 +1291,7 @@ def manifest_text(version):
         # lit), les deux pointeurs de purpose vivent, 217 lignes.
         body = render(False, None)
         ls = body.split("\n")
-        ls[0] += (" | folded to dense mode (<8.8KB): purpose "
+        ls[0] += (" | dense fold (<8.8KB): purpose "
                   "/route?q= or /tools/<name>.json")
         body = "\n".join(ls)
     return body + "# sha256=" + _sha(body.rstrip("\n")) + "\n"

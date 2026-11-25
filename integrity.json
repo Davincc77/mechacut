@@ -2591,6 +2591,117 @@
   },
   {
    "body": {
+    "clause": "next_workday",
+    "invoice_date": "2026-05-07",
+    "jurisdiction": "fr",
+    "terms": "net 30"
+   },
+   "name": "invoice_payment_due_clause_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "da023543cfafb758889443a21c8674a013dcf4f6708e6caeb9ee737ee2e3d187",
+   "status": 200
+  },
+  {
+   "body": {
+    "invoice_date": "2026-03-10",
+    "terms": "45 jours fin de mois"
+   },
+   "name": "invoice_payment_due_eom_state_example_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "b9b70f0d01315aa66f83e1d61e3337bc684fd68bf443d64ddaff65d0326849b2",
+   "status": 200
+  },
+  {
+   "body": {
+    "invoice_date": "2029-01-01",
+    "jurisdiction": "gb",
+    "terms": "30 business days"
+   },
+   "name": "invoice_payment_due_gb_no_table_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "3776f94a7c31b6d6d35683180e8102bf9702f21104a1e7a864b7b42109c95962",
+   "status": 400
+  },
+  {
+   "body": {
+    "invoice_date": "2026-05-01",
+    "jurisdiction": "gb",
+    "terms": "30 business days"
+   },
+   "name": "invoice_payment_due_gb_worked_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "ed446cb942ec8248a425c551d31ce9e28e8c40c82cbe85e4ced5909f688c7a20",
+   "status": 200
+  },
+  {
+   "body": {
+    "invoice_date": "2027-04-01",
+    "jurisdiction": "de",
+    "terms": "net 30"
+   },
+   "name": "invoice_payment_due_may2027_absorbed_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "3539a3447473ff40a36b82d3570d03378cebf307b48ccd23d10c338a7f1d20cf",
+   "status": 200
+  },
+  {
+   "body": {
+    "invoice_date": "2026-05-01",
+    "jurisdiction": "fr",
+    "terms": "net 30"
+   },
+   "name": "invoice_payment_due_ouvrables_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "b8da3e4dec2cc0ab98945e247be0cd51a345b4dcc4bf1b637bd232c68359ba5c",
+   "status": 200
+  },
+  {
+   "body": {
+    "invoice_date": "2026-05-07",
+    "jurisdiction": "fr",
+    "terms": "net 30"
+   },
+   "name": "invoice_payment_due_saturday_divergence_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "767592c3b62cc565b1087a6ddd2f26809b0f206394b6f3abfb1f7c3471f66989",
+   "status": 200
+  },
+  {
+   "body": {
+    "invoice_date": "2026-05-01",
+    "jurisdiction": "de",
+    "terms": "net 30"
+   },
+   "name": "invoice_payment_due_sunday_de_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "b14f99030a061da952dd0ea42b7e0d5e7344dda547bc0d9340e6e0b6440e54bd",
+   "status": 200
+  },
+  {
+   "body": {
+    "invoice_date": "2026-11-25",
+    "jurisdiction": "gb",
+    "terms": "net 30"
+   },
+   "name": "invoice_payment_due_xmas_gb_chain_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "111fa9207b5cc6cc1378870bb3767a8a58bdf6c69ab72eca15c0f852fed65669",
+   "status": 200
+  },
+  {
+   "body": {
+    "document": "lettre_de_change",
+    "invoice_date": "2026-11-25",
+    "jurisdiction": "fr",
+    "terms": "net 30"
+   },
+   "name": "invoice_payment_due_xmas_lc_pin",
+   "path": "/api/v1/invoice/payment-due",
+   "sha256": "a6875b5c023170e3acb5d9ac348960755c7b3b26fc7e14a0e9e410efe2f32340",
+   "status": 200
+  },
+  {
+   "body": {
     "declared": {
      "discount": "0.50"
     },

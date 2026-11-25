@@ -409,6 +409,41 @@ CASES = [
      "agent_tooloverlap"),
     ("quais ferramentas sumiram sem erro colisao de nomes mcp",
      "agent_tooloverlap"),
+    # CLASSE b112 — « les quatre lectures d'un Net 30 » : la douleur
+    # HUMAIN rang 1, rejouée des sources lues (§ 193 BGB verbatim,
+    # BFDA 1971 s.1(4), DGCCRF deux méthodes, r/Contractor 1i24hj1,
+    # Bluevine vs ResolvePay qui se contredisent). Aiguilles x3
+    # langues + garde fratrie : aging buckete des dates CONNUES,
+    # date_deemed rend la réception réputée, holidays liste des jours
+    # sans terme — aucun ne rend la vraie échéance et ses lectures.
+    ("facture net 30 tombe un samedi quelle est la vraie échéance",
+     "invoice_payment_due"),
+    ("45 jours fin de mois comment calculer la date de paiement",
+     "invoice_payment_due"),
+    ("rechnung netto 30 fällig am samstag zahlungsziel werktag",
+     "invoice_payment_due"),
+    ("invoice dated friday net 30 when is it legally due germany",
+     "invoice_payment_due"),
+    ("does net 30 count weekends or business days payment terms",
+     "invoice_payment_due"),
+    ("fatura net 30 vence no feriado qual a data real de pagamento",
+     "invoice_payment_due"),
+    ("combien de jours ouvrables entre le 5 et le 20 mars 2026",
+     "date_calc"),  # PORTE-FAUX CONSIGNÉ : hors mes tags, cette
+    # phrase est SILENCIEUSE (score sous le seuil) — elle n'a jamais
+    # été à date_calc. La ligne reste au corpus comme GUERRE DE
+    # L'OVERMATCH : si un jour un outil répond « combien de jours
+    # entre deux dates », c'est ici qu'elle migrera. Tant que mon
+    # outil ne compte pas les plages, il ne doit PAS la gagner.
+    ("aging overdue unpaid receivables buckets relance client",
+     "money_aging"),
+    ("jours fériés 2027 Allemagne liste complète",
+     "schedule_holidays"),
+    ("est-ce que tu trouves que ce tableau est équilibré "
+     "sans chiffres", None),  # leurre sans DONNÉES : aucune date ne
+    # doit être prescrite — classe b98 ; l'ancien brouillon « ask a
+    # client to pay faster » répondait chez intent_check (verbe
+    # légitime ailleurs) — consigné, remplacé avant push.
     ("raconte-moi une blague sur mes outils qui se ressemblent", None),
 
     # CLASSE b107 — « colis reçu mardi, jusqu'à quand je me rétracte » :

@@ -102,7 +102,7 @@ PACK_TITLE = {
 TR =   {
  "en": {
   'meta.title': 'Mechacut — same request, same bytes',
-  'meta.desc': 'Deterministic transforms for AI agents: 183 tools, three tiers, machine payments. No signup, no key, no storage.',
+  'meta.desc': 'Deterministic transforms for AI agents: 184 tools, three tiers, machine payments. No signup, no key, no storage.',
   'hero.plain': 'In plain words: Mechacut does the exact counting for AI assistants. Splitting a bill, a due date, a currency, a file — the assistant asks, Mechacut answers, and the answer is always the same. And when one assistant learns something new, every assistant gets it the same day.',
   'dev.h2': 'For developers & agents',
   'dev.intro': 'Everything above was true. Below is how: the full API, the tool catalogue, the schemas, the benchmarks, the pricing. No prose — references.',
@@ -345,7 +345,7 @@ TR =   {
  },
  "fr": {
   'meta.title': 'Mechacut — même requête, mêmes octets',
-  'meta.desc': 'Transformations déterministes pour agents IA : 183 outils, trois paliers, paiements machine. Sans inscription, sans clé, sans stockage.',
+  'meta.desc': 'Transformations déterministes pour agents IA : 184 outils, trois paliers, paiements machine. Sans inscription, sans clé, sans stockage.',
   'hero.plain': 'En mots simples : Mechacut fait les comptes exacts pour les assistants. Une facture à partager, une échéance, une devise, un fichier — l’assistant demande, Mechacut répond, et la réponse est toujours la même. Et quand un assistant apprend quelque chose, tous le savent le jour même.',
   'dev.h2': 'Pour les développeurs & agents',
   'dev.intro': 'Tout ce qui précède est vrai. En dessous, le comment : l’API complète, le catalogue, les schémas, les benchs, les prix. Plus de prose — des références.',
@@ -588,7 +588,7 @@ TR =   {
  },
  "pt": {
   'meta.title': 'Mechacut — mesma requisição, mesmos bytes',
-  'meta.desc': 'Transformações determinísticas para agentes: 183 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, chave ou armazenamento.',
+  'meta.desc': 'Transformações determinísticas para agentes: 184 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, chave ou armazenamento.',
   'hero.plain': 'Em palavras simples: a Mechacut faz as contas exactas para os assistentes. Uma conta para dividir, um prazo, uma moeda, um ficheiro — o assistente pergunta, a Mechacut responde, e a resposta é sempre a mesma. E quando um assistente aprende algo, todos os assistentes sabem no próprio dia.',
   'dev.h2': 'Para programadores & agentes',
   'dev.intro': 'Tudo o que está acima é verdade. Abaixo está o como: a API completa, o catálogo, os esquemas, os benchmarks, os preços. Sem prosa — referências.',
@@ -1127,11 +1127,7 @@ TEMPLATE = """<!DOCTYPE html>
       </div>
     </section>
 
-    <section class="section" id="everyday">
-      <h2>{{everyday.h2}}</h2>
-      <p class="tiers" style="color:var(--muted);max-width:720px">{{everyday.intro}} {{everyday.open}}</p>
-      {{everyday_grid}}
-    </section>
+    {{everyday_grid}}
 
     <section class="devhead">
       <h2>{{dev.h2}}</h2>
@@ -1677,6 +1673,8 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "QUOI DÉBRANCHER pour tenir le budget : IDLE-d'abord, fractions exactes, re-compte au canon context-tax ; FITS/STILL_OVER, RESTE chiffré ; la fratrie dit COMBIEN, ici QUOI ENLEVER",
         "agent_tooloverlap":
             "QUELS DEUX OUTILS N'EN FONT QU'UN, dans QUEL CLIENT : coupe 64 chars VS Code avec ABORT de la suite alphabétique (le repro publié : 5 outils, 2 listés), pliage gemini-cli tête30+queue30 avec OVERWRITE, coupe de gateway sans contrôle ; la correction en NOMBRE — la plus courte clef serveur qui dé-colle, sinon NO_PREFIX_FIX ; ce qui est légal dans l'API ne jure RIEN chez le client",
+        "invoice_payment_due":
+            "LA VRAIE ÉCHÉANCE + LES QUATRE LECTURES d'un « Net 30 » : calendaire ou ouvrés × émission ou réception, ÉCART chiffré, jamais de moyenne ; report NOMMÉ par juridiction — § 193 BGB reporte le SAMEDI par la loi, BFDA 1971 reporte les bank holidays (tables gov.uk proclamées 2026-2028, jamais prédites), facture FR : AUCUN texte de report lu — le vide est un VERDICT, la clause tranche ; lettre de change FR : com_l511_79 reporte au prochain OUVRABLE, le samedi compte (L. 3133-1) ; couche TARGET2 : le rail ferme, la dette court (directive 2011/7) ; plafond L. 441-10 signalé ; 45 jours fin de mois = DEUX méthodes DGCCRF côte à côte — 15 jours d'écart officiel",
         "shop_gift_voucher":
             "carte cadeau « périmée » REMPLACÉE d'office : cinq ans depuis l'achat — le légal couvre le papier (Irlande 2019) ; solde ≥ 1 € = dû, frontière 1 € en conflit NOMMÉ ; France : AUCUNE durée légale, mythe « 30 ans » = immobilier",
         "shop_soldes_window":
@@ -2068,6 +2066,8 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "O QUE DESCONECTAR para caber no orçamento: gotas IDLE-primeiro em frações exatas, recontagem no canon da irmã — mesmo número em context-tax; FITS/STILL_OVER com o RESTE cifrado; context-tax diz QUANTO, cost-diff A DIFERENÇA — aqui O QUE TIRAR",
         "agent_tooloverlap":
             "QUAIS DUAS FERRAMENTAS VIRAM UMA SÓ, em QUAL CLIENTE: corte de 64 chars do VS Code com ABORT do resto alfabético (o repro publicado: 5 ferramentas, 2 listadas), dobra do gemini-cli cabeça30+cauda30 com OVERWRITE, corte de gateway sem checagem; a correção em NÚMERO — a menor chave de servidor que desencalha, senão NO_PREFIX_FIX; o que é legal na API não jura NADA no cliente",
+        "invoice_payment_due":
+            "O VENCIMENTO REAL + as QUATRO leituras de um Net 30: calendarial ou dias úteis × emissão ou recebimento, gap CIFRADO, nunca média; adiamento NOMEADO por jurisdição — § 193 BGB adia o SÁBADO por lei, BFDA 1971 adia bank holidays (tabelas gov.uk proclamadas 2026-2028, nunca previstas); fatura FR: NENHUM texto de adiamento lido — o vazio é VEREDITO, a cláusula decide; letra de câmbio FR: com_l511_79 → próximo dia ÚTIL, sábado conta (L. 3133-1); camada TARGET2: o trilho fecha, a dívida corre (diretiva 2011/7); teto L. 441-10 sinalizado; 45 dias fim de mês = DOIS métodos DGCCRF lado a lado — 15 dias de gap oficial",
         "shop_gift_voucher":
             "vale-presente « vencido » de um ano é SUBSTITUÍDO por cinco anos desde a compra — a data legal COBRE o papel (Lei irlandesa de 2019, forma JD Sports); saldo de €1 ou mais é devido, fronteira €1 com conflito NOMEADO; França NEGATIVA: nenhuma duração legal, o boato dos « 30 anos » é imobiliário",
         "shop_soldes_window":

@@ -398,7 +398,11 @@ def test_endpoint_inattendu_refuse():
 # --------------------------------------------------------- manifest & sœurs
 def test_manifest_182_et_ligne_lu():
     body = client.get("/agent/manifest").text
-    assert "183 deterministic transforms + 9 recipes" in body
+    # b112 elagage : « deterministic » est tombe de la tete a claim
+    # constant (le tracteur sha256 + « POSTs carry sha256 » certifient
+    # le meme nom) — le compteur lu reste le test : TABLE 193 -
+    # recipes 9 = 184 transforms, compte a la main.
+    assert "184 transforms + 9 recipes" in body
     assert "shop_soldes_lu  /api/v1/shop/soldes-lu  free" in body
     assert len(body.encode("utf-8")) < 9000
 
@@ -433,7 +437,8 @@ def test_onze_pins_soldeslu_adds_only():
     # retiree) porte son contrat neuf sous le MÊME nom.
     # b111 relève à 364 : +9 agent_tooloverlap (adds-only, zero retirée,
     # vecteurs publics — le contrat des sœurs n'a pas bougé d'un octet).
-    assert len(g) == 364
+    # b112 relève à 374 : +10 invoice_payment_due (adds-only).
+    assert len(g) == 374
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

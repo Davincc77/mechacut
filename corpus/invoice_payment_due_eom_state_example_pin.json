@@ -1,0 +1,8 @@
+{
+ "name": "invoice_payment_due_eom_state_example_pin",
+ "path": "/api/v1/invoice/payment-due",
+ "body": {
+  "invoice_date": "2026-03-10",
+  "terms": "45 jours fin de mois"
+ }
+}

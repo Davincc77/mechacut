@@ -93,6 +93,7 @@ POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the upda
 POST /api/v1/agent/tool-trim  pasted tools/list + budget -> WHICH tools to disconnect, idle-first closed ranking in exact fractions, re-count of the survivors at the sister's canon, FITS/STILL_OVER with the overage named, $ saved at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/agent/tool-overlap  pasted tool names (+ server keys) -> which TWO tools become ONE id in WHICH client (vscode cut+TAIL_ABORT, gemini-cli fold+OVERWRITE, head64 gateways), bare shadows, provider charset/length 400s, the min server-key rename IN CHARACTERS, GATE_STRICTER_THAN_API named (free under 32 KB, x402 above)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
+POST /api/v1/invoice/payment-due  invoice date + terms (net 30, 45 jours fin de mois, 30 business days, 2/10 net 30) -> the FOUR readings with the gap CHIFFRÉ; the roll rule NAMED per jurisdiction (bgb_193 defers SATURDAY by law, bfe_1971 defers bank holidays, FR invoice: NO statutory roll — the empty table is a read VERDICT, the clause decides; FR lettre de change: com_l511_79 -> next OUVRABLE day, Saturday counts); TARGET2 settlement layer (the rails close, the debt runs); L. 441-10 cap flag; gov.uk tables proclaimed 2026-2028 only (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
 Bundle 4.3 — spell-out (TOOLS-50 #30):
@@ -295,6 +296,7 @@ import costdiffkit
 import tooltrimkit
 import overlapkit
 import withdrawalkit
+import paymentduekit
 import evalkit
 import shipdeadkit
 import returndeadkit
@@ -386,7 +388,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.34.3",
+    version="1.34.4",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2488,6 +2490,43 @@ def run_shop_withdrawal(args: dict):
 @app.post("/api/v1/shop/withdrawal")
 def api_shop_withdrawal(req: ShopWithdrawalRequest):
     body, err = run_shop_withdrawal(req.model_dump())
+    return err if err else body
+
+
+class InvoicePaymentDueRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    invoice_date: str
+    terms: str
+    jurisdiction: Optional[str] = None
+    receipt_date: Optional[str] = None
+    count_from: Optional[str] = None
+    clause: Optional[str] = None
+    document: Optional[str] = None
+
+
+def run_invoice_payment_due(args: dict):
+    try:
+        req = InvoicePaymentDueRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = paymentduekit.payment_due(
+            req.invoice_date, req.terms,
+            jurisdiction=req.jurisdiction,
+            receipt_date=req.receipt_date,
+            count_from=req.count_from, clause=req.clause,
+            document=req.document)
+    except paymentduekit.DueError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/invoice/payment-due")
+def api_invoice_payment_due(req: InvoicePaymentDueRequest):
+    body, err = run_invoice_payment_due(req.model_dump())
     return err if err else body
 
 
@@ -7213,6 +7252,7 @@ TOOL_RUN = {
            "agent_costdiff": run_agent_cost_diff,
            "agent_tooltrim": run_agent_tool_trim,
            "agent_tooloverlap": run_agent_tool_overlap,
+           "invoice_payment_due": run_invoice_payment_due,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
@@ -12312,6 +12352,94 @@ MCP_TOOLS = [
                                            "three replayed "
                                            "statutes; others "
                                            "refused by name"},
+            },
+        },
+    },
+    {
+        "name": "invoice_payment_due",
+        "description": (
+            "The REAL due date of an invoice \u2014 and the FOUR "
+            "readings around it, never a mean. Net 30 has published, "
+            "legitimate readings (calendar/worked x issue/receipt) "
+            "that a German and a French clerk both defend: the tool "
+            "computes each NAMED, with the spread in days (r/Contractor: "
+            "'they claim the 30 days exclude weekends'; r/Accounting: "
+            "60 days vs 60 business days). Roll rules are per "
+            "JURISDICTION and cited to the read text: DE \u00a7 193 "
+            "BGB defers SATURDAY by law; GB Banking and Financial "
+            "Dealings Act 1971 s.1(4) defers bank holidays (gov.uk "
+            "proclaimed tables 2026-2028 pinned \u2014 other years "
+            "REFUSED, not predicted); FR has NO statutory roll for "
+            "an invoice term \u2014 the empty sub-section (1342-"
+            "1343-5, read; old 1235-1244-1 repealed 2016; the 1925 "
+            "bill rule repealed 2007) is a VERDICT, so the contract "
+            "clause decides (next_workday | next_ouvrable | "
+            "previous_workday, named). The FR lettre de change DOES "
+            "roll (com_l511_79, read): to the next OUVRABLE day \u2014 "
+            "Saturday counts per L. 3133-1, the same statute that "
+            "opens the eight-day gap between ouvrable and ouvra "
+            "counts. EOM terms ship the two DGCCRF methods side by "
+            "side (the State's own example: 30 April vs 15 May, 15 "
+            "days). TARGET2 settlement layer on top: a due date on a "
+            "Saturday, Sunday or the six TARGET days shifts SETTLE "
+            "but not the DEBT \u2014 interest runs from the term "
+            "without reminder (directive 2011/7/EU art. 3, read); a "
+            "TARGET closing on a weekend is named ABSORBED, zero "
+            "phantom days. FR cap flag: L. 441-10 (60 net, or 45 "
+            "fin de mois by express clause). Day-0 convention pinned "
+            "on the four published examples (March 1 + 30 -> March "
+            "31). GB worked-count needs gb; refusals name field + "
+            "expected. Sisters: money_aging buckets KNOWN due dates, "
+            "date_deemed gives the deemed RECEIPT that starts this "
+            "clock, schedule/holidays lists days without ever a "
+            "term \u2014 none answers WHEN payment is legally due "
+            "and who moves the date. Free (short entry)."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["invoice_date", "terms"],
+            "additionalProperties": False,
+            "properties": {
+                "invoice_date": {"type": "string",
+                                 "description": "YYYY-MM-DD \u2014 "
+                                                "the ink date; day 0 "
+                                                "of the published "
+                                                "convention"},
+                "terms": {"type": "string",
+                          "description": "net 30 | 30 days | 30 "
+                                         "jours fin de mois | net 30 "
+                                         "eom | 30 business days | "
+                                         "30 jours ouvr\u00e9s | 30 "
+                                         "jours ouvrables | due on "
+                                         "receipt | 2/10 net 30 "
+                                         "\u2014 closed grammar"},
+                "jurisdiction": {"type": "string",
+                                 "description": "de | fr | gb \u2014 "
+                                                "only the read roll "
+                                                "texts; others "
+                                                "refused by name"},
+                "receipt_date": {"type": "string",
+                                 "description": "YYYY-MM-DD \u2014 "
+                                                "unlocks the receipt "
+                                                "readings; must not "
+                                                "precede the invoice"},
+                "count_from": {"type": "string",
+                               "description": "issue (default, the "
+                                              "published convention) "
+                                              "| receipt"},
+                "clause": {"type": "string",
+                           "description": "next_workday | "
+                                          "next_ouvrable | "
+                                          "previous_workday \u2014 "
+                                          "the contract word, "
+                                          "counted when the statute "
+                                          "is silent"},
+                "document": {"type": "string",
+                             "description": "invoice (default) | "
+                                            "lettre_de_change \u2014 "
+                                            "the FR roll exists for "
+                                            "the instrument, not "
+                                            "for the country"},
             },
         },
     },

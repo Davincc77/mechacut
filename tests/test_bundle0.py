@@ -20,7 +20,10 @@ def test_manifest_complete_and_self_certified():
     assert r1.content == r2.content          # same bytes, forever
     assert r1.status_code == 200
     body = r1.text
-    folded = "folded to dense mode" in body
+    folded = "dense fold (<8.8KB)" in body  # b112: « folded to dense
+    # mode » elague a claim constant — le drapeau se nomme « dense
+    # fold », le test suit la mesure (doctrine b111: la batterie
+    # teste ce que le texte dit, pas ce qu'il disait)
     for name, path, _pack, purpose, _tags in routing.TABLE:
         line = [l for l in body.splitlines() if l.startswith(name + "  ")]
         assert line, name                     # every tool has its line
@@ -101,7 +104,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 192   # +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +shop_soldes_be bundle105 ; +agent_costdiff bundle104 ; +shop_soldes_window bundle103 ; 185 avec shop_gift_voucher bundle102 ; 184 avec agent_contexttax bundle101 ; 183 avec money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
+    assert seen == len(routing.TABLE) == 193   # +invoice_payment_due bundle112 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +shop_soldes_be bundle105 ; +agent_costdiff bundle104 ; +shop_soldes_window bundle103 ; 185 avec shop_gift_voucher bundle102 ; 184 avec agent_contexttax bundle101 ; 183 avec money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
     # (23-11 bundle96) ; était 179 avec agent_mcpaudit (bundle92)
 
 

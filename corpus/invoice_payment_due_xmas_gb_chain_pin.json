@@ -1,0 +1,9 @@
+{
+ "name": "invoice_payment_due_xmas_gb_chain_pin",
+ "path": "/api/v1/invoice/payment-due",
+ "body": {
+  "invoice_date": "2026-11-25",
+  "terms": "net 30",
+  "jurisdiction": "gb"
+ }
+}

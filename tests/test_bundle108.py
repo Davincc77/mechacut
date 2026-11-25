@@ -405,7 +405,9 @@ def test_ten_new_pins_are_replayable():
     # paye 25-11, consigne dans le message du commit).
     # b111 relève à 364 : +9 agent_tooloverlap (adds-only, zero retirée,
     # vecteurs publics — le contrat des sœurs n'a pas bougé d'un octet).
-    assert len(g) == 364
+    # b112 relève à 374 : +10 invoice_payment_due (adds-only, vecteurs
+    # de l'oracle g112 — les dates viennent des actes lus, pas du vent).
+    assert len(g) == 374
 
 
 def test_fr_response_byte_contract():

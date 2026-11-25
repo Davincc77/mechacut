@@ -1,0 +1,9 @@
+{
+ "name": "invoice_payment_due_may2027_absorbed_pin",
+ "path": "/api/v1/invoice/payment-due",
+ "body": {
+  "invoice_date": "2027-04-01",
+  "terms": "net 30",
+  "jurisdiction": "de"
+ }
+}
