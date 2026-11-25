@@ -579,6 +579,167 @@
   },
   {
    "body": {
+    "tools": [
+     {
+      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",
+      "server": "gw"
+     },
+     {
+      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2",
+      "server": "gw"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_deep_head_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "69119fbf5f98c994ac8be1aaf1f10afad1b7fc4f6b5fdf97fcdf5a5b4af72ba0",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "name": "x",
+      "server": "s"
+     },
+     {
+      "name": "x",
+      "server": "s"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_dup_refuse_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "3ebe6a2ae94fd9a1b8531ecaae7e25d8351936ce16db315b5049d758ce8ec99f",
+   "status": 400
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "name": "mcp_report_xxxxxxxxxxxxxxxxxxxxxMIDDLEonetail_shared_0123456789abcdefghij"
+     },
+     {
+      "name": "mcp_report_xxxxxxxxxxxxxxxxxxxxxMIDDLEtwotail_shared_0123456789abcdefghij"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_fold_overwrite_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "ab258d2265a4009b652f538d22a6197d4920f94c3ddb0f549ab2a5d51cd56e0c",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "name": "mcp__4e9e25f1-b480-40f3-ba8d-a792f8f6ff07__get_deployment_logs_for_production"
+     },
+     {
+      "name": "mcp__4e9e25f1-b480-40f3-ba8d-a792f8f6ff07__get_deployment_logs_for_preview"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_head64_collapse_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "6d481e8c089e8a041b3c28ea8bf62883d0c19c711c8775f66ccad4cfdb232848",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "name": "mcp__gw__zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzA"
+     },
+     {
+      "name": "mcp__gw__zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzB"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_head64_noprefix_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "c39aef349bc1dec6ab70c8b3e310d66df7e79bc3cadad29e47aa9f5d14717b3c",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "name": "user.getData"
+     },
+     {
+      "name": "user_getData"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_sanitize_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "28ed23f8128646f281982c437770b9c10412ed8ef1b1b4040ba4a251ff15005b",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "name": "get_file",
+      "server": "drive"
+     },
+     {
+      "name": "get_file",
+      "server": "mail"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_shadow_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "3c5e14cfbbbc97565d4ca99f8295458fd9cdb0219ff229792b0590e367f4f71a",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "name": "mcp_gateway_tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_strict_gate_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "e641fdc1d95f85095613b2224ec79c104196315e0f058585410814c2a2b2ab36",
+   "status": 200
+  },
+  {
+   "body": {
+    "tools": [
+     {
+      "name": "Long_server_Name_For_Gateway-get_resource_details",
+      "server": "litellm-gw-01"
+     },
+     {
+      "name": "Long_server_Name_For_Gateway-get_resource_stats",
+      "server": "litellm-gw-01"
+     },
+     {
+      "name": "Long_server_Name_For_Gateway-get_resource_status",
+      "server": "litellm-gw-01"
+     },
+     {
+      "name": "Long_server_Name_For_Gateway-list_resources",
+      "server": "litellm-gw-01"
+     },
+     {
+      "name": "Long_server_Name_For_Gateway-list_zones",
+      "server": "litellm-gw-01"
+     }
+    ]
+   },
+   "name": "agent_tooloverlap_vscode_repro_pin",
+   "path": "/api/v1/agent/tool-overlap",
+   "sha256": "a80bbdc1a1a4b38fc01ead5504e8f64353d4f40bd5cd37157a45969184975c65",
+   "status": 200
+  },
+  {
+   "body": {
     "budget": 8,
     "budget_pct": 10,
     "tools": [

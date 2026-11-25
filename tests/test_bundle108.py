@@ -403,7 +403,9 @@ def test_ten_new_pins_are_replayable():
     # la pin shop_soldesbe_luxembourg_refuse REMPLACEE par contrat
     # change — le pointeur « en file » devient « vivent sous », gate
     # paye 25-11, consigne dans le message du commit).
-    assert len(g) == 355
+    # b111 relève à 364 : +9 agent_tooloverlap (adds-only, zero retirée,
+    # vecteurs publics — le contrat des sœurs n'a pas bougé d'un octet).
+    assert len(g) == 364
 
 
 def test_fr_response_byte_contract():

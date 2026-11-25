@@ -276,6 +276,16 @@ TABLE = (
      "budget which to drop plan "
      "debrancher retirer couper desactiver outils tenir "
      "remover desligar ferramentas ociosas caber orcamento"),
+    ("agent_tooloverlap", "/api/v1/agent/tool-overlap", "checks",
+     "which two tools become ONE id in which client: 64-char cut, "
+     "tail abort, middle fold, bare shadows, min key rename",
+     "overlap collision collide collisions same name names tools "
+     "disappear vanish truncated truncation silently dropped wrong "
+     "tool routed prefix 64-char characters overlong shadow "
+     "collision noms outils disparaissent tronque silencieusement "
+     "mauvais outil nomme "
+     "colisao nomes ferramentas somem truncadas silencioso "
+     "ferramenta errada atalho"),
     ("shop_discount_audit", "/api/v1/shop/discount-audit", "checks",
      "Omnibus thirty-day rule: is the crossed-out price legal? "
      "reference, true percent, verdict named",
@@ -1169,15 +1179,28 @@ def manifest_text(version):
         # seule, tout le contenu voyage — 217 lignes <218 avec
         # +agent_costdiff, octets <9 000 avec la NOTE dense resseree
         # a claim constant (les deux pointeurs de purpose vivent).
-        "mechacut.studio %s — %d deterministic transforms "
+        # b111 elagage MESURE (+agent_tooloverlap, 52 octets a payer) :
+        # tete « — » -> « - » (-2) ; « every POST carries » -> « POSTs
+        # carry » (-7) ; « every 400 names » -> « 400s name » (-6) ;
+        # « error IS the repair prompt » -> « error IS repair prompt »
+        # (-4) ; « — » milieu -> « ; » (-4) ; « from one » -> « from 1 »
+        # (-3) ; label « detail: » COUPE — le chemin /tools/<name>.json
+        # se nomme lui-meme (-8) ; « POST /api/v1/pipeline » ->
+        # « /api/v1/pipeline » (-5, convention b107 : le verbe vit dans
+        # le schema, le pointeur porte le chemin) ; « "task words" » ->
+        # « "words" » (-5, la place est payee par le chemin lui-meme) ;
+        # « -> sister moovicut.studio » -> « -> moovicut.studio » (-7,
+        # « sister » se lit sur la landing et dans SKILL.md, le manifeste
+        # porte le chemin). Mesure b111 : 207 lignes / 8 995 octets.
+        "mechacut.studio %s - %d deterministic transforms "
         "+ %d recipes. " %
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
         + "tiers: free=keyless 30/min; cap=free<32KB then "
-          "x402; paid=x402 from one. every POST carries "
-          "sha256; every 400 names field+expected — "
-          "error IS the repair prompt; refusals name "
+          "x402; paid=x402 from 1. POSTs carry "
+          "sha256; 400s name field+expected; "
+          "error IS repair prompt; refusals name "
           "readings. "
           # b105 elagage MESURE (consigne b104 « FR a 23 octets du
           # plafond : le lot suivant HUMAIN paie prose + elagage ») :
@@ -1205,12 +1228,12 @@ def manifest_text(version):
           # identique). Mesure LIVE 25-11 10h55 : 206 lignes /
           # 8 995 octets (splitlines — la méthode des cycles
           # précédents).
-          "detail: /tools/<name>.json | "
-        "pipelines: /api/v1/recipes, POST /api/v1/pipeline | "
-        'find: /route?q="task words" | '
+          "/tools/<name>.json | "
+        "pipelines: /api/v1/recipes, /api/v1/pipeline | "
+        'find: /route?q="words" | '
         "proposals: /proposals, /api/v1/agent/proposals | "
         "not here: storyboards, shot lists, breakdowns "
-        "-> sister moovicut.studio",
+        "-> moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
         # debranche le dense-fold ou elague une ligne de tete ») :
         # la ligne soeur est FUSIONNEE dans discovery, pas coupee —

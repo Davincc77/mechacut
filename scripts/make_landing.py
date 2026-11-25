@@ -102,7 +102,7 @@ PACK_TITLE = {
 TR =   {
  "en": {
   'meta.title': 'Mechacut — same request, same bytes',
-  'meta.desc': 'Deterministic transforms for AI agents: 182 tools, three tiers, machine payments. No signup, no key, no storage.',
+  'meta.desc': 'Deterministic transforms for AI agents: 183 tools, three tiers, machine payments. No signup, no key, no storage.',
   'nav.tools': 'Bundles',
   'nav.numbers': 'Proof',
   'nav.vision': 'Vision',
@@ -341,7 +341,7 @@ TR =   {
  },
  "fr": {
   'meta.title': 'Mechacut — même requête, mêmes octets',
-  'meta.desc': 'Transformations déterministes pour agents IA : 182 outils, trois paliers, paiements machine. Sans inscription, sans clé, sans stockage.',
+  'meta.desc': 'Transformations déterministes pour agents IA : 183 outils, trois paliers, paiements machine. Sans inscription, sans clé, sans stockage.',
   'nav.tools': 'Bundles',
   'nav.numbers': 'Preuves',
   'nav.vision': 'Vision',
@@ -580,7 +580,7 @@ TR =   {
  },
  "pt": {
   'meta.title': 'Mechacut — mesma requisição, mesmos bytes',
-  'meta.desc': 'Transformações determinísticas para agentes: 182 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, chave ou armazenamento.',
+  'meta.desc': 'Transformações determinísticas para agentes: 183 ferramentas, três níveis, pagamentos entre máquinas. Sem cadastro, chave ou armazenamento.',
   'nav.tools': 'Bundles',
   'nav.numbers': 'Provas',
   'nav.vision': 'Visão',
@@ -1630,6 +1630,8 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "le PRIX DE L'UPDATE : deux listings MCP collés, surplus par outil et champ signé, % du côté avant ; delta global, somme par outil, divergence CHIFFRÉE ; ici DE COMBIEN À COMBIEN",
         "agent_tooltrim":
             "QUOI DÉBRANCHER pour tenir le budget : IDLE-d'abord, fractions exactes, re-compte au canon context-tax ; FITS/STILL_OVER, RESTE chiffré ; la fratrie dit COMBIEN, ici QUOI ENLEVER",
+        "agent_tooloverlap":
+            "QUELS DEUX OUTILS N'EN FONT QU'UN, dans QUEL CLIENT : coupe 64 chars VS Code avec ABORT de la suite alphabétique (le repro publié : 5 outils, 2 listés), pliage gemini-cli tête30+queue30 avec OVERWRITE, coupe de gateway sans contrôle ; la correction en NOMBRE — la plus courte clef serveur qui dé-colle, sinon NO_PREFIX_FIX ; ce qui est légal dans l'API ne jure RIEN chez le client",
         "shop_gift_voucher":
             "carte cadeau « périmée » REMPLACÉE d'office : cinq ans depuis l'achat — le légal couvre le papier (Irlande 2019) ; solde ≥ 1 € = dû, frontière 1 € en conflit NOMMÉ ; France : AUCUNE durée légale, mythe « 30 ans » = immobilier",
         "shop_soldes_window":
@@ -2019,6 +2021,8 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "o PREÇO da atualização: duas listas MCP coladas, o excedente de tokens por ferramenta e campo assinado, % do lado antes; o delta global e a soma por ferramenta viajam com a divergência CIFRADA; mcp-surface diz MUDOU, context-tax diz QUANTO — aqui diz DE QUANTO A QUANTO",
         "agent_tooltrim":
             "O QUE DESCONECTAR para caber no orçamento: gotas IDLE-primeiro em frações exatas, recontagem no canon da irmã — mesmo número em context-tax; FITS/STILL_OVER com o RESTE cifrado; context-tax diz QUANTO, cost-diff A DIFERENÇA — aqui O QUE TIRAR",
+        "agent_tooloverlap":
+            "QUAIS DUAS FERRAMENTAS VIRAM UMA SÓ, em QUAL CLIENTE: corte de 64 chars do VS Code com ABORT do resto alfabético (o repro publicado: 5 ferramentas, 2 listadas), dobra do gemini-cli cabeça30+cauda30 com OVERWRITE, corte de gateway sem checagem; a correção em NÚMERO — a menor chave de servidor que desencalha, senão NO_PREFIX_FIX; o que é legal na API não jura NADA no cliente",
         "shop_gift_voucher":
             "vale-presente « vencido » de um ano é SUBSTITUÍDO por cinco anos desde a compra — a data legal COBRE o papel (Lei irlandesa de 2019, forma JD Sports); saldo de €1 ou mais é devido, fronteira €1 com conflito NOMEADO; França NEGATIVA: nenhuma duração legal, o boato dos « 30 anos » é imobiliário",
         "shop_soldes_window":

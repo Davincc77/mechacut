@@ -1,0 +1,14 @@
+{
+  "name": "agent_tooloverlap_head64_noprefix_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {
+        "name": "mcp__gw__zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzA"
+      },
+      {
+        "name": "mcp__gw__zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzB"
+      }
+    ]
+  }
+}

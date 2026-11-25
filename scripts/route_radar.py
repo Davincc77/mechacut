@@ -389,6 +389,27 @@ CASES = [
      "agent_tooltrim"),
     ("je veux débrancher mon lave-vaisselle", None),
     ("tell me a joke about trimming hedges", None),
+    # CLASSE b111 — « deux outils n'en font qu'un sans rien dire » :
+    # la douleur DEV rang 1, rejouée VERBATIM des issues closes
+    # (vscode#338895 « silently dropped », foundry#723 « wrong tool »,
+    # gemini-cli#28970, CopilotKit#7495, openworker#746). Aiguilles x3
+    # langues + garde de fratrie : le COMBIEN reste chez context-tax,
+    # le QUOI COUPER chez tool-trim, le CHANGÉ chez mcp-surface, le
+    # REJETÉ chez mcp-audit. Leurre en forme b98 : sans donnée de
+    # noms, rien ne doit être prescrit.
+    ("which tools silently disappeared after adding a second mcp "
+     "server", "agent_tooloverlap"),
+    ("tool names collide after truncation 64 characters",
+     "agent_tooloverlap"),
+    ("mcp tool prefix same first 64 characters wrong tool",
+     "agent_tooloverlap"),
+    ("deux serveurs meme nom d outil quel outil a disparu "
+     "silencieusement vscode", "agent_tooloverlap"),
+    ("collision de noms outils troncation 64 caracteres",
+     "agent_tooloverlap"),
+    ("quais ferramentas sumiram sem erro colisao de nomes mcp",
+     "agent_tooloverlap"),
+    ("raconte-moi une blague sur mes outils qui se ressemblent", None),
 
     # CLASSE b107 — « colis reçu mardi, jusqu'à quand je me rétracte » :
     # la douleur HUMAINE verbatim (BEE SECURE LU, 24-11) ferme ses

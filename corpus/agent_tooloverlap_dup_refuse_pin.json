@@ -1,0 +1,10 @@
+{
+  "name": "agent_tooloverlap_dup_refuse_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {"name": "x", "server": "s"},
+      {"name": "x", "server": "s"}
+    ]
+  }
+}

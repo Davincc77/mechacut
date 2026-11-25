@@ -1,0 +1,11 @@
+{
+  "name": "agent_tooloverlap_strict_gate_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {
+        "name": "mcp_gateway_tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+      }
+    ]
+  }
+}

@@ -91,6 +91,7 @@ POST /api/v1/shop/soldes-window year + territory -> LEGAL sale windows dated fro
 POST /api/v1/shop/soldes-be year + season -> BELGIAN sale windows from art. VI.25 CDE: sunday clause dated both seasons, one-month standstill enumerated, corona reports 2020-2021 verbatim, overruled clause kept visible (free)
 POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the update: chars+token delta per tool, signed moved fields, global vs per-tool sum stated, FITS->OVERFLOWS transition named, $ at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/agent/tool-trim  pasted tools/list + budget -> WHICH tools to disconnect, idle-first closed ranking in exact fractions, re-count of the survivors at the sister's canon, FITS/STILL_OVER with the overage named, $ saved at YOUR price (free under 32 KB, x402 above)
+POST /api/v1/agent/tool-overlap  pasted tool names (+ server keys) -> which TWO tools become ONE id in WHICH client (vscode cut+TAIL_ABORT, gemini-cli fold+OVERWRITE, head64 gateways), bare shadows, provider charset/length 400s, the min server-key rename IN CHARACTERS, GATE_STRICTER_THAN_API named (free under 32 KB, x402 above)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
 
@@ -292,6 +293,7 @@ import mcpsurfacekit
 import contexttaxkit
 import costdiffkit
 import tooltrimkit
+import overlapkit
 import withdrawalkit
 import evalkit
 import shipdeadkit
@@ -2419,6 +2421,33 @@ def run_agent_tool_trim(args: dict):
 @app.post("/api/v1/agent/tool-trim")
 def api_agent_tool_trim(req: AgentToolTrimRequest):
     body, err = run_agent_tool_trim(req.model_dump())
+    return err if err else body
+
+
+class AgentToolOverlapRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tools: List[Dict[str, Any]]
+    targets: Optional[List[str]] = None
+
+
+def run_agent_tool_overlap(args: dict):
+    try:
+        req = AgentToolOverlapRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = overlapkit.tool_overlap(req.tools, req.targets)
+    except overlapkit.OverlapError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/tool-overlap")
+def api_agent_tool_overlap(req: AgentToolOverlapRequest):
+    body, err = run_agent_tool_overlap(req.model_dump())
     return err if err else body
 
 
@@ -7049,6 +7078,7 @@ TOOL_RUN = {
            "agent_contexttax": run_agent_context_tax,
            "agent_costdiff": run_agent_cost_diff,
            "agent_tooltrim": run_agent_tool_trim,
+           "agent_tooloverlap": run_agent_tool_overlap,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
            "shop_shipping_deadline": run_shop_shipping_deadline,
@@ -11362,6 +11392,65 @@ MCP_TOOLS = [
                                    "tokens, decimal string (e.g. "
                                    "\"2\") — an argument, never a "
                                    "stored table",
+                },
+            },
+        },
+    },
+    {
+        "name": "agent_tooloverlap",
+        "description": (
+            "Which TWO of your tools become ONE id in WHICH client. "
+            "Paste the tool names (and server keys if the client "
+            "qualifies): a closed table of PUBLISHED name grammars — "
+            "vscode: (prefix+name) dot-to-underscore then a hard cut "
+            "at 64; the second registration throws and ABORTS the "
+            "loop, so every tool after it in alphabetical order dies "
+            "silently (the public repro: 5 tools, 2 listed). "
+            "gemini_cli: mcp_ prefix, sanitizer, and past 63 the "
+            "name folds to head30+\"...\"+tail30 — non-injective; the "
+            "registry OVERWRITES, last registered wins, the other is "
+            "dead. head64 gateway family: plain cut at 64 with no "
+            "collision check — a call meant for production dispatches "
+            "to preview. Providers are LOUD where clients are silent: "
+            "openai pattern+64, gemini_api charset+128, anthropic "
+            "names the conflict error (tool_name_conflict) but "
+            "publishes NO length — never promised here. Classes are "
+            "CLOSED: COLLAPSE_CUT, FOLD_COLLAPSE, SANITIZE_COLLAPSE, "
+            "EXACT_ID, BARE_SHADOW (same bare tool on two servers), "
+            "TOO_LONG, ILLEGAL_CHAR, TAIL_ABORT, OVERWRITE_LAST. "
+            "GATE_STRICTER_THAN_API names the ids legal in the API "
+            "and folded by the client — API-legal proves NOTHING. "
+            "Repair is a NUMBER: the shortest server-key length that "
+            "uncollides the cut heads, or NO_PREFIX_FIX when the "
+            "distinguisher lives past every window — rename the tools "
+            "themselves. UTF-16 units exactly like String.slice (an "
+            "emoji costs 2). Caps: 5000 entries, ceiling-300 fields, "
+            "identical (server, name) pastes refused as listing bugs. "
+            "Never fetches, never reads your config: pasted names "
+            "only. Sisters: context-tax says HOW MUCH the list costs, "
+            "tool-trim says WHAT TO CUT, mcp-surface says WHAT "
+            "CHANGED — none counts NAME COLLISIONS; that gap is this "
+            "tool. Free under 32 KB, x402 above."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["tools"],
+            "additionalProperties": False,
+            "properties": {
+                "tools": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                    "description": "entries {name, server?}; no "
+                                   "server = the name is already a "
+                                   "qualified id as pasted",
+                },
+                "targets": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "subset of the closed table "
+                                   "vscode, gemini_cli, head64, "
+                                   "openai, anthropic, gemini_api — "
+                                   "default: all",
                 },
             },
         },

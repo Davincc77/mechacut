@@ -1,0 +1,10 @@
+{
+  "name": "agent_tooloverlap_head64_collapse_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {"name": "mcp__4e9e25f1-b480-40f3-ba8d-a792f8f6ff07__get_deployment_logs_for_production"},
+      {"name": "mcp__4e9e25f1-b480-40f3-ba8d-a792f8f6ff07__get_deployment_logs_for_preview"}
+    ]
+  }
+}

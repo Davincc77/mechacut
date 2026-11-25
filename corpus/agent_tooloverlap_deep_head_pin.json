@@ -1,0 +1,16 @@
+{
+  "name": "agent_tooloverlap_deep_head_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {
+        "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",
+        "server": "gw"
+      },
+      {
+        "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2",
+        "server": "gw"
+      }
+    ]
+  }
+}

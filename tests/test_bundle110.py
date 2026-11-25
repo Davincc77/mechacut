@@ -398,7 +398,7 @@ def test_endpoint_inattendu_refuse():
 # --------------------------------------------------------- manifest & sœurs
 def test_manifest_182_et_ligne_lu():
     body = client.get("/agent/manifest").text
-    assert "182 deterministic transforms + 9 recipes" in body
+    assert "183 deterministic transforms + 9 recipes" in body
     assert "shop_soldes_lu  /api/v1/shop/soldes-lu  free" in body
     assert len(body.encode("utf-8")) < 9000
 
@@ -431,7 +431,9 @@ def test_onze_pins_soldeslu_adds_only():
     assert sum(1 for k in lu if k.endswith("refuse")) == 5
     # adds-only global : 344 + 11 = 355, la pin soeur REMPLACEE (pas
     # retiree) porte son contrat neuf sous le MÊME nom.
-    assert len(g) == 355
+    # b111 relève à 364 : +9 agent_tooloverlap (adds-only, zero retirée,
+    # vecteurs publics — le contrat des sœurs n'a pas bougé d'un octet).
+    assert len(g) == 364
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

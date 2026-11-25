@@ -1,0 +1,10 @@
+{
+  "name": "agent_tooloverlap_shadow_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {"name": "get_file", "server": "drive"},
+      {"name": "get_file", "server": "mail"}
+    ]
+  }
+}

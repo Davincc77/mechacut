@@ -38,6 +38,7 @@ def test_tier_tables_are_exact():
                                    "/api/v1/agent/context-tax": "500",
                                    "/api/v1/agent/cost-diff": "500",
                                    "/api/v1/agent/tool-trim": "500",
+                                   "/api/v1/agent/tool-overlap": "500",
                                    "/api/v1/csv/fix": "500",
                                    "/api/v1/csv/types": "500",
                                    "/api/v1/format/convert": "500",
@@ -122,5 +123,5 @@ def test_bundle2_tiers(paywall):
 def test_pricing_info_publishes_caps(paywall):
     body = client.get("/").json()
     info = body["payments"]
-    assert len(info["capped_routes"]) == 23    # b107 vérifié : shop/withdrawal reste 🟢 FREE — entrée courte (dates), comme return-deadline et les sœurs soldes, pas un collage ; +1 24-11 tard: agent/tool-trim (listing collé, 🟡 comme les deux sœurs) ; +1 24-11: agent/cost-diff (deux listings collés, 🟡) ; 21 agent/context-tax ; 20 = table/sql_dump
+    assert len(info["capped_routes"]) == 24    # b111 : +1 agent/tool-overlap (noms colles, 🟡 comme les trois sœurs) ; b107 vérifié : shop/withdrawal reste 🟢 FREE — entrée courte (dates), comme return-deadline et les sœurs soldes, pas un collage ; +1 24-11 tard: agent/tool-trim (listing collé, 🟡 comme les deux sœurs) ; +1 24-11: agent/cost-diff (deux listings collés, 🟡) ; 21 agent/context-tax ; 20 = table/sql_dump
     assert "32768" in info["mode"]

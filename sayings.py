@@ -82,6 +82,13 @@ SAY = {
               "tenir, et combien ça rend ?",
         "pt": "115 ferramentas, janela 200k — quais desligar para "
               "caber, e quanto eu economizo?"},
+    "/api/v1/agent/tool-overlap": {
+        "en": "two servers expose get_file and my gateway prefix is "
+              "long — which tool silently vanished from VS Code?",
+        "fr": "deux serveurs exposent get_file, mon préfixe gateway "
+              "est long — quel outil a silencieusement disparu ?",
+        "pt": "dois servidores expõem get_file e meu prefixo gateway "
+              "é longo — qual ferramenta sumiu sem aviso?"},
     "/api/v1/shop/withdrawal": {
         "en": "parcel arrived Tuesday — what is the real last day "
               "to change my mind, weekends and holidays counted?",

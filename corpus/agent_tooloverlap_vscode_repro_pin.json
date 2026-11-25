@@ -1,0 +1,13 @@
+{
+  "name": "agent_tooloverlap_vscode_repro_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {"name": "Long_server_Name_For_Gateway-get_resource_details", "server": "litellm-gw-01"},
+      {"name": "Long_server_Name_For_Gateway-get_resource_stats", "server": "litellm-gw-01"},
+      {"name": "Long_server_Name_For_Gateway-get_resource_status", "server": "litellm-gw-01"},
+      {"name": "Long_server_Name_For_Gateway-list_resources", "server": "litellm-gw-01"},
+      {"name": "Long_server_Name_For_Gateway-list_zones", "server": "litellm-gw-01"}
+    ]
+  }
+}

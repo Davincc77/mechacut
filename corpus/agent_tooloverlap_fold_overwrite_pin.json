@@ -1,0 +1,14 @@
+{
+  "name": "agent_tooloverlap_fold_overwrite_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {
+        "name": "mcp_report_xxxxxxxxxxxxxxxxxxxxxMIDDLEonetail_shared_0123456789abcdefghij"
+      },
+      {
+        "name": "mcp_report_xxxxxxxxxxxxxxxxxxxxxMIDDLEtwotail_shared_0123456789abcdefghij"
+      }
+    ]
+  }
+}

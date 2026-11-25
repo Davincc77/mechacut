@@ -1,0 +1,10 @@
+{
+  "name": "agent_tooloverlap_sanitize_pin",
+  "path": "/api/v1/agent/tool-overlap",
+  "body": {
+    "tools": [
+      {"name": "user.getData"},
+      {"name": "user_getData"}
+    ]
+  }
+}
