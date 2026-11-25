@@ -417,15 +417,32 @@ CASES = [
     # sa propre langue d'adjectif tue la ligne (trou « alemanh » sans
     # « allemand » corrigé ce cycle, racines au veto)
     ("rétractation colis allemagne 14 jours", None),
-    # DOULEURS PÊCHES NON ENCORE FERMÉES (consignées à la file — la
-    # machine ne ment pas pour faire vert) :
-    # brésil : question de DROIT (CDC art. 49, 7 jours, non rejoué)
-    # qui route la fenêtre enseigne — WRONG attendu, fermé au cycle
-    # qui posera le veto droit-fenêtre.
+    # CLASSE b109 — les DEUX OVERMATCH pêchés (06h13/07h44) sont
+    # FERMÉS par le veto droit-fenêtre : ils voyagent désormais en
+    # L leurres — un leurre qui meurt vide est une promesse tenue.
+    # brésil : question de DROIT (CDC art. 49, 7 jours, non rejoué
+    # chez nous) qui routait la fenêtre enseigne US — plus rien.
     ("retour brésil 7 jours arrependimento prazo", None),
     # idem EN : « withdrawal germany ... » ne doit rien prescrire —
-    # l'Allemagne est hors closed set.
+    # l'Allemagne est hors des deux tables américaines.
     ("withdrawal germany online order deadline", None),
+    # DOULEURS DU LOT b109 — aiguilles x3 langues : « mon id est
+    # listée mais meurt en appel batch / mon embedding répond 400
+    # en chat » doit ROUTER agent_modelid (la porte nommée est le
+    # produit). Corpus formulé depuis les issues citées dans le
+    # module (openclaw #20522, litellm #37271, V23, HN 49796140).
+    ("model id not found 404 batch litellm", "agent_modelid"),
+    ("embedding model returns error in chat gateway", "agent_modelid"),
+    ("id modelo introuvable 404 appel batch openrouter",
+     "agent_modelid"),
+    ("modelo listado retorna erro no chat embeddings gateway",
+     "agent_modelid"),
+    # leurres de la classe : un vrai json_map batch ne doit PAS
+    # partir vers l'audit d'ids, et un vrai retour US nomme son
+    # marché sans mot étranger.
+    ("map every item of an array batch style", "json_map"),
+    ("walmart return deadline january 31", "shop_return_deadline"),
+    ("walmart return indiana receipt", "shop_return_deadline"),
 ]
 
 

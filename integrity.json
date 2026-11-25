@@ -411,6 +411,52 @@
   {
    "body": {
     "catalog": [
+     "anthropic/claude-sonnet-5.5:batch",
+     "openai/gpt-6-sol:batch",
+     "moonshotai/kimi-k3.1-pro:batch"
+    ],
+    "ids": [
+     "anthropic/claude-sonnet-5.5:batch",
+     "openai/gpt-6-sol:batch",
+     "moonshotai/kimi-k3.1-pro:batch"
+    ]
+   },
+   "name": "agent_modelid_batch_mirage_trio",
+   "path": "/api/v1/agent/modelid",
+   "sha256": "3f7cac95cd7e8f1301a3ba1e9c93649860b609700ab47bbacd45e5ddeceae4ec",
+   "status": 200
+  },
+  {
+   "body": {
+    "catalog": [
+     "google/gemini-embedding-001:batch"
+    ],
+    "ids": [
+     "google/gemini-embedding-001:batch"
+    ]
+   },
+   "name": "agent_modelid_embedding_batch_named",
+   "path": "/api/v1/agent/modelid",
+   "sha256": "59ee354896d780c90404a7d0cf9cdd8cd508d97ec1384911b086cfa3e9ecb0ee",
+   "status": 200
+  },
+  {
+   "body": {
+    "catalog": [
+     "black-forest-labs/flux.2-pro:batch"
+    ],
+    "ids": [
+     "black-forest-labs/flux.2-pro:batch"
+    ]
+   },
+   "name": "agent_modelid_image_batch_clash",
+   "path": "/api/v1/agent/modelid",
+   "sha256": "2306ad8707f622bb35a224365bfb08cc407b3fd19055684f6676d4302a70a96a",
+   "status": 200
+  },
+  {
+   "body": {
+    "catalog": [
      "openai/gpt-5.2"
     ],
     "ids": [
@@ -489,7 +535,7 @@
    },
    "name": "agent_modelid_v23_form_not_invocable",
    "path": "/api/v1/agent/modelid",
-   "sha256": "dfb7cbb5d7d190d829ff52d5859b26ba74bd4d6e973f3aeef136d84f762b1e9f",
+   "sha256": "f5d8ccd653fa34a160cdf0db8a7681da74bab2ef58a35f591e5134cbf196069e",
    "status": 200
   },
   {

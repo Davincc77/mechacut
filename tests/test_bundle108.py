@@ -397,7 +397,9 @@ def test_ten_new_pins_are_replayable():
     # contrat PAR CONCEPTION, gate paye ; il n'est pas efface.
     assert g["shop_withdrawal_be_refuse_pin"].startswith("200:")
     # 331 pins vivants + 10 neufs, adds-only : RIEN perdu.
-    assert len(g) == 341
+    # b109 relève ce total global : 341 + 3 dialectes neufs (adds-
+    # only, la pin V23 remplacee PAR CONCEPTION comme celle de b108).
+    assert len(g) == 344
 
 
 def test_fr_response_byte_contract():

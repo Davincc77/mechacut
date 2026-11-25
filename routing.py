@@ -648,7 +648,7 @@ TABLE = (
      "apply closed case-and-number ops to every item of an array",
      "map array list each element transform over items bulk shape list of"
      "parcourir liste chaque transformer elemente mapear lista cada"
-     " array of objects batch style"),
+     " array of objects style"),
     ("num_fx", "/api/v1/num/fx", "numbers",
      "convert currency with YOUR explicit rate: exact Decimal, ISO minor units",
      "currency convert fx exchange usd eur brl jpy money transfer price "
@@ -1035,7 +1035,8 @@ TABLE = (
      "model id modelid litellm openrouter gateway prefix prefixe "
      "prefixo not found invalid identifier alias catalog annuaire "
      "catalogo erreur config agent nome modelo catalogo "
-     "identificador inexistente errado vierge tiret underscore"),
+     "identificador inexistente errado vierge tiret underscore "
+     "batch embedding"),
     ("food_poultry", "/api/v1/food/poultry", "dates",
      "turkey thaw & roast window, USDA FSIS tables, ISO clock as "
      "argument — never wall clock, never invented numbers",
@@ -1481,6 +1482,49 @@ def route(query, top=5):
                   "genev", "zurich", "amsterdam", "berlin",
                   "madrid", "lisbon", "dublin")
     V_SOLD_EXACT = {"uk", "gb", "usa", "ie"}
+    # CLASSE b109 — veto DROIT-FENÊTRE. Deux OVERMATCH pêchés par mon
+    # propre radar (scans 06h13 et 07h44, suivis, jamais niés) :
+    # « retour brésil 7 jours arrependimento prazo » routait
+    # shop_return_deadline (score 6, retour+prazo) — la table ne
+    # joue QUE les marchés publiés US/UK/FR ; nommer le Brésil (ou
+    # son droit : « arrependimento » = CDC art. 49, sept jours,
+    # AUTRE horloge) ne doit rien prescrire. « withdrawal germany
+    # online order deadline » routait shop_shipping_deadline (score
+    # 4, le « deadline » de purpose) — sa table est USPS/UPS/FEDEX,
+    # nommer l'Allemagne (ou tout territoire hors table) la tue.
+    # Le module sait refuser par nom ; c'est le ROUTEUR qu'on
+    # dresse (leçon b100/b102/b103, même classe, deux tables neuves).
+    # RACINES fermées ; les pays DÉJÀ dans la table n'y entrent pas
+    # (US/UK/FR vivent pour return-deadline, US seul pour shipping).
+    V_RTN_OUT = ("brasil", "brazil", "brasileir", "arrepend",
+                 "german", "deutsch", "aleman", "allemagne",
+                 "allemand", "italia", "italie", "espag", "portug",
+                 "angola", "mozambic", "japan", "japon", "china",
+                 "chine", "korea", "coree", "bresil", "australie",
+                 "australia", "mexic", "canad", "quebe", "ontario",
+                 "russie", "russia", "maroc", "algerie", "tunisie",
+                 "senegal", "suede", "norve", "belg", "luxemb",
+                 "suiss", "irlande", "irlandais", "dublin",
+                 "amsterdam", "berlin", "tokyo", "madrid", "lisbon",
+                 "sydney", "montreal")
+    # EXACTS : « india » ne peut pas être une RACINE — Indiana est
+    # un État US et la table retour le joue ( Walmart retourne en
+    # Indiana comme partout US ). Idem pour aucun mot de la liste
+    # ci-dessus qui ne coupe un toponyme américain.
+    V_RTN_EXACT = {"india"}
+    # V_SHIP_OUT : la table shipping est US SEULE — les mots US n'y
+    # entrent évidemment pas (tuer « ship to the United States by
+    # Christmas » serait une régression d'honnête, leçon b81 des
+    # mots trop courants rejouée à l'envers). Entrent : UK, FR et
+    # tout le reste de V_RTN_OUT. PAS de villes FR/UK : « paris »
+    # est aussi une ville du Texas, « london » aussi une ville de
+    # l'Ontario — les mots ANGLAIS/FR « brit/england/france »
+    # portent la juridiction sans ces pièges (leçon V_RTN_EXACT).
+    V_SHIP_OUT = V_RTN_OUT + ("royaume", "england", "angleterre",
+                              "scotland", "ecoss", "wales", "brit",
+                              "uk", "france", "francais", "francaise",
+                              "frances", "french")
+    vrtout = vshipout = False
     # CLASSE b105 — la Belgique a SON outil (/shop/soldes-be) : les
     # mots belges tuent toujours la fenetre FR (vsoldes_out, rien ne
     # change pour elle) mais ne tuent plus l'outil BE ; a l'envers,
@@ -1511,6 +1555,17 @@ def route(query, top=5):
             foreign = True
         if t.startswith(V_OUT) or t in V_OUT_EXACT:
             vforeign = True
+        # b109 — deux orthographes du Brésil manquaient aux deux
+        # filets : « bresil » (FR) et « brazil » (EN) n'étaient pas
+        # dans FOREIGN, « arrependimento » (le DROIT nommé, CDC 49)
+        # ne tuait pas la ligne withdrawal. Racines fermées, chaque
+        # graphie voyage par son nom (leçon b108 rejouée).
+        if t.startswith(("bresil", "arrepend")) or t in ("brazil",):
+            vforeign = True
+        if t.startswith(V_RTN_OUT) or t in V_RTN_EXACT:
+            vrtout = True
+        if t.startswith(V_SHIP_OUT):
+            vshipout = True
         if t.startswith(V_IN_P) or t in V_IN:
             vtabled = True
         if t.startswith(V_SOLD_OUT) or t in V_SOLD_EXACT:
@@ -1556,6 +1611,12 @@ def route(query, top=5):
                 and not voucher_ok:
             continue
         if name == "shop_soldes_window" and vsoldes_out:
+            continue
+        # CLASSE b109 — veto DROIT-FENÊTRE sur les deux tables
+        # américaines (radar 06h13/07h44, pêchés, suivis, réparés).
+        if name == "shop_return_deadline" and vrtout:
+            continue
+        if name == "shop_shipping_deadline" and vshipout:
             continue
         if name == "shop_soldes_be" and (vsoldes_out or vtabled) \
                 and not vbename:

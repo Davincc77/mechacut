@@ -20,7 +20,14 @@ your agent's model-id strings against a pasted catalog: closed grammar
 CASE_DRIFT, PUNCT_DRIFT, VARIANT_DECOR — did-you-mean at a NAMED
 Levenshtein≤3 threshold, and the response itself swears that OK certifies
 shape, never that the GET answers: the V23 incident, written as doctrine
-into the bytes); `money/unitprice` (unit price and shrinkflation with
+into the bytes — and since v1.30 it NAMES THE DOOR: dialect tokens read
+from the gateway docs replayed 25-Nov give {chat, embedding, image} ×
+sync/batch doors, image+`:batch` is called a CLASH ("Batch returns text
+and embeddings only"), embedding+`:batch` rides its two named
+restrictions (provider refused, nested input 400), and every
+dialect-carrying entry wears the badge "listed in the catalog, NOT
+proven invocable" — the radar's standing batch mirages, named instead
+of rediscovered); `money/unitprice` (unit price and shrinkflation with
 the DENOMINATOR NAMED: 32→28 fl oz at the same sticker is −12.5% of
 product but +14.2857% per ounce — 1/7, never one headline number;
 "two-for-$7" of 15 oz jars pays 40.3509% MORE per ounce than the big

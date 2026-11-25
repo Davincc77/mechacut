@@ -1,0 +1,8 @@
+{
+ "name": "agent_modelid_image_batch_clash",
+ "path": "/api/v1/agent/modelid",
+ "body": {
+  "ids": ["black-forest-labs/flux.2-pro:batch"],
+  "catalog": ["black-forest-labs/flux.2-pro:batch"]
+ }
+}

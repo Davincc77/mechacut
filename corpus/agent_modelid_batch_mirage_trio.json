@@ -1,0 +1,12 @@
+{
+ "name": "agent_modelid_batch_mirage_trio",
+ "path": "/api/v1/agent/modelid",
+ "body": {
+  "ids": ["anthropic/claude-sonnet-5.5:batch",
+          "openai/gpt-6-sol:batch",
+          "moonshotai/kimi-k3.1-pro:batch"],
+  "catalog": ["anthropic/claude-sonnet-5.5:batch",
+              "openai/gpt-6-sol:batch",
+              "moonshotai/kimi-k3.1-pro:batch"]
+ }
+}

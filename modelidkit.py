@@ -68,6 +68,7 @@ suggestion si la distance dépasse le seuil nommé — le retrait n'est
 byte-exact que dans un étage, et un audit qui commence à composer
 les règles recommence à déviner.
 """
+import re
 import string
 
 GRAMMAR = "org/name[:variant|#variant]"
@@ -113,6 +114,142 @@ VARIANT_CATALOG = {
                  "currently offered by no model"),
 }
 VARIANT_ROUTING = ("nitro", "floor", "exacto", "online")
+
+# --------------------------------------------------------------- DIALECTES
+# bundle109 — le champ que la grammaire peut jurer SANS ping : QUELLE
+# PORTE parle cet id. Douleur mesurée (miroir catalogue radar 05h04
+# + 23-nov, incidents cités plus haut) : un id « listé » meurt en 404
+# ou 400 quand l'appelant frappe la mauvaise porte — anthropic/
+# claude-sonnet-5.5:batch pingé en chat sync, gemini-embedding-001:
+# batch pingé comme un chat, sentence-transformers/all-minilm-l6-v2
+# renvoyé http-400 en /chat (scan bundle 72). Le petit modèle relit
+# le catalogue et ne voit pas le DIALECTE. Preuve fraîche du 25-nov :
+# HN 49796140 (« all their API routes for non existing models return
+# 404 and when there's a new model it returns 403 ») + HN 49554520
+# (Cerebras : « Model does not exist… when the error is really about
+# billing ») — la porte menteuse s'habille en id menteur.
+#
+# TABLE FERMÉE, sourcée, zéro extrapolation — chaque token vient d'un
+# id REJOUÉ dans la doc publique OpenRouter ce cycle (25-11, gate
+# batch-quickstart + guides/features/batch-api + multimodal/
+# image-generation + api_reference/embeddings) ou d'un id MESURÉ par
+# notre propre radar. Pas d'audio dans la table : sa doc n'a pas été
+# rejouée ce cycle, et une table « de mémoire » est interdite
+# (question 3). La table GRANDIT d'observations nommées, jamais
+# d'indices d'indices.
+DIALECT_EMBEDDING = frozenset(("embedding", "embed"))
+DIALECT_IMAGE = frozenset(("image", "imagen", "flux", "seedream",
+                           "diffusion", "dall", "ideogram", "recraft"))
+DIALECT_TOKENS = ("embedding", "image")  # ordre de priorité nommé
+
+# Les PHRASES de porte — verbatim des règles publiées, citées dans
+# la réponse comme la guarantee l'y oblige. « The Batch API takes
+# the base model slug and resolves the :batch entry itself » ;
+# endpoints batch acceptés : /v1/chat/completions, /v1/responses,
+# /v1/messages, /v1/embeddings ; « Batch returns text and embeddings
+# only » → l'image n'a PAS de porte batch (le clash est la règle,
+# pas une humeur). Embeddings batch : « Embeddings batches do not
+# accept provider » + « Nested input through the Batch API → 400 ».
+_SYNC_CHAT_BASE = (
+    "no sync chat endpoint on the suffixed id — the sync door is the "
+    "BASE slug; the Batch API takes the base model slug and resolves "
+    "the :batch entry itself (published variants rule)")
+_SYNC_EMBEDDING = (
+    "this id speaks embeddings, not chat — its sync door is "
+    "/v1/embeddings; a chat call on it answers 400 (measured, radar "
+    "bundle 72: all-minilm-l6-v2) — the catalog mixes types without "
+    "saying so in the id")
+_SYNC_IMAGE = (
+    "this id speaks image output — its door is the gateway's "
+    "dedicated Image API (image-generation guide, 25-nov: flux, "
+    "seedream, gpt-image listed there, not in chat); "
+    "/v1/chat/completions is not it")
+_BATCH_YES = (
+    "the batch door exists: the Batch API takes the base slug and "
+    "resolves :batch itself; one model and one endpoint per batch; "
+    "24h window")
+_BATCH_EMBEDDING_NOTES = (
+    "embeddings batches are accepted (/v1/embeddings is a listed "
+    "batch endpoint) but two named restrictions ride: provider is "
+    "not accepted, and nested document-chunk input returns 400")
+_BATCH_NONE = (
+    "CLASH — Batch returns text and embeddings only (published "
+    "limitation, 25-nov): an image-dialect id has NO batch door; a "
+    ":batch listing on it is the V23 mirage trap, refuse to ping it "
+    "trustingly")
+
+# Le BADGE — la thèse V23 en une ligne, posée sur tout résultat qui
+# porte un dialecte (et seulement ceux-là). « Listed » est un CRAYON
+# de catalogue ; « invocable » est un PING ; entre les deux, la
+# grammaire nomme la porte sans jamais jurer l'appel. Preuve fraîche
+# 25-nov : HN 49796140 (404 pour tout id absent, 403 pour tout id
+# NOUVEAU — le code HTTP ment par omission chez le fournisseur
+# comme chez le gateway).
+BADGE_LISTED_NOT_INVOCABLE = (
+    "listed in the catalog, NOT proven invocable — the batch "
+    "door is /api/v1/batch (24h window, base slug), never a "
+    "sync chat call on the :batch id")
+
+
+def _name_tokens(raw):
+    """Tokens du SEGMENT DE NOM (dernier slash), minuscules, coupés
+    sur tout ce qui n'est pas alphanumérique. L'org ne vote pas :
+    « bytedance-seed/seedream-4.5 » parle image par son NOM."""
+    base = raw
+    mark = min((x for x in (base.find(":"), base.find("#")) if x != -1),
+               default=-1)
+    if mark != -1:
+        base = base[:mark]
+    seg = base.rsplit("/", 1)[-1]
+    return set(re.split(r"[^a-z0-9]+", seg.lower()))
+
+
+def _dialect_of(raw):
+    """Dialecte de CONTENU par tokens du nom, priorité nommée :
+    embedding avant image (« multimodal-embedding » est un
+    embedding, pas une image)."""
+    toks = _name_tokens(raw)
+    if toks & DIALECT_EMBEDDING:
+        return "embedding"
+    if toks & DIALECT_IMAGE:
+        return "image"
+    return "chat"
+
+
+def _dialect_info(raw, vinfo):
+    """Champ DIALECTE — émis quand la grammaire a quelque chose à
+    dire que le déaut masquerait : id de dialecte non-chat (la
+    mauvaise porte est le pain, quel que soit le suffixe) OU porteur
+    du suffixe :batch (la porte batch est une porte, pas un modèle).
+    Un chat sans suffixe batch ne gagne AUCUN champ : les pins
+    existantes restent octet pour octet (précédent b68)."""
+    content = _dialect_of(raw)
+    batch = vinfo is not None and vinfo["class"] == "catalog" \
+        and vinfo["suffix"].lower() == "batch"
+    if content == "chat" and not batch:
+        return None
+    out = {"content": content}  # type: dict
+    if content == "embedding":
+        out["sync"] = _SYNC_EMBEDDING
+    elif content == "image":
+        out["sync"] = _SYNC_IMAGE
+    else:
+        out["sync"] = _SYNC_CHAT_BASE
+    if batch:
+        if content == "image":
+            out["batch"] = _BATCH_NONE
+            out["clash"] = True
+        elif content == "embedding":
+            out["batch"] = _BATCH_YES + " — " + _BATCH_EMBEDDING_NOTES
+            out["clash"] = False
+        else:
+            out["batch"] = _BATCH_YES
+            out["clash"] = False
+    else:
+        out["batch"] = ("not batched: this id carries no batch "
+                        "variant — sync door only")
+        out["clash"] = False
+    return out
 
 VERDICTS = ("OK", "EMPTY", "HAS_SPACE", "BAD_CHAR", "BAD_VARIANT",
             "BAD_SLASH", "NO_ORG", "PREFIX_KEPT", "CASE_DRIFT",
@@ -323,6 +460,10 @@ def run_modelid(args):
         info = _variant_info(raw)
         if info is not None:
             entry["variant"] = info
+        dinfo = _dialect_info(raw, info)
+        if dinfo is not None:
+            entry["dialect"] = dinfo
+            entry["badge"] = BADGE_LISTED_NOT_INVOCABLE
         results.append(entry)
     return {
         "grammar": GRAMMAR,

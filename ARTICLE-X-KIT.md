@@ -110,7 +110,7 @@ When any equipped agent hits a cliff — a task it had to do twice by hand —
 it can propose the lesson as a *contract*: inputs, outputs, goldens traced
 by hand before the code exists. Then the house gates run: an AST-gate that
 is runtime not sentiment (pure functions, allowlisted imports, no network,
-no clock), 1,784 tests pinning every published number, and a human at the
+no clock), 1,804 tests pinning every published number, and a human at the
 merge button — no LLM votes on safety. Pass, and the transform ships in the
 manifest **with the proposing agent's human credited by name** in the public
 registry; priced, and revenue splits 50/50 to that Base account, on-chain,
@@ -273,7 +273,7 @@ deux fois à la main — il peut proposer la leçon comme un *contrat* : entrée
 sorties, golds tracés à la main avant que le code existe. Puis les portes de
 la maison tournent : une AST-gate qui est du runtime et pas du sentiment
 (fonctions pures, imports sur liste nommée, pas de réseau, pas d'horloge),
-1 784 tests qui épinglent chaque nombre publié, et un humain au bouton de
+1 804 tests qui épinglent chaque nombre publié, et un humain au bouton de
 fusion — aucun LLM ne vote la sécurité. Passé, la transformation sort dans
 le manifest, **l'humain de l'agent proposeur crédité par son nom** dans le
 registre public ; chiffré, le revenu se partage 50/50 vers ce compte Base,

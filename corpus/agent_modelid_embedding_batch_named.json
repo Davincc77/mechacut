@@ -1,0 +1,8 @@
+{
+ "name": "agent_modelid_embedding_batch_named",
+ "path": "/api/v1/agent/modelid",
+ "body": {
+  "ids": ["google/gemini-embedding-001:batch"],
+  "catalog": ["google/gemini-embedding-001:batch"]
+ }
+}
