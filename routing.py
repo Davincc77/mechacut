@@ -1110,11 +1110,13 @@ TABLE = (
      "solded occasion distance online "
      "retractation retracter retracte retractes delai changer avis "
      "quatorze jours reception recu colis distance internet solde "
+     "ligne commande change avis decision retracter "
      "occasion prorogation feries date limite loi "
      "retractation france "
      "retratacao retratacoes desistencia desisto desiste arrependimento "
      "francia prazo quatorze dias desistir "
-     "lei francesa feriado fim de semana contagem"),
+     "lei francesa feriado fim de semana contagem "
+     "encomenda recebida compra desistencia posso terça terca"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)

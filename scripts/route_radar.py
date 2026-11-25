@@ -380,6 +380,24 @@ CASES = [
      "agent_tooltrim"),
     ("je veux débrancher mon lave-vaisselle", None),
     ("tell me a joke about trimming hedges", None),
+
+    # CLASSE b107 — « colis reçu mardi, jusqu'à quand je me rétracte » :
+    # la douleur HUMAINE verbatim (BEE SECURE LU, 24-11) ferme ses
+    # aiguilles x3 langues AVANT que le lot ne se dise livré. Gardes :
+    # le retour ENSEIGNE reste chez return-deadline, la garantie chez
+    # legal-guarantee ; la rétractation IMMOBILIÈRE (autre loi, CCH
+    # L312-12, 10 jours — pas notre section 6) et la blague ne
+    # prescrivent RIEN.
+    ("colis reçu mardi — jusqu'à quelle date exacte puis-je me "
+     "rétracter, samedi et jours fériés comptés", "shop_withdrawal"),
+    ("j'ai commandé en ligne, changement d'avis : 14 jours ou pas ?",
+     "shop_withdrawal"),
+    ("parcel arrived tuesday — until when can I withdraw from the "
+     "online order", "shop_withdrawal"),
+    ("até quando posso desistir da compra — encomenda recebida terça",
+     "shop_withdrawal"),
+    ("rétractation d'un achat immobilier signé chez le notaire", None),
+    ("raconte-moi une blague sur la rétractation", None),
     ("piada sobre desligar ferramentas", None),
 ]
 
