@@ -1070,7 +1070,7 @@ TEMPLATE = """<!DOCTYPE html>
       <div class="demo">
         <div class="dh"><span>{{demo.title}}</span></div>
         <div class="dr">
-          <input id="dexpr" value='{"value": 2.675, "decimals": 2}' spellcheck="false" aria-label="payload">
+          <input id="dexpr" value='{"value": 2.675, "places": 2}' spellcheck="false" aria-label="payload">
           <button id="drun" type="button">{{demo.run}}</button>
         </div>
         <pre id="dout" data-err="{{demo.err}}">{{demo.hint}}</pre>
