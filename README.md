@@ -5,7 +5,7 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 180 transforms + 9 named recipes as of v1.27.0, each with its tool card
+— 181 transforms + 9 named recipes as of v1.30.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
