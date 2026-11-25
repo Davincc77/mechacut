@@ -845,7 +845,11 @@ TEMPLATE = """<!DOCTYPE html>
     line-height: 1.6; -webkit-font-smoothing: antialiased; }
   .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
   header.top { display: flex; align-items: center; justify-content: space-between;
-    padding: 26px 0; border-bottom: 1px solid var(--line); }
+    padding: 26px 0; border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,10,12,.92); backdrop-filter: blur(8px); }
+  #prog { position: fixed; top: 0; left: 0; height: 2px;
+    background: var(--gold); width: 0; z-index: 60; }
   .brand { display: flex; align-items: center; gap: 12px;
     font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -.3px; }
   .brand svg { display: block; }
@@ -2828,11 +2832,9 @@ def catalog_grid(lang):
         purp = purp.replace("&", "&amp;").replace("<", "&lt;")
         cards.append(
             '<button class="tcard" data-pack="%s" data-tier="%s"%s'
-            ' data-tool="%s" data-hay="%s"><span class="tierdot" '
-            'title="%s %s — %s">%s'
+            ' data-tool="%s" data-hay="%s"><span class="tierdot">%s'
             '</span> <code>%s</code><span class="tp">%s</span></button>'
-            % (pack, tier, ' data-top="1"' if name in TOP10 else '', name, hay, BADGE[tier], TIER_CHIP[lang][tier],
-               TIER_RULE[lang][tier], BADGE[tier], name, purp))
+            % (pack, tier, ' data-top="1"' if name in TOP10 else '', name, hay, BADGE[tier], name, purp))
     packs = " · ".join('<a href="/SKILL-%s.md">%s</a>' % (pk, pk)
                        for pk in routing.PACKS)
     return (
