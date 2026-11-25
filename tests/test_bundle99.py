@@ -262,4 +262,4 @@ def test_route_and_surfaces():
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 1,
                                   "method": "tools/list"})
     names = [t["name"] for t in r.json()["result"]["tools"]]
-    assert "shop_legal_guarantee" in names and len(names) == 185  # +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +shop_soldes_be bundle105 ; +agent_costdiff bundle104 ; 178 avec shop_soldes_window bundle103 ; 177 avec shop_gift_voucher bundle102 (le compteur avait DÉRIVÉ ici, pêché par le pytest complet du cycle 103) ; 176 avec agent_contexttax bundle101
+    assert "shop_legal_guarantee" in names and len(names) == 186  # +agent_mcplist bundle113 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +shop_soldes_be bundle105 ; +agent_costdiff bundle104 ; 178 avec shop_soldes_window bundle103 ; 177 avec shop_gift_voucher bundle102 (le compteur avait DÉRIVÉ ici, pêché par le pytest complet du cycle 103) ; 176 avec agent_contexttax bundle101

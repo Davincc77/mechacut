@@ -1,0 +1,20 @@
+{
+ "body": {
+  "declared_names": [
+   "first",
+   "second"
+  ],
+  "pages": [
+   {
+    "nextCursor": "page-two",
+    "tools": [
+     {
+      "name": "first"
+     }
+    ]
+   }
+  ]
+ },
+ "name": "agent_mcplist_anythingllm_pin",
+ "path": "/api/v1/agent/mcp-list-completeness"
+}

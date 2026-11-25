@@ -1,0 +1,21 @@
+{
+ "body": {
+  "pages": [
+   {
+    "nextCursor": "k1",
+    "tools": [
+     {
+      "name": "a"
+     }
+    ]
+   },
+   {
+    "nextCursor": "k2",
+    "request": "k1",
+    "tools": []
+   }
+  ]
+ },
+ "name": "agent_mcplist_empty_page_pin",
+ "path": "/api/v1/agent/mcp-list-completeness"
+}

@@ -1,0 +1,83 @@
+{
+ "body": {
+  "declared_names": [
+   "l01",
+   "l02",
+   "l03",
+   "l04",
+   "l05",
+   "l06",
+   "l07",
+   "l08",
+   "l09",
+   "l10",
+   "l11",
+   "l12",
+   "l13",
+   "l14",
+   "l15",
+   "r01",
+   "r02",
+   "r03",
+   "r04",
+   "r05",
+   "r06",
+   "r07",
+   "r08"
+  ],
+  "pages": [
+   {
+    "nextCursor": "cursor-two",
+    "tools": [
+     {
+      "name": "l01"
+     },
+     {
+      "name": "l02"
+     },
+     {
+      "name": "l03"
+     },
+     {
+      "name": "l04"
+     },
+     {
+      "name": "l05"
+     },
+     {
+      "name": "l06"
+     },
+     {
+      "name": "l07"
+     },
+     {
+      "name": "l08"
+     },
+     {
+      "name": "l09"
+     },
+     {
+      "name": "l10"
+     },
+     {
+      "name": "l11"
+     },
+     {
+      "name": "l12"
+     },
+     {
+      "name": "l13"
+     },
+     {
+      "name": "l14"
+     },
+     {
+      "name": "l15"
+     }
+    ]
+   }
+  ]
+ },
+ "name": "agent_mcplist_codex_laravel_pin",
+ "path": "/api/v1/agent/mcp-list-completeness"
+}

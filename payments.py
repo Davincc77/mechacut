@@ -85,6 +85,7 @@ CAP_ROUTES = {
     "/api/v1/agent/cost-diff": "500",
     "/api/v1/agent/tool-trim": "500",
     "/api/v1/agent/tool-overlap": "500",
+    "/api/v1/agent/mcp-list-completeness": "500",
     "/api/v1/json/patch": "500",
     "/api/v1/csv/fix": "500",
     "/api/v1/csv/types": "500",

@@ -92,6 +92,7 @@ POST /api/v1/shop/soldes-be year + season -> BELGIAN sale windows from art. VI.2
 POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the update: chars+token delta per tool, signed moved fields, global vs per-tool sum stated, FITS->OVERFLOWS transition named, $ at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/agent/tool-trim  pasted tools/list + budget -> WHICH tools to disconnect, idle-first closed ranking in exact fractions, re-count of the survivors at the sister's canon, FITS/STILL_OVER with the overage named, $ saved at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/agent/tool-overlap  pasted tool names (+ server keys) -> which TWO tools become ONE id in WHICH client (vscode cut+TAIL_ABORT, gemini-cli fold+OVERWRITE, head64 gateways), bare shadows, provider charset/length 400s, the min server-key rename IN CHARACTERS, GATE_STRICTER_THAN_API named (free under 32 KB, x402 above)
+POST /api/v1/agent/mcp-list-completeness  pasted tools/list pages -> is the listing COMPLETE: trailing cursor echoed, empty page/empty-string cursor do NOT end the scan (spec MUST, verbatim), repeated cursor named, missing tail COUNTED vs your declared number (free under 32 KB, x402 above)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/invoice/payment-due  invoice date + terms (net 30, 45 jours fin de mois, 30 business days, 2/10 net 30) -> the FOUR readings with the gap CHIFFRÉ; the roll rule NAMED per jurisdiction (bgb_193 defers SATURDAY by law, bfe_1971 defers bank holidays, FR invoice: NO statutory roll — the empty table is a read VERDICT, the clause decides; FR lettre de change: com_l511_79 -> next OUVRABLE day, Saturday counts); TARGET2 settlement layer (the rails close, the debt runs); L. 441-10 cap flag; gov.uk tables proclaimed 2026-2028 only (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
@@ -295,6 +296,7 @@ import contexttaxkit
 import costdiffkit
 import tooltrimkit
 import overlapkit
+import mclistkit
 import withdrawalkit
 import paymentduekit
 import evalkit
@@ -388,7 +390,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.34.4",
+    version="1.34.5",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -2453,6 +2455,35 @@ def run_agent_tool_overlap(args: dict):
 @app.post("/api/v1/agent/tool-overlap")
 def api_agent_tool_overlap(req: AgentToolOverlapRequest):
     body, err = run_agent_tool_overlap(req.model_dump())
+    return err if err else body
+
+
+class AgentMcpListCompleteRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    pages: List[Dict[str, Any]]
+    declared_count: Optional[int] = None
+    declared_names: Optional[List[str]] = None
+
+
+def run_agent_mcp_list_complete(args: dict):
+    try:
+        req = AgentMcpListCompleteRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = mclistkit.mcp_list_completeness(
+            req.pages, req.declared_count, req.declared_names)
+    except mclistkit.ListError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/mcp-list-completeness")
+def api_agent_mcp_list_complete(req: AgentMcpListCompleteRequest):
+    body, err = run_agent_mcp_list_complete(req.model_dump())
     return err if err else body
 
 
@@ -7254,6 +7285,7 @@ TOOL_RUN = {
            "agent_costdiff": run_agent_cost_diff,
            "agent_tooltrim": run_agent_tool_trim,
            "agent_tooloverlap": run_agent_tool_overlap,
+           "agent_mcplist": run_agent_mcp_list_complete,
            "invoice_payment_due": run_invoice_payment_due,
            "shop_discount_audit": run_shop_discount_audit,
            "ledger_summary": run_ledger_summary,
@@ -11627,6 +11659,73 @@ MCP_TOOLS = [
                                    "vscode, gemini_cli, head64, "
                                    "openai, anthropic, gemini_api — "
                                    "default: all",
+                },
+            },
+        },
+    },
+    {
+        "name": "agent_mcplist",
+        "description": (
+            "Is your MCP tool listing COMPLETE — or did your client "
+            "stop at page one? Paste the tools/list pages exactly as "
+            "you fetched them (result objects or JSON-RPC envelopes; "
+            "a trace field 'request' per page checks the cursor "
+            "chain). Closed rules read from the spec, verbatim: a "
+            "MISSING nextCursor ends the scan, a present one — even "
+            "the empty string — does NOT (spec 2026-07-28 §Guidelines "
+            "3: 'an empty string is a valid cursor and thus MUST NOT "
+            "be treated as the end of results'); an empty page with a "
+            "cursor does not end it either (anything-llm PR #6937, "
+            "merged); a cursor that repeats is named, not followed. "
+            "Verdicts CLOSED, severity declared: STUCK_LOOP > "
+            "TRUNCATED_SILENT > UNSTABLE > COUNT_SHORT > COUNT_OVER > "
+            "INTERIM_LISTED > DUPED > COMPLETE. The pain is measured, "
+            "not preached: seven published client bugs (anything-llm "
+            "#6935, Codex #28858 — 'the other 2,642 are uncallable', "
+            "Claude Code #23179/#48126/#66537, Claude.ai web #87 "
+            "21-tools-sees-15, vercel/ai #19240, openwiki #565). "
+            "Pass declared_count or declared_names (from YOUR docs, "
+            "never fetched) and the gap becomes a NUMBER — with "
+            "names, the missing tools are LISTED, top 100, tail "
+            "folded and named. Repair is the exact cursor to resume "
+            "from — or a named refusal: a loop is not resumable, a "
+            "rejected -32602 cursor is dead, restart the scan. "
+            "Cursors are compared byte-for-byte and NEVER parsed "
+            "(spec opacity MUST — a cursor that looks like '64' is "
+            "not offset 64). resultType input_required pages are "
+            "flagged INTERIM: a scan ending on an interim result saw "
+            "nothing final. Sisters: mcp-audit says REJECTED (shape), "
+            "mcp-surface says CHANGED, tool-overlap says COLLIDED, "
+            "context-tax says HOW MUCH — NONE counts pages; a listing "
+            "can pass every one of them and still die at page two. "
+            "Free under 32 KB, x402 above."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["pages"],
+            "additionalProperties": False,
+            "properties": {
+                "pages": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                    "description": "tools/list results as fetched: "
+                                   "{tools[], nextCursor?, resultType?}"
+                                   " or {error:{code,message}}; "
+                                   "optional 'request' trace = the "
+                                   "cursor you sent for that page",
+                },
+                "declared_count": {
+                    "type": "integer",
+                    "description": "total tools the server CLAIMS "
+                                   "(docs, registry) — you paste it, "
+                                   "nothing is fetched",
+                },
+                "declared_names": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "the exact names you expect — the "
+                                   "missing tail is then LISTED, not "
+                                   "just counted",
                 },
             },
         },

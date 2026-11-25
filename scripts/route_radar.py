@@ -428,6 +428,27 @@ CASES = [
      "invoice_payment_due"),
     ("fatura net 30 vence no feriado qual a data real de pagamento",
      "invoice_payment_due"),
+    # CLASSE b113 — « TON CLIENT MCP A-T-IL VU TOUTES LES PAGES » :
+    # la douleur DEV rang 1 (seven published client bugs 2026, spec
+    # 2026-07-28 §Guidelines 3 lue verbatim). Aiguilles x3 langues +
+    # gardes fratrie : le COMBIEN coûte reste chez context-tax, le
+    # CHANGÉ chez mcp-surface, la COLLISION chez tool-overlap, la
+    # FORME chez mcp-audit — ICI on compte les PAGES. Leurres en
+    # forme b98 : « pages » sans MCP ne doit RIEN prescrire.
+    ("did my mcp client see all the tools pages nextcursor",
+     "agent_mcplist"),
+    ("tools list truncated at page 2 nextcursor uncallable",
+     "agent_mcplist"),
+    ("server declares 64 tools my agent only sees 15 pagination",
+     "agent_mcplist"),
+    ("mon agent ne voit que la premiere page des outils mcp",
+     "agent_mcplist"),
+    ("lista de ferramentas mcp cortada na pagina cursor",
+     "agent_mcplist"),
+    ("mcp paginacao faltam ferramentas depois da primeira pagina",
+     "agent_mcplist"),
+    ("tell me a story about pages of a book", None),
+    ("as paginas de um livro de receitas", None),
     ("combien de jours ouvrables entre le 5 et le 20 mars 2026",
      "date_calc"),  # PORTE-FAUX CONSIGNÉ : hors mes tags, cette
     # phrase est SILENCIEUSE (score sous le seuil) — elle n'a jamais

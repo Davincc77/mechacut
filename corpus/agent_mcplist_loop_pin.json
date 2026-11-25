@@ -1,0 +1,25 @@
+{
+ "body": {
+  "pages": [
+   {
+    "nextCursor": "loop",
+    "tools": [
+     {
+      "name": "a"
+     }
+    ]
+   },
+   {
+    "nextCursor": "loop",
+    "request": "loop",
+    "tools": [
+     {
+      "name": "b"
+     }
+    ]
+   }
+  ]
+ },
+ "name": "agent_mcplist_loop_pin",
+ "path": "/api/v1/agent/mcp-list-completeness"
+}

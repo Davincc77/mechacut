@@ -48,7 +48,8 @@ def test_manifest_token_budget():
     # per tool; the real ceiling is the byte budget + dense fold in the
     # routing module — line count is only a proxy, resized here as the
     # catalogue grows past its original 95-tool shape
-    assert len(lines) < 218   # b105 elague DES L'ANNONCE (consigne b104 tenue, marge FR 23 octets) : ligne de POINTEURS « detail: » FUSIONNEE dans la ligne de tete, contenu preserve — 217 lignes / 8 997 octets MESURES avec +shop_soldes_be ; precedents 217/8 953 (b104), 217/8 972 (b103), 217/8 966 (b102)
+    assert len(lines) < 218   # b113 MESURE : 209 lignes / 8 989 octets avec la ligne agent_mcplist — payée par élagage mesuré à claims constants (note b113 dans routing.py) ; precedent b112 208/8 994.
+    # b105 elague DES L'ANNONCE (consigne b104 tenue, marge FR 23 octets) : ligne de POINTEURS « detail: » FUSIONNEE dans la ligne de tete, contenu preserve — 217 lignes / 8 997 octets MESURES avec +shop_soldes_be ; precedents 217/8 953 (b104), 217/8 972 (b103), 217/8 966 (b102)
     # : 216 lignes MESUREES, 8 864 octets < 9 000 — le budget serre a
     # 136 octets : LE PROCHAIN OUTIL debranchera le dense-fold, a resizer
     # en mesure franche ou a couper une ligne de tete (decision de cycle,
@@ -104,7 +105,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 193   # +invoice_payment_due bundle112 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +shop_soldes_be bundle105 ; +agent_costdiff bundle104 ; +shop_soldes_window bundle103 ; 185 avec shop_gift_voucher bundle102 ; 184 avec agent_contexttax bundle101 ; 183 avec money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
+    assert seen == len(routing.TABLE) == 194   # +agent_mclistcomplete->agent_mcplist bundle113 ; +invoice_payment_due bundle112 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +shop_soldes_be bundle105 ; +agent_costdiff bundle104 ; +shop_soldes_window bundle103 ; 185 avec shop_gift_voucher bundle102 ; 184 avec agent_contexttax bundle101 ; 183 avec money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
     # (23-11 bundle96) ; était 179 avec agent_mcpaudit (bundle92)
 
 

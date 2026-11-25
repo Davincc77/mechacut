@@ -89,6 +89,15 @@ SAY = {
               "est long — quel outil a silencieusement disparu ?",
         "pt": "dois servidores expõem get_file e meu prefixo gateway "
               "é longo — qual ferramenta sumiu sem aviso?"},
+    "/api/v1/agent/mcp-list-completeness": {
+        "en": "my server declares 64 tools, Codex only sees the first "
+              "15 — did my client stop at page one, and what exactly "
+              "is missing?",
+        "fr": "mon serveur déclare 64 outils, mon agent n'en voit que "
+              "15 — mon client s'est-il arrêté à la page 1, et que me "
+              "manque-t-il exactement ?",
+        "pt": "meu servidor tem 64 ferramentas, meu agente só vê 15 "
+              "— o cliente parou na página 1; quais faltam?"},
     "/api/v1/shop/withdrawal": {
         "en": "parcel arrived Tuesday — what is the real last day "
               "to change my mind, weekends and holidays counted?",

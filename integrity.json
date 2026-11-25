@@ -341,6 +341,477 @@
   },
   {
    "body": {
+    "declared_names": [
+     "first",
+     "second"
+    ],
+    "pages": [
+     {
+      "nextCursor": "page-two",
+      "tools": [
+       {
+        "name": "first"
+       }
+      ]
+     }
+    ]
+   },
+   "name": "agent_mcplist_anythingllm_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "c25f6e8cec53f831a9b71da0cc0115d0782044ecce57d5e2b1e6c9856e1b9424",
+   "status": 200
+  },
+  {
+   "body": {
+    "pages": [
+     {
+      "nextCursor": "alpha",
+      "tools": [
+       {
+        "name": "a"
+       }
+      ]
+     },
+     {
+      "request": "omega",
+      "tools": [
+       {
+        "name": "b"
+       }
+      ]
+     }
+    ]
+   },
+   "name": "agent_mcplist_chain_break_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "d9295d57b34eaf9815796b5039e46dde8bb468feb76ef58f841e207b49d1f0ea",
+   "status": 200
+  },
+  {
+   "body": {
+    "declared_count": 138,
+    "pages": [
+     {
+      "nextCursor": "64",
+      "tools": [
+       {
+        "name": "t01"
+       },
+       {
+        "name": "t02"
+       },
+       {
+        "name": "t03"
+       },
+       {
+        "name": "t04"
+       },
+       {
+        "name": "t05"
+       },
+       {
+        "name": "t06"
+       },
+       {
+        "name": "t07"
+       },
+       {
+        "name": "t08"
+       },
+       {
+        "name": "t09"
+       },
+       {
+        "name": "t10"
+       },
+       {
+        "name": "t11"
+       },
+       {
+        "name": "t12"
+       },
+       {
+        "name": "t13"
+       },
+       {
+        "name": "t14"
+       },
+       {
+        "name": "t15"
+       },
+       {
+        "name": "t16"
+       },
+       {
+        "name": "t17"
+       },
+       {
+        "name": "t18"
+       },
+       {
+        "name": "t19"
+       },
+       {
+        "name": "t20"
+       },
+       {
+        "name": "t21"
+       },
+       {
+        "name": "t22"
+       },
+       {
+        "name": "t23"
+       },
+       {
+        "name": "t24"
+       },
+       {
+        "name": "t25"
+       },
+       {
+        "name": "t26"
+       },
+       {
+        "name": "t27"
+       },
+       {
+        "name": "t28"
+       },
+       {
+        "name": "t29"
+       },
+       {
+        "name": "t30"
+       },
+       {
+        "name": "t31"
+       },
+       {
+        "name": "t32"
+       },
+       {
+        "name": "t33"
+       },
+       {
+        "name": "t34"
+       },
+       {
+        "name": "t35"
+       },
+       {
+        "name": "t36"
+       },
+       {
+        "name": "t37"
+       },
+       {
+        "name": "t38"
+       },
+       {
+        "name": "t39"
+       },
+       {
+        "name": "t40"
+       },
+       {
+        "name": "t41"
+       },
+       {
+        "name": "t42"
+       },
+       {
+        "name": "t43"
+       },
+       {
+        "name": "t44"
+       },
+       {
+        "name": "t45"
+       },
+       {
+        "name": "t46"
+       },
+       {
+        "name": "t47"
+       },
+       {
+        "name": "t48"
+       },
+       {
+        "name": "t49"
+       },
+       {
+        "name": "t50"
+       },
+       {
+        "name": "t51"
+       },
+       {
+        "name": "t52"
+       },
+       {
+        "name": "t53"
+       },
+       {
+        "name": "t54"
+       },
+       {
+        "name": "t55"
+       },
+       {
+        "name": "t56"
+       },
+       {
+        "name": "t57"
+       },
+       {
+        "name": "t58"
+       },
+       {
+        "name": "t59"
+       },
+       {
+        "name": "t60"
+       },
+       {
+        "name": "t61"
+       },
+       {
+        "name": "t62"
+       },
+       {
+        "name": "t63"
+       },
+       {
+        "name": "t64"
+       }
+      ]
+     }
+    ]
+   },
+   "name": "agent_mcplist_codex_64_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "f8d37920d9ec80c0296811f3a87646b033eebd0c5d4af4e19af5a404fb7af825",
+   "status": 200
+  },
+  {
+   "body": {
+    "declared_names": [
+     "l01",
+     "l02",
+     "l03",
+     "l04",
+     "l05",
+     "l06",
+     "l07",
+     "l08",
+     "l09",
+     "l10",
+     "l11",
+     "l12",
+     "l13",
+     "l14",
+     "l15",
+     "r01",
+     "r02",
+     "r03",
+     "r04",
+     "r05",
+     "r06",
+     "r07",
+     "r08"
+    ],
+    "pages": [
+     {
+      "nextCursor": "cursor-two",
+      "tools": [
+       {
+        "name": "l01"
+       },
+       {
+        "name": "l02"
+       },
+       {
+        "name": "l03"
+       },
+       {
+        "name": "l04"
+       },
+       {
+        "name": "l05"
+       },
+       {
+        "name": "l06"
+       },
+       {
+        "name": "l07"
+       },
+       {
+        "name": "l08"
+       },
+       {
+        "name": "l09"
+       },
+       {
+        "name": "l10"
+       },
+       {
+        "name": "l11"
+       },
+       {
+        "name": "l12"
+       },
+       {
+        "name": "l13"
+       },
+       {
+        "name": "l14"
+       },
+       {
+        "name": "l15"
+       }
+      ]
+     }
+    ]
+   },
+   "name": "agent_mcplist_codex_laravel_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "e69dc98c8c769691fc37dbba4f174bfcdfa1324b504472bfc8d1cfb871c82e10",
+   "status": 200
+  },
+  {
+   "body": {
+    "pages": [
+     {
+      "nextCursor": "",
+      "tools": [
+       {
+        "name": "a"
+       },
+       {
+        "name": "b"
+       }
+      ]
+     }
+    ]
+   },
+   "name": "agent_mcplist_empty_cursor_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "0c9c1da5d2bb662d65eb6f9ccac476effd29e1a06a949ae69bf110a566207cba",
+   "status": 200
+  },
+  {
+   "body": {
+    "pages": [
+     {
+      "nextCursor": "k1",
+      "tools": [
+       {
+        "name": "a"
+       }
+      ]
+     },
+     {
+      "nextCursor": "k2",
+      "request": "k1",
+      "tools": []
+     }
+    ]
+   },
+   "name": "agent_mcplist_empty_page_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "af075b2014fbebabf648f5ac7476553a230f1ffb5e328fdc6123adef569e6d70",
+   "status": 200
+  },
+  {
+   "body": {
+    "pages": [
+     {
+      "nextCursor": "curs-err",
+      "tools": [
+       {
+        "name": "a"
+       }
+      ]
+     },
+     {
+      "error": {
+       "code": -32602,
+       "message": "Invalid cursor"
+      },
+      "request": "curs-err"
+     }
+    ]
+   },
+   "name": "agent_mcplist_error_cursor_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "0f19873a39b645e1b368404bf5f8a65b3a326bbdc06ba2e99a6d5031bd72d8ee",
+   "status": 200
+  },
+  {
+   "body": {
+    "pages": [
+     {
+      "nextCursor": "loop",
+      "tools": [
+       {
+        "name": "a"
+       }
+      ]
+     },
+     {
+      "nextCursor": "loop",
+      "request": "loop",
+      "tools": [
+       {
+        "name": "b"
+       }
+      ]
+     }
+    ]
+   },
+   "name": "agent_mcplist_loop_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "333916961bc836de52b1582fe7c19bf9e0d78255aa64e84e4c8f9f42b68720a2",
+   "status": 200
+  },
+  {
+   "body": {
+    "declared_names": [
+     "page1_tool",
+     "page2_tool_a",
+     "page2_tool_b"
+    ],
+    "pages": [
+     {
+      "nextCursor": "page-2",
+      "tools": [
+       {
+        "name": "page1_tool"
+       }
+      ]
+     },
+     {
+      "request": "page-2",
+      "tools": [
+       {
+        "name": "page2_tool_a"
+       },
+       {
+        "name": "page2_tool_b"
+       }
+      ]
+     }
+    ]
+   },
+   "name": "agent_mcplist_vercel_full_pin",
+   "path": "/api/v1/agent/mcp-list-completeness",
+   "sha256": "a1b25a11c70b2f9765fa4424f2228e681f0a580a20c6a6df7bdb1ae832171803",
+   "status": 200
+  },
+  {
+   "body": {
     "tools": [
      {
       "name": "a"

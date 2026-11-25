@@ -1,0 +1,24 @@
+{
+ "body": {
+  "pages": [
+   {
+    "nextCursor": "alpha",
+    "tools": [
+     {
+      "name": "a"
+     }
+    ]
+   },
+   {
+    "request": "omega",
+    "tools": [
+     {
+      "name": "b"
+     }
+    ]
+   }
+  ]
+ },
+ "name": "agent_mcplist_chain_break_pin",
+ "path": "/api/v1/agent/mcp-list-completeness"
+}

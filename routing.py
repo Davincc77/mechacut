@@ -287,6 +287,17 @@ TABLE = (
      "mauvais outil nomme "
      "colisao nomes ferramentas somem truncadas silencioso "
      "ferramenta errada atalho"),
+    ("agent_mcplist", "/api/v1/agent/mcp-list-completeness",
+     "checks",
+     "did your MCP client see every page: cursor rules replayed, the "
+     "tail counted vs your declared number",
+     "pagination paginate pages page cursor nextcursor truncated "
+     "incomplete uncallable undiscoverable missing saw every loop "
+     "repeated toolslist "
+     "pagination pages curseur liste outils tronquee incomplete "
+     "manquantes boucle "
+     "paginacao paginas cursor ferramentas ausentes truncada "
+     "incompleta laco"),
     ("invoice_payment_due", "/api/v1/invoice/payment-due", "dates",
      "the real invoice due date: four readings, roll rule named per "
      "law, TARGET2 settle layer",
@@ -1208,8 +1219,8 @@ def manifest_text(version):
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
-        + "tiers: free=keyless 30/min; cap=free<32KB then "
-          "x402; paid=x402 from 1. POSTs carry "
+        + "free=keyless 30/min; cap=free<32KB/x402; paid=x402 from 1. "
+          "POSTs carry "
           "sha256; 400s name field+expected; "
           "error IS repair prompt; refusals name "
           "readings. "
@@ -1253,10 +1264,9 @@ def manifest_text(version):
           # ; « storyboards, shot lists, breakdowns » en SLASHES.
           # Mesure b112 : 208 lignes / 8 99x octets — marge relevee
           # a l'annonce, jamais de memoire.
-          "pipelines: /api/v1/recipes, /api/v1/pipeline; "
-        "/route?q=words; "
-        "proposals: /proposals, /api/v1/agent/proposals; "
-        "not here: storyboards/shot lists/breakdowns "
+          "pipelines: /api/v1/recipes|pipeline; "
+        "proposals: /proposals|/api/v1/agent/proposals; "
+        "not here: storyboards/shotlists/breakdowns "
         "-> moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
         # debranche le dense-fold ou elague une ligne de tete ») :
@@ -1274,7 +1284,7 @@ def manifest_text(version):
         for pack in PACKS:
             if pack not in by_pack:
                 continue
-            ls.append("[%s]  /SKILL-%s.md" % (pack, pack))
+            ls.append("[%s] /SKILL-%s.md" % (pack, pack))
             for name, path, purpose in by_pack[pack]:
                 t = tier(path).split()[0]
                 ls.append("%s  %s  %s  %s" % (name, path, t, purpose)
@@ -1291,8 +1301,8 @@ def manifest_text(version):
         # lit), les deux pointeurs de purpose vivent, 217 lignes.
         body = render(False, None)
         ls = body.split("\n")
-        ls[0] += (" | dense fold (<8.8KB): purpose "
-                  "/route?q= or /tools/<name>.json")
+        ls[0] += (" | dense fold (<8.8KB): /route?q= or "
+                  "/tools/<name>.json")
         body = "\n".join(ls)
     return body + "# sha256=" + _sha(body.rstrip("\n")) + "\n"
 

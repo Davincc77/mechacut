@@ -1,0 +1,23 @@
+{
+ "body": {
+  "pages": [
+   {
+    "nextCursor": "curs-err",
+    "tools": [
+     {
+      "name": "a"
+     }
+    ]
+   },
+   {
+    "error": {
+     "code": -32602,
+     "message": "Invalid cursor"
+    },
+    "request": "curs-err"
+   }
+  ]
+ },
+ "name": "agent_mcplist_error_cursor_pin",
+ "path": "/api/v1/agent/mcp-list-completeness"
+}

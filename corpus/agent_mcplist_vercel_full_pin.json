@@ -1,0 +1,32 @@
+{
+ "body": {
+  "declared_names": [
+   "page1_tool",
+   "page2_tool_a",
+   "page2_tool_b"
+  ],
+  "pages": [
+   {
+    "nextCursor": "page-2",
+    "tools": [
+     {
+      "name": "page1_tool"
+     }
+    ]
+   },
+   {
+    "request": "page-2",
+    "tools": [
+     {
+      "name": "page2_tool_a"
+     },
+     {
+      "name": "page2_tool_b"
+     }
+    ]
+   }
+  ]
+ },
+ "name": "agent_mcplist_vercel_full_pin",
+ "path": "/api/v1/agent/mcp-list-completeness"
+}
