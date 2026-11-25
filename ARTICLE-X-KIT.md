@@ -5,11 +5,11 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 25-11 19h45: 185 transforms + 9 recipes,
-suite 1 952 passed 2 skipped, pins 383, manifest 209 lines / 8,990 bytes, prod
-v1.34.5 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b113: /agent/mcp-list-completeness, EN/FR parity held ;
-précédent b112 : 184 / 1 924 / 374 / 208 / 8,994 / v1.34.4). POST GATE: the catalog submission is public
+name, Git URL, or owner/repo). NUMBERS 25-11 22h35: 186 transforms + 9 recipes,
+suite 1 984 passed 2 skipped, pins 392, manifest 210 lines / 8,842 bytes, prod
+v1.35.0 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b114: /json/bigint, EN/FR parity held ;
+précédent b113 : 185 / 1 952 / 383 / 209 / 8,990 / v1.34.5). POST GATE: the catalog submission is public
 pull request NousResearch/hermes-agent#159281, open and awaiting human
 review; the admission paragraph cites it as under review. A watcher flips
 the paragraph and activates the one-word catalog line on merge day.)*
@@ -63,7 +63,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **185 deterministic transforms + 9 named recipes — and growing** — rounding, money
+  **186 deterministic transforms + 9 named recipes — and growing** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -222,7 +222,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **185 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
+  **186 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en
@@ -277,7 +277,7 @@ deux fois à la main — il peut proposer la leçon comme un *contrat* : entrée
 sorties, golds tracés à la main avant que le code existe. Puis les portes de
 la maison tournent : une AST-gate qui est du runtime et pas du sentiment
 (fonctions pures, imports sur liste nommée, pas de réseau, pas d'horloge),
-1 952 tests qui épinglent chaque nombre publié, et un humain au bouton de
+1 984 tests qui épinglent chaque nombre publié, et un humain au bouton de
 fusion — aucun LLM ne vote la sécurité. Passé, la transformation sort dans
 le manifest, **l'humain de l'agent proposeur crédité par son nom** dans le
 registre public ; chiffré, le revenu se partage 50/50 vers ce compte Base,
