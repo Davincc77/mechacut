@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 182 + 9, vérifiés live 25-11 10h55, prod 1.31.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 183 + 9, vérifiés live 25-11 13h35, prod 1.34.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -30,6 +30,20 @@ le pointeur de la sœur belge passe de « en file » à « vivent sous »), mani
 et le plafond landing redevient un contrat POUR LES TROIS LANGUES
 (FR 177 028 / EN 179 517 / PT 180 996, lus build-vs-prod identiques — levier
 structurel : haystack de recherche dédoublonné, plus ratissage à claim constant).
+(i) 25-11 13h35 : 182→183 (/agent/tool-overlap, bundle111 — QUELS DEUX OUTILS
+N'EN FONT QU'UN, DANS QUEL CLIENT : table fermée de grammars publiées, grammaires
+LUES À LA SOURCE — vscode (coupe 64 + ABORT de la suite alphabétique, le repro
+publié 5 outils → 2 listés rejoué en test), gemini-cli (fold head30+tail30,
+OVERWRITE dernier gagne), gateway head64 (coupe sans contrôle, production↔preview
+épinglé octet à octet), caps OpenAI 64 / Gemini API 128 lus dans leurs specs —
+l'asymétrie API-vs-client nommée GATE_STRICTER_THAN_API ; la correction en NOMBRE :
+min_server_key_len ou NO_PREFIX_FIX ; prod 1.34.0, suite 1 885, pins 364 (+9
+adds-only, vecteurs publics), manifest 207 lignes / 8 997 octets vérifiés live —
+la ligne neuve payée par élagage mesuré à claims constants (note b111 dans
+routing.py) ; Anthropic : conflit de nom publié, AUCUNE longueur publiée — le
+module ne jure pas ce que la source ne publie pas (test d'honnêteté). Les
+tranches vitrine de la soeur (brand 1.31.1, network 1.32.0, hero 1.33.0-1) ont
+rebaissé les pages : FR 171 187 / EN 174 601 / PT 175 306 build, marge revenue.)
 
 ---
 
@@ -43,7 +57,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **182 transforms + 9 named chain recipes, and growing**, stateless, keyless at
+agents: **183 transforms + 9 named chain recipes, and growing**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -103,7 +117,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **182 transforms + 9 recettes-chaînes nommées, et ça grandit**,
+déterministes pour agents : **183 transforms + 9 recettes-chaînes nommées, et ça grandit**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette
