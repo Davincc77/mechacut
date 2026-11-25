@@ -893,7 +893,9 @@ TEMPLATE = """<!DOCTYPE html>
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     line-height: 1.6; -webkit-font-smoothing: antialiased; }
   .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
-  header.top { display: flex; align-items: center; justify-content: space-between;
+  .brandmark { position:fixed; top:12px; left:14px; z-index:60; }
+  .brandmark img { display:block; border-radius:10px; }
+  header.top { display: flex; align-items: center; justify-content: flex-end;
     padding: 20px 18px; border-bottom: 1px solid var(--line);
     position: sticky; top: 0; z-index: 50;
     background: rgba(10,10,12,.92); backdrop-filter: blur(8px); }
@@ -987,6 +989,7 @@ TEMPLATE = """<!DOCTYPE html>
   @media (max-width: 480px) {
     .catgrid { grid-template-columns: 1fr; }
     .navbtn { display: block; }
+    .brandmark img { height:44px; }
     header.top nav { display: none; position: fixed; inset: 0;
       background: rgba(8, 8, 8, .97); flex-direction: column;
       align-items: flex-start; gap: 18px; padding: 84px 28px; z-index: 50; }
@@ -1079,12 +1082,10 @@ TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
 <div id="prog"></div>
+<a class="brandmark" href="/"><img src="/static/brand/wordmark.jpg" height="64" alt="Mechacut — deterministic transforms suite"></a>
 <div class="wrap">
 
   <header class="top">
-    <div class="brand">
-<img src="/static/brand/wordmark.jpg" height="64" alt="Mechacut — deterministic transforms suite" style="border-radius:10px">
-    </div>
     <nav>
       <a href="#everyday">{{nav.everyday}}</a>
       <a href="#bundles">{{nav.tools}}</a>
