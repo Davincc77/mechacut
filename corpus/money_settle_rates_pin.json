@@ -1,0 +1,22 @@
+{
+ "body": {
+  "advances": [
+   {
+    "who": "A",
+    "paid": "100.00",
+    "currency": "EUR"
+   }
+  ],
+  "participants": [
+   "A",
+   "B"
+  ],
+  "currency": "USD",
+  "rates": {
+   "EUR": "1.10"
+  },
+  "mode": "net"
+ },
+ "name": "money_settle_rates_pin",
+ "path": "/api/v1/money/settle"
+}

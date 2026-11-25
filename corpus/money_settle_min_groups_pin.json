@@ -1,0 +1,31 @@
+{
+ "body": {
+  "advances": [
+   {
+    "who": "A",
+    "paid": "100.00",
+    "split_between": [
+     "A",
+     "B"
+    ]
+   },
+   {
+    "who": "C",
+    "paid": "100.00",
+    "split_between": [
+     "C",
+     "D"
+    ]
+   }
+  ],
+  "participants": [
+   "A",
+   "B",
+   "C",
+   "D"
+  ],
+  "mode": "net"
+ },
+ "name": "money_settle_min_groups_pin",
+ "path": "/api/v1/money/settle"
+}

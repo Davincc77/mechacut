@@ -403,7 +403,7 @@ def test_manifest_182_et_ligne_lu():
     # le meme nom) — le compteur lu reste le test : TABLE 193 -
     # recipes 9 = 184 transforms, compte a la main.
     # b113 relève : TABLE 194 - recipes 9 = 185 transforms, compte à la main.
-    assert "186 transforms + 9 recipes" in body  # b114 : +json_bigint, 195-9=186
+    assert "187 transforms + 9 recipes" in body  # b115 : +money_settle, 196-9=187
     assert "shop_soldes_lu  /api/v1/shop/soldes-lu  free" in body
     assert len(body.encode("utf-8")) < 9000
 
@@ -441,7 +441,9 @@ def test_onze_pins_soldeslu_adds_only():
     # b112 relève à 374 : +10 invoice_payment_due (adds-only).
     # b114 relève à 392 : +9 json_bigint (adds-only, vecteurs publics) ; b113 relève à 383 : +9 agent_mcplist (adds-only, vecteurs
     # PUBLICS — #6935, codex, claude-web, vercel).
-    assert len(g) == 392
+    # b115 relève à 400 : +8 money_settle (adds-only, vecteurs du
+    # fil r/askmath) ; b114 relève à 392 : +9 json_bigint
+    assert len(g) == 400
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

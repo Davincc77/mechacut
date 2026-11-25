@@ -404,6 +404,12 @@ TABLE = (
      "cent-exact split, closed remainder rule",
      "money split bill participants cents remainder share friends evenly "
      "tip partage centavos"),
+    ("money_settle", "/api/v1/money/settle", "numbers",
+     "who owes whom: advances netted, minimal transfers, named forgiveness",
+     "money settle settlement who owes whom transfers advances fronted "
+     "group trip forgive waiver net itemized compare graph splitwise venmo "
+     "solde qui paye qui remise virements avance partage quem paga quem "
+     "adiantou perdoa acerto contas grupo quem deve"),
     ("number_spell", "/api/v1/number/spell", "numbers",
      "amount -> words FR/EN/PT",
      "spell words amount currency invoice mention french english "
@@ -493,7 +499,7 @@ TABLE = (
      "Une heure murale ECRITE dans la zone du job, ANCREE par la "
      "machine dans sa zone : chaque instant UTC candidat, la derive "
      "SIGNEE en minutes (positif = en retard), les deux horloges "
-     "relues ; l'offset gagne (resolution Composio #4148) ; single/"
+     "relues; l'offset gagne (resolution Composio #4148); single/"
      "fold/gap rendus par l'engine date/tz_ambiguity APPELE, jamais "
      "duplique",
      "naive timestamp scheduler server anchored utc drift late early "
@@ -515,7 +521,7 @@ TABLE = (
      "direitos do passageiro aeronautico"),
     ("date_week", "/api/v1/date/week", "dates",
      "Semaine ISO aller-retour — année ISO SEPARÉE du %Y, W53 par LE "
-     "THÉORÈME (53 jeudis ⟺ Jan-1 jeudi, ou mercredi + bissextile ; "
+     "THÉORÈME (53 jeudis ⟺ Jan-1 jeudi, ou mercredi + bissextile; "
      "zéro table), semaine inexistante refusée avec l'artefact %Y-W%V "
      "nommé, conventions Excel/US (%U %W WEEKNUM) côte à côte, notes "
      "PostgreSQL/Snowflake",
@@ -785,7 +791,7 @@ TABLE = (
      "style page actually says lisible"),
     ("recipe_shop_reste", "/api/v1/fiche/shop-reste", "numbers",
      "la chaîne « du RESTE » en un appel : total, vendus du matin, "
-     "% de l'après-midi -> la trace des trois pas et le reste exact ; "
+     "% de l'après-midi -> la trace des trois pas et le reste exact; "
      "0/28 nu et retry sur cette forme (bench v15) — la décomposition "
      "est le travail, il est déjà fait ici",
      # Bundle 72 (23-11) — trou PT dicté par le radar, ligne « loja
@@ -807,7 +813,7 @@ TABLE = (
      "heranca divisao"),
     ("recipe_soldes2", "/api/v1/fiche/soldes2", "numbers",
      "deux remises, un prix final exact + le mensonge de la somme "
-     "chiffré ; les chaînes à N paliers restent chez money/discount",
+     "chiffré; les chaînes à N paliers restent chez money/discount",
      "two discounts sale price final remise solde successive "
      "desconto duplo deux pourcentages cascade simple"),
     ("recipe_clean_table", "/api/v1/recipe/clean-table", "repair",
@@ -960,10 +966,10 @@ TABLE = (
      "reçu confirmation transfert"),
     ("money_baggage", "/api/v1/money/baggage", "numbers",
      "Date du vol = palier LOI (40×30×15 sous le siège GRATUIT depuis "
-     "2027-10-23, RIEN avant — chaque compagnie décide) ; casier : la "
-     "loi ne fixe AUCUNE taille ; gabarits transporteur EN ARGUMENTS, "
-     "jamais fetchus ; ajustement PAR DIMENSION avec ROTATION (40×18×30 "
-     "passe dans 40×30×20) ; le « cumul 100 cm / 7 kg » de la presse "
+     "2027-10-23, RIEN avant — chaque compagnie décide); casier : la "
+     "loi ne fixe AUCUNE taille; gabarits transporteur EN ARGUMENTS, "
+     "jamais fetchus; ajustement PAR DIMENSION avec ROTATION (40×18×30 "
+     "passe dans 40×30×20); le « cumul 100 cm / 7 kg » de la presse "
      "rendu comme affirmation TESTÉE (55+40+20=115), jamais comme règle",
      "cabin baggage carry on size 40x30x15 under seat underseat personal item "
      "hand luggage allowance does my bag fit suitcase sizer gauge "
@@ -976,9 +982,9 @@ TABLE = (
      "(02134→2134), mur des 15 chiffres (…1111→…1110), notation "
      "scientifique (1E5→100000), dates forcées (SEPT2, MARCH1, « 3-4 » "
      "= 4 mars EN / 3 avril EU — locale ARGUMENT, année figée par "
-     "as_of), formes de formule (=-+@), pleine chasse ; règles = les "
-     "trois interrupteurs Microsoft nommés ; import colonne-Texte "
-     "PRESCRIT ; csv/fix répare, ici on PRÉDIT",
+     "as_of), formes de formule (=-+@), pleine chasse; règles = les "
+     "trois interrupteurs Microsoft nommés; import colonne-Texte "
+     "PRESCRIT; csv/fix répare, ici on PRÉDIT",
      "excel csv damage leading zeros scientific notation date "
      "conversion corrupted on open double click spreadsheet gene "
      "names postcode truncation digits import text columns "
@@ -989,11 +995,11 @@ TABLE = (
     ("money_crossover", "/api/v1/money/crossover", "numbers",
      "Prix de reviens de DEUX tarifs à composantes (unitaire + fixe) : "
      "la bascule en FRACTION EXACTE — les sept calculateurs publiés "
-     "arrondissent le Δ fixe avant de diviser et se contredisent ; "
+     "arrondissent le Δ fixe avant de diviser et se contredisent; "
      "conventions de jours NOMMÉES (mensuel ×12 exact, jamais 30 "
-     "jours ; journalier ×365 ou 366 bissextile fourni ; « semaine » "
-     "refusée) ; DOMINATION rendue « never » nommée ; km si "
-     "consommation FOURNIE ; frais one-off en mois de payback, "
+     "jours; journalier ×365 ou 366 bissextile fourni; « semaine » "
+     "refusée); DOMINATION rendue « never » nommée; km si "
+     "consommation FOURNIE; frais one-off en mois de payback, "
      "séparés de la bascule structurelle",
      "energy tariff comparison break-even kWh standing charge unit "
      "rate which is cheaper crossover fixed plus variable saas seats "
@@ -1005,9 +1011,9 @@ TABLE = (
     ("money_points", "/api/v1/money/points", "numbers",
      "Combien vaut un POINT : cpp = (prix cash - reste cash - "
      "rewards forgoes) / points x 100 en FRACTION EXACTE (1081/725 "
-     "la ou la presse dit 1.49) ; voies cote a cote triees, egalites "
+     "la ou la presse dit 1.49); voies cote a cote triees, egalites "
      "nommees, verdict contre FLOOR fourni, solde x cpp, retour "
-     "effectif pts/$ x cpp ; jamais de table de valorisation "
+     "effectif pts/$ x cpp; jamais de table de valorisation "
      "embarquee",
      "points worth redeem redemption cents cpp award travel portal "
      "statement credit gift card balance value taxes earning rate "
@@ -1017,11 +1023,11 @@ TABLE = (
      "Ce qu'Excel AFFICHE d'une valeur STOCKÉE sous un code numFmt : "
      "la virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → "
      "$1,000 — l'attaque mesurée arXiv 2611.05806, six extracteurs "
-     "python aveugles) ; exemples de la table Microsoft rejoués "
-     "(« #.0,, »→12.2, « (000) »→(012), « 0% »→50%) ; arrondi de "
-     "display demi-vers-le-large dit ; locale en ARGUMENT (les "
+     "python aveugles); exemples de la table Microsoft rejoués "
+     "(« #.0,, »→12.2, « (000) »→(012), « 0% »→50%); arrondi de "
+     "display demi-vers-le-large dit; locale en ARGUMENT (les "
      "séparateurs du fichier sont des symboles — ingénieur Micro"
-     "soft) ; General/dates/couleurs refusés PAR LE NOM ; rendu de "
+     "soft); General/dates/couleurs refusés PAR LE NOM; rendu de "
      "style, la prédiction d'import est une autre route",
      "excel numfmt styles xlsx stored rendered diverge scale "
      "thousands trailing comma markitdown openpyxl pandas wrong "
@@ -1035,7 +1041,7 @@ TABLE = (
      "DECLAREE — le piege mm÷139 x16,4 devient impossible), max(actual, "
      "dimensionnel), ceil au palier, plafond. rollo 35 lb vs amzprep "
      "34,5 sur les MEMES pouces : la fraction exacte 4800/139 tranche "
-     "et chaque etape est nommee ; tables transporteurs en ARGUMENTS "
+     "et chaque etape est nommee; tables transporteurs en ARGUMENTS "
      "(USPS 166→139 le 12-juil-2026 = elles pourrissent)",
      "dimensional weight dim billed parcel box carrier divisor "
      "pound volumetric shipping cost surprise max fee girth "
@@ -1049,7 +1055,7 @@ TABLE = (
      "fractions vraies laisses TELS QUELS, 'false' en chaine refuse PAR "
      "LE NOM (piege truthy), string→number seulement si cast_strings=on, "
      "'007' JAMAIS (les zeros de tete sont du payload), cles dupliquees "
-     "refusees ; la notation d'origine est CONSERVEE a la sortie",
+     "refusees; la notation d'origine est CONSERVEE a la sortie",
      "tool call arguments coerce cast serde u64 i64 whole float "
      "invalid type floating point expected strict parse call args "
      "truthy quoted false leading zeros notation "
@@ -1061,7 +1067,7 @@ TABLE = (
      "ni 25 ni 50), prix égaux = 25 % de la paire JAMAIS 50, l'article "
      "impair se paie PLEIN (les paires sont DONNÉES, jamais devinées), "
      "le coupon s'EMPILE en produit de facteurs (25 puis 30 = 47,5, "
-     "jamais 55) ; trace par paire, fraction exacte à côté de "
+     "jamais 55); trace par paire, fraction exacte à côté de "
      "l'affichage",
      "bogo buy one get one second item cheaper pair effective checkout "
      "half off percent promo hoodies fine print real discount stack "
@@ -1096,7 +1102,7 @@ TABLE = (
     # Bundle 73 (23-11) — le compte à rebours d'UN four. Tags neufs
     # passés à l'audit de possession : oven / countdown / preheat /
     # conflict / serve / minuterie / forno / assado / sequencia /
-    # cronograma / temperatura étaient LIBRES ; « schedule » (7
+    # cronograma / temperatura étaient LIBRES; « schedule » (7
     # possesseurs), « roast » (poultry), « timing » (leftovers) et
     # « rest » (les deux recettes) ne sont PAS pris — pas de
     # co-quille, loi des voisins.
@@ -1211,14 +1217,14 @@ def manifest_text(version):
         # +agent_costdiff, octets <9 000 avec la NOTE dense resseree
         # a claim constant (les deux pointeurs de purpose vivent).
         # b111 elagage MESURE (+agent_tooloverlap, 52 octets a payer) :
-        # tete « — » -> « - » (-2) ; « every POST carries » -> « POSTs
-        # carry » (-7) ; « every 400 names » -> « 400s name » (-6) ;
+        # tete « — » -> « - » (-2); « every POST carries » -> « POSTs
+        # carry » (-7); « every 400 names » -> « 400s name » (-6) ;
         # « error IS the repair prompt » -> « error IS repair prompt »
-        # (-4) ; « — » milieu -> « ; » (-4) ; « from one » -> « from 1 »
-        # (-3) ; label « detail: » COUPE — le chemin /tools/<name>.json
-        # se nomme lui-meme (-8) ; « POST /api/v1/pipeline » ->
+        # (-4); « — » milieu -> «; » (-4); « from one » -> « from 1 »
+        # (-3); label « detail: » COUPE — le chemin /tools/<name>.json
+        # se nomme lui-meme (-8); « POST /api/v1/pipeline » ->
         # « /api/v1/pipeline » (-5, convention b107 : le verbe vit dans
-        # le schema, le pointeur porte le chemin) ; « "task words" » ->
+        # le schema, le pointeur porte le chemin); « "task words" » ->
         # « "words" » (-5, la place est payee par le chemin lui-meme) ;
         # « -> sister moovicut.studio » -> « -> moovicut.studio » (-7,
         # « sister » se lit sur la landing et dans SKILL.md, le manifeste
@@ -1229,7 +1235,7 @@ def manifest_text(version):
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
         + "free=keyless 30/min; cap=free<32KB/x402; paid=x402 from 1. "
-          # b114 elagage MESURE (+json_bigint, 39 octets a payer ; marge
+          # b114 elagage MESURE (+json_bigint, 39 octets a payer; marge
           # annoncee 10) : les 13 EN-TETES DE PACK ne portent plus
           # chacun leur chemin — « [repair] /SKILL-repair.md » devient
           # « [repair] » et le POINTEUR GENERALISE « packs:
@@ -1262,8 +1268,8 @@ def manifest_text(version):
           # b110 elagage MESURE (la ligne shop_soldes_lu paie ses
           # 46 octets) : le POINTEUR « packs: » est SUPPRIME — chaque
           # en-tete de pack rend son propre /SKILL-<pack>.md, le
-          # contenu voyage ; « named » coupe de la tete (adjectif,
-          # les recettes sont nommees PAR LEUR LIGNE) ; « scene »
+          # contenu voyage; « named » coupe de la tete (adjectif,
+          # les recettes sont nommees PAR LEUR LIGNE); « scene »
           # tombe de la classe not-here (« breakdowns » reste, classe
           # identique). Mesure LIVE 25-11 10h55 : 206 lignes /
           # 8 995 octets (splitlines — la méthode des cycles
@@ -1272,14 +1278,14 @@ def manifest_text(version):
           # payer) : « deterministic » COUPE de la tete — adjectif,
           # consigne b107, la certification du meme nom est le
           # tracteur sha256 de fin + « POSTs carry sha256 » qui
-          # vivent ; le POINTEUR DU MILIEU « /tools/<name>.json | »
+          # vivent; le POINTEUR DU MILIEU « /tools/<name>.json | »
           # SUPPRIME — le chemin vit DEJA dans le tail dense-fold
-          # (dédoublonnage, claim constant) ; « find: » coupe du
+          # (dédoublonnage, claim constant); « find: » coupe du
           # pointeur route (le /route?q= nu est la convention
           # maison depuis b107) et ses guillemets « "words" »
-          # tombent ; « folded to dense mode » devient « dense fold »
+          # tombent; « folded to dense mode » devient « dense fold »
           # (le drapeau se nomme lui-meme, test_bundle0 synchronise)
-          # ; « storyboards, shot lists, breakdowns » en SLASHES.
+          #; « storyboards, shot lists, breakdowns » en SLASHES.
           # Mesure b112 : 208 lignes / 8 99x octets — marge relevee
           # a l'annonce, jamais de memoire.
           "pipelines: /api/v1/recipes|pipeline; "
@@ -1394,7 +1400,7 @@ def pack_markdown(pack, mcp_tools):
 #
 # Bundle 70 (2026-11-23) — T6, né du radar comme T5 est né de B003.
 # La loi T5 (« un leurreur peut glisser UN mot, pas deux familles »)
-# protégeait la grammaire fermée de /router/apply ; /route restait
+# protégeait la grammaire fermée de /router/apply; /route restait
 # monolingue EN alors que les mots FR/PT entraient dans PURPOSES et
 # TAGS par v1.1.0. Résultat mesuré (docs/RADAR, scans 22h42→03h31,
 # 3 OVERMATCH persistants) : le routeur prescrivait sur des mots de
@@ -1420,7 +1426,7 @@ def pack_markdown(pack, mcp_tools):
 #     sous 4, AUCUN outil n'est listé — le serveur refuse par le nom
 #     au lieu de prescrire du bruit. Le 4 n'est pas un nombre réglé
 #     à la main sur le corpus : c'est le POIDS DU NOM. Un mot incidentel
-#     vaut au plus 3 (tag) ou 2 (purpose) — jamais le plancher ; un mot
+#     vaut au plus 3 (tag) ou 2 (purpose) — jamais le plancher; un mot
 #     qui EST le nom de l'outil (« chart », « csv », « batch ») vaut 4
 #     et survit seul, parce que nommer n'est pas glisser. Les poids
 #     4/3/2 restent INTACTS : ils portent la marge d'égalité de T5 dans
@@ -1461,7 +1467,7 @@ STOP = STOP_EN | STOP_FR | STOP_PT
 CONF_FLOOR = 4
 
 # T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le
-# 23-nov-2026) : la requête est tokenisée en minuscules ASCII ; sans
+# 23-nov-2026) : la requête est tokenisée en minuscules ASCII; sans
 # pli, « barré » éclate en « barr » (le é est un séparateur), « légal »
 # en « l »+« gal », et 84 mots de tags accentés + les tags à majuscules
 # (RFC, CJEU, kWh…) ne répondent JAMAIS à leur propre spelling. Le pli
@@ -1518,8 +1524,8 @@ def route(query, top=5):
     # quanto tempo guardar » routaient money_keep_records_uk — une
     # promesse fausse (le module refuse la France et le Brésil PAR
     # NOM, mais le routeur, lui, avait déjà promis). Liste fermée,
-    # zéro LM ; la requête honnête passe par le token UK (« HMRC »,
-    # « Royaume-Uni », « limited company ») et reste admise ; sans
+    # zéro LM; la requête honnête passe par le token UK (« HMRC »,
+    # « Royaume-Uni », « limited company ») et reste admise; sans
     # lui, elle meurt en NO_MATCH CONSIGNÉ à la file (la douleur
     # réelle FR est un futur outil, pas un prêt).
     FOREIGN = ("france", "francais", "francaise", "frances", "french",
@@ -1587,15 +1593,15 @@ def route(query, top=5):
     # propre radar (scans 06h13 et 07h44, suivis, jamais niés) :
     # « retour brésil 7 jours arrependimento prazo » routait
     # shop_return_deadline (score 6, retour+prazo) — la table ne
-    # joue QUE les marchés publiés US/UK/FR ; nommer le Brésil (ou
+    # joue QUE les marchés publiés US/UK/FR; nommer le Brésil (ou
     # son droit : « arrependimento » = CDC art. 49, sept jours,
     # AUTRE horloge) ne doit rien prescrire. « withdrawal germany
     # online order deadline » routait shop_shipping_deadline (score
     # 4, le « deadline » de purpose) — sa table est USPS/UPS/FEDEX,
     # nommer l'Allemagne (ou tout territoire hors table) la tue.
-    # Le module sait refuser par nom ; c'est le ROUTEUR qu'on
+    # Le module sait refuser par nom; c'est le ROUTEUR qu'on
     # dresse (leçon b100/b102/b103, même classe, deux tables neuves).
-    # RACINES fermées ; les pays DÉJÀ dans la table n'y entrent pas
+    # RACINES fermées; les pays DÉJÀ dans la table n'y entrent pas
     # (US/UK/FR vivent pour return-deadline, US seul pour shipping).
     V_RTN_OUT = ("brasil", "brazil", "brasileir", "arrepend",
                  "german", "deutsch", "aleman", "allemagne",
@@ -1628,7 +1634,7 @@ def route(query, top=5):
     vrtout = vshipout = False
     # CLASSE b105 — la Belgique a SON outil (/shop/soldes-be) : les
     # mots belges tuent toujours la fenetre FR (vsoldes_out, rien ne
-    # change pour elle) mais ne tuent plus l'outil BE ; a l'envers,
+    # change pour elle) mais ne tuent plus l'outil BE; a l'envers,
     # nommer la France (vtabled) ou tout autre calendrier (vsoldes_out)
     # sans mot belge ne doit JAMAIS prescrire l'outil BE — le module
     # repondrait un 400 et le routeur aurait promis (lecon b100/102/103).
@@ -1679,7 +1685,7 @@ def route(query, top=5):
         # juridiction NOMMÉE autre tuait la ligne. b108 — LU (L. 221-3/
         # L. 222-9) et BE (VI.47-VI.53 + C. civ. I.7) sont rejouées
         # AUSSI : un Luxembourg ou une Belgique nommés laissent vivre
-        # la ligne (c'est LEURS grammaires qu'ils demandent) ; tout
+        # la ligne (c'est LEURS grammaires qu'ils demandent); tout
         # autre pays nommé la tue toujours avant qu'elle ne promette.
         # Irlande entre par V_IN (gift-voucher) : elle a ICI son drapeau.
         if t.startswith(("irland",)) or t in ("ie", "irl", "eire",
@@ -1747,7 +1753,7 @@ def route(query, top=5):
         # tombait TOP1_WRONG vers LU. La frontière jurée b105 ne vit
         # que si les mots COMMUNS ne surclasse aucune table : les
         # mois et les verbes d'ouverture restent chez window et be
-        # (leurs tags n'ont jamais porté « quand commencent ») ; la
+        # (leurs tags n'ont jamais porté « quand commencent »); la
         # ligne LU ne garde que ses noms propres. Radar de fermeture
         # rejoué APRES la correction — c'est lui qui l'a trouvée,
         # jamais la batterie : l'outillage ment le moins sur son

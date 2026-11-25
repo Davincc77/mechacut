@@ -299,6 +299,7 @@ import tooltrimkit
 import overlapkit
 import mclistkit
 import bigintkit
+import settlementkit
 import withdrawalkit
 import paymentduekit
 import evalkit
@@ -392,7 +393,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.35.0",
+    version="1.36.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -3074,6 +3075,47 @@ def run_money_split(args: dict):
 @app.post("/api/v1/money/split")
 def api_money_split(req: MoneySplitRequest):
     body, err = run_money_split(req.model_dump())
+    return err if err else body
+
+
+# --------------------------------------------- bundle 115: who owes whom
+
+class MoneySettleRequest(BaseModel):
+    advances: List[Any]
+    participants: Optional[List[Any]] = None
+    share_mode: Optional[Literal["equal", "weights"]] = None
+    waivers: Optional[List[Any]] = None
+    mode: Literal["net", "itemized", "compare"] = "net"
+    currency: Optional[str] = None
+    rates: Optional[dict] = None
+
+
+def run_money_settle(args: dict):
+    try:
+        req = MoneySettleRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = settlementkit.money_settle(
+            req.advances, req.participants,
+            req.share_mode or "equal", req.waivers, req.mode,
+            req.currency, req.rates)
+    except settlementkit.MoneyError as e:
+        return None, bad_request(
+            [{"field": "settle", "message": str(e),
+              "expected": "advances [{who, paid: decimal string, label?, "
+                          "split_between?, currency?}]; participants "
+                          "[name | {name, weight?}]; waivers "
+                          "[{from, to, amount?}]; mode net|itemized|"
+                          "compare; rates {CODE: string} when currencies "
+                          "differ"}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/settle")
+def api_money_settle(req: MoneySettleRequest):
+    body, err = run_money_settle(req.model_dump())
     return err if err else body
 
 
@@ -7263,6 +7305,7 @@ TOOL_RUN = {
            "units_convert": run_units_convert,
            "money_prorate": run_money_prorate,
            "money_split": run_money_split,
+           "money_settle": run_money_settle,
            "number_spell": run_number_spell,
            "hash_digest": run_hash_digest,
            "hash_hmac": run_hash_hmac,
@@ -10371,6 +10414,62 @@ MCP_TOOLS = [
                                                     "byte-exact "
                                                     "patched "
                                                     "document"}}}},
+    {
+        "name": "money_settle",
+        "description": "Who owes whom after a group fronted money: "
+                       "advances + shares + named forgiveness -> closed-"
+                       "cent balances and the MINIMUM transfers. The "
+                       "signature product is the GRAPH QUESTION the "
+                       "threads never answer (r/askmath 1ugli3y: A "
+                       "fronted 1375, C 865, C 'won't ask B for money'; "
+                       "A demands 628.33, B offers 458.33 — both are "
+                       "right, on two different graphs). mode='net' "
+                       "settles the NET SOLDES: the /money/split "
+                       "remainder rule closes the cents (the thread's "
+                       "own 746.67 x 3 = 2240.01 does NOT), a waiver "
+                       "can only release what the forgiver is OWED "
+                       "net — capped, named, the remainder travels to "
+                       "the other creditors — and transfers are the "
+                       "proven minimum (zero-sum partition DP, n<=9; "
+                       "greedy above, minimality NOT claimed). "
+                       "mode='itemized' honours EACH RECEIPT: the "
+                       "waiver kills the receipt edge (B->A 458.33, C "
+                       "eats 288.33 — B's answer, with who bears it "
+                       "spelled out). mode='compare' renders BOTH and "
+                       "numbers the divergence. Rates are ARGUMENTS, "
+                       "never fetched (the transaction-date rate beats "
+                       "the booking-date one — tryzedger 2026-11-14); "
+                       "0- and 3-decimal settlement currencies refuse "
+                       "by name. Every answer replays each person's "
+                       "balance before returning or refuses. Free.",
+        "inputSchema": {"type": "object",
+                        "required": ["advances"],
+                        "properties": {
+                            "advances": {"type": "array",
+                                         "description": "[{who, paid: "
+                                         "decimal string, label?, "
+                                         "split_between?, currency?}]"},
+                            "participants": {
+                                "type": "array",
+                                "description": "[name | {name, "
+                                             "weight?}] — the "
+                                             "/money/split grammar"},
+                            "share_mode": {"type": "string",
+                                           "enum": ["equal",
+                                                    "weights"]},
+                            "waivers": {"type": "array",
+                                        "description": "[{from, to, "
+                                        "amount?}] — forgiveness is an "
+                                        "argument, never a silent "
+                                        "deduction"},
+                            "mode": {"type": "string",
+                                     "enum": ["net", "itemized",
+                                              "compare"]},
+                            "currency": {"type": "string"},
+                            "rates": {"type": "object",
+                                      "description": "{CODE: decimal "
+                                      "string} — caller-supplied, "
+                                      "the suite never fetches"}}}},
     {
         "name": "money_bogo",
         "description": "The discount the CHECKOUT really applies under "

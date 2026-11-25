@@ -4206,6 +4206,251 @@
   },
   {
    "body": {
+    "advances": [
+     {
+      "paid": "100.00",
+      "split_between": [
+       "A",
+       "B"
+      ],
+      "who": "A"
+     },
+     {
+      "paid": "100.00",
+      "split_between": [
+       "C",
+       "D"
+      ],
+      "who": "C"
+     }
+    ],
+    "mode": "net",
+    "participants": [
+     "A",
+     "B",
+     "C",
+     "D"
+    ]
+   },
+   "name": "money_settle_min_groups_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "48a199c0946418cd6b72e7621b2bfca28419b156907d0174fa92fd18c01db157",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "currency": "EUR",
+      "paid": "100.00",
+      "who": "A"
+     }
+    ],
+    "currency": "USD",
+    "mode": "net",
+    "participants": [
+     "A",
+     "B"
+    ],
+    "rates": {
+     "EUR": "1.10"
+    }
+   },
+   "name": "money_settle_rates_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "dc834261e65e24d19abd10e4805a4e946ef80b053109cff29770958cb51d96a9",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "1375.00",
+      "who": "A"
+     },
+     {
+      "paid": "0.00",
+      "who": "B"
+     },
+     {
+      "paid": "865.00",
+      "who": "C"
+     }
+    ],
+    "mode": "compare",
+    "participants": [
+     "A",
+     "B",
+     "C"
+    ],
+    "waivers": [
+     {
+      "from": "C",
+      "to": "B"
+     }
+    ]
+   },
+   "name": "money_settle_thread_compare_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "148f9c3dc38d053e29e47ddc9ac8e56611b279bc69dde3d36441d5801554bf23",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "1375.00",
+      "who": "A"
+     },
+     {
+      "paid": "0.00",
+      "who": "B"
+     },
+     {
+      "paid": "865.00",
+      "who": "C"
+     }
+    ],
+    "mode": "itemized",
+    "participants": [
+     "A",
+     "B",
+     "C"
+    ]
+   },
+   "name": "money_settle_thread_itemized_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "b7e975a1f480a91fbe66333df3d0de399604b355b7213db2e2c1b0ec32e04123",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "1375.00",
+      "who": "A"
+     },
+     {
+      "paid": "0.00",
+      "who": "B"
+     },
+     {
+      "paid": "865.00",
+      "who": "C"
+     }
+    ],
+    "mode": "net",
+    "participants": [
+     "A",
+     "B",
+     "C"
+    ],
+    "waivers": [
+     {
+      "from": "C",
+      "to": "B"
+     }
+    ]
+   },
+   "name": "money_settle_thread_net_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "54d76e5ee7209658d2018c2489b0496233ea11f6489450d8f95f93a86460f5d4",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "1375.00",
+      "who": "A"
+     },
+     {
+      "paid": "0.00",
+      "who": "B"
+     },
+     {
+      "paid": "865.00",
+      "who": "C"
+     }
+    ],
+    "mode": "net",
+    "participants": [
+     "A",
+     "B",
+     "C"
+    ]
+   },
+   "name": "money_settle_thread_noforgive_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "2201faa8c66d5a5bf8ec84f9febe9a5a661c0644fd1d3e12ffef0ed5164a4bea",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "1375.00",
+      "who": "A"
+     },
+     {
+      "paid": "0.00",
+      "who": "B"
+     },
+     {
+      "paid": "865.00",
+      "who": "C"
+     }
+    ],
+    "mode": "net",
+    "participants": [
+     "A",
+     "B",
+     "C"
+    ],
+    "waivers": [
+     {
+      "amount": "999.00",
+      "from": "C",
+      "to": "B"
+     }
+    ]
+   },
+   "name": "money_settle_waiver_cap_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "a0e1ac808c9891ada7c3c7a9445fc1d08937626929bf8ed5ea23908862cf53e5",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "1000.00",
+      "who": "A"
+     }
+    ],
+    "mode": "net",
+    "participants": [
+     {
+      "name": "A",
+      "weight": 1
+     },
+     {
+      "name": "B",
+      "weight": 1
+     },
+     {
+      "name": "C",
+      "weight": 2
+     }
+    ]
+   },
+   "name": "money_settle_weights_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "d57a92e0a4ca31eede9fb4dd9fe218f2b90d3b0888a7a617480d8764eb25f9a2",
+   "status": 200
+  },
+  {
+   "body": {
     "participants": [
      "a",
      "b",

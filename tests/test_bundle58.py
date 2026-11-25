@@ -424,9 +424,9 @@ def test_everyday_chip_baked_three_languages():
     # « Nineteen » datait de e19 ; e20-e23 avaient dérivé le compte —
     # dérive mesurée, corrigée avec e24, précédent b73).
     # resize 24-11 bundle100 : VINGT-CINQ (e25 keep-records-uk).
-    assert "Twenty-seven" in en["everyday.intro"]  # b107 : soldes BE FUSIONNÉE dans la carte e26, retrait=e27 — 27
-    assert "Vingt-sept" in fr["everyday.intro"]
-    assert "Vinte e sete" in pt["everyday.intro"]
+    assert "Twenty-eight" in en["everyday.intro"]  # b115 : e28 settle — 28 ; b107 : fusion e26, retrait e27 — 27
+    assert "Vingt-huit" in fr["everyday.intro"]
+    assert "Vinte e oito" in pt["everyday.intro"]
 
 
 def test_golden_contains_eleven_new_pins():

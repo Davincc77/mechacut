@@ -410,7 +410,9 @@ def test_ten_new_pins_are_replayable():
     # b114 relève à 392 : +9 json_bigint (adds-only, vecteurs publics
     # Unity/claude/llm4s/ragflow/x402) ; b113 relève à 383 : +9 agent_mcplist (adds-only, vecteurs
     # PUBLICS — #6935, codex, claude-web, vercel).
-    assert len(g) == 392
+    # b115 relève à 400 : +8 money_settle (adds-only, vecteurs du
+    # fil r/askmath) ; b114 relève à 392 : +9 json_bigint
+    assert len(g) == 400
 
 
 def test_fr_response_byte_contract():

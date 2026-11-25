@@ -72,6 +72,14 @@ def test_landing_budget():
     # precedent 143 000 au bundle76.
     # the catalogue grid is internally scrolled: page height cannot grow
     assert "max-height: 30rem" in html
+    # b115 — le contrat écrit par b114 dans un COMMENTAIRE devient
+    # ASSERTION : l'octet navigateur (app + beacon Cloudflare 367) doit
+    # rester sous 181 000 dans les TROIS langues. Un commentaire ne
+    # rougit jamais ; c'est ainsi que PT a vécu à 181 294 servis pendant
+    # un cycle entier sous une suite verte (itération 14 de la classe
+    # « l'outillage ment », consignée b114, close par cette ligne).
+    for _l in ("en", "fr", "pt"):
+        assert len(_landing(_l).encode("utf-8")) + 367 < 181_000, _l
     # fixed section skeleton: five landmark anchors, never one per tool
     for anchor in ('id="bundles"', 'id="tiers"', 'id="bench"', 'id="build"',
                    'id="vision"', 'id="contract"'):

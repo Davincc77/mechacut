@@ -1,0 +1,32 @@
+{
+ "body": {
+  "advances": [
+   {
+    "who": "A",
+    "paid": "1375.00"
+   },
+   {
+    "who": "B",
+    "paid": "0.00"
+   },
+   {
+    "who": "C",
+    "paid": "865.00"
+   }
+  ],
+  "participants": [
+   "A",
+   "B",
+   "C"
+  ],
+  "waivers": [
+   {
+    "from": "C",
+    "to": "B"
+   }
+  ],
+  "mode": "compare"
+ },
+ "name": "money_settle_thread_compare_pin",
+ "path": "/api/v1/money/settle"
+}

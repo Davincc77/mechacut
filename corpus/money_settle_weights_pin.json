@@ -1,0 +1,27 @@
+{
+ "body": {
+  "advances": [
+   {
+    "who": "A",
+    "paid": "1000.00"
+   }
+  ],
+  "participants": [
+   {
+    "name": "A",
+    "weight": 1
+   },
+   {
+    "name": "B",
+    "weight": 1
+   },
+   {
+    "name": "C",
+    "weight": 2
+   }
+  ],
+  "mode": "net"
+ },
+ "name": "money_settle_weights_pin",
+ "path": "/api/v1/money/settle"
+}
