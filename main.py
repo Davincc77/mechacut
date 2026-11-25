@@ -384,7 +384,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.33.3",
+    version="1.34.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -12275,6 +12275,23 @@ def misses():
 _BRAND_DIR = Path(__file__).resolve().parent / "static" / "brand"
 _BRAND_TYPES = {"banner-16x9.jpg": "image/jpeg", "banner-ultrawide.jpg": "image/jpeg",
                 "logo-mark.png": "image/png", "favicon-512.png": "image/png"}
+
+
+_FONT_DIR = Path(__file__).resolve().parent / "static" / "fonts"
+_FONT_TYPES = {"SpaceGrotesk-var.woff2": "font/woff2",
+               "IBMPlexMono-400.woff2": "font/woff2",
+               "IBMPlexMono-500.woff2": "font/woff2",
+               "Inter-var.woff2": "font/woff2"}
+
+
+@app.get("/static/fonts/{name}")
+def font_asset(name: str):
+    """Self-hosted fonts — closed allowlist, same doctrine as brand."""
+    if name not in _FONT_TYPES or not (_FONT_DIR / name).is_file():
+        return JSONResponse(status_code=404, content={"error": "not_found"})
+    return Response(content=(_FONT_DIR / name).read_bytes(),
+                    media_type=_FONT_TYPES[name],
+                    headers={"cache-control": "public, max-age=31536000, immutable"})
 
 
 @app.get("/static/brand/{name}")

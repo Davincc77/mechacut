@@ -852,10 +852,15 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://mechacut.studio/static/brand/banner-16x9.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23141414'/><path d='M20 70 L40 45 L55 55 L80 25' stroke='%23d4af37' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;
+  font-display:swap;src:url('/static/fonts/SpaceGrotesk-var.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;
+  font-display:swap;src:url('/static/fonts/IBMPlexMono-400.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;
+  font-display:swap;src:url('/static/fonts/IBMPlexMono-500.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 500;
+  font-display:swap;src:url('/static/fonts/Inter-var.woff2') format('woff2')}
   :root {
     --bg: #0a0a0a; --fg: #ececec; --muted: #8f8f8f;
     --gold: #d4af37; --line: #232323; --card: #121212;
