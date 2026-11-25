@@ -513,22 +513,43 @@ CASES = [
 
 
 def get(url, params=None, data=None, headers=None):
+    # b112 FIX 429 (douleur d'outillage pêchée par le scan de clôture
+    # LUI-MÊME : le balayage golden tournait en parallèle, la sonde a
+    # lu des 429 comme des NO_MATCH — six fausses douleurs dont deux
+    # de MES aiguilles, « NOUVELLE » sur des phrases vertes en
+    # conditions calmes. Le 429 n'est pas une réponse du routeur,
+    # c'est la porte de la salle d'attente : on attend, on ne
+    # consigne pas. Retry poli, 4 tentatives, 6 s — un 429 persistant
+    # remonte ENCORE comme status distinct, jamais comme NO_MATCH.
     if params:
         url += "?" + "&".join(
             "%s=%s" % (k, urllib.parse.quote(str(v)))
             for k, v in params.items())
-    req = urllib.request.Request(url, data=data, headers=headers or {})
-    req.add_header("User-Agent", UA)
-    try:
-        with urllib.request.urlopen(req, timeout=30) as r:
-            return r.status, json.loads(r.read().decode())
-    except urllib.error.HTTPError as e:
+    import time as _t
+    last = None
+    for attempt in range(4):
+        req = urllib.request.Request(url, data=data, headers=headers or {})
+        req.add_header("User-Agent", UA)
         try:
-            return e.code, json.loads(e.read().decode())
-        except Exception:
-            return e.code, {}
-    except Exception as e:
-        return 0, {"error": str(e)[:120]}
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.status, json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            try:
+                body = json.loads(e.read().decode())
+            except Exception:
+                body = {}
+            if e.code == 429 and attempt < 3:
+                _t.sleep(6)
+                continue
+            return e.code, body
+        except Exception as e:
+            last = e
+            if attempt < 3:
+                _t.sleep(6)
+                continue
+            return 0, {"error": "transport:%s" % type(last).__name__}
+    return 0, {"error": "retry-loop-exhausted"}  # defensif — chaque
+    # iteration retourne ; la ligne est pour le lectrice statique
 
 
 import urllib.parse  # noqa: E402  (après get pour lisibilité)
