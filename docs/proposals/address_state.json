@@ -1,0 +1,16 @@
+{
+  "name": "address_state",
+  "purpose": "postal address -> state/province extracted and validated per country grammar, never guessed",
+  "examples": [
+    {"input": {"text": "Rua Augusta 1525, 01412-000, São Paulo, SP, Brazil"}, "expected": {"state": "SP"}},
+    {"input": {"text": "12 Rue de la Gare, L-2345, Luxembourg"}, "expected": {"state": null}}
+  ],
+  "why": "Crypto Bot ran address_parse live 00:05 CET: SP stayed in lines - correct per contract, but a BR user wants the UF field",
+  "source": "Crypto Bot",
+  "arrival": "2026-11-26",
+  "verdict": "SUSPECT-DUPLICATE",
+  "scores": {"address_parse": 22, "validate_postal": 10, "crypto_address": 8},
+  "threshold": 8,
+  "stored": false,
+  "human_decision": "not a new tool - a REVISION of address_parse: extract state/province when the address itself carries a grammar-defined token (BR SP), never infer from postal code. Queued in DEMAND-QUEUE (address-parse-state). Payment path: address_parse is a cap route; large address-book batches already pay x402, so the revision rides an existing paid door - no base_account needed to be payable, and none accepted to be heard."
+}
