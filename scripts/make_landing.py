@@ -2078,9 +2078,9 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "shop_gift_voucher":
             "vale-presente « vencido » de um ano é SUBSTITUÍDO por cinco anos desde a compra — a data legal COBRE o papel (Lei irlandesa de 2019, forma JD Sports); saldo de €1 ou mais é devido, fronteira €1 com conflito NOMEADO; França NEGATIVA: nenhuma duração legal, o boato dos « 30 anos » é imobiliário",
         "shop_soldes_window":
-            "as datas legais dos saldos na França vêm do arrêté de 27-05-2019 rejogado: antecipação nas duas estações (2027: 6 de janeiro, não 13; 23 de junho, não 30), sete derrogações com o texto — inverno 2021 em SEIS SEMANAS, Mosela sozinha a 26-06-2021 — anexo versionado; antes de 2020 e fora da França, recusado por nome",
+            "datas dos saldos FR do arrêté de 27-05-2019 rejogado: antecipação nas duas estações (2027: 6 jan, não 13; 23 jun, não 30), sete derrogações verbatim — inverno 2021 em SEIS SEMANAS, Mosela só a 26-06-2021 — anexo versionado; antes de 2020 e fora da França, recusado por nome",
         "shop_soldes_be":
-            "as datas legais dos saldos belgas pela regra do art. VI.25 CDE: cláusula do domingo datada (2027: sábado 2 de janeiro), espera de um mês NOMEADA (2 de dezembro a 1º de janeiro), adiamentos da corona 2020-2021 com o texto, cláusula desativada mas visível; França e Luxemburgo recusados pelo nome",
+            "datas belgas (art. VI.25 CDE): cláusula do domingo datada (2027: sáb 2 jan), espera de um mês NOMEADA (2 dez–1 jan), adiamentos corona verbatim, cláusula afastada visível; França/Luxemburgo recusados pelo nome",
         "agent_retrybudget":
             "repetir esta falha é racional? taxonomia fechada, teto "
             "de hash, orçamento de sessão, backoff determinístico",
@@ -2232,7 +2232,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "schedule_holidays":
             "feriados legais FR BE LU BR PT DE US com a lei citada em cada linha",
         "shop_withdrawal":
-            "retratação FR BE LU : um pacote, três gramáticas — sábado avança FR/BE, SOBREVIVE no LU ; doze meses sem informação ; exceções nomeadas",
+            "retratação FR BE LU: um pacote, três gramáticas — sábado avança FR/BE, SOBREVIVE no LU; doze meses sem informação; exceções nomeadas",
         "web_cache":
             "texto Cache-Control → ação RFC 9111, frescor, diretivas inertes",
         "gzip_roundtrip":
@@ -2400,11 +2400,11 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "eth_receipt":
             "logs + efeitos esperados → veredito de correspondência",
         "money_baggage":
-            "Data do voo = faixa da LEI (40×30×15 sob o assento GRÁTIS desde 2027-10-23, NADA antes — cada companhia decide); gabaritos COMO ARGUMENTOS, nunca fetchados; ajuste POR DIMENSÃO com ROTAÇÃO (40×18×30 cabe em 40×30×20); o «total 100 cm / 7 kg» da imprensa é TESTADO (55+40+20=115), nunca regra",
+            "Data do voo = faixa da LEI (40×30×15 sob o assento GRÁTIS desde 2027-10-23, NADA antes — cada companhia decide); gabaritos COMO ARGUMENTOS; ajuste POR DIMENSÃO com ROTAÇÃO (40×18×30 cabe em 40×30×20); o «total 100 cm» da imprensa é TESTADO (55+40+20=115), nunca regra",
         "csv_excel_damage":
             "O que o Excel DESTRÓI no duplo clique, PREDITO antes: zeros à esquerda (02134→2134), muro dos 15 dígitos (…1111→…1110), notação científica (1E5→100000), datas forçadas (SEPT2, « 3-4 » = 4 de março EN / 3 de abril EU — locale como ARGUMENTO, ano por as_of), formas de fórmula (=-+@); os três interruptores Microsoft nomeados; Texto para Colunas PRESCRITO; csv/fix conserta, aqui se PREDIT",
         "money_crossover":
-            "Preço de custo de DUAS tarifas (unitário + fixo): a virada em FRAÇÃO EXATA — as calculadoras publicas arredondam o Δ fixo antes de dividir e se contradizem; convenções de dias NOMEADAS (mensal ×12, nunca 30; «semana» recusada); DOMINAÇÃO «never» nomeada; km se consumo FORNECIDO",
+            "Preço de custo de DUAS tarifas (unitário + fixo): virada em FRAÇÃO EXATA — as calculadoras públicas arredondam o Δ fixo antes de dividir e se contradizem; dias NOMEADOS (mensal ×12, «semana» recusada); DOMINAÇÃO «never»; km se consumo FORNECIDO",
         "money_points":
             "Quanto vale um PONTO: cpp = (preço cash - resto cash - rewards forgoes) / pontos x 100 em FRAÇÃO EXATA (1081/725 onde a imprensa diz 1.49); vias lado a lado, ordenadas, igualdades nomeadas, veredito contra FLOOR fornecido, saldo x cpp, retorno efetivo pts/$ x cpp; nunca tabela de valoração embarcada",
         "csv_excel_display":
@@ -2412,7 +2412,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "ship_dimweight":
             "O peso REALMENTE cobrado: dimensões ARREDONDADAS PARA A POLEGADA SUPERIOR antes do volume, volume ÷ divisor (unidade DECLARADA), max(real, dimensional), ceil na faixa, teto; a fração exata tranche (4800/139); tabelas da transportadora COMO ARGUMENTOS",
         "json_coerce":
-            "Conserta os ARGUMENTOS de uma chamada de ferramenta que um leitor RÍGIDO recusa: 8.0→8 (classe serde « invalid type: floating point 2500.0, expected u64 », 11/11 rodadas medidas), exponentes e frações TAIS QUAIS, 'false' em string recusado PELO NOME (pegadinha truthy), string→number só se cast_strings=on, '007' NUNCA (zeros à esquerda são payload), chaves duplicadas recusadas; notação original CONSERVADA",
+            "Conserta ARGUMENTOS que um leitor RÍGIDO recusa: 8.0→8 (classe serde « invalid type: floating point 2500.0, expected u64 »), exponentes e frações TAIS QUAIS, 'false' em string recusado PELO NOME (pegadinha truthy), string→number só com cast_strings=on, '007' NUNCA (zeros à esquerda são payload); notação CONSERVADA",
         "money_bogo":
             "A porcentagem que o CAIXA aplica sob uma placa « BUY ONE GET ONE 50 % »: desconto sobre o MAIS BARATO (60+40 vira 80 em 100 = 20 %, nem 25 nem 50), preços iguais = 25 % do par NUNCA 50, o ímpar se paga CHEIO (pares DADOS, nunca adivinhados), cupom EMPILHA em produto de fatores (25 depois 30 = 47,5, nunca 55); rastro por par",
         "agent_modelid":
@@ -2420,9 +2420,9 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "food_poultry":
             "janela de descongelar e assar o peru, tabelas USDA FSIS, relógio ISO como argumento — nunca relógio de parede, nunca números inventados",
         "food_leftovers":
-            "janela das sobras, USDA FSIS: limite 2h, 3-4 dias na geladeira, 2-6 meses no congelador (UNIÃO das duas páginas FSIS que se contradizem) — todos os tempos como ARGUMENTOS, nunca relógio de parede, nunca tabelas inventadas",
+            "janela das sobras, USDA FSIS: limite 2h, 3-4 dias geladeira, 2-6 meses congelador (UNIÃO das duas páginas FSIS que se contradizem) — tempos como ARGUMENTOS, nunca relógio de parede nem tabela inventada",
         "food_ovenschedule":
-            "um forno, vários pratos, um horário de servir: contagem regressiva de trás para frente, conflitos de temperatura nomeados, nunca relógio de parede — as timelines da web não verificam nada disso",
+            "um forno, vários pratos, um horário de servir: contagem regressiva de trás para frente, conflitos de temperatura nomeados, nunca relógio de parede",
         # b114 : le PT FRANCHIT le plafond (181 558 > 181 000) — élagage
         # à l'annonce, précédent b112/b113. 1) shop_soldes_lu tombait
         # sur le FALLBACK ANGLAIS (640 octets de prose EN sur une page

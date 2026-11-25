@@ -40,7 +40,16 @@ def test_landing_budget():
     # le manifest < 9000 octets (test_bundle0) — la landing est une
     # vitrine navigateur, pas un artefact de contexte de modèle.
     assert len(html.encode("utf-8")) < 181_000  # resize 24-11 bundle100 :
-    # MESURÉ en 173 079 / fr 178 683 / pt 176 779 — une ligne TABLE +
+    # b114 LEÇON (classe outillage, itération ~14, pêchée PAR LA PROD) :
+    # le VRAI contrat est l'octet que le NAVIGATEUR reçoit — Cloudflare
+    # injecte un beacon de 367 octets dans la page SERVIE, invisible au
+    # TestClient. Mesure live 25-11 22h2x : en 179 984 / fr 178 080 /
+    # pt 180 624 APP, soit pt 181 188 SERVI avant élagage — la page PT
+    # dépassait 181 k dans les navigateurs DEPUIS b113 (180 927 app =
+    # 181 294 servi) pendant que ce test restait VERT sur les octets
+    # locaux. Désormais : marge PT = 181_000 − 367 − app ; le lot PT qui
+    # casse 180 633 app casse le contrat réel. Précédent mesure
+    # en 173 079 / fr 178 683 / pt 176 779 — une ligne TABLE +
     # la carte e25 ×3 langues coûtent +2 189 octets FR (conforme à la
     # moyenne des bundles, 2 100-2 700). Marge = un bundle ; le
     # prochain franchira 181 k : ce sera ÉLAGUE (prose serrée), pas
