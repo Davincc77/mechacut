@@ -1,0 +1,7 @@
+{
+ "body": {
+  "raw": "{\"paymentRequired\": {\"maxAmountRequired\": 9007199254740993}, \"scheme\": \"exact\"}"
+ },
+ "name": "json_bigint_x402_pin",
+ "path": "/api/v1/json/bigint"
+}

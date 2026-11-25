@@ -93,6 +93,7 @@ POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the upda
 POST /api/v1/agent/tool-trim  pasted tools/list + budget -> WHICH tools to disconnect, idle-first closed ranking in exact fractions, re-count of the survivors at the sister's canon, FITS/STILL_OVER with the overage named, $ saved at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/agent/tool-overlap  pasted tool names (+ server keys) -> which TWO tools become ONE id in WHICH client (vscode cut+TAIL_ABORT, gemini-cli fold+OVERWRITE, head64 gateways), bare shadows, provider charset/length 400s, the min server-key rename IN CHARACTERS, GATE_STRICTER_THAN_API named (free under 32 KB, x402 above)
 POST /api/v1/agent/mcp-list-completeness  pasted tools/list pages -> is the listing COMPLETE: trailing cursor echoed, empty page/empty-string cursor do NOT end the scan (spec MUST, verbatim), repeated cursor named, missing tail COUNTED vs your declared number (free under 32 KB, x402 above)
+POST /api/v1/json/bigint  pasted JSON text -> which integers lie past 2^53: RFC 8259 section 6 range, exact binary64 AND the JS print per finding, COLLISION named, reader table JS/Go/Python/nlohmann, mode=quote patches bytes-only where flagged (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
 POST /api/v1/invoice/payment-due  invoice date + terms (net 30, 45 jours fin de mois, 30 business days, 2/10 net 30) -> the FOUR readings with the gap CHIFFRÉ; the roll rule NAMED per jurisdiction (bgb_193 defers SATURDAY by law, bfe_1971 defers bank holidays, FR invoice: NO statutory roll — the empty table is a read VERDICT, the clause decides; FR lettre de change: com_l511_79 -> next OUVRABLE day, Saturday counts); TARGET2 settlement layer (the rails close, the debt runs); L. 441-10 cap flag; gov.uk tables proclaimed 2026-2028 only (free)
 POST /api/v1/money/split      to-the-cent split, closed remainder rule
@@ -297,6 +298,7 @@ import costdiffkit
 import tooltrimkit
 import overlapkit
 import mclistkit
+import bigintkit
 import withdrawalkit
 import paymentduekit
 import evalkit
@@ -390,7 +392,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.34.5",
+    version="1.35.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -6846,6 +6848,33 @@ def api_json_coerce(req: JsonCoerceRequest):
     return err if err else body
 
 
+class JsonBigintRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    raw: str
+    mode: Optional[str] = None
+
+
+def run_json_bigint(args: dict):
+    try:
+        req = JsonBigintRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = bigintkit.bigint_audit(req.raw, req.mode)
+    except bigintkit.BigintError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/json/bigint")
+def api_json_bigint(req: JsonBigintRequest):
+    body, err = run_json_bigint(req.model_dump())
+    return err if err else body
+
+
 # ------------------------------ bundle 0: task router + named recipes
 
 @app.get("/route")
@@ -7263,6 +7292,7 @@ TOOL_RUN = {
            "money_points": run_money_points,
            "ship_dimweight": run_ship_dimweight,
            "json_coerce": run_json_coerce,
+           "json_bigint": run_json_bigint,
            "money_bogo": run_money_bogo,
            "ledger_apply_payments": run_ledger_apply_payments,
            "eval_compare": run_eval_compare,
@@ -10292,6 +10322,55 @@ MCP_TOOLS = [
                                        "enum": ["on", "off", "true",
                                                 "false"],
                                        "default": "off"}}}},
+    {
+        "name": "json_bigint",
+        "description": "Audit the INTEGERS in a pasted JSON document "
+                       "for the silent 2^53 lie: a grammar scan (never "
+                       "a regex — digits inside strings are never "
+                       "findings) gives every number its RFC 6901 "
+                       "pointer, and every integer outside RFC 8259 "
+                       "section 6's interoperable range [-(2**53)+1, "
+                       "(2**53)-1] (verbatim law cited in the payload) "
+                       "comes back TWICE: the exact binary64 value and "
+                       "the shortest string JS re-emits — the two "
+                       "numbers your tickets quote without naming "
+                       "(Unity-MCP #754: 568105584918935294 -> print "
+                       "...300, lookup dies with a LYING 'not found'; "
+                       "claude-code #11506: 348555896224571969 -> "
+                       "displayed ...970; llm4s #1597: ...993 -> ...992 "
+                       "'whichever library reads the result'). Classes "
+                       "CLOSED, severity declared: COLLISION (two "
+                       "literals, one JS reading — the wrong-record "
+                       "symptom) > LOSSY > OVERFLOW (1e400 -> Infinity, "
+                       "the hazard RFC 8259 names) > UNDERFLOW "
+                       "(2e-500 -> 0) > EXACT_UNSAFE (value kept, "
+                       "range — and neighbours — lost) > SAFE. Per "
+                       "finding the reader table: JS/Go-interface{}/"
+                       "float, Python int (exact!), Go UseNumber, "
+                       "nlohmann int64/uint64 bounds — conformance is "
+                       "not interoperability, so the DIVERGENCE is the "
+                       "product. mode='quote' returns the patched "
+                       "bytes: only flagged integer literals become "
+                       "strings, every other byte intact (the rule "
+                       "t27 #10438 is writing as policy). The MCP "
+                       "draft spec's MUST for x-mcp-header integers "
+                       "uses this exact range — cited scoped, never "
+                       "overclaimed. Free.",
+        "inputSchema": {"type": "object",
+                        "required": ["raw"],
+                        "properties": {
+                            "raw": {"type": "string",
+                                    "description": "the JSON TEXT as "
+                                                   "bytes travelled — "
+                                                   "paste the wire, "
+                                                   "not a re-parsed "
+                                                   "object"},
+                            "mode": {"type": "string",
+                                     "enum": ["quote"],
+                                     "description": "'quote' adds the "
+                                                    "byte-exact "
+                                                    "patched "
+                                                    "document"}}}},
     {
         "name": "money_bogo",
         "description": "The discount the CHECKOUT really applies under "

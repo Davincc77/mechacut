@@ -2034,6 +2034,8 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "fenêtre des restes, USDA FSIS : seuil 2h, 3-4 jours frigo, 2-6 mois congélateur (UNION des deux pages FSIS) — temps en ARGUMENTS, jamais l'horloge, jamais de tables inventées",
         "food_ovenschedule":
             "un four, des plats, une heure de service : compte à rebours à l'envers, conflits de température nommés, jamais d'horloge murale",
+        "json_bigint":
+            "quels ENTIERS JSON mentent au-delà de 2^53 : la valeur binary64 EXACTE ET la chaîne que JS réémet, par lecteur (JS/Go/Python/nlohmann), COLLISIONS nommées — le symptôme du mauvais enregistrement ; mode=quote ne cite que les littéraux marqués, le reste octet à octet ; RFC 8259 §6 cité verbatim",
     },    "pt": {
         "address_parse":
             "endereço postal → país, CEP validado contra 50 gramáticas, linhas restantes; ambiguidade NOMEADA, nunca adivinhada",
@@ -2398,21 +2400,21 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "eth_receipt":
             "logs + efeitos esperados → veredito de correspondência",
         "money_baggage":
-            "Data do voo = faixa da LEI (40×30×15 sob o assento GRÁTIS desde 2027-10-23, NADA antes — cada companhia decide); bagageiro: a lei não fixa NENHUM tamanho; gabaritos COMO ARGUMENTOS, nunca fetchados; ajuste POR DIMENSÃO com ROTAÇÃO (40×18×30 cabe em 40×30×20); o «total 100 cm / 7 kg» da imprensa é afirmação TESTADA (55+40+20=115), nunca regra",
+            "Data do voo = faixa da LEI (40×30×15 sob o assento GRÁTIS desde 2027-10-23, NADA antes — cada companhia decide); gabaritos COMO ARGUMENTOS, nunca fetchados; ajuste POR DIMENSÃO com ROTAÇÃO (40×18×30 cabe em 40×30×20); o «total 100 cm / 7 kg» da imprensa é TESTADO (55+40+20=115), nunca regra",
         "csv_excel_damage":
-            "O que o Excel DESTRÓI no duplo clique, PREDITO antes: zeros à esquerda (02134→2134), muro dos 15 dígitos (…1111→…1110), notação científica (1E5→100000), datas forçadas (SEPT2, MARCH1, « 3-4 » = 4 de março EN / 3 de abril EU — locale como ARGUMENTO, ano travado por as_of), formas de fórmula (=-+@), largura total; regras = os três interruptores da Microsoft nomeados; importação Texto para Colunas PRESCRITA; csv/fix conserta, aqui se PREDIT",
+            "O que o Excel DESTRÓI no duplo clique, PREDITO antes: zeros à esquerda (02134→2134), muro dos 15 dígitos (…1111→…1110), notação científica (1E5→100000), datas forçadas (SEPT2, « 3-4 » = 4 de março EN / 3 de abril EU — locale como ARGUMENTO, ano por as_of), formas de fórmula (=-+@); os três interruptores Microsoft nomeados; Texto para Colunas PRESCRITO; csv/fix conserta, aqui se PREDIT",
         "money_crossover":
-            "Preço de custo de DUAS tabelas com componentes (unitário + fixo): a virada em FRAÇÃO EXATA — as sete calculadoras arredondam o Δ fixo antes de dividir e se contradizem; convenções de dias NOMEADAS (mensal ×12 exato, nunca 30; diário ×365 ou 366 bissexto; «semana» recusada); DOMINAÇÃO como «never» nomeado; km se consumo FORNECIDO; taxas one-off em meses de payback, separadas da virada",
+            "Preço de custo de DUAS tarifas (unitário + fixo): a virada em FRAÇÃO EXATA — as calculadoras publicas arredondam o Δ fixo antes de dividir e se contradizem; convenções de dias NOMEADAS (mensal ×12, nunca 30; «semana» recusada); DOMINAÇÃO «never» nomeada; km se consumo FORNECIDO",
         "money_points":
             "Quanto vale um PONTO: cpp = (preço cash - resto cash - rewards forgoes) / pontos x 100 em FRAÇÃO EXATA (1081/725 onde a imprensa diz 1.49); vias lado a lado, ordenadas, igualdades nomeadas, veredito contra FLOOR fornecido, saldo x cpp, retorno efetivo pts/$ x cpp; nunca tabela de valoração embarcada",
         "csv_excel_display":
-            "O que o Excel EXIBE de um valor ARMAZENADO sob numFmt: vírgula trailing ESCALA por mil (« $#,##0, » + 1 000 000 → $1,000 — ataque medido arXiv 2611.05806, seis extratores python cegos); exemplos da tabela Microsoft reproduzidos (« #.0,, »→12.2, « (000) »→(012), « 0% »→50%); meio-para-fora de display dito; locale como ARGUMENTO (separadores do arquivo são símbolos — engenheiro da Microsoft); General/datas/cores recusados PELO NOME; render é um lado, predição de importação outra rota",
+            "O que o Excel EXIBE de um valor ARMAZENADO sob numFmt: vírgula trailing ESCALA por mil (« $#,##0, » + 1 000 000 → $1,000 — arXiv 2611.05806, seis extratores cegos) ; tabela Microsoft rejouée ; meio-para-fora dito ; locale como ARGUMENTO ; General/datas/cores recusados PELO NOME",
         "ship_dimweight":
-            "O peso REALMENTE cobrado: dimensões arredondadas PARA A POLEGADA SUPERIOR antes do volume, volume ÷ divisor (unidade DECLARADA — a pegadinha mm÷139 x16,4 fica impossível), max(real, dimensional), ceil na faixa, teto; rollo 35 lb vs amzprep 34,5 nas MESMAS polegadas: a fração exata 4800/139 resolve, cada etapa nomeada; tabelas da transportadora COMO ARGUMENTOS (USPS 166→139 em 12-jul-2026 = elas apodrecem)",
+            "O peso REALMENTE cobrado: dimensões ARREDONDADAS PARA A POLEGADA SUPERIOR antes do volume, volume ÷ divisor (unidade DECLARADA), max(real, dimensional), ceil na faixa, teto; a fração exata tranche (4800/139); tabelas da transportadora COMO ARGUMENTOS",
         "json_coerce":
             "Conserta os ARGUMENTOS de uma chamada de ferramenta que um leitor RÍGIDO recusa: 8.0→8 (classe serde « invalid type: floating point 2500.0, expected u64 », 11/11 rodadas medidas), exponentes e frações TAIS QUAIS, 'false' em string recusado PELO NOME (pegadinha truthy), string→number só se cast_strings=on, '007' NUNCA (zeros à esquerda são payload), chaves duplicadas recusadas; notação original CONSERVADA",
         "money_bogo":
-            "A porcentagem que o CAIXA aplica sob uma placa « BUY ONE GET ONE 50 % »: desconto sobre o MAIS BARATO (regra de varejo publicada — 60+40 vira 80 em 100 = 20 %, nem 25 nem 50), preços iguais = 25 % do par NUNCA 50, o ímpar se paga CHEIO (pares DADOS, nunca adivinhados), cupom se EMPILHA como produto de fatores (25 depois 30 = 47,5, nunca 55); rastro por par, fração exata ao lado do exibido",
+            "A porcentagem que o CAIXA aplica sob uma placa « BUY ONE GET ONE 50 % »: desconto sobre o MAIS BARATO (60+40 vira 80 em 100 = 20 %, nem 25 nem 50), preços iguais = 25 % do par NUNCA 50, o ímpar se paga CHEIO (pares DADOS, nunca adivinhados), cupom EMPILHA em produto de fatores (25 depois 30 = 47,5, nunca 55); rastro por par",
         "agent_modelid":
             "audita ids de modelo contra um catálogo colado — vereditos nomeados, did-you-mean a uma distância nomeada, nunca jura que fez o GET (V23)",
         "food_poultry":
@@ -2421,6 +2423,19 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "janela das sobras, USDA FSIS: limite 2h, 3-4 dias na geladeira, 2-6 meses no congelador (UNIÃO das duas páginas FSIS que se contradizem) — todos os tempos como ARGUMENTOS, nunca relógio de parede, nunca tabelas inventadas",
         "food_ovenschedule":
             "um forno, vários pratos, um horário de servir: contagem regressiva de trás para frente, conflitos de temperatura nomeados, nunca relógio de parede — as timelines da web não verificam nada disso",
+        # b114 : le PT FRANCHIT le plafond (181 558 > 181 000) — élagage
+        # à l'annonce, précédent b112/b113. 1) shop_soldes_lu tombait
+        # sur le FALLBACK ANGLAIS (640 octets de prose EN sur une page
+        # PT — faute de parité PÊCHÉE PAR le budget : c'est le plafond
+        # qui l'a révélée, consigné) — traduite SERREE ; 2) les deux
+        # plus longues .tp PT raccourcies à claims constants (les
+        # détails voyagent dans /tools/<name>.json, la carte est une
+        # vitrine) ; 3) json_bigint PT ajoutée (parité — la carte
+        # neuve doit se lire en portugais chez elle).
+        "shop_soldes_lu":
+            "janelas do Luxemburgo datadas POR ACTO (lei 2016: A CADA ANO por decreto grão-ducal, zero fórmula) ; dez actos rejogados 2018-2027 ; duas retificações de dois tipos (2018 : dia da semana errado ; 2023 : o próprio limite) ; cadeia de 2021 : três actos, um adiamento morto ; SEM espera (divergência BE) ; antes de 2018 e depois do último acto, recusado por nome",
+        "json_bigint":
+            "quais inteiros JSON MENTEM além de 2^53 : valor binary64 EXATO E a string que o JS reimprime, por leitor; COLISÕES nomeadas — o registro errado ; mode=quote cita só os marcados, o resto byte a byte ; RFC 8259 §6 verbatim",
     },
 }
 

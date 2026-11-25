@@ -3256,6 +3256,88 @@
   },
   {
    "body": {
+    "raw": "[9007199254740991, 9007199254740992, 9007199254740993]"
+   },
+   "name": "json_bigint_bounds_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "10269343e55efd4dc3a5645b41fa76fdf7ec328a229f4e1030774b9bb2dc6f4a",
+   "status": 200
+  },
+  {
+   "body": {
+    "raw": "{\"value\": 348555896224571969}"
+   },
+   "name": "json_bigint_claude_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "9ccb8cc16894483fdf96d67f85b210deac6e7090e47a778cd0b5bf1b6f833f7b",
+   "status": 200
+  },
+  {
+   "body": {
+    "raw": "{\"hi\": 1e400, \"lo\": 2e-500, \"exp\": 2e20}"
+   },
+   "name": "json_bigint_hazards_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "f4038d5b8c9cce644f647f0da26b3bc666b82a3920e9091cd37cebc033803124",
+   "status": 200
+  },
+  {
+   "body": {
+    "raw": "{\"a\": 9007199254740993, \"b\": 9007199254740992}"
+   },
+   "name": "json_bigint_llm4s_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "9f60dcfd9f3ac01f70300bc3287a092fcb456b1a5ed64cc3b60bde9f68909eda",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "quote",
+    "raw": "{\"a\": 9007199254740993, \"ok\": 7, \"b\": 1234567890123456789}"
+   },
+   "name": "json_bigint_quote_mode_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "a44e0b22d86dc9878e5fa3dbebf16954a20d1532aecf6a440e6ff758a6448446",
+   "status": 200
+  },
+  {
+   "body": {
+    "raw": "{\"id\": 1234567890123456789}"
+   },
+   "name": "json_bigint_ragflow_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "b19a995ee2f5180afd2ade4932d58facd5a7706f609c0e373035dcd30253ce9a",
+   "status": 200
+  },
+  {
+   "body": {
+    "raw": "{\"id\": \"9007199254740993\", \"note\": \"18446744073709551615\"}"
+   },
+   "name": "json_bigint_strings_clean_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "3eb72f1b8e6072d71ced461329c7c358dbbc3902b49fcd669bd3bbf6fbfb1734",
+   "status": 200
+  },
+  {
+   "body": {
+    "raw": "{\"entityId\": 568105584918935294}"
+   },
+   "name": "json_bigint_unity_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "f38fed7e5c24d653c2eaca920eb31d3c51e9ef8daf2b0583a7274282d4cf36e6",
+   "status": 200
+  },
+  {
+   "body": {
+    "raw": "{\"paymentRequired\": {\"maxAmountRequired\": 9007199254740993}, \"scheme\": \"exact\"}"
+   },
+   "name": "json_bigint_x402_pin",
+   "path": "/api/v1/json/bigint",
+   "sha256": "968f363bf055f4296774fc8d228dbb8aa0d7fdc8ed2258c7007e9594aff03b70",
+   "status": 200
+  },
+  {
+   "body": {
     "raw": "{\"force\": \"false\"}",
     "schema": {
      "force": "boolean"

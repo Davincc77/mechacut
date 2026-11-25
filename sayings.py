@@ -304,6 +304,16 @@ SAY = {
               "tout refusé — répare les arguments sans jamais deviner",
         "pt": "o modelo mandou limit 8.0 e o parser estrito recusou a "
               "chamada inteira — conserte os argumentos sem adivinhar"},
+    "/api/v1/json/bigint": {
+        "en": "my snowflake id came back off by one from the JSON parse "
+              "— which integers past 2^53 lie, and what does each "
+              "reader see?",
+        "fr": "mon id snowflake revient à un près après le parse JSON "
+              "— quels entiers au-delà de 2^53 mentent, et que voit "
+              "chaque lecteur ?",
+        "pt": "meu id snowflake volta errado de um depois do parse "
+              "JSON — quais inteiros além de 2^53 mentem, e o que cada "
+              "leitor vê?"},
     "/api/v1/money/bogo": {
         "en": "the sign says buy one get one 50% off — a $60 and a $40 "
               "hoodie: what percentage does the register really take",

@@ -407,9 +407,10 @@ def test_ten_new_pins_are_replayable():
     # vecteurs publics — le contrat des sœurs n'a pas bougé d'un octet).
     # b112 relève à 374 : +10 invoice_payment_due (adds-only, vecteurs
     # de l'oracle g112 — les dates viennent des actes lus, pas du vent).
-    # b113 relève à 383 : +9 agent_mcplist (adds-only, vecteurs
+    # b114 relève à 392 : +9 json_bigint (adds-only, vecteurs publics
+    # Unity/claude/llm4s/ragflow/x402) ; b113 relève à 383 : +9 agent_mcplist (adds-only, vecteurs
     # PUBLICS — #6935, codex, claude-web, vercel).
-    assert len(g) == 383
+    assert len(g) == 392
 
 
 def test_fr_response_byte_contract():

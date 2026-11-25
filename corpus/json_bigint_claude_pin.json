@@ -1,0 +1,7 @@
+{
+ "body": {
+  "raw": "{\"value\": 348555896224571969}"
+ },
+ "name": "json_bigint_claude_pin",
+ "path": "/api/v1/json/bigint"
+}

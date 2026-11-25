@@ -530,6 +530,28 @@ CASES = [
     ("map every item of an array batch style", "json_map"),
     ("walmart return deadline january 31", "shop_return_deadline"),
     ("walmart return indiana receipt", "shop_return_deadline"),
+    # CLASSE b114 — l'entier qui ment à la frontière de l'OUTIL (json_
+    # bigint). Aiguilles x3 langues issues des tickets cités dans le
+    # module (Unity #754, claude-code #11506, llm4s #1597, ragflow
+    # #22064). Leurre de classe : une PHRASE sur les entiers géants
+    # sans données ne doit RIEN prescrire — l'audit exige des octets.
+    ("my int64 id comes back rounded after the json parse",
+     "json_bigint"),
+    ("snowflake id loses digits when the tool parses json",
+     "json_bigint"),
+    ("mon id flocon revient arrondi dans le json", "json_bigint"),
+    ("mon entier 64 bits depasse la plage sure et change de valeur",
+     "json_bigint"),
+    ("meu id int64 chega arredondado depois do parse json",
+     "json_bigint"),
+    ("numero inteiro grande perde digitos silencioso no json",
+     "json_bigint"),
+    ("tell me a story about giants who lived in the mountains", None),
+    # garde fratrie : la FORME refusée (8.0 vs u64) reste json_coerce,
+    # l'ARRONDI demandé reste num_round.
+    ("argument 8.0 invalid type floating point expected u64",
+     "json_coerce"),
+    ("banker rounding half to even two decimal places", "num_round"),
 ]
 
 
@@ -640,6 +662,16 @@ def probe_router(manifest):
 
 
 # ---------------- lentille 2 : mirages de catalogue.
+# Families d'embeddings dont l'ID NE PORTE PAS le mot « embed » —
+# table close, incident mpnet 25-nov-2026 21h15 (la sonde devinait le
+# type par substring et punissait un 400 de son propre essai). Les mots
+# viennent des familles publiques referencees sur les hubs de models ;
+# la re-sonde 400 couvre l'inconnu, la table evite le request gaspille.
+EMBED_FAMILY = ("mpnet", "minilm", "bge-", "e5-", "gte-", "arctic",
+                "nv-embed", "jina-embed", "voyage", "nomic-embed",
+                "snowflake-arctic", "all-roberta", "all-mpnet")
+
+
 def probe_catalog(sample=12):
     def key():
         p = os.path.expanduser("~/.hermes/auth.json")
@@ -669,7 +701,8 @@ def probe_catalog(sample=12):
         # l'ancienne sonde, renvoyait http-400 — le catalogue mélange
         # les TYPES (chat/embeddings) sans le dire dans l'id ; c'est
         # le piège V23 sous son second jour (listed ≠ invocable ICI).
-        embed = "embed" in mid.lower()
+        embed = ("embed" in mid.lower() or
+                 any(t in mid.lower() for t in EMBED_FAMILY))
         if embed:
             path, probe = "/embeddings", {"model": mid, "input": "OK"}
         else:
@@ -680,9 +713,28 @@ def probe_catalog(sample=12):
                     headers={
                         "Authorization": "Bearer " + k,
                         "Content-Type": "application/json"})
-        out.append({"text": mid, "want": "embed" if embed else None,
-                    "verdict": "ok" if st == 200 else
-                    ("MIRAGE" if st == 404 else "http-%d" % st)})
+        rec = {"text": mid, "want": "embed" if embed else None,
+               "verdict": "ok" if st == 200 else
+               ("MIRAGE" if st == 404 else "http-%d" % st)}
+        if st == 400 and not embed:
+            # incident 25-11 21h15 : sentence-transformers/all-mpnet
+            # est un EMBEDDING dont l'id ne porte pas le mot « embed » —
+            # la table de familles le ratait encore, le 400 est l'indice
+            # que le TYPE etait devine, pas la destination. Re-sonde une
+            # seule fois sur /embeddings : gueri = ok-embed-typed, sinon
+            # le verdict reste nomme.
+            st2, _ = get(NOUS + "/embeddings",
+                         data=json.dumps({"model": mid,
+                                          "input": "OK"}).encode(),
+                         headers={
+                             "Authorization": "Bearer " + k,
+                             "Content-Type": "application/json"})
+            if st2 == 200:
+                rec["verdict"] = "ok"
+                rec["via"] = "embed-retry"
+            else:
+                rec["verdict"] = "http-400+embed-%d" % st2
+        out.append(rec)
         time.sleep(1.0)
     return out
 
@@ -727,10 +779,6 @@ def main():
     # via=catalog-mirror ) pour que le diff du prochain scan paye voie
     # ses propres lignes comme PREV, pas comme decouvertes.
     carried = [dict(r, via="catalog-mirror") for r in mirror]
-    latest_doc = {"ts": scan["ts"],
-                  "n": len(rows) + len(carried),
-                  "counts": scan["counts"],
-                  "rows": rows + carried}
     prev = {}
     if os.path.exists(latest):
         # clé (texte, want) : le corpus contient des lignes au MEME
@@ -740,8 +788,16 @@ def main():
         # ligne PT loja).
         prev = {(r["text"], r.get("want"), r.get("via")): r["verdict"]
                 for r in json.load(open(latest))["rows"]}
-    with open(latest, "w") as fh:
-        json.dump(latest_doc, fh, ensure_ascii=False, indent=1)
+    # XS b114 — la classe « l'artifact ment » (13e iteration) FermEE ici :
+    # 1) les verdicts du diff etaient PRINTES puis JETES — chaque cycle
+    #    les re-derivait a la main. Ils vivent desormais dans le JSON
+    #    (bloc diff, items {text, want, verdict}).
+    # 2) n comptait les lignes PORTEES du miroir sans que counts les
+    #    voie (mesure 25-11 19h30 : n=201, somme 189 — 12 lignes du
+    #    miroir absentes des counts). Le doc rend desormais
+    #    n == len(rows) == somme(counts) + somme(counts_carried), et
+    #    n_scan = la part du scan courant. L'invariant est verifie en
+    #    ecivant : un desaccord fait HURLE le script, pas le rapport.
     new_pain = [r for r in rows
                 if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
                 and prev.get((r["text"], r.get("want"),
@@ -755,6 +811,39 @@ def main():
               and any((r["text"], r.get("want"), r.get("via")) == k
                       and r["verdict"] in
                       ("ok", "leurre-ok") for r in rows)]
+
+    def _counts(items):
+        c = {}
+        for it in items:
+            c[it["verdict"]] = c.get(it["verdict"], 0) + 1
+        return c
+
+    counts_carried = _counts(carried)
+    latest_doc = {"ts": scan["ts"],
+                  "n": len(rows) + len(carried),
+                  "n_scan": len(rows),
+                  "counts": scan["counts"],
+                  "counts_carried": counts_carried,
+                  "diff": {
+                      "REGRESSION": [{"text": r["text"],
+                                      "want": r.get("want"),
+                                      "verdict": r["verdict"]}
+                                     for r in new_pain[:20]],
+                      "NOUVELLE": [{"text": r["text"],
+                                    "want": r.get("want"),
+                                    "verdict": r["verdict"]}
+                                   for r in fresh[:20]],
+                      "GUERIE": [{"text": k[0][:80], "want": k[1]}
+                                 for k in healed[:20]],
+                  },
+                  "rows": rows + carried}
+    if (latest_doc["n"] != len(latest_doc["rows"]) or
+            sum(latest_doc["counts"].values()) +
+            sum(counts_carried.values()) != latest_doc["n"]):
+        raise SystemExit("INVARIANT RUPTURE : n != somme des counts — "
+                         "l'artifact mentrait, ne pas livrer ce scan")
+    with open(latest, "w") as fh:
+        json.dump(latest_doc, fh, ensure_ascii=False, indent=1)
     print("# RADAR ROUTEUR — %s" % scan["ts"])
     print("douleurs actives : %s" % json.dumps(
         {k: v for k, v in scan["counts"].items()

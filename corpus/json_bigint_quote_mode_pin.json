@@ -1,0 +1,8 @@
+{
+ "body": {
+  "mode": "quote",
+  "raw": "{\"a\": 9007199254740993, \"ok\": 7, \"b\": 1234567890123456789}"
+ },
+ "name": "json_bigint_quote_mode_pin",
+ "path": "/api/v1/json/bigint"
+}

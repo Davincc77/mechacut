@@ -298,6 +298,15 @@ TABLE = (
      "manquantes boucle "
      "paginacao paginas cursor ferramentas ausentes truncada "
      "incompleta laco"),
+    ("json_bigint", "/api/v1/json/bigint", "repair",
+     "which JSON integers lie past 2^53: exact binary64 bytes AND the "
+     "JS print, per reader, collisions named, quote-patch on demand",
+     "bigint int64 uint64 snowflake maxsafe safe rounded silently "
+     "wrong id entity past loses "
+     "bigint int64 uint64 flocon entier depasse arrondi silencieusement "
+     "faux "
+     "bigint int64 uint64 inteiro grande arredondado silencioso errado "
+     "perde"),
     ("invoice_payment_due", "/api/v1/invoice/payment-due", "dates",
      "the real invoice due date: four readings, roll rule named per "
      "law, TARGET2 settle layer",
@@ -1220,6 +1229,15 @@ def manifest_text(version):
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
         + "free=keyless 30/min; cap=free<32KB/x402; paid=x402 from 1. "
+          # b114 elagage MESURE (+json_bigint, 39 octets a payer ; marge
+          # annoncee 10) : les 13 EN-TETES DE PACK ne portent plus
+          # chacun leur chemin — « [repair] /SKILL-repair.md » devient
+          # « [repair] » et le POINTEUR GENERALISE « packs:
+          # /SKILL-<pack>.md » vit une seule fois dans la tete (le
+          # template nomme le pattern, precedent b112 « le chemin vit
+          # DEJA ailleurs » dedoublonne). Mesure : -212 octets rendus,
+          # +26 au pointeur, marge 10 -> ~160.
+          "packs: /SKILL-<pack>.md; "
           "POSTs carry "
           "sha256; 400s name field+expected; "
           "error IS repair prompt; refusals name "
@@ -1284,7 +1302,9 @@ def manifest_text(version):
         for pack in PACKS:
             if pack not in by_pack:
                 continue
-            ls.append("[%s] /SKILL-%s.md" % (pack, pack))
+            ls.append("[%s]" % pack)  # b114: le chemin vit dans le
+            # template de tete « packs: /SKILL-<pack>.md » — 212 octets
+            # rendus au budget, claim constant.
             for name, path, purpose in by_pack[pack]:
                 t = tier(path).split()[0]
                 ls.append("%s  %s  %s  %s" % (name, path, t, purpose)

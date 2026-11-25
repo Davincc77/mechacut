@@ -314,6 +314,7 @@ def test_mcp_exposes_bundle1():
                       'intent_card', 'intent_check', 'extract_facts',
                       'text_select', 'check_constraints', 'check_refs',
                       'ship_dimweight', 'json_coerce',
+                      'json_bigint',
                       'money_bogo',
                       'money_unitprice',
                       'agent_modelid',

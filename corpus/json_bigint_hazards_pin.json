@@ -1,0 +1,7 @@
+{
+ "body": {
+  "raw": "{\"hi\": 1e400, \"lo\": 2e-500, \"exp\": 2e20}"
+ },
+ "name": "json_bigint_hazards_pin",
+ "path": "/api/v1/json/bigint"
+}
