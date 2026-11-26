@@ -405,13 +405,16 @@ TABLE = (
      "money split bill participants cents remainder share friends evenly "
      "tip partage centavos"),
     ("money_settle", "/api/v1/money/settle", "numbers",
-     "who owes whom: advances netted, minimal transfers, named forgiveness",
+     "who owes whom: advances netted, noncash face|cash|none, minimal "
+     "transfers, named forgiveness",
      "settle settlement settles fewest barbecue reimburse "
      "who owes whom transfers advances fronted group trip forgive waiver "
      "net itemized compare splitwise venmo solde solder soldes paye payer "
      "payent remise virement virements avance avancés groupe quem paga "
      "pagar perdoa perdoou adiantou adiantar dividir despesas viagem "
-     "acerto contas"),
+     "acerto contas points rewards gift card cashback noncash carte "
+     "cadeaux pontos cartão-presente vale-presente person-night "
+     "occupancy"),
     ("number_spell", "/api/v1/number/spell", "numbers",
      "amount -> words FR/EN/PT",
      "spell words amount currency invoice mention french english "

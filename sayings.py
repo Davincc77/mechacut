@@ -325,15 +325,15 @@ SAY = {
               "JSON — quais inteiros além de 2^53 mentem, e o que cada "
               "leitor vê?"},
     "/api/v1/money/settle": {
-        "en": "three of us fronted money and one forgave the other — "
-              "who pays whom, in how many transfers, and which graph "
-              "is answering?",
-        "fr": "on a tous avancé de l'argent et l'un a remis la dette "
-              "de l'autre — qui paye qui, en combien de virements, et "
-              "selon quel graphe ?",
-        "pt": "cada um adiantou um valor e um perdoou a dívida do "
-              "outro — quem paga quem, em quantas transferências, e "
-              "por qual gráfico?"},
+        "en": "we split the trip but the hotel was paid with reward "
+              "points — who owes whom, in how many transfers, and "
+              "which graph is answering?",
+        "fr": "on a partagé le voyage mais l'hôtel était payé en "
+              "points fidélité — qui doit quoi à qui, en combien de "
+              "virements, et selon quel graphe ?",
+        "pt": "dividimos a viagem mas o hotel saiu em pontos de "
+              "cartão — quem deve a quem, em quantas transferências, "
+              "e por qual gráfico?"},
     "/api/v1/money/bogo": {
         "en": "the sign says buy one get one 50% off — a $60 and a $40 "
               "hoodie: what percentage does the register really take",

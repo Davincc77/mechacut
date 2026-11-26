@@ -37,6 +37,33 @@ CLOSED RULES (all cited in the payload, none invented here):
     remainder rule is 2-decimal); 0- and 3-decimal codes are REFUSED BY
     NAME with the reason — never silently re-scaled.
 
+NON-CASH ADVANCES (bundle 117): a line can be kind="noncash" — points,
+a gift card, a coupon, credit someone "split". The thread-fight is never
+about arithmetic: r/askmath 1tuuael published BOTH answers of the SAME
+trip (she fronted 631, he 50 cash + 500 of points) — 40.50 when the
+points count in FACE against the provider's side, 290.50 when the
+agreement was to GIVE the credit and split only the cash remaining.
+The gap is exactly half the face (250): a graph disagreement. So the
+machine renders the READING as an ARGUMENT — counts:
+  "face" — the instrument counts at face value (129phqq's accepted
+           gift-card answer: GC 200 + card 144, four people -> C->A 58,
+           C->B 28, D->B 86, word for word);
+  "cash" — the instrument counts at the CASH it actually cost its
+           provider (value, a required decimal STRING argument: GC
+           bought at 160 -> credited 160; earned points redeemed for
+           travel -> 0). The value of a point is NEVER guessed or
+           fetched — CFPB Credit Card Rewards Issue Spotlight (May
+           2024): "The value of a point can vary by redemption
+           option"; it is the caller's, like the FX rate above;
+  "none" — the line travels as a NOTE only: neither the pot nor the
+           ledger sees it ("we agreed I would GIVE the 500 in credits,
+           then share the remaining cost" — PuzzleDad's reading of
+           1tuuael, and the AITA "the points are mine" convention).
+kind="noncash" WITHOUT a counts verdict is REFUSED BY NAME — silently
+picking the convention IS the wound this bundle ships against. "value"
+is only legal under counts="cash" (an unused valuation is a lie
+waiting for its reader); a cash line carrying counts is refused too.
+
 Amounts are STRINGS, arithmetic is Decimal to the minor unit. Every
 response passes identity checks INSIDE the module before it is returned:
 in net mode sum(balances) == 0 and each person's received-minus-paid
@@ -50,6 +77,7 @@ from money import MoneyError, ISO_DECIMALS, money_split, num_fx
 
 MIN_DP_BOUND = 9  # exact minimal-transfer DP is certified at n <= 9
 _VERDICTS = ("net", "itemized", "compare")
+_NONCASH_COUNTS = ("face", "cash", "none")
 
 
 def _cents(amount, dp=2):
@@ -89,7 +117,9 @@ def _name_list(participants):
 def _validated_advances(advances):
     if not isinstance(advances, list) or not advances:
         raise MoneyError("advances must be a non-empty list of "
-                         "{who, paid, label?, split_between?, currency?}")
+                         "{who, paid, label?, split_between?, currency?}"
+                         " — kind/counts/value extend it for nature "
+                         "lines (b117)")
     out = []
     for i, a in enumerate(advances):
         if not isinstance(a, dict):
@@ -109,7 +139,7 @@ def _validated_advances(advances):
         sb = a.get("split_between")
         if sb is not None and (not isinstance(sb, list) or not sb
                                or not all(isinstance(x, str) and x.strip()
-                                         for x in sb)):
+                                          for x in sb)):
             raise MoneyError("advance %d: split_between must be a "
                              "non-empty list of names" % i)
         cur = a.get("currency")
@@ -119,16 +149,104 @@ def _validated_advances(advances):
                 raise MoneyError("advance %d: currency %r is not in the "
                                  "closed ISO table this suite converts"
                                  % (i, cur))
+        # --- b117: nature lines. A CASH line carries no valuation
+        # fields at all — byte-identical to bundle 115 (contract).
+        kind = a.get("kind")
+        if kind not in (None, "cash", "noncash"):
+            raise MoneyError(
+                "advance %d: kind must be cash|noncash (closed set) — "
+                "the nature of money is DECLARED, never inferred" % i)
+        counts = a.get("counts")
+        value = a.get("value")
+        if kind != "noncash":
+            if counts is not None or value is not None:
+                raise MoneyError(
+                    "advance %d: counts/value belong to kind=noncash "
+                    "lines only — a cash line has no valuation to hide"
+                    % i)
+            out.append({"who": who, "paid": format(amt, "f"),
+                        "label": a.get("label"), "split_between": sb,
+                        "currency": cur})
+            continue
+        if counts not in _NONCASH_COUNTS:
+            raise MoneyError(
+                "advance %d is kind=noncash and counts=%r is not a "
+                "reading: name ONE of face (instrument credited at "
+                "face), cash (credited at the cash it cost — value "
+                "argument required), none (a note only: neither pot "
+                "nor ledger). r/askmath 1tuuael fought over exactly "
+                "this gap (40.50 face vs 290.50 none); the machine "
+                "will not pick for you" % (i, counts))
+        if amt == 0:
+            raise MoneyError(
+                "advance %d: a noncash line with paid 0 has no face to "
+                "count — drop it or state the face value the trip "
+                "consumed" % i)
+        if counts == "cash":
+            if value is None:
+                raise MoneyError(
+                    "advance %d: counts=cash needs value — the CASH the "
+                    "instrument actually cost its provider. The value "
+                    "of a point is an ARGUMENT, never fetched or "
+                    "guessed (CFPB Credit Card Rewards Issue Spotlight, "
+                    "May 2024: the value of a point varies by redemption "
+                    "option)" % i)
+            try:
+                vam = Decimal(str(value))
+            except Exception:
+                raise MoneyError("advance %d: value must be a decimal "
+                                 "STRING (same exactness rule as paid)"
+                                 % i)
+            if vam < 0:
+                raise MoneyError("advance %d: negative value refused — "
+                                 "a cost that pays you back is a "
+                                 "separate cash advance by the other "
+                                 "side, not a negative valuation" % i)
+            value = format(vam, "f")
+        elif value is not None:
+            raise MoneyError(
+                "advance %d: value is legal only under counts=cash — "
+                "a valuation nobody reads is a lie waiting for its "
+                "reader; face counts paid, none counts nothing" % i)
         out.append({"who": who, "paid": format(amt, "f"),
                     "label": a.get("label"), "split_between": sb,
-                    "currency": cur})
+                    "currency": cur, "kind": "noncash",
+                    "counts": counts, "value": value})
     return out
 
 
 def _convert(adv, cur, rates):
-    """advance echo + settled amount in the target currency (exact path)"""
+    """advance echo + settled amount in the target currency (exact path).
+    Noncash lines settle at the READING's amount (face=paid, cash=value,
+    none=0.00); the note echo keeps the face visible even when it does
+    not count."""
     conv, total = [], 0
     for a in adv:
+        if a.get("kind") == "noncash":
+            counted = (a["paid"] if a["counts"] == "face"
+                       else a["value"] if a["counts"] == "cash"
+                       else "0.00")
+            amt = counted
+            note = {"who": a["who"], "paid": a["paid"],
+                    "kind": "noncash", "counts": a["counts"],
+                    "currency": a["currency"] or cur}
+            if a["counts"] == "cash":
+                note["value"] = a["value"]
+            if a.get("label") is not None:
+                note["label"] = a["label"]
+            if a["counts"] == "none":
+                note["note"] = ("face %s travels as a note only — your "
+                                "counts verdict excludes it from the "
+                                "pot AND the ledger" % a["paid"])
+            elif a["currency"] and a["currency"] != cur:
+                fx = num_fx(amt, rates[a["currency"]], cur)
+                amt = fx["result"]
+                note["rate_used"] = fx["rate_used"]
+                note["exact_before_rounding"] = fx["exact_before_rounding"]
+            note["settled"] = amt
+            conv.append(note)
+            total += _cents(amt)
+            continue
         amt = a["paid"]
         note = {"who": a["who"], "paid": amt,
                 "currency": a["currency"] or cur}
@@ -283,16 +401,25 @@ def _settle_net(participants, names, adv, waivers, cur, rates):
         if acc[n] != bal[n]:
             raise MoneyError("identity REFUSED (net): transfers do not "
                              "reproduce the balance of %r" % n)
+    # b117: per-person split of what is CASH vs counted noncash — only
+    # when the graph actually holds nature lines (cash graphs stay
+    # byte-identical to bundle 115).
+    nc = {n: 0 for n in names}
+    for a, c in zip(adv, conv):
+        if a.get("kind") == "noncash" and a["counts"] != "none":
+            nc[a["who"]] += _cents(c["settled"])
     return {
         "mode": "net",
         "currency": cur,
         "advances": conv,
         "total": _s(total),
         "shares": shares,
-        "balances": [{"who": n,
-                      "position": ("settled" if bal[n] == 0 else
-                                   ("owed " if bal[n] < 0 else "due ") +
-                                   _s(abs(bal[n])))} for n in names],
+        "balances": [dict({"who": n,
+                           "position": ("settled" if bal[n] == 0 else
+                                        ("owed " if bal[n] < 0
+                                         else "due ") + _s(abs(bal[n])))},
+                          **({"noncash_advanced": _s(nc[n])} if nc[n]
+                             else {})) for n in names],
         "waivers": reports,
         "transfers": transfers,
         "transfer_count": len(transfers),
@@ -380,6 +507,10 @@ def _settle_itemized(participants, names, adv, waivers, cur, rates):
         raise MoneyError("identity REFUSED (itemized): out-of-pocket "
                          "total %s != advanced total %s"
                          % (_s(sum(oop.values())), _s(tot_oop)))
+    nc = {n: 0 for n in names}
+    for a, c in zip(adv, conv):
+        if a.get("kind") == "noncash" and a["counts"] != "none":
+            nc[a["who"]] += _cents(c["settled"])
     return {
         "mode": "itemized",
         "currency": cur,
@@ -393,8 +524,9 @@ def _settle_itemized(participants, names, adv, waivers, cur, rates):
         "waivers": reports,
         "transfer_count": len([e for e in edges
                                if _cents(e["amount"]) > 0]),
-        "positions": [{"who": n, "out_of_pocket": _s(oop[n])}
-                      for n in names],
+        "positions": [dict({"who": n, "out_of_pocket": _s(oop[n])},
+                           **({"noncash_credit": _s(nc[n])} if nc[n]
+                              else {})) for n in names],
         "rule": ("every receipt is split on its own with the "
                  "/money/split remainder rule PER RECEIPT — the leftover "
                  "cent of each receipt travels differently than the "
@@ -524,4 +656,17 @@ def money_settle(advances, participants=None, share_mode="equal",
                "identity_check": ("both graphs replayed their balances "
                                   "before this compare was returned")}
     res["share_mode"] = share_mode
+    if any(a.get("kind") == "noncash" for a in adv):
+        res["noncash_rule"] = (
+            "kind=noncash lines are counted at YOUR declared reading — "
+            "face (paid, the nominal the trip consumed) | cash (value, "
+            "the cash the instrument cost its provider) | none (a note: "
+            "neither pot nor ledger, the provider's own gift convention). "
+            "Point values are never fetched or guessed (CFPB Credit Card "
+            "Rewards Issue Spotlight, May 2024: the value of a point "
+            "varies by redemption option). r/askmath 1tuuael: the SAME "
+            "trip published 40.50 (face) and 290.50 (none) — the gap is "
+            "half the face, a graph disagreement, not arithmetic. In "
+            "itemized mode out_of_pocket INCLUDES counted noncash face: "
+            "subtract noncash_credit for the cash line.")
     return res

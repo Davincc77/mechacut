@@ -1,0 +1,29 @@
+{
+ "body": {
+  "advances": [
+   {
+    "who": "her",
+    "paid": "631.00"
+   },
+   {
+    "who": "him",
+    "paid": "50.00"
+   },
+   {
+    "who": "him",
+    "paid": "500.00",
+    "kind": "noncash",
+    "counts": "none",
+    "label": "reward points"
+   }
+  ],
+  "participants": [
+   "her",
+   "him"
+  ],
+  "mode": "net",
+  "currency": "USD"
+ },
+ "name": "money_settle_noncash_none_pin",
+ "path": "/api/v1/money/settle"
+}

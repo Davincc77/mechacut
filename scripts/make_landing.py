@@ -2053,20 +2053,20 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "json_bigint":
             "quels ENTIERS JSON mentent au-delà de 2^53 : la valeur binary64 EXACTE ET la chaîne que JS réémet, par lecteur (JS/Go/Python/nlohmann), COLLISIONS nommées — le symptôme du mauvais enregistrement ; mode=quote ne cite que les littéraux marqués, le reste octet à octet ; RFC 8259 §6 cité verbatim",
         "money_settle":
-            "qui paye qui après les avances : solde NET (remise plafonnée à la propre créance, NOMMÉE) ou graphe PAR REÇUS — compare rend les DEUX réponses du fil et chiffre l’écart ; virements minimaux PROUVÉS (partition DP ≤9), cents fermés à la règle /money/split ; taux en ARGUMENTS, jamais fetchés",
+            "qui paye qui après les avances : solde NET (remise plafonnée à la propre créance, NOMMÉE) ou graphe PAR REÇUS — compare rend les DEUX réponses du fil et chiffre l'écart ; avance en NATURE (points, carte cadeaux) comptée à TA lecture, face|cash|none, jamais devinée ; virements minimaux PROUVÉS (DP ≤9) ; taux en ARGUMENTS, jamais fetchés",
     },    "pt": {
         "address_parse":
             "endereço postal → país, CEP validado contra 50 gramáticas, linhas restantes; ambiguidade NOMEADA, nunca adivinhada",
         "date_civil":
-            "instante + fuso IANA nomeado → a data civil que o fuso habita; mudança de exercício sinalizada, fuso do servidor nunca lido",
+            "instante + fuso IANA → a data civil do fuso; mudança de exercício sinalizada, fuso do servidor nunca lido",
         "text_fold_report":
-            "quais reducoes de acentos ou caixa APAGAM uma identidade distinta — relatado, nomeado; o dobramento em si fica com o chamador",
+            "quais reduções de acentos ou caixa APAGAM identidade — relatado, nomeado; o dobramento fica com o chamador",
         "text_novel_words":
             "descricao contra titulo: palavras novas contadas por item, feeds eco nomeados, limite dito (padrao 3)",
         "date_window":
-            "limites de uma cláusula (min..max dias antes/depois de um evento) → a janela INCLUSIVE inteira, span e sentido ditos; limites invertidas recusadas por nome (não se reordena um contrato)",
+            "limites de cláusula (min..max dias antes/depois de um evento) → janela INCLUSIVE, span e sentido ditos; invertidas recusadas por nome (não se reordena um contrato)",
         "date_deemed":
-            "data de envio + modo de envio → recebimento reputado; sem modo, sem data (tabela fechada nomeada, override por argumento declarado)",
+            "data de envio + modo → recebimento reputado; sem modo, sem data (tabela fechada nomeada, override por argumento)",
         "net_ratelimit":
             "cabeçalhos Retry-After e X-RateLimit-* lidos (delta-seconds ou IMF-fixdate estrito); em contradição, ambas as esperas são NOMEADAS, nunca escolhidas; now é argumento, nunca relógio de parede",
         "number_words_pair":
@@ -2442,7 +2442,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "food_leftovers":
             "janela das sobras, USDA FSIS: limite 2h, 3-4 dias geladeira, 2-6 meses congelador (UNIÃO das duas páginas FSIS que se contradizem) — tempos como ARGUMENTOS, nunca relógio de parede nem tabela inventada",
         "food_ovenschedule":
-            "um forno, vários pratos, um horário de servir: contagem regressiva de trás para frente, conflitos de temperatura nomeados, nunca relógio de parede",
+            "um forno, vários pratos, hora de servir: contagem de trás para frente, conflitos de temperatura nomeados, nunca relógio de parede",
         # b114 : le PT FRANCHIT le plafond (181 558 > 181 000) — élagage
         # à l'annonce, précédent b112/b113. 1) shop_soldes_lu tombait
         # sur le FALLBACK ANGLAIS (640 octets de prose EN sur une page
@@ -2453,11 +2453,11 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         # vitrine) ; 3) json_bigint PT ajoutée (parité — la carte
         # neuve doit se lire en portugais chez elle).
         "shop_soldes_lu":
-            "janelas do Luxemburgo datadas POR ACTO (lei 2016: A CADA ANO, zero fórmula); dez actos 2018-2027; duas retificações de tipos opostos (2018: o dia da semana; 2023: o limite); cadeia 2021: três actos, um morto; SEM espera (divergência BE); fora do intervalo publicado: recusado por nome",
+            "janelas do Luxemburgo datadas POR ACTO (lei 2016: A CADA ANO, zero fórmula); dez actos 2018-2027; duas retificações, tipos opostos (2018: dia; 2023: limite); cadeia 2021: três actos, um morto; SEM espera (divergência BE); fora da faixa: recusado por nome",
         "json_bigint":
-            "quais inteiros JSON MENTEM além de 2^53 : valor binary64 EXATO E a string que o JS reimprime, por leitor; COLISÕES nomeadas — o registro errado ; mode=quote cita só os marcados, o resto byte a byte ; RFC 8259 §6 verbatim",
+            "quais inteiros JSON MENTEM além de 2^53 : valor binary64 EXATO E a string que o JS reimprime, por leitor; COLISÕES nomeadas — o registro errado; mode=quote cita só os marcados, o resto byte a byte; RFC 8259 §6 verbatim",
         "money_settle":
-            "quem paga quem após os avanços: saldos LÍQUIDOS (perdão só do que o perdoador TEM A RECEBER, nomeado) ou grafo NOTA A NOTA; compare numera o vão; mínimos PROVADOS (DP ≤9); taxas como ARGUMENTOS, nunca fetchadas",
+            "quem paga quem após os avanços: LÍQUIDOS (perdão só do que se TEM A RECEBER, nomeado) ou NOTA A NOTA; natureza (pontos, cartão-presente) pela SUA leitura: face|cash|none, nunca adivinhada; compare numera o vão; mínimos PROVADOS (DP ≤9); taxas EM ARGUMENTOS",
     },
 }
 
@@ -2485,13 +2485,13 @@ W = {
               "%s, third-grid %s \u00b7 never one number",
       "comp": "\u2192 %s owed under the NEW table (\u22652027-10-23) \u00b7 "
               "carrier MAY pay %s \u00b7 claim by %s \u00b7 or \u00a3220/"
-              "\u00a3350/\u00a3520 under UK261 \u00b7 same flight date, "
-              "old rules: a different answer",
+              "\u00a3350/\u00a3520 UK261 \u00b7 same flight, old rules: "
+              "another answer",
       "bag": "\u2192 %s under the seat by the 2027 LAW \u00b7 carrier "
              "gauge 40\u00d730\u00d720: %s once faces are sorted \u00b7 "
              "overhead: the law sets NO size",
-      "cross": "\u2192 the two tariffs flip at %s kWh a month (%s a "
-               "year) \u00b7 exact \u2014 web calculators round the "
+      "cross": "\u2192 the two tariffs flip at %s kWh/mo (%s/yr) "
+               "\u00b7 exact \u2014 web calculators round the "
                "fixed part first",
       "points": "\u2192 %s \u00a2/point, exactly %s \u00b7 above your "
                 "floor %s \u2192 redeem",
@@ -2503,8 +2503,8 @@ W = {
       "poultry": "\u2192 16-lb bird into the fridge by %s, not "
                  "before %s",
       "withdrawal": "\u2192 last day to change your mind: %s \u00b7 %s at as_of",
-      "settle": "\u2192 net: ONE wire B\u2192A $%s, proven minimum \u00b7 per receipt "
-                "$%s \u00b7 C's gift: $%s net vs $%s on receipt",
+      "settle": "\u2192 net: ONE wire B\u2192A $%s, minimum PROUVED \u00b7 per "
+                "receipt $%s \u00b7 C forgave $%s net vs $%s itemized",
       "leftovers": "\u2192 Thanksgiving 2026 replay: eat by %s \u00b7 "
                    "band %s",
       "ovenschedule": "\u2192 oven on %s, bird out %s \u00b7 temp "
@@ -2647,7 +2647,7 @@ W = {
                  "antes de %s",
       "withdrawal": "\u2192 \u00faltimo dia para desistir: %s \u00b7 %s na data dita",
       "settle": "→ líquido: um PIX de R$ %s B→A, mínimo provado · nota a "
-                "nota R$ %s · o perdão de C vale R$ %s no saldo, R$ %s na "
+                "nota R$ %s · perdão de C: R$ %s no saldo, R$ %s na "
                 "nota",
       "leftovers": "\u2192 replay thanksgiving 2026: comer at\u00e9 %s "
                    "\u00b7 banda %s",

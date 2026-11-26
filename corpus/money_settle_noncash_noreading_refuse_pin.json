@@ -1,0 +1,17 @@
+{
+ "body": {
+  "advances": [
+   {
+    "who": "A",
+    "paid": "10.00",
+    "kind": "noncash"
+   }
+  ],
+  "participants": [
+   "A"
+  ],
+  "mode": "net"
+ },
+ "name": "money_settle_noncash_noreading_refuse_pin",
+ "path": "/api/v1/money/settle"
+}

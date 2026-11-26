@@ -1,0 +1,27 @@
+{
+ "body": {
+  "advances": [
+   {
+    "who": "A",
+    "paid": "144.00"
+   },
+   {
+    "who": "B",
+    "paid": "200.00",
+    "kind": "noncash",
+    "counts": "face",
+    "label": "gift card"
+   }
+  ],
+  "participants": [
+   "A",
+   "B",
+   "C",
+   "D"
+  ],
+  "mode": "net",
+  "currency": "USD"
+ },
+ "name": "money_settle_noncash_giftcard_pin",
+ "path": "/api/v1/money/settle"
+}

@@ -66,6 +66,35 @@ def vkey(r):
         via = None
     return (r["text"], r.get("want"), via)
 
+
+# b117 — RULING de loi du catalogue (tour de cadence --catalog 06h17,
+# scan 2026-11-26T06-17-00.json, re-sonde 3/3 stable depuis 25-11
+# 23h47). Le trio :batch est LISTE dans le dump colle et MEURT en 404
+# a l'ecriture : loi persistante de l'etage ADAPTATEUR, non reparable
+# par nous, et desormais COUVERTE EN PRODUIT — le temoin de base du
+# modelid (b116 lot 2) rend listed=False + note quand la porte
+# conseillee n'est pas dans le releve. Le radar cesse de re-sonder des
+# lois closes (slots gaspilles) mais la ligne RESTE dans le miroir,
+# verdict RULING(law) — ferme comme loi, jamais enterree par silence.
+# ornith-1.5-122b (403 a l'invocation, visible au listing) reste
+# OUVERT : KEY-VISIBILITY porte par le FOURNISSEUR, pas une loi
+# produit ; sa douleur voyage tant que la porte est chez l'autre.
+RULED_LAWS = {
+    "anthropic/claude-sonnet-5.5:batch":
+        "closed b117: listed-404 variant is an ADAPTER LAW; modelid "
+        "base witness (b116) renders listed=False + note for it",
+    "google/gemini-embedding-001:batch":
+        "closed b117: same :batch law as claude-sonnet-5.5:batch",
+    "openai/gpt-6-luna:batch":
+        "closed b117: same :batch law as claude-sonnet-5.5:batch",
+}
+
+
+def eff(r):
+    """verdict VU par les compteurs : une loi fermee n'est plus une
+    douleur, elle est un verdict nomme."""
+    return "RULING(law)" if r.get("ruled") else r["verdict"]
+
 # ---------------- lentille 1 : le corpus. Chaque cas = (texte,
 # attente). attente : nom de fiche/route cherche dans le top, ou
 # None = « ne doit RIEN prescrire » (leurre). Les variantes
@@ -592,6 +621,35 @@ CASES = [
     ("why is everything running so slow today", None),
     ("raconte-moi a quoi reve un harnais vide", None),
     ("the tallest waterfall in the world is made of what", None),
+    # CLASSE b117 — l'avance NON-CASH (money_settle). Aiguilles x3
+    # langues issues des fils cités (#1tuuael, 129phqq, 1c9f5j2).
+    ("she paid the hotel with reward points — do i owe her cash or "
+     "the points half", "money_settle"),
+    ("my friend used a 200 gift card on the bill, who do the other "
+     "two pay back", "money_settle"),
+    ("elle a paye l hotel en points fidelite qui doit quoi a qui",
+     "money_settle"),
+    ("carte cadeaux de 200 sur l addition, qui rembourse qui",
+     "money_settle"),
+    ("metade do hotel saiu em pontos, quem paga quem no acerto",
+     "money_settle"),
+    ("meu vale-presente entrou na conta, quem paga quem no acerto",
+     "money_settle"),
+    ("person-night occupancy split at the end of the trip",
+     "money_settle"),
+    # « LEURRES » RETIRÉS par ma propre sonde locale (26-11, itération
+    # 18 de la classe « l'artefact ment ») : je voulais 3 phrases « ne
+    # doit RIEN prescrire » sur la valeur live du point — la relecture
+    # du CATALOGUE dit le contraire : /money/points existe, calcule le
+    # cpp EN FRACTION EXACTE depuis des ARGUMENTS, sans table embarquee
+    # nifetch (b-série numbers). « worth today » = besoin REEL, reponse
+    # HONNETE (le « today » voyage dans les arguments). Un leurre qui
+    # tombe sur un outil qui assume sa phrase n'est pas un OVERMATCH :
+    # c'est MON corpus qui ment. Ils deviennent aiguilles x3 langues.
+    ("what is a reward point worth today", "money_points"),
+    ("combien vaut un point fidelite en euros aujourd'hui",
+     "money_points"),
+    ("quanto vale um ponto do cartao hoje", "money_points"),
 ]
 
 
@@ -850,7 +908,8 @@ def main():
         # enterre sinon la douleur par silence (mesuré : mpnet).
         pend = [r["text"] for r in mirror
                 if "/" in str(r["text"])
-                and r["verdict"] not in ("ok", "leurre-ok", "plan-skip")]
+                and r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
+                and r["text"] not in RULED_LAWS]
         crows = probe_catalog(pending=pend)
         merged = merge_catalog(mirror, crows)
         if merged is None:
@@ -858,6 +917,9 @@ def main():
             # miroir intact — la douleur attend son tour, elle ne
             # meurt pas de l'artefact.
         else:
+            for r in merged:
+                if r["text"] in RULED_LAWS:
+                    r["ruled"] = RULED_LAWS[r["text"]]
             rows += merged
             mirror = []
             with open(CATALOG_FILE, "w") as fh:
@@ -868,10 +930,13 @@ def main():
             # mirror vide ici : les lignes viennent d'ETRE sondees et
             # vivent dans rows (les porter AUSSI comme veille les
             # compterait deux fois dans n — invariant verifie).
+    for r in rows:
+        if r["text"] in RULED_LAWS:
+            r["ruled"] = RULED_LAWS[r["text"]]
     scan = {"ts": datetime.now().isoformat(timespec="seconds"),
             "n": len(rows),
-            "counts": {v: sum(1 for r in rows if r["verdict"] == v)
-                       for v in sorted({r["verdict"] for r in rows})},
+            "counts": {v: sum(1 for r in rows if eff(r) == v)
+                       for v in sorted({eff(r) for r in rows})},
             "rows": rows}
     latest = os.path.join(RADAR_DIR, "latest.json")
     stamp = scan["ts"].replace(":", "-").replace(" ", "_")
@@ -906,21 +971,24 @@ def main():
     #    n_scan = la part du scan courant. L'invariant est verifie en
     #    ecivant : un desaccord fait HURLE le script, pas le rapport.
     new_pain = [r for r in rows
-                if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
+                if eff(r) not in ("ok", "leurre-ok", "plan-skip",
+                                  "RULING(law)")
                 and prev.get(vkey(r)) == "ok"]
     fresh = [r for r in rows
-             if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
+             if eff(r) not in ("ok", "leurre-ok", "plan-skip",
+                               "RULING(law)")
              and vkey(r) not in prev]
     healed = [k for k, v in prev.items()
               if v not in ("ok", "leurre-ok", "plan-skip")
               and any(vkey(r) == k
-                      and r["verdict"] in
-                      ("ok", "leurre-ok") for r in rows)]
+                      and eff(r) in ("ok", "leurre-ok", "RULING(law)")
+                      for r in rows)]
 
     def _counts(items):
         c = {}
         for it in items:
-            c[it["verdict"]] = c.get(it["verdict"], 0) + 1
+            k = eff(it) if isinstance(it, dict) else it[0]
+            c[k] = c.get(k, 0) + 1
         return c
 
     counts_carried = _counts(carried)
@@ -952,7 +1020,7 @@ def main():
     print("# RADAR ROUTEUR — %s" % scan["ts"])
     print("douleurs actives : %s" % json.dumps(
         {k: v for k, v in scan["counts"].items()
-         if k not in ("ok", "leurre-ok", "plan-skip")}))
+         if k not in ("ok", "leurre-ok", "plan-skip", "RULING(law)")}))
     for label, items in (("REGRESSION", new_pain), ("NOUVELLE", fresh),
                          ("GUERIE", healed)):
         for it in items[:8]:

@@ -4353,6 +4353,146 @@
    "body": {
     "advances": [
      {
+      "paid": "631.00",
+      "who": "her"
+     },
+     {
+      "paid": "50.00",
+      "who": "him"
+     },
+     {
+      "counts": "face",
+      "kind": "noncash",
+      "label": "reward points",
+      "paid": "500.00",
+      "who": "him"
+     }
+    ],
+    "currency": "USD",
+    "mode": "net",
+    "participants": [
+     "her",
+     "him"
+    ]
+   },
+   "name": "money_settle_noncash_face_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "5a8550836f19775fe734fa799caa3bb871a9b6ff09ee1825f625dcdc8fac66f8",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "144.00",
+      "who": "A"
+     },
+     {
+      "counts": "face",
+      "kind": "noncash",
+      "label": "gift card",
+      "paid": "200.00",
+      "who": "B"
+     }
+    ],
+    "currency": "USD",
+    "mode": "net",
+    "participants": [
+     "A",
+     "B",
+     "C",
+     "D"
+    ]
+   },
+   "name": "money_settle_noncash_giftcard_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "12d76b16a44cd3af797a7349bb219518fc3be54fe790cd6ed74ec13450836542",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "631.00",
+      "who": "her"
+     },
+     {
+      "paid": "50.00",
+      "who": "him"
+     },
+     {
+      "counts": "none",
+      "kind": "noncash",
+      "label": "reward points",
+      "paid": "500.00",
+      "who": "him"
+     }
+    ],
+    "currency": "USD",
+    "mode": "net",
+    "participants": [
+     "her",
+     "him"
+    ]
+   },
+   "name": "money_settle_noncash_none_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "bd930a825a5fc0eb9266fa4064e780c394aaebe50db2867e1b64beb7910f83ce",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "kind": "noncash",
+      "paid": "10.00",
+      "who": "A"
+     }
+    ],
+    "mode": "net",
+    "participants": [
+     "A"
+    ]
+   },
+   "name": "money_settle_noncash_noreading_refuse_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "8372a8e724ff26a4ceee2ff73c388702e9b17cf1615a7b0affcc9aad5f7cb99f",
+   "status": 400
+  },
+  {
+   "body": {
+    "advances": [
+     {
+      "paid": "144.00",
+      "who": "A"
+     },
+     {
+      "counts": "cash",
+      "kind": "noncash",
+      "label": "gift card",
+      "paid": "200.00",
+      "value": "160.00",
+      "who": "B"
+     }
+    ],
+    "currency": "USD",
+    "mode": "net",
+    "participants": [
+     "A",
+     "B",
+     "C",
+     "D"
+    ]
+   },
+   "name": "money_settle_noncash_value_pin",
+   "path": "/api/v1/money/settle",
+   "sha256": "2770a5f76160c7e516c6285a91b08044f3b6dfdbb8b75241e5a5adf844f4db64",
+   "status": 200
+  },
+  {
+   "body": {
+    "advances": [
+     {
       "currency": "EUR",
       "paid": "100.00",
       "who": "A"

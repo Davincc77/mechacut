@@ -396,7 +396,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.37.0",
+    version="1.38.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -3107,7 +3107,10 @@ def run_money_settle(args: dict):
         return None, bad_request(
             [{"field": "settle", "message": str(e),
               "expected": "advances [{who, paid: decimal string, label?, "
-                          "split_between?, currency?}]; participants "
+                          "split_between?, currency?, kind "
+                          "cash|noncash, counts face|cash|"
+                          "none, value: decimal string when "
+                          "counts=cash}]; participants "
                           "[name | {name, weight?}]; waivers "
                           "[{from, to, amount?}]; mode net|itemized|"
                           "compare; rates {CODE: string} when currencies "
@@ -10478,7 +10481,18 @@ MCP_TOOLS = [
                        "never fetched (the transaction-date rate beats "
                        "the booking-date one — tryzedger 2026-11-14); "
                        "0- and 3-decimal settlement currencies refuse "
-                       "by name. Every answer replays each person's "
+                       "by name. A line can be kind='noncash' — "
+                       "points, a gift card, a coupon — and then "
+                       "counts is REQUIRED: face (nominal), cash "
+                       "(the cash the instrument cost: value "
+                       "argument, never fetched — CFPB rewards "
+                       "spotlight 2024-05: a point's value varies "
+                       "by redemption option), none (a note: "
+                       "neither pot nor ledger). r/askmath 1tuuael "
+                       "published 40.50 and 290.50 for ONE trip — "
+                       "half the face apart, a graph disagreement; "
+                       "the machine renders the reading you named. "
+                       "Every answer replays each person's "
                        "balance before returning or refuses. Free.",
         "inputSchema": {"type": "object",
                         "required": ["advances"],
@@ -10486,7 +10500,10 @@ MCP_TOOLS = [
                             "advances": {"type": "array",
                                          "description": "[{who, paid: "
                                          "decimal string, label?, "
-                                         "split_between?, currency?}]"},
+                                         "split_between?, currency?, "
+                                         "kind cash|noncash (+ "
+                                         "counts face|cash|none, "
+                                         "value when counts=cash)}]"},
                             "participants": {
                                 "type": "array",
                                 "description": "[name | {name, "

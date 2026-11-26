@@ -444,7 +444,8 @@ def test_onze_pins_soldeslu_adds_only():
     # b115 relève à 400 : +8 money_settle (adds-only, vecteurs du
     # fil r/askmath) ; b114 relève à 392 : +9 json_bigint
     # b116 relève à 410 : +10 agent_resultcliff (adds-only)
-    assert len(g) == 410
+    # b117 relève à 415 : +5 money_settle noncash (adds-only)
+    assert len(g) == 415
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 
