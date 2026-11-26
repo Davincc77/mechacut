@@ -53,7 +53,7 @@ def _p(body):
     return r.status_code, r.json()
 
 
-ORDER = ["http_ratelimit", "number_words_pair", "date_window", "date_deemed", "text_fold_report", "text_novel_words", "address_parse", "date_civil", "money_tip", "money_split", "date_slash_ambiguity", "stats_rate_ci", "pdf_provenance", "text_mojibake", "text_claimsweep", "doi_name_equivalence", "xbrl_decimals_calc_consistency", "fx_cross_named_direction", "fx_quote_cross", "seat_allocation", "erc20_raw_units", "eu_vat_rate_table", "json_canonical_rfc8785", "date_julian_gregorian", "sec_due_date_rule_0_3", "standings_tiebreak_named", "cvss_base_score", "ecb_target_reference_day", "ecb_rates_history", "pep440_sort", "spdx_expression", "display_eei_eu", "energy_class_eu", "series_date_order", "weighted_mean_exact", "sec_13f_value_unit"]
+ORDER = ['http_ratelimit', 'number_words_pair', 'date_window', 'date_deemed', 'text_fold_report', 'text_novel_words', 'address_parse', 'date_civil', 'money_tip', 'money_split', 'date_slash_ambiguity', 'stats_rate_ci', 'pdf_provenance', 'text_mojibake', 'text_claimsweep', 'doi_name_equivalence', 'xbrl_decimals_calc_consistency', 'fx_cross_named_direction', 'fx_quote_cross', 'seat_allocation', 'erc20_raw_units', 'eu_vat_rate_table', 'json_canonical_rfc8785', 'date_julian_gregorian', 'sec_due_date_rule_0_3', 'standings_tiebreak_named', 'cvss_base_score', 'ecb_target_reference_day', 'ecb_rates_history', 'pep440_sort', 'spdx_expression', 'display_eei_eu', 'energy_class_eu', 'series_date_order', 'weighted_mean_exact', 'sec_13f_value_unit', 'marc008_date_range', 'lcc_main_class', 'wayback_timestamp', 'warc_payload_digest', 'pdf_pdfa_claim', 'scholarly_preprint_id', 'date_edtf_interval', 'date_interval_within', 'date_partial', 'rounded_figure_consistency', 'theory_fit_sigma', 'els_scan_expected', 'benford_digit_test', 'stats_chi2_critical', 'eu_ccd_apr_annex', 'stats_chi2_gof', 'swhid_compute', 'forge_repo_url_equivalence', 'utc_tt_offset_named_table', 'shadow_length_sun_elevation', 'euro_legacy_convert', 'price_index_adjust', 'public_domain_status', 'geodesic_wgs84_inverse', 'horizon_hidden_height', 'median_time_past', 'easter_computus', 'maya_long_count']
 
 
 def test_l1_listed_in_file_order_with_said_dates():
@@ -64,15 +64,15 @@ def test_l1_listed_in_file_order_with_said_dates():
     # (l'audit adversarial Hermes), shipped 6->7. La garde des comptes
     # exacts EST le test du registre : quand il casse, c'est la
     # collection qui a grandi, et le pin s'incline devant le fichier.
+    # 27-11: vague 2 Grok (28 propositions SUSPECT-DUPLICATE consignees) —
+    # 64 rangees, proposed 49. Pin aligne sur le fichier (lit de la source).
     # 26-11 soir : le registre porte desormais AUSSI les candidates
     # maison (dogfood passe par la meme porte) — stats_rate_ci,
     # pdf_provenance, text_mojibake shipped + text_claimsweep d'abord en-banc puis SHIPPED 27-11 (127_hermes). Pin aligne sur le fichier ;
     # date_civil/address_parse flips accepted->shipped (outils reels
     # dans le manifest, le statut mentait). Pin aligne sur le fichier.
-    assert b["counts"]["status"] == {"shipped": 13, "accepted": 0,
-                                     "en-banc": 1, "refuse": 1,
-                                     "proposed": 21}
-    assert b["counts"]["total"] == 36
+    assert b["counts"]["status"] == {'shipped': 13, 'accepted': 0, 'en-banc': 1, 'refuse': 1, 'proposed': 49}
+    assert b["counts"]["total"] == 64
     for e in b["entries"]:
         assert len(e["arrival"]) == 10 and e["arrival"][4] == "-"
     assert b["registry"] == "docs/proposals/registry.jsonl"
@@ -81,13 +81,13 @@ def test_l1_listed_in_file_order_with_said_dates():
 def test_l2_latest_is_a_window_not_a_promise():
     s, b = _q({"latest": 3})
     assert [e["name"] for e in b["entries"]] == [
-        "series_date_order", "weighted_mean_exact",
-        "sec_13f_value_unit"]  # 3 derniers du fichier
-    assert b["counts"] == {"shown": 3, "total": 36}
-    s, b = _q({"latest": 36})
+        "median_time_past", "easter_computus",
+        "maya_long_count"]  # 3 derniers du fichier (maree vague 2)
+    assert b["counts"] == {"shown": 3, "total": 64}
+    s, b = _q({"latest": 64})
     assert [e["name"] for e in b["entries"]] == ORDER  # ordre du fichier
-    s, b = _q({"latest": 37})
-    assert b["counts"]["shown"] == 36  # up to, never exactly
+    s, b = _q({"latest": 65})
+    assert b["counts"]["shown"] == 64  # up to, never exactly
 
 
 def test_l3_search_one_named_proposal():
@@ -106,9 +106,8 @@ def test_l4_refused_carries_the_why_and_the_empty_is_a_fact():
     s, b = _q({"status": "en-banc"})
     assert [e["name"] for e in b["entries"]] == ["money_tip"]  # text_claimsweep shipped (flip b127)
     s, b = _q({"status": "proposed"})
-    assert [e["name"] for e in b["entries"]] == [
-        "doi_name_equivalence", "xbrl_decimals_calc_consistency", "fx_cross_named_direction", "fx_quote_cross", "seat_allocation", "erc20_raw_units", "eu_vat_rate_table", "json_canonical_rfc8785", "date_julian_gregorian", "sec_due_date_rule_0_3", "standings_tiebreak_named", "cvss_base_score", "ecb_target_reference_day", "ecb_rates_history", "pep440_sort", "spdx_expression", "display_eei_eu", "energy_class_eu", "series_date_order", "weighted_mean_exact", "sec_13f_value_unit"]
-    assert b["counts"]["shown"] == 21  # maree Grok consignee, blobs au fil des GO
+    assert [e["name"] for e in b["entries"]] == ['doi_name_equivalence', 'xbrl_decimals_calc_consistency', 'fx_cross_named_direction', 'fx_quote_cross', 'seat_allocation', 'erc20_raw_units', 'eu_vat_rate_table', 'json_canonical_rfc8785', 'date_julian_gregorian', 'sec_due_date_rule_0_3', 'standings_tiebreak_named', 'cvss_base_score', 'ecb_target_reference_day', 'ecb_rates_history', 'pep440_sort', 'spdx_expression', 'display_eei_eu', 'energy_class_eu', 'series_date_order', 'weighted_mean_exact', 'sec_13f_value_unit', 'marc008_date_range', 'lcc_main_class', 'wayback_timestamp', 'warc_payload_digest', 'pdf_pdfa_claim', 'scholarly_preprint_id', 'date_edtf_interval', 'date_interval_within', 'date_partial', 'rounded_figure_consistency', 'theory_fit_sigma', 'els_scan_expected', 'benford_digit_test', 'stats_chi2_critical', 'eu_ccd_apr_annex', 'stats_chi2_gof', 'swhid_compute', 'forge_repo_url_equivalence', 'utc_tt_offset_named_table', 'shadow_length_sun_elevation', 'euro_legacy_convert', 'price_index_adjust', 'public_domain_status', 'geodesic_wgs84_inverse', 'horizon_hidden_height', 'median_time_past', 'easter_computus', 'maya_long_count']
+    assert b["counts"]["shown"] == 49  # maree Grok vagues 1+2 consignees (21+28), blobs au fil des GO
 
 def test_l5_grammars_are_named():
     s, b = _q({"latest": 0})
@@ -145,9 +144,10 @@ def test_b90_surfaces():
     assert "/api/v1/agent/proposals" in m
     page = client.get("/proposals", headers={
         "Accept": "text/html"}).text
-    # 26-11 maree Grok : la fenetre des 10 derniers arrivages montre des
-    #ormais les rangees 27-36 du fichier ; money_tip/money_split sont sortis
-    # de la fenetre — le fenetrage est une fenetre, pas une promesse.
-    assert "cvss_base_score" in page and "sec_13f_value_unit" in page
-    assert "money_tip" not in page
+    # 27-11 maree vague 2 (28 arrivages) : la fenetre des 10 derniers
+    # montre desormais les rangees 55-64 ; cvss_base_score et
+    # sec_13f_value_unit sont sortis de la fenetre — le fenetrage est une
+    # fenetre, pas une promesse ; tout reste dans les donnees brutes.
+    assert "utc_tt_offset_named_table" in page and "maya_long_count" in page
+    assert "cvss_base_score" not in page and "money_tip" not in page
     assert "Dernières arrivées" in page or "Latest arrivals" in page
