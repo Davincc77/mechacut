@@ -1,0 +1,12 @@
+{
+  "name": "money_prorate_bankers_month",
+  "path": "/api/v1/money/prorate",
+  "body": {
+    "amount": "1000",
+    "cycle_start": "2026-01-01",
+    "cycle_end": "2026-01-31",
+    "service_start": "2026-01-15",
+    "service_end": "2026-01-31",
+    "basis": "month30"
+  }
+}

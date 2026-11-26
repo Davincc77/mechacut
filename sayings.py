@@ -441,9 +441,12 @@ SAY = {
         "fr": "un euro vaut combien de réais aujourd'hui ? et au 6 novembre ?",
         "pt": "quanto está o dólar hoje? e no dia 6 de novembro?"},
     "/api/v1/money/prorate": {
-        "en": "prorate $1,200 over 47 days",
-        "fr": "prorate 1 200 € sur 47 jours",
-        "pt": "prorrateie R$ 1.200 por 47 dias"},
+        "en": "prorate $1,229 lease 19/30 — landlord's 30-day month "
+              "and real days, named, with the gap",
+        "fr": "prorata du loyer 1 229 € sur 19 jours — mois de 30 "
+              "du bail et jours réels, nommés, avec l'écart",
+        "pt": "prorratizar aluguel R$ 1.229 por 19 dias — mês de 30 "
+              "do contrato e dias reais, nomeados, com a diferença"},
     "/api/v1/money/amortize": {
         "en": "schedule a $15,000 loan at 4.5% over 24 months",
         "fr": "tableau d'un prêt de 15 000 € à 4,5 % sur 24 mois",

@@ -59,7 +59,7 @@ POST /api/v1/num/round        exact Decimal rounding (banker's, sig digits)
 
 Bundle 4.2 — units & money (TOOLS-50 #27-29):
 POST /api/v1/units/convert    closed families, exact rational factors
-POST /api/v1/money/prorate    amount x covered/cycle days, rounded last (paid)
+POST /api/v1/money/prorate    amount x covered/basis; basis, order, pair NAMED (paid)
 POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/61-90/90+ (free)
 POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, cent-exact (free)
 POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences pointées (free)
@@ -396,7 +396,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.39.0",
+    version="1.40.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1621,6 +1621,9 @@ class MoneyProrateRequest(BaseModel):
     mode: Literal["half_even", "half_up", "ceil", "floor", "trunc"] = "half_up"
     inclusive: bool = True
     clamp: bool = True
+    basis: Literal["cycle", "month30", "year365"] = "cycle"
+    order: Literal["product", "quotient"] = "product"
+    compare: bool = False
 
 
 def run_money_prorate(args: dict):
@@ -1628,11 +1631,41 @@ def run_money_prorate(args: dict):
         req = MoneyProrateRequest(**args)
     except Exception as e:
         return None, bad_request(_pyd_errors(e))
+    date_fields = ("cycle_start", "cycle_end", "service_start",
+                   "service_end")
     try:
         out = money.money_prorate(req.amount, req.cycle_start, req.cycle_end,
                                   req.service_start, req.service_end,
                                   req.places, req.mode, req.inclusive,
-                                  req.clamp)
+                                  req.clamp, req.basis, req.order,
+                                  req.compare)
+    except money.GrainRefusal as g:
+        # The refusal names itself AND shows the two whole-day readings
+        # when the moment has an honest date part: the cevz6l fight is
+        # 12-vs-11, never 11.5.
+        entry = {"field": g.field, "message": str(g),
+                 "expected": "calendar date YYYY-MM-DD -- the bound is "
+                             "named via inclusive true (move-out day "
+                             "counted) / false (not counted)"}
+        parts = {f: money.grain_date_part(getattr(req, f))
+                 for f in date_fields}
+        if all(v is not None for v in parts.values()):
+            readings = {}
+            for bound, label in ((True, "move_out_day_counted"),
+                                 (False, "move_out_day_free")):
+                try:
+                    r = money.money_prorate(
+                        req.amount, parts["cycle_start"],
+                        parts["cycle_end"], parts["service_start"],
+                        parts["service_end"], req.places, req.mode,
+                        bound, req.clamp, req.basis, req.order)
+                    readings[label] = r["prorated"]
+                except money.MoneyError:
+                    readings = {}
+                    break
+            if readings:
+                entry["readings"] = readings
+        return None, bad_request([entry])
     except money.MoneyError as e:
         return None, bad_request(
             [{"field": "amount", "message": str(e),
@@ -8093,9 +8126,15 @@ MCP_TOOLS = [
         "name": "money_prorate",
         "description": (
             "Prorate a cycle amount over a service window: prorated = "
-            "amount * covered_days / cycle_days, exact fraction reported, "
-            "rounding is the last step (half_up default), window clamped "
-            "to the cycle. Paid route (x402 from first call)."
+            "amount * covered_days / divisor, exact fraction reported. "
+            "Conventions are NAMED, never picked in silence: basis "
+            "cycle|month30 (banker's month) |year365, order product "
+            "(round last) |quotient (round the daily rate first, the "
+            "landlord formula), compare=true renders both orders with "
+            "the signed delta and the two objects (occupied vs "
+            "unoccupied, sum identity). A date carrying a time is "
+            "REFUSED by name with the two whole-day readings. Paid "
+            "route (x402 from first call)."
         ),
         "inputSchema": {
             "type": "object",
@@ -8113,6 +8152,13 @@ MCP_TOOLS = [
                                   "trunc"], "default": "half_up"},
                 "inclusive": {"type": "boolean", "default": True},
                 "clamp": {"type": "boolean", "default": True},
+                "basis": {"type": "string",
+                          "enum": ["cycle", "month30", "year365"],
+                          "default": "cycle"},
+                "order": {"type": "string",
+                          "enum": ["product", "quotient"],
+                          "default": "product"},
+                "compare": {"type": "boolean", "default": False},
             },
         },
     },

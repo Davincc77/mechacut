@@ -6,6 +6,7 @@ The rounding step is the LAST operation and its mode is explicit.
 
 from decimal import Decimal, ROUND_HALF_EVEN, ROUND_HALF_UP, ROUND_CEILING, \
     ROUND_FLOOR, ROUND_DOWN
+import re
 
 from numfmt import _dec  # shared value -> Decimal coercion (raises NumberError)
 from dates import parse_date, DateError
@@ -26,7 +27,8 @@ def _d(s):
 
 def money_prorate(amount, cycle_start, cycle_end, service_start, service_end,
                   places=2, mode="half_up", inclusive=True,
-                  clamp=True):
+                  clamp=True, basis="cycle", order="product",
+                  compare=False):
     """Pro-rate `amount` (the full-cycle price) over the service window
     inside a billing cycle. Rule (documented, closed):
 
@@ -36,7 +38,57 @@ def money_prorate(amount, cycle_start, cycle_end, service_start, service_end,
     ends when `inclusive` (the default); service window clamped to the cycle
     when `clamp` (else days outside simply don't count). covered_days uses
     the same inclusiveness. Exact fraction reported before rounding.
+
+    CONVENTIONS (bundle 119) -- the rent-proration fight published in
+    full: r/personalfinance 9sqw2j (two formulas in ONE thread:
+    "1000/30 = 33.33 per day x 18 = 600" -- the poster rounds his own
+    result silently -- and "[19/30]x[1229]" with the other bound),
+    r/Landlord 1hitzjq (the banker's month as published rule: "divided
+    by 30 days, REGARDLESS of actual number of days"), r/RealEstate
+    1idq3vr (the annual-over-365 rule: "(annual rent / 365) x 22"),
+    r/Landlord 1fep9e6 (the move-out-day bound named by the landlord
+    himself) and r/legaladvice 66vwu9 (noon vs midnight: a DATE is not
+    a MOMENT). Three closed sets, every member named by the people who
+    use it -- we name them, we never pick one in silence:
+
+      basis:  "cycle"   -- denominator = days in the cycle window (28,
+                          29, 30 or 31). The default, legacy-stable.
+              "month30" -- banker's / landlord month: daily rate always
+                          = amount / 30, whatever the real month.
+              "year365" -- amount is monthly; daily rate = amount*12/365.
+      order:  "product"  -- multiply first, round LAST (one rounding).
+              "quotient" -- the landlord's formula: round the DAILY rate
+                          to `places` first, then multiply by days.
+      compare -- adds the "conventions" block: both orders side by side
+                          with the signed delta, and the two OBJECTS
+                          (occupied vs unoccupied) with the sum identity
+                          -- r/personalfinance 1b5p04y: the same word
+                          "prorated" meant the partial month payment in
+                          one lease and the end-of-lease-to-end-of-month
+                          delta in the renewal, and the tenant fought a
+                          phantom error with true numbers.
+
+    Defaults (basis=cycle, order=product, compare=False) render the
+    pre-119 output byte for byte -- the settle contract, mirrored.
+    A date carrying a TIME (noon on the 12th, epoch, RFC header) is
+    REFUSED BY NAME: no thread publishes a day fraction as a unit;
+    the two published readings of a noon lease are day 12 counted or
+    not -- that is the `inclusive` argument, never 11.5.
     """
+    _refuse_time_grain(cycle_start, "cycle_start")
+    _refuse_time_grain(cycle_end, "cycle_end")
+    _refuse_time_grain(service_start, "service_start")
+    _refuse_time_grain(service_end, "service_end")
+    if basis not in ("cycle", "month30", "year365"):
+        raise MoneyError("basis must be cycle|month30|year365 (closed set) "
+                         "-- cycle = real days of the window, month30 = the "
+                         "banker's month (r/Landlord 1hitzjq), year365 = "
+                         "amount*12/365 daily (r/RealEstate 1idq3vr)")
+    if order not in ("product", "quotient"):
+        raise MoneyError("order must be product|quotient (closed set) "
+                         "-- product rounds once at the end, quotient "
+                         "rounds the daily rate first (the landlord's "
+                         "formula in r/personalfinance 9sqw2j)")
     try:
         cs = parse_date(cycle_start)["date"]
         ce = parse_date(cycle_end)["date"]
@@ -67,19 +119,122 @@ def money_prorate(amount, cycle_start, cycle_end, service_start, service_end,
     if places < 0 or places > 12 or mode not in _MODES:
         raise MoneyError("places must be 0-12 and mode one of "
                          + ", ".join(sorted(_MODES)))
-    exact = amt * Decimal(covered) / Decimal(cycle_days)
-    rounded = exact.quantize(Decimal(1).scaleb(-places),
-                             rounding=_MODES[mode])
-    return {
-        "prorated": format(rounded, "f"),
+    q = Decimal(1).scaleb(-places)
+    # Daily rate before any rounding, per the named basis. cycle is the
+    # legacy line; month30 is the banker's month (1hitzjq: "divided by
+    # 30 days, REGARDLESS"); year365 treats the amount as monthly and
+    # prices the day at amount*12/365 (1idq3vr top rule).
+    if basis == "cycle":
+        daily = amt / Decimal(cycle_days)
+        num, den = covered, cycle_days
+    elif basis == "month30":
+        daily = amt / Decimal(30)
+        num, den = covered, 30
+    else:  # year365
+        daily = amt * 12 / Decimal(365)
+        num, den = covered * 12, 365
+    # Legacy operation order preserved for basis=cycle (amt * covered
+    # first, divide after) -- the 28-significant-digit rounding of the
+    # two orders is not always identical, and the default render must
+    # stay byte-identical to the pre-119 module.
+    product_exact = amt * Decimal(num) / Decimal(den)
+    ratio = {"numerator": num, "denominator": den}
+    prod = product_exact.quantize(q, rounding=_MODES[mode])
+    daily_r = daily.quantize(q, rounding=_MODES[mode])
+    quot = daily_r * Decimal(covered)
+    chosen = quot if order == "quotient" else prod
+    out = {
+        "prorated": format(chosen, "f"),
         "amount": format(amt, "f"),
         "covered_days": covered,
         "cycle_days": cycle_days,
-        "ratio": {"numerator": covered, "denominator": cycle_days},
-        "exact_decimal": format(exact.quantize(
+        "ratio": ratio,
+        "exact_decimal": format((quot if order == "quotient" else
+                                 product_exact).quantize(
             Decimal(1).scaleb(-12), rounding=ROUND_HALF_EVEN), "f"),
         "places": places, "mode": mode, "inclusive": inclusive,
     }
+    invoked = basis != "cycle" or order != "product" or compare
+    if invoked:
+        out["basis"] = basis
+        out["order"] = order
+    if order == "quotient":
+        # The rounded daily IS the instrument: show the rate the whole
+        # convention multiplies, so 33.33x18=599.94 is auditable at a
+        # glance (9sqw2j's poster rounds his result instead).
+        out["daily_rounded"] = format(daily_r, "f")
+    if compare:
+        # The pair render: both orders side by side with the signed
+        # delta, and both OBJECTS of the same word (1b5p04y). Never a
+        # silent average: the delta IS the negotiation.
+        out["conventions"] = {
+            "orders": {
+                "product": format(prod, "f"),
+                "quotient": format(quot, "f"),
+                "delta_product_minus_quotient":
+                    format(prod - quot, "f"),
+                "chosen": order,
+            },
+            "objects": {
+                "occupied": format(chosen, "f"),
+                "unoccupied": format(amt - chosen, "f"),
+                "amount": format(amt, "f"),
+                "sum_equals_amount":
+                    (chosen + (amt - chosen)) == amt,
+            },
+        }
+    return out
+
+
+_EPOCH_RE = re.compile(r"-?\d{8,}(?:\.\d+)?\Z")
+_WEEKDAY_RE = re.compile(r"^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,\s", re.I)
+_MOMENT_RE = re.compile(r"\d{4}-\d{2}-\d{2}[ T]\d")
+
+
+class GrainRefusal(MoneyError):
+    """A date argument carrying a MOMENT on the prorate path (bundle
+    119). Carries field+value so the route layer can show the two
+    whole-day readings instead of only the refusal."""
+
+    def __init__(self, field, value):
+        self.field = field
+        self.value = value
+        MoneyError.__init__(
+            self,
+            "REFUSED_DAY_GRAIN: %s='%s' names a moment; prorate counts "
+            "whole days. A lease ending 'at noon on the 12th' has "
+            "exactly two published readings (r/personalfinance cevz6l, "
+            "r/legaladvice 66vwu9): the move-out day counted "
+            "(inclusive=true) or not (inclusive=false). Nobody "
+            "publishes 11.5 as a unit -- pass the calendar date and "
+            "name the bound." % (field, value))
+
+
+def _refuse_time_grain(value, field):
+    """Prorate counts WHOLE days. A value that carries a time (epoch,
+    HH:MM, ISO with T, RFC weekday header) is refused by name -- the
+    silent date-truncation of a noon lease was itself the convention
+    pick this bundle exists to kill."""
+    s = str(value).strip()
+    if (_EPOCH_RE.fullmatch(s) or ":" in s or _WEEKDAY_RE.match(s)
+            or _MOMENT_RE.search(s)):
+        raise GrainRefusal(field, s)
+
+
+def grain_date_part(value):
+    """Best-effort calendar-date extraction from a moment string, for
+    the refusal's two readings. Returns None when no honest date part
+    exists (epoch) -- the readings are then omitted, never guessed."""
+    s = str(value).strip()
+    m = re.match(r"(\d{4}-\d{2}-\d{2})", s)
+    if m:
+        return m.group(1)
+    if _EPOCH_RE.fullmatch(s) or _WEEKDAY_RE.match(s):
+        return None
+    try:
+        return parse_date(s)["date"][:10]
+    except DateError:
+        return None
 
 
 def money_split(total, participants, mode="remainder_order"):

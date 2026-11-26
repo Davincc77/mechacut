@@ -141,9 +141,12 @@ TABLE = (
      "units convert measure length weight temperature volume area speed "
      "fahrenheit celsius miles km ounces grams acres nautical unidades"),
     ("money_prorate", "/api/v1/money/prorate", "numbers",
-     "exact proration before last rounding",
+     "proration with named basis and order",
      "money prorate split invoice tax period days fraction refund "
-     "subscription cancel unused prorata"),
+     "subscription cancel unused prorata loyer bail rent lease "
+     "prorated banker month annual coloc colocataire divise "
+     "diviser divisez prorrateio proporcional rateio contrato "
+     "aluguel"),
     ("money_aging", "/api/v1/money/aging", "numbers",
      "due-date aging of receivables into buckets",
      "aging overdue unpaid receivable invoice due dunning relance "
@@ -1724,6 +1727,14 @@ def route(query, top=5):
                 "leuven", "louvain", "charleroi", "wallonie", "brabant"):
             vbelg = True
         st = _stem(t)
+        # CLASSE b119 — les token D'UN CARACTERE NE SCORENT JAMAIS :
+        # l'elision FR « n'existent » produisait le token « n » et un
+        # leurre d'opinion atteignait CONF_FLOOR (4) chez
+        # date_tz_ambiguity via purpose-word. Generalisation du piege
+        # b81 des tags-« 1 » : une forme trop courte est un signal
+        # vide, dans les deux sens de la table.
+        if len(st) < 2:
+            continue
         if st not in seen:
             seen.add(st)
             toks.append(st)

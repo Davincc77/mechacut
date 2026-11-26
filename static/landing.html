@@ -649,7 +649,8 @@
     return (pack === "all" || c.dataset.pack === pack) &&
            (tier === "all" || c.dataset.tier === tier) &&
            (!topmode || w !== "" || c.dataset.top === "1") &&
-           (!w || c.dataset.hay.indexOf(w) >= 0);
+           (!w || c.dataset.tool.indexOf(w) >= 0 ||
+                  c.dataset.hay.indexOf(w) >= 0);
   }
   function apply() {
     var n = 0;

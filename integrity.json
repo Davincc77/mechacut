@@ -4325,6 +4325,69 @@
   },
   {
    "body": {
+    "amount": "1000",
+    "basis": "month30",
+    "cycle_end": "2026-01-31",
+    "cycle_start": "2026-01-01",
+    "service_end": "2026-01-31",
+    "service_start": "2026-01-15"
+   },
+   "name": "money_prorate_bankers_month",
+   "path": "/api/v1/money/prorate",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "9a397653da0d16b45041d7f4065fe3b75a4df8d8398e7923f71b8a0815263208",
+   "status": 200
+  },
+  {
+   "body": {
+    "amount": "1229",
+    "compare": true,
+    "cycle_end": "2018-11-30",
+    "cycle_start": "2018-11-01",
+    "service_end": "2018-11-19",
+    "service_start": "2018-11-01"
+   },
+   "name": "money_prorate_compare_pair",
+   "path": "/api/v1/money/prorate",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "78193a363a933eade8f9774b6a68efb652f4ddd65963c23b7b90a38d8e58372c",
+   "status": 200
+  },
+  {
+   "body": {
+    "amount": "1000",
+    "cycle_end": "2018-11-30",
+    "cycle_start": "2018-11-01",
+    "order": "quotient",
+    "service_end": "2018-11-18",
+    "service_start": "2018-11-01"
+   },
+   "name": "money_prorate_landlord_quotient",
+   "path": "/api/v1/money/prorate",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "5a0b7a0ed4d833e21fa2647c73be5fa2e565ea077990f76972a81029b629cdab",
+   "status": 200
+  },
+  {
+   "body": {
+    "amount": "1500",
+    "cycle_end": "2018-08-31",
+    "cycle_start": "2018-08-01",
+    "service_end": "2018-08-12T12:00",
+    "service_start": "2018-08-01"
+   },
+   "name": "money_prorate_noon_refusal",
+   "path": "/api/v1/money/prorate",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "ee2d0645c20ff93d3ed56dc5142787fe4a55be01b3e094e7e48061e04e85058f",
+   "status": 400
+  },
+  {
+   "body": {
     "amount": "100.00",
     "cycle_end": "2026-11-30",
     "cycle_start": "2026-11-01",
@@ -4336,6 +4399,22 @@
    "price_atomic": "500",
    "requires_payment": true,
    "sha256": "a9ba97f060b8f3d72dbc688d88d86d3da50b5059545cdd2179eba2a61476bb90",
+   "status": 200
+  },
+  {
+   "body": {
+    "amount": "1000",
+    "basis": "year365",
+    "cycle_end": "2026-01-31",
+    "cycle_start": "2026-01-01",
+    "service_end": "2026-01-31",
+    "service_start": "2026-01-15"
+   },
+   "name": "money_prorate_year365_january",
+   "path": "/api/v1/money/prorate",
+   "price_atomic": "500",
+   "requires_payment": true,
+   "sha256": "eda635e35eef7dc1bff98f0463f5a4b1a928c3fc452627d2b4dfe5477e586903",
    "status": 200
   },
   {

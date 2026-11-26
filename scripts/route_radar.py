@@ -675,6 +675,36 @@ CASES = [
      "agent_resultcliff"),
     ("ativa as ferramentas mcp no onyx e deu tokens insuficientes antes de rodar",
      "agent_mcpaudit"),
+    # CLASSE b119 — la GUERRE DU PRORATA (money_prorate). Aiguilles
+    # x3 langues issues des fils LUS AU SOURCE (9sqw2j, 1hitzjq,
+    # 1idq3vr, cevz6l) : chaque formule publiee doit tomber chez
+    # prorate, jamais chez la fratrie (settle/split/points).
+    ("prorate my rent at the banker's month for 17 days of january",
+     "money_prorate"),
+    ("annual rent divided by 365 times 22 days — the prorated month",
+     "money_prorate"),
+    ("my lease ends at noon the 12th — 12 days or 11 prorated",
+     "money_prorate"),
+    ("mon bail finit a midi le 12 — prorata sur 12 jours ou 11",
+     "money_prorate"),
+    ("le bailleur divise par 30 peu importe le mois — prorata loyer 17 jours de janvier",
+     "money_prorate"),
+    ("coloc : loyer prorata de 19 jours sur 30 sur 1229 — rends les deux formules",
+     "money_prorate"),
+    ("o escritorio faz rateio do aluguel por 30 independentemente do mes — 17 dias de janeiro",
+     "money_prorate"),
+    ("meu contrato acaba ao meio-dia do dia 12 — 12 dias ou 11 no prorrateio",
+     "money_prorate"),
+    ("aluguel anual dividido por 365 vezes 22 dias — o mes proporcional",
+     "money_prorate"),
+    # LEURRE DE CLASSE (b119, discipline b117/it.18) : phrase sans
+    # donnee ni mot d'outil — ne doit RIEN prescrire. NOTE : une
+    # phrase MOTIVEE qui porte le mot « prorating » route chez un
+    # destination honnete qui refuse par arguments (400 nomme) —
+    # classe b117, pas un OVERMATCH ; leurre retire de ce test pour
+    # ne pas mentir sur sa propre table (it. 18 bis).
+    ("pourquoi les agences existent si elles n'expliquent jamais rien",
+     None),
 ]
 
 

@@ -417,9 +417,11 @@ def test_ten_new_pins_are_replayable():
     # b118 relève à 418 : +3 agent_resultcliff onyx (adds-only, le
     # vecteur #16312 843719−2032226 rejoué, le refus nommé, la
     # frontière marge 0)
+    # b119 relève à 423 : +5 money_prorate conventions (adds-only —
+    # golden continuity prouve les 418 hash-à-hash)
     # matrice #97622 rejouée, les portes codex/bionic/rakazo/vscode,
     # la notice hermes calculée à la main, le mode all-rows).
-    assert len(g) == 418
+    assert len(g) == 423
 
 
 def test_fr_response_byte_contract():
