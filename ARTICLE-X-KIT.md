@@ -5,13 +5,26 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 26-11 09h25: 188 transforms + 9 recipes
-(unchanged — b118 grew the /agent/result-cliff TABLE by one harness row, it did
-not add a tool — and growing holds: the suite, the pins and the readings all
-moved),
-suite 2 084 passed 2 skipped, pins 418, manifest 212 lines / 8,934 bytes, prod
-v1.39.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b118: the cliff table answers ONYX — a harness that cuts
+name, Git URL, or owner/repo). NUMBERS 26-11 11h50: 188 transforms + 9 recipes
+(unchanged — b119 NAMED the rent conventions on /money/prorate, it did not add
+a tool — and growing holds: the suite, the pins and the readings all moved),
+suite 2 095 passed 2 skipped, pins 423, manifest 212 lines / 8,934 bytes, prod
+v1.40.0 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b119: the rent-proration fight is now a PAIR render — 9sqw2j
+posts "1000/30=33.33×18=600" (it rounded twice silently; the landlord's way
+gives 599.94), 1hitzjq bills the banker's month "/30 REGARDLESS" — 566.67 vs
+548.39 on the SAME 31-day January, 1idq3vr publishes the annual/365 rule,
+1b5p04y's "prorated $127.55" vs the $1,354 billed is TWO OBJECTS under one
+word, and cevz6l's noon-on-the-12th is refused by name WITH the two whole-day
+counts — nobody publishes 11.5 as a unit; defaults replay the bundle-4 bytes
+exactly, the 418 prior hashes intact hash-for-hash; iterations 22-23 of "the
+artifact lies": my own corpus's FR elision made a ONE-CHARACTER token that
+reached CONF_FLOOR on a tool nobody asked — single-char tokens never score
+now; and the /misses.json demand window cannot tell an agent from a monitor —
+named, queued, not built; structural: the tool NAME left the landing
+data-hay (the data-tool JS clause already covers it) — ~2,700 bytes RETURNED
+per page, pages served 178,378 / 178,669 / 178,781, all three breathing under
+181,000 again; previous b118: the cliff table answers ONYX — a harness that cuts
 NOTHING, the provider rejecting the whole request IS the cliff; the published
 vector of #16312 (Required 2032226 / Available 843719 → margin −1,188,507)
 replays IN PROD; MAX_TOOL_RESULT_TOKENS 20,000 ships as STATUS, never as law,

@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 188 + 9, vérifiés live 26-11 09h25, prod 1.39.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 188 + 9, vérifiés live 26-11 11h50, prod 1.40.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -167,7 +167,23 @@ ment », pêchée par MA SONDE LOCALE : trois de mes leurres tombaient sur
 routeur — la question 5 vaut aussi pour les leurres. PT était la page serrée
 — payée PAR LE PORTUGAL (8 serrages à claims constants). prod 1.38.0, suite
 2 072 passed 2 skipped, pins 415, manifest 212 lignes / 8 934 octets INTACT,
-pages SERVIES 180 988 / 180 942 / 180 993 — les trois sous 181 000.)
+pages SERVIES 180 988 / 180 942 / 180 993 — les trois sous 181 000.) ;
+(p) 26-11 11h50 : pas d'outil neuf — conventions NOMMÉES sur l'entrée
+/money/prorate existante (bundle119, lentille HUMAIN) : basis
+cycle|month30|year365, order product|quotient, compare = PAIRE rendue avec
+écart signé + identité occupied+unoccupied=amount ; six fils lus AU SOURCE
+(9sqw2j, 1hitzjq, 1idq3vr, 1fep9e6, cevz6l, 1b5p04y) — un mot, QUATRE
+formules publiées, zéro nommées par les calculateurs ; midi n'est pas une
+unité : refus nommé AVEC les deux comptes entiers. Défauts = gel bundle 4
+octet pour octet (418 hash précédents INTACTS). STRUCTUREL : le name est
+sorti du data-hay landing (~2 700 octets rendus PAR page, la clause
+data-tool du JS couvre la recherche) ; itérations 22-23 de « l'artefact
+ment » pêchées par l'outillage maison : token d'un caractère passant le
+CONF_FLOOR (élision FR), et fenêtre /misses.json incapable de distinguer
+l'agent du moniteur — nommée, consignée, non bâtie. prod 1.40.0, suite
+2 095 passed 2 skipped, pins 423, manifest 212 lignes / 8 934 octets
+INTACT, pages SERVIES 178 378 / 178 669 / 178 781 — les trois sous
+181 000, marge retrouvée sans élaguer une claim de plus.)
 
 ---
 

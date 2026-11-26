@@ -5,16 +5,29 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 188 transforms + 9 named recipes as of v1.39.0, each with its tool card
+— 188 transforms + 9 named recipes as of v1.40.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 418 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 423 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money_settle` NON-CASH MODE (THE 500
+is the truth of today. Recent highlights: `money_prorate` RENT
+CONVENTIONS NAMED (the same lease posts FOUR formulas: 1000/30=33.33×18
+"= 600" rounds SILENTLY twice — the landlord's own way gives 599.94
+(r/personalfinance 9sqw2j); the office splits "/30 days, REGARDLESS of
+actual number of days" — 566.67 vs 548.39 on a 31-day January
+(r/Landlord 1hitzjq); the annual/365 rule is published too (r/RealEstate
+1idq3vr); and "prorated $127.55" vs the $1,354 billed is TWO OBJECTS
+under one word (r/personalfinance 1b5p04y). basis cycle|month30|year365,
+order product|quotient are ARGUMENTS; compare renders the pair with the
+signed delta and occupied+unoccupied=amount; a date carrying a TIME is
+refused by name WITH the two whole-day counts — nobody publishes 11.5 as
+a unit, 12-or-11 is the `inclusive` bound (r/personalfinance cevz6l);
+defaults replay the bundle-4 bytes exactly); then `money_settle`
+NON-CASH MODE (THE 500
 DOLLARS OF POINTS: the same trip publishes two answers — 40.50 counting the
 instrument in FACE against its provider, 290.50 giving the credit and splitting
 only the cash (r/askmath 1tuuael; the gap is exactly half the face — a graph
