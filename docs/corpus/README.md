@@ -40,3 +40,4 @@ Re-derivation contract: every row's URL was fetched and hashed as
 received; re-running the detectors means `curl <url>` + the needle
 families listed in the case study (or, once it ships, one
 `text_mojibake` call). A ledger that cannot be re-curlied is prose.
+- `wave6-attestations.json` — 20 stablecoin examination-report PDFs (Circle, 2025-2026), provenance verdicts by the door v1.48.0: 20/20 dates ordered, lag +1 month uniform, 12 distinct increasing Acrobat builds — the clean longitudinal control against the frozen-template finding; the same wave that caught v1 blind to ObjStm and forced the same-day revision.

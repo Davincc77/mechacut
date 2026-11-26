@@ -48,3 +48,5 @@ session artifact.
   results; row 1's demand evidence doubled; rows 2+7 merged. None proposed to
   the door yet — next session: propose #6 (stats_rate_ci) and #2/7
   (pdf_provenance) with hand-traced golds, then arbitrate text_mojibake.
+
+16. pdf_provenance MULTI-LOCATION: two-layer Info (inner PDFKit.NET in ObjStm under outer Acrobat re-save) — v1.48 reports last-wins from ONE location; surfacing per-location producers would serve forensics. 1 occurrence (wave 6, 27-11).

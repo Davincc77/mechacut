@@ -128,8 +128,10 @@ fraudes IA" until a wave proves a number on it.
 
 ## Program
 
-Order: (1) stablecoin attestations → (2) elections → (3) EPREL →
-(4) EDC education → (5) IATI. Each = one wave: collect → batch at the
-door → attribute → ledger in docs/corpus/ → case study in the house
-skeleton → copy-audit → commit. CourtListener/professions remains
-parked pending the account token.
+Order (Vince 27-11): (1) stablecoin attestations → (2) elections →
+(3) EPREL → **academia/scientific publishing (Crossref, ORCID,
+template-freeze on journals — promoted from second wave, named by the
+human)** → EDC education → IATI → EUTL. Each = one wave: collect →
+batch at the door → attribute → ledger in docs/corpus/ → case study in
+the house skeleton → copy-audit → commit. CourtListener/professions
+remains parked pending the account token.
