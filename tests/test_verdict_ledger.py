@@ -104,10 +104,45 @@ def test_non_build_verdicts_cite_their_journal_line():
 
 
 def test_door_section_keeps_the_empty_register_honest():
+    # ÈRE 2 (26-11) : la porte a reçu ses premiers dossiers —
+    # address_state, validate_cnpj, text_mojibake. L'invariance n'est
+    # plus « vide mais honnête », c'est « rempli mais adossé » : chaque
+    # ligne de la section porte cite un dossier blob suivi, et le
+    # « No entries yet » n'a pas le droit de survivre à la première
+    # ligne réelle (index qui nie ce qu'il contient = classe b87).
     door = PAGE.split("## Via threads")[0]
     assert "agent/propose" in door
-    assert "No entries yet" in door, \
-        "door section may not fake receipts before the first blob"
+    rows = [l for l in door.splitlines() if l.strip().startswith("| 2026-")]
+    if "No entries yet" in door:
+        assert not rows, "empty-register wording while door rows exist"
+    import json
+    tracked = set(subprocess.run(["git", "ls-files"], cwd=ROOT,
+                                 capture_output=True, text=True).stdout.split())
+    for line in rows:
+        blobs = re.findall(r"docs/proposals/([a-z0-9_]+)\.json", line)
+        assert blobs, "door row without a docs/proposals/ blob citation"
+        for b in blobs:
+            p = "docs/proposals/%s.json" % b
+            assert p in tracked, "door row cites an untracked blob: %s" % p
+            d = json.loads((ROOT / p).read_text(encoding="utf-8"))
+            name = d.get("name") or d.get("blob", {}).get("name")
+            assert name, "blob dossier without a name: %s" % p
+
+
+def test_every_blob_dossier_has_a_row():
+    # sens inverse : docs/proposals/*.json de forme blob (name ou
+    # examples) DOIT avoir sa ligne — l'index suit le dossier, jamais
+    # l'inverse en silence. Les mappings (splitters.json) ne sont pas
+    # des asks et n'ont pas de ligne à fermer.
+    import json
+    inbox = ROOT / "docs" / "proposals"
+    for fn in sorted(inbox.glob("*.json")):
+        d = json.loads(fn.read_text(encoding="utf-8"))
+        if "name" not in d and "examples" not in d.get("blob", {}):
+            continue
+        key = d.get("name") or d["blob"]["name"]
+        assert key in PAGE, ("docs/proposals/%s exists but VERDICTS.md "
+                             "carries no row for '%s'" % (fn.name, key))
 
 
 def test_inbox_readme_matches_the_doors_promise():

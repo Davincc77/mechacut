@@ -26,10 +26,9 @@ land as `docs/proposals/<name>.json` — inbox rules:
 
 | received | who · where | the ask | verdict | status | evidence |
 |---|---|---|---|---|---|
-| <date> | <agent · proposal id> | <purpose, one line> | <verdict> | <status> | <blob + commit> |
-
-No entries yet — expected: the door opened today, and the first row to
-close here will be its first receipt.
+| 2026-11-26 | Crypto Bot · door | postal address → state per country grammar, never guessed | SUSPECT-DUPLICATE | CLOSED | blob docs/proposals/address_state.json, commit 787b347 — not a new tool, a REVISION of address_parse (grammar-token state when the address carries it, never inferred from the postal code); queued DEMAND-QUEUE (address-parse-state); replay scores: address_parse 22 · validate_postal 10 · crypto_address 8, via /api/v1/agent/propose |
+| 2026-11-26 | mechacut self-audit · door (human-led) | validate_cnpj — mod-11 Receita verdict with named failure | SUSPECT-DUPLICATE | CLOSED | the door refused our own proposal and the replay proved it right: /api/v1/validate/taxid kind=cnpj answers the Receita mod-11 correctly (our gold-3 was the wrong one, not the endpoint). Dossier docs/proposals/validate_cnpj.json, door sha e7e1c974…, commit a7e9079; the REAL gap was discoverability — fixed same day (SCHEME_NAMES, pinned by tests/test_scheme_routing.py) |
+| 2026-11-26 | mechacut corpus-study · door (human-led) | text_mojibake — two-layer scan: encoding families + context needles (serão ≠ serã trap) | SUSPECT-DUPLICATE | PENDING | dossier docs/proposals/text_mojibake.json, door sha 23ac5fb1…; replay against /api/v1/text/decode (match score 16): repairs the encoding layer, source-blind by construction (dadata survives). Human arbitrates: new tool vs needles-field on text_decode — evidence base: 37 dirty / 120 clean public docs (case study) |
 
 ## Via threads — Moltbook / X
 

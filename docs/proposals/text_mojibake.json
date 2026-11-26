@@ -1,0 +1,34 @@
+{
+  "name": "text_mojibake",
+  "verdict": "SUSPECT-DUPLICATE",
+  "received": "2026-11-26",
+  "door_sha256": "23ac5fb19369724d0369335b2f0543fec6e2c46eca48cf223ef54beec4c35638",
+  "matches": [
+    {"tool": "text_decode", "score": 16, "matched": ["mojibake", "encod", "text", "decode", "only"]},
+    {"tool": "agent_contexttax", "score": 12, "matched": ["context", "per", "agent", "only"]},
+    {"tool": "doc_text", "score": 12, "matched": ["layer", "per", "text", "doc"]}
+  ],
+  "replay_evidence": {
+    "candidate": "text_decode (/api/v1/text/decode, free)",
+    "run": "2026-11-26, POST {\"text\":\"Os bilhetes tÃªm serÃ£ responsable dadata\"}",
+    "response": {"text": "Os bilhetes têm serã responsable dadata", "repaired": true, "repairs": 3, "suspect": true, "sha256": "551403745fe340291aa3d409818046156c3f56c75f038af909660c22222ce662"},
+    "reading": "the encoding layer is repaired (tÃªm → têm); the source layer survives untouched: dadata stays dadata. A clean-Portuguese false-positive class was measured separately: 'serã' is a strict substring of 'serão', so any needle scan must be context-aware — text_decode has no needle surface at all. Six corpus agents re-wrote this scanner by hand across two waves; two hit the substring trap before correcting."
+  },
+  "human_decision": "PENDING — row open in VERDICTS.md. Arbitration axes: (1) text_mojibake as a new tool (two layers: encoding families + context needles, per-family counts) vs (2) a REVISION of text_decode adding a needles field. Evidence base is public: 37 dirty / 120 clean documents with per-string ledgers (case study). No blob edit: golds replay as received.",
+  "blob": {
+    "name": "text_mojibake",
+    "purpose": "two-layer mojibake scan: encoding families (Ã sequences, â€ quotes) plus context needles; serão never counts as serã; per-family counts",
+    "examples": [
+      {"input": {"text": "remarcações tÃªm uma taxa adicional"}, "expected": {"encoding_hits": 1}},
+      {"input": {"text": "Os voos serão confirmados em breve"}, "expected": {"encoding_hits": 0, "needle_hits": {"serã": 0}}},
+      {"input": {"text": "Os voos serã confirmados"}, "expected": {"encoding_hits": 0, "needle_hits": {"serã": 1}}},
+      {"input": {"text": "CONTRATAÇÃO DAS MANHÃ"}, "expected": {"encoding_hits": 0}},
+      {"input": {"text": "tarifa â€œpremiumâ€"}, "expected": {"encoding_hits": 1}}
+    ],
+    "why": "Six agents rewrote the same mojibake regex across two waves; the trap sprang twice: serã is a substring of clean serão, so correct Portuguese scored as damage. text_decode repairs encoding only; no source-layer needle scan exists. Golds traced: 37 dirty / 120 clean docs.",
+    "source": "mechacut corpus-study (human-led, 26-11)",
+    "as_of": null,
+    "undated": true,
+    "base_account": null
+  }
+}
