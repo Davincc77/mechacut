@@ -95,6 +95,7 @@ def test_landing_contract():
     assert "@media (max-width: 1100px)" in html
     assert 'class="navbtn"' in html
     assert 'class="tblwrap"' in html
+    assert '<link rel="canonical" href="https://mechacut.studio/">' in html
 
 
 def test_hits_marker_survives_single_pass():
