@@ -76,3 +76,5 @@ change, ce fichier ment — le corriger fait partie de la taxe.
   compteur du bench ; plugin = autre horloge (registre MCP).
 - Ce fichier est dans le dépôt pour les DEUX agents (main + sœur cron) :
   périmé ici = faux rouge ailleurs.
+
+- **127_hermes v1.50.0** (build 2967c19) : text_claimsweep — table fermée importée du CI copy-audit, golds du blob 77dcc80b rejoués, citation exemptée, extra=forbid né avec l'outil ; élague manifeste claim constant ; suite 2217.
