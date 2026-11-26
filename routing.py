@@ -1489,6 +1489,26 @@ STOP = STOP_EN | STOP_FR | STOP_PT
 # T6 — le plancher de confiance publié dans la réponse /route.
 CONF_FLOOR = 4
 
+# AUTO-AUDIT (corpus LATAM, 26-nov-2026) — la découvrabilité des
+# SCHÉMES NUS. « q=cnpj » répondait VIDE alors que validate_taxid
+# connaît le CNPJ depuis toujours : le mot vivait aux TAGS (poids 3),
+# sous le plancher — un mot seul ne nommait pas l'outil. Même trou
+# pour cpf/siren/isbn. Or un nom de schéma EST le domaine de l'outil :
+# « cnpj » querying « validate_taxid » a le même statut épistémique
+# que « chart » querying « chart_from_data ». Les poids 4/3/2 restent
+# INTACTS (T5, rejeté par le banc) : ce patch n'étend pas le poids, il
+# étend la SURFACE DU NOM (nsegs) pour les outils dont le domaine est
+# précisément la liste fermée des schémas qu'ils valident. Leçons
+# rejouées : « iban » passait (dans le nom), « cas » plié « cas » ne
+# heurte jamais « ça » plié « ca » — collision vérée avant patch, pas
+# après.
+SCHEME_NAMES = {
+    "validate_taxid": "cnpj cpf siren siret nif vat",
+    "id_checkdigit": "isbn isbn10 isbn13 ean ean8 ean13 upca gtin "
+                     "gtin14 issn isin cusip sedol aba lei orcid cas "
+                     "verhoeff damm",
+}
+
 # T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le
 # 23-nov-2026) : la requête est tokenisée en minuscules ASCII; sans
 # pli, « barré » éclate en « barr » (le é est un séparateur), « légal »
@@ -1806,6 +1826,8 @@ def route(query, top=5):
         nsegs = set(filter(None, (_stem(_nw(x)) for x in name.split("_"))))
         nsegs |= set(filter(None, (_stem(_nw(x)) for x in
                                    re.split(r"[/_-]+", tail))))
+        nsegs |= set(filter(None, (_stem(_nw(x)) for x in
+                                   SCHEME_NAMES.get(name, "").split())))
         tagset = set(filter(None, (_stem(_nw(x)) for x in tags.split())))
         pwords = set(filter(None, (_stem(_nw(x)) for x in
                                    re.split(r"[^a-z0-9]+",

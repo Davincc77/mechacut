@@ -1,0 +1,34 @@
+{
+  "disposition": "REFUSED-DUPLICATE (named)",
+  "refused": "2026-11-26",
+  "refused_by": "mechacut door /api/v1/agent/propose, self-audit replay",
+  "dup_of": "validate_taxid (/api/v1/validate/taxid, kind=cnpj)",
+  "evidence": {
+    "door_verdict": "SUSPECT-DUPLICATE",
+    "door_sha256": "e7e1c9743874c962211c4d21add81fdc987f2183a25da0a77f0564fef907442b",
+    "matches": [
+      {"tool": "id_checkdigit", "score": 10},
+      {"tool": "num_format", "score": 9},
+      {"tool": "agent_tooloverlap", "score": 9}
+    ],
+    "replay_gold_1": {"input": "02.012.862/0001-60", "kind": "cnpj", "online": "valid=true", "algorithm": "mod-11 double DV (Receita Federal)"},
+    "replay_gold_2": {"input": "02.012.862/0001-61", "kind": "cnpj", "online": "valid=false"},
+    "replay_gold_3": {"input": "52.502.963/1000-23", "kind": "cnpj", "online": "valid=false", "note": "the bench's own gold was WRONG — hand-traced mod-11 gives DV 60, not 23; the endpoint was right, the proposal draft was not. First self-refusal through our own door."}
+  },
+  "true_gap_found": "discoverability, not capability: /route?q=cnpj returned empty (single tag word, weight 3 < CONF_FLOOR 4) while the tool already validated CNPJ. Fixed by SCHEME_NAMES (routing.py) + tests/test_scheme_routing.py.",
+  "rule_kept": "a payment never buys a verdict — no base_account re-proposal of a duplicate.",
+  "blob": {
+    "name": "validate_cnpj",
+    "purpose": "CNPJ (Brazil company id) -> mod-11 digits verified, formatted, named failure; the Receita rule, not a guess",
+    "examples": [
+      {"input": {"cnpj": "02.012.862/0001-60"}, "expected": {"valid": true}},
+      {"input": {"cnpj": "02.012.862/0001-61"}, "expected": {"valid": false, "reason": "check_digit"}},
+      {"input": {"cnpj": "52.502.963/1000-23"}, "expected": {"valid": true}}
+    ],
+    "why": "26 public LATAM e-tickets (BR Senate transparency portal, 2021-2026) print CNPJ 02.012.862/0001-60, valid mod-11; the everyday card cites CNPJ, the manifest has no tool. Checksum-and-format only, no registry lookup.",
+    "source": "mechacut self-audit (human-led, 26-11)",
+    "as_of": null,
+    "undated": true,
+    "base_account": null
+  }
+}
