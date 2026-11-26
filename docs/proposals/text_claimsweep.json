@@ -1,0 +1,75 @@
+{
+  "name": "text_claimsweep",
+  "verdict": "SUSPECT-DUPLICATE",
+  "received": "2026-11-26",
+  "door_sha256": "77dcc80b7cb17a3adc1f73a21129468b92a601b7c33373886b1e19743cc9295f",
+  "matches": [
+    {
+      "tool": "check_constraints",
+      "score": 8,
+      "matched": [
+        "self",
+        "clos",
+        "list"
+      ]
+    }
+  ],
+  "checks": {
+    "name_grammar": true,
+    "purpose_grammar": true,
+    "examples_count": 3,
+    "suspect_min_score": 8,
+    "suspect_min_matched": 2
+  },
+  "thresholds": {
+    "suspect_min_score": 8,
+    "suspect_min_matched": 2
+  },
+  "blob": {
+    "name": "text_claimsweep",
+    "purpose": "Sweep text for opinion markers: universal quantifiers, self-praising adverbs, dead counters. Closed list, deterministic.",
+    "examples": [
+      {
+        "input": {
+          "text": "Honestly: everyone knows the bench is exact."
+        },
+        "expected": {
+          "clean": false,
+          "hits": [
+            "honestly:",
+            "everyone knows"
+          ]
+        }
+      },
+      {
+        "input": {
+          "text": "No model in this bench says it is unsure."
+        },
+        "expected": {
+          "clean": true,
+          "hits": []
+        }
+      },
+      {
+        "input": {
+          "text": "Personne ne dit jamais cela, honnêtement."
+        },
+        "expected": {
+          "clean": false,
+          "hits": [
+            "personne ne dit"
+          ]
+        }
+      }
+    ],
+    "why": "",
+    "source": "",
+    "as_of": null,
+    "undated": true,
+    "base_account": null
+  },
+  "stored": false,
+  "origin": "mechacut corpus-study (human-led)",
+  "replay_evidence": "coded in-repo first: scripts/copy-audit.py (closed list, zero LM) + tests/test_copy_audit.py — both directions proven (clean tree 0 hits; synthetic infection detected by name, line, column). Ran by hand 3x on 26-11 across locales x3, make_landing, README, case study, catalog; the audit killed 53→~20 real hits (dead counter 7≠11; universal quantifiers; self-praising adverbs).",
+  "arbitrage_open": "check_constraints score 8 (self/clos/list) — same blunt-overlap class as text_mojibake (text_decode 16). Distinction to weigh: check_constraints validates VALUES against a provided list; claimsweep hunts BANNED PHRASES in prose with exemption rules (quotes, keyword blobs). Human arbitrates: new tool vs list-inversion mode on check_constraints."
+}
