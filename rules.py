@@ -264,13 +264,15 @@ def sort_multi(rows, by):
 
 # -------------------------------------------------------------- json/query
 _Q = re.compile(r"^\$(?:\.[a-zA-Z_][a-zA-Z0-9_]*"
-                r"|\[(?:\d+|\*)\])*$")
+                r"|\.\*|\[(?:\d+|\*)\])*$")
 
 
 def json_query(data, path):
     if not isinstance(path, str) or not _Q.match(path):
-        raise RulesError("path must match $ .key [n] [*] grammar, e.g. "
-                         "$.users[0].email or $.items[*].price")
+        raise RulesError("path must match $ .key .* [n] [*] grammar, "
+                         "e.g. $.users[0].email, $.items[*].price or "
+                         "$.items.*.price — .* is the dot form of [*], "
+                         "and $..descend is refused by name")
     results = []
     tokens = _tokenize(path)
 

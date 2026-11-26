@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.46.0",
+    version="1.47.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -10388,7 +10388,7 @@ MCP_TOOLS = [
         "name": "json_query",
         "description": (
             "Nested JSON access done right: $-path grammar with .key, "
-            "[n] and [*] wildcards; returns every match with its exact "
+            "[n], [*] and the dot form .* wildcards; returns every match with its exact "
             "canonical path. Reaches users[*].email where small models "
             "grab the wrong depth. Free."
         ),

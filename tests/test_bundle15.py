@@ -82,11 +82,42 @@ def test_json_query_wildcard_and_paths():
                                "value": "b@x.io"}
 
 
+def test_json_query_dot_star_v147_fix():
+    # REGRET Vince 27-11 (json_query) : $.meta.anomalies.* etait refuse
+    # alors que [*] passait — le . * courant (JSONPath) est l'ALIAS
+    # exact du wildcard bracket. Les deux syntaxes rendent le MEME
+    # objet : meme canon, meme sha256. La grammaire reste fermee :
+    # $..descend n'entre pas.
+    data = {"meta": {"anomalies": ["a", "b"]}}
+    r1 = client.post("/api/v1/json/query",
+                     json={"data": data, "path": "$.meta.anomalies.*"})
+    r2 = client.post("/api/v1/json/query",
+                     json={"data": data, "path": "$.meta.anomalies[*]"})
+    assert r1.status_code == 200, r1.text
+    assert r2.status_code == 200
+    j1, j2 = r1.json(), r2.json()
+    assert j1["matches"] == 2 and j1["not_found"] is False
+    assert j1["results"] == j2["results"]
+    assert j1["sha256"] == j2["sha256"]
+
+
+def test_json_query_dot_star_midpath():
+    data = {"users": [{"email": "a@x.io"}, {"email": "b@x.io"}]}
+    r = client.post("/api/v1/json/query",
+                    json={"data": data, "path": "$.users.*.email"})
+    assert r.status_code == 200, r.text
+    assert [x["value"] for x in r.json()["results"]] == ["a@x.io", "b@x.io"]
+
+
 def test_json_query_grammar_closed():
     r = client.post("/api/v1/json/query",
                     json={"data": {}, "path": "$..users"})
     assert r.status_code == 400
     assert "$" in json.dumps(r.json())
+    # v1.47.0 : l'alias .* n'ouvre PAS la descente recursive — toujours 400
+    r = client.post("/api/v1/json/query",
+                    json={"data": {}, "path": "$.a.*x"})
+    assert r.status_code == 400
 
 
 def test_mcp_exposes_bundle15():
