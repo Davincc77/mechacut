@@ -1,0 +1,80 @@
+{
+  "name": "stats_rate_ci",
+  "verdict": "ELIGIBLE",
+  "received": "2026-11-26",
+  "door_sha256": "0016ac7275398a9df8e4080a59bdae8114126b95faafa80f7ba7960596994110",
+  "matches": [],
+  "checks": {
+    "name_grammar": true,
+    "purpose_grammar": true,
+    "examples_count": 3,
+    "suspect_min_score": 8,
+    "suspect_min_matched": 2
+  },
+  "thresholds": {
+    "suspect_min_score": 8,
+    "suspect_min_matched": 2
+  },
+  "monetizable": false,
+  "blob": {
+    "name": "stats_rate_ci",
+    "purpose": "Wilson 95 percent interval for k of n: observed rate AND adjusted center AND bounds — never conflated.",
+    "examples": [
+      {
+        "input": {
+          "k": 720,
+          "n": 1105
+        },
+        "expected": {
+          "observed_pct": 65.2,
+          "wilson_center_pct": 65.1,
+          "lower_pct": 62.3,
+          "upper_pct": 67.9
+        }
+      },
+      {
+        "input": {
+          "k": 0,
+          "n": 600
+        },
+        "expected": {
+          "observed_pct": 0.0,
+          "wilson_center_pct": 0.3,
+          "lower_pct": 0.0,
+          "upper_pct": 0.6
+        }
+      },
+      {
+        "input": {
+          "k": 1,
+          "n": 10
+        },
+        "expected": {
+          "observed_pct": 10.0,
+          "wilson_center_pct": 21.1,
+          "lower_pct": 1.8,
+          "upper_pct": 40.4
+        }
+      }
+    ],
+    "why": "",
+    "source": "",
+    "as_of": null,
+    "undated": true,
+    "base_account": null
+  },
+  "origin": "mechacut corpus-study (human-led) — demand: three census re-derivations",
+  "history": [
+    {
+      "v1_sha": "d466dc52976bee3e88c7d6cbe76d340f345e061da33490ffe0b7e446dc0578b1",
+      "v1_verdict": "SUSPECT-DUPLICATE (date_window 8 — lexical: 'interval','bound','nam')",
+      "v1_flaw": "a single 'rate_pct' conflated the naive rate (65.2, what the report quotes) with the Wilson center (65.1). A tool that conflates them lies. v2 names BOTH fields; same golds, cleaner contract."
+    }
+  ],
+  "next_steps": [
+    "commit the blob verbatim as docs/proposals/stats_rate_ci.json in github.com/Davincc77/mechacut",
+    "the bench replays its examples against any existing candidate; golds stay hand-traced — an accepted proposal ships as a bundle or is refused by name",
+    "money follows admission, never causes it",
+    "to make this contract payable: re-propose with base_account — a checksummed Base address of YOURS; a human-held key is never asked for and never stored"
+  ]
+}

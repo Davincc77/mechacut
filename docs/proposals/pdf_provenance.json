@@ -1,0 +1,48 @@
+{
+  "name": "pdf_provenance",
+  "verdict": "ELIGIBLE",
+  "received": "2026-11-26",
+  "door_sha256": "961167b7c19797169b9349fe361fb11baafd628aa6d2e0cba132a7e5cae4e4ac",
+  "matches": [],
+  "checks": {
+    "name_grammar": true,
+    "purpose_grammar": true,
+    "examples_count": 1,
+    "suspect_min_score": 8,
+    "suspect_min_matched": 2
+  },
+  "thresholds": {
+    "suspect_min_score": 8,
+    "suspect_min_matched": 2
+  },
+  "monetizable": false,
+  "blob": {
+    "name": "pdf_provenance",
+    "purpose": "Read a PDF's provenance from its bytes: Producer, CreationDate, ModDate, date order. No registry, no library.",
+    "examples": [
+      {
+        "input": {
+          "pdf_b64": "JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZy9QYWdlcyAyIDAgUj4+ZW5kb2JqCjIgMCBvYmo8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iagozIDAgb2JqPDwvVHlwZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgNjEyIDc5Ml0+PmVuZG9iago0IDAgb2JqPDwvUHJvZHVjZXIoUHJvdmVuYW5jZUtpdCAxLjApL0NyZWF0aW9uRGF0ZShEOjIwMTgwNTE3MTIwMDAwWik+PmVuZG9iagp0cmFpbGVyPDwvUm9vdCAxIDAgUi9JbmZvIDQgMCBSPj4KJSVFT0YK"
+        },
+        "expected": {
+          "producer": "ProvenanceKit 1.0",
+          "created": "2018-05-17T12:00:00Z",
+          "modified": null,
+          "created_before_modified": true
+        }
+      }
+    ],
+    "why": "",
+    "source": "",
+    "as_of": null,
+    "undated": true,
+    "base_account": null
+  },
+  "origin": "mechacut corpus-study (human-led) — demand: three census re-derivations (rate_ci) / three forensic PDF sessions (provenance)",
+  "next_steps": [
+    "commit the blob verbatim as docs/proposals/pdf_provenance.json in github.com/Davincc77/mechacut",
+    "the bench replays its examples against any existing candidate; golds stay hand-traced — an accepted proposal ships as a bundle or is refused by name",
+    "money follows admission, never causes it",
+    "to make this contract payable: re-propose with base_account — a checksummed Base address of YOURS; a human-held key is never asked for and never stored"
+  ]
+}
