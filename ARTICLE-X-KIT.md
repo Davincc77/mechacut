@@ -5,12 +5,22 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 26-11 11h50: 188 transforms + 9 recipes
-(unchanged — b119 NAMED the rent conventions on /money/prorate, it did not add
-a tool — and growing holds: the suite, the pins and the readings all moved),
-suite 2 095 passed 2 skipped, pins 423, manifest 212 lines / 8,934 bytes, prod
-v1.40.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b119: the rent-proration fight is now a PAIR render — 9sqw2j
+name, Git URL, or owner/repo). NUMBERS 26-11 13h55: 189 transforms + 9 recipes
+(+money_payscale bundle120; the goose line of /agent/result-cliff is NEW
+GRAMMAR on an existing tool — the suite, the pins and the readings moved),
+suite 2 131 passed 2 skipped, pins 431, manifest 213 lines / 8,979 bytes, prod
+v1.41.0 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b120: the salary-vs-paystub fight is now a closed named table —
+5 USC 5504(b) "divide by 2,087", its half-up rounding example $18.845→$18.85 is
+a shipped test vector, the rate-first vs direct order pair renders the signed
+delta (−6.40 a pay, −166.40 a year on 52,000 — r/AskHR's "$8" family, quantified),
+2027's 53 Fridays = 27 paydays counted from the calendar, 365 refused BY NAME;
+and goose, read at CODE not at thread: 2,000 lines OR 50,000 bytes → temp file +
+LAST-50 tail, 200,000 chars → zero-survival notice, the carried "CLI 20 lines"
+claim died at the reading; 13 resultcliff pins re-epinged BY THE VERSION BUMP,
+the other 410 intact hash-for-hash; pages served 180,067 / 180,467 / 180,538 —
+all three under 181,000, FR and PT tight: the next carded lot opens with a
+FR+PT tightening wave; earlier b119: the rent-proration fight is now a PAIR render — 9sqw2j
 posts "1000/30=33.33×18=600" (it rounded twice silently; the landlord's way
 gives 599.94), 1hitzjq bills the banker's month "/30 REGARDLESS" — 566.67 vs
 548.39 on the SAME 31-day January, 1idq3vr publishes the annual/365 rule,
@@ -103,7 +113,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **188 deterministic transforms + 9 named recipes — and growing** — rounding, money
+  **189 deterministic transforms + 9 named recipes — and growing** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -262,7 +272,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **188 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
+  **189 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en

@@ -5,16 +5,32 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 188 transforms + 9 named recipes as of v1.40.0, each with its tool card
+— 189 transforms + 9 named recipes as of v1.41.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 423 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 431 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money_prorate` RENT
+is the truth of today. Recent highlights: `money_payscale` SALARY↔HOUR,
+EVERY published denominator NAMED (the paystub fight in law: 5 USC 5504(b)
+"divide the annual rate by 2,087", "nearest cent, counting one-half and
+over" — OPM's $18.845→$18.85 is a shipped test vector; 2,080 is the "typical"
+that r/Payroll cites in every comment and no calculator names; basis
+fed2087|priv2080|workdays(year)|pto|hours — 365 refused BY NAME; the
+rate-first vs direct order pair renders the signed delta — −6.40 a pay,
+−166.40 a year on 52,000, r/AskHR's "$8" family quantified; and the 27-payday
+year of r/IRS_Source counted from the calendar, 2016 and 2027, 53 Fridays);
+`agent_resultcliff` GOOSE row read AT CODE, not at thread (block/goose MOVED
+to aaif-goose — redirect proven via API; developer shell: 2,000 lines OR
+50,000 bytes → temp file + LAST-50 lines TAIL-capped at 10,000 bytes with a
+char-boundary snap, the head dropped TWICE; the agent-wide handler REPLACES
+past 200,000 chars — zero survival, knob #9256; #13817: even the rescue
+notice can be orphaned — and the carried "CLI 20 lines" claim died at the
+reading, removed; declared mode judged only by the harness's own UTF-8 bound
+inequalities, INDETERMINATE_NEEDS_PASTE before any guess); then `money_prorate` RENT
 CONVENTIONS NAMED (the same lease posts FOUR formulas: 1000/30=33.33×18
 "= 600" rounds SILENTLY twice — the landlord's own way gives 599.94
 (r/personalfinance 9sqw2j); the office splits "/30 days, REGARDLESS of

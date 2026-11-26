@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 188 + 9, vérifiés live 26-11 11h50, prod 1.40.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 189 + 9, vérifiés live 26-11 13h55, prod 1.41.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -184,6 +184,35 @@ l'agent du moniteur — nommée, consignée, non bâtie. prod 1.40.0, suite
 2 095 passed 2 skipped, pins 423, manifest 212 lignes / 8 934 octets
 INTACT, pages SERVIES 178 378 / 178 669 / 178 781 — les trois sous
 181 000, marge retrouvée sans élaguer une claim de plus.)
+(q) 26-11 13h55 : 188→189 (/money/payscale, bundle120, lentille HUMAIN
+rang 2 porté DEUX cycles — livré ; + la ligne GOOSE en grammaire neuve de
+/agent/result-cliff, lentille DEV rang 1). La loi avant la mémoire :
+5 USC 5504(b) relu À CORNELL au mot près (divide by 2,087 ; x40/x80 ;
+nearest cent, one-half and over — l'exemple OPM $18.845→$18.85 est
+vecteur de test, HALF-UP pas banker's ; §5505 : 1/12, et le mois de 30
+jours + le 31 ignoré vivent AUSSI dans le texte — le banker's month de
+b119 a une sœur légale) ; la dérivation 4x262/17x261/7x260 de r/fednews
+1fnk3cb est devenue un CALCUL (basis workdays+year, calendrier, zéro
+fetch) ; r/AskHR 1y0ey31 = la PAIRE d'ordres rate_first/direct avec
+l'écart signé — le jumeau exact de la guerre du prorata ; 1de8205 rejoué
+au cent (38.46/38.17/42.55 sur 80 000) ; 1qh5ouz chiffré : 2016 et 2027,
+53 vendredis, 27 paies — comptées, pas prophétisées ; 365 refusé PAR LE
+NOM. GOOSE relevé AU CODE (shell.rs 161-164 + large_response_handler.rs,
+HEAD) : block/goose a MOVED (aaif-goose, redirect API), l'OR 2 000
+lignes/50 000 octets → fichier temp + queue 50 lignes plafonnée 10 000
+octets avec SNAP de frontière (la tête jetée DEUX FOIS), le handler
+200 000 chars REMPLACE sans rien laisser survivre, knob #9256, et
+#13817 ouvert 25-nov : la clause de secours peut être orphelinée — la
+claim portée « CLI 20 lignes » est MORTUE à la relecture, retirée.
+Itération 25 de « l'artefact ment », pêchée par ma propre clôture : le
+NO_MATCH d'ouverture (aiguille contexttax) n'était qu'un 429 — re-jouée
+seule, VIVANTE score 13, produit innocent ; et ma sonde manuelle de pin
+a crié DRIFT parce que je canonais SANS le sha embarqué — l'instrument
+de la maison ou rien, re-prouvé. Pins 431 (8 adds-only ; 13 cliff
+re-épinglés PAR LE VERSIONNEMENT, 410 hash INTACTS hash-à-hash, diff
+golden prouvé avant push). Suite 2 131 passed 2 skipped. Pages SERVIES
+180 067 / 180 467 / 180 538 — les trois sous 181 000, FR/PT à ~500 :
+la vague de serrages FR+PT est consignée avant la carte suivante.)
 
 ---
 
@@ -197,7 +226,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **188 transforms + 9 named chain recipes, and growing**, stateless, keyless at
+agents: **189 transforms + 9 named chain recipes, and growing**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -257,7 +286,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **188 transforms + 9 recettes-chaînes nommées, et ça grandit**,
+déterministes pour agents : **189 transforms + 9 recettes-chaînes nommées, et ça grandit**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette
