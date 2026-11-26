@@ -34,6 +34,7 @@ Files:
 | `wave3-money.json` | 3 | 27 cited money items (ANAC, Senacon, Procon, Spain DSCA, STJ Tema 164, NF-e 402) + labeled exposure formula |
 | `wave3-census.json` | 3 | the census: 8,221 rows enumerated, 6,350 attachments, per-file statuses; rate 720/1,105 with GOL 0/600, Azul 0/345 |
 | `wave4-banks.json` | 4 | SEC XBRL balance-sheet equation, 86 filings batched through /api/v1/batch — 86 OK, 0 contradicted; first-pass 28 artifacts attributed to parent-only SE tag (self-audit, published) |
+| `wave5-en16931.json` | 5 | governments: 40 official EN 16931 examples, 126 batch checks — 113 OK, 1 genuine divergence (HUF example vs the Schematron's own 2-decimal formula), 12 not-assessable + 7 multi-rate named; three extractor self-corrections published |
 
 Re-derivation contract: every row's URL was fetched and hashed as
 received; re-running the detectors means `curl <url>` + the needle

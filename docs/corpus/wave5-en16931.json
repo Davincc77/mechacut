@@ -1,0 +1,28 @@
+{
+ "wave": 5,
+ "column": "governments-en16931",
+ "generated": "2026-11-26",
+ "corpus": "40 official EN 16931 example instances (ubl/examples + cii/examples, ConnectingEurope repo, raw.githubusercontent)",
+ "method": "extraction: ElementTree stdlib, paths read from the files (two of my own extraction bugs found and fixed mid-campaign: LegalMonetaryTotal double-count in UBL BT-109, header+category TaxAmount double-count in UBL BT-110 — both produced fake CONTRADICTEDs that were attributed to the extractor before any headline). verdicts: POST /api/v1/batch tool=invoice_validate_totals, Decimal components, sha256 per receipt.",
+ "tally": {
+  "checks_run": 126,
+  "ok": 113,
+  "genuine_divergence": 1,
+  "not_assessable_on_examples": 12,
+  "multi_rate_set_aside": 7
+ },
+ "finding_huf": {
+  "file": "cii_examples_huf_example_cii.xml",
+  "declared": "TaxBasisTotalAmount 69180.00 HUF, Rate 27.00%, TaxTotalAmount 18679.00 HUF",
+  "schematron_formula": "round(69180.00*27/100 *10*10) div 100 = 18678.60",
+  "divergence": "0.40 HUF",
+  "attribution": "ISO-4217 assigns 0 minor units to HUF; the example rounds to whole forints (correct in practice), the official Schematron hardcodes 2 decimals (currency-blind). The example and the standard's own formula disagree, by the standard's own arithmetic.",
+  "door_receipt": "a6bb59fd7078f144f3f49578c73ba97b48add35190b65151739e3f053fd9d293"
+ },
+ "not_assessable_reason": "CII examples carry category RATES but not per-category TaxAmount/BasisAmount; BR-CO-14 cannot be evaluated on them — named, not guessed.",
+ "self_corrections_published": [
+  "UBL BT-109 double-count (my extractor summed declared + lines)",
+  "UBL BT-110 double-count (header TaxTotal + subtotals)",
+  "float summation garbage -9.09e-15 replaced by Decimal (the RoundingIssue file passes exactly at 0.00)"
+ ]
+}
