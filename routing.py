@@ -406,10 +406,12 @@ TABLE = (
      "tip partage centavos"),
     ("money_settle", "/api/v1/money/settle", "numbers",
      "who owes whom: advances netted, minimal transfers, named forgiveness",
-     "money settle settlement who owes whom transfers advances fronted "
-     "group trip forgive waiver net itemized compare graph splitwise venmo "
-     "solde qui paye qui remise virements avance partage quem paga quem "
-     "adiantou perdoa acerto contas grupo quem deve"),
+     "settle settlement settles fewest barbecue reimburse "
+     "who owes whom transfers advances fronted group trip forgive waiver "
+     "net itemized compare splitwise venmo solde solder soldes paye payer "
+     "payent remise virement virements avance avancés groupe quem paga "
+     "pagar perdoa perdoou adiantou adiantar dividir despesas viagem "
+     "acerto contas"),
     ("number_spell", "/api/v1/number/spell", "numbers",
      "amount -> words FR/EN/PT",
      "spell words amount currency invoice mention french english "
@@ -740,7 +742,8 @@ TABLE = (
     ("validate_iban", "/api/v1/validate/iban", "checks",
      "61 countries, BBAN + mod-97",
      "iban bank validate payment account sepa country bban transfer payout "
-     "mod97 bancaire"),
+     "mod97 bancaire copied copy bounced wire typo "
+     "transposición copié"),
     ("validate_phone", "/api/v1/validate/phone", "checks",
      "E.164 + country rules",
      "phone validate number e164 mobile country ddi plus dial whatsapp "
@@ -1434,7 +1437,21 @@ def pack_markdown(pack, mcp_tools):
 #     les changer a été essayé et rejeté par le banc lui-même.
 
 STOP_EN = frozenset("a an and do for from in into is it make my of on or "
-                    "please that the this to turn with".split())
+                    "please that the this to turn with "
+                    # b115 — le trou ANGLAIS pêché en vérifiant mes
+                    # propres needles : STOP_FR/PT portaient pronoms et
+                    # auxiliaires, STOP_EN non — « did I copy this IBAN
+                    # right? a bounced wire costs 45 » (la phrase de la
+                    # carte e3 elle-même, publiée sur la landing)
+                    # routait text_diff à cause des mots de conversation
+                    # « did »/« i » restés Vivants dans les tags de
+                    # l'outil. I, me, did, does, was, were, are sont de
+                    # la grammaire, pas du contenu — fermés ici, testés
+                    # sur le token BRUT (leçon b70). « am » reste VOLONTAIREMENT
+                    # hors liste : c'est le code ISO de l'Arménie, un
+                    # signal de la table des jours fériés (classe b81 —
+                    # un mot trop courant tuerait une requête honnête).
+                    "i me did does was were are".split())
 
 # Grammaire française fermée — pronoms, articles, prépositions,
 # conjonctions, modaux. Volontairement ABSENTS (ce sont des signaux) :
