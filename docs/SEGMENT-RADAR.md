@@ -135,3 +135,43 @@ human)** → EDC education → IATI → EUTL. Each = one wave: collect →
 batch at the door → attribute → ledger in docs/corpus/ → case study in
 the house skeleton → copy-audit → commit. CourtListener/professions
 remains parked pending the account token.
+
+
+## VAGUE 2 — fringe & folklore quantitatif (lance par Vince 26-11, 17 sieges)
+
+Meme doctrine, cible differente : ces segments testent la these de la porte
+sur le terrain OU l'affirmation est fausse par construction. Skew tient les
+fringe theories (numerologie, nombre d'or, pyramides, « code de la Bible »)
+avec la consigne exacte : recalculez les nombres annonces et MESUREZ le tri
+selectif — combien de combinaisons il faut exclure pour que la prediction
+tienne. C'est claimsweep + fractions exactes en mission reelle.
+
+Carte de deduction previsible (pour ne pas gaspiller les 2 slots chacun) :
+- Lineage / ISBN -> id_checkdigit CONNAIT deja ISBN-10/13 (doublon attendu ;
+  la douleur honnete : registre nomme des ISBN invalides publies ?)
+- Till / « c'etait moins cher avant » -> money_unitprice (shrinkflation est
+  dans son but) ; l'angle neuf = bases non denommees (grammage vs prix au
+  kilo changes), a prouver en ecart
+- Moi (Vince) / dates de fin du monde -> date_* + claimsweep (la structure
+  est : prediction non falsifiable = marqueur ; table des dates recalculees)
+- Rail / Benford -> TROU PLAUSIBLE : test chi-carre / MAD avec bins nommes,
+  digits first-or-second en argument, table fermee des attendu-theoriques
+- Research Scout / loteries -> TROU PLAUSIBLE : binomiale exacte en fraction
+  (combien de tirages pour 50 % de probabilite — le chiffre que la presse
+  rend faux), tirage = fonction nommee, jamais simulee
+- Flux / Terre plate -> TROU PLAUSIBLE : geodesie fermee (WGS84 great-circle,
+  formule published, ecarts vs modele plat NOMMES — pas de moquerie : le
+  verdict rend les deux et chiffre)
+- Risk Officer / TAEG -> formule publiee (17 CFR / EU 108/2008) — candidate
+  apc_exact : racine n-ieme en Decimal, bornes de methode nomees
+- Capsule / archives du web + Gate / archives nationales -> wayback memento
+  date grammar (date_* existe ; douleur mesurable = en-tetes Date vs
+  snapshot) ; ledger droits d'auteur -> regles vie+70 par pays = TABLE
+  fermee, candidate naturalisation vs regles existantes
+- Probe / PDF banks + Git / Software Heritage -> pdf_provenance +
+  hash_* existent ; douleur attendue : cohérence SHA1git vs manifeste
+- Horizon / ovnis + Seal / conspirationnistes + Host / canulars -> le
+  corpus est le deliverable (ecarts attribues), outils deja la
+
+Reception : guetteur 30 min ; chaque proposition passee a /route + manifest
++ golds rejoues AVANT arbitrage ; SUSPECT-DUPLICATE rendu sans contournement.
