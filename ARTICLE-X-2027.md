@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 189 + 9, vérifiés live 26-11 13h55, prod 1.41.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 189 + 9, vérifiés live 26-11 17h35, prod 1.42.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -213,6 +213,41 @@ re-épinglés PAR LE VERSIONNEMENT, 410 hash INTACTS hash-à-hash, diff
 golden prouvé avant push). Suite 2 131 passed 2 skipped. Pages SERVIES
 180 067 / 180 467 / 180 538 — les trois sous 181 000, FR/PT à ~500 :
 la vague de serrages FR+PT est consignée avant la carte suivante.)
+(r) 26-11 17h35 : 189 constants (/agent/result-cliff, bundle121, lentille
+DEV rang 2 — la GRAMMAIRE neuve du SURVIVANT, pas un outil neuf ; suite
+2 131→2 149, pins 431→437, prod 1.41.0→1.42.0). La vague de novembre lue
+AU SOURCE, cinq issues, une loi : llama_index#24102 (9-nov) EXÉCUTE des
+arguments coupés « réparés » — write_file 17 lignes sur 40 ; le fix
+fusionné NeMo#2551 (4-nov) exige STRICT json.loads, « no partial
+parsing » ; langchain4j#7169, simonw/llm#1887, PraisonAI#6369 complètent.
+Le kit prononce désormais par ligne rejouable : INTACT, BROKEN avec le
+NOEUD coupable (marcheur RFC 8259 fermé), ou PARSEABLE_BUT_MUTATED — la
+classe où le marqueur tombe DANS UNE SEULE chaîne : le survivant parse
+et SA VALEUR MENT ; NOT_REPLAYED avec la raison NOMMÉE partout où la loi
+ne se rejoue pas exactement (fold rakazo, bande vscode, ~2KB claude,
+onyx qui ne coupe rien), declared mode SANS champ. Deux lois lues AU
+SOURCE aujourd'hui : codex output-truncation/src/lib.rs — re-enveloppe
+les résultats MCP, « Truncated tool output: » en dur, structured_content
+DROPPED, budget ré-échelonné parce que l'ESCAPING JSON regonfle la
+prévisualisation ; claude docs — les gardes de TRANSPORT 16 MiB (HTTP/
+SSE échoue, WebSocket CLOSE) que MAX_MCP_OUTPUT_TOKENS ne bouge pas.
+Leçons pêchées PAR l'oracle : la notice hermes porte des SAUTS DE LIGNE
+bruts — dans une chaîne, un saut de ligne est un caractère de CONTRÔLE :
+la coupe en-chaîne chez hermes est BROKEN, jamais muée — LA FORME DU
+MARQUEUR EST LE VERDICT ; et ma virgule finale tuait mon propre vecteur
+goose avant le premier test. Aiguilles x3 langues « does my cut break
+the json » VERTES EN PROD, la fratrie garde la sienne (repair broken-fix
+10, mcpsurface). Itération de « l'artefact ment » re-payée à la CLÔTURE :
+le NO_MATCH/REGRESSION sur l'aiguille FR mcpsurface (scan 17h25, juste
+après le sweep de 437 pins) — re-jouée SEULE, VIVANTE score 19 ; le scan
+qui hurle se re-joue avant de toucher au produit, it. 25 reconfirmée.
+Pins 437 (6 adds-only jsonsurv, tous sous la franchise 32 KB — le pin
+60 KB serait passé 402 en prod, pêché AVANT push ; 16 resultcliff
+re-épinglés PAR LE VERSIONNEMENT b121-1, les 421 autres hash INTACTS
+hash-à-hash, diff golden prouvé avant push). Suite 2 149 passed 2
+skipped. Pages SERVIES 180 129 / 180 634 / 180 707 — les trois sous
+181 000, FR/PT à ~300 : la vague de serrages est désormais LA première
+tâche de tout lot à carte.)
 
 ---
 

@@ -5,12 +5,24 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 26-11 13h55: 189 transforms + 9 recipes
-(+money_payscale bundle120; the goose line of /agent/result-cliff is NEW
-GRAMMAR on an existing tool — the suite, the pins and the readings moved),
-suite 2 131 passed 2 skipped, pins 431, manifest 213 lines / 8,979 bytes, prod
-v1.41.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b120: the salary-vs-paystub fight is now a closed named table —
+name, Git URL, or owner/repo). NUMBERS 26-11 17h35: 189 transforms + 9 recipes
+(bundle121 adds NEW GRAMMAR to the existing /agent/result-cliff — the suite,
+the pins and the readings moved; transforms count is the manifest's, unchanged),
+suite 2 149 passed 2 skipped, pins 437, manifest 213 lines / 8,979 bytes, prod
+v1.42.0 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b121: a pasted JSON result now answers, per replayable row,
+whether THAT harness's OWN cut still parses — INTACT, BROKEN with the guilty
+node path, or PARSEABLE_BUT_MUTATED, the dangerous class where the marker
+lands inside one string and the survivor parses while its text lies
+(llama_index#24102 executed a repaired cut-off write_file; NeMo#2550's merged
+fix demands strict json.loads — no partial parsing); rows the table cannot
+replay exactly answer NOT_REPLAYED with the named reason, declared mode
+carries no field; two laws read at source today: codex's MCP re-envelope
+(escape-inflated budget re-scaled until the envelope fits) and claude's
+16 MiB transport guards that MAX_MCP_OUTPUT_TOKENS does not move; 16
+resultcliff pins re-epinged BY THE VERSION BUMP, the other 421 intact
+hash-for-hash; pages served 180,129 / 180,634 / 180,707 — all three under
+181,000, FR/PT at ~300, the tightening wave consigned heavier; ripoint b120: the salary-vs-paystub fight is now a closed named table —
 5 USC 5504(b) "divide by 2,087", its half-up rounding example $18.845→$18.85 is
 a shipped test vector, the rate-first vs direct order pair renders the signed
 delta (−6.40 a pay, −166.40 a year on 52,000 — r/AskHR's "$8" family, quantified),

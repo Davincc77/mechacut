@@ -5,16 +5,26 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 189 transforms + 9 named recipes as of v1.41.0, each with its tool card
+— 189 transforms + 9 named recipes as of v1.42.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 431 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 437 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money_payscale` SALARY↔HOUR,
+is the truth of today. Recent highlights: `agent_resultcliff` SURVIVOR VERDICTS
+(bundle121 — paste a JSON result and every replayable harness row answers
+whether ITS OWN cut still parses: INTACT, BROKEN with the guilty node path,
+or PARSEABLE_BUT_MUTATED, the class where the marker lands inside one string
+and the survivor PARSES WHILE LYING — the November 2026 wave shipped this
+taxonomy at the framework level: llama_index#24102 EXECUTED a repaired
+cut-off write_file, NeMo#2550's merged fix demands STRICT json.loads,
+langchain4j#7169 / simonw/llm#1887 / PraisonAI#6369 round it out, and
+arXiv 2610.36114 measured it: 3,827 of 11,189 tool results cut, every cut
+result broken JSON; rows the table cannot replay EXACTLY answer NOT_REPLAYED
+with the named reason — never a survivor invented), `money_payscale` SALARY↔HOUR,
 EVERY published denominator NAMED (the paystub fight in law: 5 USC 5504(b)
 "divide the annual rate by 2,087", "nearest cent, counting one-half and
 over" — OPM's $18.845→$18.85 is a shipped test vector; 2,080 is the "typical"
