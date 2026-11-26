@@ -2,16 +2,20 @@
 
 *(X long-form, written FOR Hermes users, about the Hermes plugin first.
 Every number is curlable at posting time; both bench arms live in the public
-repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
-panel's "Install from Git" flow installed and activated the plugin today, and
-the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 26-11 20h05: 190 transforms + 9 recipes
-(bundle122 adds BOLETO as NEW GRAMMAR — a sixteenth scheme with per-DV
-verdicts — to the existing /id/checkdigit, transforms unchanged; bundle123 —
-stats_rate_ci, shipped the same evening — moves the count 189 to 190),
-suite 2 175 passed 2 skipped, pins 443, manifest 214 lines / 8,995 bytes, prod
-v1.44.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b122: the FEBRABAN linha digitável answers per-dígito — which
+repo. STATUS 26-11: the catalog is live — PR NousResearch/hermes-agent
+#159281 was merged 26-11 19:20 UTC by maintainer teknium1 and mechacut now
+resolves by name in the Hermes plugin catalog (tier community); the Git
+install was proven 23-11 — the desktop Plugins panel's "Install from Git"
+flow installed and activated the plugin, and the CLI lines below match
+`hermes plugins install`'s own grammar (catalog name, Git URL, or owner/repo).
+NUMBERS 26-11 20h40: 192 transforms + 9 recipes (bundle122 adds BOLETO as NEW
+GRAMMAR — a sixteenth scheme with per-DV verdicts — to the existing
+/id/checkdigit, transforms unchanged; bundle123 — stats_rate_ci — moved the
+count 189 to 190; bundle124 — pdf_provenance — and bundle125 — text_mojibake
+— both new tools, move it 190 to 192; v1.47.0 and v1.48.0 bump the version,
+not the counter — grammar and revision on existing tools), suite 2 198 passed
+2 skipped, pins 447, manifest 216 lines / 8,992 bytes, prod v1.48.0 — each
+read live from /agent/manifest and /integrity.json, never from memory (ripoint b122: the FEBRABAN linha digitável answers per-dígito — which
 campo DV fails, fator decoded to BOTH cycle candidates without any wall
 clock, a 48-digit linha refused by name; the published campo-1 example
 00190.00009 replays exactly); ripoint b121: a pasted JSON result now answers,
@@ -75,11 +79,14 @@ destination — the corpus lied, not the router; question 5 now covers decoys to
 previous b116: /agent/result-cliff — the cliff table read at the SOURCE,
 as_of per row; EN/FR/PT parité tenue, budget navigateur payé dans le même
 commit, pages servies 180 856 / 180 763 / 180 945 ;
+previous b122/b123 : 190 / 2 175 / 443 / 214 / 8 995 / v1.44.0 ;
 précédents b115 : 187 / 2 017 / 400 / 211 / 8,883 / v1.36.0 ;
-b114 : 186 / 1 984 / 392 / 210 / 8,842 / v1.35.0). POST GATE: the catalog submission is public
-pull request NousResearch/hermes-agent#159281, open and awaiting human
-review; the admission paragraph cites it as under review. A watcher flips
-the paragraph and activates the one-word catalog line on merge day.)*
+b114 : 186 / 1 984 / 392 / 210 / 8,842 / v1.35.0). GATE FLIPPED 26-11: the
+catalog submission — public pull request NousResearch/hermes-agent#159281 —
+was MERGED 26-11 19:20 UTC by maintainer teknium1; the entry lists live in
+plugin-catalog.json (tier community, v1.1.2, pinned sha). The admission
+paragraph cites the merge in the past tense and the one-word catalog line
+is active.)*
 
 ---
 
@@ -130,7 +137,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **190 deterministic transforms + 9 named recipes — and growing** — rounding, money
+  **192 deterministic transforms + 9 named recipes — and growing** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -197,10 +204,11 @@ receipt is byte-exact.
 No storefront, no popularity vote, no self-updating listing: every version
 is a pinned commit, and the Hermes catalog itself admits plugins only via a
 human-merged pull request — the same admission ritual this suite applies to
-every tool. The listing of this plugin is passing through that door in front
-of everyone: pull request NousResearch/hermes-agent#159281 sits open, waiting
-for a human merge button — yes or no, it happens on the record, at an address
-you can read right now. That is not a tagline; it is checkable on GitHub.
+every tool. This plugin's listing went through that door in front of
+everyone: pull request NousResearch/hermes-agent#159281 was merged on
+November 26, 2026 by a human maintainer — yes or no, it happened on the
+record, at an address you can read right now. The listing is live in the
+catalog today. That is not a tagline; it is checkable on GitHub.
 
 ## Why it is safe on your machine
 
@@ -222,7 +230,7 @@ you can read right now. That is not a tagline; it is checkable on GitHub.
 ```bash
 curl https://mechacut.studio/agent/manifest          # the whole surface, keyless, right now
 hermes plugins install mechacut/plugin     # via Git — live today
-# hermes plugins install mechacut                    # via the catalog, merge day
+hermes plugins install mechacut                    # via the catalog — live
 ```
 
 Zero-terminal route, same result: the desktop app's Plugins panel →
@@ -289,7 +297,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **190 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
+  **192 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en
@@ -361,10 +369,11 @@ Pas de vitrine, pas de vote de popularité, pas de fiche qui s'auto-modifie :
 chaque version est un commit épinglé, et le catalogue Hermes lui-même
 n'admet les plugins que par pull request fusionnée à la main par un
 mainteneur — le même rituel d'admission que cette suite applique à chaque
-outil. La fiche de ce plugin passe par cette porte en direct devant tout le
-monde : la pull request NousResearch/hermes-agent#159281 est ouverte,
-elle attend un bouton de fusion humain — oui ou non, ça se passe sur la
-place publique, à une adresse lisible dès maintenant. Ce n'est pas une
+outil. La fiche de ce plugin est passée par cette porte en direct devant
+tout le monde : la pull request NousResearch/hermes-agent#159281 a été
+fusionnée le 26 novembre 2026 par un mainteneur humain — oui ou non, ça
+s'est passé sur la place publique, à une adresse lisible dès maintenant.
+La fiche est en live au catalogue aujourd'hui. Ce n'est pas une
 tagline : c'est vérifiable sur GitHub.
 
 ## Pourquoi c'est sûr chez toi
@@ -390,7 +399,7 @@ tagline : c'est vérifiable sur GitHub.
 ```bash
 curl https://mechacut.studio/agent/manifest          # toute la surface, sans clé, maintenant
 hermes plugins install mechacut/plugin     # via Git — live aujourd'hui
-# hermes plugins install mechacut                    # via le catalogue, au jour du merge
+hermes plugins install mechacut                    # via le catalogue — live
 ```
 
 Sans terminal, même résultat : panneau Plugins de l'app desktop →
