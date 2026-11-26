@@ -425,6 +425,8 @@
   "text_count_mixed": "200:693a48ee93ff9bfa42380519951063350b94a1033d77d15e6339278da66a2d02",
   "text_decode_cafe": "200:bbb7d72e20b38db11d6204d0b680f82eb001e22ab55df125b0aae50b225b4132",
   "text_escape_sql": "200:73696064b3a9704a3e52ceb6633e99186ebb4470179914bbb026141a7dc6e873",
+  "text_mojibake_families_pin": "200:3c6ebd1621ac394f8f2ee37e44cdd06cb501cee6e108bc685f20c0d9791ff9fb",
+  "text_mojibake_serao_never_ser\u00e3_pin": "200:4f7d596349ce46c5d283d2221e08dedadc0fec8ba27062c494ad449d3e6c5665",
   "text_punycode_munich": "200:63f63c6067d954071b0047944f6b2137636294ae5bfb6ff8859e677862d6918e",
   "text_sanitize_reserved": "200:2dbc3dfe6a4b8d7a5b2ae8d00d7f8209ee950b7e73b22a54de87d3ecdd538876",
   "text_select_growth": "200:b7422517b9ed9ea75c48e9c9a900e1c079cc027becb8a333f4a288bb94ccf9ed",

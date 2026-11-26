@@ -978,7 +978,15 @@ TEMPLATE = """<!DOCTYPE html>
   .tcard .tp { font-size: 12px; color: var(--muted);
     display: -webkit-box; -webkit-line-clamp: 2;
     -webkit-box-orient: vertical; overflow: hidden; }
-  .tcard .tierdot { font-size: 10px; }
+  /* b125_hermes elagage STRUCTUREL : le span .tierdot (28 octets x 200
+     cartes = ~5,6 k PAR PAGE) passe en ::before pilote par data-tier —
+     meme badge, meme taille, zero repetition dans le markup. Precents :
+     b110 (lignes vides), b119 (name hors hay), b124 (packlinks repliees).
+     Le budget d'un outil neuf devient ~negatif pour la landing. */
+  .tcard::before { font-size: 10px; margin-right: 2px; }
+  .tcard[data-tier="free"]::before { content: "\1F7E2 "; }
+  .tcard[data-tier="cap"]::before { content: "\1F7E1 "; }
+  .tcard[data-tier="paid"]::before { content: "\1F534 "; }
   .tcard.hide { display: none; }
   #tptry { margin: 0 0 10px; }
   #tptry .tsay { font-size: 14px; margin: 0 0 6px; color: var(--fg); }
@@ -1672,6 +1680,12 @@ CAT_TOP10 = {"en": "\u2605 Top 10", "fr": "\u2605 Le top 10",
 PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
                 # validés nom par nom + chiffres par chiffres au merge
     "fr": {
+        "stats_rate_ci":
+            "k sur n → taux OBSERVÉ et centre WILSON séparés et nommés, intervalle 95 % — le 65,2 % seul est un mensonge de précision",
+        "pdf_provenance":
+            "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON — null nommé, jamais deviné",
+        "text_mojibake":
+            "scan deux couches SANS réparer : familles d'encodage comptées, needles de contexte nommés — serão ne compte JAMAIS comme serã",
         "address_parse":
             "adresse postale → pays, code postal validé contre 50 grammaires, lignes restantes ; ambiguïté NOMMÉE, jamais devinée",
         "date_civil":
@@ -2069,6 +2083,12 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "money_settle":
             "qui paye qui après les avances : solde NET (remise plafonnée à la propre créance, NOMMÉE) ou graphe PAR REÇUS — compare rend les DEUX réponses du fil, écart chiffré ; avance en NATURE (points, carte cadeaux) comptée à TA lecture, face|cash|none, jamais devinée ; virements minimaux PROUVÉS (DP ≤9) ; taux en ARGUMENTS, jamais fetchés",
     },    "pt": {
+        "stats_rate_ci":
+            "k de n → taxa OBSERVADA e centro WILSON separados e nomeados, intervalo 95 % — 65,2% sozinho é mentira de precisão",
+        "pdf_provenance":
+            "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido — null nomeado, nunca inventado",
+        "text_mojibake":
+            "varredura em duas camadas SEM consertar: famílias de codificação contadas, agulhas de contexto nomeadas — serão nunca conta como serã",
         "address_parse":
             "endereço postal → país, CEP validado contra 50 gramáticas, linhas restantes; ambiguidade NOMEADA, nunca adivinhada",
         "date_civil":
@@ -3083,9 +3103,9 @@ def catalog_grid(lang):
         purp = purp.replace("&", "&amp;").replace("<", "&lt;")
         cards.append(
             '<button class="tcard" data-pack="%s" data-tier="%s"%s'
-            ' data-tool="%s" data-hay="%s"><span class="tierdot">%s'
-            '</span> <code>%s</code><span class="tp">%s</span></button>'
-            % (pack, tier, ' data-top="1"' if name in TOP10 else '', name, hay, BADGE[tier], name, purp))
+            ' data-tool="%s" data-hay="%s"> <code>%s</code>'
+            '<span class="tp">%s</span></button>'
+            % (pack, tier, ' data-top="1"' if name in TOP10 else '', name, hay, name, purp))
     # b124_hermes elagage MESURE (+pdf_provenance, budget PT a 8 octets
     # de marge) : les 13 liens packs sont REPLIES en un gabarit —
     # « /SKILL-<pack>.md » se nomme lui-meme, les NOMS des packs vivent

@@ -313,9 +313,10 @@ def test_landing_catalog_card_present_three_languages():
         body = json.load(open(os.path.join(
             os.path.dirname(main.__file__), page)))
         grid = body["bundles_grid"]
+        # b125_hermes : badge passe en CSS ::before (pilote data-tier)
+        # — la batterie suit le texte, pas ce qu'il disait (b112).
         m = re.search(r'data-tool="json_bigint" data-hay="([^"]*)"'
-                      r'[^>]*><span class="tierdot">[^<]*</span> '
-                      r'<code>json_bigint</code><span class="tp">(.*?)'
+                      r'[^>]*> <code>json_bigint</code><span class="tp">(.*?)'
                       r'</span>', grid)
         assert m, page
         hay, tp = m.group(1), m.group(2)

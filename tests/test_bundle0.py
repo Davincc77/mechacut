@@ -20,10 +20,9 @@ def test_manifest_complete_and_self_certified():
     assert r1.content == r2.content          # same bytes, forever
     assert r1.status_code == 200
     body = r1.text
-    folded = "dense fold (<8.8KB)" in body  # b112: « folded to dense
-    # mode » elague a claim constant — le drapeau se nomme « dense
-    # fold », le test suit la mesure (doctrine b111: la batterie
-    # teste ce que le texte dit, pas ce qu'il disait)
+    folded = "dense fold" in body  # b125_hermes: « (<8.8KB) » elague a
+    # claim constant (le seuil vit dans le code du fold, le drapeau se
+    # nomme lui-meme) — la batterie suit la mesure (b111/b112).
     for name, path, _pack, purpose, _tags in routing.TABLE:
         line = [l for l in body.splitlines() if l.startswith(name + "  ")]
         assert line, name                     # every tool has its line
@@ -105,7 +104,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 200   # +pdf_provenance bundle124_hermes ; +stats_rate_ci bundle123 ; +money_payscale bundle120 ; +agent_resultcliff bundle116 ; +money_settle bundle115 ; +json_bigint bundle114 ; +agent_mclistcomplete->agent_mcplist bundle113 ; +invoice_payment_due bundle112 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +agent_costdiff bundle104 ; +shop_soldes_window bundle103 ; 185 avec shop_gift_voucher bundle102 ; 184 avec agent_contexttax bundle101 ; 183 avec money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
+    assert seen == len(routing.TABLE) == 201   # +text_mojibake bundle125_hermes ; +pdf_provenance bundle124_hermes ; +stats_rate_ci bundle123 ; +money_payscale bundle120 ; +agent_resultcliff bundle116 ; +money_settle bundle115 ; +json_bigint bundle114 ; +agent_mclistcomplete->agent_mcplist bundle113 ; +invoice_payment_due bundle112 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +agent_costdiff bundle104 ; +shop_soldes_window bundle103 ; 185 avec shop_gift_voucher bundle102 ; 184 avec agent_contexttax bundle101 ; 183 avec money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
     # (23-11 bundle96) ; était 179 avec agent_mcpaudit (bundle92)
 
 

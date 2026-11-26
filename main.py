@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.45.0",
+    version="1.46.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4824,6 +4824,33 @@ def api_pdf_provenance(req: PdfProvenanceRequest):
     return err if err else body
 
 
+# --------------------------------------- bundle 125_hermes: text/mojibake
+
+class TextMojibakeRequest(BaseModel):
+    text: str
+
+
+def run_text_mojibake(args: dict):
+    try:
+        req = TextMojibakeRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = micro.mojibake_scan(req.text)
+    except micro.MicroError as e:
+        return None, bad_request([{"field": "text", "message": str(e),
+                                   "expected": "a non-empty string"}],
+                                 "check_failed")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/text/mojibake")
+def api_text_mojibake(req: TextMojibakeRequest):
+    body, err = run_text_mojibake(req.model_dump())
+    return err if err else body
+
+
 # --------------------------------------------- bundle 7.1: text tools
 
 class TextCountRequest(BaseModel):
@@ -7563,6 +7590,7 @@ TOOL_RUN = {
            "image_rightsize": run_rightsize,
            "money_rates": run_rates,
            "doc_text": run_doc_text,
+           "text_mojibake": run_text_mojibake,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -9948,6 +9976,27 @@ MCP_TOOLS = [
                       "description": "successes, 0 <= k <= n"},
                 "n": {"type": "integer",
                       "description": "trials, >= 1"},
+            },
+        },
+    },
+    {
+        "name": "text_mojibake",
+        "description": (
+            "Two-layer mojibake SCAN that never repairs: encoding "
+            "families (latin1_accents Ã/Â+octet, cp1252_punct â+) counted "
+            "per family with encoding_hits = DISTINCT families hit, plus "
+            "context needles (serã, estã) counted only at word borders — "
+            "serão never counts as serã. Verdict CLEAN/ENCODING/NEEDLES/"
+            "BOTH. Sister of text_decode, separated on purpose: the tool "
+            "that repairs must not be the tool that judges. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["text"],
+            "properties": {
+                "text": {"type": "string",
+                         "description": "document text as-is — nothing "
+                                        "is modified"},
             },
         },
     },

@@ -8,6 +8,16 @@ actually talks to their agent.
 """
 
 SAY = {
+    "/api/v1/text/mojibake": {
+        "en": "count what is broken WITHOUT repairing it: families "
+              "of encoding + context needles — serão never counts "
+              "as serã",
+        "fr": "compter le casse SANS reparer : familles d'encodage "
+              "+ needles contextuels — serão ne compte jamais comme "
+              "serã",
+        "pt": "contar o estrago SEM consertar: famílias de codificação "
+              "+ agulhas de contexto — serão nunca conta como serã",
+    },
     "/api/v1/pdf/provenance": {
         "en": "before you call this PDF the original, read what it "
               "confesses: which tool wrote it, which dates it claims, "

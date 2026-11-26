@@ -950,6 +950,10 @@ TABLE = (
      "mojibake -> utf-8, only provable fixes",
      "encoding garbled mojibake cafÃ utf8 latin1 broken accents "
      "illisible encodage caracteres embaralhado"),
+    ("text_mojibake", "/api/v1/text/mojibake", "text",
+     "mojibake scan: families + needles, never repairs",
+     "mojibake encoding accents utf8 cp1252 serao sera mangled "
+     "caracteres embaralhado"),
     ("num_human", "/api/v1/num/human", "numbers",
      "duration bytes roman ordinal shaped for humans",
      "how long humanize bytes size kb mb duration seconds format "
@@ -1260,12 +1264,12 @@ def manifest_text(version):
         # « -> sister moovicut.studio » -> « -> moovicut.studio » (-7,
         # « sister » se lit sur la landing et dans SKILL.md, le manifeste
         # porte le chemin). Mesure b111 : 207 lignes / 8 995 octets.
-        "mechacut.studio %s - %d transforms "
+        "mechacut.studio %s %d transforms "
         "+ %d recipes. " %
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
-        + "free=keyless 30/min; cap<32KB; paid=x402 from 1. "
+        + "keyless 30/min; cap<32KB; paid=x402 from 1. "
           # b114 elagage MESURE (+json_bigint, 39 octets a payer; marge
           # annoncee 10) : les 13 EN-TETES DE PACK ne portent plus
           # chacun leur chemin — « [repair] /SKILL-repair.md » devient
@@ -1277,8 +1281,7 @@ def manifest_text(version):
           "packs: /SKILL-<pack>.md; "
           "POSTs carry "
           "sha256; 400s name+expected; "
-          "error IS repair prompt; refusals name "
-          "readings. "
+          "error IS repair;"
           # b105 elagage MESURE (consigne b104 « FR a 23 octets du
           # plafond : le lot suivant HUMAIN paie prose + elagage ») :
           # la ligne de POINTEURS « detail: » est FUSIONNEE dans la
@@ -1358,7 +1361,7 @@ def manifest_text(version):
         # lit), les deux pointeurs de purpose vivent, 217 lignes.
         body = render(False, None)
         ls = body.split("\n")
-        ls[0] += (" | dense fold (<8.8KB): /route?q=")
+        ls[0] += (" | dense fold: /route?q=")
         body = "\n".join(ls)
     return body + "# sha256=" + _sha(body.rstrip("\n")) + "\n"
 

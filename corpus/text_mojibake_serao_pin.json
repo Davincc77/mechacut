@@ -1,0 +1,7 @@
+{
+ "name": "text_mojibake_serao_never_serã_pin",
+ "path": "/api/v1/text/mojibake",
+ "body": {
+  "text": "Os voos serão confirmados"
+ }
+}

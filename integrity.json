@@ -6882,6 +6882,24 @@
   },
   {
    "body": {
+    "text": "remarca\u00e7\u00f5es t\u00c3\u00aam uma taxa \u00e2\u20ac\u0153premium\u00e2\u20ac"
+   },
+   "name": "text_mojibake_families_pin",
+   "path": "/api/v1/text/mojibake",
+   "sha256": "3c6ebd1621ac394f8f2ee37e44cdd06cb501cee6e108bc685f20c0d9791ff9fb",
+   "status": 200
+  },
+  {
+   "body": {
+    "text": "Os voos ser\u00e3o confirmados"
+   },
+   "name": "text_mojibake_serao_never_ser\u00e3_pin",
+   "path": "/api/v1/text/mojibake",
+   "sha256": "4f7d596349ce46c5d283d2221e08dedadc0fec8ba27062c494ad449d3e6c5665",
+   "status": 200
+  },
+  {
+   "body": {
     "domain": "m\u00fcnchen.de"
    },
    "name": "text_punycode_munich",

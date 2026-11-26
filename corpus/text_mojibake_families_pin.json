@@ -1,0 +1,7 @@
+{
+ "name": "text_mojibake_families_pin",
+ "path": "/api/v1/text/mojibake",
+ "body": {
+  "text": "remarcações tÃªm uma taxa â€œpremiumâ€"
+ }
+}

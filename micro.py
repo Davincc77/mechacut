@@ -676,3 +676,52 @@ def novel_words(items, max_echo=3):
             "items": out,
             "counts": {"echo": echo, "novel": novel, "items": len(items)},
             "max_echo": max_echo}
+
+
+# ---- bundle 125_hermes: mojibake_scan — la couche qui lit sans reparer ----
+# text_decode REPARE les encodages prouvables ; ce scan ne touche rien :
+# il dit si le texte est soupçonne, dans quelle couche, combien de fois,
+# par famille et par needle NOMMES. Ne du recensement LATAM (vague 3) :
+# 37 billets sales sur 120, et le piege qui avait fausse une passe —
+# « serão » n'est pas « serã » : la frontiere du mot decide, jamais le
+# sous-chaine. Tables FERGEES : familles motivees par le corpus public
+# bresilien, needles par le meme recensement. Un outil qui modifie ce
+# qu'il diagnostique efface la preuve de son propre jugement — d'ou la
+# separation (arbitrage Vince 26-11).
+
+_MOJI_FAMILIES = {
+    # Ã/Â (bytes C3/C2 d'une sequence UTF-8 lue en Latin-1/CP1252) suivis
+    # d'un octet de combinaison 80-BF : tÃªm, Ã©, Â«.
+    "latin1_accents": re.compile(r"[\u00C3\u00C2][\u0080-\u00BF]"),
+    # â suivi du signe CP1252 (E2 lu en CP1252) : â€œ â€ â€™, contractions
+    # de guillemets/tirets typographiques.
+    "cp1252_punct": re.compile(r"\u00E2[\u0080-\u009F\u00A0-\u00BF\u20AC\u0153]"),
+}
+
+# needles : formes CASSEES nommees, comptees seulement quand le mot
+# s'ARRETE la (serã| + non-lettre) — la suite legitime (serão) n'est
+# jamais un hit. Paires (needle, regex-frontiere).
+_MOJI_NEEDLES = {
+    "serã": re.compile(r"ser\u00E3(?![\u0061-\u007A\u00E0-\u00FF])", re.I),
+    "estã": re.compile(r"est\u00E3(?![\u0061-\u007A\u00E0-\u00FF])", re.I),
+}
+
+
+def mojibake_scan(text):
+    if not isinstance(text, str):
+        raise MicroError("text must be a string — the scan reads, it does not convert")
+    if not text.strip():
+        raise MicroError("text required: an empty string proves nothing")
+    families = {k: len(p.findall(text)) for k, p in _MOJI_FAMILIES.items()}
+    needles = {k: len(p.findall(text)) for k, p in _MOJI_NEEDLES.items()}
+    hits = sum(1 for v in families.values() if v)
+    if hits and any(needles.values()):
+        verdict = "BOTH"
+    elif hits:
+        verdict = "ENCODING"
+    elif any(needles.values()):
+        verdict = "NEEDLES"
+    else:
+        verdict = "CLEAN"
+    return {"encoding_hits": hits, "families": families,
+            "needle_hits": needles, "verdict": verdict}
