@@ -579,10 +579,11 @@ TABLE = (
      "certificate tls ssl x509 pem cert expiry expiration validity "
      "chain expire certificat cert expire"),
     ("id_checkdigit", "/api/v1/id/checkdigit", "checks",
-     "check digits: ISBN/EAN/GTIN/ISIN/LEI… verify, repair, scan",
+     "check digits: ISBN/EAN/GTIN/ISIN/LEI/boleto… verify, repair, scan",
      "check digit isbn ean upc gtin issn isin cusip sedol aba lei orcid "
      "cas verhoeff damm checksum barcode identifier typo transposed "
-     "wrong digit chiffre de controle verificador dígito"),
+     "wrong digit chiffre de controle verificador dígito "
+     "boleto linha digitavel febraban fator banrisul"),
     ("image_rightsize", "/api/v1/image/rightsize", "web",
      "deterministic PNG resize: exact box / bilinear / nearest, integer "
      "resampling, same bytes forever",
@@ -1519,7 +1520,7 @@ SCHEME_NAMES = {
     "validate_taxid": "cnpj cpf siren siret nif vat",
     "id_checkdigit": "isbn isbn10 isbn13 ean ean8 ean13 upca gtin "
                      "gtin14 issn isin cusip sedol aba lei orcid cas "
-                     "verhoeff damm",
+                     "boleto febraban verhoeff damm",
 }
 
 # T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le

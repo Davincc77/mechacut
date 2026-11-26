@@ -1,0 +1,9 @@
+{
+ "body": {
+  "mode": "check",
+  "value": "00191234540000000000000000000018110000000015000",
+  "scheme": "boleto"
+ },
+ "name": "id_checkdigit_boleto_valid_pin",
+ "path": "/api/v1/id/checkdigit"
+}

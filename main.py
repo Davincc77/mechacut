@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.42.0",
+    version="1.43.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -9226,9 +9226,10 @@ MCP_TOOLS = [
     {
         "name": "id_checkdigit",
         "description": "Check digits for the identifiers a model guesses: "
-                       "15 published schemes (ISBN-10/13, EAN-8/13, UPC-A, "
+                       "16 published schemes (ISBN-10/13, EAN-8/13, UPC-A, "
                        "GTIN-14, ISSN, ISIN, CUSIP, SEDOL, ABA, LEI, ORCID, "
-                       "CAS, Luhn-family via ISIN, Verhoeff, Damm), each "
+                       "CAS, boleto, Luhn-family via ISIN, Verhoeff, Damm), "
+                       "each "
                        "cited to its spec. check: auto-detect returns EVERY "
                        "format that matches with its own verdict — a valid "
                        "Bookland number is both ean13 and isbn13 and the "
@@ -9239,7 +9240,11 @@ MCP_TOOLS = [
                        "valid. scan: finds and verifies identifiers in free "
                        "text. Generic schemes (verhoeff, damm) need an "
                        "explicit scheme= — they would pass any digit "
-                       "string 10 % of the time. Free.",
+                       "string 10 % of the time. boleto (FEBRABAN linha "
+                       "digitável, 47): verdict PER DIGITO — which campo "
+                       "DV fails, fator decoded to BOTH cycle dates (floor "
+                       "1000, cycle restart 2025-02-22); a 48-digit linha "
+                       "is refused by name. Free.",
         "inputSchema": {"type": "object", "properties": {
             "mode": {"type": "string",
                      "enum": ["check", "generate", "repair", "scan"]},
@@ -9249,8 +9254,8 @@ MCP_TOOLS = [
             "scheme": {"type": "string",
                        "description": "closed list: isbn10 isbn13 ean8 "
                                       "ean13 upca gtin14 issn isin cusip "
-                                      "sedol aba lei orcid cas verhoeff "
-                                      "damm; omit to auto-detect"},
+                                      "sedol aba lei orcid cas boleto "
+                                      "verhoeff damm; omit to auto-detect"},
             "text": {"type": "string",
                      "description": "scan mode: free text up to 20 000 "
                                     "chars"}},

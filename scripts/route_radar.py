@@ -629,6 +629,21 @@ CASES = [
     ("sera que meu corte quebra o json e ele continua parseavel",
      "agent_resultcliff"),
     ("my json is broken can you fix it", "json_repair"),
+    # CLASSE b122 — boleto (REVISION id_checkdigit, rails installment
+    # 1, GO Vince 26-11). Douleur : a linha digitável cai no banco e
+    # o pagador nao sabe QUAL dv falha (forum ACBr : erros 26/486).
+    ("which dv on my boleto linha digitavel is wrong",
+     "id_checkdigit"),
+    ("minha linha digitável cai no banco qual dígito está errado",
+     "id_checkdigit"),
+    ("mon boleto febraban est rejeté quel chiffre de contrôle",
+     "id_checkdigit"),
+    # leurre SANS DONNEE — etape PECHÉ par l'oracle local (lecon b122) :
+    # ma premiere phrase portait « settle », mot du hay de money_settle,
+    # et le radar l'a volée — un leurre qui route est une promesse
+    # fausse, jamais un test. Cette phrase-ci ne contient AUCUN mot de
+    # la table, vérifié contre /route en local avant d'etre consigne.
+    ("why is the till at the kiosk quiet today", None),
     ("why is everything running so slow today", None),
     ("raconte-moi a quoi reve un harnais vide", None),
     ("the tallest waterfall in the world is made of what", None),

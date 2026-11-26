@@ -3232,6 +3232,60 @@
   },
   {
    "body": {
+    "mode": "check",
+    "value": "00191234540000000000000000000018110000000015000"
+   },
+   "name": "id_checkdigit_boleto_autodetect_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "719c64d6ff00e8328aff44c626920a4cd6015049fff614b1a5ab25ed7d98a5e6",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "check",
+    "scheme": "boleto",
+    "value": "00191234590000000000000000000018110000000015000"
+   },
+   "name": "id_checkdigit_boleto_dv1_fail_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "fad6bb419579a64985c3aa7a789b12c5701f642eb042694aa86d7c627e74546b",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "check",
+    "scheme": "boleto",
+    "value": "00191234540000000000000000000018109990000015000"
+   },
+   "name": "id_checkdigit_boleto_fator_floor_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "c2c18c4f4a720c2b46765d387611f2f22c437c9f2681e83db976d667b33ee9e7",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "generate",
+    "scheme": "boleto",
+    "value": "0019100000000150001234500000000000000000001"
+   },
+   "name": "id_checkdigit_boleto_generate_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "d9cbff133a010d2d8001092a15ea5b86a3cc1934d3d702b5ef50079c06d3dbcd",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "check",
+    "scheme": "boleto",
+    "value": "00191234540000000000000000000018110000000015000"
+   },
+   "name": "id_checkdigit_boleto_valid_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "722cdc4978a69db9dc1173c98bef9676d258a779c80563b5d03bb44f40876c7b",
+   "status": 200
+  },
+  {
+   "body": {
     "text": "Caf\u00e9 Cr\u00e8me \u2014 2026 !"
    },
    "name": "id_slug_cafe",

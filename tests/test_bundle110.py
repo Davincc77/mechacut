@@ -449,7 +449,9 @@ def test_onze_pins_soldeslu_adds_only():
     # b119 relève à 423 : +5 money_prorate conventions (adds-only)
     # b120 relève à 431 : +5 money_payscale +3 goose cliff (adds-only)
     # b121 relève à 437 : +6 agent_resultcliff json_survival (adds-only)
-    assert len(g) == 437
+    # b122 relève à 442 : +5 id_checkdigit boleto (adds-only — diff
+    # golden 59 insertions ZÉRO suppression, hash-à-hash prouvé)
+    assert len(g) == 442
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

@@ -2,7 +2,7 @@
 CONFIDENTLY (veridigit bench, Nov 2025: a frontier model, tool-free,
 missed the check digit 91 % of the time on non-memorised identifiers).
 
-15 schemes, each cited to its published spec — no table here is written
+16 schemes, each cited to its published spec — no table here is written
 from memory:
   isbn10   ISO 2108: weights 10..1, sum mod 11, 'X' = 10
   isbn13   ISO 2108 (Bookland 978/979) + GS1 mod-10
@@ -35,6 +35,19 @@ from memory:
   damm     Damm 2004 (totally anti-symmetric quasigroup, dissertation
            Philipps-Universitaet Marburg). The table is the published
            one: en.wikipedia.org/wiki/Damm_algorithm
+  boleto   FEBRABAN linha digitavel (47 digits, Brazil): five fields,
+           three module-10 field digits (weights 2,1 from the right,
+           digit-summed products), one module-11 general digit
+           (weights 2..9 from the right; result <2 or >9 -> 1), and
+           campo 5 = fator de vencimento (4) + valor (10). The fator
+           counts days since 1997-10-07 and MUST be >= 1000: cycle 1
+           ran 1000..9999 up to 2025-02-21, cycle 2 restarted at 1000
+           on 2025-02-22 (Linx table + BB Anexo + FEBRABAN concordant,
+           read 26-11). Layout sources read 26-11: box4.dev/pt-br/
+           brasil/validador-boleto (campo table + published DV
+           example 001900000 -> 9), macoratti.net/boleto.htm (BB
+           campo composition), github.com/micdog22/confere-boleto
+           (barcode reassembly + weight statements).
 
 Closed design decisions, said out loud (this is the product):
 - check with no scheme returns EVERY scheme whose format matches, each
@@ -46,12 +59,23 @@ Closed design decisions, said out loud (this is the product):
   confident wrong answer we exist to kill.
 - CAS matches only the canonical hyphenated form: bare digit strings
   are indistinguishable from other 7-10 digit identifiers.
+- boleto: the verdict is PER DIGITO (dv1, dv2, dv3, dv_geral — each with
+  its given and expected char), because the bank rejects the linha for
+  ONE failing DV (ACBr forum vectors, read 26-11). A 48-digit linha is
+  refused BY NAME: it is either a conta de consumo (8-prefixed layout)
+  or the Banrisul duplo-dígito variant — neither grammar is asserted
+  here, we do not guess what we have not sourced. The fator decodes to
+  BOTH cycle candidates (1997-10-07 base, 9000-day restart, 2025-02-22
+  discontinuity) — never to one date by reading the wall clock. scan
+  finds a dot-separated linha inside one token; a space-separated
+  printed linha arrives as separate fields by design and needs check.
 - ISBN hyphenation is NOT attempted: it needs the registration-group
   range tables, and getting them from memory is how wrong books get
   shelved. issn/orcid/cas have algorithmic hyphenation, we render it.
 """
 
 import re
+from datetime import date, timedelta
 
 MODES = ("check", "generate", "repair", "scan")
 SCANNABLE_MAX = 20000      # chars of text scan accepts (bounded CPU, 🟢)
@@ -277,6 +301,11 @@ _SCHEMES = {
                 p.replace("-", "")))) % 10),
         pos_charsets=lambda i, n: "" if n[i] == "-" else _DIGITS,
         pretty=lambda v: v),
+    "boleto": dict(
+        spec="FEBRABAN linha digitável (47 digits, 5 campos, per-DV "
+             "verdicts — see module docstring for the cited layout)",
+        rx=r"\d{47}", check_n=0, custom=True, dotless=True,
+        pos_charsets=lambda i, n: _DIGITS),
     "verhoeff": dict(
         spec="Verhoeff 1969 (dihedral group D5; published tables)",
         rx=r"\d{2,}", check_n=1, split=_last1,
@@ -300,6 +329,132 @@ def _orcid_p(p15):
     return p
 
 
+# ------------------------------------------------- boleto (FEBRABAN 47)
+# Engines transcribed from the layout sources cited in the module
+# docstring (read 26-11), NOT from any implementation: mod-10 with
+# weights 2,1 from the right of the campo body (products digit-summed),
+# general DV mod-11 with weights 2..9 cycling from the right over the
+# 43 barcode digits without the DV slot (result <2 or >9 -> 1).
+_BOLETO_EPOCH = date(1997, 10, 7)     # fator base date (BB Anexo: data
+_BOLETO_RESTART = 9000                # base 07/10/1997; cycle 2 restart
+                                      # +9000 days, fator 1000 = 2025-02-22
+
+
+def _boleto_strip(value):
+    """The linha is PRINTED in five fields with dots and spaces; those
+    are separators, not data."""
+    return re.sub(r"[.\s-]", "", value or "")
+
+
+def _boleto_mod10(body):
+    s = 0
+    for i, ch in enumerate(reversed(body)):
+        p = int(ch) * (2 if i % 2 == 0 else 1)
+        s += p // 10 + p % 10
+    return str((10 - s % 10) % 10)
+
+
+def _boleto_geral(bar43):
+    """General DV over the 43 barcode digits without the DV slot,
+    weights 2,3,...,9,2,... from the right (micdog22/BB layout)."""
+    s = sum(int(d) * (2 + i % 8) for i, d in enumerate(reversed(bar43)))
+    res = 11 - s % 11
+    return str(1 if res < 2 or res > 9 else res)
+
+
+def _boleto_linha(bar43):
+    """Build the 47-digit linha from the 43-digit barcode body
+    (banco3 moeda1 fator4 valor10 livre25, general-DV slot omitted)."""
+    banco, moeda, fator, valor, livre = (
+        bar43[0:3], bar43[3], bar43[4:8], bar43[8:18], bar43[18:43])
+    c1 = banco + moeda + livre[0:5]
+    c2 = livre[5:15]
+    c3 = livre[15:25]
+    geral = _boleto_geral(bar43)
+    return (c1 + _boleto_mod10(c1) + c2 + _boleto_mod10(c2)
+            + c3 + _boleto_mod10(c3) + geral + fator + valor)
+
+
+def _boleto_due(fator):
+    """Cycle candidates for a fator — NEVER one date from the wall
+    clock: fator f maps to base+f (cycle 1) and base+f+9000 (cycle 2)."""
+    f = int(fator)
+    if f < 1000:
+        return [], ("fator %04d is below 1000: FEBRABAN rejects it (due "
+                    "dates closer to the 1997-10-07 base than 1000 days "
+                    "have no valid factor)" % f)
+    d1 = _BOLETO_EPOCH + timedelta(days=f)
+    d2 = _BOLETO_EPOCH + timedelta(days=f + _BOLETO_RESTART)
+    out = [{"cycle": 1, "due": d1.isoformat()},
+           {"cycle": 2, "due": d2.isoformat()}]
+    note = ("cycle 1 ended 2025-02-21 (fator 9999); cycle 2 restarted at "
+            "1000 on 2025-02-22 — both candidate dates are returned, "
+            "which cycle applies is the bearer's fact, not ours")
+    return out, note
+
+
+def _boleto_verdict(digits):
+    """Full per-DV verdict + decode of a 47-digit linha."""
+    c1, c2, c3 = digits[0:10], digits[10:21], digits[21:32]
+    dv_g, c5 = digits[32], digits[33:47]
+    bar43 = (c1[0:3] + c1[3] + c5[0:4] + c5[4:14]
+             + c1[4:9] + c2[0:10] + c3[0:10])
+    dvs = {}
+    for name, body, given in (("dv1", c1[0:9], c1[9]),
+                              ("dv2", c2[0:10], c2[10]),
+                              ("dv3", c3[0:10], c3[10])):
+        exp = _boleto_mod10(body)
+        dvs[name] = {"given": given, "expected": exp, "valid": given == exp}
+    exp_g = _boleto_geral(bar43)
+    dvs["dv_geral"] = {"given": dv_g, "expected": exp_g,
+                       "valid": dv_g == exp_g}
+    fator, valor = c5[0:4], c5[4:14]
+    due, note = _boleto_due(fator)
+    cents = int(valor)
+    return {"scheme": "boleto",
+            "spec": "FEBRABAN linha digitável (47 digits, 5 campos)",
+            "checksum_valid": all(d["valid"] for d in dvs.values()),
+            "normalized": digits, "dvs": dvs,
+            "failing_fields": [k for k, d in dvs.items() if not d["valid"]],
+            "decoded": {
+                "banco": c1[0:3], "moeda": c1[3],
+                "fator_vencimento": fator,
+                "due_date_candidates": due, "fator_note": note,
+                "valor_centavos": valor,
+                "valor_decimal": "%d.%02d" % (cents // 100, cents % 100)},
+            "barcode44": bar43[0:4] + dv_g + bar43[4:]}
+
+
+def _boleto_generate(value):
+    n = _boleto_strip(value)
+    if len(n) == 44:
+        raise DigitError(
+            "44 digits is the full barcode — mode=check answers the "
+            "47-digit linha; mode=generate needs the 43-digit body "
+            "(banco3+moeda1+fator4+valor10+campo livre 25, the general "
+            "DV slot omitted)")
+    if len(n) != 43 or not n.isdigit():
+        raise DigitError(
+            "boleto generate needs 43 digits, got %r (%d)" % (value, len(n)))
+    if int(n[4:8]) < 1000:
+        raise DigitError(
+            "fator %s below 1000: FEBRABAN rejects due dates closer than "
+            "1000 days to the 1997-10-07 base — fix the body, not the DV"
+            % n[4:8])
+    linha = _boleto_linha(n)
+    dv_g = linha[32]
+    return {"mode": "generate", "scheme": "boleto",
+            "spec": "FEBRABAN linha digitável (47 digits, 5 campos)",
+            "payload": n, "value": linha,
+            # the printed form on the ticket: five campos, dots inside
+            # campos 1-3, campo 4 alone, campo 5 bare (sem edição)
+            "value_printed": "%s.%s %s.%s %s.%s %s %s" % (
+                linha[0:5], linha[5:10], linha[10:15], linha[15:21],
+                linha[21:26], linha[26:32], dv_g, linha[33:47]),
+            "barcode44": n[0:4] + dv_g + n[4:],
+            "normalized": linha}
+
+
 _RX = {name: re.compile("^(?:" + s["rx"] + ")$")
        for name, s in _SCHEMES.items()}
 
@@ -321,8 +476,12 @@ def normalize(value):
 def _match_entry(scheme, value, norm):
     s = _SCHEMES[scheme]
     n = value.upper().replace(" ", "") if s.get("raw") else norm
+    if s.get("dotless"):
+        n = _boleto_strip(n)
     if not _RX[scheme].match(n):
         return None
+    if s.get("custom"):
+        return _boleto_verdict(n)
     payload, given = s["split"](n)
     expected = s["check_fn"](payload)
     return {"scheme": scheme, "spec": s["spec"],
@@ -342,6 +501,13 @@ def _check(value, scheme=None):
             cands.append(e)
     if scheme:
         if not cands:
+            if scheme == "boleto" and len(_boleto_strip(value)) == 48:
+                raise DigitError(
+                    "48 digits is not the 47-position FEBRABAN "
+                    "cobranca layout: either a consumo linha (8-"
+                    "prefixed) or the Banrisul duplo-digito variant "
+                    "— neither grammar is asserted here; refusing "
+                    "to guess which")
             raise DigitError(
                 "not a %s shape (%s); expected format %s"
                 % (scheme, value, _SCHEMES[scheme]["rx"]))
@@ -380,6 +546,8 @@ def _pretty(norm, scheme):
 
 def _generate(scheme, value):
     s = _SCHEMES[scheme]
+    if s.get("custom"):
+        return _boleto_generate(value)
     n = value.strip().upper().replace(" ", "") if s.get("raw") \
         else normalize(value)
     if s.get("raw"):
@@ -409,7 +577,13 @@ def _repair(value, scheme=None):
         s = _SCHEMES[sc]
         if s.get("raw"):
             continue  # CAS needs its exact hyphen layout; no guessing
-        chars = list(norm)
+        if s.get("custom"):
+            digits = _boleto_strip(norm)
+            if len(digits) != 47 or not digits.isdigit():
+                continue  # repair answers the 47-digit linha only
+            chars = list(digits)
+        else:
+            chars = list(norm)
         for pos in range(len(chars)):
             charset = s["pos_charsets"](pos, chars)
             orig = chars[pos]
@@ -448,10 +622,12 @@ def _scan(text):
                 continue
             e = _match_entry(sc, tok, normalize(tok))
             if e:
-                cands.append({"scheme": sc,
-                              "checksum_valid": e["checksum_valid"],
-                              "expected_check_char":
-                                  e["expected_check_char"]})
+                cand = {"scheme": sc,
+                        "checksum_valid": e["checksum_valid"],
+                        "expected_check_char": e.get("expected_check_char")}
+                if e.get("failing_fields"):
+                    cand["failing_fields"] = e["failing_fields"]
+                cands.append(cand)
         if cands:
             found.append({"token": tok, "start": m.start(),
                           "results": cands})

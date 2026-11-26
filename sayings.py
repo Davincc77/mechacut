@@ -444,7 +444,8 @@ SAY = {
     "/api/v1/id/checkdigit": {
         "en": "is this ISBN a real check digit or a bad copy-paste?",
         "fr": "ce code-barres a-t-il le bon chiffre de contrôle ?",
-        "pt": "este ISBN tem o dígito verificador certo?"},
+        "pt": "meu boleto caiu no banco: qual dígito da linha "
+              "digitável está errado?"},
     "/api/v1/image/rightsize": {
         "en": "shrink this screenshot to 480 wide, keep the ratio",
         "fr": "réduis cette capture à 480 de large, en gardant les proportions",
