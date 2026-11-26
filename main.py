@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.47.0",
+    version="1.48.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -9940,6 +9940,9 @@ MCP_TOOLS = [
         "name": "pdf_provenance",
         "description": (
             "PDF bytes -> provenance the file confesses: last /Producer "
+            "(counted), dates, order — and WHERE the info lived "
+            "(plain | object_stream | none: an invisible Info is not "
+            "an absent Info; inflate-included since v1.48.0). "
             "(with occurrence count — incremental updates keep evidence), "
             "/CreationDate and /ModDate as ISO with their own offsets, "
             "and created_before_modified as a NAMED comparison: null when "

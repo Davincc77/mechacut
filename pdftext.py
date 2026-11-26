@@ -514,6 +514,29 @@ def provenance(pdf_b64):
     prods = _pdf_strings(raw, "Producer")
     cre = _pdf_strings(raw, "CreationDate")
     mod = _pdf_strings(raw, "ModDate")
+    # v1.48.0 REVISION (wave-6, 27-11 — le meme jour que le v1 :
+    # l'audit par la porte a rendu null sur les attestations Circle dont
+    # l'Info vit dans des Flux COMPRESSES (ObjStm/FlateDecode). null
+    # n'etait pas un aveu du document, c'etait notre cecite : un scan
+    # octet nu ne voit pas ce qui est inflate-a-l'interieur. Desormais
+    # on decompresse aussi, et l'ENDROIT est nomme — les trois etats
+    # (plain / object_stream / none) ne sont jamais fondus.)
+    location = "plain" if (prods or cre or mod) else None
+    if location is None:
+        for m in re.finditer(rb"stream\r?\n(.*?)endstream", raw, re.S):
+            try:
+                z = zlib.decompress(m.group(1))
+            except Exception:
+                continue
+            if not (b"/Producer" in z or b"/CreationDate" in z
+                    or b"/ModDate" in z):
+                continue
+            location = "object_stream"
+            prods = prods + _pdf_strings(z, "Producer")
+            cre = cre + _pdf_strings(z, "CreationDate")
+            mod = mod + _pdf_strings(z, "ModDate")
+    if location is None:
+        location = "none"
     created = _pdf_date(cre[-1]) if cre else None
     modified = _pdf_date(mod[-1]) if mod else None
     if created is not None and modified is not None:
@@ -523,6 +546,7 @@ def provenance(pdf_b64):
         order = None  # the dossier's bug, named: nothing to compare
     return {"producer": prods[-1] if prods else None,
             "producer_count": len(prods),
+            "info_location": location,
             "created": created,
             "modified": modified,
             "created_before_modified": order,

@@ -100,6 +100,7 @@ def test_g1_dossier_gold_corrected():
     # LA correction : une date absente ne se compare pas.
     assert d["created_before_modified"] is None
     assert d["producer_count"] == 1
+    assert d["info_location"] == "plain"
 
 
 def test_g2_normal_order():
@@ -168,3 +169,33 @@ def test_refusals_are_named():
     assert "pdf" in r.text.lower()
     r = client.post("/api/v1/pdf/provenance", json={"pdf_b64": "!!!bad"})
     assert r.status_code == 400
+
+
+def test_g7_info_in_object_stream_v148():
+    # REVISION v1.48.0 nee du wave-6 REALITE mesurée: les PDF modernes
+    # logent /Info dans des FLUX COMPRESSED (ObjStm FlateDecode) — le
+    # scan octet nu de v1 rendait null, ce qui n'est PAS la meme chose
+    # qu'une absence. Gold: un seul stream zlib contenant l'Info.
+    import base64, zlib
+    inner = (b"<</Producer (ZlibKit 1.0)/CreationDate (D:20200101000000Z)"
+             b"/ModDate (D:20200102030405Z)>>")
+    stream = zlib.compress(inner)
+    raw = (b"%PDF-1.5\n1 0 obj<</Type/ObjStm/N 1/First 0/Length "
+           + str(len(stream)).encode() + b">>stream\n" + stream
+           + b"\nendstream\ntrailer<</Root 9 0 R>>\n%%EOF\n")
+    d = call(base64.b64encode(raw).decode(), raw=True).json()
+    assert d["producer"] == "ZlibKit 1.0"
+    assert d["created"] == "2020-01-01T00:00:00Z"
+    assert d["modified"] == "2020-01-02T03:04:05Z"
+    assert d["created_before_modified"] is True
+    # la distinction NOMMEE — le null de v1 n'etait pas un aveu,
+    # c'etait notre cecite
+    assert d["info_location"] == "object_stream"
+
+
+def test_g8_plain_versus_absent_v148():
+    a = call(body_with(info(producer="ProvenanceKit 1.0",
+                            created="D:20180517120000Z"))).json()
+    assert a["info_location"] == "plain"
+    b = call(b"1 0 obj<</Type/Catalog>>endobj").json()
+    assert b["info_location"] == "none"
