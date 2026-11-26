@@ -34,6 +34,18 @@ A corrupted string is a fingerprint. If a bug is generated randomly at print tim
 
 The contrast is the thesis: the institutions LATAM has to answer to can make verifiable documents. The airline that carries their lawmakers cannot.
 
+## Figures
+
+All four are generated from the ledgers themselves (`docs/corpus/`), never from this prose — the chart and the text share one formula and one data source.
+
+![One dot per readable public LATAM e-ticket, 2019–2026](figures/fig1-timeline.png)
+
+![LATAM 720/1105 with Wilson 95% CI vs GOL and Azul zero-hit bounds](figures/fig2-contrast.png)
+
+![Non-Brazilian LATAM tickets: 22 readable, 0 dirty — Brazil controls 4/4 dirty](figures/fig3-border.png)
+
+![Published document-defect money: Spain €178.9M, ANAC R$725.8M unpaid stock](figures/fig4-money.png)
+
 ## What the bytes prove — and what they don't
 
 Proved: a deterministic pipeline is emitting, to millions of passengers, a document that mixes languages, fabricates a city, mispells its own brand (`E-RETIAL`), and fuses words inside the fare-rule text it asks the passenger to obey (`dadata`, `nãorealize`, `serã`). Dated: the core strings (E-RETIAL, dadata, nãorealize, serã, responsãvel) fire in every census year 2019→2026 and a 2018 ticket already carries them — the freeze is **at least eight years old**; the fabricated city and the Spanish-label line joined the set on 2021-03-29; a `tÃªm`-class fare-branch first appears 2026-05-17 and is shipping today. Localization: the same generator, non-Brazil emissions clean — the corruption lives in LATAM's Brazil-specific template layer.
