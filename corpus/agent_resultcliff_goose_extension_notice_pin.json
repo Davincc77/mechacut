@@ -1,0 +1,6 @@
+{
+ "name": "agent_resultcliff_goose_extension_notice_pin",
+ "path": "/api/v1/agent/result-cliff",
+ "body": {"harness": "goose", "size": 200001, "unit": "chars",
+          "tool": "extension"}
+}

@@ -1,0 +1,5 @@
+{
+ "name": "agent_resultcliff_goose_indeterminate_pin",
+ "path": "/api/v1/agent/result-cliff",
+ "body": {"harness": "goose", "size": 40000, "unit": "chars"}
+}

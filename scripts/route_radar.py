@@ -705,6 +705,43 @@ CASES = [
     # ne pas mentir sur sa propre table (it. 18 bis).
     ("pourquoi les agences existent si elles n'expliquent jamais rien",
      None),
+    # CLASSE b120 — GOOSE (agent_resultcliff) : la loi relevee AU CODE
+    # (shell.rs 161-164 + large_response_handler.rs, HEAD 26-nov).
+    # Aiguilles x3 langues, formes de SURFACE des fils et des docs —
+    # le leurre de classe (goose sans donnee) route chez une
+    # destination honnete qui refuse par arguments, classe b117.
+    ("goose truncated my shell output to the last 50 lines in a temp file",
+     "agent_resultcliff"),
+    ("GOOSE_MAX_TOOL_RESPONSE_SIZE 200000 characters replaced my result",
+     "agent_resultcliff"),
+    ("goose ne garde que les 50 dernieres lignes du resultat shell",
+     "agent_resultcliff"),
+    ("mon output goose depasse 2000 lignes bascule dans un fichier temp",
+     "agent_resultcliff"),
+    ("o goose cortou a saida do shell nas ultimas 50 linhas",
+     "agent_resultcliff"),
+    ("saida do goose passou 50 KB e virou arquivo temporario",
+     "agent_resultcliff"),
+    # CLASSE b120 — SALAIRE↔HEURE (money_payscale) : aiguilles x3
+    # langues issues des fils LUS AU SOURCE (17sefrt « 20 cents off »,
+    # 1bpysai « ×26 ne tombe pas », 1fnk3cb 2087 vs 2080, 1qh5ouz
+    # 27 periodes). Gardes de fratrie : le POURCENTAGE reste chez
+    # unitprice, l'ECHEANCE facture reste payment-due, le LOYER reste
+    # prorate — payscale tient l'echelle ANNEE↔HEURE, personne d'autre.
+    ("convert 52000 salary to hourly is it 2080 or 2087 hours",
+     "money_payscale"),
+    ("biweekly gross times 26 does not match my annual salary",
+     "money_payscale"),
+    ("salaire annuel en taux horaire combien d heures 2080 ou 2087",
+     "money_payscale"),
+    ("mon brut bihebdomadaire multiplie par 26 ne tombe pas sur le annuel",
+     "money_payscale"),
+    ("salario anual em taxa horaria dividido por 2087 horas nao bate",
+     "money_payscale"),
+    ("meu pagamento quinzenal vezes 24 nao confere com o salario anual",
+     "money_payscale"),
+    # LEURRE DE CLASSE b120 : avis sans donnee — ne doit RIEN prescrire.
+    ("je trouve que les tableaux de paie c'est du bruit", None),
 ]
 
 

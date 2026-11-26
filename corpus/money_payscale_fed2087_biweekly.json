@@ -1,0 +1,6 @@
+{
+ "name": "money_payscale_fed2087_biweekly",
+ "path": "/api/v1/money/payscale",
+ "body": {"annual": "52000", "basis": "fed2087", "period": "biweekly",
+          "year": 2027, "payday_weekday": "fri"}
+}

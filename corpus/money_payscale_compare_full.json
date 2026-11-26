@@ -1,0 +1,6 @@
+{
+ "name": "money_payscale_compare_full",
+ "path": "/api/v1/money/payscale",
+ "body": {"annual": "80000", "compare": true, "year": 2024,
+          "pto_hours": "200", "hours": "1820"}
+}

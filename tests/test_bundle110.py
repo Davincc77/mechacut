@@ -403,7 +403,7 @@ def test_manifest_182_et_ligne_lu():
     # le meme nom) — le compteur lu reste le test : TABLE 193 -
     # recipes 9 = 184 transforms, compte a la main.
     # b113 relève : TABLE 194 - recipes 9 = 185 transforms, compte à la main.
-    assert "188 transforms + 9 recipes" in body  # b116 : +agent_resultcliff, 197-9=188 (b115 : 196-9=187)
+    assert "189 transforms + 9 recipes" in body  # b120 : +money_payscale, 198-9=189 (b116 : 197-9=188)
     assert "shop_soldes_lu  /api/v1/shop/soldes-lu  free" in body
     assert len(body.encode("utf-8")) < 9000
 
@@ -447,7 +447,8 @@ def test_onze_pins_soldeslu_adds_only():
     # b117 relève à 415 : +5 money_settle noncash (adds-only)
     # b118 relève à 418 : +3 agent_resultcliff onyx (adds-only)
     # b119 relève à 423 : +5 money_prorate conventions (adds-only)
-    assert len(g) == 423
+    # b120 relève à 431 : +5 money_payscale +3 goose cliff (adds-only)
+    assert len(g) == 431
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

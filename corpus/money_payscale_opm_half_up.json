@@ -1,0 +1,5 @@
+{
+ "name": "money_payscale_opm_half_up",
+ "path": "/api/v1/money/payscale",
+ "body": {"annual": "37690", "basis": "hours", "hours": "2000"}
+}

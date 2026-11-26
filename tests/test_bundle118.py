@@ -140,7 +140,8 @@ def test_six_old_rows_unmoved():
     assert by["rakazo"]["verdict"] == "INLINE"
     # la ligne neuve : refuse la pâte, ne devine JAMAIS un token
     assert by["onyx"]["verdict"] == "REFUSED_IN_PASTE"
-    assert len(out["rows"]) == 7
+    assert len(out["rows"]) == 8  # b120 : +goose, la table NE BIGARRE
+    # PAS — additif, les sept de b118 rejouées à l'identique.
 
 
 def test_no_constant_for_onyx_lives_in_the_module():
@@ -164,7 +165,7 @@ def test_endpoint_onyx_200_with_version_and_sha():
     assert b["verdict"] == "INLINE"
     assert b["crossed"] is False
     assert b["margin"] == 128000 - 30000  # 98 000, à la main
-    assert b["table_version"] == cliffkit.TABLE_VERSION == "b118-1"
+    assert b["table_version"] == cliffkit.TABLE_VERSION == "b120-1"
     assert b["as_of"] == "2026-11-26"
     assert "sha256" in b
 

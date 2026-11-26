@@ -147,6 +147,14 @@ TABLE = (
      "prorated banker month annual coloc colocataire divise "
      "diviser divisez prorrateio proporcional rateio contrato "
      "aluguel"),
+    ("money_payscale", "/api/v1/money/payscale", "numbers",
+     "salary to hourly with every published denominator named",
+     "salary hourly wage paycheck payscale biweekly semimonthly "
+     "paystub opm federal workdays pto "
+     "salaire horaire taux paie bihebdomadaire mensuel "
+     "annuel heures bulletin "
+     "salario taxa horaria renda quinzenal mensal "
+     "holerito horas anuais"),
     ("money_aging", "/api/v1/money/aging", "numbers",
      "due-date aging of receivables into buckets",
      "aging overdue unpaid receivable invoice due dunning relance "
@@ -1092,6 +1100,9 @@ TABLE = (
      "cliff harness survives survive inline persist spilled cutoff frontier "
      "bionic rakazo maxresultsizechars tool_output_token_limit 50k onyx "
      "verbatim corta "
+     "goose aaif maxtoolresponsesize tailonly last50 2000lines "
+     "queue derniereslignes cauda ultimas "
+     "tail last lines temp response notice saida arquivo lignes "
      "coupe seuil survit franchit frontiere resultat cortado cortou "
      "cortada truncado sobrevive"),
     ("food_poultry", "/api/v1/food/poultry", "dates",

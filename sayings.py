@@ -324,6 +324,16 @@ SAY = {
         "pt": "meu id snowflake volta errado de um depois do parse "
               "JSON — quais inteiros além de 2^53 mentem, e o que cada "
               "leitor vê?"},
+    "/api/v1/money/payscale": {
+        "en": "52 000 a year — is that 25.00 an hour or 24.92? the "
+              "paystub says 2087, the calculator says 2080, and "
+              "nobody says which order rounds",
+        "fr": "45 000 € par an — combien de l'heure ? 2 080 ou "
+              "2 087 heures, dans quel ordre on arrondit — "
+              "personne ne le dit, la fiche le nomme",
+        "pt": "60 mil por ano — dá quantos por hora? 2.080 ou "
+              "2.087 horas, e quem arredonda primeiro — a folha "
+              "nomeia, a calculadora cala"},
     "/api/v1/money/settle": {
         "en": "we split the trip but the hotel was paid with reward "
               "points — who owes whom, in how many transfers, and "

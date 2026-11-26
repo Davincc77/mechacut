@@ -35,11 +35,32 @@ survivors' shape. Never fetches; the table ships in code, sources
 cited per row, as_of per row.
 """
 
-TABLE_VERSION = "b118-1"
+TABLE_VERSION = "b120-1"
 AS_OF = "2026-11-26"
 
 UNITS = ("chars", "bytes", "lines", "tokens")
 SURFACES = ("result", "description")
+
+# goose law, read IN CODE (not in threads) at aaif-goose/goose — the
+# repo MOVED from block/goose (API redirect confirmed 2026-11-26):
+# platform_extensions/developer/shell.rs lines 161-164 (read at HEAD
+# 2026-11-26): OUTPUT_LIMIT_LINES 2000, OUTPUT_LIMIT_BYTES 50_000,
+# OUTPUT_PREVIEW_LINES 50, OUTPUT_PREVIEW_BYTES 10_000. The OR of
+# two MIXED units is new grammar in this table; the reason cites
+# LINES first when both exceed (`if exceeded_lines`). The global
+# layer, agents/large_response_handler.rs (read the same day):
+# DEFAULT_LARGE_TEXT_THRESHOLD = 200_000 CHARS (.chars().count()),
+# knob GOOSE_MAX_TOOL_RESPONSE_SIZE (PR #9256 merged 2026-05-27,
+# fixes #7027); an oversized block is REPLACED by a notice pointing
+# at a KEPT file (tempfile keep(), prefix goose_mcp_response_,
+# owner-only per its own test) — zero result characters survive
+# inline. Write failure NAMED: the full text passes through.
+GOOSE_SHELL_LINES = 2000
+GOOSE_SHELL_BYTES = 50_000
+GOOSE_PREVIEW_LINES = 50
+GOOSE_PREVIEW_BYTES = 10_000
+GOOSE_GLOBAL_CHARS = 200_000
+GOOSE_TOOLS = ("shell", "extension")
 
 
 class CliffError(Exception):
@@ -404,6 +425,68 @@ def _rows():
                 },
             },
         },
+        "goose": {
+            "aliases": ("goose", "aaif-goose", "block/goose",
+                        "goose cli", "goose-cli"),
+            "surfaces": {
+                "result": {
+                    "unit": "chars", "cliff": GOOSE_GLOBAL_CHARS,
+                    "cmp": "gt",
+                    "counted_as": ("the GLOBAL handler counts Rust "
+                                   ".chars() = Unicode scalars = "
+                                   "python code points exactly "
+                                   "(large_response_handler.rs read "
+                                   "2026-11-26); the developer "
+                                   "shell cuts EARLIER in LINES "
+                                   "OR BYTES — see shell_law"),
+                    "verdict": "REPLACE_WITH_NOTICE",
+                    "marker": ('"The response returned from the '
+                               "tool call was larger (N characters)"
+                               " and is stored in the file which "
+                               "you can use other tools to examine "
+                               'or search in: {path}" — the block '
+                               "is REPLACED: ZERO result "
+                               "characters survive inline; the "
+                               "shell notice instead: "
+                               '"[Output exceeded 2000 line limit '
+                               "(N lines total). Full output saved "
+                               "to {path}. Read it with shell "
+                               "commands like `head`, `tail`, or "
+                               "`sed -n \'100,200p\'` up to 2000 "
+                               'lines at a time.]"'),
+                    "message_lies": False,
+                    "recoverable": ("usually — the large-response "
+                                    "file is KEPT (tempfile keep(), "
+                                    "prefix goose_mcp_response_, "
+                                    "owner-only per its own test); "
+                                    "but a shell preview's file "
+                                    "lives in ShellTool's PRIVATE "
+                                    "TempDir (dies with the tool "
+                                    "instance), and goose#13817 "
+                                    "(open 2026-11-25) shows a "
+                                    "session truncate can delete "
+                                    "the compaction summary the "
+                                    "notice rides in — the rescue "
+                                    "path itself can be orphaned"),
+                    "repair": ("GOOSE_MAX_TOOL_RESPONSE_SIZE (PR "
+                               "#9256 merged 2026-05-27, fixes "
+                               "#7027); the default 200000 chars "
+                               "is PUBLISHED in code "
+                               "(DEFAULT_LARGE_TEXT_THRESHOLD) — "
+                               "declare max_response_size if YOUR "
+                               "config sets another"),
+                    "source": ("aaif-goose/goose (repo MOVED from "
+                               "block/goose — API redirect read "
+                               "2026-11-26) crates/goose/src/agents"
+                               "/large_response_handler.rs + "
+                               "agents/platform_extensions/"
+                               "developer/shell.rs read at HEAD "
+                               "2026-11-26; #7025 closed "
+                               "2026-05-14, #9256 merged "
+                               "2026-05-27, #13817 open 2026-11-25"),
+                },
+            },
+        },
     }
 
 
@@ -415,7 +498,7 @@ FIRECRAWL_NOTE = ("firecrawl-mcp-server#548 (open 2026-10-16, read "
                   "it rides the claude-code recoverable field.")
 
 ALL_ORDER = ("claude-code", "codex", "bionic", "vscode", "rakazo",
-             "hermes-agent", "onyx")
+             "hermes-agent", "onyx", "goose")
 
 
 def resolve_harness(name):
@@ -489,8 +572,218 @@ def _ask(row, key):
         "nothing in this table pretends to know YOUR value)" % key)
 
 
-def _row_verdict(name, row, surface, m, unit, size, args):
+def _goose_survivors(text):
+    """Exact replay of shell.rs truncate_output + truncate_preview_bytes
+    (read at HEAD 2026-11-26): last 50 lines joined by \\n, then a
+    byte-tail of 10 000 snapped FORWARD to the next char boundary."""
+    parts = text.split("\n")
+    ps = max(0, len(parts) - GOOSE_PREVIEW_LINES)
+    tail = parts[ps:]
+    joined = "\n".join(tail)
+    jb = joined.encode("utf-8")
+    cut = len(jb) > GOOSE_PREVIEW_BYTES
+    snap = False
+    if cut:
+        start = len(jb) - GOOSE_PREVIEW_BYTES
+        while start < len(jb) and 0x80 <= jb[start] < 0xC0:
+            start += 1
+            snap = True
+        keep = jb[start:]
+    else:
+        keep = jb
+    ks = keep.decode("utf-8")
+    return {"survivor_lines": ks.count("\n") + 1,
+            "survivor_bytes": len(keep),
+            "survivor_chars": len(ks),
+            "dropped_head_lines": len(parts) - len(tail),
+            "preview_line_cut_applied": cut,
+            "boundary_snap_applied": snap}
+
+
+def _goose_judge(out, surf, m, unit, size, args, text):
+    # The goose row is TWO clauses in one harness: the developer
+    # shell law (lines OR bytes, mixed units — new grammar in this
+    # table) and the agent-wide char handler. tool=shell (default)
+    # judges the clause that bites FIRST; tool=extension judges only
+    # the global one. A declared mode NEVER guesses: the UTF-8
+    # inequalities the harness itself relies on (bytes >= chars,
+    # chars >= ceil(bytes/4)) DECIDE when they can, and the row
+    # names INDETERMINATE_NEEDS_PASTE when they cannot.
+    tq = args.get("tool")
+    if tq is None:
+        tq = "shell"
+    else:
+        raw = str(tq).strip().lower()
+        if raw in ("shell", "developer", "developer-shell",
+                   "dev-shell"):
+            tq = "shell"
+        elif raw in ("extension", "ext", "mcp"):
+            tq = "extension"
+        else:
+            raise CliffError(
+                "tool",
+                "unknown goose tool '%s' — the law is two-layered, "
+                "name the layer" % tq,
+                "shell|extension (developer-shell and mcp alias)")
+    gcliff = GOOSE_GLOBAL_CHARS
+    gsize = args.get("max_response_size")
+    if gsize is not None:
+        gcliff = _declared_size(gsize, "chars")
+    out["cliff"] = gcliff
+    out["tool"] = tq
+
+    g = {"unit": "chars", "cliff": gcliff, "crossed": None,
+         "margin": None, "verdict": None, "by_bound": None}
+    exact = m["chars"] if m is not None else (
+        size if unit == "chars" else None)
+    if exact is not None:
+        g["margin"] = gcliff - exact
+        g["crossed"] = exact > gcliff
+    elif unit == "bytes":
+        if size <= gcliff:
+            g["crossed"] = False   # chars <= bytes: impossible to
+            g["by_bound"] = "chars<=bytes"  # cross, PROVEN
+        elif (size + 3) // 4 > gcliff:
+            g["crossed"] = True
+            g["by_bound"] = "chars>=bytes/4"
+    elif unit == "lines":
+        if size - 1 > gcliff:
+            g["crossed"] = True
+            g["by_bound"] = "chars>=lines-1"
+    elif unit == "tokens":
+        raise CliffError(
+            "unit",
+            "goose counts CHARS (global) and BYTES+LINES (shell) — "
+            "'tokens' would need a tokenizer goose never published",
+            "unit chars|bytes|lines, or paste the result and the "
+            "kit counts it the way goose does")
+    g["verdict"] = ("INDETERMINATE_NEEDS_PASTE" if g["crossed"] is
+                    None else ("REPLACE_WITH_NOTICE" if g["crossed"]
+                               else "INLINE"))
+    out["global"] = g
+
+    law = {"applies": tq == "shell", "verdict": None,
+           "crossed": None, "triggered_by": None,
+           "cliffs": {"lines": GOOSE_SHELL_LINES,
+                      "bytes": GOOSE_SHELL_BYTES},
+           "preview": {"lines": GOOSE_PREVIEW_LINES,
+                       "bytes": GOOSE_PREVIEW_BYTES,
+                       "shape": ("last 50 lines joined, then "
+                                 "TAIL-capped at 10000 bytes "
+                                 "snapped forward to a char "
+                                 "boundary — the head is dropped "
+                                 "TWICE (lines, then bytes)")},
+           "temp_file": ("full output written to ShellTool's PRIVATE "
+                         "TempDir — dies with the tool instance; "
+                         "the global handler's goose_mcp_response_ "
+                         "file is KEPT (owner-only) — different "
+                         "rescues, read at source 2026-11-26")}
+    if not law["applies"]:
+        law["status"] = "NOT_APPLIED"
+        law["verdict"] = "NOT_APPLIED"
+    elif m is not None:
+        over_l = m["lines"] > GOOSE_SHELL_LINES
+        over_b = m["bytes"] > GOOSE_SHELL_BYTES
+        law["crossed"] = over_l or over_b
+        law["status"] = "EXACT_PASTE"
+        if law["crossed"]:
+            law["verdict"] = "TEMP_FILE_TAIL_ONLY"
+            law["triggered_by"] = "lines" if over_l else "bytes"
+            law["reason_rendered"] = (
+                "Output exceeded %d line limit (%d lines total)."
+                % (GOOSE_SHELL_LINES, m["lines"]) if over_l else
+                "Output exceeded %d byte limit (%d bytes total)."
+                % (GOOSE_SHELL_BYTES, m["bytes"]))
+            law.update(_goose_survivors(text))
+            law["dropped_bytes"] = m["bytes"] - law["survivor_bytes"]
+        else:
+            law["verdict"] = "INLINE"
+            law.update(_goose_survivors(text))
+    else:
+        law["status"] = "DECLARED"
+        if unit == "chars":
+            if size > GOOSE_SHELL_BYTES:
+                law["crossed"] = True   # bytes >= chars > 50000 —
+                law["by_bound"] = "bytes>=chars"   # PROVEN blind
+                law["verdict"] = "TEMP_FILE_TAIL_ONLY"
+                law["triggered_by"] = "bytes"
+            else:
+                law["crossed"] = None
+                law["status"] = ("INDETERMINATE_NEEDS_PASTE"
+                                 if not (size > GOOSE_SHELL_BYTES)
+                                 else "CROSSED")
+                law["verdict"] = law["status"]
+        elif unit == "bytes":
+            law["crossed"] = (size > GOOSE_SHELL_BYTES
+                              if size > GOOSE_SHELL_BYTES else None)
+            if size > GOOSE_SHELL_BYTES:
+                law["verdict"] = "TEMP_FILE_TAIL_ONLY"
+                law["triggered_by"] = "bytes"
+            else:
+                law["crossed"] = None
+                law["verdict"] = law["status"] = (
+                    "INDETERMINATE_NEEDS_PASTE")
+        elif unit == "lines":
+            if size > GOOSE_SHELL_LINES:
+                law["crossed"] = True
+                law["verdict"] = "TEMP_FILE_TAIL_ONLY"
+                law["triggered_by"] = "lines"
+            else:
+                law["crossed"] = None
+                law["verdict"] = law["status"] = (
+                    "INDETERMINATE_NEEDS_PASTE")
+        law.setdefault("verdict", "INDETERMINATE_NEEDS_PASTE")
+        law["crossed"] = bool(law["verdict"] == "TEMP_FILE_TAIL_ONLY") \
+            if law["verdict"] == "TEMP_FILE_TAIL_ONLY" else \
+            law.get("crossed")
+    out["shell_law"] = law
+
+    if law["applies"] and law["crossed"] is True:
+        out["verdict"] = "TEMP_FILE_TAIL_ONLY"
+        out["crossed"] = True
+        out["operative"] = ("shell_law — the clause bites FIRST: a "
+                            "developer-shell block never reaches the "
+                            "200000-char handler inline")
+    elif g["crossed"] is True:
+        out["verdict"] = "REPLACE_WITH_NOTICE"
+        out["crossed"] = True
+        out["operative"] = "global_handler"
+    elif ((law["applies"] and law["crossed"] is None)
+          or g["crossed"] is None):
+        out["verdict"] = "INDETERMINATE_NEEDS_PASTE"
+        out["crossed"] = None
+        out["operative"] = ("undecided — the declared count does not "
+                            "cross any published bound; paste the "
+                            "result or declare the other unit")
+    else:
+        out["verdict"] = "INLINE"
+        out["crossed"] = False
+        out["operative"] = ("none — both clauses hold at the "
+                            "published numbers")
+    out["margin"] = g["margin"]
+    out["unit"] = surf["unit"]
+    return out
+
+
+def out_goose_stub(name, surface, surf):
+    """Same base fields as _row_verdict builds for every row — the
+    goose judge then fills verdict/crossed/margin from TWO clauses."""
+    return {"harness": name, "surface": surface,
+            "unit": surf["unit"],
+            "counted_as": surf["counted_as"],
+            "verdict": None, "crossed": None, "margin": None,
+            "message_lies": surf["message_lies"],
+            "marker": surf["marker"],
+            "recoverable": surf["recoverable"],
+            "repair": surf["repair"],
+            "source": surf["source"], "as_of": AS_OF}
+
+
+def _row_verdict(name, row, surface, m, unit, size, args, text=None):
     surf = row["surfaces"][surface]
+    if name == "goose":
+        return _goose_judge(out_goose_stub(name, surface, surf),
+                            surf, m, unit, size, args, text)
     out = {"harness": name, "surface": surface,
            "unit": surf["unit"],
            "counted_as": surf["counted_as"],
@@ -647,7 +940,8 @@ def run_cliff(args):
         unit = str(unit).strip().lower()
         n = _declared_size(size, unit)
     args_rest = {k: args.get(k) for k in ("budget", "token_limit",
-                                          "context_room")}
+                                          "context_room", "tool",
+                                          "max_response_size")}
 
     if harness is None:
         if m is None:
@@ -661,8 +955,8 @@ def run_cliff(args):
             row = HARNESSES[name]
             if surface not in row["surfaces"]:
                 continue
-            rows.append(_row_verdict(name, row, surface, m, None, None,
-                                     args_rest))
+            rows.append(_row_verdict(name, row, surface, m, None,
+                                     None, args_rest, result))
         return {"mode": "all-rows", "table_version": TABLE_VERSION,
                 "as_of": AS_OF, "measured": m, "rows": rows,
                 "firecrawl_548": FIRECRAWL_NOTE}
@@ -676,7 +970,8 @@ def run_cliff(args):
             "by claude-code in this table" % (name, surface),
             "surface result (or claude-code + description)")
     out = _row_verdict(name, row, surface, m,
-                       unit if m is None else None, n, args_rest)
+                       unit if m is None else None, n, args_rest,
+                       result)
     out["mode"] = "paste" if m is not None else "declared"
     out["table_version"] = TABLE_VERSION
     if m is not None:

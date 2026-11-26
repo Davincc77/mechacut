@@ -1,0 +1,6 @@
+{
+ "name": "money_payscale_workdays_2026",
+ "path": "/api/v1/money/payscale",
+ "body": {"annual": "52000", "basis": "workdays", "year": 2026,
+          "period": "biweekly"}
+}

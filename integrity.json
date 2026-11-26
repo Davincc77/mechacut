@@ -1031,7 +1031,7 @@
    },
    "name": "agent_resultcliff_all_rows_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "7653684a1b9e0f444561a239f4a601448ef0b035a1a393a3bef570a9a2f4a598",
+   "sha256": "796b21fafe6a2ab0628fa99105e76da2b224af7b2093516f2ed2b1ea74dabd3b",
    "status": 200
   },
   {
@@ -1042,7 +1042,7 @@
    },
    "name": "agent_resultcliff_bionic_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "e1e19ce8b0a2965f2203a5e844be9228c5d1222013cf812d07efcc32c2a3313f",
+   "sha256": "6ba90aeb38debbf6372165284d0e81f4e19a590602e5afe5089b65cf1019b166",
    "status": 200
   },
   {
@@ -1054,7 +1054,7 @@
    },
    "name": "agent_resultcliff_claude_description_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "6e707a47826a489b568d4f787389349d83c60e1a30e8a59b4ded3ba590184d08",
+   "sha256": "b364392c851e5a58f7596f536583b20bded4e3355965efdf7095ccc37191fbbf",
    "status": 200
   },
   {
@@ -1064,7 +1064,7 @@
    },
    "name": "agent_resultcliff_claude_greek_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "19bb661e5e8ada468dc5d45d3d2cf5f708e0745a306b59c77a1c1fca1394e9df",
+   "sha256": "63b76ac4ff14e0c775a84369ca45c7ae4a18271973a6e098e4075c1504cb824f",
    "status": 200
   },
   {
@@ -1075,7 +1075,7 @@
    },
    "name": "agent_resultcliff_claude_persist_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "219e4cab5da77454238befb568c386731d9cbcd9f85a8357f433c1ad8a8773fe",
+   "sha256": "4825a055403a036e7a2358b337af99559c8a1d0d6a59b6a0acdeab39597740f4",
    "status": 200
   },
   {
@@ -1086,7 +1086,7 @@
    },
    "name": "agent_resultcliff_codex_paste_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "42a096f1e5c20aff2ffc9293bbb72bafc7d24cf76327768a75c52a0b9d2107a5",
+   "sha256": "b43cd8eb518279a7a527d6af41ac669e09754f260c0854ac74bc9fdedd0cb664",
    "status": 200
   },
   {
@@ -1098,7 +1098,41 @@
    },
    "name": "agent_resultcliff_codex_tokens_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "dcec935c55b40d050db4243c8512e240ea08c1bbae95c8c0fbd504ffd62cfb20",
+   "sha256": "c86cce3db4164b0a6e858a1bc94553ef9737d2267b762a002724309b403e19d4",
+   "status": 200
+  },
+  {
+   "body": {
+    "harness": "goose",
+    "size": 200001,
+    "tool": "extension",
+    "unit": "chars"
+   },
+   "name": "agent_resultcliff_goose_extension_notice_pin",
+   "path": "/api/v1/agent/result-cliff",
+   "sha256": "d543a2d2d38c7b1ffaadb6b9637b8001d253866cdc366f4187edc79d6c2a3f7c",
+   "status": 200
+  },
+  {
+   "body": {
+    "harness": "goose",
+    "size": 40000,
+    "unit": "chars"
+   },
+   "name": "agent_resultcliff_goose_indeterminate_pin",
+   "path": "/api/v1/agent/result-cliff",
+   "sha256": "cbdb66a9982f364e20149f8831e961c8ec4cc1153cc97296dc4927c1d36cb018",
+   "status": 200
+  },
+  {
+   "body": {
+    "harness": "goose",
+    "size": 2501,
+    "unit": "lines"
+   },
+   "name": "agent_resultcliff_goose_shell_lines_pin",
+   "path": "/api/v1/agent/result-cliff",
+   "sha256": "8a7a2ba00345c7773b58b5cd5aba6c0e99343a63bf48f4e6e49107a65ac99c50",
    "status": 200
   },
   {
@@ -1109,7 +1143,7 @@
    },
    "name": "agent_resultcliff_hermes_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "d3f8a684048e114bfbcd9fb961a7c26a05a7b12619568f6ab2b41d864cd40d66",
+   "sha256": "f7aac41267817e18f983fc05bf55c780a14fff1624a7efb5865235176393503b",
    "status": 200
   },
   {
@@ -1121,7 +1155,7 @@
    },
    "name": "agent_resultcliff_onyx_boundary_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "70ede0327a629b52f0bcda7cfed594614705364ecb551e34b6b8ecf2269641a7",
+   "sha256": "2a9fe3ebd3929214f301384fc97d13d859b5ccd5109b58bdfcb99ba9d4246a90",
    "status": 200
   },
   {
@@ -1132,7 +1166,7 @@
    },
    "name": "agent_resultcliff_onyx_refused_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "79a8717a0cfeeee0d4f4f032e74727164ea70906e9a75268048d664fcec8f883",
+   "sha256": "977df1100547d7f2e2a6641920eba80edaa935adf80832882c8aa6bdce419ebf",
    "status": 200
   },
   {
@@ -1144,7 +1178,7 @@
    },
    "name": "agent_resultcliff_onyx_reject_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "10f2a71263e435e774930dd80aaa8ef17f8a8e5ccb1de6a9e8082ddfff0b42e9",
+   "sha256": "b3328ac01bddecf660e8ca45f841cb628fc183dc6178e28992fa64bfa9745b45",
    "status": 200
   },
   {
@@ -1156,7 +1190,7 @@
    },
    "name": "agent_resultcliff_rakazo_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "edfb8701167fb3747564f6937c3c75bd73a4bfbb2b34a744ba32c916c1b05b7c",
+   "sha256": "caabdd0ee42b1230875ea65463ece6e3aa10e863d14e0851a2cf5509676a992c",
    "status": 200
   },
   {
@@ -1167,7 +1201,7 @@
    },
    "name": "agent_resultcliff_vscode_pin",
    "path": "/api/v1/agent/result-cliff",
-   "sha256": "cf5dc998152bbad400b2153ab1380cdad090d75b745ddf9f40d9c1d39d633b5c",
+   "sha256": "2f499871e0f6c1b40d72a7641f8b61131d196b94f8d53bf97f8ceeffd381e667",
    "status": 200
   },
   {
@@ -4244,6 +4278,66 @@
    "name": "money_keep_records_uk_vat_future_event_oss",
    "path": "/api/v1/money/keep-records-uk",
    "sha256": "4a387e5c3993fa3e1e3281053b3a5440ecabb066e5d68b9afdd90ee0fc107e14",
+   "status": 200
+  },
+  {
+   "body": {
+    "annual": "80000",
+    "compare": true,
+    "hours": "1820",
+    "pto_hours": "200",
+    "year": 2024
+   },
+   "name": "money_payscale_compare_full",
+   "path": "/api/v1/money/payscale",
+   "sha256": "215a5425d902f0bde1c5b1686ce28d144a55a55e7fa1b9d6fc478e67e0ea3f7c",
+   "status": 200
+  },
+  {
+   "body": {
+    "annual": "52000",
+    "basis": "fed2087",
+    "payday_weekday": "fri",
+    "period": "biweekly",
+    "year": 2027
+   },
+   "name": "money_payscale_fed2087_biweekly",
+   "path": "/api/v1/money/payscale",
+   "sha256": "66aba3097bba33b1ab331bd356b6be6a79e37245640a9e522a63c3dae2f92df5",
+   "status": 200
+  },
+  {
+   "body": {
+    "annual": "37690",
+    "basis": "hours",
+    "hours": "2000"
+   },
+   "name": "money_payscale_opm_half_up",
+   "path": "/api/v1/money/payscale",
+   "sha256": "ab87dfa6b9f93c81997f1cd0464c9c1262559244ecff68c1c165cb8a737252e9",
+   "status": 200
+  },
+  {
+   "body": {
+    "annual": "43000",
+    "basis": "priv2080",
+    "period": "biweekly"
+   },
+   "name": "money_payscale_priv2080_askhr_43000",
+   "path": "/api/v1/money/payscale",
+   "sha256": "860d41cb14e9ae66ecac47b4ca368f15874c45d63b1ffc97a3f3a6ce9314b354",
+   "status": 200
+  },
+  {
+   "body": {
+    "annual": "52000",
+    "basis": "workdays",
+    "period": "biweekly",
+    "year": 2026
+   },
+   "name": "money_payscale_workdays_2026",
+   "path": "/api/v1/money/payscale",
+   "sha256": "0632ec985c63db719ec1d47e835cbdfdb009883e043f8e7bd96e05cbbc4fb03a",
    "status": 200
   },
   {

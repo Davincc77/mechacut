@@ -1,0 +1,5 @@
+{
+ "name": "money_payscale_priv2080_askhr_43000",
+ "path": "/api/v1/money/payscale",
+ "body": {"annual": "43000", "basis": "priv2080", "period": "biweekly"}
+}

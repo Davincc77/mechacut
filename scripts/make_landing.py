@@ -291,6 +291,8 @@ TR =   {
   'everyday.e28.say': "A fronted 1,375.00, C 865.00, B nothing; equal shares; C tells B 'the barbecue is on me.' A demands 628.33, B offers 458.33 — both answers right, DIFFERENT GRAPHS. Net: C forgives only the 118.34 owed to them → B wires A 628.33, ONE transfer, proven minimum. Itemized: the forgiveness kills the B→C edge; B pays A 458.33, C bears 288.33. compare numbers the gap; cents close where the thread's 746.67×3 did not.",
   'everyday.e29.name': 'Same rent, four conventions — no calculator picks for you',
   'everyday.e29.say': "Move out the 18th, $1,000 month: the posted formula '1000/30 = 33.33 × 18 = 600' rounded SILENTLY twice — the landlord's own way gives 599.94 (9sqw2j). Move in Jan 15 of a 31-day month: the office splits by '/30 days, REGARDLESS of actual number of days' — 566.67; a neighbour by /31 — 548.39 (r/Landlord 1hitzjq). Lease ends at NOON the 12th: 12 billed, 11.5 pleaded, 12-or-11 published (cevz6l). prorate names basis cycle|month30|year365, order, bound; compare renders BOTH with the signed delta; a moment in a date is refused, the two whole-day counts shown. Local law never encoded.",
+  'everyday.e30.name': 'Same salary, many hourly rates — the stub never says',
+  'everyday.e30.say': "52,000 a year: ÷2,080 = 25.00 (r/Payroll's “typically” — in every comment, named by no calculator); ÷2,087 = 24.92 — that is 5 USC 5504(b) word for word (‘divide the annual rate by 2,087’, ‘nearest cent, counting one-half and over’); the r/ATC stub “20 cents off” IS this law. Order bites: round the rate first, ×80 = 1,993.60; divide the year by 26 = 2,000.00 — −6.40 a pay, −166.40 a year, rendered as a signed pair. Biweekly ÷26 vs semimonthly ÷24 are TWO clocks (2,000.00 vs 2,166.67). And 2027 has 53 Fridays: 27 every-other-week paydays (r/IRS_Source) — counted, not prophesied. payscale names each denominator and its citation; 365 refused by name; YOUR divisor stays an argument (1,820, 2,640 — law never encoded); never an average, never a fetch.",
   'nav.kit': 'Kit',
   'kit.h2': 'The suite on your disk',
   'kit.creed': 'The protocol is not the transport — it is the birth certificate of the tool.',
@@ -539,6 +541,8 @@ TR =   {
   'everyday.e28.say': "A avance 1 375,00 €, C 865,00 €, B rien ; parts égales ; C remet sa part à B. A exige 628,33, B propose 458,33 — le désaccord EST l'architecture : C ne remet que les 118,34 qu'on lui doit → B vire 628,33 à A, un virement, minimum prouvé ; par reçu, la remise tue l'arête B→C → B paye 458,33, C porte 288,33. compare rend les deux, chiffre l'écart ; les cents ferment là où le 746,67×3 du fil ne fermait pas.",
   'everyday.e29.name': 'Un même loyer, quatre conventions — aucun calculateur ne choisit pour vous',
   'everyday.e29.say': "Sortie le 18, loyer 1 000 € : publié : « 1000/30 = 33,33 × 18 = 600 » — DEUX arrondis silencieux, la voie du bailleur donne 599,94 (9sqw2j). Entrée le 15 janvier, mois de 31 : l'office divise « par 30, REGARDLESS of actual number of days » — 566,67 ; le voisin par 31 — 548,39 (1hitzjq). Bail finit MIDI le 12 : 12 facturés, 11,5 plaidés, 12-ou-11 publiés (cevz6l). prorate nomme basis cycle|month30|year365, ordre, borne ; compare rend les DEUX, écart signé ; un instant dans une date est refusé — les deux jours entiers montrés. Jamais la loi locale.",
+  'everyday.e30.name': 'Un salaire, plusieurs taux horaires — la fiche ne dit jamais lequel',
+  'everyday.e30.say': "52 000 par an : ÷2 080 = 25,00 (le « typically » de r/Payroll — écrit dans tous les fils, nommé par aucun calculateur) ; ÷2 087 = 24,92 — c'est la loi fédérale US mot pour mot (5 USC 5504(b) : « divide the annual rate by 2,087 », « nearest cent, counting one-half and over ») ; le bulletin « 20 cents off » de r/ATC, c'est elle. L'ordre mord : arrondir le taux d'abord, ×80 = 1 993,60 ; diviser l'année par 26 = 2 000,00 — −6,40 par paie, −166,40 par an, rendus en paire signée. Bihebdo ÷26 contre semi-mensuel ÷24 : DEUX horloges (2 000,00 contre 2 166,67). Et 2027 compte 53 vendredis : 27 paies tous les 15 jours (r/IRS_Source) — comptées, pas prophétisées. payscale nomme chaque diviseur et sa citation ; 365 refusé par le nom ; TON diviseur reste un argument (1 820, 2 640 — jamais la loi locale) ; jamais de moyenne, jamais de fetch.",
   'nav.kit': 'Kit',
   'kit.h2': 'La suite sur votre disque',
   'kit.creed': "Le protocole n'est pas le transport — c'est l'acte de naissance de l'outil.",
@@ -786,6 +790,8 @@ TR =   {
   'everyday.e28.say': "A adiantou 1.375, C 865, B nada; partes iguais; C perdoa a parte de B — A cobra 628,33, B oferece 458,33: a briga É a arquitetura. No saldo, C só perdoa os 118,34 que lhe devem → PIX de 628,33 B→A, mínimo provado; nota a nota, o perdão mata a aresta B→C → B paga 458,33, C carrega 288,33. compare numera o vão.",
   'everyday.e29.name': 'Aluguel: quatro convenções — nenhuma calculadora escolhe',
   'everyday.e29.say': "Saída dia 18, aluguel R$ 1.000: postado « 1000/30 = 33,33 × 18 = 600 » — DUAS rodadas em silêncio, o caminho do locador dá 599,94 (9sqw2j). Entrada 15 de janeiro, mês de 31: o escritório divide « por 30, REGARDLESS » — 566,67; o vizinho por 31 — 548,39 (1hitzjq). Contrato termina ao MEIODIA do 12: 12 dias cobrados, 11,5 alegados, 12-ou-11 publicados (cevz6l). prorate nomeia basis cycle|month30|year365, ordem, marco; compare mostra as DUAS com a diferença; instante numa data é recusado — os dois dias inteiros mostrados. Nunca a lei local.",
+  'everyday.e30.name': 'Um salário, várias taxas por hora — o contracheque nunca diz qual',
+  'everyday.e30.say': "52.000 por ano: ÷2.080 = 25,00 (o “typically” do r/Payroll — em todo comentário, em nenhuma calculadora); ÷2.087 = 24,92 — é a lei federal dos EUA palavra por palavra (5 USC 5504(b): « divide the annual rate by 2,087 », « nearest cent, counting one-half and over »); o contracheque “20 cents off” do r/ATC é essa lei. A ordem morde: arredondar a taxa antes, ×80 = 1.993,60; dividir o ano por 26 = 2.000,00 — −6,40 por pagamento, −166,40 por ano, no par com sinal. Quinzenal ÷26 contra semimensal ÷24: DOIS relógios (2.000,00 contra 2.166,67). E 2027 tem 53 sextas: 27 pagamentos quinzenais (r/IRS_Source) — contados, não profetizados. payscale nomeia cada divisor e sua citação; 365 recusado pelo nome; o SEU divisor fica como argumento (1.820, 2.640 — nunca a lei local); nunca média, nunca fetch.",
   'nav.kit': 'Kit',
   'kit.h2': 'A suíte no seu disco',
   'kit.creed': 'O protocolo não é o transporte — é a certidão de nascimento da ferramenta.',
@@ -2512,8 +2518,10 @@ W = {
       "withdrawal": "\u2192 last day to change your mind: %s \u00b7 %s at as_of",
       "settle": "\u2192 net: ONE wire B\u2192A $%s, minimum PROUVED \u00b7 per "
                 "receipt $%s \u00b7 C forgave $%s net vs $%s itemized",
-      "prorate": "\u2192 $1,000 x 18d: product %s vs landlord %s \u00b7 "
-                 "delta %s \u00b7 named, never picked for you",
+      "prorate": "→ $1,000 x 18d: product %s vs landlord %s · "
+                 "delta %s · named, never picked for you",
+      "payscale": "→ 52,000 ÷2,087 = %s/h · rate-first ×80 = %s · "
+                  "÷26 by %s · 2027: %s paydays",
       "leftovers": "\u2192 Thanksgiving 2026 replay: eat by %s \u00b7 "
                    "band %s",
       "ovenschedule": "\u2192 oven on %s, bird out %s \u00b7 temp "
@@ -2596,8 +2604,10 @@ W = {
       "settle": "→ net : B vire A %s \u20ac, UN virement prouvé · "
                 "par reçu %s \u20ac · la remise de C vaut %s € nette vs %s "
                 "€ sur le reçu",
-      "prorate": "\u2192 1 000 \u20ac x 18 j : produit %s vs bailleur %s \u00b7 "
-                 "\u00e9cart %s \u00b7 nomm\u00e9s, jamais choisis pour vous",
+      "prorate": "→ 1 000 € x 18 j : produit %s vs bailleur %s · "
+                 "écart %s · nommés, jamais choisis pour vous",
+      "payscale": "→ 52 000 ÷2 087 = %s /h · taux arrondi ×80 = %s "
+                  "· ÷26 : écart %s · 2027 : %s paies",
       "leftovers": "\u2192 replay thanksgiving 2026 : \u00e0 consommer "
                    "avant %s \u00b7 bande %s",
       "ovenschedule": "\u2192 four allum\u00e9 %s, dinde dehors %s \u00b7 "
@@ -2660,8 +2670,10 @@ W = {
       "settle": "→ líquido: PIX R$ %s B→A, mínimo provado · nota a "
                 "nota R$ %s · perdão de C: R$ %s no saldo, R$ %s na "
                 "nota",
-      "prorate": "\u2192 R$ 1.000 x 18d: produto %s vs locador %s \u00b7 "
-                 "diferen\u00e7a %s \u00b7 nomeadas, ningu\u00e9m escolhe por voc\u00ea",
+      "prorate": "→ R$ 1.000 x 18d: produto %s vs locador %s · "
+                 "diferença %s · nomeadas, ninguém escolhe por você",
+      "payscale": "→ 52.000 ÷2.087 = %s/h · taxa ×80 = %s "
+                  "· ÷26: diferença %s · 2027: %s pagamentos",
       "leftovers": "\u2192 replay thanksgiving 2026: comer at\u00e9 %s "
                    "\u00b7 banda %s",
       "ovenschedule": "\u2192 forno ligado %s, peru de fora %s · "
@@ -2888,6 +2900,17 @@ _EVERYDAY_CALLS = [
              d["conventions"]["orders"]["quotient"],
              d["conventions"]["orders"]["delta_product_minus_quotient"
                                         ]))),
+    ("/api/v1/money/payscale",
+     {"annual": "52000", "basis": "fed2087",
+      "period": "biweekly", "year": 2027,
+      "payday_weekday": "fri"},
+     "payscale", lambda d, L: tuple(
+         (v.replace(".", ",") if L != "en" else v) for v in (
+             d["hourly"]["rounded_cent"],
+             d["periods"]["biweekly"]["rate_first"],
+             d["periods"]["biweekly"]["delta_rate_first_minus_direct"
+                                        ],
+             str(d["paydays_in_year"]["every_other_from_first"])))),
 ]
 
 

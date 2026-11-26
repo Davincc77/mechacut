@@ -60,6 +60,7 @@ POST /api/v1/num/round        exact Decimal rounding (banker's, sig digits)
 Bundle 4.2 — units & money (TOOLS-50 #27-29):
 POST /api/v1/units/convert    closed families, exact rational factors
 POST /api/v1/money/prorate    amount x covered/basis; basis, order, pair NAMED (paid)
+POST /api/v1/money/payscale   annual -> hourly/period, EVERY published denominator NAMED, PAIR of orders + annual hole (free)
 POST /api/v1/money/aging      invoices + as_of -> receivable buckets 1-30/31-60/61-90/90+ (free)
 POST /api/v1/ledger/apply-payments  invoices + payments -> FIFO reconciliation, cent-exact (free)
 POST /api/v1/eval/compare        expected + got -> judge: OK/WRONG, divergences pointées (free)
@@ -303,6 +304,7 @@ import mclistkit
 import bigintkit
 import settlementkit
 import cliffkit
+import payscalekit
 import withdrawalkit
 import paymentduekit
 import evalkit
@@ -396,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.40.0",
+    version="1.41.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -3155,6 +3157,46 @@ def run_money_settle(args: dict):
 @app.post("/api/v1/money/settle")
 def api_money_settle(req: MoneySettleRequest):
     body, err = run_money_settle(req.model_dump())
+    return err if err else body
+
+
+# ------------------------------------- bundle 120: salary <-> hourly
+
+
+class MoneyPayscaleRequest(BaseModel):
+    annual: str
+    basis: Optional[str] = None
+    period: Optional[str] = None
+    order: Optional[str] = None
+    compare: Optional[bool] = None
+    year: Optional[int] = None
+    pto_hours: Optional[str] = None
+    hours: Optional[str] = None
+    payday_weekday: Optional[str] = None
+    currency: Optional[str] = None
+
+
+def run_money_payscale(args: dict):
+    try:
+        req = MoneyPayscaleRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = payscalekit.money_payscale(
+            req.annual, req.basis, req.period, req.order,
+            bool(req.compare), req.year, req.pto_hours,
+            req.hours, req.payday_weekday, req.currency)
+    except payscalekit.PayScaleError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.message,
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/money/payscale")
+def api_money_payscale(req: MoneyPayscaleRequest):
+    body, err = run_money_payscale(req.model_dump())
     return err if err else body
 
 
@@ -6834,6 +6876,8 @@ class AgentResultCliffRequest(BaseModel):
     budget: Optional[int] = None
     token_limit: Optional[int] = None
     context_room: Optional[int] = None
+    tool: Optional[str] = None
+    max_response_size: Optional[int] = None
 
 
 def run_agent_resultcliff(args: dict):
@@ -7380,6 +7424,7 @@ TOOL_RUN = {
            "money_prorate": run_money_prorate,
            "money_split": run_money_split,
            "money_settle": run_money_settle,
+           "money_payscale": run_money_payscale,
            "number_spell": run_number_spell,
            "hash_digest": run_hash_digest,
            "hash_hmac": run_hash_hmac,
@@ -10745,7 +10790,23 @@ MCP_TOOLS = [
             "that number as STATUS, never as law; a paste is "
             "REFUSED for this row — counting tokens without the "
             "provider's tokenizer would be exactly the guess this "
-            "kit exists to kill). Repair "
+            "kit exists to kill). GOOSE is TWO clauses in one "
+            "harness and the FIRST is a mixed-units law: the "
+            "developer shell truncates at 2000 lines OR 50 000 "
+            "bytes, full output to a temp file, inline the LAST 50 "
+            "lines then TAIL-capped at 10 000 bytes snapped to a "
+            "char boundary — the head is dropped twice (shell.rs "
+            "lines 161-164 read at HEAD 2026-11-26; the repo MOVED, "
+            "block/goose now redirects to aaif-goose/goose). The "
+            "agent-wide handler REPLACES any tool text past 200 000 "
+            "chars (GOOSE_MAX_TOOL_RESPONSE_SIZE, #9256 merged "
+            "2026-05-27) with a pointer notice to a KEPT file — "
+            "zero result characters survive, and #13817 (open "
+            "2026-11-25) shows a session truncate can orphan the "
+            "very history the notice rides in. Pick the layer with "
+            "tool=shell (default) or tool=extension; a declared "
+            "count is judged ONLY by UTF-8 bound inequalities, "
+            "never guessed. Repair "
             "clauses quoted: _meta['anthropic/maxResultSizeChars'] "
             "≤ 500000 (v2.1.91+), tool_output_token_limit, YOUR "
             "rakazo budget as an argument. Never fetches; zero "
@@ -10758,7 +10819,7 @@ MCP_TOOLS = [
                 "harness": {"type": "string",
                             "description": "claude-code|codex|bionic|"
                                           "vscode|rakazo|hermes-agent"
-                                          "|onyx "
+                                          "|onyx|goose "
                                           "(aliases accepted); omit "
                                           "to judge all rows against "
                                           "a paste"},
@@ -10809,6 +10870,25 @@ MCP_TOOLS = [
                                                 "20 000-token knob "
                                                 "is PROPOSED, not "
                                                 "law)"},
+                "tool": {"type": "string",
+                         "description": "goose only: shell (the "
+                                        "developer extension — "
+                                        "DEFAULT, the layer that "
+                                        "bites first) or extension "
+                                        "(any other tool, judged by "
+                                        "the 200000-char handler "
+                                        "alone)"},
+                "max_response_size": {"type": "integer",
+                                      "minimum": 1,
+                                      "description": "goose: your "
+                                                     "GOOSE_MAX_TOOL_"
+                                                     "RESPONSE_SIZE "
+                                                     "if the config "
+                                                     "sets one "
+                                                     "(default "
+                                                     "200000 chars "
+                                                     "is published "
+                                                     "in code)"},
             },
         },
     },
@@ -12932,6 +13012,98 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "money_payscale",
+        "description": (
+            "Annual salary <-> hourly and per-pay-period, with EVERY "
+            "published denominator NAMED — the scale no money tool "
+            "holds. The wound is arithmetic amnesia: r/ATC 17sefrt "
+            "was '20 cents off' his paystub because he divided by "
+            "2080 and the stub divides by 2,087 (5 U.S.C. 5504(b): "
+            "'divide the annual rate by 2,087', weekly/biweekly "
+            "= hourly x40/x80, 'nearest cent, counting one-half "
+            "and over as a whole cent' — the OPM example $18.845 -> "
+            "$18.85 is a shipped test vector, half-up NOT banker's); "
+            "r/fednews 1fnk3cb publishes the 2087 derivation (the "
+            "28-year cycle 4x262/17x261/7x260 weekdays x8); 1de8205 "
+            "published 38.46/38.17/42.55 for ONE $80k salary (2080/"
+            "2096/1880 — 20% of silence); r/AskHR 1y0ey31: the "
+            "employer rounds the HOURLY first, then x80 — that "
+            "order loses real money per year and the tool renders "
+            "the ORDER pair with the signed delta; r/IRS_Source "
+            "1qh5ouz: 'every 11 years a calendar year contains 27 "
+            "pay periods' — pass payday_weekday+year and the 26/27 "
+            "block answers from the CALENDAR, zero fetch. basis "
+            "closed set fed2087|priv2080|workdays(year)|pto(hours): "
+            "no silent pick, 365 refused BY NAME (3r0eti: /365 gave "
+            "13.35 instead of 24.03 — a harm, not a convention). "
+            "compare=true renders the whole published table with "
+            "the spread — never an average. Monthly = 1/12 cites "
+            "5 USC 5505(1); semimonthly /24 is labelled convention, "
+            "NOT statute; the annual HOLE (periods x gross - "
+            "annual) travels named — it IS the fednews complaint, "
+            "quantified. Holidays/PTO are arguments; local law "
+            "never encoded. Decimal strings in, strings out, "
+            "sha256 on every answer. Free."),
+        "inputSchema": {
+            "type": "object",
+            "required": ["annual"],
+            "properties": {
+                "annual": {"type": "string",
+                           "description": "annual salary, decimal "
+                                          "string ('52000', "
+                                          "'43000.50')"},
+                "basis": {"type": "string",
+                          "description": "fed2087 | priv2080 | "
+                                         "workdays (+year) | pto "
+                                         "(+pto_hours) — required "
+                                         "unless compare=true; no "
+                                         "silent denominator"},
+                "period": {"type": "string",
+                           "description": "weekly | biweekly | "
+                                          "semimonthly | monthly "
+                                          "(omit = all four)"},
+                "order": {"type": "string",
+                          "description": "rate_first (statute's "
+                                         "own sequence: round the "
+                                         "hourly to cents, then "
+                                         "x40/x80) | direct "
+                                         "(annual / period-count) "
+                                         "— both always render, "
+                                         "this NAMES the pick"},
+                "compare": {"type": "boolean",
+                            "description": "all published bases "
+                                           "side by side with the "
+                                           "spread, never averaged"},
+                "year": {"type": "integer",
+                         "description": "for basis=workdays and "
+                                        "the 27-payday calendar "
+                                        "block (1900..2099)"},
+                "pto_hours": {"type": "string",
+                              "description": "hours off from 2,080 "
+                                             "for basis=pto (the "
+                                             "1880 reading of "
+                                             "1de8205)"},
+                "hours": {"type": "string",
+                          "description": "basis=hours: YOUR "
+                                         "contract's denominator "
+                                         "(1820 = 35hx52, 2400 = "
+                                         "200hx12) — an argument, "
+                                         "never encoded law"},
+                "payday_weekday": {"type": "string",
+                                   "description": "mon..sun — "
+                                                  "with year "
+                                                  "renders the "
+                                                  "26-vs-27 "
+                                                  "every-other-week "
+                                                  "year of 1qh5ouz"},
+                "currency": {"type": "string",
+                             "description": "echoed label only, "
+                                            "never converted, "
+                                            "never fetched"},
+            },
+        },
+    },
 ]
 
 
@@ -13188,6 +13360,7 @@ def index(request: Request):
             "/api/v1/num/round": "POST value + places/mode -> exact Decimal rounding",
             "/api/v1/units/convert": "POST value + from/to -> closed-family conversion",
             "/api/v1/money/prorate": "POST amount + cycle + window -> prorated (paid)",
+            "/api/v1/money/payscale": "POST annual + named basis -> hourly/periods with every published denominator named (free)",
             "/api/v1/money/aging": "POST invoices + as_of -> due-date buckets (free)",
             "/api/v1/ledger/apply-payments": "POST invoices + payments -> FIFO reconciliation (free)",
             "/api/v1/eval/compare": "POST expected + got -> verdict OK/WRONG + named divergences (free)",
