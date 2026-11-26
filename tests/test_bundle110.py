@@ -403,7 +403,7 @@ def test_manifest_182_et_ligne_lu():
     # le meme nom) — le compteur lu reste le test : TABLE 193 -
     # recipes 9 = 184 transforms, compte a la main.
     # b113 relève : TABLE 194 - recipes 9 = 185 transforms, compte à la main.
-    assert "189 transforms + 9 recipes" in body  # b120 : +money_payscale, 198-9=189 (b116 : 197-9=188)
+    assert "190 transforms + 9 recipes" in body  # b123 : +stats_rate_ci, 199-9=190 (b120 : 198-9=189)
     assert "shop_soldes_lu  /api/v1/shop/soldes-lu  free" in body
     assert len(body.encode("utf-8")) < 9000
 
@@ -451,7 +451,9 @@ def test_onze_pins_soldeslu_adds_only():
     # b121 relève à 437 : +6 agent_resultcliff json_survival (adds-only)
     # b122 relève à 442 : +5 id_checkdigit boleto (adds-only — diff
     # golden 59 insertions ZÉRO suppression, hash-à-hash prouvé)
-    assert len(g) == 442
+    # b123 relève à 443 : +1 stats_rate_ci (adds-only, 1 insertion
+    # zero suppression, hash-à-hash vérifié par git diff)
+    assert len(g) == 443
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

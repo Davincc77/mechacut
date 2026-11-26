@@ -8,6 +8,16 @@ actually talks to their agent.
 """
 
 SAY = {
+    "/api/v1/stats/rate-ci": {
+        "en": "720 clean of 1105 invoices audited: what rate, "
+              "what interval — the naive 65.2% alone is a lie "
+              "of precision",
+        "fr": "720 propres sur 1 105 factures : quel taux, quel "
+              "intervalle — le 65,2 % seul est un mensonge de "
+              "précision",
+        "pt": "720 limpas em 1105 notas fiscais: que taxa, que "
+              "intervalo — 65,2% sozinho e mentira de precisao",
+    },
     "/api/v1/fiche/shop-reste": {
         "en": "shop had 435, sold 35 morning, 40% of the REST "
               "afternoon, how many remain?",

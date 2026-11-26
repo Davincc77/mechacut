@@ -1,0 +1,5 @@
+{
+  "name": "stats_rate_ci_wilson",
+  "path": "/api/v1/stats/rate-ci",
+  "body": {"k": 720, "n": 1105}
+}

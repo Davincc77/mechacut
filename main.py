@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.43.0",
+    version="1.44.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4767,6 +4767,35 @@ def api_color_check(req: ColorCheckRequest):
     return err if err else body
 
 
+# ------------------------------------------ bundle 123: stats/rate-ci
+
+class StatsRateCiRequest(BaseModel):
+    k: int
+    n: int
+
+
+def run_stats_rate_ci(args: dict):
+    try:
+        req = StatsRateCiRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = checkers.wilson_ci(req.k, req.n)
+    except checkers.CheckError as e:
+        return None, bad_request([{"field": "k", "message": str(e),
+                                   "expected": "integers with 0 <= k <= n, "
+                                               "n >= 1"}],
+                                 "check_failed")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/stats/rate-ci")
+def api_stats_rate_ci(req: StatsRateCiRequest):
+    body, err = run_stats_rate_ci(req.model_dump())
+    return err if err else body
+
+
 # --------------------------------------------- bundle 7.1: text tools
 
 class TextCountRequest(BaseModel):
@@ -7547,6 +7576,7 @@ TOOL_RUN = {
            "validate_email": run_validate_email,
            "validate_url": run_validate_url,
            "color_check": run_color_check,
+           "stats_rate_ci": run_stats_rate_ci,
            "text_count": run_text_count,
            "sort_natural": run_sort_natural,
            "text_case": run_text_case,
@@ -9846,6 +9876,27 @@ MCP_TOOLS = [
                 "color": {"type": "string",
                           "description": "#rgb | #rrggbb | rgb(r,g,b)"},
                 "against": {"type": "string"},
+            },
+        },
+    },
+    {
+        "name": "stats_rate_ci",
+        "description": (
+            "k of n -> Wilson 95% score interval in percent to 0,1 "
+            "(z=1,96 named, exact Decimal, raw bounds capped into [0,1] "
+            "BEFORE rounding). observed_pct and wilson_center_pct are "
+            "separate named fields — conflating them is the disease. "
+            "Born from the LATAM census (720/1105 = 65,2 [62,3-67,9]). "
+            "Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["k", "n"],
+            "properties": {
+                "k": {"type": "integer",
+                      "description": "successes, 0 <= k <= n"},
+                "n": {"type": "integer",
+                      "description": "trials, >= 1"},
             },
         },
     },

@@ -435,3 +435,52 @@ def color_palette(color, scheme="complementary", steps=5, neutral=False):
             n.append(hx(0.0, 0.0, ll))
         out["neutral_ramp"] = n
     return out
+
+
+# ---- bundle 123: stats_rate_ci — Wilson 95 % for k of n -------------------
+# Born from the LATAM census (wave 3): 720/1105 was computed by hand three
+# times before it became a door tool. z = 1,96 is the committee constant of
+# the 95 % level, named here, never inherited from a silent default.
+
+from decimal import Decimal as _D, ROUND_HALF_EVEN as _RHE
+
+_WILSON_Z = _D("1.96")
+
+
+def wilson_ci(k, n):
+    """Exact Decimal Wilson score interval, reported to 0,1 % half-even.
+
+    Caps raw bounds into [0, 1] BEFORE rounding (the census lesson: a
+    cap applied after rounding invents 0,1 points). Returns the OBSERVED
+    rate and the WILSON CENTER as two named fields — the conflation of
+    the two is the disease this tool kills."""
+    if not isinstance(k, int) or not isinstance(n, int):
+        raise CheckError("k and n must be integers: k counts successes, n counts trials")
+    if n < 1:
+        raise CheckError("n must be at least 1: an interval needs at least one trial")
+    if k < 0:
+        raise CheckError("k must be 0 or more: a count of successes cannot be negative")
+    if k > n:
+        raise CheckError("k must not exceed n: cannot observe more successes than trials")
+    z = _WILSON_Z
+    z2 = z * z
+    N = _D(n)
+    p = _D(k) / N
+    denom = 1 + z2 / N
+    center = (p + z2 / (2 * N)) / denom
+    inner = p * (1 - p) / N + z2 / (4 * N * N)
+    half = z * inner.sqrt() / denom
+    lo = center - half
+    hi = center + half
+    if lo < 0:
+        lo = _D(0)
+    if hi > 1:
+        hi = _D(1)
+
+    def pct(x):
+        return str((x * 100).quantize(_D("0.1"), rounding=_RHE))
+
+    return {"k": k, "n": n, "observed_pct": pct(p),
+            "wilson_center_pct": pct(center),
+            "lower_pct": pct(lo), "upper_pct": pct(hi),
+            "method": "wilson", "confidence_pct": "95.0", "z": str(z)}

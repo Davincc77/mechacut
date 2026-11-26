@@ -6747,6 +6747,16 @@
   },
   {
    "body": {
+    "k": 720,
+    "n": 1105
+   },
+   "name": "stats_rate_ci_wilson",
+   "path": "/api/v1/stats/rate-ci",
+   "sha256": "30018146008f689576558c16c8a01aa1a64e1ebedfbf957c073f0bbc1958e885",
+   "status": 200
+  },
+  {
+   "body": {
     "factor": "1/2",
     "items": [
      {

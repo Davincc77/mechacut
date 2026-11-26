@@ -775,6 +775,10 @@ TABLE = (
      "hex/rgb/hsl + WCAG contrast",
      "color contrast wcag accessibility hex rgb hsl check aa aaa readable "
      "background foreground lighthouse contraste"),
+    ("stats_rate_ci", "/api/v1/stats/rate-ci", "numbers",
+     "Wilson 95% interval for k of n",
+     "wilson confidence interval rate proportion percent k of n taxa "
+     "taux intervalle sondage pourcentage"),
     ("text_count", "/api/v1/text/count", "text",
      "words/sentences/lines/bytes exact",
      "count words characters lines sentences bytes text measure how long "
@@ -1268,7 +1272,7 @@ def manifest_text(version):
           # +26 au pointeur, marge 10 -> ~160.
           "packs: /SKILL-<pack>.md; "
           "POSTs carry "
-          "sha256; 400s name field+expected; "
+          "sha256; 400s name+expected; "
           "error IS repair prompt; refusals name "
           "readings. "
           # b105 elagage MESURE (consigne b104 « FR a 23 octets du
@@ -1311,9 +1315,9 @@ def manifest_text(version):
           #; « storyboards, shot lists, breakdowns » en SLASHES.
           # Mesure b112 : 208 lignes / 8 99x octets — marge relevee
           # a l'annonce, jamais de memoire.
-          "pipelines: /api/v1/recipes|pipeline; "
+          "/api/v1/recipes|pipeline; "
         "proposals: /proposals|/api/v1/agent/proposals; "
-        "not here: storyboards/shotlists/breakdowns "
+        "storyboards/shotlists/breakdowns "
         "-> moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
         # debranche le dense-fold ou elague une ligne de tete ») :

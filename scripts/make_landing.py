@@ -3046,9 +3046,14 @@ def catalog_grid(lang):
                      % (pk, PACK_TITLE[lang].get(pk, pk)))
     for t in ("free", "cap", "paid"):
         word = TIER_CHIP[lang][t]
-        chips.append('<span class="chip" data-f="tier=%s" title="%s %s — %s">'
-                     '%s %s</span>'
-                     % (t, BADGE[t], word, TIER_RULE[lang][t], BADGE[t], word))
+        # b123 elagage MESURE (+stats_rate_ci, le budget FR casse de 108
+        # octets, PT de 181) : l'attribut TITLE des chips TIERS est SUPPRIME
+        # — il repetait mot a mot la legende visible juste dessous (la ligne
+        # <span class="lg"> porte deja BADGE+MOT+REGLE pour les trois
+        # paliers). Claim constant, precedent b114 « le chemin vit DEJA
+        # ailleurs » : ce qui vit deux fois ne paie qu'une fois.
+        chips.append('<span class="chip" data-f="tier=%s">%s %s</span>'
+                     % (t, BADGE[t], word))
     legend = " · ".join('<span class="lg">%s %s — %s</span>'
                         % (BADGE[t], TIER_CHIP[lang][t], TIER_RULE[lang][t])
                         for t in ("free", "cap", "paid"))
