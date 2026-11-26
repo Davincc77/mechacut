@@ -8,7 +8,7 @@ because nobody hashes what an institution signs. This catalog is that check, gen
 
 **The invariant law.** Every institutional document splits into three columns:
 *computation* (arithmetic/grammar byte-in — a bench can own it forever), *registry*
-(oracle lookups — the bench names the source and caches honestly), *human* (judgment —
+(oracle lookups — the bench names the source and the cache age), *human* (judgment —
 the bench refuses it by name). We sell the first column at machine price, instrument the
 second, and never pretend the third is ours.
 
@@ -57,15 +57,15 @@ session; **[L]** = ledger-sourced (subagent, source URL live, flagged in `gaps` 
 | Insurance | CA DOI / NAIC / FBI | duplicate claim by file hash, altered-form byte-diff, prompt-pay deadline arithmetic | CA DOI 2025: $527.8 M reviewed claims, $458.3 M suspected; FBI: non-health fraud >$40 bn/yr **[L]** |
 | Notarial | FR décret 71-941 art. 16-17; RON US (47 states) | PAdES/QES chain + timestamp validation in-bytes; notarial-block field presence + commission-expiry arithmetic — **a seal's authority can never be a checksum; we say so** | an emailed "signed" PDF is not an acte authentique |
 
-## The whitespace (market, stated honestly)
+## The whitespace (market)
 
 Rule-validation is already commoditized: **€0.0025–0.01 per invoice** at published API
-prices (SUPER PDP) — the deterministic check is cheap and everyone knows it now. What
+prices (SUPER PDP) — the deterministic check is cheap — prices published above. What
 **no** surveyed vendor sells: per-document **hash anchoring at issuance + third-party
 re-verification + published jurisdiction rule packs + examiner-ready export** as one
 curlable contract. Generic anchoring exists (OpenTimestamps free, OriginStamp freemium)
-with zero compliance framing; KYC vendors re-check via ML per event. The slot is the
-column every regulator already made deterministic and nobody priced.
+with zero compliance framing; KYC vendors re-check via ML per event. The regulators named above published their rules as
+deterministic checks; none of the surveyed vendors priced the re-verification contract.
 
 ## Honest gaps (kept, not buried)
 

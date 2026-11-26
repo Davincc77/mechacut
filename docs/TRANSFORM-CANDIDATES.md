@@ -29,6 +29,7 @@ session artifact.
 | 10 | SEPA ledger: EPC262-08 v11.0 publishes Creditor Identifier formats + check digits per country; banks reject files on exactly this arithmetic today, by hand-debug. | `validate_creditor_id` — CI structure + mod-97 family DV per country from the EPC PDF; `kind:"creditor_id"`? — NO: taxid kinds are government-issued entity ids, CI is a mandate artefact → separate tool or id_checkdigit scheme, door arbitrage decides. | same family question as #8/#9 — batch the three rails proposals together, one door session. | **CANDIDATE — propose with 8-9** |
 | 11 | Governments ledger: EN 16931 BR-CO subset is pure arithmetic (parent counted 23 CO rules in the official preprocessed Schematron; BR-CO-10/13/14/15/17 = totals chain). France/Italy/Germany/Poland mandates all live 2025-27. | `en16931_arith` — input extracted-invoice figure tuple (net, per-rate breakdown, VAT total, gross, lines) → BR-CO pass/fail with rule ids named; NOT full XML validation (that belongs to PDPs; we own the arithmetic verdict on already-extracted numbers). | doc_points exists (declared-claim points); en16931_arith is different: computes cross-field coherence. Expect door scrutiny — draft golds from the Schematron text itself. | **CANDIDATE — the big one; propose last, after 8-10 build muscle** |
 | 12 | Professions ledger: PJe resolution mandates a fixed signature-banner sentence; FR notarial/translation oaths and apostille art. 4 have fixed field wording — the same needle-profile machinery as #1 applied to REQUIRED text instead of broken text. | fold into `text_mojibake`'s successor or `document_points` extension: a REQUIRED-pattern profile (presence, not damage). Decision deferred to the #1 arbitration. | overlaps #1/#5 — one arbitration session, named verdicts. | **CANDIDATE — arbitrate with #1** |
+| 13 | The public-copy opinion audit ran by hand THREE times today (locales x3 languages, landing script, README, case study, catalog): marker scan → scoped rewrite → counter-needle. A closed word list + line scan, zero LM — the repo already ships it as scripts/copy-audit.py; the bench has no sibling (text layer = decode/mojibake/points, none sweeps CLAIMS). | `text_claimsweep` — input {text} → {clean, hits:[{line, marker, snippet}]} over the closed marker list (universal quantifiers without named corpus, self-praising adverbs, dead counters); false-positive controls: quoted material and keyword blobs skipped by rule, not by judgment. | text_decode (repairs), doc_text (extracts), document_points (verifies numbers) — none names opinion. | **CANDIDATE — code exists in-repo, formalize contract** |
 
 ## Loop ledger update (26-11, institutional research)
 - 2026-11-26 (evening) — rows 8-12 observed while building `docs/INST-CATALOG.md`
@@ -38,6 +39,9 @@ session artifact.
   Next door session: propose #8, #9, #10 as a batch (rails family), then #11.
 
 ## Loop ledger update
+- 2026-11-26 (late) — row 13 observed the third time the same audit ran by
+  hand; scripts/copy-audit.py + tests/test_copy_audit.py coded it in-repo first
+  (both directions proven), door proposal to follow with hand-traced golds.
 - 2026-11-26 (post-census) — rows 6 and 7 observed while integrating wave-3
   results; row 1's demand evidence doubled; rows 2+7 merged. None proposed to
   the door yet — next session: propose #6 (stats_rate_ci) and #2/7
