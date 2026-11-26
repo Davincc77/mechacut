@@ -5,10 +5,20 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 26-11 04h30: 188 transforms + 9 recipes,
-suite 2 049 passed 2 skipped, pins 410, manifest 212 lines / 8,934 bytes, prod
-v1.37.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b116: /agent/result-cliff — the cliff table read at the SOURCE,
+name, Git URL, or owner/repo). NUMBERS 26-11 07h15: 188 transforms + 9 recipes
+(unchanged — b117 extended /money/settle, it did not add a tool — and growing
+holds: the suite, the pins and the readings all moved),
+suite 2 072 passed 2 skipped, pins 415, manifest 212 lines / 8,934 bytes, prod
+v1.38.0 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b117: noncash kind/counts/value on settle, the two published
+answers of r/askmath 1tuuael replayed IN PROD — 40.50 face, 290.50 none; PT was
+the tight page and was paid FIRST: 8 constant-claim squeezes; pages served
+180,988 / 180,942 / 180,993 — all three under 181,000; the catalog radar RULED
+the :batch trio as an adapter LAW covered in product — rows keep their names in
+the mirror as RULING(law), re-probe slots freed; and iteration 18 of "the
+artifact lies": three decoys of mine fell on /money/points — an honest
+destination — the corpus lied, not the router; question 5 now covers decoys too;
+previous b116: /agent/result-cliff — the cliff table read at the SOURCE,
 as_of per row; EN/FR/PT parité tenue, budget navigateur payé dans le même
 commit, pages servies 180 856 / 180 763 / 180 945 ;
 précédents b115 : 187 / 2 017 / 400 / 211 / 8,883 / v1.36.0 ;

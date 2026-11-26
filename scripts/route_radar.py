@@ -947,6 +947,13 @@ def main():
     # via=catalog-mirror ) pour que le diff du prochain scan paye voie
     # ses propres lignes comme PREV, pas comme decouvertes.
     carried = [dict(r, via="catalog-mirror") for r in mirror]
+    # b117 — le drapeau RULING vit AUSSI dans le portage solo : une loi
+    # fermee au scan paye ne doit pas redevenir une douleur quand un
+    # scan impaye porte ses lignes (l'inverse de l'iteration 16 :
+    # l'identite porte, le verdict porte aussi).
+    for r in carried:
+        if r["text"] in RULED_LAWS:
+            r["ruled"] = RULED_LAWS[r["text"]]
     # XS b116 — la cle du diff est vkey(), normalisee au niveau
     # module (testee hors reseau dans test_bundle72). Le prev indexe
     # le scan precedent APRES normalisation du via : miroir porte et

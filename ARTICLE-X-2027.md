@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 188 + 9, vérifiés live 26-11 04h30, prod 1.37.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 188 + 9, vérifiés live 26-11 07h15, prod 1.38.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -151,7 +151,23 @@ douleur 21h15 est GUERIE ; la fiche PT e24 portait le texte du PERU — remplac�
 par la vraie traduction des quatre horloges ; le bouton copy-curl ne copie plus
 un /tools/.json mort. prod 1.37.0, suite 2 049 passed 2 skipped, pins 410,
 manifest 212 lignes / 8 934 octets, pages SERVIES 180 856 / 180 763 / 180 945 —
-les trois sous 181 000.)
+les trois sous 181 000.) ; (o) 26-11 07h15 : pas d'outil neuf — GRAMMAIRE
+neuve (bundle117, lentille HUMAIN) : /money/settle connaît l'AVANCE EN NATURE,
+kind=noncash + counts face|cash|none en ARGUMENTS, refus par le nom sans
+lecture déclarée — les DEUX réponses publiées du même voyage (r/askmath
+1tuuael) closent EN PROD : 40,50 en face, 290,50 crédit donné, l'écart est
+EXACTEMENT la moitié de la face, un désaccord de graphe pas d'arithmétique ;
+129phqq rejoué au détail près (C→A 58, C→B 28, D→B 86). La valeur du point
+est un argument, jamais un fetch (CFPB rewards spotlight 2024-05). RADAR :
+le trio :batch STATUÉ loi d'adaptateur couverte en produit — RULING(law) dans
+le miroir, jamais enterré par silence ; ornith 403 reste ouvert NOMMÉ (porte
+fournisseur) ; mpnet guérison CONFIRMÉE. Et l'itération 18 de « l'artefact
+ment », pêchée par MA SONDE LOCALE : trois de mes leurres tombaient sur
+/money/points — une destination HONNÊTE ; c'est le corpus qui mentait, pas le
+routeur — la question 5 vaut aussi pour les leurres. PT était la page serrée
+— payée PAR LE PORTUGAL (8 serrages à claims constants). prod 1.38.0, suite
+2 072 passed 2 skipped, pins 415, manifest 212 lignes / 8 934 octets INTACT,
+pages SERVIES 180 988 / 180 942 / 180 993 — les trois sous 181 000.)
 
 ---
 

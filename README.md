@@ -5,16 +5,23 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 188 transforms + 9 named recipes as of v1.37.0, each with its tool card
+— 188 transforms + 9 named recipes as of v1.38.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 410 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 415 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `agent/result-cliff` (DOES THIS
+is the truth of today. Recent highlights: `money_settle` NON-CASH MODE (THE 500
+DOLLARS OF POINTS: the same trip publishes two answers — 40.50 counting the
+instrument in FACE against its provider, 290.50 giving the credit and splitting
+only the cash (r/askmath 1tuuael; the gap is exactly half the face — a graph
+disagreement, not arithmetic). kind=noncash + counts face|cash|none are
+ARGUMENTS; the cash cost of a point is yours to name, never fetched (CFPB
+rewards spotlight 2024-05); no reading named = refused by name — silently
+choosing the convention IS the wound; then `agent/result-cliff` (DOES THIS
 RESULT SURVIVE INLINE IN THIS HARNESS — every harness buries tool results at its
 own frontier in its own unit, and the unit in its error message often LIES:
 Claude Code persists past 50,000 CHARACTERS while the notice says tokens,
