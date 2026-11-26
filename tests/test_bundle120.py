@@ -275,4 +275,4 @@ def test_endpoint_goose_200_and_version():
     b = r.json()
     assert b["verdict"] == "TEMP_FILE_TAIL_ONLY"
     assert b["table_version"] == cliffkit.TABLE_VERSION
-    assert b["table_version"] == "b120-1"
+    assert b["table_version"] == "b121-1"

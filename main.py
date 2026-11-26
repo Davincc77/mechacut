@@ -94,7 +94,7 @@ POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the upda
 POST /api/v1/agent/tool-trim  pasted tools/list + budget -> WHICH tools to disconnect, idle-first closed ranking in exact fractions, re-count of the survivors at the sister's canon, FITS/STILL_OVER with the overage named, $ saved at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/agent/tool-overlap  pasted tool names (+ server keys) -> which TWO tools become ONE id in WHICH client (vscode cut+TAIL_ABORT, gemini-cli fold+OVERWRITE, head64 gateways), bare shadows, provider charset/length 400s, the min server-key rename IN CHARACTERS, GATE_STRICTER_THAN_API named (free under 32 KB, x402 above)
 POST /api/v1/agent/modelid       pasted id list (+catalog) -> closed grammar audit, named drift ladder, dialect DOORS (:batch = base slug, never the sync chat path), V23 badge, zero fetch (free)
-POST /api/v1/agent/result-cliff  harness + size (or paste) -> does the result CROSS that harness's cliff, computed in the harness's OWN unit (codex bytes÷4, claude 50k CHARS while its message says tokens, rakazo UTF-16 with YOUR budget), named verdict + marker + survivors + repair clause; unpublished thresholds answered UNPUBLISHED_THRESHOLD, never a guess (free)
+POST /api/v1/agent/result-cliff  harness + size (or paste) -> does the result CROSS that harness's cliff, in the harness's OWN unit (codex bytes÷4, claude 50k CHARS while its message says tokens, rakazo UTF-16 with YOUR budget), named verdict + marker + survivor JSON INTACT/BROKEN/MUTATED + repair clause; unpublished thresholds: UNPUBLISHED_THRESHOLD, never a guess (free)
 POST /api/v1/agent/mcp-list-completeness  pasted tools/list pages -> is the listing COMPLETE: trailing cursor echoed, empty page/empty-string cursor do NOT end the scan (spec MUST, verbatim), repeated cursor named, missing tail COUNTED vs your declared number (free under 32 KB, x402 above)
 POST /api/v1/json/bigint  pasted JSON text -> which integers lie past 2^53: RFC 8259 section 6 range, exact binary64 AND the JS print per finding, COLLISION named, reader table JS/Go/Python/nlohmann, mode=quote patches bytes-only where flagged (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.41.0",
+    version="1.42.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -10810,7 +10810,16 @@ MCP_TOOLS = [
             "clauses quoted: _meta['anthropic/maxResultSizeChars'] "
             "≤ 500000 (v2.1.91+), tool_output_token_limit, YOUR "
             "rakazo budget as an argument. Never fetches; zero "
-            "reasoning re-paid after the first call. EN/FR/PT tags, "
+            "reasoning re-paid after the first call. b121: paste a "
+            "JSON result and every replayable row also answers "
+            "does-the-cut-break-it — INTACT, BROKEN with the guilty "
+            "node path, or PARSEABLE_BUT_MUTATED (the marker lands "
+            "inside one string value: the survivor still parses "
+            "while its TEXT lies — the llama_index#24102 class "
+            "where repaired-but-cut-off arguments EXECUTE); rows "
+            "the table cannot replay EXACTLY answer NOT_REPLAYED "
+            "with the named reason, declared mode carries no such "
+            "field, never a guess. EN/FR/PT tags, "
             "golden sha."
         ),
         "inputSchema": {

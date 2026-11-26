@@ -1,0 +1,10 @@
+{
+ "name": "agent_resultcliff_jsonsurv_notjson_pin",
+ "path": "/api/v1/agent/result-cliff",
+ "body": {
+  "harness": "codex",
+  "result": "hello {broken",
+  "token_limit": 400
+ },
+ "why": "b121 : paste non-JSON = NOT_REPLAYED NOMME, jamais un avis sur des octets qui n'ont jamais parse"
+}

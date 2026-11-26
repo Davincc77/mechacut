@@ -165,7 +165,7 @@ def test_endpoint_onyx_200_with_version_and_sha():
     assert b["verdict"] == "INLINE"
     assert b["crossed"] is False
     assert b["margin"] == 128000 - 30000  # 98 000, à la main
-    assert b["table_version"] == cliffkit.TABLE_VERSION == "b120-1"
+    assert b["table_version"] == cliffkit.TABLE_VERSION == "b121-1"
     assert b["as_of"] == "2026-11-26"
     assert "sha256" in b
 

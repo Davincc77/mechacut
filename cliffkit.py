@@ -33,9 +33,34 @@ suffixes. None of them predicts what a harness does to ONE result —
 this kit is the crossing, the verdict, the marker text and the
 survivors' shape. Never fetches; the table ships in code, sources
 cited per row, as_of per row.
+
+b121 — THE SURVIVOR SPEAKS: a JSON paste answers, per row, whether
+THE HARNESS'S OWN CUT still parses. The demand is measured, not
+pleaded: arXiv 2610.36114 (3,827 of 11,189 tool results cut before
+the model — "every cut result became broken JSON"), and the November
+2026 wave of frameworks EXECUTING cut-off JSON arguments because a
+lenient repairer "fixed" them: run-llama/llama_index#24102 (2026-11-
+09, parse_partial_json repairs a truncated write_file call at line 17
+of 40 and FunctionAgent RUNS it), NVIDIA/NeMo-Agent-Toolkit#2550
+(2026-11-03, 16 of 40 lines land on disk; the merged fix #2551
+requires STRICT json.loads — "no partial parsing"), langchain4j#7169
+(2026-11-18, JsonEOFException from a LENGTH reply), simonw/llm#1887
+(2026-11-16), MervinPraison/PraisonAI#6369 (2026-11-14, index-
+addressed stream assembly yields invalid JSON and drops
+finish_reason). /json/repair and /json/bigint speak of the INTACT
+document; nobody pronounced on the SURVIVANT. This field does, and
+it refuses to fake it: only cuts the table can replay EXACTLY are
+replayed (others answer NOT_REPLAYED with the named reason), and the
+parse oracle is json.loads itself — never a guess about where JSON
+breaks. A middle cut that falls wholly INSIDE one string value
+produces a survivor that STILL PARSES with the marker buried in the
+text — PARSEABLE_BUT_MUTATED is the dangerous class (a repaired
+argument EXECUTES), and it is named as itself.
 """
 
-TABLE_VERSION = "b120-1"
+import json as _json
+
+TABLE_VERSION = "b121-1"
 AS_OF = "2026-11-26"
 
 UNITS = ("chars", "bytes", "lines", "tokens")
@@ -214,6 +239,15 @@ def _rows():
                          "kind": "env",
                          "repair": "MAX_MCP_OUTPUT_TOKENS (default)"},
                     ],
+                    "transport_guard": (
+                        "BELOW the result cliffs, the TRANSPORT "
+                        "decides first: an HTTP/SSE server response "
+                        "over 16 MiB is STOPPED mid-read and the "
+                        "request FAILS; a single WebSocket message "
+                        "over 16 MiB CLOSES the connection — MAX_"
+                        "MCP_OUTPUT_TOKENS moves neither guard "
+                        "(code.claude.com/docs/en/mcp read "
+                        "2026-11-26)"),
                     "source": ("code.claude.com/docs/en/mcp re-grepped "
                                "2026-11-26; anthropics/claude-code"
                                "#97622 open, #87650 lineage"),
@@ -265,8 +299,23 @@ def _rows():
                              "OR 256 lines with head+tail surviving "
                              "(openai/codex#6544, closed 2026-03-08 — "
                              "historical footnote, not today's law)"),
+                    "mcp_envelope": (
+                        "today's MCP law lives in codex-rs/utils/"
+                        "output-truncation/src/lib.rs (read "
+                        "2026-11-26): a serialized CallToolResult "
+                        "over max_bytes is RE-ENVELOPED — a plain "
+                        "text result loses its JSON envelope and "
+                        "starts with the literal \"Truncated tool "
+                        "output:\"; structured_content is DROPPED; "
+                        "the preview is middle-cut in BYTES (\"…N "
+                        "chars truncated…\") and its own JSON "
+                        "ESCAPING re-inflates it, so the budget is "
+                        "SCALED DOWN and re-cut until the envelope "
+                        "fits — the text inside the result is a cut "
+                        "of a re-escape of a cut"),
                     "source": ("codex-rs/utils/string/src/truncate.rs "
-                               "+ session/step_settings.rs read "
+                               "+ utils/output-truncation/src/lib.rs + "
+                               "session/step_settings.rs read "
                                "2026-11-26; openai/codex#14206 open"),
                 },
             },
@@ -779,6 +828,332 @@ def out_goose_stub(name, surface, surf):
             "source": surf["source"], "as_of": AS_OF}
 
 
+# ------------------------------------------- b121: the survivor PARSES?
+_WS = " \t\n\r"
+
+
+def _json_token_spans(text):
+    """RFC 8259 closed grammar over a document that ALREADY passed
+    _json.loads: returns [(lo, hi, kind, path)] for EVERY token, in
+    order. kind: struct | key | string_value | number | literal.
+    path is the member path the token sits at ('$' for structural
+    tokens between members), keys RAW (display only). The document is
+    valid by contract, so this walk never raises and never guesses."""
+    spans = []
+    pos = [0]
+    n = len(text)
+
+    def skip_ws():
+        while pos[0] < n and text[pos[0]] in _WS:
+            pos[0] += 1
+
+    def scan_string():
+        j = pos[0] + 1
+        while True:
+            ch = text[j]
+            if ch == "\\":
+                j += 2
+                continue
+            if ch == '"':
+                return j + 1
+            j += 1
+
+    def scan_atom():
+        j = pos[0]
+        while j < n and text[j] not in " \t\n\r,}]":
+            j += 1
+        return j
+
+    def parse_arr(path):
+        lo = pos[0]
+        spans.append((lo, lo + 1, "struct", path))
+        pos[0] += 1
+        skip_ws()
+        if pos[0] < n and text[pos[0]] == "]":
+            cl = pos[0]
+            spans.append((cl, cl + 1, "struct", path))
+            pos[0] += 1
+            return
+        idx = 0
+        while True:
+            parse_value(path + "[%d]" % idx)
+            skip_ws()
+            if pos[0] < n and text[pos[0]] == ",":
+                cm = pos[0]
+                spans.append((cm, cm + 1, "struct", path + "[%d]" % idx))
+                pos[0] += 1
+                skip_ws()
+                idx += 1
+                continue
+            break
+        cl = pos[0]
+        spans.append((cl, cl + 1, "struct", path))
+        pos[0] += 1
+
+    def parse_obj(path):
+        lo = pos[0]
+        spans.append((lo, lo + 1, "struct", path))
+        pos[0] += 1
+        skip_ws()
+        if pos[0] < n and text[pos[0]] == "}":
+            cl = pos[0]
+            spans.append((cl, cl + 1, "struct", path))
+            pos[0] += 1
+            return
+        while True:
+            key_lo = pos[0]
+            key_hi = scan_string()
+            key = text[key_lo + 1:key_hi - 1]
+            member = path + "." + key
+            spans.append((key_lo, key_hi, "key", member))
+            pos[0] = key_hi
+            skip_ws()
+            col = pos[0]
+            spans.append((col, col + 1, "struct", member))
+            pos[0] += 1
+            parse_value(member)
+            skip_ws()
+            if pos[0] < n and text[pos[0]] == ",":
+                cm = pos[0]
+                spans.append((cm, cm + 1, "struct", member))
+                pos[0] += 1
+                skip_ws()
+                continue
+            break
+        cl = pos[0]
+        spans.append((cl, cl + 1, "struct", path))
+        pos[0] += 1
+
+    def parse_value(path):
+        skip_ws()
+        lo = pos[0]
+        c = text[lo]
+        if c == "{":
+            parse_obj(path)
+            return
+        if c == "[":
+            parse_arr(path)
+            return
+        if c == '"':
+            hi = scan_string()
+            spans.append((lo, hi, "string_value", path))
+            pos[0] = hi
+            return
+        hi = scan_atom()
+        spans.append((lo, hi,
+                      "number" if c in "-0123456789" else "literal",
+                      path))
+        pos[0] = hi
+
+    skip_ws()
+    parse_value("$")
+    return spans
+
+
+def _guilty_at(spans, lo, hi):
+    """What the deleted span [lo, hi) touched: the node the cut BEGINS
+    inside (token containing lo), the node it ENDS inside (token
+    containing hi-1 — the last character that died), and whether both
+    are the SAME string value (the PARSEABLE_BUT_MUTATED condition:
+    the marker fell wholly inside one string, so the survivor still
+    parses while the value lies)."""
+    begin = None
+    end = None
+    last = max(hi - 1, lo)
+    for s_lo, s_hi, kind, path in spans:
+        if begin is None and s_lo <= lo < s_hi:
+            begin = (kind, path)
+        if s_lo <= last < s_hi:
+            end = (kind, path)
+    if begin is None:
+        begin = ("structure", "$")
+    if end is None:
+        end = ("structure", "$")
+    return {"begin": {"kind": begin[0], "path": begin[1]},
+            "end": {"kind": end[0], "path": end[1]},
+            "same_string": bool(begin == end and begin[0] ==
+                                "string_value")}
+
+
+def _goose_tail_text(text):
+    """The shell-law survivor STRING, byte-exact with _goose_survivors
+    (last 50 lines, tail-capped at 10 000 bytes snapped forward)."""
+    parts = text.split("\n")
+    ps = max(0, len(parts) - GOOSE_PREVIEW_LINES)
+    joined = "\n".join(parts[ps:])
+    jb = joined.encode("utf-8")
+    if len(jb) > GOOSE_PREVIEW_BYTES:
+        start = len(jb) - GOOSE_PREVIEW_BYTES
+        while start < len(jb) and 0x80 <= jb[start] < 0xC0:
+            start += 1
+        return ps, jb[start:].decode("utf-8")
+    return ps, joined
+
+
+def _survivor_replay(name, out, text):
+    """(survivor, lo, hi, marker) with EXACT replay of the row's own
+    law, or None when this row's cut is not replayable honestly. lo/hi
+    are the deleted span in CHARACTERS of the original paste."""
+    v = out.get("verdict")
+    if v == "INLINE":
+        return None
+    if name == "rakazo":
+        return None  # LEAF_MIDDLE_CUT_FLAGGED — the fold is per-leaf,
+        # longest leaf first: not a head/tail of the paste. Replaying
+        # it would invent a survivor the harness may not produce.
+    if name == "vscode":
+        return None  # UNPUBLISHED_THRESHOLD — a band is not a cut.
+    if name == "onyx":
+        return None  # PROVIDER_REQUEST_REJECTED — nothing is cut.
+    if name == "claude-code" and v == "PERSIST_TO_FILE":
+        return None  # zero of the RESULT survives inline; a ~2 KB
+    # preview clause is approximate ("~"), and this kit never replays
+    # an approximation. The FILE holds the intact bytes.
+    if name == "goose":
+        if v == "REPLACE_WITH_NOTICE":
+            return None  # global handler: the block is REPLACED.
+        law = out.get("shell_law") or {}
+        if law.get("verdict") == "TEMP_FILE_TAIL_ONLY":
+            _ps, tail = _goose_tail_text(text)
+            end = len(text) - len(tail)
+            return tail, 0, end, ""  # the HEAD is what died
+        return None
+    if name == "codex" and v == "MIDDLE_CUT_MARKED":
+        b = text.encode("utf-8")
+        head = out.get("kept_head_bytes")
+        tail = out.get("kept_tail_bytes")
+        marker = out.get("marker_rendered") or ""
+        if head is None or tail is None:
+            return None
+        h = min(head, len(b))
+        while h > 0 and 0x80 <= b[h] < 0xC0:
+            h -= 1  # floor_char_boundary (truncate.rs split_string)
+        t = max(len(b) - tail, h)
+        while t < len(b) and 0x80 <= b[t] < 0xC0:
+            t += 1  # suffix starts at the first char AT/after target
+        pre = b[:h].decode("utf-8")
+        suf = b[t:].decode("utf-8")
+        return (pre + marker + suf, len(pre), len(text) - len(suf),
+                marker)
+    if name == "bionic" and v == "HEAD_ONLY_MARKED":
+        cliff = out.get("cliff")
+        if cliff is None:
+            return None
+        marker = "... (truncated)"
+        return text[:cliff] + marker, cliff, len(text), marker
+    if name == "hermes-agent" and v == "HEAD_TAIL_MARKED":
+        head, tail = hermes_split(out.get("cliff") or 0)
+        marker = out.get("marker_rendered") or ""
+        if tail > len(text) - head:
+            return None
+        return (text[:head] + marker + text[len(text) - tail:],
+                head, len(text) - tail, marker)
+    return None
+
+
+_NOT_REPLAYED_WHY = {
+    "rakazo": ("LEAF_MIDDLE_CUT_FLAGGED — rakazo folds the LONGEST "
+               "leaf first (max(8, floor(len/4)) per end), not the "
+               "document: a head/tail replay would invent a survivor. "
+               "The fold replaces a string middle IN PLACE, so the "
+               "document still PARSES while a string value is "
+               "SILENTLY MUTATED — ask the kit for the rows it can "
+               "replay exactly"),
+    "vscode": ("UNPUBLISHED_THRESHOLD — the cut lives inside a band "
+               "(14.4 KB–999 KB reported, #311068); replaying would "
+               "invent the harness's number"),
+    "onyx": ("PROVIDER_REQUEST_REJECTED — onyx cuts NOTHING: the "
+             "paste survives VERBATIM, it is the whole PROVIDER "
+             "request that dies; no local cut to replay"),
+    "claude-code": ("PERSIST_TO_FILE — zero of the result survives "
+                    "inline (the notice replaces it; the ~2 KB "
+                    "preview clause is approximate and this kit "
+                    "never replays '~'): the JSON is INTACT IN THE "
+                    "NAMED FILE, unreadable inline"),
+    "goose": ("the global handler REPLACES the block with a notice — "
+              "zero result characters survive inline (shell.rs's "
+              "tail-only clause answers separately under shell_law)"),
+}
+
+
+def _json_survival(name, out, text):
+    """The b121 field: does THIS harness's OWN cut on THIS pasted
+    document still PARSE? The oracle is _json.loads itself. Declared
+    mode has no text and NO field — the kit never pronounces on bytes
+    it has not seen."""
+    try:
+        _json.loads(text)
+    except ValueError:
+        return {"input": "NOT_JSON",
+                "verdict": "NOT_REPLAYED",
+                "why": "the paste is not a JSON document — nothing "
+                       "about a cut's JSON survival can be judged "
+                       "from bytes that never parsed"}
+    v = out.get("verdict")
+    if v == "INLINE":
+        return {"input": "JSON", "verdict": "INTACT", "cut": False,
+                "why": "no cut at this size in this harness — the "
+                       "document reaches the model whole"}
+    if v in ("REFUSED_IN_PASTE", "UNPUBLISHED_THRESHOLD",
+             "REFUSED_NEEDS_ARGUMENT"):
+        why = (_NOT_REPLAYED_WHY.get(name)
+               or "the row refuses a paste-counted cut — no local "
+                  "replay without the harness's own argument")
+        if v == "REFUSED_NEEDS_ARGUMENT" and name not in \
+                _NOT_REPLAYED_WHY:
+            why = ("the row needs %s to place its cliff — declare it "
+                   "and the kit replays" % out.get("ask"))
+        if isinstance(why, tuple):
+            why = why[0]
+        return {"input": "JSON", "verdict": "NOT_REPLAYED", "why": why}
+    if name == "goose" and v == "REPLACE_WITH_NOTICE":
+        return {"input": "JSON", "verdict": "NO_CONTENT_SURVIVES",
+                "rescue": "the notice points at a goose_mcp_response_ "
+                          "file the harness KEEPS (owner-only, read "
+                          "at source): the intact bytes live there, "
+                          "inline NOTHING of the result survives",
+                "why": _NOT_REPLAYED_WHY["goose"]}
+    if name == "claude-code" and v == "PERSIST_TO_FILE":
+        return {"input": "JSON", "verdict": "NO_CONTENT_SURVIVES",
+                "rescue": "the full text is saved to the file the "
+                          "notice NAMES — read it back and it "
+                          "parses",
+                "why": _NOT_REPLAYED_WHY["claude-code"]}
+    replayed = _survivor_replay(name, out, text)
+    if replayed is None:
+        why = _NOT_REPLAYED_WHY.get(name) or (
+            "no exact replay of this row's cut shape exists in the "
+            "table — the kit says NOT_REPLAYED rather than invent a "
+            "survivor")
+        if isinstance(why, tuple):
+            why = why[0]
+        return {"input": "JSON", "verdict": "NOT_REPLAYED", "why": why}
+    survivor, lo, hi, marker = replayed
+    doc0 = _json.loads(text)
+    try:
+        got = _json.loads(survivor)
+    except _json.JSONDecodeError as e:
+        return {"input": "JSON", "verdict": "BROKEN",
+                "cut": [lo, hi],
+                "guilty": _guilty_at(_json_token_spans(text), lo, hi),
+                "survivor_error": "%s: line %d column %d (char %d)"
+                                  % (e.msg, e.lineno, e.colno,
+                                     e.pos),
+                "marker_rendered": marker}
+    if got == doc0:
+        return {"input": "JSON", "verdict": "INTACT",
+                "cut": [lo, hi],
+                "why": "the deleted span was empty — the survivor is "
+                       "the document itself"}
+    return {"input": "JSON", "verdict": "PARSEABLE_BUT_MUTATED",
+            "cut": [lo, hi],
+            "guilty": _guilty_at(_json_token_spans(text), lo, hi),
+            "marker_rendered": marker,
+            "why": "the survivor PARSES — and the marker sits INSIDE "
+                   "the value: a repaired argument would EXECUTE the "
+                   "lie (llama_index#24102 class)"}
+
+
 def _row_verdict(name, row, surface, m, unit, size, args, text=None):
     surf = row["surfaces"][surface]
     if name == "goose":
@@ -793,6 +1168,9 @@ def _row_verdict(name, row, surface, m, unit, size, args, text=None):
            "recoverable": surf["recoverable"],
            "repair": surf["repair"],
            "source": surf["source"], "as_of": AS_OF}
+    for extra in ("transport_guard", "mcp_envelope"):
+        if extra in surf:
+            out[extra] = surf[extra]
     if m is not None and surf["unit"] == "tokens":
         # A PASTE cannot be counted in tokens without the provider's
         # OWN tokenizer — the kit refuses the guess, and it refuses
@@ -955,8 +1333,11 @@ def run_cliff(args):
             row = HARNESSES[name]
             if surface not in row["surfaces"]:
                 continue
-            rows.append(_row_verdict(name, row, surface, m, None,
-                                     None, args_rest, result))
+            r = _row_verdict(name, row, surface, m, None,
+                             None, args_rest, result)
+            if m is not None and surface == "result":
+                r["json_survival"] = _json_survival(name, r, result)
+            rows.append(r)
         return {"mode": "all-rows", "table_version": TABLE_VERSION,
                 "as_of": AS_OF, "measured": m, "rows": rows,
                 "firecrawl_548": FIRECRAWL_NOTE}
@@ -972,6 +1353,8 @@ def run_cliff(args):
     out = _row_verdict(name, row, surface, m,
                        unit if m is None else None, n, args_rest,
                        result)
+    if m is not None and surface == "result":
+        out["json_survival"] = _json_survival(name, out, result)
     out["mode"] = "paste" if m is not None else "declared"
     out["table_version"] = TABLE_VERSION
     if m is not None:

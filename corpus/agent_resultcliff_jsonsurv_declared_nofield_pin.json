@@ -1,0 +1,11 @@
+{
+ "name": "agent_resultcliff_jsonsurv_declared_nofield_pin",
+ "path": "/api/v1/agent/result-cliff",
+ "body": {
+  "harness": "codex",
+  "size": 3014,
+  "unit": "bytes",
+  "token_limit": 400
+ },
+ "why": "b121 : mode DECLARE = pas de champ json_survival — le kit ne prononce jamais sur des octets qu'il n'a pas vus"
+}

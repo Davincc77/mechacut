@@ -448,7 +448,8 @@ def test_onze_pins_soldeslu_adds_only():
     # b118 relève à 418 : +3 agent_resultcliff onyx (adds-only)
     # b119 relève à 423 : +5 money_prorate conventions (adds-only)
     # b120 relève à 431 : +5 money_payscale +3 goose cliff (adds-only)
-    assert len(g) == 431
+    # b121 relève à 437 : +6 agent_resultcliff json_survival (adds-only)
+    assert len(g) == 437
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

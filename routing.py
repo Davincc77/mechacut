@@ -1095,7 +1095,7 @@ TABLE = (
      "batch embedding"),
     ("agent_resultcliff", "/api/v1/agent/result-cliff", "code",
      "does THIS result survive inline in THIS harness — the crossing "
-     "in its OWN unit, verdict+marker+repair, every row dated and "
+     "in its OWN unit, verdict+marker+json, every row dated and "
      "sourced",
      "cliff harness survives survive inline persist spilled cutoff frontier "
      "bionic rakazo maxresultsizechars tool_output_token_limit 50k onyx "
@@ -1104,7 +1104,9 @@ TABLE = (
      "queue derniereslignes cauda ultimas "
      "tail last lines temp response notice saida arquivo lignes "
      "coupe seuil survit franchit frontiere resultat cortado cortou "
-     "cortada truncado sobrevive"),
+     "cortada truncado sobrevive "
+     "cut break casse quebra survivant survivor parsable "
+     "corte parseavel"),
     ("food_poultry", "/api/v1/food/poultry", "dates",
      "turkey thaw & roast window, USDA FSIS tables, ISO clock as "
      "argument — never wall clock, never invented numbers",

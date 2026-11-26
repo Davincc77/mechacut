@@ -618,6 +618,17 @@ CASES = [
      "agent_resultcliff"),
     ("bionic and rakazo — which harness buries results first",
      "agent_resultcliff"),
+    # CLASSE b121 — le SURVIVANT JSON (json_survival). Douleur : la
+    # coupe qui casse le JSON (arXiv 2610.36114, llama_index#24102,
+    # NeMo#2550). Aiguilles x3 langues + leurre : « casse-t-il » ne
+    # doit JAMAIS choir chez repair (qui répare l'INTACT) ni reshape.
+    ("does my cut break the json", "agent_resultcliff"),
+    ("will my json survive the cut after truncation",
+     "agent_resultcliff"),
+    ("est-ce que ma coupe casse le json", "agent_resultcliff"),
+    ("sera que meu corte quebra o json e ele continua parseavel",
+     "agent_resultcliff"),
+    ("my json is broken can you fix it", "json_repair"),
     ("why is everything running so slow today", None),
     ("raconte-moi a quoi reve un harnais vide", None),
     ("the tallest waterfall in the world is made of what", None),

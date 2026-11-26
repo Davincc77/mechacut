@@ -101,13 +101,16 @@ SAY = {
     "/api/v1/agent/result-cliff": {
         "en": "my tool result came back 51,000 characters — does it "
               "survive inline in Claude Code, or did it land in a "
-              "file I never got to read?",
+              "file I never got to read? and if it was JSON, does "
+              "what's left still PARSE, or does it lie?",
         "fr": "mon résultat d'outil fait 51 000 caractères — survit-"
               "il en ligne chez Claude Code, ou a-t-il atterri dans "
-              "un fichier que je ne lirai jamais ?",
+              "un fichier que je ne lirai jamais ? et si c'était du "
+              "JSON, le reste se parse-t-il encore, ou ment-il ?",
         "pt": "meu resultado de ferramenta tem 51.000 caracteres — "
               "sobrevive inline no Claude Code ou caiu num arquivo "
-              "que eu nunca vou ler?"},
+              "que eu nunca vou ler? e se era JSON, o que sobra "
+              "ainda parseia, ou mente?"},
     "/api/v1/shop/withdrawal": {
         "en": "parcel arrived Tuesday — what is the real last day "
               "to change my mind, weekends and holidays counted?",

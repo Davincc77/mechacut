@@ -2056,7 +2056,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "agent_modelid":
             "audit des ids de modèle contre un catalogue collé — verdicts nommés, did-you-mean à distance nommée, ne jure jamais avoir fait le GET (V23)",
         "agent_resultcliff":
-            "mon résultat survit-il EN LIGNE chez CE harnais — la traversée calculée dans SON unité (claude code compte des CARACTÈRES en parlant de tokens), verdict, marqueur et clause de réparation cités, chaque ligne datée et sourcée",
+            "mon résultat survit-il EN LIGNE chez CE harnais — la traversée calculée dans SON unité (claude code compte des CARACTÈRES en parlant de tokens), verdict, marqueur et clause de réparation cités, chaque ligne datée et sourcée ; collé en JSON, le survivant est jugé INTACT, CASSE avec le nœud coupable, ou PARSANT-MAIS-MENTI",
         "food_poultry":
             "fenêtre décongélation et cuisson de la dinde, tables USDA FSIS, horloge ISO en argument — jamais l'horloge murale, jamais de nombres inventés",
         "food_leftovers":
@@ -2449,7 +2449,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "agent_modelid":
             "audita ids de modelo contra um catálogo colado — vereditos nomeados, did-you-mean a uma distância nomeada, nunca jura que fez o GET (V23)",
         "agent_resultcliff":
-            "meu resultado sobrevive INLINE NESTE harness — a travessia na UNIDADE DELE (o claude code conta CARACTERES falando de tokens), veredito, marcador e reparo citados, linha por linha datada",
+            "meu resultado sobrevive INLINE NESTE harness — a travessia na UNIDADE DELE (o claude code conta CARACTERES falando de tokens), veredito, marcador e reparo citados, linha por linha datada ; colado em JSON, o sobrevivente é julgado INTACTO, QUEBRADO com o nó culpado, ou PARSEIA-MENTE",
         "food_poultry":
             "janela de descongelar e assar o peru, tabelas USDA FSIS, relógio ISO como argumento — nunca relógio de parede, nunca números inventados",
         "food_leftovers":
