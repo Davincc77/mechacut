@@ -7,8 +7,13 @@ change, ce fichier ment — le corriger fait partie de la taxe.
 
 ## Ordre exact (17 fichiers, du rouge au vert)
 
-1. `tests/test_bundleNNN.py` — golds tracés À LA MAIN, écrit AVANT
-   l'implémentation. Le docstring porte les traces de calcul.
+1. `tests/test_bundleNNN[_agent].py` — golds tracés À LA MAIN, écrit
+   AVANT l'implémentation. Le docstring porte les traces de calcul.
+   **Convention de nommage (décision Vince 27-11)** : le fichier porte le
+   nom de l'agent qui le construit — `test_bundle123_hermes.py` pour
+   l'agent campagnes (Hermès interactif) ; **sans suffixe = un autre
+   agent** (cron sœur, externe). Le numéro de bundle reste global et
+   unique ; le suffixe dit QUI a payé la taxe, pas ce que le test prouve.
 2. L'implémentation dans le kit de sa famille (`checkers.py` pour
    checks/numbers-logique, kit dédié sinon).
 3. `main.py` — Request(BaseModel) + `run_x` + endpoint + **entrée dans
