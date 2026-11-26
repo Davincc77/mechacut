@@ -6109,9 +6109,14 @@ status, said plainly: the contracts are written, compiled and PROVEN on
 a local EVM (one CREATE2 clone per paid tool, immutable terms, no owner,
 no admin, permissionless flush, ETH cannot enter — see /PAYOUTS). The
 factory is LIVE on Base (0xFB209Eb982baA11Ff18CAF1ef22f29729DC3709a);
-no per-tool clone is registered yet, so today every x402 call still
-settles to the core address and no split pays anyone. Born, not yet
-feeding — said until it changes. To make a contract payable at all, the
+the FIRST CLONE IS LIVE: /api/v1/chart settles to its own splitter
+0x310852d642CcE4Dcb36C8027C79a5E0a2defCe64 (born tx 84d1fe5243580378ab6c3528
+5034ecfeedd37083b757313387ff673d61876d45; terms re-read by direct eth_call:
+token = Circle USDC, payoutBps = 5000, payout = 0x7cCeEde0643A1810AC698Ff83eA3F8bea9D2BC16,
+treasury = 0x00f04a2a505116daf3b88eae17445d85bed4fbac — the owner's two wallets,
+a self-split, disclosed as such). Every other paid route still settles to the
+core address; the first EXTERNAL proposer clone is born when an accepted
+proposal carries a base_account. Born, and feeding — said until it changes. To make a contract payable at all, the
 proposer MUST include base_account: a checksummed Base address (EIP-55
 verified format). We verify the format and nothing else: no custody,
 no solvency check, and NO RESPONSIBILITY for a well-formed but wrong

@@ -7,11 +7,14 @@ BASE: 0xFB209Eb982baA11Ff18CAF1ef22f29729DC3709a (tx
 Verified by direct calls, not by memory: token = Circle USDC
 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, treasury = the core account,
 payoutBps = 5000, predicted("money_tip") answers.
-What is NOT done: no per-tool clone is registered yet — ensure() waits
-for accepted proposals that carry a base_account, so today x402
-challenges keep paying the single env address (MECHACUT_PAY_TO) and the
-SKILL-KIT says exactly that. Nothing here promises
-money that moves today.
+State update 26-11: THE FIRST CLONE IS LIVE. /api/v1/chart ->
+0x310852d642CcE4Dcb36C8027C79a5E0a2defCe64 (ensure tx 84d1fe5243580378ab6c35285034ecfeedd37083b757313387ff673d61876d45;
+terms verified by direct eth_call: token = Circle USDC, payoutBps = 5000,
+payout = 0x7cCe…BC16, treasury = 0x00f0…fbac — the owner's two wallets, a
+self-split disclosed as such). Registered in docs/proposals/splitters.json;
+challenges for that route answer the clone's address, every other route still
+answers MECHACUT_PAY_TO. What is NOT done: no EXTERNAL proposer clone yet —
+the first one is born when an accepted proposal carries a base_account.
 
 ## The mechanics (contract-level, contracts/splitter.sol)
 - **One splitter per paid tool** — x402 settles USDC (EIP-3009) to the
