@@ -655,10 +655,18 @@ CASES = [
     # #16312) : « le fournisseur a refuse la requete entiere a cause
     # du resultat » ne doit tomber ni chez les sœurs de prix ni chez
     # mcplist — c'est UNE TRAVERSÉE, dans l'unité du provider.
+    # ITÉRATION 20, pêchée PAR CE RADAR DE CLÔTURE AVANT PUSH : deux
+    # de MES phrases portaient le verbatim de #16312 (« before any
+    # tool ran », « tokens insuficientes antes de rodar ») — ce
+    # n'est PAS une traversée de RÉSULTAT, c'est la taille des
+    # DÉFINITIONS qui mange le budget : la sœur qui répond est
+    # agent_mcpaudit, et le routeur PROD l'a dit avant moi. Ces deux
+    # aiguilles deviennent PREUVE DE FRATRIE (want=mcpaudit), la
+    # question 5 vaut aussi pour les aiguilles.
     ("onyx fed my mcp tool result verbatim and the provider rejected the whole request",
      "agent_resultcliff"),
     ("enabling mcp tools in onyx gave not enough tokens required 2032226 available",
-     "agent_resultcliff"),
+     "agent_mcpaudit"),
     ("onyx ne coupe rien mais le fournisseur refuse ma requete a cause du resultat",
      "agent_resultcliff"),
     ("le resultat verbatim d onyx a fait exploser la fenetre du modele",
@@ -666,7 +674,7 @@ CASES = [
     ("o onyx nao corta mas o provedor recusou a requisao inteira pelo resultado",
      "agent_resultcliff"),
     ("ativa as ferramentas mcp no onyx e deu tokens insuficientes antes de rodar",
-     "agent_resultcliff"),
+     "agent_mcpaudit"),
 ]
 
 

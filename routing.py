@@ -1088,6 +1088,7 @@ TABLE = (
      "sourced",
      "cliff harness survives survive inline persist spilled cutoff frontier "
      "bionic rakazo maxresultsizechars tool_output_token_limit 50k onyx "
+     "verbatim corta "
      "coupe seuil survit franchit frontiere resultat cortado cortou "
      "cortada truncado sobrevive"),
     ("food_poultry", "/api/v1/food/poultry", "dates",
