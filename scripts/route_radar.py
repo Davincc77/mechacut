@@ -859,12 +859,15 @@ def main():
             # meurt pas de l'artefact.
         else:
             rows += merged
-            mirror = merged
+            mirror = []
             with open(CATALOG_FILE, "w") as fh:
                 json.dump({"ts": datetime.now().isoformat(
                               timespec="seconds"),
                            "rows": merged}, fh, ensure_ascii=False,
                           indent=1)
+            # mirror vide ici : les lignes viennent d'ETRE sondees et
+            # vivent dans rows (les porter AUSSI comme veille les
+            # compterait deux fois dans n — invariant verifie).
     scan = {"ts": datetime.now().isoformat(timespec="seconds"),
             "n": len(rows),
             "counts": {v: sum(1 for r in rows if r["verdict"] == v)
