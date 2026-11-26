@@ -5,12 +5,26 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 26-11 07h15: 188 transforms + 9 recipes
-(unchanged — b117 extended /money/settle, it did not add a tool — and growing
-holds: the suite, the pins and the readings all moved),
-suite 2 072 passed 2 skipped, pins 415, manifest 212 lines / 8,934 bytes, prod
-v1.38.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b117: noncash kind/counts/value on settle, the two published
+name, Git URL, or owner/repo). NUMBERS 26-11 09h25: 188 transforms + 9 recipes
+(unchanged — b118 grew the /agent/result-cliff TABLE by one harness row, it did
+not add a tool — and growing holds: the suite, the pins and the readings all
+moved),
+suite 2 084 passed 2 skipped, pins 418, manifest 212 lines / 8,934 bytes, prod
+v1.39.0 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b118: the cliff table answers ONYX — a harness that cuts
+NOTHING, the provider rejecting the whole request IS the cliff; the published
+vector of #16312 (Required 2032226 / Available 843719 → margin −1,188,507)
+replays IN PROD; MAX_TOOL_RESULT_TOKENS 20,000 ships as STATUS, never as law,
+and a paste on that row is REFUSED by name — tokens are counted only by the
+provider's tokenizer; iterations 19-21 of "the artifact lies", all three
+caught BEFORE push by the house's own checks: my queue entry claimed nothing
+prorates occupancy while /money/prorate has lived since bundle 4; two of my
+own new radar needles carried a DEFINITION pain and prod routed them to the
+honest sibling first; and the EN Omnibus card was shipping the FedEx-table
+paragraph of its neighbour — rewritten to the claims FR/PT already told. EN
+paid by the truth (the lying copy was 127 bytes longer), PT paid its own
+squeeze: pages served 180,874 / 180,962 / 180,993 — all three under 181,000;
+previous b117: noncash kind/counts/value on settle, the two published
 answers of r/askmath 1tuuael replayed IN PROD — 40.50 face, 290.50 none; PT was
 the tight page and was paid FIRST: 8 constant-claim squeezes; pages served
 180,988 / 180,942 / 180,993 — all three under 181,000; the catalog radar RULED

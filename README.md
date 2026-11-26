@@ -5,12 +5,12 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 188 transforms + 9 named recipes as of v1.38.0, each with its tool card
+— 188 transforms + 9 named recipes as of v1.39.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 415 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 418 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest

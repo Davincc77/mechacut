@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 188 + 9, vérifiés live 26-11 07h15, prod 1.38.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 188 + 9, vérifiés live 26-11 09h25, prod 1.39.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
