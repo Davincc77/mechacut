@@ -1,0 +1,313 @@
+{
+ "wave": 3,
+ "column": "money",
+ "generated": "2026-11-26T13:55+01:00",
+ "doctrine": "curl-verified primary first; secondary labeled; estimates labeled",
+ "items": [
+  {
+   "claim": "ANAC total fines applied, all motifs, 2024 (institutional aggregate incl. information-quality cases)",
+   "value": "R$ ~14,000,000 (1,115 autos de infracao lavrados; ~R$ 5,000,000 actually paid)",
+   "currency": "BRL",
+   "year": "2024",
+   "source_url": "https://www.anac.gov.br/assuntos/legislacao/legislacao-1/portarias/2025/portaria-16852/@@display-file/anexo_norma/RGA-2024.pdf",
+   "source_class": "primary",
+   "note": "Relatorio de Gestao e Atividades 2024, p.121 (curl-verified 2026-11-26): 'Autos de Infracao 1115 | Multas Aplicadas R$ 14 MI | Multas Pagas R$ 5 MI'. Aggregate for all motifs, not only information."
+  },
+  {
+   "claim": "ANAC unpaid administrative-fine stock (divida ativa), cumulative to 2024",
+   "value": "R$ 725,760,000",
+   "currency": "BRL",
+   "year": "2024",
+   "source_url": "https://www.anac.gov.br/assuntos/legislacao/legislacao-1/portarias/2025/portaria-16852/@@display-file/anexo_norma/RGA-2024.pdf",
+   "source_class": "primary",
+   "note": "RGA-2024 p.210: 'multas administrativas (R$ 725,76 milhoes em divida ativa)'. Shows enforcement value sits mostly UNPAID."
+  },
+  {
+   "claim": "ANAC CBA-fine collection, 2022",
+   "value": "R$ ~21,000,000 collected (-5.71% YoY)",
+   "currency": "BRL",
+   "year": "2022",
+   "source_url": "https://www.gov.br/anac/pt-br/centrais-de-conteudo/publicacoes/publicacoes-arquivos/relatorio-de-gestao-e-atividades-2022/@@display-file/file",
+   "source_class": "primary",
+   "note": "RGA-2022: 'Em 2022 arrecadou-se R$ 21 milhoes em multas do CBA'. gov.br URL serves a bot-challenge to curl; viewable in browser."
+  },
+  {
+   "claim": "ANAC total fines applied, 2025 (all motifs)",
+   "value": "R$ ~10,900,000 applied / ~R$ 3,300,000 paid (915 autos de infracao)",
+   "currency": "BRL",
+   "year": "2025",
+   "source_url": "https://www.anac.gov.br/assuntos/legislacao/legislacao-1/boletim-de-pessoal/2026/bps-v-21-no-16-22-a-24-04-2026/portaria-19159/@@display-file/bps_anexo/RGA-2025.pdf",
+   "source_class": "primary",
+   "note": "RGA-2025 p.99 (curl-verified): 'Autos de Infracao 915 | Multas Aplicadas R$ 10,9 MI | Multas Pagas R$ 3,3 MI'."
+  },
+  {
+   "claim": "ANAC second-instance fine, process 00065.022464/2018-50 (airline): failure to inform passengers of programmed schedule changes >=72h (Res.400/2016 art.12). First instance 3 x R$35.000; final R$63.382,80",
+   "value": "R$ 63,382.80",
+   "currency": "BRL",
+   "year": "2021",
+   "source_url": "https://www.anac.gov.br/acesso-a-informacao/junta-recursal/sessoes-de-julgamento/2021/516a-sessao-de-julgamento/00065-022464-2018-50/@@display-file/dlb_arquivo/SEI_00065.022464_2018_50.pdf",
+   "source_class": "primary",
+   "note": "PDF downloaded 2026-11-26; operative text reforming fine to R$ 63.382,80. Airline carrier anonymized per doctrine (company is public record)."
+  },
+  {
+   "claim": "ANAC fine, process 00065.037212/2018-25 (carrier TAP): 4 passengers showed up due to FAILURE OF INFORMATION about flight change; alternatives not offered (Res.400 art.12 par.2). First instance 4 x R$35.000 (R$140.000); final R$74.046,73",
+   "value": "R$ 74,046.73",
+   "currency": "BRL",
+   "year": "2021",
+   "source_url": "https://www.anac.gov.br/acesso-a-informacao/junta-recursal/sessoes-de-julgamento/2021/519a-sessao-de-julgamento/00065-037212-2018-25/@@display-file/dlb_arquivo/SEI_00065.037212_2018_25.pdf",
+   "source_class": "primary",
+   "note": "Downloaded + parsed 2026-11-26; dated 'Brasilia, 27 de abril de 2021'."
+  },
+  {
+   "claim": "ANAC fine, process 00058.032040/2013-88 (airline): missing passenger-information banners at check-in/boardling areas (Res.141/2010 art.18 par.3)",
+   "value": "R$ 7,000.00",
+   "currency": "BRL",
+   "year": "2018",
+   "source_url": "https://www.anac.gov.br/acesso-a-informacao/junta-recursal/decisoes-monocraticas/2018/marco/00058-032040-2013-88/@@display-file/dlb_arquivo/SEI_00058.032040_2013_88.pdf",
+   "source_class": "primary",
+   "note": "Second instance upheld R$ 7.000,00 (SIGEC credit 640945148)."
+  },
+  {
+   "claim": "ANAC fine, process 00066.505638/2017-24 (airline Passaredo): cancelled flight not communicated to passenger (Res.141 art.7 c/c CBA art.302-III-u)",
+   "value": "R$ 7,000.00",
+   "currency": "BRL",
+   "year": "2018",
+   "source_url": "https://www.anac.gov.br/acesso-a-informacao/junta-recursal/decisoes-monocraticas/2018/novembro/00066-505638-2017-24/@@display-file/dlb_arquivo/SEI_00066.505638_2017_24.pdf",
+   "source_class": "primary",
+   "note": "Decision 1782/2018; SIGEC credit 663136183."
+  },
+  {
+   "claim": "ANAC infraction-value table for breaches of the general-conditions-of-carriage (incl. right-to-information articles): minimum/intermediate/maximum",
+   "value": "R$ 20.000 / R$ 35.000 / R$ 50.000 per conduct",
+   "currency": "BRL",
+   "year": "2016",
+   "source_url": "https://www.anac.gov.br/assuntos/legislacao/legislacao-1/resolucoes/resolucoes-2016/resolucao-no-400-13-12-2016",
+   "source_class": "primary",
+   "note": "Annex to Res.400/2016 (inserted by Res.434/2017); art.43 links info breaches to CBA 302-III-u."
+  },
+  {
+   "claim": "ANAC current (Res.762/2024, effective 2026) reference values for 'incomplete/inexact/adulterated information, data, record or document' conduct (x operator-size multiplier); PNAE-information conduct at R$ 17.500",
+   "value": "R$ 750 / 2.250 / 4.500 (levels 1-3); R$ 17.500 PNAE",
+   "currency": "BRL",
+   "year": "2024",
+   "source_url": "https://www.anac.gov.br/assuntos/legislacao/legislacao-1/resolucoes/2024/resolucao-762",
+   "source_class": "primary",
+   "note": "Table 1 items 1-3 and Table 3 item 7. Documented in CP 02/2024 draft: https://www.gov.br/anac/pt-br/acesso-a-informacao/participacao-social/consultas-publicas/consultas/2024/cp-02-2024/cp-02-2024-minuta-de-resolucao-infracoes-e-valores-base-de-multa.pdf"
+  },
+  {
+   "claim": "Senacon (Ministry of Justice) fine on Decolar.com for selling Avianca tickets without informing consumers of cancellation risk (CDC right-to-information)",
+   "value": "R$ 752,417.75",
+   "currency": "BRL",
+   "year": "2021",
+   "source_url": "https://www.gov.br/mj/pt-br/assuntos/noticias/ministerio-da-justica-e-seguranca-publica-multa-agencia-de-viagem-por-nao-informar-riscos-corretamente-aos-clientes",
+   "source_class": "primary",
+   "note": "Same official page also records CV Viagens R$ 478.596,09 (Sep/2021) and CVC R$ 363.046,25 (Aug/2021)."
+  },
+  {
+   "claim": "Senacon fine on CVC for selling Avianca-bankruptcy-risk tickets without information",
+   "value": "R$ 363,046.25",
+   "currency": "BRL",
+   "year": "2022",
+   "source_url": "https://www.gov.br/mj/pt-br/assuntos/noticias/cvc-tera-que-pagar-multa-por-vender-passagens-de-empresa-em-processo-de-falencia",
+   "source_class": "primary",
+   "note": "Page text shows a typo'd 'R$363.46,25'; the MJ consolidated notice gives R$ 363.046,25."
+  },
+  {
+   "claim": "Senacon proposal of R$ 1.300.000 against Iberia for offering Madrid tickets at USD 118 (real price USD 1.180) to ~1.300 consumers and cancelling them within 72h - price/document information defect (CDC arts. 4,6,30,31,37,38)",
+   "value": "R$ 1,300,000.00 (proposed sanction)",
+   "currency": "BRL",
+   "year": "2022",
+   "source_url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/consumidor/sei_08012-000126_2022_71.pdf/@@download/file",
+   "source_class": "primary",
+   "note": "Official SEI technical note (process 08012.000126/2022-71). Final decision value not located -> labeled PROPOSAL."
+  },
+  {
+   "claim": "Procon-RJ fine on Itapemirim Transportes Aereos for abusive practice + breach of duty to inform",
+   "value": "R$ 468,186.66",
+   "currency": "BRL",
+   "year": "2022",
+   "source_url": "https://valor.globo.com/empresas/noticia/2022-03-29/procon-rj-aplica-multa-de-r-468-mil-a-itapemirim-transportes-aereos.ghtml",
+   "source_class": "secondary",
+   "note": "News of official Procon-RJ act; primary gazette not retrieved."
+  },
+  {
+   "claim": "Procon-SP administrative fine on 123Milhas: 'Descumprimento contratual / Falta de informacao ao consumidor / Descumprimento da oferta'",
+   "value": "R$ 2,819,550.00",
+   "currency": "BRL",
+   "year": "2023",
+   "source_url": "https://www2.camara.leg.br/atividade-legislativa/comissoes/comissoes-permanentes/ctur/apresentacoes-em-eventos/sr-luiz-orsatti-procon-sp",
+   "source_class": "primary",
+   "note": "Official Procon-SP presentation delivered to the Chamber of Deputies (CTUR)."
+  },
+  {
+   "claim": "STJ binding thesis (Repetitive Tema 164): absence of adequate/clear information by airlines and travel agencies about visa/return-ticket requirements = service defect (CDC art.14) -> strict liability + moral damages, unconstrained by Warsaw/Montreal limits",
+   "value": "binding thesis - no fixed tariff",
+   "currency": "BRL",
+   "year": "2018",
+   "source_url": "https://scon.stj.jus.br/docs_internet/jurisprudencia/jurisprudenciaemteses/Jurisprudencia%20em%20Teses%20164%20-%20Direito%20do%20Consumidor%20-%20VIII.pdf",
+   "source_class": "primary",
+   "note": "Key doctrine for 'document/information ambiguity shifts the burden'."
+  },
+  {
+   "claim": "TJDFT 'CDC na visao do TJDFT' - principle of information: STJ consistently interprets ambiguous contract clauses max-favor-consumers (CDC art.47) and demands clear, express, highlighted drafting of rights-limiting clauses",
+   "value": "interpretive rule",
+   "currency": "",
+   "year": "2021",
+   "source_url": "https://www.tjdft.jus.br/consultas/jurisprudencia/jurisprudencia-em-temas/cdc-na-visao-do-tjdft-1/principios-do-cdc/principio-da-informacao",
+   "source_class": "primary",
+   "note": "Cites STJ AgInt nos EDcl no AREsp 1610203/SC (j. 18/05/2021)."
+  },
+  {
+   "claim": "Counter-example honestly on record: TJDFT 3rd Recursal Panel (small claims) held English-language airline tickets need NO translation and DANO MORAL was refused (Juizados Especiais, Lei 9.099)",
+   "value": "R$ 0 (claim dismissed)",
+   "currency": "BRL",
+   "year": "2014",
+   "source_url": "https://www.lexml.gov.br/urn/urn:lex:br;distrito.federal:tribunal.justica.distrito.federal.territorios;turma.recursal.juizados.especiais.civeis.criminais.df.3:acordao:2014-07-01;801234",
+   "source_class": "primary",
+   "note": "Acordao 801234, proc. 20130111533862ACJ: 'desnecessaria a traducao de passagens aereas emitidas em ingles... informacoes facilmente compreendidas'. Shows ambiguity of case law; cited so the money column stays honest."
+  },
+  {
+   "claim": "NF-e official rejection 402 'Rejeicao: XML da area de dados com codificacao diferente de UTF-8' (mandatory rule D03) - mis-encoded fiscal document is NOT AUTHORIZED: invoice not issued",
+   "value": "code 402",
+   "currency": "",
+   "year": "2018",
+   "source_url": "https://www.fazenda.sp.gov.br/nfe/downloads/Manual_de_Orientacao_Contribuinte_v_5%2000.pdf",
+   "source_class": "primary",
+   "note": "MOC v5.00 (SEFAZ-SP official mirror): rule table 'D03 XML utiliza codificacao diferente de UTF-8 Obrig. 402 Rej.' at PDF pp.29/75/81; rejection-code list p.87."
+  },
+  {
+   "claim": "NF-e rejections 243 'XML Mal Formado' (rule B02), 299 'XML da area de cabecalho com codificacao diferente de UTF-8', 215/225/242 'Falha no Schema XML' - same effect: document rejected by SEFAZ",
+   "value": "codes 243 / 299 / 215 / 225 / 242",
+   "currency": "",
+   "year": "2018",
+   "source_url": "https://www.fazenda.sp.gov.br/nfe/downloads/Manual_de_Orientacao_Contribuinte_v_5%2000.pdf",
+   "source_class": "primary",
+   "note": "MOC v5.00 PDF p.86-87 code table ('243 Rejeicao: XML Mal Formado'; '299 Rejeicao: XML da area de cabecalho com codificacao diferente de UTF-8'). Economic meaning: rejected NF-e = no fiscal authorization = no credit, payment blocked."
+  },
+  {
+   "claim": "LATAM Brasil domestic passengers carried 2024 (exposure denominator)",
+   "value": "34,800,000",
+   "currency": "",
+   "year": "2024",
+   "source_url": "https://www.latamairlines.com/br/pt/imprensa/noticias/resultados-ops-2024",
+   "source_class": "primary",
+   "note": "LATAM's own press release (10/01/2025): 34.8M domestic BR, 39% share per ANAC; group 82M. 2025: ANAC data compiled by trade press give 39,039,607 (38.6% share) [secondary: https://www.panrotas.com.br/aviacao/empresas/2026/01/quantos-passageiros-voaram-com-azul-gol-e-latam-no-brasil-em-2025_225293.html]."
+  },
+  {
+   "claim": "LATAM Group total operating revenues 2024",
+   "value": "US$ 13,034 million",
+   "currency": "USD",
+   "year": "2024",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1047716/000162828025003246/results-eng4q2024.htm",
+   "source_class": "primary",
+   "note": "6-K filed with SEC (31/01/2025): net income US$ 977M, adjusted EBITDAR >US$ 3.1B, 82M passengers (record)."
+  },
+  {
+   "claim": "LATAM 'Adicional de Emissao' charged for purchases, changes AND reissues of tickets (reemissao de bilhetes) made via call center or LATAM stores - the customer-paid price of the DOCUMENT pipeline re-issuing a ticket",
+   "value": "domestic R$ 97 / regional R$ 162 / long-haul R$ 216 / award tickets R$ 60,00 (non-refundable; website purchases exempt)",
+   "currency": "BRL",
+   "year": "2026",
+   "source_url": "http://web.archive.org/web/20260417125042/https://www.latamairlines.com/br/pt/central-ajuda/perguntas/remarcacoes/passagens/valor-remarcar",
+   "source_class": "primary",
+   "note": "Wayback capture of the official LATAM BR help page (live page served 'HTTP 000' to curl; live URL: https://www.latamairlines.com/br/pt/central-ajuda/perguntas/remarcacoes/passagens/valor-remarcar). Page renders values doubled ('R$ 97 97') - artifact noted."
+  },
+  {
+   "claim": "Spain, Ministry of Consumer Rights: sanctions on 5 low-cost airlines (incl. Ryanair EUR 107.775.777) for abusive practices including 'misleading omission of information and lack of clarity in published prices' (art. 47.1(m) TRLGDCU) and disproportionate boarding-pass PRINTING fees",
+   "value": "EUR 178,933,631.99 total",
+   "currency": "EUR",
+   "year": "2024",
+   "source_url": "https://www.dsca.gob.es/es/comunicacion/notas-prensa/consumo-sanciona-179-millones-euros-cinco-aerolineas-low-cost-practicas",
+   "source_class": "primary",
+   "note": "Ministerial orders published 13/12/2024: https://www.dsca.gob.es/es/comunicacion/notas-prensa/consumo-publica-ordenes-ministeriales-sanciones-aerolineas-low-cost. Same article number '47' as Brazil CDC. Some sanctions later suspended on appeal by Madrid High Court (news)."
+  },
+  {
+   "claim": "Italy, AGCM: Ryanair commitments to refund consumers for misleading check-in / carry-on baggage information at booking (Law 206/2023 consumer code arts. 21-22)",
+   "value": "over EUR 1,500,000 refunded across >100,000 bookings",
+   "currency": "EUR",
+   "year": "2024",
+   "source_url": "https://www.agcm.it/media/comunicati-stampa/2024/11/PS12689",
+   "source_class": "primary",
+   "note": "AGCM press release 14/11/2024; decision 31360 also fixes non-compliance fine range EUR 10.000-10.000.000."
+  },
+  {
+   "claim": "ANAC average domestic ticket price Dec-2024 (rebooking cost anchor used in exposure estimate)",
+   "value": "R$ 758,16",
+   "currency": "BRL",
+   "year": "2024",
+   "source_url": "https://www.gov.br/anac/pt-br/canais_atendimento/consumidor/boletins/2024/anual/@@display-file/file",
+   "source_class": "primary",
+   "note": "Boletim ANAC Consumidor 2024 (vs R$ 583,40 Dec-2019)."
+  },
+  {
+   "claim": "ESTIMATE (not a cited number): annual BR exposure from corrupted ticket documents",
+   "value": "EUR/BRL bands: R$ 20.1M - R$ 201.4M per year (fee-based) - see summary.b",
+   "currency": "BRL",
+   "year": "2024",
+   "source_url": "corpus: ~/.hermes/cache/scratch/corpus/wave2-brasil.json",
+   "source_class": "estimate",
+   "note": "Formula in summary.b; inputs: observed defect rate x 34.8M pax x reissue rates x R$97 fee."
+  }
+ ],
+ "summary": {
+  "a_anac_information_motif_BRL_total": {
+   "decided_anac_info_fines_BRL": 151429.53,
+   "arithmetic": "63,382.80 (proc 00065.022464/2018-50) + 74,046.73 (proc 00065.037212/2018-25) + 7,000.00 (proc 00058.032040/2013-88) + 7,000.00 (proc 00066.505638/2017-24)",
+   "plus_consumer_enforcement_BRL_total": 4881796.75,
+   "consumer_arithmetic": "752,417.75 (Decolar) + 478,596.09 (CV Viagens) + 363,046.25 (CVC) + 468,186.66 (Itapemirim Procon-RJ) + 2,819,550.00 (123Milhas Procon-SP)",
+   "grand_total_cited_BRL": 5033226.28,
+   "grand_total_if_iberia_proposal_included_BRL": 6333226.28,
+   "caveat": "No information-motif ANAC aviation fine with FINAL decided amount was verifiable for 2022-2026 in public repositories; the four decided cases above are 2018-2021 decisions. 2022-2026 exposure is instead anchored on ANAC aggregate RGA numbers (R$14M applied 2024; R$10.9M applied 2025; R$725.76M unpaid stock)."
+  },
+  "b_exposure_estimate": {
+   "label": "ESTIMATE - corrupted-ticket document exposure, LATAM Brasil, 2024 baseline. NOT a verified monetary total.",
+   "rate_as_provided_by_corpus_task": {
+    "fraction": "37/62",
+    "value": 0.59677,
+    "denominator_definition": "among observed BR-issued readable tickets in our corpus"
+   },
+   "rate_recount_from_corpus_json": {
+    "fraction": "39/79",
+    "value": 0.49367,
+    "definition": "readable BR-issued official docs (Camara+Senado+wave1+recheck, deduped by filename) with mojibake fingerprint hits"
+   },
+   "passengers_BR_domestic_2024": 34800000,
+   "affected_documents": {
+    "at_37_62": 20767742,
+    "at_39_79": 17179747
+   },
+   "unit_cost_low_BRL": {
+    "source": "LATAM Adicional de Emissao domestic reissue fee",
+    "value": 97.0
+   },
+   "unit_cost_high_BRL": {
+    "source": "ANAC average domestic fare Dec-2024 (full rebooking scenario)",
+    "value": 758.16
+   },
+   "formula": "annual_cost = rate x passengers x q x unit_cost, where q = share of affected documents requiring paid reissue/rebooking",
+   "bands_fee_only_BRL": {
+    "q=1%": 20144710,
+    "q=5%": 100723548,
+    "q=10%": 201447097
+   },
+   "bands_fee_only_BRL_conservative_rate_q1_5_10pct": [
+    16664354,
+    83321772,
+    166643544
+   ],
+   "band_rebooking_worst_case_q1pct_BRL": 157452712,
+   "context": "Even the 1% reissue scenario (~R$20M/yr) exceeds the ENTIRE annual value of all ANAC fines applied in Brazil (~R$14M in 2024, all motifs) - the document pipeline silently costs multiples of what enforcement records."
+  },
+  "c_nfe_rejected_invoice_numbers": {
+   "found": "codes 402 (data-area non-UTF-8), 299 (header-area non-UTF-8), 243 (malformed XML), 215/225/242 (schema failures), MOC v5.00",
+   "monetary_value_public": "none located - SEFAZ does not publish aggregate rejected-invoice BRL; the economic harm is structural (no fiscal authorization => invoice not issued => credit denied, payment blocked)"
+  }
+ },
+ "strongest_numbers": [
+  "EUR 178,933,631.99 - Spain's Ministry of Consumer sanctions (Nov-2024, orders Dec-2024) on five low-cost airlines incl. misleading price/information omissions at booking (art.47.1.m TRLGDCU) and boarding-pass printing fees - dsca.gob.es press release (primary)",
+  "R$ 2,819,550.00 - Procon-SP fine on 123Milhas for 'falta de informacao ao consumidor / descumprimento da oferta' (2023) - official Procon-SP filing delivered to the Chamber of Deputies (primary)",
+  "R$ 4,881,796.75 - cited total of Brazilian consumer-enforcement information-defect fines in the air-travel market (Decolar, CV Viagens, CVC, Itapemirim, 123Milhas; gov.br/mj + camara.leg.br + Valor) [2021-2023]",
+  "R$ 14,000,000 applied / R$ 5,000,000 paid in 2024; R$ 725,760,000 fine stock in divida ativa - ANAC Relatorio de Gestao 2024, pp.121/210 (primary, curl-verified PDF)",
+  "34,800,000 LATAM Brasil domestic passengers (2024, LATAM press release per ANAC data) x R$ 97 published 'Adicional de Emissao' reissue fee - the unit price customers pay when the document pipeline must re-issue a ticket (primary)"
+ ],
+ "honest_notes": "dadosabertos.anac.gov.br CKAN no longer resolves (DNS -> private) and ANAC's open 'lista de processos sancionadores' CSV covers ONLY airport concessions, so no filterable airline fine dataset exists for 2022-2026; all information-motif ANAC decisions with final amounts that we could verify in the 2018-2021 window are cited, but NONE dated 2022-2026 was found - the Junta Recursal repository migrated to gov.br pages behind Incapsula bot-challenges (curl+extract blocked; browser folder views empty). The Iberia R$1.3M is a PROPOSED sanction in a 2022 Senacon technical note, not a final amount. Itapemirim R$468,186.66 comes from Valor (secondary). The corpus defect rate given to me (37/62 readable BR-issued tickets = 59.7%) could not be reproduced exactly from the wave1/wave2 JSONs: re-counting with filename dedup gives 39/79 (49.4%); both rates are shown in the estimate. LATAM fee values verified via Wayback capture 2026-04-17 because the live latamairlines.com page refuses curl (HTTP 000) and no longer renders the block in extractors; page itself displays the numbers doubled ('97 97'), a rendering artifact, interpreted as R$97/162/216. TJDFT case law is genuinely split: found and cited a small-claims acordao (2014) that DISMISSED damages over English-language tickets ('no translation needed'), so the 'ambiguity shifted the burden' line is anchored on STJ Tema 164 / art.47 doctrine rather than an English-ticket damages award, which I could not locate with a public case number. No BRL totals for NF-e rejections are published; mechanism + official codes cited instead."
+}

@@ -30,6 +30,9 @@ Files:
 | `wave2-europe.json` | 2 | 30 docs, UK/Scotland/Germany FOI & Bundestag |
 | `wave2-anzus.json` | 2 | 30 docs, US DOL/HHS/state audits, Australia, Canada |
 | `wave2-brasil.json` | 2 | 58 docs, Câmara API + fresh Senado ids, fingerprint-evolution table |
+| `wave3-latam-foreign.json` | 3 | border arm: 25 non-BR LATAM tickets (EC/PE/CO/CL/US), 22 readable ALL clean, BR controls dirty |
+| `wave3-money.json` | 3 | 27 cited money items (ANAC, Senacon, Procon, Spain DSCA, STJ Tema 164, NF-e 402) + labeled exposure formula |
+| `wave3-census.json` | 3 | the census: 8,221 rows enumerated, 6,350 attachments, per-file statuses; rate 720/1,105 with GOL 0/600, Azul 0/345 |
 
 Re-derivation contract: every row's URL was fetched and hashed as
 received; re-running the detectors means `curl <url>` + the needle

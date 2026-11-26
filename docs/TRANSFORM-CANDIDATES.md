@@ -1,0 +1,31 @@
+# Transform candidates observed in the institutional research program
+
+Grown from the loop, live. Each row: the pain observed (who repeated what,
+how many times), the candidate transform, the dedupe already done at the
+manifest, the status. Nothing here is invented demand — every row cites a
+session artifact.
+
+| # | observed repetition | candidate transform | dedupe vs bench | status |
+|---|---|---|---|---|
+| 1 | Eight-plus corpus agents across THREE waves hand-rewrote the mojibake regex family (the census alone benched 969 files through file_encoding + hand regex); the `serã ⊂ serão` substring trap bit twice before correction. Wave-3 demand grew further: the census needed the needle family dated by first/last appearance per string (boundaries 2021-03-29, 2026-05-17) — profile-scoped needle EVOLUTION, still the same scanner. | `text_mojibake` — two-layer scan (encoding families + context needles), per-family counts, named profiles (`latam-e-ticket-2021-2026` as first profile). | door verdict SUSPECT-DUPLICATE (text_decode 16); replay proved text_decode source-blind (`dadata` survives). | **PENDING arbitration** — dossier `docs/proposals/text_mojibake.json`, door sha 23ac5fb1… |
+| 2 | Every wave child repeated the same PDF provenance ritual: read CreationDate vs printed emission date, read Producer, classify original / phone-print / office-reprint / scan. I did it manually for the LATAM ticket, then again on three Senate docs, then the census wave scripted it a third time. | `pdf_provenance` — input PDF bytes → {producer, creator, creation/mod dates, reprint-class (ORIGINAL / REPRINT_QUARTZ / REPRINT_OFFICE / SCANNED / ERROR_PAGE), metadata-claim-vs-printed-date delta}. Deterministic from the bytes; it is literally how the case study dated its documents. | `/route?q=pdf metadata` → file_identify (magic bytes only — no metadata forensics); doc_text (content only). No overlap. | **CANDIDATE — propose next** |
+| 3 | Every agent's first bench call needed the same preamble: browser-like User-Agent + 30/min pacing + retry-on-error-without-verdict logic. The sister loop logged its first 429; my battery logged the shape; three child transcripts contain hand-written pacing loops. | `agent_quota_budget` exists (b83, REPEAT/MUTATE/ABORT) — the gap is only that agents don't route to it. Candidate: fold into a SKILL line + possibly a `x402.rate`-style advisory. | retry-budget covers the taxonomy. | **NOT A NEW TRANSFORM** — discoverability fix (skill text), same class as SCHEME_NAMES |
+| 4 | Institutional research wave 1 will make three agents independently re-implement: (a) identifier structure+checksum validation for EORI/ABAnumber/VPA/boleto-line/IRN-canonical-hash style tax numbers; (b) required-field presence checks against a named legal list (CGI 289 II, §14 UStG, SdI codes, EN 16931 BR-rules); (c) arithmetic tie-outs (sum lines = total, VAT = rate × base). | (a) extends `validate_taxid`/`id_checkdigit` — probably REVISIONS (new kinds), not new tools; (b) is the `document_points` rule-pack architecture discussed (per-jurisdiction packs, each rule cited to its article); (c) already bench-live (money/arith, recipe_invoice, /money/prorate). | manifest checked per family. | **WAIT FOR RESEARCH** — the catalog agents' ledgers decide which kinds are requested by law vs nice-to-have |
+| 5 | The case-study re-verification pass I still owe (curl every cited URL, recompute every ledger number) is itself a repeating pattern across all three deliverables (report, corpus, VERDICTS). | `report_reverify`-style meta-check is NOT a bench transform (needs network + the report); it is a SCRIPT in the house (like report-guard.sh on the sister side) + a pinned test pattern. | n/a | **HOUSE TOOLING, not bench** |
+
+## Ledger of the loop itself
+
+- 2026-11-26 — research program dispatched (deleg_d6bcd23c, 3 fronts);
+  candidates 2, 3, 5 observed while writing the dispatch prompts themselves,
+  before any result arrived. Candidate 1 already at the door.
+- Standing rule applied: no transform is proposed from imagination — row 4
+  explicitly waits for cited legal demand from the ledgers.
+
+| 6 | Wave-3 census needed confidence intervals on dirty/readable rates (65.2% [62.3–67.9], GOL upper 0.64%) — hand-computed Wilson arithmetic, deterministic, and every future corpus study will re-derive it by hand a third time. | `stats_rate_ci` — inputs {k, n, confidence} → Wilson lower/upper + canonical interval string; closed-form arithmetic, golds hand-traced (Wilson 1927 formula) or second-sourced. | manifest grep: no stats/rate/interval tool exists (only money/date/text families). | **CANDIDATE — propose next** |
+| 7 | The border arm needed emission data READ FROM THE TICKET ITSELF (city, generator path) and cross-checked against metadata; wave 1 did the same dance by hand (Quartz/producer vs printed date). Rows 2 and 7 are the same underlying tool: PDF forensics = metadata + text-layer claims compared. | **merge into candidate 2** (`pdf_provenance`) — output must include {printed_emission_city, printed_emission_date, metadata_dates, producer, claim_consistency}. | file_identify (magic bytes only); doc_text (content only). | **CANDIDATE 2 CONFIRMED, scope widened** |
+
+## Loop ledger update
+- 2026-11-26 (post-census) — rows 6 and 7 observed while integrating wave-3
+  results; row 1's demand evidence doubled; rows 2+7 merged. None proposed to
+  the door yet — next session: propose #6 (stats_rate_ci) and #2/7
+  (pdf_provenance) with hand-traced golds, then arbitrate text_mojibake.
