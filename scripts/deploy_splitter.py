@@ -55,7 +55,8 @@ def main():
     if cid != 8453:
         sys.exit("chain guard: RPC %s answers chain id %d, not Base "
                  "mainnet (8453) — refusing to deploy there" % (rpc, cid))
-    art = json.load(open(ART))
+    with open(ART) as f:
+        art = json.load(f)
     cmd = sys.argv[1]
 
     if cmd == "predict":
