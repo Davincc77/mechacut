@@ -136,7 +136,15 @@ def calc(expr, digits=None):
         value = _ev(tree, expr)
     if value == value.to_integral_value() and \
             abs(value.as_tuple().exponent) < 30:
-        raw = str(value.quantize(Decimal(1)))
+        try:
+            raw = str(value.quantize(Decimal(1)))
+        except InvalidOperation:
+            # B3 (vague Grok 26-11) : un resultat au-dela des chiffres
+            # exacts rendables sautait en decimal nu -> HTTP 500. Desormais
+            # refus NOMME, avec la porte attendue citee (erc20_raw_units).
+            raise CalcError("result over 30 exact digits — refused; "
+                            "exact long-unit math is the known gap "
+                            "(erc20_raw_units, registry 26-11)")
     else:
         raw = str(value.normalize()) if value.copy_abs() >= 1 or \
             value == 0 else str(value)

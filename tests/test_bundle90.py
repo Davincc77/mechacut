@@ -53,7 +53,7 @@ def _p(body):
     return r.status_code, r.json()
 
 
-ORDER = ["http_ratelimit", "number_words_pair", "date_window", "date_deemed", "text_fold_report", "text_novel_words", "address_parse", "date_civil", "money_tip", "money_split", "date_slash_ambiguity", "stats_rate_ci", "pdf_provenance", "text_mojibake", "text_claimsweep", "doi_name_equivalence", "xbrl_decimals_calc_consistency"]
+ORDER = ["http_ratelimit", "number_words_pair", "date_window", "date_deemed", "text_fold_report", "text_novel_words", "address_parse", "date_civil", "money_tip", "money_split", "date_slash_ambiguity", "stats_rate_ci", "pdf_provenance", "text_mojibake", "text_claimsweep", "doi_name_equivalence", "xbrl_decimals_calc_consistency", "fx_cross_named_direction", "fx_quote_cross", "seat_allocation", "erc20_raw_units", "eu_vat_rate_table", "json_canonical_rfc8785", "date_julian_gregorian", "sec_due_date_rule_0_3", "standings_tiebreak_named", "cvss_base_score", "ecb_target_reference_day", "ecb_rates_history", "pep440_sort", "spdx_expression", "display_eei_eu", "energy_class_eu", "series_date_order", "weighted_mean_exact", "sec_13f_value_unit"]
 
 
 def test_l1_listed_in_file_order_with_said_dates():
@@ -71,8 +71,8 @@ def test_l1_listed_in_file_order_with_said_dates():
     # dans le manifest, le statut mentait). Pin aligne sur le fichier.
     assert b["counts"]["status"] == {"shipped": 12, "accepted": 0,
                                      "en-banc": 2, "refuse": 1,
-                                     "proposed": 2}
-    assert b["counts"]["total"] == 17
+                                     "proposed": 21}
+    assert b["counts"]["total"] == 36
     for e in b["entries"]:
         assert len(e["arrival"]) == 10 and e["arrival"][4] == "-"
     assert b["registry"] == "docs/proposals/registry.jsonl"
@@ -81,13 +81,13 @@ def test_l1_listed_in_file_order_with_said_dates():
 def test_l2_latest_is_a_window_not_a_promise():
     s, b = _q({"latest": 3})
     assert [e["name"] for e in b["entries"]] == [
-        "text_claimsweep", "doi_name_equivalence",
-        "xbrl_decimals_calc_consistency"]  # 3 derniers du fichier
-    assert b["counts"] == {"shown": 3, "total": 17}
-    s, b = _q({"latest": 17})
+        "series_date_order", "weighted_mean_exact",
+        "sec_13f_value_unit"]  # 3 derniers du fichier
+    assert b["counts"] == {"shown": 3, "total": 36}
+    s, b = _q({"latest": 36})
     assert [e["name"] for e in b["entries"]] == ORDER  # ordre du fichier
-    s, b = _q({"latest": 18})
-    assert b["counts"]["shown"] == 17  # up to, never exactly
+    s, b = _q({"latest": 37})
+    assert b["counts"]["shown"] == 36  # up to, never exactly
 
 
 def test_l3_search_one_named_proposal():
@@ -107,9 +107,8 @@ def test_l4_refused_carries_the_why_and_the_empty_is_a_fact():
     assert [e["name"] for e in b["entries"]] == ["money_tip", "text_claimsweep"]
     s, b = _q({"status": "proposed"})
     assert [e["name"] for e in b["entries"]] == [
-        "doi_name_equivalence", "xbrl_decimals_calc_consistency"]
-    assert b["counts"]["shown"] == 2  # arrivees Grok consignees, blobs a venir
-
+        "doi_name_equivalence", "xbrl_decimals_calc_consistency", "fx_cross_named_direction", "fx_quote_cross", "seat_allocation", "erc20_raw_units", "eu_vat_rate_table", "json_canonical_rfc8785", "date_julian_gregorian", "sec_due_date_rule_0_3", "standings_tiebreak_named", "cvss_base_score", "ecb_target_reference_day", "ecb_rates_history", "pep440_sort", "spdx_expression", "display_eei_eu", "energy_class_eu", "series_date_order", "weighted_mean_exact", "sec_13f_value_unit"]
+    assert b["counts"]["shown"] == 21  # maree Grok consignee, blobs au fil des GO
 
 def test_l5_grammars_are_named():
     s, b = _q({"latest": 0})
@@ -146,5 +145,9 @@ def test_b90_surfaces():
     assert "/api/v1/agent/proposals" in m
     page = client.get("/proposals", headers={
         "Accept": "text/html"}).text
-    assert "money_tip" in page and "money_split" in page
+    # 26-11 maree Grok : la fenetre des 10 derniers arrivages montre des
+    #ormais les rangees 27-36 du fichier ; money_tip/money_split sont sortis
+    # de la fenetre — le fenetrage est une fenetre, pas une promesse.
+    assert "cvss_base_score" in page and "sec_13f_value_unit" in page
+    assert "money_tip" not in page
     assert "Dernières arrivées" in page or "Latest arrivals" in page

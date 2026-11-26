@@ -5359,7 +5359,7 @@
    },
    "name": "pdf_provenance_confesses_pin",
    "path": "/api/v1/pdf/provenance",
-   "sha256": "4caa79f314eecf96299f68480cca40e8117d244a0a5945468a32cb0b4c423717",
+   "sha256": "676fe25c96a4684f95455a48ee4b561823e93adccee2015057a11240b4ccfd61",
    "status": 200
   },
   {
@@ -5463,7 +5463,7 @@
    },
    "name": "recipe_invoice_fr",
    "path": "/api/v1/recipe/invoice",
-   "sha256": "57c56145c1722c0b524f372888d3708bf7a1666dc250ca17da1a8b0d85f69d12",
+   "sha256": "417deba32bc52a4385e0b29abfb4a7d56249e541a1ddaf14091546bfe435bd47",
    "status": 200
   },
   {
@@ -5531,7 +5531,7 @@
    "path": "/api/v1/reshape",
    "price_atomic": "500",
    "requires_payment": true,
-   "sha256": "e9295c54f84f2081c40f2fd0ad98c3d73ba87818a0bd35cedcc0d62c4b6c6e3c",
+   "sha256": "cc6e446abaa7a59e8aae7a3cc8313a2c6a306069bf7dcba62b23af4f6969a190",
    "status": 400
   },
   {
@@ -7011,7 +7011,7 @@
    },
    "name": "validate_bad",
    "path": "/api/v1/validate",
-   "sha256": "33709d4a8b7e079a5f553daab8bfa17383709d4ffcea369dc292dcc678aa7aa2",
+   "sha256": "90acbb6980ad8e4a12bf9fb43f3bb4e745393ce58341a39d6555a0795d328aad",
    "status": 400
   },
   {

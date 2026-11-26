@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.48.1",
+    version="1.49.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -436,7 +436,7 @@ def _sha_text(text: str) -> str:
 _REPAIR_PREFIX = re.compile(r"^[a-z][a-z0-9_./ -]{1,30}: ")
 
 
-def bad_request(errors, kind="invalid_input", extra=None):
+def bad_request(errors, kind="invalid_input", extra=None, tool=None):
     """The single door every 400 passes. Since bundle 93 it refuses to
     emit a naked refusal: an entry without `expected` borrows it from
     its own repair sentence (module messages are written AS repairs —
@@ -448,11 +448,13 @@ def bad_request(errors, kind="invalid_input", extra=None):
         for e in errors:
             if isinstance(e, dict) and "expected" not in e:
                 msg = str(e.get("message", ""))
-                e["expected"] = (
-                    _REPAIR_PREFIX.sub("", msg, count=1) if
-                    _REPAIR_PREFIX.search(msg) else
-                    ("see the contract: /tools/" +
-                     str(e.get("field", "body"))))
+                if _REPAIR_PREFIX.search(msg):
+                    e["expected"] = _REPAIR_PREFIX.sub("", msg, count=1)
+                else:
+                    where = ("/tools/" + tool + ".json"
+                             if tool else "/agent/manifest — tool table")
+                    e["expected"] = (where + " — field: "
+                                     + str(e.get("field", "body")))
     body: Dict[str, Any] = {"error": kind, "errors": errors}
     if extra:
         body.update(extra)
@@ -4456,6 +4458,9 @@ def api_json_map(req: JsonMapRequest):
 
 
 class NumFxRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")  # B5 (vague Grok 26-11) : une
+    # cle avalee en silence (direction/pair/legs) inversait des audits —
+    # desormais toute cle hors contrat est refusee PAR SON NOM.
     amount: str
     rate: str
     to: str
@@ -5319,7 +5324,20 @@ def run_batch(args: dict):
                 [{"field": "payloads[%d]" % i,
                   "message": "each payload must be an object"}],
                 "invalid_input")
-        out, err = runner(one)
+        try:
+            out, err = runner(one)
+        except Exception as e:  # noqa: BLE001 — B3b/B7 (vague Grok 26-11) :
+            # un item qui levait tuait TOUT le batch (500 global). Desormais
+            # l'item meurt nomme, le lot survit — la raison d'etre du batch.
+            fail += 1
+            results.append({"index": i, "ok": False, "error": {
+                "error": "tool_error",
+                "message": "%s: %s" % (type(e).__name__, str(e)[:160]),
+                "expected": "/tools/" + tool + ".json — item isolated, "
+                            "the batch survived"}})
+            if stop_on_error:
+                break
+            continue
         if err is None:
             ok += 1
             results.append({"index": i, "ok": True, "result": out})
@@ -5342,9 +5360,11 @@ def run_batch(args: dict):
 
 
 class RecipeInvoiceRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")  # B8 (vague Grok 26-11) : le
+    # pays inconnu n'etait pas inconnu, il etait ignore. Refuse par le nom.
     line_items: List[Dict[str, Any]]
     currency: str = "EUR"
-    vat_percent: str = "0"
+    vat_percent: Optional[str] = None
     date: str = ""
     due_days: int = 0
     words_lang: Literal["en", "fr", "pt"] = "fr"
@@ -5358,14 +5378,15 @@ def run_recipe_invoice(args: dict):
         return None, bad_request(
             [{"field": "line_items",
               "message": "line_items must be an array of 1..200 "
-                         "{desc, qty, unit_price}"}], "invalid_input")
+                         "{desc, qty, unit_price}"}], "invalid_input",
+              tool="recipe_invoice")
     rows, sub = [], Decimal(0)
     for i, it in enumerate(items):
         if not isinstance(it, dict) or "desc" not in it:
             return None, bad_request(
                 [{"field": "line_items[%d]" % i,
                   "message": "each item needs desc, qty, unit_price"}],
-                "invalid_input")
+                 "invalid_input", tool="recipe_invoice")
         try:
             qty = Decimal(str(it.get("qty", 1)))
             price = Decimal(str(it.get("unit_price", 0)))
@@ -5379,8 +5400,13 @@ def run_recipe_invoice(args: dict):
         sub += line
         rows.append({"desc": str(it["desc"]), "qty": str(qty),
                      "unit_price": str(price), "line_total": str(line)})
+    applied = []
+    if args.get("vat_percent") in (None, ""):
+        applied.append("vat_percent absent -> 0 (defaut NOMME : un taux "
+                       "silencieux vaut 0 n'importe quand, un defaut dit "
+                       "se laisse corriger — B8)")
     try:
-        vat_p = Decimal(str(args.get("vat_percent", "0")))
+        vat_p = Decimal(str(args.get("vat_percent") or "0"))
     except Exception:
         return None, bad_request(
             [{"field": "vat_percent", "message": "numeric string"}],
@@ -5411,6 +5437,7 @@ def run_recipe_invoice(args: dict):
            "total_words": spelled.get("words"),
            "date": args.get("date") or None,
            "due": due}
+    out["applied_defaults"] = applied
     out["sha256"] = canon(out)
     return out, None
 
