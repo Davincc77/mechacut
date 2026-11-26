@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-  # OBLIGATOIRE (b116) : CPython 3.9 execute depuis
+# fichier refuse « Non-UTF-8 code starting with \xe2 » sur les longues
+# lignes accentuées SANS déclaration — compile() in-memory passe, le
+# run ne passe pas ; ne jamais retirer cette ligne.
 """Generate the human landing page FROM the final code (rule 7).
 
 Run after every bundle: python scripts/make_landing.py && pytest -q
