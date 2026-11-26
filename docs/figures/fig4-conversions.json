@@ -1,0 +1,31 @@
+{
+ "as_of": "2026-11-26",
+ "method": "POST /api/v1/num/fx (exact Decimal, half_even, ISO minor units)",
+ "rates_source": "api.frankfurter.dev/v1/latest base=EUR & base=BRL",
+ "rows": [
+  {
+   "original": "\u20ac178,933,631.99",
+   "usd": "196379661.11",
+   "rate": "1.0975",
+   "sha12": "9be2e9dd5e72"
+  },
+  {
+   "original": "\u20ac107,775,578.75",
+   "usd": "118283697.68",
+   "rate": "1.0975",
+   "sha12": "8f5c704b0a13"
+  },
+  {
+   "original": "R$725,760,000",
+   "usd": "125890329.60",
+   "rate": "0.17346",
+   "sha12": "5f52c4dfbe02"
+  },
+  {
+   "original": "R$~14,000,000",
+   "usd": "2428440.00",
+   "rate": "0.17346",
+   "sha12": "35b325ead949"
+  }
+ ]
+}
