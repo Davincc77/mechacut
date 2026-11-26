@@ -5,16 +5,35 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 187 transforms + 9 named recipes as of v1.36.0, each with its tool card
+— 188 transforms + 9 named recipes as of v1.37.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 400 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 410 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
-is the truth of today. Recent highlights: `money/settle` (WHO PAYS WHOM
+is the truth of today. Recent highlights: `agent/result-cliff` (DOES THIS
+RESULT SURVIVE INLINE IN THIS HARNESS — every harness buries tool results at its
+own frontier in its own unit, and the unit in its error message often LIES:
+Claude Code persists past 50,000 CHARACTERS while the notice says tokens,
+MAX_MCP_OUTPUT_TOKENS lifts nothing, the latin/greek matrix proves the unit
+(#97622; the doc now says it: "50,000 characters, whatever its token count",
+hard ceiling 500,000 via the maxResultSizeChars annotation); codex counts UTF-8
+bytes ÷ 4 — its published function, so the crossing is EXACT not estimated,
+marker "…N tokens truncated…", mutated in place with no artifact and no handle
+(#14206); bionic cuts at exactly 50,000 chars appending "... (truncated)", no
+continuation (#2338); VS Code answers UNPUBLISHED_THRESHOLD because NO threshold
+is published — the kit refuses to guess (#311068); and the table's own proof:
+rakazo's PUBLISHED #2439 formula is ALREADY DEAD CODE — read at HEAD today the
+cut is per-leaf, keep = max(8, floor(len/4)), payload.contextTruncated=true. A
+cliff read from memory one month old is WRONG, so every row rides as_of dated
+and source-cited. Unit absent or non-convertible = NAMED refusal; paste WITHOUT
+a harness and all six rows answer in one call, each measured the way IT measures
+(hermes-agent's own row included: 2,000,000 chars, head 40% tail 60%, counts
+inside the notice); sisters: context-tax PRICES the listing, tool-trim CUTS it,
+mcp-surface DIFFS it — none predicted the crossing of ONE result); `money/settle` (WHO PAYS WHOM
 after a group fronted money — r/askmath 1ugli3y replayed verbatim: A
 fronts 1375, C 865, B nothing; C tells B "keep the barbecue on me"; A
 demands 628.33, B offers 458.33 — the thread never resolved because

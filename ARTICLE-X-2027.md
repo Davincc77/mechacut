@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 187 + 9, vérifiés live 26-11 00h50, prod 1.36.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 188 + 9, vérifiés live 26-11 04h30, prod 1.37.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -120,6 +120,38 @@ un COMMENTAIRE devient une ASSERTION sur les trois langues (itération 15 de la
 classe « l'outillage ment » : un commentaire ne rougit jamais). prod 1.36.0,
 suite 2 017 passed 2 skipped, pins 400 (+8 adds-only, vecteurs du fil), manifest
 211 lignes / 8 883 octets lus live.)
+(n) 26-11 04h30 : 187→188 (/agent/result-cliff, bundle116 — LE CLIFF TRAVERSÉ
+DANS L'UNITÉ DU HARNAIS : chaque harnais enterre les résultats d'outils à sa
+frontière, dans son unité, et son MESSAGE ment sur cette unité — Claude Code
+persiste à 50 000 CARACTÈRES pendant que son texte parle de tokens (#97622,
+doc relue live : MAX_MCP_OUTPUT_TOKENS ne leve rien, plafond DUR 500 000 via
+l'annotation maxResultSizeChars) ; codex compte OCTETS÷4 — sa fonction publiée
+relu dans truncate.rs, donc la traversée est EXACTE, pas estimée (#14206 ouvert :
+mutation en place, aucun artifact, aucune poignée) ; bionic 50 000 pile avec
+« ... (truncated) » sans continuation (#2338) ; VS Code répond UNPUBLISHED_
+THRESHOLD — aucun seuil publié, jamais un chiffre deviné (#311068) ; ET LA
+MUTATION PÊCHÉE AU SOURCE : la formule PUBLIÉE de rakazo (#2439) est déjà du
+code mort — HEAD raccourcit par feuille, keep = max(8, floor(len/4)), marqueur
+contextTruncated dans le payload. Un cliff lu de mémoire il y a un mois est
+FAUX : chaque ligne de la table voyage as_of + source cités. Unité absente ou
+non convertible = refus nommé ; le paste sans harness juge les SIX lignes en un
+appel, chacune comptée COMME ELLE compte ; la ligne hermes-agent tient sa notice
+calculée à la main (2 000 000 chars, tête 40 % queue 60 %, compte dans la mention).
+26 tests dont l'oracle rakazo écrit deux fois ; 10 pins adds-only ; LOT 2 lentille
+RADAR : le modelid rend son TEMOIN DE BASE (le miroir 23h47 avait nommé trois
+:batch listés et 404 en écriture — la porte conseillée est le slug de BASE, et
+le témoin dit si le relevé collé la nomme ; les 12 verdicts de b68 restent gelés,
+6 pins changent par contrat consigné) ; XS radar itérations 16 ET 17 (douleur
+pending forcée dans le tirage payant, miroir jamais réécrit par un scan en échec,
+clé du diff normalisée — sinon la guérison d'une ligne portée est structurellement
+indeclareable, péché en relisant mon propre fix b99 — et le double comptage du
+miroir payé, péché PAR LE SCAN DE CE CYCLE dans l'artifact qu'il venait de
+produire) ; certification mpnet rendue à la source : ok porte embeddings, la
+douleur 21h15 est GUERIE ; la fiche PT e24 portait le texte du PERU — remplacée
+par la vraie traduction des quatre horloges ; le bouton copy-curl ne copie plus
+un /tools/.json mort. prod 1.37.0, suite 2 049 passed 2 skipped, pins 410,
+manifest 212 lignes / 8 934 octets, pages SERVIES 180 856 / 180 763 / 180 945 —
+les trois sous 181 000.)
 
 ---
 
@@ -133,7 +165,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **187 transforms + 9 named chain recipes, and growing**, stateless, keyless at
+agents: **188 transforms + 9 named chain recipes, and growing**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -193,7 +225,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **187 transforms + 9 recettes-chaînes nommées, et ça grandit**,
+déterministes pour agents : **188 transforms + 9 recettes-chaînes nommées, et ça grandit**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette

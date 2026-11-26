@@ -5,12 +5,14 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 26-11 00h50: 187 transforms + 9 recipes,
-suite 2 017 passed 2 skipped, pins 400, manifest 211 lines / 8,883 bytes, prod
-v1.36.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b115: /money/settle, EN/FR/PT parité tenue, budget navigateur
-payé dans le même commit ;
-précédent b114 : 186 / 1 984 / 392 / 210 / 8,842 / v1.35.0). POST GATE: the catalog submission is public
+name, Git URL, or owner/repo). NUMBERS 26-11 04h30: 188 transforms + 9 recipes,
+suite 2 049 passed 2 skipped, pins 410, manifest 212 lines / 8,934 bytes, prod
+v1.37.0 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b116: /agent/result-cliff — the cliff table read at the SOURCE,
+as_of per row; EN/FR/PT parité tenue, budget navigateur payé dans le même
+commit, pages servies 180 856 / 180 763 / 180 945 ;
+précédents b115 : 187 / 2 017 / 400 / 211 / 8,883 / v1.36.0 ;
+b114 : 186 / 1 984 / 392 / 210 / 8,842 / v1.35.0). POST GATE: the catalog submission is public
 pull request NousResearch/hermes-agent#159281, open and awaiting human
 review; the admission paragraph cites it as under review. A watcher flips
 the paragraph and activates the one-word catalog line on merge day.)*
@@ -64,7 +66,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **187 deterministic transforms + 9 named recipes — and growing** — rounding, money
+  **188 deterministic transforms + 9 named recipes — and growing** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -223,7 +225,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **187 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
+  **188 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en
