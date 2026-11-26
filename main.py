@@ -281,6 +281,7 @@ import verdict
 import redlines
 import cache
 import micro
+import claimsweep
 import rules as rules_mod
 import htmltext
 import context
@@ -398,7 +399,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.49.0",
+    version="1.50.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4864,6 +4865,29 @@ def api_text_mojibake(req: TextMojibakeRequest):
     return err if err else body
 
 
+# ------------------------------------ bundle 127_hermes: text/claimsweep
+
+class TextClaimsweepRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    text: str
+
+
+def run_text_claimsweep(args: dict):
+    try:
+        req = TextClaimsweepRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    out = claimsweep.sweep(req.text)
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/text/claimsweep")
+def api_text_claimsweep(req: TextClaimsweepRequest):
+    body, err = run_text_claimsweep(req.model_dump())
+    return err if err else body
+
+
 # --------------------------------------------- bundle 7.1: text tools
 
 class TextCountRequest(BaseModel):
@@ -7626,6 +7650,7 @@ TOOL_RUN = {
            "money_rates": run_rates,
            "doc_text": run_doc_text,
            "text_mojibake": run_text_mojibake,
+           "text_claimsweep": run_text_claimsweep,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -10016,6 +10041,26 @@ MCP_TOOLS = [
                       "description": "successes, 0 <= k <= n"},
                 "n": {"type": "integer",
                       "description": "trials, >= 1"},
+            },
+        },
+    },
+    {
+        "name": "text_claimsweep",
+        "description": (
+            "Opinion sweep of public copy: a CLOSED, hand-killed marker "
+            "list (self-conceding adverbs before a fact, unnamed universal "
+            "quantifiers, dead counters) — never an LM guessing tone. "
+            "Quote exemption: a marker carried by quoted speech is not the "
+            "author's claim; elsewhere it still hits. Returns the "
+            "canonical lowercase marker in first-visible order. The list "
+            "is locked in the contract — same table the CI plays. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["text"],
+            "properties": {
+                "text": {"type": "string",
+                         "description": "the copy to sweep, as-is"},
             },
         },
     },

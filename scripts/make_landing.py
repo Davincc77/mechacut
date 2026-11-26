@@ -1682,6 +1682,8 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
     "fr": {
         "stats_rate_ci":
             "k sur n → taux OBSERVÉ et centre WILSON séparés et nommés, intervalle 95 % — le 65,2 % seul est un mensonge de précision",
+        "text_claimsweep":
+            "sweep d'opinion à liste FERMÉE : auto-aveu, quantifieurs sans corpus, compteurs morts — citation exemptée, ton jamais deviné",
         "pdf_provenance":
             "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON — null nommé, jamais deviné",
         "text_mojibake":
@@ -2085,6 +2087,8 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
     },    "pt": {
         "stats_rate_ci":
             "k de n → taxa OBSERVADA e centro WILSON separados e nomeados, intervalo 95 % — 65,2% sozinho é mentira de precisão",
+        "text_claimsweep":
+            "varredura de opinião com lista FECHADA: confissão, quantificador sem corpus, contador morto — citação isenta, tom nunca adivinhado",
         "pdf_provenance":
             "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido — null nomeado, nunca inventado",
         "text_mojibake":

@@ -225,7 +225,7 @@ def test_mcp_dates_tools():
     r = client.post("/mcp", json={"jsonrpc": "2.0", "id": 1,
                                   "method": "tools/list"})
     names = [t["name"] for t in r.json()["result"]["tools"]]
-    assert len(names) == 193  # +text_mojibake bundle125_hermes ; +pdf_provenance bundle124_hermes ; +stats_rate_ci bundle123 ; +money_payscale bundle120 ; +agent_resultcliff bundle116 ; +money_settle bundle115 ; +json_bigint bundle114 ; +agent_mcplist bundle113 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +shop_soldes_be bundle105 ; +agent_costdiff bundle104 ;
+    assert len(names) == 194  # +text_claimsweep bundle127_hermes ; +text_mojibake bundle125_hermes ; +pdf_provenance bundle124_hermes ; +stats_rate_ci bundle123 ; +money_payscale bundle120 ; +agent_resultcliff bundle116 ; +money_settle bundle115 ; +json_bigint bundle114 ; +agent_mcplist bundle113 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +shop_soldes_be bundle105 ; +agent_costdiff bundle104 ;
     # 178 avec shop_soldes_window bundle103 ;
     # 177 avec shop_gift_voucher bundle102 ;
     # 176 avec agent_contexttax bundle101 ;

@@ -17,6 +17,10 @@ def test_copy_audit_can_fail():
     shutil_marker.write_text('{"k": "honestly: fine"}', encoding="utf-8")
     import shutil as sh
     sh.copy(ROOT / "scripts" / "copy-audit.py", d / "scripts" / "copy-audit.py")
+    # b127 : la table vit dans claimsweep.py et le CI l'IMPORTE — le
+    # faux positif de ce test doit donc voyager avec la table unique,
+    # sinon c'est l'import qui meurt (rc 2), pas la regle (rc 1).
+    sh.copy(ROOT / "claimsweep.py", d / "claimsweep.py")
     r = subprocess.run([sys.executable, str(d / "scripts" / "copy-audit.py")],
                        capture_output=True, text=True, cwd=d)
     assert r.returncode == 1 and "honestly:" in r.stdout

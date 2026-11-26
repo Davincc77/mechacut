@@ -954,6 +954,11 @@ TABLE = (
      "mojibake scan: families + needles, never repairs",
      "mojibake encoding accents utf8 cp1252 serao sera mangled "
      "caracteres embaralhado"),
+    ("text_claimsweep", "/api/v1/text/claimsweep", "text",
+     "opinion-marker sweep of copy, closed list, quote-exempt",
+     "opinion marketing claim copywriting tone honesty quantifier "
+     "honneterete avis marketing claim verite ton honnemente opiniao "
+     "redacao"),
     ("num_human", "/api/v1/num/human", "numbers",
      "duration bytes roman ordinal shaped for humans",
      "how long humanize bytes size kb mb duration seconds format "
@@ -1269,7 +1274,19 @@ def manifest_text(version):
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
-        + "keyless 30/min; cap<32KB; paid=x402 from 1. "
+        + "keyless 30/min; <32KB; x402 from 1. "
+          # b127 elagage MESURE (+text_claimsweep, 45 octets a payer ;
+          # marge relevee a 8 988, jamais de memoire) : « cap » et
+          # « paid= » coupes — le plafond se dit dans le 413 nomme et
+          # le tier « paid » vit sur CHAQUE ligne (claim constant,
+          # consigne b102) ; « carry » et « IS » coupes (le sha256 se
+          # lit en queue de chaque reponse, l'equation erreur=reparation
+          # est le contrat 400 lui-meme) ; « /api/v1/recipes » coupe —
+          # les recettes s'enumeraient PAR LEUR LIGNE dans [recipes],
+          # seul /api/v1/pipeline vit ici, nulle part ailleurs ;
+          # « shotlists/breakdowns » coupes — le trio survit dans
+          # /elsewhere (json), les DEUX cartes agent et la landing ;
+          # « moovicut.studio » reste, pin b0:154 honore.
           # b114 elagage MESURE (+json_bigint, 39 octets a payer; marge
           # annoncee 10) : les 13 EN-TETES DE PACK ne portent plus
           # chacun leur chemin — « [repair] /SKILL-repair.md » devient
@@ -1279,9 +1296,8 @@ def manifest_text(version):
           # DEJA ailleurs » dedoublonne). Mesure : -212 octets rendus,
           # +26 au pointeur, marge 10 -> ~160.
           "packs: /SKILL-<pack>.md; "
-          "POSTs carry "
-          "sha256; 400s name+expected; "
-          "error IS repair;"
+          "POSTs sha256; 400s name+expected; "
+          "error=repair;"
           # b105 elagage MESURE (consigne b104 « FR a 23 octets du
           # plafond : le lot suivant HUMAIN paie prose + elagage ») :
           # la ligne de POINTEURS « detail: » est FUSIONNEE dans la
@@ -1322,10 +1338,9 @@ def manifest_text(version):
           #; « storyboards, shot lists, breakdowns » en SLASHES.
           # Mesure b112 : 208 lignes / 8 99x octets — marge relevee
           # a l'annonce, jamais de memoire.
-          "/api/v1/recipes|pipeline; "
+          "/api/v1/pipeline; "
         "proposals: /api/v1/agent/proposals; "
-        "storyboards/shotlists/breakdowns "
-        "-> moovicut.studio",
+        "storyboards->moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
         # debranche le dense-fold ou elague une ligne de tete ») :
         # la ligne soeur est FUSIONNEE dans discovery, pas coupee —

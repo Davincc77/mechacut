@@ -413,6 +413,16 @@ SAY = {
         "pt": "o peru foi para a geladeira às 21h depois do jantar "
               "das 16h — até que dia comer, e até quando se "
               "congelar hoje à noite"},
+    "/api/v1/text/claimsweep": {
+        "en": "sweep my landing copy before I ship it — the honest "
+              "adverbs, the everyone-knows phrases, quoted voices stay "
+              "exempt",
+        "fr": "balaie ma copie de landing avant publication : adverbes "
+              "d'auto-aveu, quantifieurs sans corpus — les voix citées "
+              "restent exemptées",
+        "pt": "varra meu texto de landing antes de publicar: advérbios "
+              "de confissão, quantificadores sem corpus — vozes citadas "
+              "ficam isentas"},
     "/api/v1/food/ovenschedule": {
         "en": "the bird, the stuffing and the rolls all want the "
               "oven before a 4 pm serve — give me the countdown and "

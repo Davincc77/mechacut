@@ -5,8 +5,15 @@ Deterministic scanner (closed word list, zero LM) for the phrases this house
 has already had to kill by hand: self-praising adverbs, universal quantifiers
 without a named corpus, dead counters. Runs in CI: any hit fails the suite.
 Exempt lines: data-hay keyword blobs and quoted source material (<q>).
+
+Depuis bundle 127_hermes : la table vit dans claimsweep.py (la porte joue
+la MEME liste que le CI — un texte, une regle, un seul endroit). L'import
+est la loi ; la re/copie serait une trahison de doctrine.
 """
 import re, sys, pathlib
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+from claimsweep import MARKERS  # noqa: E402 — table unique, pas de copie
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FILES = ["README.md", "docs/INST-CATALOG.md", "docs/CASE-STUDY-TICKET.md",
@@ -14,26 +21,6 @@ FILES = ["README.md", "docs/INST-CATALOG.md", "docs/CASE-STUDY-TICKET.md",
          "docs/CASE-STUDY-GOVERNMENTS.md",
          "locales/en.json", "locales/fr.json", "locales/pt.json",
          "scripts/make_landing.py"]
-
-MARKERS = [
-    # adverbe d'auto-aveu devant un fait
-    "honestly:", "honnêtement :", "honesto:", "stated honestly",
-    "honestly-labelled",
-    # quantifieur universel sans corpus nommé
-    "everyone knows", "Nobody says", "Personne ne dit", "Ninguém diz",
-    "personne ne compte", "ninguém conta",
-    # garantie revendiquée hors mesure
-    "the class the form can guarantee",
-    "la seule classe que la forme garantit",
-    "a única classe que a forma garante",
-    "confidence honestly", "marquer honnêtement", "confiança com honestidade",
-    # compteurs morts / placeholders retirés
-    "{n_shipped}", "no paid clone", "clone payant enregistré",
-    "clone pago registrado", "nothing splits", "rien ne se divise",
-    "nada divide",
-    # slot sur-cité
-    "every regulator",
-]
 
 def hits(path: pathlib.Path):
     out = []
