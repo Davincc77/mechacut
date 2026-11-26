@@ -11,7 +11,7 @@ State update 26-11: THE FIRST CLONE IS LIVE. /api/v1/chart ->
 0x310852d642CcE4Dcb36C8027C79a5E0a2defCe64 (ensure tx 84d1fe5243580378ab6c35285034ecfeedd37083b757313387ff673d61876d45;
 terms verified by direct eth_call: token = Circle USDC, payoutBps = 5000,
 payout = 0x7cCe…BC16, treasury = 0x00f0…fbac — the owner's two wallets, a
-self-split disclosed as such). Registered in docs/proposals/splitters.json;
+self-split disclosed as such). First split settled 26-11 01:42 CET: payment tx 0xb1276cf7... (1000 USDC units Phantom -> clone, HTTP 200 + sha256), flush tx 0x715c70a0... (Flushed(1000,500,500), clone back to 0, gas 0.000000342546 ETH). Signed by the agent, funded by the owner's wallet — still a self-split; the first EXTERNAL payer is still ahead. Registered in docs/proposals/splitters.json;
 challenges for that route answer the clone's address, every other route still
 answers MECHACUT_PAY_TO. What is NOT done: no EXTERNAL proposer clone yet —
 the first one is born when an accepted proposal carries a base_account.
