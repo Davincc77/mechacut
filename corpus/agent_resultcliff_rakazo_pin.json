@@ -1,0 +1,10 @@
+{
+ "body": {
+  "harness": "rakazo",
+  "size": 4001,
+  "unit": "chars",
+  "budget": 1000
+ },
+ "name": "agent_resultcliff_rakazo_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

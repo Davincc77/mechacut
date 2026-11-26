@@ -1,0 +1,10 @@
+{
+ "body": {
+  "harness": "claude-code",
+  "surface": "description",
+  "size": 2049,
+  "unit": "chars"
+ },
+ "name": "agent_resultcliff_claude_description_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

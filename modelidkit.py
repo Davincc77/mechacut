@@ -464,6 +464,26 @@ def run_modelid(args):
         if dinfo is not None:
             entry["dialect"] = dinfo
             entry["badge"] = BADGE_LISTED_NOT_INVOCABLE
+        if info is not None and cat:
+            # b116 TEMOIN DE BASE (miroir radar 25-11 23h47 : trois
+            # :batch LISTES mais 404 en ecriture — la porte conseillee
+            # est le slug de BASE ; un conseil de porte vers une porte
+            # que le releve colle NE NOMME RIEN reste un mirage). Le
+            # champ est additif, mode catalogue seulement, jamais un
+            # verdict de plus : l'echelle de b68 reste gelee.
+            k = raw.find(info["marker"])
+            base = raw[:k]
+            listed = base in cat
+            entry["base"] = {
+                "slug": base, "listed": listed,
+                "note": ("base slug IS in the pasted annuaire — the "
+                         "sync door this suffix's table names is "
+                         "proven listed (invocability stays a ping, "
+                         "V23)" if listed else
+                         "base slug is NOT in the pasted annuaire — "
+                         "the door the rules name is unproven HERE: "
+                         "paste the fuller listing or ping it; this "
+                         "audit swears nothing on an absent line")}
         results.append(entry)
     return {
         "grammar": GRAMMAR,

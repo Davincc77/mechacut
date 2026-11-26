@@ -1,0 +1,9 @@
+{
+ "body": {
+  "harness": "vscode",
+  "size": 120000,
+  "unit": "bytes"
+ },
+ "name": "agent_resultcliff_vscode_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

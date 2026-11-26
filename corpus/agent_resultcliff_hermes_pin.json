@@ -1,0 +1,9 @@
+{
+ "body": {
+  "harness": "hermes-agent",
+  "size": 2000001,
+  "unit": "chars"
+ },
+ "name": "agent_resultcliff_hermes_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

@@ -49,6 +49,23 @@ RADAR_DIR = os.path.join(os.path.dirname(os.path.dirname(
 # bundle 99 (S) — continuite du miroir --catalog entre scans impayes.
 CATALOG_FILE = os.path.join(RADAR_DIR, "latest_catalog.json")
 
+# XS b116 — cle de diff NORMALISEE au niveau module (testable). Le via
+# du miroir (catalog-mirror) et les via de sonde (embed-retry,
+# forced-pending) ne participent pas a l'identite d'une ligne : sans
+# cette normalisation, une douleur portee par un scan solo puis
+# re-sondee au scan paye suivant ressortait NOUVELLE au lieu de
+# suivie, et sa guerison ne pouvait jamais etre declaree. Le via
+# reste AFFICHE dans les lignes, il ne les divise plus. 16e iteration
+# de la classe « l'artefact ment ».
+CATALOG_VIAS = ("catalog-mirror", "embed-retry", "forced-pending")
+
+
+def vkey(r):
+    via = r.get("via")
+    if via in CATALOG_VIAS:
+        via = None
+    return (r["text"], r.get("want"), via)
+
 # ---------------- lentille 1 : le corpus. Chaque cas = (texte,
 # attente). attente : nom de fiche/route cherche dans le top, ou
 # None = « ne doit RIEN prescrire » (leurre). Les variantes
@@ -552,6 +569,29 @@ CASES = [
     ("argument 8.0 invalid type floating point expected u64",
      "json_coerce"),
     ("banker rounding half to even two decimal places", "num_round"),
+    # CLASSE b116 — le cliff de résultat (agent_resultcliff). Aiguilles
+    # x3 langues issues des tickets CITÉS dans le module (#97622,
+    # #14206, #2338, #311068) : « survit-il CHEZ CE harnais » ne doit
+    # JAMAIS tomber chez les sœurs (context-tax COÛTE, tool-trim
+    # DÉCOUPE, mcp-audit JUGENT). Leurres de classe : une phrase sans
+    # résultat ni harnais ne prescrit rien — le kit exige une taille.
+    ("claude code cut my 50001 char mcp result — does it survive inline",
+     "agent_resultcliff"),
+    ("the codex result came back with a tokens truncated marker — what survived where",
+     "agent_resultcliff"),
+    ("will my tool result survive inline in bionic or hit the cutoff",
+     "agent_resultcliff"),
+    ("mon resultat de 51000 caracteres franchit-il le seuil de claude code",
+     "agent_resultcliff"),
+    ("ou est passe mon resultat, coupe en plein milieu",
+     "agent_resultcliff"),
+    ("meu resultado foi cortado no meio — o que sobrevive inline",
+     "agent_resultcliff"),
+    ("bionic and rakazo — which harness buries results first",
+     "agent_resultcliff"),
+    ("why is everything running so slow today", None),
+    ("raconte-moi a quoi reve un harnais vide", None),
+    ("the tallest waterfall in the world is made of what", None),
 ]
 
 
@@ -672,7 +712,38 @@ EMBED_FAMILY = ("mpnet", "minilm", "bge-", "e5-", "gte-", "arctic",
                 "snowflake-arctic", "all-roberta", "all-mpnet")
 
 
-def probe_catalog(sample=12):
+def merge_catalog(mirror, crows):
+    # XS b116 — merge du scan paye avec le miroir porte. Renvoie les
+    # lignes du nouveau miroir, ou None si le scan A ECHOUE (pas de
+    # cle, listing en erreur) : un echec de l'artefact ne reecrit
+    # JAMAIS le miroir, la douleur ouverte garde son dernier verdict
+    # vrai plutot que de disparaitre par silence. Et une douleur du
+    # miroir que crows n'a pas sondee (ceinture — le tirage est deja
+    # force par pending=) voyage avec un verdict NOMME au lieu de
+    # s'evaporer. Les lignes ok non re-sondees n'ont pas de douleur
+    # ouverte : elles repartent a zero, pas de fausse continuite.
+    if any(str(r["verdict"]).startswith("catalog-") for r in crows):
+        return None
+    seen = {r["text"] for r in crows}
+    out = list(crows)
+    for r in mirror:
+        if ("/" in str(r["text"])
+                and r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
+                and r["text"] not in seen):
+            out.append(dict(r, verdict="PENDING (not re-sampled)"))
+    return out
+
+
+def probe_catalog(sample=12, pending=None):
+    # XS b116 — porter la douleur pending. Mesure 25-11 23h47 : la
+    # re-sonde mpnet (http-400 ouvert) a ECHAPPE au tirage stride du
+    # scan paye suivant et sa ligne a disparu du miroir sans GUERIE
+    # declaree. Un scan paye ne doit jamais enterrer une douleur par
+    # silence : les ids en douleur du miroir precedent sont FORCES
+    # dans l'echantillon, meme sortis du listing — et les trois morts
+    # d'un id voyagent NOMMEES : MIRAGE (liste, 404 en ecriture),
+    # GONE (disparu du listing, 404), UNLISTED-INVOCABLE (invoquable
+    # sans etre liste — le miroir exact du piege V23).
     def key():
         p = os.path.expanduser("~/.hermes/auth.json")
         try:
@@ -692,8 +763,14 @@ def probe_catalog(sample=12):
     except Exception:
         return [{"verdict": "catalog-error",
                  "text": "http-%d" % st}]
-    step = max(1, len(ids) // sample)
+    step = max(1, len(ids) // max(1, sample))  # sample=0 = pending-only
     picked = ids[::step][:sample]
+    listed = set(ids)
+    forced = set()
+    for pid in (pending or []):
+        if pid not in picked:
+            picked.append(pid)
+            forced.add(pid)
     out = []
     for mid in picked:
         # Bundle 72 — le verdict doit TYPER l'endpoint. Mesuré 06:22 :
@@ -734,6 +811,13 @@ def probe_catalog(sample=12):
                 rec["via"] = "embed-retry"
             else:
                 rec["verdict"] = "http-400+embed-%d" % st2
+        if mid in forced:
+            rec["via"] = "forced-pending"
+            if mid not in listed:
+                if rec["verdict"] == "MIRAGE":
+                    rec["verdict"] = "GONE"
+                elif rec["verdict"] == "ok":
+                    rec["verdict"] = "UNLISTED-INVOCABLE"
         out.append(rec)
         time.sleep(1.0)
     return out
@@ -759,12 +843,28 @@ def main():
         except Exception:
             mirror = []
     if "--catalog" in argv:
-        crows = probe_catalog()
-        rows += crows
-        mirror = []
-        with open(CATALOG_FILE, "w") as fh:
-            json.dump({"ts": datetime.now().isoformat(timespec="seconds"),
-                       "rows": crows}, fh, ensure_ascii=False, indent=1)
+        # XS b116 — la douleur ouverte du miroir est FORCEE dans le
+        # tirage (pending=) : le stride ne décide plus qui guérit.
+        # Second verrou : un scan EN ERREUR (pas de cle, listing
+        # 404/5xx) ne réécrit PAS le miroir — l'échec de l'artefact
+        # enterre sinon la douleur par silence (mesuré : mpnet).
+        pend = [r["text"] for r in mirror
+                if "/" in str(r["text"])
+                and r["verdict"] not in ("ok", "leurre-ok", "plan-skip")]
+        crows = probe_catalog(pending=pend)
+        merged = merge_catalog(mirror, crows)
+        if merged is None:
+            rows += crows          # scan echoue : erreur consignee,
+            # miroir intact — la douleur attend son tour, elle ne
+            # meurt pas de l'artefact.
+        else:
+            rows += merged
+            mirror = merged
+            with open(CATALOG_FILE, "w") as fh:
+                json.dump({"ts": datetime.now().isoformat(
+                              timespec="seconds"),
+                           "rows": merged}, fh, ensure_ascii=False,
+                          indent=1)
     scan = {"ts": datetime.now().isoformat(timespec="seconds"),
             "n": len(rows),
             "counts": {v: sum(1 for r in rows if r["verdict"] == v)
@@ -779,14 +879,18 @@ def main():
     # via=catalog-mirror ) pour que le diff du prochain scan paye voie
     # ses propres lignes comme PREV, pas comme decouvertes.
     carried = [dict(r, via="catalog-mirror") for r in mirror]
+    # XS b116 — la cle du diff est vkey(), normalisee au niveau
+    # module (testee hors reseau dans test_bundle72). Le prev indexe
+    # le scan precedent APRES normalisation du via : miroir porte et
+    # sonde paye se recoupent enfin, la guerison peut etre DECLAREE.
     prev = {}
     if os.path.exists(latest):
-        # clé (texte, want) : le corpus contient des lignes au MEME
-        # texte avec des volontés différentes — indexé sur le texte
-        # seul, le last-write-wins faisait ressortir un NO_MATCH
-        # ancien comme « REGRESSION » (artefact mesuré 22-11 21h57,
+        # cle (texte, want) normalisee : le corpus contient des lignes
+        # au MEME texte avec des volontes differentes — indexe sur le
+        # texte seul, le last-write-wins faisait ressortir un NO_MATCH
+        # ancien comme « REGRESSION » (artefact mesure 22-11 21h57,
         # ligne PT loja).
-        prev = {(r["text"], r.get("want"), r.get("via")): r["verdict"]
+        prev = {vkey(r): r["verdict"]
                 for r in json.load(open(latest))["rows"]}
     # XS b114 — la classe « l'artifact ment » (13e iteration) FermEE ici :
     # 1) les verdicts du diff etaient PRINTES puis JETES — chaque cycle
@@ -800,15 +904,13 @@ def main():
     #    ecivant : un desaccord fait HURLE le script, pas le rapport.
     new_pain = [r for r in rows
                 if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
-                and prev.get((r["text"], r.get("want"),
-                              r.get("via"))) == "ok"]
+                and prev.get(vkey(r)) == "ok"]
     fresh = [r for r in rows
              if r["verdict"] not in ("ok", "leurre-ok", "plan-skip")
-             and (r["text"], r.get("want"), r.get("via"))
-             not in prev]
+             and vkey(r) not in prev]
     healed = [k for k, v in prev.items()
               if v not in ("ok", "leurre-ok", "plan-skip")
-              and any((r["text"], r.get("want"), r.get("via")) == k
+              and any(vkey(r) == k
                       and r["verdict"] in
                       ("ok", "leurre-ok") for r in rows)]
 

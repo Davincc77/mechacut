@@ -512,7 +512,7 @@ TABLE = (
     ("money_flight_comp", "/api/v1/money/flight_comp", "numbers",
      "Date de vol = TABLE de compensation : 261/2004 + Sturgeon/Nelson "
      "avant 2027-10-23, (UE) 2026/2202 codifié APRÈS (seuil « EXCEEDING "
-     "3 h » STRICT, 180 min pile ne paye pas), UK261 £220/350/520 avec la "
+     "3 h » STRICT — 180 min pile ne paye pas), UK261 £220/350/520, la "
      "ligne officielle £260 sous 4 h, plafond intra-UE €400 nommé, "
      "réductions = options « le transporteur PEUT », forclusion 9 mois "
      "en date exacte, zéro fetch",
@@ -524,8 +524,8 @@ TABLE = (
     ("date_week", "/api/v1/date/week", "dates",
      "Semaine ISO aller-retour — année ISO SEPARÉE du %Y, W53 par LE "
      "THÉORÈME (53 jeudis ⟺ Jan-1 jeudi, ou mercredi + bissextile; "
-     "zéro table), semaine inexistante refusée avec l'artefact %Y-W%V "
-     "nommé, conventions Excel/US (%U %W WEEKNUM) côte à côte, notes "
+     "zéro table), semaine inexistante refusée, artefact %Y-W%V nommé, "
+     "conventions Excel/US (%U %W WEEKNUM) côte à côte, notes "
      "PostgreSQL/Snowflake",
      "iso week week number isoweek isocalendar w53 kw53 week-based-year "
      "excel weeknum isoweeknum date boundary reporting semana numero "
@@ -970,10 +970,10 @@ TABLE = (
     ("money_baggage", "/api/v1/money/baggage", "numbers",
      "Date du vol = palier LOI (40×30×15 sous le siège GRATUIT depuis "
      "2027-10-23, RIEN avant — chaque compagnie décide); casier : la "
-     "loi ne fixe AUCUNE taille; gabarits transporteur EN ARGUMENTS, "
-     "jamais fetchus; ajustement PAR DIMENSION avec ROTATION (40×18×30 "
-     "passe dans 40×30×20); le « cumul 100 cm / 7 kg » de la presse "
-     "rendu comme affirmation TESTÉE (55+40+20=115), jamais comme règle",
+     "loi ne fixe AUCUNE taille; gabarits EN ARGUMENTS, jamais "
+     "fetchus; PAR DIMENSION avec ROTATION (40×18×30 passe dans "
+     "40×30×20); « cumul 100 cm / 7 kg » de la presse = affirmation "
+     "TESTÉE (55+40+20=115), jamais règle",
      "cabin baggage carry on size 40x30x15 under seat underseat personal item "
      "hand luggage allowance does my bag fit suitcase sizer gauge "
      "rotation overhead new eu rule air passenger voyage sac "
@@ -982,12 +982,12 @@ TABLE = (
      "regulamento eu bagagem franquia tamanho permitido"),
     ("csv_excel_damage", "/api/v1/csv/excel_damage", "repair",
      "Ce qu'Excel DÉTRUIT au double-clic, PRÉDIT avant : zéros de tête "
-     "(02134→2134), mur des 15 chiffres (…1111→…1110), notation "
-     "scientifique (1E5→100000), dates forcées (SEPT2, MARCH1, « 3-4 » "
-     "= 4 mars EN / 3 avril EU — locale ARGUMENT, année figée par "
-     "as_of), formes de formule (=-+@), pleine chasse; règles = les "
-     "trois interrupteurs Microsoft nommés; import colonne-Texte "
-     "PRESCRIT; csv/fix répare, ici on PRÉDIT",
+     "(02134→2134), mur des 15 chiffres (…1111→…1110), scient. "
+     "(1E5→100000), dates forcées (SEPT2, MARCH1, « 3-4 » = 4 mars EN "
+     "/ 3 avril EU — locale ARGUMENT, année par as_of), formes de "
+     "formule (=-+@), pleine chasse; les trois interrupteurs Micro"
+     "soft nommés; import colonne-Texte PRESCRIT; csv/fix répare, "
+     "ici on PRÉDIT",
      "excel csv damage leading zeros scientific notation date "
      "conversion corrupted on open double click spreadsheet gene "
      "names postcode truncation digits import text columns "
@@ -996,14 +996,11 @@ TABLE = (
      "csv excel zeros à esquerda notação científica corrupção ao "
      "abrir datas forçadas"),
     ("money_crossover", "/api/v1/money/crossover", "numbers",
-     "Prix de reviens de DEUX tarifs à composantes (unitaire + fixe) : "
-     "la bascule en FRACTION EXACTE — les sept calculateurs publiés "
+     "Prix de reviens de DEUX tarifs (unitaire + fixe) : bascule en FRACTION EXACTE — les sept calculateurs publiés "
      "arrondissent le Δ fixe avant de diviser et se contredisent; "
-     "conventions de jours NOMMÉES (mensuel ×12 exact, jamais 30 "
-     "jours; journalier ×365 ou 366 bissextile fourni; « semaine » "
-     "refusée); DOMINATION rendue « never » nommée; km si "
-     "consommation FOURNIE; frais one-off en mois de payback, "
-     "séparés de la bascule structurelle",
+     "jours NOMMÉS (mensuel ×12, jamais 30; journalier ×365/366 si "
+     "fourni; « semaine » refusée); DOMINATION rendue « never »; km si "
+     "conso FOURNIE; one-off en mois de payback, hors bascule",
      "energy tariff comparison break-even kWh standing charge unit "
      "rate which is cheaper crossover fixed plus variable saas seats "
      "per user monthly annual leap year ev charging cost per km domi "
@@ -1014,24 +1011,20 @@ TABLE = (
     ("money_points", "/api/v1/money/points", "numbers",
      "Combien vaut un POINT : cpp = (prix cash - reste cash - "
      "rewards forgoes) / points x 100 en FRACTION EXACTE (1081/725 "
-     "la ou la presse dit 1.49); voies cote a cote triees, egalites "
+     "la ou la presse dit 1.49); voies triées cote a cote, egalites "
      "nommees, verdict contre FLOOR fourni, solde x cpp, retour "
-     "effectif pts/$ x cpp; jamais de table de valorisation "
-     "embarquee",
+     "effectif pts/$ x cpp; jamais de table embarquee",
      "points worth redeem redemption cents cpp award travel portal "
      "statement credit gift card balance value taxes earning rate "
      "return dollar vale resgate ponto saldo centimes vaut fracao "
      "voies"),
     ("csv_excel_display", "/api/v1/csv/excel_display", "repair",
-     "Ce qu'Excel AFFICHE d'une valeur STOCKÉE sous un code numFmt : "
-     "la virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → "
-     "$1,000 — l'attaque mesurée arXiv 2611.05806, six extracteurs "
-     "python aveugles); exemples de la table Microsoft rejoués "
-     "(« #.0,, »→12.2, « (000) »→(012), « 0% »→50%); arrondi de "
-     "display demi-vers-le-large dit; locale en ARGUMENT (les "
-     "séparateurs du fichier sont des symboles — ingénieur Micro"
-     "soft); General/dates/couleurs refusés PAR LE NOM; rendu de "
-     "style, la prédiction d'import est une autre route",
+     "Ce qu'Excel AFFICHE d'un STOCKÉ sous numFmt : la virgule trailing SCALE par mille (« $#,##0, » + 1 000 000 → "
+     "$1,000 — attaque mesurée arXiv 2611.05806, six extracteurs "
+     "python aveugles); table Microsoft rejouée (« #.0,, »→12.2, « "
+     "(000) »→(012), « 0% »→50%); display demi-vers-le-large dit; "
+     "locale en ARGUMENT (séparateurs = symboles); General/dates/"
+     "couleurs refusés PAR NOM; prédiction d'import = autre route",
      "excel numfmt styles xlsx stored rendered diverge scale "
      "thousands trailing comma markitdown openpyxl pandas wrong "
      "budget cell shows saw shown extractor misled mise en forme affichée "
@@ -1040,12 +1033,12 @@ TABLE = (
      "número valor estocado"),
     ("ship_dimweight", "/api/v1/ship/dimweight", "numbers",
      "Le poids VRAIMENT facture du colis : dimensions arrondies AU "
-     "POUCE SUPERIEUR avant volume, volume ÷ diviseur (son unite est "
-     "DECLAREE — le piege mm÷139 x16,4 devient impossible), max(actual, "
-     "dimensionnel), ceil au palier, plafond. rollo 35 lb vs amzprep "
-     "34,5 sur les MEMES pouces : la fraction exacte 4800/139 tranche "
-     "et chaque etape est nommee; tables transporteurs en ARGUMENTS "
-     "(USPS 166→139 le 12-juil-2026 = elles pourrissent)",
+     "POUCE SUP. avant volume, volume ÷ diviseur (unité DECLAREE — "
+     "piege mm÷139 x16,4 impossible), max(actual, dimensionnel), ceil "
+     "au palier, plafond. rollo 35 lb vs amzprep 34,5 sur les MEMES "
+     "pouces : la fraction 4800/139 tranche, chaque etape nommee; "
+     "tables transporteurs EN ARGUMENTS (USPS 166→139, 12-juil-2026 "
+     "= elles pourrissent)",
      "dimensional weight dim billed parcel box carrier divisor "
      "pound volumetric shipping cost surprise max fee girth "
      "poids facture colis dimensions volumetrique transporteur "
@@ -1054,24 +1047,23 @@ TABLE = (
     ("json_coerce", "/api/v1/json/coerce", "repair",
      "Repare les ARGUMENTS d'un appel d'outil qu'un lecteur STRICT "
      "refuse : 8.0→8 (classe serde « invalid type: floating point "
-     "2500.0, expected u64 », 11/11 tours mesurés), exponents et "
-     "fractions vraies laisses TELS QUELS, 'false' en chaine refuse PAR "
-     "LE NOM (piege truthy), string→number seulement si cast_strings=on, "
-     "'007' JAMAIS (les zeros de tete sont du payload), cles dupliquees "
-     "refusees; la notation d'origine est CONSERVEE a la sortie",
+     "2500.0, expected u64 », 11/11 tours mesurés), exposants et "
+     "fractions vraies TELS QUELS, 'false' en chaine refusé PAR "
+     "NOM (piege truthy), string→number si cast_strings=on seul, "
+     "'007' JAMAIS (zeros de tete = payload), cles dupliquees "
+     "refusees; notation d'origine CONSERVÉE a la sortie",
      "tool call arguments coerce cast serde u64 i64 whole float "
      "invalid type floating point expected strict parse call args "
      "truthy quoted false leading zeros notation "
      "arguments appel outil coercion arguments refuses "
      "argumentos chamada ferramenta coerção tipos estritos"),    ("money_bogo", "/api/v1/money/bogo", "numbers",
      "Le pourcentage que la CAISSE applique vraiment sous un panneau "
-     "« BUY ONE GET ONE 50 % » : la remise porte sur le MOINCHER des "
-     "deux (règle de détail publiée — 60+40 rend 80 sur 100, soit 20 %, "
-     "ni 25 ni 50), prix égaux = 25 % de la paire JAMAIS 50, l'article "
-     "impair se paie PLEIN (les paires sont DONNÉES, jamais devinées), "
-     "le coupon s'EMPILE en produit de facteurs (25 puis 30 = 47,5, "
-     "jamais 55); trace par paire, fraction exacte à côté de "
-     "l'affichage",
+     "« BUY ONE GET ONE 50 % » : la remise porte sur le MOINCHER "
+     "(règle publiée — 60+40 rend 80 sur 100 = 20 %, ni 25 ni 50), "
+     "prix égaux = 25 % de la paire JAMAIS 50, l'impair se paie "
+     "PLEIN (paires DONNÉES, jamais devinées), coupon EMPILE en "
+     "produit de facteurs (25 puis 30 = 47,5, jamais 55); trace par "
+     "paire, fraction exacte à côté de l'affichage",
      "bogo buy one get one second item cheaper pair effective checkout "
      "half off percent promo hoodies fine print real discount stack "
      "coupon bogo achète un obtiens le deuxième gratuit moins cher "
@@ -1087,6 +1079,14 @@ TABLE = (
      "catalogo erreur config agent nome modelo catalogo "
      "identificador inexistente errado vierge tiret underscore "
      "batch embedding"),
+    ("agent_resultcliff", "/api/v1/agent/result-cliff", "code",
+     "does THIS result survive inline in THIS harness — the crossing "
+     "in its OWN unit, verdict+marker+repair, every row dated and "
+     "sourced",
+     "cliff harness survives survive inline persist spilled cutoff frontier "
+     "bionic rakazo maxresultsizechars tool_output_token_limit 50k "
+     "coupe seuil survit franchit frontiere resultat cortado cortou "
+     "cortada truncado sobrevive"),
     ("food_poultry", "/api/v1/food/poultry", "dates",
      "turkey thaw & roast window, USDA FSIS tables, ISO clock as "
      "argument — never wall clock, never invented numbers",
@@ -1173,9 +1173,8 @@ TABLE = (
      "hands both periods to a grand-ducal decree EVERY YEAR "
      "— zero formule; ten replayed acts 2018..2027, two "
      "rectifications of two kinds (weekday label 2018, the bound "
-     "itself 2023), the 2021 chain of three acts with its dead "
-     "postponement, no waiting period unlike Belgium, never "
-     "extrapolated past the last act",
+     "itself 2023), the 2021 chain: three acts, one dead; no waiting "
+     "period unlike Belgium, never extrapolated past the last act",
      "soldes luxembourg lëtzebuerg winter summer sale sales "
      "date legale ouverture cloture "
      "reglement grand-ducal memorial "

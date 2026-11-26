@@ -92,6 +92,8 @@ POST /api/v1/shop/soldes-be year + season -> BELGIAN sale windows from art. VI.2
 POST /api/v1/agent/cost-diff  two pasted tools/listings -> the price of the update: chars+token delta per tool, signed moved fields, global vs per-tool sum stated, FITS->OVERFLOWS transition named, $ at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/agent/tool-trim  pasted tools/list + budget -> WHICH tools to disconnect, idle-first closed ranking in exact fractions, re-count of the survivors at the sister's canon, FITS/STILL_OVER with the overage named, $ saved at YOUR price (free under 32 KB, x402 above)
 POST /api/v1/agent/tool-overlap  pasted tool names (+ server keys) -> which TWO tools become ONE id in WHICH client (vscode cut+TAIL_ABORT, gemini-cli fold+OVERWRITE, head64 gateways), bare shadows, provider charset/length 400s, the min server-key rename IN CHARACTERS, GATE_STRICTER_THAN_API named (free under 32 KB, x402 above)
+POST /api/v1/agent/modelid       pasted id list (+catalog) -> closed grammar audit, named drift ladder, dialect DOORS (:batch = base slug, never the sync chat path), V23 badge, zero fetch (free)
+POST /api/v1/agent/result-cliff  harness + size (or paste) -> does the result CROSS that harness's cliff, computed in the harness's OWN unit (codex bytes÷4, claude 50k CHARS while its message says tokens, rakazo UTF-16 with YOUR budget), named verdict + marker + survivors + repair clause; unpublished thresholds answered UNPUBLISHED_THRESHOLD, never a guess (free)
 POST /api/v1/agent/mcp-list-completeness  pasted tools/list pages -> is the listing COMPLETE: trailing cursor echoed, empty page/empty-string cursor do NOT end the scan (spec MUST, verbatim), repeated cursor named, missing tail COUNTED vs your declared number (free under 32 KB, x402 above)
 POST /api/v1/json/bigint  pasted JSON text -> which integers lie past 2^53: RFC 8259 section 6 range, exact binary64 AND the JS print per finding, COLLISION named, reader table JS/Go/Python/nlohmann, mode=quote patches bytes-only where flagged (free)
 POST /api/v1/invoice/validate-totals  lines + DECLARED totals -> exact deltas, verdict OK/CONTRADICTED (free)
@@ -300,6 +302,7 @@ import overlapkit
 import mclistkit
 import bigintkit
 import settlementkit
+import cliffkit
 import withdrawalkit
 import paymentduekit
 import evalkit
@@ -393,7 +396,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.36.0",
+    version="1.37.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -6784,6 +6787,35 @@ def api_agent_modelid(req: AgentModelidRequest):
     return err if err else body
 
 
+# --------------------------------------------- bundle 116: result cliffs
+
+class AgentResultCliffRequest(BaseModel):
+    harness: Optional[str] = None
+    surface: Optional[str] = None
+    result: Optional[str] = None
+    size: Optional[int] = None
+    unit: Optional[str] = None
+    budget: Optional[int] = None
+    token_limit: Optional[int] = None
+
+
+def run_agent_resultcliff(args: dict):
+    try:
+        out = cliffkit.run_cliff(args)
+    except cliffkit.CliffError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e.message),
+              "expected": e.expected}])
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/agent/result-cliff")
+def api_agent_resultcliff(req: AgentResultCliffRequest):
+    body, err = run_agent_resultcliff(req.model_dump())
+    return err if err else body
+
+
 class FoodPoultryRequest(BaseModel):
     mode: Optional[str] = None
     weight: Optional[Any] = None
@@ -7380,6 +7412,7 @@ TOOL_RUN = {
            "invoice_validate_totals": run_invoice_validate_totals,
            "money_unitprice": run_money_unitprice,
            "agent_modelid": run_agent_modelid,
+           "agent_resultcliff": run_agent_resultcliff,
            "food_poultry": run_food_poultry,
            "food_leftovers": run_food_leftovers,
            "food_ovenschedule": run_food_ovenschedule,
@@ -10604,6 +10637,92 @@ MCP_TOOLS = [
                             "description": "pasted annuaire ids (GET "
                                            "/v1/models output); omit "
                                            "for grammar-only mode"},
+            },
+        },
+    },
+    {
+        "name": "agent_resultcliff",
+        "description": (
+            "Does THIS tool result survive inline in THIS harness? "
+            "Each harness buries results at its own frontier, in its "
+            "own unit, and the UNIT in its error message often LIES: "
+            "Claude Code persists past 50,000 CHARACTERS while the "
+            "notice says 'tokens', MAX_MCP_OUTPUT_TOKENS does not "
+            "lift it, and the latin/greek matrix of #97622 proves "
+            "the cut counts characters (50000 chars of greek ≈ 48k "
+            "tokens — a token threshold would have moved the greek "
+            "boundary by ~14k; it did not). Codex counts UTF-8 "
+            "bytes ÷ 4 (truncate.rs, read 2026-11-26: cliff bytes = "
+            "4 × tool_output_token_limit, marker '…N tokens "
+            "truncated…', head+tail at half each, output mutated IN "
+            "PLACE — #14206: no artifact, no handle). Bionic cuts "
+            "at exactly 50,000 chars, appends '... (truncated)', no "
+            "continuation (#2338). Rakazo's PUBLISHED #2439 formula "
+            "is ALREADY DEAD CODE — today it shortens the longest "
+            "leaf first, keeping max(8, floor(len/4)) at each end, "
+            "flags payload.contextTruncated=true, and estimates "
+            "0.3/0.4/1/0.6/1.25 tokens per UTF-16 unit — a cliff "
+            "read from memory one month old is WRONG; every row is "
+            "as_of dated and source-cited. VS Code answers "
+            "UNPUBLISHED_THRESHOLD (flagged isTruncated, community "
+            "cuts from 14.4 KB, no published number — #311068). "
+            "Unit mismatch = NAMED refusal, never a conversion "
+            "invented: the crossing is computed in the harness's "
+            "own counting. Paste WITHOUT a harness and all rows "
+            "answer in one call, each measured the way IT measures "
+            "(hermes-agent's own row rides too: 2,000,000 chars, "
+            "head 40% tail 60%, counts inside the notice). Repair "
+            "clauses quoted: _meta['anthropic/maxResultSizeChars'] "
+            "≤ 500000 (v2.1.91+), tool_output_token_limit, YOUR "
+            "rakazo budget as an argument. Never fetches; zero "
+            "reasoning re-paid after the first call. EN/FR/PT tags, "
+            "golden sha."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "harness": {"type": "string",
+                            "description": "claude-code|codex|bionic|"
+                                          "vscode|rakazo|hermes-agent "
+                                          "(aliases accepted); omit "
+                                          "to judge all rows against "
+                                          "a paste"},
+                "surface": {"type": "string",
+                            "enum": ["result", "description"],
+                            "description": "claude-code cuts results "
+                                           "at 50k chars AND tool "
+                                           "descriptions at 2048 "
+                                           "(silent, UI shows intact)"},
+                "result": {"type": "string",
+                           "description": "paste the tool result — "
+                                          "measured exactly per "
+                                          "harness unit (UTF-8 "
+                                          "bytes, code points, "
+                                          "UTF-16 units)"},
+                "size": {"type": "integer", "minimum": 0,
+                         "description": "or declare the size — with "
+                                        "unit, always; a count "
+                                        "without its unit is how the "
+                                        "tokens-for-chars lie happens"},
+                "unit": {"type": "string",
+                         "enum": ["chars", "bytes", "lines", "tokens"],
+                         "description": "declared mode only; must "
+                                        "match how the harness "
+                                        "counts or the kit refuses "
+                                        "by name"},
+                "token_limit": {"type": "integer", "minimum": 0,
+                                "description": "codex: your "
+                                               "tool_output_token_"
+                                               "limit (config; the "
+                                               "per-model default is "
+                                               "not published — "
+                                               "argument, never a "
+                                               "guess)"},
+                "budget": {"type": "integer", "minimum": 0,
+                           "description": "rakazo: the per-result "
+                                          "fit size in chars (its "
+                                          "cut is budget-bound, not "
+                                          "constant)"},
             },
         },
     },

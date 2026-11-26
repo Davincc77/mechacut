@@ -1,0 +1,9 @@
+{
+ "body": {
+  "harness": "bionic",
+  "size": 50001,
+  "unit": "chars"
+ },
+ "name": "agent_resultcliff_bionic_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

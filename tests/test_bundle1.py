@@ -319,6 +319,7 @@ def test_mcp_exposes_bundle1():
                       'money_bogo',
                       'money_unitprice',
                       'agent_modelid',
+                      'agent_resultcliff',
                       'food_poultry', 'food_leftovers',
                       'food_ovenschedule', 'ledger_apply_payments',
                           'ledger_summary', 'eval_compare',

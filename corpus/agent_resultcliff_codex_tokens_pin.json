@@ -1,0 +1,10 @@
+{
+ "body": {
+  "harness": "codex",
+  "size": 600,
+  "unit": "tokens",
+  "token_limit": 500
+ },
+ "name": "agent_resultcliff_codex_tokens_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

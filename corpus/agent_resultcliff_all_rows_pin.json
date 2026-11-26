@@ -1,0 +1,9 @@
+{
+ "body": {
+  "result": "hello",
+  "token_limit": 500,
+  "budget": 100000
+ },
+ "name": "agent_resultcliff_all_rows_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

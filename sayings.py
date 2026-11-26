@@ -98,6 +98,16 @@ SAY = {
               "manque-t-il exactement ?",
         "pt": "meu servidor tem 64 ferramentas, meu agente só vê 15 "
               "— o cliente parou na página 1; quais faltam?"},
+    "/api/v1/agent/result-cliff": {
+        "en": "my tool result came back 51,000 characters — does it "
+              "survive inline in Claude Code, or did it land in a "
+              "file I never got to read?",
+        "fr": "mon résultat d'outil fait 51 000 caractères — survit-"
+              "il en ligne chez Claude Code, ou a-t-il atterri dans "
+              "un fichier que je ne lirai jamais ?",
+        "pt": "meu resultado de ferramenta tem 51.000 caracteres — "
+              "sobrevive inline no Claude Code ou caiu num arquivo "
+              "que eu nunca vou ler?"},
     "/api/v1/shop/withdrawal": {
         "en": "parcel arrived Tuesday — what is the real last day "
               "to change my mind, weekends and holidays counted?",

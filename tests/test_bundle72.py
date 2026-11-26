@@ -23,6 +23,7 @@ avec --catalog, dette payée) :
    (plus de seuil dupliqué « <= 5 » qui laissait passer un leurre à
    4-5 depuis T6), sonde /embeddings typée par l'id.
 """
+import json
 import sys
 import pathlib
 
@@ -133,3 +134,93 @@ def test_catalog_probe_is_typed_offline():
     assert verdicts["google/gemini-embedding-001:batch"] == "ok"
     assert any(u.endswith("/embeddings") for u in calls)
     assert any("/chat/completions" in u for u in calls)
+
+
+# ---------------------------------------------------------------------
+# XS b116 — porter la douleur pending d'un scan paye a l'autre.
+# Mesure 25-11 23h47 : mpnet (http-400 ouvert depuis 21h15) a echappe
+# au tirage stride du scan paye suivant ; mirror = [] l'a efface et
+# latest.json a porte le deuil sans GUERIE declaree. L'artefact ne
+# doit jamais enterrer une douleur par silence.
+# ---------------------------------------------------------------------
+
+def test_pending_ids_are_forced_and_deaths_are_named():
+    # tirage : ids [aaa/x, bbb/y], sample=2 -> step=max(1,2//2)=1 ->
+    # picked = les DEUX. pending = [bbb/y, ccc/z, ddd/w] : bbb/y est
+    # deja tire (NON force — sa mort reste MIRAGE, il est liste) ;
+    # ccc/z 404 hors listing -> GONE ; ddd/w 200 hors listing ->
+    # UNLISTED-INVOCABLE (le miroir exact du piege V23, nomme).
+    # Attentes calculees a la MAIN, pas lues du module.
+    def fake_get(url, params=None, data=None, headers=None):
+        if url.endswith("/models"):
+            return 200, {"data": [{"id": "aaa/x"}, {"id": "bbb/y"}]}
+        mid = json.loads(data or b"{}")["model"]
+        if mid == "bbb/y":
+            return 404, {}
+        if mid == "ccc/z":
+            return 404, {}
+        return 200, {"data": [1]}
+
+    real = route_radar.get
+    try:
+        route_radar.get = fake_get
+        out = route_radar.probe_catalog(
+            sample=2, pending=["bbb/y", "ccc/z", "ddd/w"])
+    finally:
+        route_radar.get = real
+    v = {r["text"]: r for r in out}
+    assert v["aaa/x"]["verdict"] == "ok"
+    assert "via" not in v["aaa/x"]
+    assert v["bbb/y"]["verdict"] == "MIRAGE"      # liste + 404
+    assert "via" not in v["bbb/y"]                # pas force : tire
+    assert v["ccc/z"]["verdict"] == "GONE"        # disparu + 404
+    assert v["ccc/z"]["via"] == "forced-pending"
+    assert v["ddd/w"]["verdict"] == "UNLISTED-INVOCABLE"
+    assert v["ddd/w"]["via"] == "forced-pending"
+
+
+def test_merge_catalog_refuses_to_rewrite_on_failure():
+    # scan echoue (pas de cle / listing 4xx) : merge_catalog rend
+    # None — le miroir reste tel quel, la douleur garde son verdict.
+    mirror = [{"text": "z/sick", "verdict": "MIRAGE"}]
+    assert route_radar.merge_catalog(
+        mirror, [{"text": "pas de cle", "verdict": "catalog-skipped"}]
+    ) is None
+    assert route_radar.merge_catalog(
+        mirror, [{"text": "http-500", "verdict": "catalog-error"}]
+    ) is None
+
+
+def test_merge_pending_carry_and_ok_release():
+    # douleur du miroir non sondee (ceinture) -> portee AVEC verdict
+    # nomme ; id re-sonde -> pas de doublon ; ligne ok non re-sondee
+    # -> liberee (pas de fausse continuite) ; texte sans « / » (les
+    # lignes d'erreur du scan) -> jamais portee comme modele.
+    mirror = [{"text": "z/sick", "verdict": "MIRAGE"},
+              {"text": "z/healed", "verdict": "ok"},
+              {"text": "http-404", "verdict": "catalog-error"}]
+    crows = [{"text": "z/sick", "verdict": "ok"}]
+    out = route_radar.merge_catalog(mirror, crows)
+    assert out == [{"text": "z/sick", "verdict": "ok"}]
+    mirror2 = [{"text": "z/missed", "verdict": "MIRAGE",
+                "via": "forced-pending"}]
+    out2 = route_radar.merge_catalog(mirror2, crows)
+    assert len(out2) == 2
+    carried = out2[1]
+    assert carried["verdict"] == "PENDING (not re-sampled)"
+    assert carried["via"] == "forced-pending"  # le via voyage, pas coupable
+
+
+def test_vkey_normalizes_carry_not_identity():
+    # la cle du diff ne doit pas diviser une ligne selon son via de
+    # portage : miroir porte, sonde forcee et scan nu se recoupent —
+    # sinon la guerison est invisiblement impossible (b99 inacheve).
+    base = {"text": "m/id", "want": None}
+    keys = {route_radar.vkey(dict(base)),
+            route_radar.vkey(dict(base, via="catalog-mirror")),
+            route_radar.vkey(dict(base, via="embed-retry")),
+            route_radar.vkey(dict(base, via="forced-pending"))}
+    assert len(keys) == 1
+    # want SEPAURE les intentions ; un via inconnu reste une identite
+    assert route_radar.vkey(dict(base, want="embed")) not in keys
+    assert route_radar.vkey(dict(base, via="scan-future")) not in keys

@@ -724,8 +724,11 @@
   });
   function closep() { panel.hidden = true; if (last) last.focus(); }
   if (copyb) copyb.addEventListener("click", function () {
-    var cmd = trycmd || "curl -s https://" + location.host + "/tools/" +
-              pname.textContent + ".json";
+    // b116: nom vide => copie /agent/manifest, jamais un /tools/.json 404
+    var cmd = trycmd || (pname.textContent
+        ? "curl -s https://" + location.host + "/tools/" +
+          pname.textContent + ".json"
+        : "curl -s https://" + location.host + "/agent/manifest");
     if (navigator.clipboard) navigator.clipboard.writeText(cmd).then(
       function () { copyb.textContent = copyb.dataset.copied; });
   });

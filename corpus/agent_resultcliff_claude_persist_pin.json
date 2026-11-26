@@ -1,0 +1,9 @@
+{
+ "body": {
+  "harness": "claude-code",
+  "size": 50500,
+  "unit": "chars"
+ },
+ "name": "agent_resultcliff_claude_persist_pin",
+ "path": "/api/v1/agent/result-cliff"
+}
