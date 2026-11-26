@@ -2196,7 +2196,7 @@ h1{font-size:22px}a{color:#4da3ff}table{border-collapse:collapse;
 width:100%%;font-size:14px}td,th{padding:7px 10px;border-bottom:1px
 solid #1d2530;text-align:left;vertical-align:top}
 code{color:#9fe8b9}nav{font-size:13px;opacity:.8}</style></head><body>
-<nav><a href=\">/\">mechacut</a> · Registre public · Public registry ·
+<nav><a href=\"/\">mechacut</a> · Registre public · Public registry ·
 Registro público · <a href=\">/api/v1/agent/proposals\">JSON API</a></nav>
 <h1>Latest arrivals — Dernières arrivées</h1>
 <p style=\"font-size:14px;opacity:.85\">%s · Source: git, append-only
