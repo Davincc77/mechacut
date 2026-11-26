@@ -100,7 +100,15 @@
   .tcard .tp { font-size: 12px; color: var(--muted);
     display: -webkit-box; -webkit-line-clamp: 2;
     -webkit-box-orient: vertical; overflow: hidden; }
-  .tcard .tierdot { font-size: 10px; }
+  /* b125_hermes elagage STRUCTUREL : le span .tierdot (28 octets x 200
+     cartes = ~5,6 k PAR PAGE) passe en ::before pilote par data-tier —
+     meme badge, meme taille, zero repetition dans le markup. Precents :
+     b110 (lignes vides), b119 (name hors hay), b124 (packlinks repliees).
+     Le budget d'un outil neuf devient ~negatif pour la landing. */
+  .tcard::before { font-size: 10px; margin-right: 2px; }
+  .tcard[data-tier="free"]::before { content: "F7E2 "; }
+  .tcard[data-tier="cap"]::before { content: "F7E1 "; }
+  .tcard[data-tier="paid"]::before { content: "F534 "; }
   .tcard.hide { display: none; }
   #tptry { margin: 0 0 10px; }
   #tptry .tsay { font-size: 14px; margin: 0 0 6px; color: var(--fg); }
