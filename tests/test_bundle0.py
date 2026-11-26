@@ -105,7 +105,7 @@ def test_skill_packs_partition_the_suite():
         ls = body.rstrip("\n").split("\n")
         assert ls[-1] == "# sha256=" + _sha("\n".join(ls[:-1]))
         seen += body.count("\n## ")
-    assert seen == len(routing.TABLE) == 199   # +stats_rate_ci bundle123 ; +money_payscale bundle120 ; +agent_resultcliff bundle116 ; +money_settle bundle115 ; +json_bigint bundle114 ; +agent_mclistcomplete->agent_mcplist bundle113 ; +invoice_payment_due bundle112 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +agent_costdiff bundle104 ; +shop_soldes_window bundle103 ; 185 avec shop_gift_voucher bundle102 ; 184 avec agent_contexttax bundle101 ; 183 avec money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
+    assert seen == len(routing.TABLE) == 200   # +pdf_provenance bundle124_hermes ; +stats_rate_ci bundle123 ; +money_payscale bundle120 ; +agent_resultcliff bundle116 ; +money_settle bundle115 ; +json_bigint bundle114 ; +agent_mclistcomplete->agent_mcplist bundle113 ; +invoice_payment_due bundle112 ; +agent_tooloverlap bundle111 ; +shop_soldes_lu bundle110 ; +shop_withdrawal bundle107 ; +agent_tooltrim bundle106 ; +agent_costdiff bundle104 ; +shop_soldes_window bundle103 ; 185 avec shop_gift_voucher bundle102 ; 184 avec agent_contexttax bundle101 ; 183 avec money_keep_records_uk bundle100 ; 182 avec shop_legal_guarantee bundle99 ; 181 avec agent_mcpsurface bundle97
     # (23-11 bundle96) ; était 179 avec agent_mcpaudit (bundle92)
 
 

@@ -5355,6 +5355,24 @@
   },
   {
    "body": {
+    "pdf_b64": "JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZz4+ZW5kb2JqCjIgMCBvYmo8PC9Qcm9kdWNlciAoUHJvdmVuYW5jZUtpdCAxLjApL0NyZWF0aW9uRGF0ZSAoRDoyMDE4MDUxNzEyMDAwMFopL01vZERhdGUgKEQ6MjAxOTAxMDEwMDAwMDBaKT4+ZW5kb2JqCnRyYWlsZXI8PC9Sb290IDEgMCBSPj4KJSVFT0YK"
+   },
+   "name": "pdf_provenance_confesses_pin",
+   "path": "/api/v1/pdf/provenance",
+   "sha256": "4caa79f314eecf96299f68480cca40e8117d244a0a5945468a32cb0b4c423717",
+   "status": 200
+  },
+  {
+   "body": {
+    "pdf_b64": "Tk9UQSBQREYgQVQgQUxM"
+   },
+   "name": "pdf_provenance_notpdf_refuse_pin",
+   "path": "/api/v1/pdf/provenance",
+   "sha256": "c1163d4195dbcbb3973aa28105995fed61364bf49f6a83a038266eb920a80aae",
+   "status": 400
+  },
+  {
+   "body": {
     "agg": "sum",
     "columns": "region",
     "data": [

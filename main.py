@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.44.0",
+    version="1.45.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4796,6 +4796,34 @@ def api_stats_rate_ci(req: StatsRateCiRequest):
     return err if err else body
 
 
+# ------------------------------------------ bundle 124_hermes: pdf/provenance
+
+class PdfProvenanceRequest(BaseModel):
+    pdf_b64: str
+
+
+def run_pdf_provenance(args: dict):
+    try:
+        req = PdfProvenanceRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e))
+    try:
+        out = pdftext.provenance(req.pdf_b64)
+    except pdftext.PdfError as e:
+        return None, bad_request([{"field": "pdf_b64", "message": str(e),
+                                   "expected": "base64 of bytes starting "
+                                               "with %PDF-"}],
+                                 "check_failed")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/pdf/provenance")
+def api_pdf_provenance(req: PdfProvenanceRequest):
+    body, err = run_pdf_provenance(req.model_dump())
+    return err if err else body
+
+
 # --------------------------------------------- bundle 7.1: text tools
 
 class TextCountRequest(BaseModel):
@@ -7535,6 +7563,7 @@ TOOL_RUN = {
            "image_rightsize": run_rightsize,
            "money_rates": run_rates,
            "doc_text": run_doc_text,
+           "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
            "ics_validate": run_ics,
@@ -9876,6 +9905,28 @@ MCP_TOOLS = [
                 "color": {"type": "string",
                           "description": "#rgb | #rrggbb | rgb(r,g,b)"},
                 "against": {"type": "string"},
+            },
+        },
+    },
+    {
+        "name": "pdf_provenance",
+        "description": (
+            "PDF bytes -> provenance the file confesses: last /Producer "
+            "(with occurrence count — incremental updates keep evidence), "
+            "/CreationDate and /ModDate as ISO with their own offsets, "
+            "and created_before_modified as a NAMED comparison: null when "
+            "a date is absent or unreadable, never defaulted. The dossier "
+            "gold that claimed true-vs-null is fixed here and the fix is "
+            "in VERDICTS. Encrypted files answer; locks are not broken. "
+            "Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["pdf_b64"],
+            "properties": {
+                "pdf_b64": {"type": "string",
+                            "description": "base64 of a file starting "
+                                           "with %PDF- (16 MB cap)"},
             },
         },
     },

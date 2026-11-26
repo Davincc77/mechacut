@@ -303,7 +303,7 @@ def test_mcp_exposes_bundle1():
                       'hash_hmac', 'hash_digest', 'enc_base64', 'jwt_decode',
                       'id_uuid', 'id_slug', 'fingerprint', 'validate_iban',
                       'validate_phone', 'validate_email', 'validate_url',
-                      'color_check', 'stats_rate_ci', 'text_count', 'sort_natural', 'text_case',
+                      'color_check', 'pdf_provenance', 'stats_rate_ci', 'text_count', 'sort_natural', 'text_case',
                       'text_truncate', 'regex_test', 'text_chunk', 'md_render',
                       'html_text', 'color_palette', 'eth_abi_encode',
                       'eth_abi_decode', 'eth_eip712', 'eth_receipt',

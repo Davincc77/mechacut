@@ -346,3 +346,184 @@ def extract_text(pdf_b64):
         "supported": "text operators Tj/TJ/'/\" , FlateDecode, "
                      "ToUnicode CMaps (bfchar/bfrange), /Differences",
     }
+
+
+# ---- bundle 124_hermes: pdf_provenance ------------------------------------
+# Provenance = what the bytes themselves confess: which tool wrote this,
+# when it says it was born, when it says it was touched — and whether
+# that story is even ordered. Born from the Senate-forensics method
+# (template frozen byte-for-byte across 15 months; CreationDate
+# D:20261014160317; Producer iOS Quartz) and the LATAM case study.
+#
+# Contract decisions the dossier did NOT make (audit 26-11, grave dans
+# VERDICTS): the dossier's single gold claimed created_before_modified
+# TRUE while modified was NULL — a vacuous comparison passed off as a
+# fact. Here, a comparison against an absent date is NULL, always.
+#
+#   - LAST occurrence of each key wins (incremental updates append their
+#     generation at the end of the file; the newest Info speaks) and the
+#     number of occurrences is SAID (producer_count) — proof that two
+#     generations coexist never disappears.
+#   - Offsets travel: Z stays Z, +01'00' becomes +01:00. Never rebased,
+#     never assumed local.
+#   - Truncated dates (D:20180517) are padded with zeros — the PDF spec
+#     allows the truncation itself; inventing a time would not be.
+#   - Encrypted PDFs: metadata keys are read in the clear when present;
+#     the verdict ENCRYPTED travels as a named boolean instead of a
+#     refusal (this endpoint reads confessions, it does not break locks).
+
+
+def _unescape_pdf_string(s):
+    out, i = [], 0
+    while i < len(s):
+        c = s[i]
+        if c == "\\" and i + 1 < len(s):
+            n = s[i + 1]
+            if n in "()\\":
+                out.append(n)
+                i += 2
+                continue
+            m = {"n": "\n", "r": "\r", "t": "\t", "b": "\b", "f": "\f"}
+            if n in m:
+                out.append(m[n])
+                i += 2
+                continue
+            if n.isdigit():
+                j = i + 1
+                oct_ = ""
+                while j < len(s) and s[j].isdigit() and len(oct_) < 3:
+                    oct_ += s[j]
+                    j += 1
+                try:
+                    out.append(chr(int(oct_, 8) & 0xFF))
+                    i = j
+                    continue
+                except ValueError:
+                    pass
+            out.append(n)
+            i += 2
+            continue
+        out.append(c)
+        i += 1
+    return "".join(out)
+
+
+def _pdf_strings(raw, key):
+    """All (...) values for /key, in file order."""
+    vals = []
+    pat = re.compile(rb"/" + key.encode() + rb"\s*\(")
+    for m in pat.finditer(raw):
+        i = m.end()
+        depth = 1
+        buf = []
+        while i < len(raw) and depth:
+            c = raw[i:i + 1]
+            if c == b"\\":
+                buf.append(raw[i:i + 2])
+                i += 2
+                continue
+            if c == b"(":
+                depth += 1
+            elif c == b")":
+                depth -= 1
+                if depth == 0:
+                    break
+            buf.append(c)
+            i += 1
+        if depth == 0:
+            vals.append(_unescape_pdf_string(
+                b"".join(buf).decode("latin-1", "replace")))
+    return vals
+
+
+def _pdf_date(s):
+    """D:YYYYMMDD[HH[mm[SS]]](Z|+hh'mm'|-hh'mm')? -> ISO or None.
+    A full date (8+ digits) is required: year-only and year-month are
+    real PDF values but reporting '2018-00-00' would be a fake ISO —
+    they are refused as unreadable, named null. Missing time parts pad
+    with zeros (the spec truncates; we do not invent beyond that)."""
+    if not s:
+        return None
+    t = s.strip()
+    if t.startswith("D:") or t.startswith("d:"):
+        t = t[2:]
+    i = 0
+    digits = ""
+    while i < len(t) and t[i].isdigit():
+        digits += t[i]
+        i += 1
+    if len(digits) not in (8, 10, 12, 14):
+        return None
+    y, mo, d = digits[0:4], digits[4:6], digits[6:8]
+    hh = digits[8:10] if len(digits) >= 10 else "00"
+    mi = digits[10:12] if len(digits) >= 12 else "00"
+    ss = digits[12:14] if len(digits) >= 14 else "00"
+    try:
+        vals = [int(x) for x in (y, mo, d, hh, mi, ss)]
+    except ValueError:
+        return None
+    if not (vals[1] <= 12 and vals[2] <= 31
+            and vals[3] <= 23 and vals[4] <= 59 and vals[5] <= 60):
+        return None
+    iso = "%s-%s-%sT%s:%s:%s" % (y, mo, d, hh, mi, ss)
+    rest = t[i:]
+    if rest.startswith("Z"):
+        return iso + "Z"
+    if rest[:1] in "+-":
+        mm = re.match(r"([+-])(\d{2})'?(\d{2})?", rest)
+        if not mm or mm.group(3) is None:
+            return None
+        return iso + "%s%s:%s" % (mm.group(1), mm.group(2), mm.group(3))
+    return iso  # naive date-time: said as such, no invented offset
+
+
+def _iso_comparable(s):
+    """Sortable form: offsets normalized to UTC minutes for ORDER only;
+    the reported strings keep their own offsets (bytes speak, we do not
+    translate)."""
+    if not s:
+        return None
+    base = s[:19]
+    try:
+        from datetime import datetime, timedelta
+        naive = datetime.strptime(base, "%Y-%m-%dT%H:%M:%S")
+    except ValueError:
+        return None
+    tz = s[19:]
+    if tz in ("", "Z"):
+        return naive if tz == "Z" else None
+    if re.match(r"^[+-]\d{2}:\d{2}$", tz):
+        sign = 1 if tz[0] == "+" else -1
+        oh, om = int(tz[1:3]), int(tz[4:6])
+        return naive - sign * timedelta(hours=oh, minutes=om)
+    return None
+
+
+def provenance(pdf_b64):
+    import base64 as _b64
+    if not isinstance(pdf_b64, str) or not pdf_b64.strip():
+        raise PdfError("pdf_b64 required")
+    try:
+        raw = _b64.b64decode("".join(pdf_b64.split()), validate=True)
+    except Exception:
+        raise PdfError("pdf_b64 is not valid base64")
+    if len(raw) > 16 * 1024 * 1024:
+        raise PdfError("PDF exceeds the 16 MB cap")
+    if not raw.lstrip().startswith(b"%PDF-"):
+        raise PdfError("missing %PDF header — not a PDF, refusing to guess")
+    prods = _pdf_strings(raw, "Producer")
+    cre = _pdf_strings(raw, "CreationDate")
+    mod = _pdf_strings(raw, "ModDate")
+    created = _pdf_date(cre[-1]) if cre else None
+    modified = _pdf_date(mod[-1]) if mod else None
+    if created is not None and modified is not None:
+        a, b = _iso_comparable(created), _iso_comparable(modified)
+        order = (a <= b) if (a is not None and b is not None) else None
+    else:
+        order = None  # the dossier's bug, named: nothing to compare
+    return {"producer": prods[-1] if prods else None,
+            "producer_count": len(prods),
+            "created": created,
+            "modified": modified,
+            "created_before_modified": order,
+            "encrypted": bool(re.search(rb"/Encrypt\s+\d+\s+0\s+R", raw))}

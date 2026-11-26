@@ -598,6 +598,10 @@ TABLE = (
      "PDF to text per page: CMaps, Flate, honest no-text-layer verdicts",
      "pdf extract text document facture invoice documento extrair "
      "texte extraer"),
+    ("pdf_provenance", "/api/v1/pdf/provenance", "extract",
+     "PDF producer/dates read from the bytes, order named",
+     "pdf provenance metadata producer creation moddate forensic tampon "
+     "certifie conforme regeneration dates document"),
     ("money_amortize", "/api/v1/money/amortize", "numbers",
      "loan schedule: annuity payments, interest per month, balance to 0.00",
      "loan amortization mortgage financiamento empréstimo pret crédito "
@@ -1261,7 +1265,7 @@ def manifest_text(version):
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
-        + "free=keyless 30/min; cap=free<32KB/x402; paid=x402 from 1. "
+        + "free=keyless 30/min; cap<32KB; paid=x402 from 1. "
           # b114 elagage MESURE (+json_bigint, 39 octets a payer; marge
           # annoncee 10) : les 13 EN-TETES DE PACK ne portent plus
           # chacun leur chemin — « [repair] /SKILL-repair.md » devient
@@ -1316,7 +1320,7 @@ def manifest_text(version):
           # Mesure b112 : 208 lignes / 8 99x octets — marge relevee
           # a l'annonce, jamais de memoire.
           "/api/v1/recipes|pipeline; "
-        "proposals: /proposals|/api/v1/agent/proposals; "
+        "proposals: /api/v1/agent/proposals; "
         "storyboards/shotlists/breakdowns "
         "-> moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
@@ -1354,8 +1358,7 @@ def manifest_text(version):
         # lit), les deux pointeurs de purpose vivent, 217 lignes.
         body = render(False, None)
         ls = body.split("\n")
-        ls[0] += (" | dense fold (<8.8KB): /route?q= or "
-                  "/tools/<name>.json")
+        ls[0] += (" | dense fold (<8.8KB): /route?q=")
         body = "\n".join(ls)
     return body + "# sha256=" + _sha(body.rstrip("\n")) + "\n"
 

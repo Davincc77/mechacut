@@ -1,0 +1,7 @@
+{
+ "name": "pdf_provenance_notpdf_refuse_pin",
+ "path": "/api/v1/pdf/provenance",
+ "body": {
+  "pdf_b64": "Tk9UQSBQREYgQVQgQUxM"
+ }
+}

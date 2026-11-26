@@ -8,6 +8,17 @@ actually talks to their agent.
 """
 
 SAY = {
+    "/api/v1/pdf/provenance": {
+        "en": "before you call this PDF the original, read what it "
+              "confesses: which tool wrote it, which dates it claims, "
+              "and whether the order is even possible",
+        "fr": "avant de dire ce PDF original, lis ce qu'il avoue : "
+              "quel outil l'a ecrit, quelles dates il pretent, et si "
+              "l'ordre est seulement possible",
+        "pt": "antes de chamar este PDF de original, leia o que ele "
+              "confessa: qual ferramenta o escreveu, quais datas alega, "
+              "e se a ordem ao menos faz sentido",
+    },
     "/api/v1/stats/rate-ci": {
         "en": "720 clean of 1105 invoices audited: what rate, "
               "what interval — the naive 65.2% alone is a lie "

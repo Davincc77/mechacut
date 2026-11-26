@@ -3086,8 +3086,13 @@ def catalog_grid(lang):
             ' data-tool="%s" data-hay="%s"><span class="tierdot">%s'
             '</span> <code>%s</code><span class="tp">%s</span></button>'
             % (pack, tier, ' data-top="1"' if name in TOP10 else '', name, hay, BADGE[tier], name, purp))
-    packs = " · ".join('<a href="/SKILL-%s.md">%s</a>' % (pk, pk)
-                       for pk in routing.PACKS)
+    # b124_hermes elagage MESURE (+pdf_provenance, budget PT a 8 octets
+    # de marge) : les 13 liens packs sont REPLIES en un gabarit —
+    # « /SKILL-<pack>.md » se nomme lui-meme, les NOMS des packs vivent
+    # deja dans les puces (data-f=pack=X). Precedent b114 du manifeste :
+    # « le chemin vit DEJA ailleurs ». Le claim « les packs existent a
+    # ces URLs » voyage intact.
+    packs = "/SKILL-&lt;pack&gt;.md" 
     return (
         '<div class="chips">%s</div>\n'
         '<p class="tierlegend">%s</p>\n'
