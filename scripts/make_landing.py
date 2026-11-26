@@ -1855,7 +1855,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "web_cert":
             "Lint de certificat X.509 depuis PEM : SANs, validité, flags de dépréciation, forme de la chaîne ; as_of rend le verdict rejouable",
         "id_checkdigit":
-            "clés de contrôle : ISBN/EAN/GTIN/ISIN/LEI… vérifier, réparer, scanner",
+            "clés de contrôle : ISBN/EAN/GTIN/ISIN/LEI/boleto… vérifier, réparer, scanner",
         "image_rightsize":
             "redimensionnement PNG déterministe : boîte exacte / bilinéaire / nearest, rééchantillonnage entier, mêmes bytes pour toujours",
         "money_rates":
@@ -2248,7 +2248,7 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "web_cert":
             "Lint de certificado X.509 a partir de PEM: SANs, validade, flags de depreciação, forma da cadeia; as_of torna o veredito reproduzível",
         "id_checkdigit":
-            "dígitos verificadores: ISBN/EAN/GTIN/ISIN/LEI… verificar, reparar, escanear",
+            "dígitos verificadores: ISBN/EAN/GTIN/ISIN/LEI/boleto… verificar, reparar, escanear",
         "image_rightsize":
             "redimensionamento PNG determinístico: caixa exata / bilinear / nearest, reamostragem inteira, mesmos bytes para sempre",
         "money_rates":
