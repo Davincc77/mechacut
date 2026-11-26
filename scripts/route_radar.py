@@ -650,6 +650,23 @@ CASES = [
     ("combien vaut un point fidelite en euros aujourd'hui",
      "money_points"),
     ("quanto vale um ponto do cartao hoje", "money_points"),
+    # CLASSE b118 — la ligne ONYX du cliff (agent_resultcliff).
+    # Aiguilles x3 langues issues du TICKET LU AU SOURCE (#11007,
+    # #16312) : « le fournisseur a refuse la requete entiere a cause
+    # du resultat » ne doit tomber ni chez les sœurs de prix ni chez
+    # mcplist — c'est UNE TRAVERSÉE, dans l'unité du provider.
+    ("onyx fed my mcp tool result verbatim and the provider rejected the whole request",
+     "agent_resultcliff"),
+    ("enabling mcp tools in onyx gave not enough tokens required 2032226 available",
+     "agent_resultcliff"),
+    ("onyx ne coupe rien mais le fournisseur refuse ma requete a cause du resultat",
+     "agent_resultcliff"),
+    ("le resultat verbatim d onyx a fait exploser la fenetre du modele",
+     "agent_resultcliff"),
+    ("o onyx nao corta mas o provedor recusou a requisao inteira pelo resultado",
+     "agent_resultcliff"),
+    ("ativa as ferramentas mcp no onyx e deu tokens insuficientes antes de rodar",
+     "agent_resultcliff"),
 ]
 
 

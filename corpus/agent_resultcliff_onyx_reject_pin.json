@@ -1,0 +1,10 @@
+{
+ "body": {
+  "harness": "onyx",
+  "size": 2032226,
+  "unit": "tokens",
+  "context_room": 843719
+ },
+ "name": "agent_resultcliff_onyx_reject_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

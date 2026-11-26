@@ -6800,6 +6800,7 @@ class AgentResultCliffRequest(BaseModel):
     unit: Optional[str] = None
     budget: Optional[int] = None
     token_limit: Optional[int] = None
+    context_room: Optional[int] = None
 
 
 def run_agent_resultcliff(args: dict):
@@ -10688,7 +10689,17 @@ MCP_TOOLS = [
             "own counting. Paste WITHOUT a harness and all rows "
             "answer in one call, each measured the way IT measures "
             "(hermes-agent's own row rides too: 2,000,000 chars, "
-            "head 40% tail 60%, counts inside the notice). Repair "
+            "head 40% tail 60%, counts inside the notice). Onyx is "
+            "a row of a different KIND: it cuts NOTHING — "
+            "run_llm_loop appends the result VERBATIM and the whole "
+            "PROVIDER request dies (#11007 open since 2026-05-12; "
+            "dupes #15119/#16312 closed INTO it 2026-11-20 — the "
+            "pain reports itself; MAX_TOOL_RESULT_TOKENS=20 000 "
+            "lives in PROPOSED PR #14586, unmerged — the kit ships "
+            "that number as STATUS, never as law; a paste is "
+            "REFUSED for this row — counting tokens without the "
+            "provider's tokenizer would be exactly the guess this "
+            "kit exists to kill). Repair "
             "clauses quoted: _meta['anthropic/maxResultSizeChars'] "
             "≤ 500000 (v2.1.91+), tool_output_token_limit, YOUR "
             "rakazo budget as an argument. Never fetches; zero "
@@ -10700,7 +10711,8 @@ MCP_TOOLS = [
             "properties": {
                 "harness": {"type": "string",
                             "description": "claude-code|codex|bionic|"
-                                          "vscode|rakazo|hermes-agent "
+                                          "vscode|rakazo|hermes-agent"
+                                          "|onyx "
                                           "(aliases accepted); omit "
                                           "to judge all rows against "
                                           "a paste"},
@@ -10740,6 +10752,17 @@ MCP_TOOLS = [
                                           "fit size in chars (its "
                                           "cut is budget-bound, not "
                                           "constant)"},
+                "context_room": {"type": "integer", "minimum": 0,
+                                 "description": "onyx: YOUR model's "
+                                                "remaining room in "
+                                                "tokens — onyx cuts "
+                                                "nothing, the "
+                                                "provider rejecting "
+                                                "the request IS the "
+                                                "cliff (#11007; the "
+                                                "20 000-token knob "
+                                                "is PROPOSED, not "
+                                                "law)"},
             },
         },
     },

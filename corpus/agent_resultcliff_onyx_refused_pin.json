@@ -1,0 +1,9 @@
+{
+ "body": {
+  "harness": "onyx",
+  "size": 25000,
+  "unit": "tokens"
+ },
+ "name": "agent_resultcliff_onyx_refused_pin",
+ "path": "/api/v1/agent/result-cliff"
+}

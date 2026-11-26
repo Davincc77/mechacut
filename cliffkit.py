@@ -35,7 +35,7 @@ survivors' shape. Never fetches; the table ships in code, sources
 cited per row, as_of per row.
 """
 
-TABLE_VERSION = "b116-1"
+TABLE_VERSION = "b118-1"
 AS_OF = "2026-11-26"
 
 UNITS = ("chars", "bytes", "lines", "tokens")
@@ -359,6 +359,51 @@ def _rows():
                 },
             },
         },
+        "onyx": {
+            "aliases": ("onyx", "onyx-dot-app", "onyx app"),
+            "surfaces": {
+                "result": {
+                    "unit": "tokens",
+                    "cliff": None, "cliff_from": "context_room",
+                    "cmp": "gt",
+                    "counted_as": ("the harness cuts NOTHING — "
+                                   "run_llm_loop appends "
+                                   "llm_facing_response VERBATIM; "
+                                   "the cliff is YOUR model window "
+                                   "and the provider's own token "
+                                   "count (onyx-dot-app/onyx#11007, "
+                                   "body re-read at source "
+                                   "2026-11-26)"),
+                    "verdict": "PROVIDER_REQUEST_REJECTED",
+                    "marker": ("none — nothing is cut: the WHOLE "
+                               "request dies with a provider error; "
+                               "the '[TRUNCATED: ...]' notice lives "
+                               "only in the PROPOSED fix"),
+                    "message_lies": False,
+                    "recoverable": ("no — dead request, dead turn; "
+                                    "#16312 (marked dup 2026-11-20): "
+                                    "'Required: 2032226, Available: "
+                                    "843719' hit BEFORE any tool "
+                                    "even ran — the tool DEFINITIONS "
+                                    "alone ate the budget"),
+                    "repair": ("MAX_TOOL_RESULT_TOKENS default "
+                               "20 000 + notice is PROPOSED, NOT "
+                               "DEPLOYED: issue #11007 open since "
+                               "2026-05-12, PR #14586 still open "
+                               "(unmerged, re-read 2026-11-26); "
+                               "#15119 and #16312 were closed INTO "
+                               "this issue 2026-11-20 — the pain "
+                               "REPORTS, it does not repair; until "
+                               "it ships the only real lever is your "
+                               "own room: pass context_room"),
+                    "ask": "context_room",
+                    "source": ("onyx-dot-app/onyx#11007 body + "
+                               "duplicate marks read at source "
+                               "2026-11-26; #15119 (564-chunk merged "
+                               "RAG sections), #16312, PR #14586"),
+                },
+            },
+        },
     }
 
 
@@ -370,7 +415,7 @@ FIRECRAWL_NOTE = ("firecrawl-mcp-server#548 (open 2026-10-16, read "
                   "it rides the claude-code recoverable field.")
 
 ALL_ORDER = ("claude-code", "codex", "bionic", "vscode", "rakazo",
-             "hermes-agent")
+             "hermes-agent", "onyx")
 
 
 def resolve_harness(name):
@@ -455,6 +500,19 @@ def _row_verdict(name, row, surface, m, unit, size, args):
            "recoverable": surf["recoverable"],
            "repair": surf["repair"],
            "source": surf["source"], "as_of": AS_OF}
+    if m is not None and surf["unit"] == "tokens":
+        # A PASTE cannot be counted in tokens without the provider's
+        # OWN tokenizer — the kit refuses the guess, and it refuses
+        # hardest for the harness that cuts nothing at all: there is
+        # no local cut to replay here, only a budget to declare.
+        out["verdict"] = "REFUSED_IN_PASTE"
+        out["ask"] = surf["ask"]
+        out["reason"] = ("onyx counts in the provider's tokens — no "
+                         "paste can be counted without that "
+                         "tokenizer, and nothing local was cut; "
+                         "declare size+unit=tokens AND context_room "
+                         "instead")
+        return out
     cliff = surf["cliff"]
     if cliff is None:
         if surf.get("cliff_kind") == "unpublished":
@@ -588,7 +646,8 @@ def run_cliff(args):
     else:
         unit = str(unit).strip().lower()
         n = _declared_size(size, unit)
-    args_rest = {k: args.get(k) for k in ("budget", "token_limit")}
+    args_rest = {k: args.get(k) for k in ("budget", "token_limit",
+                                          "context_room")}
 
     if harness is None:
         if m is None:

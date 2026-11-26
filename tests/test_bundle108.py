@@ -414,9 +414,12 @@ def test_ten_new_pins_are_replayable():
     # fil r/askmath) ; b114 relève à 392 : +9 json_bigint
     # b116 relève à 410 : +10 agent_resultcliff (adds-only, la
     # b117 relève à 415 : +5 money_settle noncash (adds-only)
+    # b118 relève à 418 : +3 agent_resultcliff onyx (adds-only, le
+    # vecteur #16312 843719−2032226 rejoué, le refus nommé, la
+    # frontière marge 0)
     # matrice #97622 rejouée, les portes codex/bionic/rakazo/vscode,
     # la notice hermes calculée à la main, le mode all-rows).
-    assert len(g) == 415
+    assert len(g) == 418
 
 
 def test_fr_response_byte_contract():
