@@ -5,12 +5,12 @@ Deterministic mechanical tools for AI agents — the machine that answers
 endpoint, x402 USDC micropayments on Base, and zero storage of what you send.
 
 **Live catalog: [mechacut.studio/agent/manifest](https://mechacut.studio/agent/manifest)**
-— 189 transforms + 9 named recipes as of v1.42.0, each with its tool card
+— 190 transforms + 9 named recipes as of v1.44.0, each with its tool card
 (`/tools/<name>.json`: schema, price, a human sentence in EN/FR/PT, and the
 server's real captured answer). Weak model? Start at
 [`/SKILL-MINI.md`](https://mechacut.studio/SKILL-MINI.md) — a 2.6 KB manual
 written to be followed literally by a 0.5B. Prove-the-determinism checklist:
-[`/integrity.json`](https://mechacut.studio/integrity.json) — 437 replayable
+[`/integrity.json`](https://mechacut.studio/integrity.json) — 443 replayable
 golden pins.
 
 The list below is the historical build log (bundle by bundle); the manifest
@@ -248,16 +248,17 @@ silent rounding is structurally impossible; 5 eggs halved is 2½ = 3 whole or
 into CREATE TABLE + INSERT where every inferred type comes with its reason
 and sample — `'007'` stays TEXT, identifiers outside the closed grammar are
 refused by name, quoting is exact per dialect, and the oracle is loading the
-sqlite dump back and re-querying the hand-computed rows), `id/checkdigit` (15 published
+sqlite dump back and re-querying the hand-computed rows), `id/checkdigit` (16 published
 check-digit schemes — ISBN, EAN/UPC/GTIN, ISSN, ISIN, CUSIP, SEDOL, ABA, LEI,
-ORCID, CAS, Verhoeff, Damm — with `generate`, `repair` and `scan`; the point:
+ORCID, CAS, boleto (FEBRABAN linha digitável, per-dígito verdict), Verhoeff,
+Damm — with `generate`, `repair` and `scan`; the point:
 a frontier model with no tool gets the check digit wrong ~91 % of the time on
 non-memorised identifiers, and we report format ambiguity instead of guessing
 it), `money/rates` (ECB official
 reference rates + a committed 65-day archive of true published days),
 `image/rightsize` (PNG resize in pure stdlib — integer resampling, no float
 ever touches a sample), `web/cert` (X.509 lint from PEM, `as_of` argument
-makes every verdict replayable), `id/checkdigit` (15 published schemes —
+makes every verdict replayable), `id/checkdigit` (16 published schemes —
 frontier models botch ~91% of unmemorised check digits; ours cites every
 spec and reports Bookland ambiguity instead of guessing), `xml/to_json`
 (the conversion rules PRINTED in the response; `force_array` kills the

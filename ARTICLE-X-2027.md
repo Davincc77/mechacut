@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 189 + 9, vérifiés live 26-11 17h35, prod 1.42.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 190 + 9, vérifiés live 26-11 20h05, prod 1.44.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -248,6 +248,32 @@ hash-à-hash, diff golden prouvé avant push). Suite 2 149 passed 2
 skipped. Pages SERVIES 180 129 / 180 634 / 180 707 — les trois sous
 181 000, FR/PT à ~300 : la vague de serrages est désormais LA première
 tâche de tout lot à carte.)
+(s) 26-11 19h35 : 189 constants (/id/checkdigit, bundle122, lentille
+HUMAIN rang 1 — le BOLETO entre en REVISION groupee id_checkdigit, GO
+Vince 26-11 ; 16e scheme, PAS outil neuf ; suite 2 149→2 169, pins
+437→442, prod 1.42.0→1.43.0). La linha digitável FEBRABAN répond
+désormais PAR DIGITO : dv1-dv3 mod-10, dv geral mod-11 (bord publié :
+résultat <2 ou >9 → 1), champ 5 décodé, barcode44 rendu ; le fator
+porte la discontinuité lue au source — sol 1000, cycle 1 fini
+2025-02-21, cycle 2 redémarre 1000 le 2025-02-22 — et rend les DEUX
+dates candidates, jamais une date choisie par l'horloge murale ; un
+48 chiffres est REFUSÉ PAR NOM (consumo 8-prefixée ou Banrisul
+double DV : aucune grammaire assertée). Sources relues AU VENTRE ce
+cycle : table box4.dev + exemple publié 00190.00009 → DV 9 REJOUÉ,
+macoratti.net composition BB, micdog22 barcode+ poids. Golds tracés à
+la main (script écrit AVANT le module) + oracle transcrit indépendant.
+Leçons pêchées PAR les oracles : mon premier LEURRE radar portait
+« settle », mot du hay money_settle — le radar LOCAL me l'a volé avant
+le push (un leurre qui route est une promesse fausse, jamais un test) ;
+et la loi Luxembourg relue au source CE SOIR contredit ma mémoire —
+le LU a REFUSÉ l'arrondi 0/5 (Gramegna 2016-2020), la table de l'arrondi
+est PAR PAYS, la proie est consignée, pas câblée de mémoire. Aiguilles
+boleto x3 langues VERTES EN PROD (le lot ferme sa douleur ACBr), pages
+SERVIES 180 245 / 180 743 / 180 816. Relecture à la clôture : la sœur a
+SHIPPÉ bundle123 (stats_rate_ci) pendant la vérification — prod 1.44.0, 190
+transforms, pins 443, suite 2 175, et les pages SERVIES 180 429 / 180 915 /
+180 999 : le PT est à UN OCTET du plafond. La vague de serrages FR+PT passe
+URGENTE, tâche zéro de tout lot à carte.)
 
 ---
 
@@ -261,7 +287,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **189 transforms + 9 named chain recipes, and growing**, stateless, keyless at
+agents: **190 transforms + 9 named chain recipes, and growing**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -321,7 +347,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **189 transforms + 9 recettes-chaînes nommées, et ça grandit**,
+déterministes pour agents : **190 transforms + 9 recettes-chaînes nommées, et ça grandit**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette

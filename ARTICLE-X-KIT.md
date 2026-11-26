@@ -5,14 +5,19 @@ Every number is curlable at posting time; both bench arms live in the public
 repo. STATUS 23-11: the Git install is live and proven — the desktop Plugins
 panel's "Install from Git" flow installed and activated the plugin today, and
 the CLI line below matches `hermes plugins install`'s own grammar (catalog
-name, Git URL, or owner/repo). NUMBERS 26-11 17h35: 189 transforms + 9 recipes
-(bundle121 adds NEW GRAMMAR to the existing /agent/result-cliff — the suite,
-the pins and the readings moved; transforms count is the manifest's, unchanged),
-suite 2 149 passed 2 skipped, pins 437, manifest 213 lines / 8,979 bytes, prod
-v1.42.0 — each read live from /agent/manifest and /integrity.json, never from
-memory (ripoint b121: a pasted JSON result now answers, per replayable row,
-whether THAT harness's OWN cut still parses — INTACT, BROKEN with the guilty
-node path, or PARSEABLE_BUT_MUTATED, the dangerous class where the marker
+name, Git URL, or owner/repo). NUMBERS 26-11 20h05: 190 transforms + 9 recipes
+(bundle122 adds BOLETO as NEW GRAMMAR — a sixteenth scheme with per-DV
+verdicts — to the existing /id/checkdigit, transforms unchanged; bundle123 —
+stats_rate_ci, shipped the same evening — moves the count 189 to 190),
+suite 2 175 passed 2 skipped, pins 443, manifest 214 lines / 8,995 bytes, prod
+v1.44.0 — each read live from /agent/manifest and /integrity.json, never from
+memory (ripoint b122: the FEBRABAN linha digitável answers per-dígito — which
+campo DV fails, fator decoded to BOTH cycle candidates without any wall
+clock, a 48-digit linha refused by name; the published campo-1 example
+00190.00009 replays exactly); ripoint b121: a pasted JSON result now answers,
+per replayable row, whether THAT harness's OWN cut still parses — INTACT,
+BROKEN with the guilty node path, or PARSEABLE_BUT_MUTATED, the dangerous
+class where the marker
 lands inside one string and the survivor parses while its text lies
 (llama_index#24102 executed a repaired cut-off write_file; NeMo#2550's merged
 fix demands strict json.loads — no partial parsing); rows the table cannot
@@ -125,7 +130,7 @@ One install, two skills, **pure text** — nothing executes on your machine,
 no daemon, no MCP server required:
 
 - **mechacut** teaches your agent the surface of `mechacut.studio`:
-  **189 deterministic transforms + 9 named recipes — and growing** — rounding, money
+  **190 deterministic transforms + 9 named recipes — and growing** — rounding, money
   splits, dates, hashes, unit conversions, redaction, CSV, cron, QR, diff.
   Keyless, no signup, 30/min. `curl https://mechacut.studio/agent/manifest`
   lists all of them, today, in plain text. Every response carries its
@@ -284,7 +289,7 @@ Une installation, deux skills, **du texte pur** — rien ne s'exécute sur ta
 machine, pas de daemon, pas de serveur MCP obligatoire :
 
 - **mechacut** apprend à ton agent la surface de `mechacut.studio` :
-  **189 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
+  **190 transformations déterministes + 9 recettes nommées — et ça grandit** — arrondis,
   partages d'argent, dates, hashes, conversions, masquage, CSV, cron, QR,
   diff. Sans clé, sans inscription, 30/min. `curl
   https://mechacut.studio/agent/manifest` les liste toutes, aujourd'hui, en
