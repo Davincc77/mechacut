@@ -25,6 +25,10 @@ change, ce fichier ment — le corriger fait partie de la taxe.
 5. `corpus/x_pin.json` — une requête épinglée (harness golden).
 6. `sayings.py` — SAY[path] × en/fr/pt (instructions, pas slogans ;
    l'argent de chaque langue dans sa devise).
+6b. `make_landing` touche AUSSI `static/landing.html`
+    (artifact SUIVI, pas seulement locales/*.json — pêché au bundle
+    125 : commit oubliait le template, verts locaux cachaient un arbre
+    sale). Après régénération : `git status`, ajouter le fichier.
 7. `scripts/golden.py write` — régénère `golden.json` +
    `static/agent_examples.json`. Vérifier : diff **adds-only**,
    zéro suppression (compter les ^- hors en-tête de fichier).
