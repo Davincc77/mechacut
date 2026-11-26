@@ -398,7 +398,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.48.0",
+    version="1.48.1",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -708,7 +708,15 @@ async def hardening(request: Request, call_next):
             return JSONResponse(
                 status_code=413,
                 content={"error": "payload_too_large",
-                         "message": f"request body over {MAX_BODY_BYTES} bytes"},
+                         "field": "request body (Content-Length)",
+                         "message": f"body over {MAX_BODY_BYTES} bytes",
+                         "expected": f"Content-Length <= {MAX_BODY_BYTES}",
+                         "repair": f"b64 payloads: source file max "
+                                   f"{(MAX_BODY_BYTES - 32) * 3 // 4} bytes "
+                                   "(base64 expands 4/3); batch: <=100 "
+                                   "payloads; tier caps may bind earlier "
+                                   "(free <=32 KB) — /tools/<name>.json "
+                                   "states each."},
             )
     response = await call_next(request)
     response.headers.setdefault("X-Content-Type-Options", "nosniff")
@@ -9942,7 +9950,9 @@ MCP_TOOLS = [
             "PDF bytes -> provenance the file confesses: last /Producer "
             "(counted), dates, order — and WHERE the info lived "
             "(plain | object_stream | none: an invisible Info is not "
-            "an absent Info; inflate-included since v1.48.0). "
+            "an absent Info; inflate-included since v1.48.0). HTTP gate: "
+            "file <= 3.9 MB (5 MB body cap) — over it the 413 "
+            "names the repair. "
             "(with occurrence count — incremental updates keep evidence), "
             "/CreationDate and /ModDate as ISO with their own offsets, "
             "and created_before_modified as a NAMED comparison: null when "
@@ -9957,7 +9967,7 @@ MCP_TOOLS = [
             "properties": {
                 "pdf_b64": {"type": "string",
                             "description": "base64 of a file starting "
-                                           "with %PDF- (16 MB cap)"},
+                                           "with %PDF- (HTTP: file <= 3.9 MB — the 5 MB body cap is the real gate; over it a 413 names the repair)"},
             },
         },
     },

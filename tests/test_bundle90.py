@@ -53,10 +53,7 @@ def _p(body):
     return r.status_code, r.json()
 
 
-ORDER = ["http_ratelimit", "number_words_pair", "date_window",
-         "date_deemed", "text_fold_report", "text_novel_words",
-         "address_parse", "date_civil", "money_tip", "money_split",
-         "date_slash_ambiguity"]
+ORDER = ["http_ratelimit", "number_words_pair", "date_window", "date_deemed", "text_fold_report", "text_novel_words", "address_parse", "date_civil", "money_tip", "money_split", "date_slash_ambiguity", "stats_rate_ci", "pdf_provenance", "text_mojibake", "text_claimsweep", "doi_name_equivalence", "xbrl_decimals_calc_consistency"]
 
 
 def test_l1_listed_in_file_order_with_said_dates():
@@ -67,10 +64,15 @@ def test_l1_listed_in_file_order_with_said_dates():
     # (l'audit adversarial Hermes), shipped 6->7. La garde des comptes
     # exacts EST le test du registre : quand il casse, c'est la
     # collection qui a grandi, et le pin s'incline devant le fichier.
-    assert b["counts"]["status"] == {"shipped": 7, "accepted": 2,
-                                     "en-banc": 1, "refuse": 1,
-                                     "proposed": 0}
-    assert b["counts"]["total"] == 11
+    # 26-11 soir : le registre porte desormais AUSSI les candidates
+    # maison (dogfood passe par la meme porte) — stats_rate_ci,
+    # pdf_provenance, text_mojibake shipped + text_claimsweep en-banc ;
+    # date_civil/address_parse flips accepted->shipped (outils reels
+    # dans le manifest, le statut mentait). Pin aligne sur le fichier.
+    assert b["counts"]["status"] == {"shipped": 12, "accepted": 0,
+                                     "en-banc": 2, "refuse": 1,
+                                     "proposed": 2}
+    assert b["counts"]["total"] == 17
     for e in b["entries"]:
         assert len(e["arrival"]) == 10 and e["arrival"][4] == "-"
     assert b["registry"] == "docs/proposals/registry.jsonl"
@@ -79,12 +81,13 @@ def test_l1_listed_in_file_order_with_said_dates():
 def test_l2_latest_is_a_window_not_a_promise():
     s, b = _q({"latest": 3})
     assert [e["name"] for e in b["entries"]] == [
-        "money_tip", "money_split", "date_slash_ambiguity"]  # 3 derniers du fichier
-    assert b["counts"] == {"shown": 3, "total": 11}
-    s, b = _q({"latest": 11})
+        "text_claimsweep", "doi_name_equivalence",
+        "xbrl_decimals_calc_consistency"]  # 3 derniers du fichier
+    assert b["counts"] == {"shown": 3, "total": 17}
+    s, b = _q({"latest": 17})
     assert [e["name"] for e in b["entries"]] == ORDER  # ordre du fichier
-    s, b = _q({"latest": 12})
-    assert b["counts"]["shown"] == 11  # up to, never exactly
+    s, b = _q({"latest": 18})
+    assert b["counts"]["shown"] == 17  # up to, never exactly
 
 
 def test_l3_search_one_named_proposal():
@@ -101,10 +104,11 @@ def test_l4_refused_carries_the_why_and_the_empty_is_a_fact():
     assert [e["name"] for e in b["entries"]] == ["money_split"]
     assert "sha256" in b["entries"][0]["reason"]
     s, b = _q({"status": "en-banc"})
-    assert [e["name"] for e in b["entries"]] == ["money_tip"]
+    assert [e["name"] for e in b["entries"]] == ["money_tip", "text_claimsweep"]
     s, b = _q({"status": "proposed"})
-    assert s == 200 and b["entries"] == []
-    assert b["counts"]["shown"] == 0  # vide dit, pas erreur
+    assert [e["name"] for e in b["entries"]] == [
+        "doi_name_equivalence", "xbrl_decimals_calc_consistency"]
+    assert b["counts"]["shown"] == 2  # arrivees Grok consignees, blobs a venir
 
 
 def test_l5_grammars_are_named():

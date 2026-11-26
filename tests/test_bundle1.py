@@ -377,6 +377,12 @@ def test_oversized_body_413():
     r = client.post("/api/v1/json/repair", json={"text": "x" * 6_000_000})
     assert r.status_code == 413
     assert r.json()["error"] == "payload_too_large"
+    # v1.48.1 — le 413 EST un contrat de reparation (douleur mesuree par
+    # l'equipe Grok 26-11: le message nommait le plafond mais ni le champ
+    # ni la taille de fichier qui passe). Desormais les trois.
+    j = r.json()
+    assert "field" in j and "expected" in j and "repair" in j
+    assert "3932136" in j["repair"]  # octets de fichier max en b64 sous 5 Mo
 
 
 def test_security_headers_on_api_json():

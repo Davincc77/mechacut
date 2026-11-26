@@ -199,3 +199,12 @@ def test_g8_plain_versus_absent_v148():
     assert a["info_location"] == "plain"
     b = call(b"1 0 obj<</Type/Catalog>>endobj").json()
     assert b["info_location"] == "none"
+
+
+def test_contract_honesty_http_cap_v148():
+    # Le contrat HTTP ne promet que ce le serveur laisse passer.
+    # La garde 16 MB de pdftext reste pour l'usage LOCAL (kit) ; via
+    # HTTP, le plafond est le corps 5 MB -> 3 932 148 octets de PDF.
+    from main import MCP_TOOLS
+    d = next(t for t in MCP_TOOLS if t["name"] == "pdf_provenance")["description"]
+    assert "3.9 MB" in d and "16 MB" not in d
