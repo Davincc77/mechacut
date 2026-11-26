@@ -1,0 +1,513 @@
+{
+ "corpus": "apple-xai mojibake study",
+ "method": "curl download; pypdf text layer; regex '\u00c3\u00a9|\u00c3\u00a3|\u00c3\u00aa|\u00c3\u00a1|\u00c3\u00ad|\u00c3\u00b3|\u00c3\u00ba|\u00c3\u00a7|\u00c2[\u00ba\u00aa]|\u00e2\u20ac|\u00c3\u00bc|\u00c3\u00b6|\u00c3\u00a4' + variants '\u00c2\u00ab|\u00c2\u00bb|\u00c2\u00b0|\u00c2\u00b5|\u00c3\u2014|\u00c3\u00b8|\u00c3\u00a5|\u00c3\u00bd|\u00c3\u00bf|\u00e2\u201a\u00ac|\u00c3\u201a|\u00c3\u0192|\u00c3\u201e|\u00c3\u2026|\u00c3\u2020'; per-file sha256 first 16 hex; extraction capped at first 300 pages (none hit cap except noted page counts).",
+ "summary": {
+  "files_analyzed": 42,
+  "apple_files": 29,
+  "xai_files": 13,
+  "corrupted_files": 0,
+  "extraction_verification": "every file yielded 9k+ extracted chars; extended scan (\u00c3./\u00c2./\u00e2. any-context) matched only legitimate French/Portuguese words (\u00c2G\u00c9S, LICEN\u00c7A), zero double-encoded sequences",
+  "personal_data_screening": "regex screen + manual context review of all hits: zero files contain client names/account numbers",
+  "honest_note": "Apple PDFs were easy to find (apple.com/legal SLA corpus, environment/legal reports, data on images.apple.com); xAI publishes real PDFs natively on data.x.ai/media.x.ai (frameworks, model cards) \u2014 a small but genuine set of 13. Zero mojibake across all 42 files: both companies ship clean, properly encoded PDFs (generated via correct pipelines; multilingual SLAs carry real Unicode, not double-encoded latin1). Only dirty-looking Apple documents found were SEC 14a-8 shareholder letters \u2014 excluded for personal data; they show a different corruption class (Word semicolon substitutions)."
+ },
+ "excluded_for_personal_data": [
+  {
+   "kind": "SEC 14a-8 no-action correspondence re Apple (e.g. sec.gov/files/corpfin/no-action/14a-8/*apple*.pdf)",
+   "reason": "institution-issued but embeds individual proponents' names, addresses and share-ownership proof \u2014 excluded under hard rule 1. Note: these letters DO show non-mojibake corruption (letter substitution, e.g. 'authoriza;on', 'mee;ng') from Word conversion."
+  }
+ ],
+ "download_probe_failures": [
+  {
+   "url": "https://www.apple.com/legal/sales-support/applecare/applecareplus/2406/240618_applecareplus_uk_tc.pdf",
+   "company": "apple",
+   "http": "404",
+   "is_pdf": false,
+   "path": null
+  },
+  {
+   "url": "https://www.apple.com/legal/sales-support/applecare/applecareplus/2406/240618_applecareplus_de_tc.pdf",
+   "company": "apple",
+   "http": "404",
+   "is_pdf": false,
+   "path": null
+  },
+  {
+   "url": "https://www.apple.com/legal/sales-support/applecare/applecareplus/2406/240618_applecareplus_fr_tc.pdf",
+   "company": "apple",
+   "http": "404",
+   "is_pdf": false,
+   "path": null
+  },
+  {
+   "url": "https://www.apple.com/legal/sales-support/applecare/applecareplus/2406/240618_applecareplus_it_tc.pdf",
+   "company": "apple",
+   "http": "404",
+   "is_pdf": false,
+   "path": null
+  },
+  {
+   "url": "https://www.apple.com/legal/sales-support/applecare/applecareplus/2406/240618_applecareplus_es_tc.pdf",
+   "company": "apple",
+   "http": "404",
+   "is_pdf": false,
+   "path": null
+  },
+  {
+   "url": "https://www.apple.com/supplier-responsibility/pdf/Apple-Supplier-Code-of-Conduct-and-Supplier-Responsibility-Standards.pdf",
+   "company": "apple",
+   "http": "200",
+   "is_pdf": false,
+   "path": null
+  },
+  {
+   "url": "https://data.x.ai/2025-07-09-grok-4-mini-model-card.pdf",
+   "company": "xai",
+   "http": "404",
+   "is_pdf": false,
+   "path": null
+  },
+  {
+   "url": "https://data.x.ai/ccpa_consumer_privacy_notice.pdf",
+   "company": "xai",
+   "http": "404",
+   "is_pdf": false,
+   "path": null
+  }
+ ],
+ "files": [
+  {
+   "url": "https://www.apple.com/legal/sla/docs/iOS26_iPadOS26.pdf",
+   "company": "apple",
+   "sha256_16": "0ba2e9a6fdc7e0da",
+   "pages": 930,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "flag was regex substring false-positive (Spanish 'describan' / descriptive prose); no actual personal data"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/iOS27_iPadOS27.pdf",
+   "company": "apple",
+   "sha256_16": "22dda5b160b74332",
+   "pages": 784,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "flag was regex substring false-positive (Spanish 'describan' / descriptive prose); no actual personal data"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/iOS18_iPadOS18.pdf",
+   "company": "apple",
+   "sha256_16": "bc121f733c289803",
+   "pages": 573,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/iOS17_iPadOS17.pdf",
+   "company": "apple",
+   "sha256_16": "d259ca7f669e1d85",
+   "pages": 585,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/macOSSequoia.pdf",
+   "company": "apple",
+   "sha256_16": "6daf86557f06825c",
+   "pages": 726,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/macOSTahoe.pdf",
+   "company": "apple",
+   "sha256_16": "ba07dc414fc4fee6",
+   "pages": 895,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "flag was regex substring false-positive (Spanish 'describan' / descriptive prose); no actual personal data"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/macOSSonoma.pdf",
+   "company": "apple",
+   "sha256_16": "de1aae74276a3e98",
+   "pages": 648,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/AppleStoreApp.pdf",
+   "company": "apple",
+   "sha256_16": "11d1dee847f2750c",
+   "pages": 5,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/HomeView27.pdf",
+   "company": "apple",
+   "sha256_16": "dd6d1200f6ba0356",
+   "pages": 23,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/visionOS26.pdf",
+   "company": "apple",
+   "sha256_16": "86e4cfc76f91abca",
+   "pages": 221,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "flag was regex substring false-positive (Spanish 'describan' / descriptive prose); no actual personal data"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/watchOS27.pdf",
+   "company": "apple",
+   "sha256_16": "a9efc8698dcd0b7c",
+   "pages": 595,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "flag was regex substring false-positive (Spanish 'describan' / descriptive prose); no actual personal data"
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/tvOS27.pdf",
+   "company": "apple",
+   "sha256_16": "1bea531ba66160ad",
+   "pages": 430,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "flag was regex substring false-positive (Spanish 'describan' / descriptive prose); no actual personal data"
+  },
+  {
+   "url": "https://www.apple.com/legal/privacy/law-enforcement-guidelines-us.pdf",
+   "company": "apple",
+   "sha256_16": "29ff2c1acc5bc5fe",
+   "pages": 21,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "regex hit was descriptive prose ('customer name alone is insufficient'); document discloses no actual personal data"
+  },
+  {
+   "url": "https://www.apple.com/legal/privacy/pdfs/apple-privacy-policy-en-ww.pdf",
+   "company": "apple",
+   "sha256_16": "f3171fac1aac4193",
+   "pages": 1,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/compliance/pdfs/Apple-Human-Rights-Policy.pdf",
+   "company": "apple",
+   "sha256_16": "dc9539718a35c2f6",
+   "pages": 3,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/legal/more-resources/docs/apple-canada-inc-report-fy25-ca-en.pdf",
+   "company": "apple",
+   "sha256_16": "ef95ca1b12a3616e",
+   "pages": 45,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/legal/more-resources/docs/Norway-Apple-Combat-Human-Trafficking-and-Slavery-in-Supply-Chain-2025.pdf",
+   "company": "apple",
+   "sha256_16": "1c79a686b9df14cc",
+   "pages": 45,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/legal/more-resources/docs/Apple-UNGP-Mapping.pdf",
+   "company": "apple",
+   "sha256_16": "b2c0d47832dd67af",
+   "pages": 29,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/legal/more-resources/docs/uk-Apple-Combat-Human-Trafficking-and-Slavery-in-Supply-Chain-2023.pdf",
+   "company": "apple",
+   "sha256_16": "8ab276fcdd5de660",
+   "pages": 33,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/legal/sales-support/applecare/applecareplus/2406/240618_applecareplus_us.pdf",
+   "company": "apple",
+   "sha256_16": "b747b91bfcae4937",
+   "pages": 17,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/legal/sales-support/applecare/applecareplus/2203/220308_applecareplus_ie_tc.pdf",
+   "company": "apple",
+   "sha256_16": "bdd23f98d84ee781",
+   "pages": 15,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/environment/pdf/Apple_Environmental_Progress_Report_2026.pdf",
+   "company": "apple",
+   "sha256_16": "294587a989beb1bd",
+   "pages": 113,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/environment/pdf/Apple_Environmental_Progress_Report_2025.pdf",
+   "company": "apple",
+   "sha256_16": "597676e8b48ac455",
+   "pages": 126,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://www.apple.com/environment/pdf/Apples_Water_Strategy.pdf",
+   "company": "apple",
+   "sha256_16": "d22ece3dd262371c",
+   "pages": 28,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/environment/pdf/products/iphone/iPhone_Air_PER_Sept2025.pdf",
+   "company": "apple",
+   "sha256_16": "015ed1cf36668427",
+   "pages": 5,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/environment/pdf/products/desktops/Mac_Studio_PER_March2025.pdf",
+   "company": "apple",
+   "sha256_16": "f82d9ea02fe83cb3",
+   "pages": 12,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/co/environment/pdf/products/notebooks/M4_MacBook_Air_PER_March2025.pdf",
+   "company": "apple",
+   "sha256_16": "83b25d6e7e12a047",
+   "pages": 12,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://images.apple.com/in/supply-chain/pdf/How-we-prevent-forced-labor-in-our-supply-chain.pdf",
+   "company": "apple",
+   "sha256_16": "06264c9abb857c23",
+   "pages": 1,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://help.apple.com/pdf/security/en_US/apple-platform-security-guide.pdf",
+   "company": "apple",
+   "sha256_16": "b52f68820c1ea891",
+   "pages": 266,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://data.x.ai/2025-12-31-xai-frontier-artificial-intelligence-framework.pdf",
+   "company": "xai",
+   "sha256_16": "aa01669c19fca50c",
+   "pages": 11,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://data.x.ai/2025-08-20-xai-risk-management-framework.pdf",
+   "company": "xai",
+   "sha256_16": "39fab200a4b36f14",
+   "pages": 9,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://data.x.ai/2025.02.20-RMF-Draft.pdf",
+   "company": "xai",
+   "sha256_16": "89fafebb73757def",
+   "pages": 8,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://data.x.ai/2025-08-20-grok-4-model-card.pdf",
+   "company": "xai",
+   "sha256_16": "54068c0d9570d94d",
+   "pages": 8,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://data.x.ai/2025-09-19-grok-4-fast-model-card.pdf",
+   "company": "xai",
+   "sha256_16": "0b9080d64e74ac88",
+   "pages": 7,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf",
+   "company": "xai",
+   "sha256_16": "635f30c2ea83cd2b",
+   "pages": 6,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf",
+   "company": "xai",
+   "sha256_16": "ea72c27a6b04949d",
+   "pages": 8,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://data.x.ai/ccpa_personnel_privacy_notice.pdf",
+   "company": "xai",
+   "sha256_16": "4ae31977259534ba",
+   "pages": 9,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://media.x.ai/v1/website/4p5-5184fdf9.pdf",
+   "company": "xai",
+   "sha256_16": "068d432a70abc127",
+   "pages": 29,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://media.x.ai/v1/website/4p7card-5eccc980.pdf",
+   "company": "xai",
+   "sha256_16": "9e4269af5fb9685d",
+   "pages": 30,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://media.x.ai/v1/website/card4p7-3a96f40b.pdf",
+   "company": "xai",
+   "sha256_16": "c40541597ac3c461",
+   "pages": 30,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf",
+   "company": "xai",
+   "sha256_16": "1fbb3ab6d7c57272",
+   "pages": 42,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  },
+  {
+   "url": "https://fedscoop.com/wp-content/uploads/sites/5/2025/08/xAI-Enterprise-Customer-Agreement-GSA-Approved-6.26.25.pdf",
+   "company": "xai",
+   "sha256_16": "7855cbf53b085fec",
+   "pages": 27,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "personal_data_flag": false,
+   "personal_data_note": "no personal data detected"
+  }
+ ],
+ "worst_examples": [
+  {
+   "url": "https://www.apple.com/legal/sla/docs/iOS26_iPadOS26.pdf",
+   "mojibake_count": 0
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/macOSTahoe.pdf",
+   "mojibake_count": 0
+  },
+  {
+   "url": "https://www.apple.com/legal/sla/docs/iOS27_iPadOS27.pdf",
+   "mojibake_count": 0
+  }
+ ]
+}

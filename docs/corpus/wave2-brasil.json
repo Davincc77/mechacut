@@ -1,0 +1,1989 @@
+{
+ "task": "wave2-brasil (Corpus A deepening): Camara dos Deputados CEAP 'Passagem Aérea - Reembolso' attachments + Senado CEAPS id probing",
+ "generated": "2026-11-26",
+ "method": [
+  "curl/urllib with UA=Mozilla/5.0; every URL + doc id recorded",
+  "text layer: ~/Projets/mechacut/.venv/bin/python + pypdf 6.21.4; <200 chars extracted = scanned",
+  "primary detector: POST base64(extracted text) -> https://mechacut.studio/api/v1/file/encoding (verdict + sha256); 30 req/min pacing with retry",
+  "secondary: mojibake regex (A-tilde/A-acirc/A-acute family, quotes) + fingerprint needles, whitespace-tolerant; 'sera-with-tilde-not-o' and 't-Ã-ª-m' matched case-sensitively to avoid matching clean 'serao'",
+  "anonymization: doc id + airline + emission date only; deputy/passenger names never recorded",
+  "note: double-encoded mojibake IS valid UTF-8, so the bench always answers 'valid utf-8 without BOM' on these files; per method the regex layer decides hits"
+ ],
+ "probes": {
+  "senado_ids_probed": 830,
+  "senado_ids_ranges": "303881-303975, 304000-304320, 305000-305010, 268200-268300, 271500-271600, 272400-272500, 274750-274850",
+  "senado_pdfs_returned": 478,
+  "senado_pdfs_selected_for_analysis": 27,
+  "id_space": "305xxx: all 404. 304000-304100: 404/empty. ids resume at 304101 (late Oct 2026 batch = AeroTur 'Reserva Aérea' booking printouts, NOT LATAM-issued tickets: zero frozen strings there). 303881-303975 gap: returned non-LATAM or placeholder",
+  "camara_deputies_scanned": 513,
+  "camara_api_calls": 3078,
+  "camara_rows_air_ticket_reembolso": 519,
+  "camara_pdf_attachments_downloaded": 31,
+  "camara_api_no_rows_2021_2022": "57th-legislature ids returned only 2023-2026 expenses"
+ },
+ "files": [
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268281",
+   "doc_id": "268281",
+   "airline": "GOL",
+   "emission_date": null,
+   "year": 2025,
+   "sha256_16": "00c8dc6fc646ae3e",
+   "status": "ok",
+   "text_chars": 2072,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "db540b46586f6bddf1f928f7ad46235307fad8ec26593e3cba64006fce943c10"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268282",
+   "doc_id": "268282",
+   "airline": "GOL",
+   "emission_date": null,
+   "year": 2025,
+   "sha256_16": "8fb62cb555870f78",
+   "status": "ok",
+   "text_chars": 2149,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "27e87de041da6821c3d3ad32bbfbecae0564a3a4970dbae9eaa6e6e2dd4d683e"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268283",
+   "doc_id": "268283",
+   "airline": "LATAM",
+   "emission_date": "08/08/25",
+   "year": 2025,
+   "sha256_16": "15c648c9db09e642",
+   "status": "ok",
+   "text_chars": 12411,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "f56f0c4704f1e08a7dcae44f55310fa620cf45ebff10d50a68803e41e5d24a32"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268284",
+   "doc_id": "268284",
+   "airline": "LATAM",
+   "emission_date": "11/08/25",
+   "year": 2025,
+   "sha256_16": "cbda1dd905b1e160",
+   "status": "ok",
+   "text_chars": 12411,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "f56f0c4704f1e08a7dcae44f55310fa620cf45ebff10d50a68803e41e5d24a32"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268285",
+   "doc_id": "268285",
+   "airline": "LATAM",
+   "emission_date": "21/08/25",
+   "year": 2025,
+   "sha256_16": "dadd46e25602cfa9",
+   "status": "ok",
+   "text_chars": 12462,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "5df48e9903f02d0f0fd9243821d72a7d29eb95b437366a129cb59f741983e589"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268286",
+   "doc_id": "268286",
+   "airline": "LATAM",
+   "emission_date": "24/08/25",
+   "year": 2025,
+   "sha256_16": "39a8f955f7021481",
+   "status": "ok",
+   "text_chars": 12411,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "f56f0c4704f1e08a7dcae44f55310fa620cf45ebff10d50a68803e41e5d24a32"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268287",
+   "doc_id": "268287",
+   "airline": "GOL",
+   "emission_date": null,
+   "year": 2025,
+   "sha256_16": "78850e61dfa5d7c5",
+   "status": "ok",
+   "text_chars": 2129,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "6b234a25a67bb962cdac8d67db93c69d3fc9043cbbf4ccaa0787381f6f9355bb"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268288",
+   "doc_id": "268288",
+   "airline": "LATAM",
+   "emission_date": "08/08/25",
+   "year": 2025,
+   "sha256_16": "cb05425be94af8f5",
+   "status": "ok",
+   "text_chars": 12408,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "6a8835f64809352351608778df01be2007cc38622400212933a21ca5dcc3c308"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268289",
+   "doc_id": "268289",
+   "airline": "LATAM",
+   "emission_date": "30/07/25",
+   "year": 2025,
+   "sha256_16": "e05aa70127ff6413",
+   "status": "ok",
+   "text_chars": 12463,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "e759ab211cbb02d569ebede0bba811363ffa7802af88ec53b76da15c24d5aef9"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/268290",
+   "doc_id": "268290",
+   "airline": "LATAM",
+   "emission_date": "26/08/25",
+   "year": 2025,
+   "sha256_16": "0faac1eb1c7956e2",
+   "status": "ok",
+   "text_chars": 12476,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "82777490c36c59d3e922b7dbd2dea7494c7c6baa73456349596792f836922081"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/271522",
+   "doc_id": "271522",
+   "airline": "non-ticket/other",
+   "emission_date": "02/09/2025",
+   "year": 2025,
+   "sha256_16": "f39b2a17bf9e77aa",
+   "status": "ok",
+   "text_chars": 350,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "e8db93e0537fcad6fb736b88e6e3bf3742deb9dfdbbd867c4bfe66d6cd7a8744"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/272427",
+   "doc_id": "272427",
+   "airline": "non-ticket/other",
+   "emission_date": "05/11/2025",
+   "year": 2025,
+   "sha256_16": "edd15182f79e13bd",
+   "status": "ok",
+   "text_chars": 3385,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "f85243bcb81000eb60f19fea54d98183ba06b777f8dcff2de273321bdb875d60"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/272446",
+   "doc_id": "272446",
+   "airline": "non-ticket/other",
+   "emission_date": "08/10/2025",
+   "year": 2025,
+   "sha256_16": "5eb3521b5f6b88aa",
+   "status": "ok",
+   "text_chars": 747,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "ac34df2d76e516354b9a39bb3863d616b85a353ac11ca45486baf2712dda1a0d"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/303933",
+   "doc_id": "303933",
+   "airline": "non-ticket/other",
+   "emission_date": "16/11/2026",
+   "year": 2026,
+   "sha256_16": "e53c24c346697a30",
+   "status": "ok",
+   "text_chars": 3407,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "ea37d2f6005053bd328eaab4b96f8da2bf3755bc74219b84ad4fba0dff31d2ab"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/303939",
+   "doc_id": "303939",
+   "airline": "non-ticket/other",
+   "emission_date": "14/11/2026",
+   "year": 2026,
+   "sha256_16": "35bb655fbea940b6",
+   "status": "ok",
+   "text_chars": 1873,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "100692b0bdd2fcc21c0a1398ec7210f85ad4e57032b45f223bffd6831860fa25"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/303940",
+   "doc_id": "303940",
+   "airline": "non-ticket/other",
+   "emission_date": "13/11/2026",
+   "year": 2026,
+   "sha256_16": "922b6d22ee49227c",
+   "status": "ok",
+   "text_chars": 1645,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "bee7a8b7a562f7683a7529be54f032f977378c5de878f5e51625484f09c712fd"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304109",
+   "doc_id": "304109",
+   "airline": "non-ticket/other",
+   "emission_date": "01/10/2026",
+   "year": 2026,
+   "sha256_16": "872785c1aa65540e",
+   "status": "ok",
+   "text_chars": 2678,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "590239ad7bf60684bf02944580e71a2e1333174bf503b26eaa1a01d1789510fe"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304112",
+   "doc_id": "304112",
+   "airline": "non-ticket/other",
+   "emission_date": "12/10/2026",
+   "year": 2026,
+   "sha256_16": "92bbe65d7f666e5d",
+   "status": "ok",
+   "text_chars": 3324,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "e01e63a5e5a6f9f90d0fcbd67afbd3e29ae42315ecaa573f5e5776e7797310fe"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304115",
+   "doc_id": "304115",
+   "airline": "LATAM",
+   "emission_date": null,
+   "year": 2026,
+   "sha256_16": "5a4acdf5d135dd95",
+   "status": "ok",
+   "text_chars": 2789,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "b7993d7ce9866f2db58bcdc109d354f0b03c98e45b299b24f779799a3b6a5533"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304120",
+   "doc_id": "304120",
+   "airline": "LATAM",
+   "emission_date": null,
+   "year": 2026,
+   "sha256_16": "ffc83cb123e1b60d",
+   "status": "ok",
+   "text_chars": 2769,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "f5a39432426355c6cd87d7d31fb92ca8c53e80fab8c471d0e62f4e588fdf1614"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304123",
+   "doc_id": "304123",
+   "airline": "LATAM",
+   "emission_date": "12/10/2026",
+   "year": 2026,
+   "sha256_16": "8ac9e3148e44b9a5",
+   "status": "ok",
+   "text_chars": 2728,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "3b3231d8fc62c5836311a484b46c2eec1ebec2de550d4c9fd023ba616b5a136e"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304151",
+   "doc_id": "304151",
+   "airline": "LATAM",
+   "emission_date": null,
+   "year": 2026,
+   "sha256_16": "fc4d508590b7dfc4",
+   "status": "ok",
+   "text_chars": 781,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "0e1fdfbe13ac28e26dbf51f20ab2827ff14157a9a69db00ddbb34caffb8d9b0d"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304152",
+   "doc_id": "304152",
+   "airline": "LATAM",
+   "emission_date": "12/10/2026",
+   "year": 2026,
+   "sha256_16": "bb2f7f009f28132a",
+   "status": "ok",
+   "text_chars": 2870,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "9a48aabb387c4a455b140e1a1469a5547944cef66b973539213b26a3b12e0223"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304159",
+   "doc_id": "304159",
+   "airline": "LATAM",
+   "emission_date": "05/10/2026",
+   "year": 2026,
+   "sha256_16": "d33771c148058581",
+   "status": "ok",
+   "text_chars": 2715,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "20d3c5b0a319978b24a68b547ef92b649d9b243a310506f86284e0523087cd21"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304169",
+   "doc_id": "304169",
+   "airline": "LATAM",
+   "emission_date": "04/10/2026",
+   "year": 2026,
+   "sha256_16": "168ec41f9adb8bf8",
+   "status": "ok",
+   "text_chars": 2779,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "f1d16f6f82e14350158f4ebf468789d87778a49656894ba77e89f7d80fdd00f2"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304171",
+   "doc_id": "304171",
+   "airline": "non-ticket/other",
+   "emission_date": "13/10/2026",
+   "year": 2026,
+   "sha256_16": "c259ec8e1c43a77f",
+   "status": "ok",
+   "text_chars": 2676,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "92887b0955ddd351e3217f1f589a1e13a9ddf05bc0f48bc3a1bd62cb111a5fcd"
+  },
+  {
+   "source": "senado_federal",
+   "url": "https://www6g.senado.leg.br/transparencia/sen/download/ceaps/documento/304174",
+   "doc_id": "304174",
+   "airline": "non-ticket/other",
+   "emission_date": "15/10/2026",
+   "year": 2026,
+   "sha256_16": "449bf098e8cf4bf1",
+   "status": "ok",
+   "text_chars": 1675,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "a2221bfbfd3b7ff6f7fd09979a1bf7652e2d610d4bcf48262a385325835da0a8"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/1590/2023/7492451.pdf",
+   "doc_id": "7492451",
+   "airline": "GOL",
+   "emission_date": "2023-02-01T00:00:00",
+   "year": 2023,
+   "sha256_16": "ed6830ab3bf10e10",
+   "status": "scanned (no text layer)",
+   "text_chars": 1,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3680/2023/7492465.pdf",
+   "doc_id": "7492465",
+   "airline": "LATAM",
+   "emission_date": "2023-02-01T00:00:00",
+   "year": 2023,
+   "sha256_16": "5930c6db58f1cb4a",
+   "status": "scanned (no text layer)",
+   "text_chars": 3,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2894/2023/7492595.pdf",
+   "doc_id": "7492595",
+   "airline": "LATAM",
+   "emission_date": "05/01/23",
+   "year": 2023,
+   "sha256_16": "0531aeadd9ee8249",
+   "status": "ok",
+   "text_chars": 10155,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "06123cd649e2db89a3ddff3ddaf96617c1a867589d6e3577e0a0ac5a1e396753"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3369/2023/7494447.pdf",
+   "doc_id": "7494447",
+   "airline": "AZUL",
+   "emission_date": "2023-02-05T00:00:00",
+   "year": 2023,
+   "sha256_16": "af0c701195ad3823",
+   "status": "ok",
+   "text_chars": 2880,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "ff4656d538b85debdc9cb4bbc1080c1157f482841db17f9ff7d0c44faa04776c"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3396/2023/7571177.pdf",
+   "doc_id": "7571177",
+   "airline": "Air France",
+   "emission_date": "28/03/2023",
+   "year": 2023,
+   "sha256_16": "f673cc0aac26a8ed",
+   "status": "ok",
+   "text_chars": 10712,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "50db6ca4f458600338bed1275e210b1e3f5055dbf1a8541a3aac972982b78091"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/974/2023/7636234.pdf",
+   "doc_id": "7636234",
+   "airline": "Aerolineas Argentinas",
+   "emission_date": "11/10/2023",
+   "year": 2023,
+   "sha256_16": "d1bb76f785e58902",
+   "status": "ok",
+   "text_chars": 1905,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "0c7e5589d71fffd7484bf4beaf320734e76ca0412f16525f4d197a3efc8ee2f3"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3545/2023/7658663.pdf",
+   "doc_id": "7658663",
+   "airline": "TAP",
+   "emission_date": "2023-06-13T00:00:00",
+   "year": 2023,
+   "sha256_16": "1fd1fefb6d0b77e1",
+   "status": "scanned (no text layer)",
+   "text_chars": 2,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/1472/2024/7674366.pdf",
+   "doc_id": "7674366",
+   "airline": "LATAM",
+   "emission_date": "2024-01-17T00:00:00",
+   "year": 2024,
+   "sha256_16": "d48430d5995a7c66",
+   "status": "scanned (no text layer)",
+   "text_chars": 3,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2236/2024/7674638.pdf",
+   "doc_id": "7674638",
+   "airline": "AZUL",
+   "emission_date": "22/01/2024",
+   "year": 2024,
+   "sha256_16": "4f04f824f78cbd30",
+   "status": "ok",
+   "text_chars": 493,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "HTTP Error 429: Too Many Requests",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2938/2024/7675976.pdf",
+   "doc_id": "7675976",
+   "airline": "LATAM",
+   "emission_date": "2024-01-24T00:00:00",
+   "year": 2024,
+   "sha256_16": "2df064d12694e6eb",
+   "status": "scanned (no text layer)",
+   "text_chars": 1,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3043/2024/7677841.pdf",
+   "doc_id": "7677841",
+   "airline": "LATAM",
+   "emission_date": "2024-01-28T00:00:00",
+   "year": 2024,
+   "sha256_16": "6d4e1015d20f5bbc",
+   "status": "scanned (no text layer)",
+   "text_chars": 2,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3216/2024/7711986.pdf",
+   "doc_id": "7711986",
+   "airline": "United Airlines",
+   "emission_date": "2024-03-20T00:00:00",
+   "year": 2024,
+   "sha256_16": "702a088a1a3ce8ac",
+   "status": "scanned (no text layer)",
+   "text_chars": 3,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2999/2024/7717213.pdf",
+   "doc_id": "7717213",
+   "airline": "LATAM",
+   "emission_date": "2024-04-01T00:00:00",
+   "year": 2024,
+   "sha256_16": "6361b16664dcbdc9",
+   "status": "scanned (no text layer)",
+   "text_chars": 0,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3345/2024/7731389.pdf",
+   "doc_id": "7731389",
+   "airline": "Delta",
+   "emission_date": "2024-04-11T00:00:00",
+   "year": 2024,
+   "sha256_16": "61a2d36eb323e8f1",
+   "status": "scanned (no text layer)",
+   "text_chars": 0,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3520/2024/7734666.pdf",
+   "doc_id": "7734666",
+   "airline": "Avianca",
+   "emission_date": "2024-05-06T00:00:00",
+   "year": 2024,
+   "sha256_16": "7963ef8df426d756",
+   "status": "ok",
+   "text_chars": 5750,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "1315aad903e8876d41d06cb0f924d1daf67d2139eb29b421dd6caa6c011e9507"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2900/2024/7839361.pdf",
+   "doc_id": "7839361",
+   "airline": "LATAM",
+   "emission_date": "2024-12-02T00:00:00",
+   "year": 2024,
+   "sha256_16": "7bbc5ede8910d800",
+   "status": "scanned (no text layer)",
+   "text_chars": 3,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3079/2024/7841105.pdf",
+   "doc_id": "7841105",
+   "airline": "LATAM",
+   "emission_date": "2024-12-03T00:00:00",
+   "year": 2024,
+   "sha256_16": "0b19951cb13accd7",
+   "status": "scanned (no text layer)",
+   "text_chars": 4,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3788/2025/7856771.pdf",
+   "doc_id": "7856771",
+   "airline": "GOL",
+   "emission_date": "2025-01-09T00:00:00",
+   "year": 2025,
+   "sha256_16": "87a2c6b325128dd0",
+   "status": "ok",
+   "text_chars": 2103,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "bf8fd58cd2ad0476acc653727e859c2479b0aaca76a2365da9ce9582d240bc63"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3788/2025/7858134.pdf",
+   "doc_id": "7858134",
+   "airline": "LATAM",
+   "emission_date": "09/01/25",
+   "year": 2025,
+   "sha256_16": "b862e1a5744cd317",
+   "status": "ok",
+   "text_chars": 11905,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "e18ca62cd7965a7ef60cb84df39b50ac7593692f954d43cb6575ef0b9fc07f17"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/583/2025/7862533.pdf",
+   "doc_id": "7862533",
+   "airline": "LATAM",
+   "emission_date": "2025-01-26T00:00:00",
+   "year": 2025,
+   "sha256_16": "93b1303435a8e05c",
+   "status": "scanned (no text layer)",
+   "text_chars": 2,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3430/2025/7868805.pdf",
+   "doc_id": "7868805",
+   "airline": "AZUL",
+   "emission_date": "2025-01-13T00:00:00",
+   "year": 2025,
+   "sha256_16": "8596be974e84c738",
+   "status": "scanned (no text layer)",
+   "text_chars": 4,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2911/2025/7900776.pdf",
+   "doc_id": "7900776",
+   "airline": "American Airlines",
+   "emission_date": "31/12/2024",
+   "year": 2024,
+   "sha256_16": "60aae1b77071555d",
+   "status": "ok",
+   "text_chars": 5834,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "0f11424a0245f993e75e2cde3021182ad7a6e73b95b72f13758a897dd36fd215"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3216/2025/7917954.pdf",
+   "doc_id": "7917954",
+   "airline": "United Airlines",
+   "emission_date": "28/04/2025",
+   "year": 2025,
+   "sha256_16": "eee82e6087af3df9",
+   "status": "ok",
+   "text_chars": 7976,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "d1cf4aa047534b4649a301469cf0097012b446a74c05d43251ac958521b108bb"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3081/2025/7964503.pdf",
+   "doc_id": "7964503",
+   "airline": "KLM",
+   "emission_date": "15/07/2025",
+   "year": 2025,
+   "sha256_16": "28ead15d2f4a9d03",
+   "status": "ok",
+   "text_chars": 3925,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "ee8073a8750ae9266386664a79d0df2a1a59b5910501fd73ddc07a4f154165d7"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3626/2026/8040138.pdf",
+   "doc_id": "8040138",
+   "airline": "LATAM",
+   "emission_date": "05/12/25",
+   "year": 2025,
+   "sha256_16": "7dcc8e9d40851894",
+   "status": "ok",
+   "text_chars": 17232,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "core_frozen_set": true,
+   "sample_tokens": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "dae9ac7ee6cf60c83f3d5f524354d662a99749f2787a5badc8a0b5ab649bb419"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3289/2026/8041013.pdf",
+   "doc_id": "8041013",
+   "airline": "AZUL",
+   "emission_date": "2026-01-21T00:00:00",
+   "year": 2026,
+   "sha256_16": "6c67736c9cacb8fb",
+   "status": "scanned (no text layer)",
+   "text_chars": 0,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2225/2026/8046852.pdf",
+   "doc_id": "8046852",
+   "airline": "GOL",
+   "emission_date": "2026-01-30T00:00:00",
+   "year": 2026,
+   "sha256_16": "fac63742d3d9c95f",
+   "status": "ok",
+   "text_chars": 2473,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "93fa9f809c1984327498e690fcbd3ee8105f9f5a1b49bbc39a4dd7e74fc8a568"
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2329/2026/8050314.pdf",
+   "doc_id": "8050314",
+   "airline": "LATAM",
+   "emission_date": "2026-01-29T00:00:00",
+   "year": 2026,
+   "sha256_16": "3696f8f03bc69db8",
+   "status": "scanned (no text layer)",
+   "text_chars": 2,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/733/2026/8071678.pdf",
+   "doc_id": "8071678",
+   "airline": "American Airlines",
+   "emission_date": "2026-03-08T00:00:00",
+   "year": 2026,
+   "sha256_16": "8df8803ccfe77863",
+   "status": "scanned (no text layer)",
+   "text_chars": 1,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "n/a (scanned image, no text layer sent)",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/3550/2026/8078197.pdf",
+   "doc_id": "8078197",
+   "airline": "LATAM",
+   "emission_date": "2026-04-06T00:00:00",
+   "year": 2026,
+   "sha256_16": "8d198d1f25b281a8",
+   "status": "ok",
+   "text_chars": 1319,
+   "fingerprints": [
+    "Rio do janeiro",
+    "de orden"
+   ],
+   "core_frozen_set": false,
+   "sample_tokens": [
+    "Rio do janeiro",
+    "de orden"
+   ],
+   "mojibake_count": 0,
+   "mechacut_verdict": "HTTP Error 429: Too Many Requests",
+   "mechacut_sha": null
+  },
+  {
+   "source": "camara_dos_deputados",
+   "url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/169/2026/8122315.pdf",
+   "doc_id": "8122315",
+   "airline": "LATAM",
+   "emission_date": "2026-06-25T00:00:00",
+   "year": 2026,
+   "sha256_16": "5293448b823a9c5a",
+   "status": "ok",
+   "text_chars": 849,
+   "fingerprints": [],
+   "core_frozen_set": false,
+   "sample_tokens": [],
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "eaf725b15ce96cd6ff7334ba02778d168032adc5f47aa787352278e98c81b6c0"
+  }
+ ],
+ "wave1_recheck_same_matcher": [
+  {
+   "file": "c125347.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s150913.pdf",
+   "year": null,
+   "fingerprints": [
+    "E-RETIAL"
+   ],
+   "emission_date": null,
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s158492.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s159727.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s167055.pdf",
+   "year": 2021,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "21/09/2021",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s168745.pdf",
+   "year": null,
+   "fingerprints": [
+    "E-RETIAL",
+    "dadata",
+    "serã"
+   ],
+   "emission_date": null,
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s170112.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s179895.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s183209.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s185568.pdf",
+   "year": 2022,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "09/08/22",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s190948.pdf",
+   "year": 2022,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "04/11/22",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s218373.pdf",
+   "year": 2024,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "12/01/24",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s232432.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s237404.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s262835.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s279763.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303505.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303850.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303851.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": "10/11/2026",
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303852.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303853.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303854.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303855.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303856.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303857.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303858.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303859.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303860.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303861.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": "15/11/2026",
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303862.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303863.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303864.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303865.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303866.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303867.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ],
+   "emission_date": "16/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303868.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ],
+   "emission_date": "16/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303869.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303870.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303871.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303873.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303874.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303875.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303876.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303877.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": "13/11/2026",
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303878.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "09/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303879.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303880.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303976.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "18/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303990.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303991.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303992.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303993.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303994.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "18/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303995.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303996.pdf",
+   "year": 2026,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "18/11/26",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "s303997.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303998.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "s303999.pdf",
+   "year": 2026,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "t268251.pdf",
+   "year": 2025,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "13/07/25",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "t274803.pdf",
+   "year": 2025,
+   "fingerprints": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "emission_date": "14/11/25",
+   "status": "ok",
+   "core_frozen_set": true
+  },
+  {
+   "file": "other_o179148.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "other_o183735.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "other_o197594.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "other_o200701.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "other_o207281.pdf",
+   "year": 2023,
+   "fingerprints": [],
+   "emission_date": "01/06/2023",
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "other_o210903.pdf",
+   "year": 2023,
+   "fingerprints": [],
+   "emission_date": "18/08/2023",
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "other_o215400.pdf",
+   "year": 2023,
+   "fingerprints": [],
+   "emission_date": "10/10/2023",
+   "status": "ok",
+   "core_frozen_set": false
+  },
+  {
+   "file": "other_o237404.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  },
+  {
+   "file": "other_o239460.pdf",
+   "year": null,
+   "fingerprints": [],
+   "emission_date": null,
+   "status": "scan",
+   "core_frozen_set": false
+  }
+ ],
+ "positive_control": {
+  "synthetic_text": "Recibo sintético de controle: valor com acento duplo Ã© e São Paulo.",
+  "regex_fired": true,
+  "bench": {
+   "bom": null,
+   "encoding": "utf-8",
+   "declared": false,
+   "verdict": "valid utf-8 without BOM",
+   "bytes": 72,
+   "sha256": "e109fed168e952d9e23cc0121382753d77137ab7f555461f9be5535bc03721c6"
+  },
+  "bench_reads_mojibake_as": "valid utf-8 (by design, see method)"
+ },
+ "summary": {
+  "files_analyzed": 58,
+  "files_with_text_layer": 42,
+  "scanned": 16,
+  "new_fingerprint_hits_any": 11,
+  "new_core_frozen_hits": 10,
+  "new_senado_core_hits": 7,
+  "new_camara_core_hits": 3,
+  "wave1_core_frozen_docs_same_matcher": 24,
+  "wave1_any_fingerprint_docs": 26,
+  "cumulative_frozen_fingerprint_docs": 34,
+  "fingerprint_evolution_by_year": {
+   "2021": {
+    "E-RETIAL": 1,
+    "Rio do janeiro": 1,
+    "dadata": 1,
+    "de orden": 1,
+    "serã": 1
+   },
+   "2022": {
+    "E-RETIAL": 2,
+    "Rio do janeiro": 2,
+    "dadata": 2,
+    "de orden": 2,
+    "serã": 2
+   },
+   "2023": {
+    "E-RETIAL": 1,
+    "Rio do janeiro": 1,
+    "dadata": 1,
+    "de orden": 1,
+    "serã": 1
+   },
+   "2024": {
+    "E-RETIAL": 1,
+    "Rio do janeiro": 1,
+    "dadata": 1,
+    "de orden": 1,
+    "serã": 1
+   },
+   "2025": {
+    "E-RETIAL": 11,
+    "Rio do janeiro": 11,
+    "dadata": 11,
+    "de orden": 11,
+    "serã": 11
+   },
+   "2026": {
+    "Rio do janeiro": 19,
+    "de orden": 19,
+    "E-RETIAL": 18,
+    "dadata": 18,
+    "serã": 18,
+    "tÃªm": 8
+   },
+   "?": {
+    "E-RETIAL": 2,
+    "dadata": 1,
+    "serã": 1
+   }
+  },
+  "per_airline_tally_files": {
+   "GOL": 6,
+   "LATAM": 28,
+   "non-ticket/other": 10,
+   "AZUL": 4,
+   "Air France": 1,
+   "Aerolineas Argentinas": 1,
+   "TAP": 1,
+   "United Airlines": 2,
+   "Delta": 1,
+   "Avianca": 1,
+   "American Airlines": 2,
+   "KLM": 1
+  },
+  "per_airline_tally_fingerprint_hits": {
+   "LATAM": 11
+  },
+  "evolution_verdict": "The four core frozen strings (Rio do janeiro, E-RETIAL, de orden, serã) recur byte-identical in every sampled year 2021-2026; no mid-freeze template edit observed. 'tÃªm' + 'Bruselas' status: tÃªm appears only in the Nov-2026 emission batches AND alongside same-day tickets without it (303857 vs 303863, both 09/11/26) -> a fare-branch variant, not a boundary; Bruselas was found in NONE of the 129 scanned documents this wave.",
+  "fingerprint_evolution_core_by_year": {
+   "2021": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "2022": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "2023": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "2024": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "2025": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã"
+   ],
+   "2026": [
+    "E-RETIAL",
+    "Rio do janeiro",
+    "dadata",
+    "de orden",
+    "serã",
+    "tÃªm"
+   ]
+  },
+  "note_w1_definitions": "wave1 'any fingerprint' docs = 26; strict core-4 set = 24"
+ }
+}

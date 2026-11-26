@@ -1,0 +1,414 @@
+[
+ {
+  "file": "c125347.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s150913.pdf",
+  "status": "ok",
+  "latam_fp": 1,
+  "mojibake": 0,
+  "sha256": "28345a28fc234a69",
+  "date": null
+ },
+ {
+  "file": "s158492.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s159727.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s167055.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "9754713d071efe43",
+  "date": "21/09/2021"
+ },
+ {
+  "file": "s168745.pdf",
+  "status": "ok",
+  "latam_fp": 5,
+  "mojibake": 0,
+  "sha256": "2349af8d2493641d",
+  "date": null
+ },
+ {
+  "file": "s170112.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s179895.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s183209.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s185568.pdf",
+  "status": "ok",
+  "latam_fp": 7,
+  "mojibake": 0,
+  "sha256": "e1a0c13c6e83d407",
+  "date": "09/08/22"
+ },
+ {
+  "file": "s190948.pdf",
+  "status": "ok",
+  "latam_fp": 7,
+  "mojibake": 0,
+  "sha256": "cb7818ea2346248a",
+  "date": "04/11/22"
+ },
+ {
+  "file": "s218373.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "d2da5bfe9bdf5a50",
+  "date": "12/01/24"
+ },
+ {
+  "file": "s232432.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s237404.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s262835.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s279763.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303505.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s303850.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303851.pdf",
+  "status": "ok",
+  "latam_fp": 0,
+  "mojibake": 0,
+  "sha256": "923f7c837cd82150",
+  "date": "10/11/2026"
+ },
+ {
+  "file": "s303852.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303853.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303854.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303855.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s303856.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s303857.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "f890763be1cfe74f",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303858.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "26a589e0ac733879",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303859.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "6e8f22a8434dd81a",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303860.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "87480ef328f33f29",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303861.pdf",
+  "status": "ok",
+  "latam_fp": 0,
+  "mojibake": 0,
+  "sha256": "996883555e002a5d",
+  "date": "15/11/2026"
+ },
+ {
+  "file": "s303862.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "f359fcc3541dc4ef",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303863.pdf",
+  "status": "ok",
+  "latam_fp": 9,
+  "mojibake": 1,
+  "sha256": "ce26a9d99f928211",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303864.pdf",
+  "status": "ok",
+  "latam_fp": 9,
+  "mojibake": 1,
+  "sha256": "32f71eddcd3f5c48",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303865.pdf",
+  "status": "ok",
+  "latam_fp": 9,
+  "mojibake": 1,
+  "sha256": "0ddc23503a0ec7d0",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303866.pdf",
+  "status": "ok",
+  "latam_fp": 0,
+  "mojibake": 0,
+  "sha256": "398d6f7c9ed706f4",
+  "date": null
+ },
+ {
+  "file": "s303867.pdf",
+  "status": "ok",
+  "latam_fp": 9,
+  "mojibake": 1,
+  "sha256": "315ca71c8e266353",
+  "date": "16/11/26"
+ },
+ {
+  "file": "s303868.pdf",
+  "status": "ok",
+  "latam_fp": 9,
+  "mojibake": 1,
+  "sha256": "b463d54da105b02b",
+  "date": "16/11/26"
+ },
+ {
+  "file": "s303869.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303870.pdf",
+  "status": "ok",
+  "latam_fp": 0,
+  "mojibake": 0,
+  "sha256": "c2986679d91f6204",
+  "date": null
+ },
+ {
+  "file": "s303871.pdf",
+  "status": "ok",
+  "latam_fp": 9,
+  "mojibake": 1,
+  "sha256": "89a24d568a3ed595",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303873.pdf",
+  "status": "ok",
+  "latam_fp": 9,
+  "mojibake": 1,
+  "sha256": "d8fdafd1ec0fce1a",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303874.pdf",
+  "status": "ok",
+  "latam_fp": 9,
+  "mojibake": 1,
+  "sha256": "8adf2feca3c8908f",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303875.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303876.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "65f5be5492af96fa",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303877.pdf",
+  "status": "ok",
+  "latam_fp": 0,
+  "mojibake": 0,
+  "sha256": "87f12944e729b74b",
+  "date": "13/11/2026"
+ },
+ {
+  "file": "s303878.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "0af832157c2c877e",
+  "date": "09/11/26"
+ },
+ {
+  "file": "s303879.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303880.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "s303976.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "be6bb06aaffbc739",
+  "date": "18/11/26"
+ },
+ {
+  "file": "s303990.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303991.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303992.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303993.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303994.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "7fb267828de5dd5e",
+  "date": "18/11/26"
+ },
+ {
+  "file": "s303995.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303996.pdf",
+  "status": "ok",
+  "latam_fp": 8,
+  "mojibake": 0,
+  "sha256": "128c1af732ca90cf",
+  "date": "18/11/26"
+ },
+ {
+  "file": "s303997.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303998.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "s303999.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "t268251.pdf",
+  "status": "ok",
+  "latam_fp": 7,
+  "mojibake": 0,
+  "sha256": "d3fd07d087b63ca8",
+  "date": "13/07/25"
+ },
+ {
+  "file": "t274803.pdf",
+  "status": "ok",
+  "latam_fp": 7,
+  "mojibake": 0,
+  "sha256": "31571e20c836be20",
+  "date": "14/11/25"
+ },
+ {
+  "file": "o179148.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "o183735.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "o197594.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "o200701.pdf",
+  "status": "scan (pas de couche texte)"
+ },
+ {
+  "file": "o207281.pdf",
+  "status": "ok",
+  "latam_fp": 0,
+  "mojibake": 0,
+  "sha256": "764b2fd0ec24344e",
+  "date": "01/06/2023"
+ },
+ {
+  "file": "o210903.pdf",
+  "status": "ok",
+  "latam_fp": 0,
+  "mojibake": 0,
+  "sha256": "12e67b2e588a0f3b",
+  "date": "18/08/2023"
+ },
+ {
+  "file": "o215400.pdf",
+  "status": "ok",
+  "latam_fp": 0,
+  "mojibake": 0,
+  "sha256": "fb2549e34fecfb9f",
+  "date": "10/10/2023"
+ },
+ {
+  "file": "o237404.pdf",
+  "status": "scan/unreadable"
+ },
+ {
+  "file": "o239460.pdf",
+  "status": "scan (pas de couche texte)"
+ }
+]

@@ -1,0 +1,937 @@
+{
+ "corpus": "google-microsoft mojibake study (same method as LATAM airline corpus study)",
+ "method": "curl -A Mozilla/5.0 download -> pypdf 6.21.4 text-layer extraction -> regex count; EUR-Lex OJ files retrieved via browser fetch; positive-control and byte-pair probe verification",
+ "regex": "Ã©|Ã£|Ãª|Ã¡|Ã­|Ã³|Ãº|Ã§|Â[ºª]|â€|Ã¼|Ã¶|Ã¤ (+ NBSP artifact 'Â ', + byte-pair probe [ÃÂ][\\x00-\\xff])",
+ "generated_utc": "2026-11-26T10:38:24Z",
+ "files": [
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_en_eu.pdf",
+   "company": "google",
+   "sha256_16": "7473d7726cf6770b",
+   "pages": 26,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 33755,
+   "pages_with_text_layer": 26,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Terms of Service, official PDF export (en-EU)"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_pt-BR_eu.pdf",
+   "company": "google",
+   "sha256_16": "749748c14897c08a",
+   "pages": 28,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 37125,
+   "pages_with_text_layer": 28,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export pt-BR"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_es_eu.pdf",
+   "company": "google",
+   "sha256_16": "3eb2e776986905ee",
+   "pages": 29,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 40186,
+   "pages_with_text_layer": 29,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export es"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_fr_eu.pdf",
+   "company": "google",
+   "sha256_16": "b906cf2dba4abc23",
+   "pages": 29,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 43125,
+   "pages_with_text_layer": 29,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export fr"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_de_eu.pdf",
+   "company": "google",
+   "sha256_16": "724eb1ec7bf09a92",
+   "pages": 29,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 41318,
+   "pages_with_text_layer": 29,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export de"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_it_eu.pdf",
+   "company": "google",
+   "sha256_16": "7174a1f07c1cdf00",
+   "pages": 28,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 40579,
+   "pages_with_text_layer": 28,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export it"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_pl_eu.pdf",
+   "company": "google",
+   "sha256_16": "1f982c18316bab75",
+   "pages": 29,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 42415,
+   "pages_with_text_layer": 29,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export pl"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_ro_eu.pdf",
+   "company": "google",
+   "sha256_16": "2e0cb84421a8a393",
+   "pages": 28,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 41942,
+   "pages_with_text_layer": 28,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export ro"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_tr_eu.pdf",
+   "company": "google",
+   "sha256_16": "6828b4def68b90fc",
+   "pages": 27,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 38010,
+   "pages_with_text_layer": 27,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export tr"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/terms/pdf/20260730/4te5pybt/google_terms_of_service_ja_eu.pdf",
+   "company": "google",
+   "sha256_16": "2b944de0b2849a7a",
+   "pages": 29,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 19026,
+   "pages_with_text_layer": 29,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m150",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google ToS PDF export ja"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/privacy/pdf/20261016/k8m9x4w2/google_privacy_policy_en_eu.pdf",
+   "company": "google",
+   "sha256_16": "6525e06649fbbf1d",
+   "pages": 63,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 90982,
+   "pages_with_text_layer": 63,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m155",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Privacy Policy official PDF export (en-EU)"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/privacy/pdf/20261016/k8m9x4w2/google_privacy_policy_pt-BR_eu.pdf",
+   "company": "google",
+   "sha256_16": "351efce8219243db",
+   "pages": 70,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 101671,
+   "pages_with_text_layer": 70,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m155",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Privacy Policy PDF export pt-BR"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/privacy/pdf/20261016/k8m9x4w2/google_privacy_policy_fr_eu.pdf",
+   "company": "google",
+   "sha256_16": "779b0dfd57ca56dd",
+   "pages": 75,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 119740,
+   "pages_with_text_layer": 75,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m155",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Privacy Policy PDF export fr"
+  },
+  {
+   "url": "https://www.gstatic.com/policies/privacy/pdf/20261016/k8m9x4w2/google_privacy_policy_de_eu.pdf",
+   "company": "google",
+   "sha256_16": "c9cb8aa71b5270d5",
+   "pages": 74,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 113508,
+   "pages_with_text_layer": 74,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m155",
+   "creator": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessC",
+   "year_hint": "2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Privacy Policy PDF export de"
+  },
+  {
+   "url": "https://services.google.com/fh/files/misc/de-google-cloud-terms-of-service.pdf",
+   "company": "google",
+   "sha256_16": "45b38eec31174602",
+   "pages": 22,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 66213,
+   "pages_with_text_layer": 22,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m142",
+   "creator": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like ",
+   "year_hint": "2023-2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Cloud Terms of Service, German contract PDF"
+  },
+  {
+   "url": "https://services.google.com/fh/files/misc/fr-google-cloud-terms-of-service.pdf",
+   "company": "google",
+   "sha256_16": "aa732b760b95deab",
+   "pages": 21,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 68006,
+   "pages_with_text_layer": 21,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m142",
+   "creator": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like ",
+   "year_hint": "2023-2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Cloud Terms of Service, French contract PDF"
+  },
+  {
+   "url": "https://services.google.com/fh/files/misc/pt-br-google-cloud-terms-of-service.pdf",
+   "company": "google",
+   "sha256_16": "74be0b868e149bcb",
+   "pages": 21,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 63541,
+   "pages_with_text_layer": 21,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m142",
+   "creator": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like ",
+   "year_hint": "2023-2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Cloud Terms of Service, pt-BR contract PDF"
+  },
+  {
+   "url": "https://services.google.com/fh/files/misc/id-google-cloud-terms-of-service.pdf",
+   "company": "google",
+   "sha256_16": "83b66dac555a527f",
+   "pages": 21,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 62512,
+   "pages_with_text_layer": 21,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m142",
+   "creator": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like ",
+   "year_hint": "2023-2026",
+   "source_kind": "google-own-pipeline",
+   "note": "Google Cloud Terms of Service, Indonesian contract PDF"
+  },
+  {
+   "url": "https://ec.europa.eu/competition/antitrust/cases/dec_docs/39740/39740_14996_3.pdf",
+   "company": "google",
+   "sha256_16": "d25a147a2a3912b3",
+   "pages": 216,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 532527,
+   "pages_with_text_layer": 190,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "",
+   "creator": "",
+   "year_hint": "2017",
+   "source_kind": "eu-regulatory",
+   "note": "EC Decision AT.39740 Google Search (Shopping)"
+  },
+  {
+   "url": "https://ec.europa.eu/competition/antitrust/cases/dec_docs/40099/40099_9993_3.pdf",
+   "company": "google",
+   "sha256_16": "f346e3b729f4fbb4",
+   "pages": 328,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 1003285,
+   "pages_with_text_layer": 301,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "",
+   "creator": "",
+   "year_hint": "2018",
+   "source_kind": "eu-regulatory",
+   "note": "EC Decision AT.40099 Google Android"
+  },
+  {
+   "url": "https://ec.europa.eu/competition/antitrust/cases1/20263/AT_40670_18812.pdf",
+   "company": "google",
+   "sha256_16": "ca7c618537555d6f",
+   "pages": 363,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 1151553,
+   "pages_with_text_layer": 363,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "",
+   "creator": "",
+   "year_hint": "2025",
+   "source_kind": "eu-regulatory",
+   "note": "EC Decision AT.40670 Google Adtech & Data (2025)"
+  },
+  {
+   "url": "https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_17_1784/IP_17_1784_EN.pdf",
+   "company": "google",
+   "sha256_16": "fc7a0f7055d6047f",
+   "pages": 4,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 13184,
+   "pages_with_text_layer": 4,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Qt 4.8.7",
+   "creator": "wkhtmltopdf 0.12.6",
+   "year_hint": "2017",
+   "source_kind": "eu-regulatory",
+   "note": "EC press release IP/17/1784 (Google Shopping fine) PDF print"
+  },
+  {
+   "url": "https://portal.tce.go.gov.br/documents/20181/1304468/Edital+-+Preg%C3%A3o+23-2025+-+Google+Cloud+Platform.pdf/bc8a3a80-e82f-4186-8165-55bf03feec4a?version=1.0",
+   "company": "google",
+   "sha256_16": "cfea95f7a337736a",
+   "pages": 82,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 197873,
+   "pages_with_text_layer": 82,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Microsoft® Word 2016",
+   "creator": "Microsoft® Word 2016",
+   "year_hint": "2025",
+   "source_kind": "public-procurement BR",
+   "note": "TCE-GO Pregao 23/2025 Google Cloud Platform edital+minuta"
+  },
+  {
+   "url": "https://www.sec.gov/Archives/edgar/data/1652044/000130817925000513/goog012714-ars.pdf",
+   "company": "google",
+   "sha256_16": "5ac77db34cc0eab3",
+   "pages": 110,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 365267,
+   "pages_with_text_layer": 110,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "macOS Version 14.6.1 (Build 23G93) Quartz PDFContext",
+   "creator": "",
+   "year_hint": "2025",
+   "source_kind": "SEC EDGAR exhibit (company-generated)",
+   "note": "Alphabet Annual Report (SEC EDGAR courtesy PDF)"
+  },
+  {
+   "url": "https://www.sec.gov/Archives/edgar/data/1652044/000130817926000344/goog014907-ars.pdf",
+   "company": "google",
+   "sha256_16": "bf2062d542b6e60d",
+   "pages": 112,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 357589,
+   "pages_with_text_layer": 111,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Adobe PDF Library 17.0",
+   "creator": "Adobe InDesign 18.5 (Macintosh)",
+   "year_hint": "2026",
+   "source_kind": "SEC EDGAR exhibit (company-generated)",
+   "note": "Alphabet Annual Report (SEC EDGAR courtesy PDF)"
+  },
+  {
+   "url": "https://uca.edu/it/files/2016/03/GoogleAppsforEducationOnlineAgreement.pdf",
+   "company": "google",
+   "sha256_16": "a02bb88c334762e4",
+   "pages": 14,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 39072,
+   "pages_with_text_layer": 14,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF",
+   "creator": "",
+   "year_hint": "2016",
+   "source_kind": "education-contract-template (Google Apps agreement text)",
+   "note": "Google Apps for Education Online Agreement (template hosted by UCA)"
+  },
+  {
+   "url": "https://www.microsoft.com/licensing/docs/documents/download/Microsoft%20Customer%20Agreement.pdf",
+   "company": "microsoft",
+   "sha256_16": "6e8bb0dc3d50d164",
+   "pages": 11,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 41798,
+   "pages_with_text_layer": 11,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Microsoft® Word for Microsoft 365",
+   "creator": "Microsoft® Word for Microsoft 365",
+   "year_hint": "2023-2026",
+   "source_kind": "microsoft-own-pipeline",
+   "note": "Microsoft Customer Agreement, official PDF"
+  },
+  {
+   "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/mcaps-MSFT-GSA-Commercial-Supplier-Agreement-Terms.pdf",
+   "company": "microsoft",
+   "sha256_16": "16123bbf66fd013a",
+   "pages": 294,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 1001871,
+   "pages_with_text_layer": 294,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Adobe Acrobat Pro (64-bit) 24.4.20243",
+   "creator": "Adobe Acrobat Pro (64-bit) 24.4.20243",
+   "year_hint": "2023-2026",
+   "source_kind": "microsoft-own-pipeline",
+   "note": "MSFT GSA Commercial Supplier Agreement Terms (official CDN PDF)"
+  },
+  {
+   "url": "https://download.microsoft.com/download/1/F/5/1F5357DD-F7C8-4CC8-8C5F-7F6B1569ECF0/Transactional_Licensing_Comparison_Chart.pdf",
+   "company": "microsoft",
+   "sha256_16": "5747330a74e92cc8",
+   "pages": 5,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 8575,
+   "pages_with_text_layer": 5,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "macOS Version 15.4.1 (Build 24E263) Quartz PDFContext",
+   "creator": "",
+   "year_hint": "2023-2026",
+   "source_kind": "microsoft-own-pipeline",
+   "note": "Microsoft licensing agreements comparison chart (official)"
+  },
+  {
+   "url": "https://www.bemopro.com/hubfs/legal/CSPagreement.pdf?hsLang=en",
+   "company": "microsoft",
+   "sha256_16": "5e81a0551730405f",
+   "pages": 10,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 42708,
+   "pages_with_text_layer": 10,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Microsoft® Word for Microsoft 365",
+   "creator": "Microsoft® Word for Microsoft 365",
+   "year_hint": "2024",
+   "source_kind": "microsoft-own-pipeline",
+   "note": "Microsoft Customer Agreement (CSP) copy hosted by partner BEMO"
+  },
+  {
+   "url": "https://ec.europa.eu/competition/mergers/cases1/202330/M_10646_9311516_7443_3.pdf",
+   "company": "microsoft",
+   "sha256_16": "7d0b3f8f590d6fa6",
+   "pages": 258,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 792745,
+   "pages_with_text_layer": 245,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "",
+   "creator": "",
+   "year_hint": "2023",
+   "source_kind": "eu-regulatory",
+   "note": "EC Decision M.10646 Microsoft/Activision Blizzard"
+  },
+  {
+   "url": "https://ec.europa.eu/competition/mergers/cases/decisions/m8124_1349_5.pdf",
+   "company": "microsoft",
+   "sha256_16": "2301b19f85d16d6b",
+   "pages": 117,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 317968,
+   "pages_with_text_layer": 93,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "",
+   "creator": "",
+   "year_hint": "2016",
+   "source_kind": "eu-regulatory",
+   "note": "EC Decision M.8124 Microsoft/LinkedIn"
+  },
+  {
+   "url": "https://portal.tce.go.gov.br/documents/20181/1532543/Edital+PE+25-2026+-+Licen%C3%A7as+Microsoft.pdf/54e02d31-2c11-4799-be56-e76aa6cbc630?version",
+   "company": "microsoft",
+   "sha256_16": "ff3016fa7e690c51",
+   "pages": 84,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 225132,
+   "pages_with_text_layer": 84,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Microsoft® Word 2016",
+   "creator": "Microsoft® Word 2016",
+   "year_hint": "2026",
+   "source_kind": "public-procurement BR",
+   "note": "TCE-GO Pregao 25/2026 Microsoft licences edital+minuta"
+  },
+  {
+   "url": "https://static.agehab.go.gov.br/cpl/pregao.eletronico/2025.012/2025.012.p.001.pdf",
+   "company": "microsoft",
+   "sha256_16": "146554e6acd53e10",
+   "pages": 95,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 305203,
+   "pages_with_text_layer": 95,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m143",
+   "creator": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)",
+   "year_hint": "2025",
+   "source_kind": "public-procurement BR",
+   "note": "AGEHAB Pregao 012/2025 Microsoft 365 edital"
+  },
+  {
+   "url": "https://static.agehab.go.gov.br/cpl/pregao.eletronico/2025.012/2025.012.p.002.pdf",
+   "company": "microsoft",
+   "sha256_16": "c910c1233a9ddaf5",
+   "pages": 15,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 46116,
+   "pages_with_text_layer": 15,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m143",
+   "creator": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)",
+   "year_hint": "2025",
+   "source_kind": "public-procurement BR",
+   "note": "AGEHAB Pregao 012/2025 parecer juridico"
+  },
+  {
+   "url": "https://static.agehab.go.gov.br/cpl/pregao.eletronico/2025.012/2025.012.p.005.pdf",
+   "company": "microsoft",
+   "sha256_16": "0ec93ffac33cffe6",
+   "pages": 95,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 305231,
+   "pages_with_text_layer": 95,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Skia/PDF m143",
+   "creator": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)",
+   "year_hint": "2025",
+   "source_kind": "public-procurement BR",
+   "note": "AGEHAB Pregao 012/2025 Termo de Referencia/minuta contrato"
+  },
+  {
+   "url": "https://diariooficial.abc.go.gov.br/portal/edicoes/download/6917",
+   "company": "microsoft",
+   "sha256_16": "137f0067cd57f72d",
+   "pages": 91,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 598181,
+   "pages_with_text_layer": 91,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "GPL Ghostscript 9.20; modified using iText® 5.2.1 ©2000-2012 1T3XT BVBA",
+   "creator": "Adobe InDesign 20.1 (Windows)",
+   "year_hint": "2025",
+   "source_kind": "public-procurement BR",
+   "note": "Diario Oficial ABC GO 6917 (contratos Microsoft)"
+  },
+  {
+   "url": "https://it.nc.gov/documents/files/208c-web-summary/open",
+   "company": "microsoft",
+   "sha256_16": "7113e8687fac52d3",
+   "pages": 3,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 5129,
+   "pages_with_text_layer": 3,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Microsoft® Word for Microsoft 365",
+   "creator": "Microsoft® Word for Microsoft 365",
+   "year_hint": "2026",
+   "source_kind": "public-procurement US",
+   "note": "NC IT statewide reseller summary, Microsoft EA"
+  },
+  {
+   "url": "https://www.its.ms.gov/sites/default/files/ProcurementPDFs/EPL/Microsoft-3736/3736%20Instructions%20for%20Use%20-%2007312024.pdf",
+   "company": "microsoft",
+   "sha256_16": "9453f984ba8eb56c",
+   "pages": 11,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 24486,
+   "pages_with_text_layer": 11,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Microsoft: Print To PDF",
+   "creator": "",
+   "year_hint": "2024",
+   "source_kind": "public-procurement US",
+   "note": "Mississippi ITS EPL 3736 Microsoft Instructions for Use"
+  },
+  {
+   "url": "http://www.aqmd.gov/docs/default-source/Agendas/Governing-Board/2024/2024-sep6-008.pdf?sfvrsn=2",
+   "company": "microsoft",
+   "sha256_16": "5a9c3e203d1bce3b",
+   "pages": 2,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 3458,
+   "pages_with_text_layer": 2,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "AQMD",
+   "creator": "AQMD",
+   "year_hint": "2024",
+   "source_kind": "public-procurement US",
+   "note": "South Coast AQMD board item: Microsoft EA / Office 365"
+  },
+  {
+   "url": "https://docs.sandiego.gov/council_reso_ordinance/rao2026/R-316966.pdf",
+   "company": "microsoft",
+   "sha256_16": "3cd02981aef3ce95",
+   "pages": 6,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 11391,
+   "pages_with_text_layer": 6,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "OpenText PDF Writer: 5.15.0.37",
+   "creator": "",
+   "year_hint": "2026",
+   "source_kind": "public-procurement US",
+   "note": "City of San Diego resolution R-316966 Microsoft EA procurement"
+  },
+  {
+   "url": "https://seu-electronica.uoc.edu/content/dam/e-office/docs/en/2025_Condicions%20d'%C3%BAs%20dels%20serveis%20de%20Google_Workspace%20i%20Microsoft%20365%20per%20l'estudiantat_EN.pdf",
+   "company": "microsoft",
+   "sha256_16": "24b863c9a606b6d1",
+   "pages": 8,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 11529,
+   "pages_with_text_layer": 8,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Adobe PDF Library 25.1.213",
+   "creator": "Acrobat PDFMaker 25 para Word",
+   "year_hint": "2025",
+   "source_kind": "education institutional terms",
+   "note": "UOC terms of use for Google Workspace & Microsoft 365 services (institutional)"
+  },
+  {
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525245150/d908201ddef14a1.pdf",
+   "company": "microsoft",
+   "sha256_16": "86086b3fd19ac0ba",
+   "pages": 110,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 416197,
+   "pages_with_text_layer": 110,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Acrobat Distiller 8.1.0 (Windows)",
+   "creator": "Html2Pdf v2024.01.22.2, branch: main",
+   "year_hint": "2025",
+   "source_kind": "SEC EDGAR exhibit (company-generated)",
+   "note": "Microsoft DEF 14A proxy statement (SEC EDGAR PDF)"
+  },
+  {
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524242883/d858775ddef14a1.pdf",
+   "company": "microsoft",
+   "sha256_16": "43665df5cf29d298",
+   "pages": 102,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 345397,
+   "pages_with_text_layer": 102,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "Acrobat Distiller 8.1.0 (Windows)",
+   "creator": "",
+   "year_hint": "2024",
+   "source_kind": "SEC EDGAR exhibit (company-generated)",
+   "note": "Microsoft DEF 14A proxy statement (SEC EDGAR PDF)"
+  },
+  {
+   "url": "https://www10.goiania.go.gov.br/DadosINTER/Sicon/2025/SICON788687.pdf",
+   "company": "microsoft",
+   "sha256_16": "6255d2b7a9e0606d",
+   "pages": 27,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 84258,
+   "pages_with_text_layer": 27,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "producer": "PDFKit.NET 12.3.563.0 DMV10",
+   "creator": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)",
+   "year_hint": "2025",
+   "source_kind": "public-procurement BR",
+   "note": "Goiania SICON software subscription license contract (vendor TBD)"
+  },
+  {
+   "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/PDF/?uri=CELEX:52018XC0112%2801%29",
+   "company": "google",
+   "sha256_16": "3f031c42b14d053f",
+   "pages": 4,
+   "mojibake_count": 0,
+   "sample_tokens": [
+    "[legit-caps?] s comerciais. 1. INTRODUÇÃO (1) A decisão es ta",
+    "[legit-caps?] t e à Google. 2. DEFINIÇÃO DE MERCADO E DE POS",
+    "[legit-caps?] ÇÃO DE MERCADO E DE POSIÇÃO DOMINANTE (3) A dec"
+   ],
+   "chars": 13104,
+   "pages_with_text_layer": 4,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "any_C3_C2_sequences": {
+    "ÃO": 4
+   },
+   "producer": "Antenna House PDF Output Library 6.4.1077 (Windows (x64))",
+   "creator": "AH XSL Formatter V6.4 MR5 for Windows (x64) : 6.4.7.29948 (2017/07/31 11:23JST)",
+   "year_hint": "2017-2019",
+   "source_kind": "eu-regulatory (EUR-Lex OJ multilingual)",
+   "note": "EUR-Lex Official Journal summary, multilingual OJ typesetting pipeline"
+  },
+  {
+   "url": "https://eur-lex.europa.eu/legal-content/ES/TXT/PDF/?uri=CELEX:52018XC0112%2801%29",
+   "company": "google",
+   "sha256_16": "6a88152984029624",
+   "pages": 4,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 13475,
+   "pages_with_text_layer": 4,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "any_C3_C2_sequences": {},
+   "producer": "Antenna House PDF Output Library 6.4.1077 (Windows (x64))",
+   "creator": "AH XSL Formatter V6.4 MR5 for Windows (x64) : 6.4.7.29948 (2017/07/31 11:23JST)",
+   "year_hint": "2017-2019",
+   "source_kind": "eu-regulatory (EUR-Lex OJ multilingual)",
+   "note": "EUR-Lex Official Journal summary, multilingual OJ typesetting pipeline"
+  },
+  {
+   "url": "https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:52018XC0112%2801%29",
+   "company": "google",
+   "sha256_16": "3e46ca0b0866061f",
+   "pages": 4,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 13310,
+   "pages_with_text_layer": 4,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "any_C3_C2_sequences": {},
+   "producer": "Antenna House PDF Output Library 6.4.1077 (Windows (x64))",
+   "creator": "AH XSL Formatter V6.4 MR5 for Windows (x64) : 6.4.7.29948 (2017/07/31 11:23JST)",
+   "year_hint": "2017-2019",
+   "source_kind": "eu-regulatory (EUR-Lex OJ multilingual)",
+   "note": "EUR-Lex Official Journal summary, multilingual OJ typesetting pipeline"
+  },
+  {
+   "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/PDF/?uri=CELEX:52019XC1128%2802%29",
+   "company": "google",
+   "sha256_16": "b4af0794bb5f1405",
+   "pages": 4,
+   "mojibake_count": 0,
+   "sample_tokens": [],
+   "chars": 15083,
+   "pages_with_text_layer": 4,
+   "pattern_counts": {
+    "Â(space)": 0
+   },
+   "any_C3_C2_sequences": {},
+   "producer": "PDFlib+PDI 9.1.2p4 (C++/Win32)",
+   "creator": "Arbortext Advanced Print Publisher 11.2.5182/W",
+   "year_hint": "2017-2019",
+   "source_kind": "eu-regulatory (EUR-Lex OJ multilingual)",
+   "note": "EUR-Lex Official Journal summary, multilingual OJ typesetting pipeline"
+  }
+ ],
+ "summary": {
+  "total_files": 49,
+  "google_files": 30,
+  "microsoft_files": 19,
+  "corrupted_files": 0,
+  "total_mojibake_matches": 0,
+  "corrupted_google": 0,
+  "corrupted_microsoft": 0,
+  "worst_examples": [
+   {
+    "url": "https://diariooficial.abc.go.gov.br/portal/edicoes/download/6917",
+    "mojibake_count": 0,
+    "note": "highest C3/C2 byte-pair volume but verified LEGITIMATE uppercase Portuguese accents; zero true mojibake"
+   },
+   {
+    "url": "https://portal.tce.go.gov.br/documents/20181/1532543/Edital+PE+25-2026+-+Licen%C3%A7as+Microsoft.pdf/54e02d31-2c11-4799-be56-e76aa6cbc630?version",
+    "mojibake_count": 0,
+    "note": "highest C3/C2 byte-pair volume but verified LEGITIMATE uppercase Portuguese accents; zero true mojibake"
+   },
+   {
+    "url": "https://portal.tce.go.gov.br/documents/20181/1304468/Edital+-+Preg%C3%A3o+23-2025+-+Google+Cloud+Platform.pdf/bc8a3a80-e82f-4186-8165-55bf03feec4a?version=1.0",
+    "mojibake_count": 0,
+    "note": "highest C3/C2 byte-pair volume but verified LEGITIMATE uppercase Portuguese accents; zero true mojibake"
+   }
+  ],
+  "per_pipeline_clean": {
+   "google gstatic policy exports (Skia/PDF, 13 locales)": "0 mojibake",
+   "google services.google.com Cloud ToS (4 locales)": "0 mojibake",
+   "microsoft.com licensing + cdn-dynmedia + download.microsoft": "0 mojibake",
+   "EC antitrust/merger decisions + press releases": "0 mojibake",
+   "EUR-Lex OJ multilingual (PT/ES/FR)": "0 mojibake",
+   "SEC EDGAR company PDFs (Alphabet ARS, MSFT proxy)": "0 mojibake",
+   "BR gov procurement (Word 2016 / SEI Skia / InDesign-Ghostscript gazette)": "0 mojibake (all C3/C2 = legit caps)",
+   "US .gov procurement + .edu templates": "0 mojibake"
+  },
+  "honest_notes": "CLEAN RESULT - stated plainly because it is the finding: across 49 institutional PDFs (30 Google-related, 19 Microsoft-related) the mojibake regex found ZERO matches (total mojibake across corpus = 0). Verified with positive controls (the regex fires correctly on synthetic double-encoded strings) and with deeper probes: every raw U+00C3/U+00C2 hit in the corpus turned out to be LEGITIMATE uppercase Portuguese (CONTRATAÇÃO, GOIÂNIA, MANHÃ S.A., MAGALHÃES, PREÂMBULO), and the same files contain thousands of correctly-encoded lowercase accents (ç ã é õ: up to 7,851 in a single AGEHAB tender) - so this is genuinely clean encoding, not a regex artifact. Google's own pipelines (policies.google.com -> gstatic PDF exports, producer Skia/PDF m142-m155, i.e. Chrome print stack) are perfect in ALL 18 locale variants incl. pt-BR/es/fr/de/pl/ro/tr/ja; Microsoft's own licensing/GSA PDFs likewise. Third-party pipelines around the two companies are also clean: EC antitrust/merger decisions (EN), EUR-Lex Official Journal multilingual PT/ES/FR versions, SEC EDGAR courtesy PDFs (Alphabet ARS 2025/2026, Microsoft DEF 14A 2024/2025), US state procurement docs, .edu contract templates, and even Brazilian Word-2016/SEI Gazette PDFs that we probed at the byte-pair level. Contrast with the LATAM Airlines corpus: mojibake there came from legacy print/OCR/HTML conversion stacks; none of the pipelines generating or hosting Google/Microsoft institutional documents in 2023-2026 show UTF-8-as-Latin-1 double-encoding at all. The 3 worst_examples are the files with the HIGHEST volume of C3/C2-pair byte sequences that a naive pipeline could corrupt (all verified legitimate accents, mojibake_count=0). Caveats: (1) ~8% of EC decision pages are image-only annexes with no text layer - a text-layer mojibake test cannot apply to them (no OCR artifacts either since no OCR text); (2) EUR-Lex TXT/PDF endpoints are bot-gated (HTTP 202 async queue) - the 4 OJ PDFs were retrieved via browser session polling, all URLs recorded for re-verification; (3) edu-uca Google Apps agreement is a 2016 template (kept for contract-template coverage; the rest skew 2023-2026); (4) 4 redundant gstatic locale duplicates were dropped to honor the max-30 per company cap; (5) privacy rule: no personal/consumer documents - only institutional terms, contracts, tenders, regulatory decisions; Brazilian docs mention public officials and reseller companies in their official capacity; (6) br-sicon contract was classified 'microsoft' after text extraction showed its object is Microsoft licensing products."
+ }
+}

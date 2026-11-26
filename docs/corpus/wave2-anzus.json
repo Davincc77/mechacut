@@ -1,0 +1,696 @@
+{
+ "corpus": "wave2-anzus (US+CA+AU public-record airline ticket/itinerary/travel-invoice PDFs, preferred 2020-2026)",
+ "generated": "2026-11-26",
+ "method": "bench https://mechacut.studio/api/v1/file/encoding (POST {\"blob\": base64(text layer)}) as PRIMARY + regex mojibake layer as decision layer for hits",
+ "anonymization": "traveler names intentionally excluded; only issuer/airline/doc ids reported",
+ "summary": {
+  "files_analyzed": 30,
+  "pdfs_downloaded": 35,
+  "urls_attempted": 37,
+  "download_failed": 3,
+  "excluded_no_air_evidence": 4,
+  "dirty_mojibake": 0,
+  "clean": 30,
+  "scanned_no_text": 0,
+  "bench_verdicts": {
+   "valid utf-8 without BOM": 30
+  },
+  "positive_control": "PASS: mojibake regex fired 4 hits on synthetic mojibake payload, 0 on clean; bench POST of same payload returned HTTP 200 verdict \"valid utf-8 without BOM\" (sha256 f4793a488ece119c) - confirms documented bench behaviour that double-encoded text reads as valid UTF-8, so the regex layer decides hits",
+  "layers_agree": true,
+  "contradictions_investigated": "idx32 first bench call returned a JSON body without a verdict field; retry returned the normal verdict - transient server-side flake, not an encoding signal. All 30 final verdicts agree with the regex layer (clean).",
+  "channel_note": "dol.gov, hhs.gov, sa.gov.au and several federal.au hosts reject curl/datacenter traffic; 18 of 34 PDFs were fetched as raw Wayback mirror copies (web.archive.org id_ mode); sha256 recorded is of the file as obtained",
+  "extended_scan": "no U+FFFD and no extended mojibake families beyond the 14 specified patterns, across all 34 extracted text layers",
+  "year_range": [
+   "2019",
+   "2020",
+   "2021",
+   "2022",
+   "2023",
+   "2024",
+   "2025",
+   "2026"
+  ]
+ },
+ "files": [
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202110-voucher.pdf",
+   "doc_id": "202110-voucher.pdf",
+   "airline": "Unspecified",
+   "year": "2021",
+   "sha256_16": "786fc2fad894189f",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "7e0bc98ad88a4de7",
+   "sample_tokens": [],
+   "note": "US DOL FOIA E2 travel vouchers (Oct 2021) with airfare lines, PNR confirmation numbers, Ticket Total Air Amount; carrier names redacted/unlisted; acquired via Wayback mirror (dol.gov WAF 403)",
+   "country": "US",
+   "text_chars": 14354
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202204-voucher.pdf",
+   "doc_id": "202204-voucher.pdf",
+   "airline": "Unspecified",
+   "year": "2022",
+   "sha256_16": "27259abfa951c4e6",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "4c59a797b6b3ff9d",
+   "sample_tokens": [],
+   "note": "US DOL E2 vouchers Apr 2022; airfare lines, PNR (QPPOKW), SATO TMC invoices referenced; carrier not itemized; Wayback copy",
+   "country": "US",
+   "text_chars": 33661
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202206-voucher.pdf",
+   "doc_id": "A012177624",
+   "airline": "Unspecified",
+   "year": "2022",
+   "sha256_16": "4020a509d7246606",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "73d77123465c3744",
+   "sample_tokens": [],
+   "note": "US DOL E2 vouchers Jun 2022; Ticket Total Air Amount lines; Wayback copy",
+   "country": "US",
+   "text_chars": 26559
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202209-voucher-js.pdf",
+   "doc_id": "A012419560",
+   "airline": "Unspecified",
+   "year": "2022",
+   "sha256_16": "4c67253effc5e43b",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "041a797360d7265f",
+   "sample_tokens": [],
+   "note": "US DOL E2 voucher Sep 2022 (small); transport/airfare expense types; Wayback copy",
+   "country": "US",
+   "text_chars": 7796
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202301-voucher.pdf",
+   "doc_id": "202301-voucher.pdf",
+   "airline": "Unspecified",
+   "year": "2023",
+   "sha256_16": "5256801768a1ca81",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "c7be6f771cdbfe45",
+   "sample_tokens": [],
+   "note": "US DOL E2 vouchers Jan 2023; airfare 1,028.21 / 3,604.25 etc.; Wayback copy",
+   "country": "US",
+   "text_chars": 18423
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202504-voucher-lcd.pdf",
+   "doc_id": "202504-voucher-lcd.pdf",
+   "airline": "Unspecified",
+   "year": "2025",
+   "sha256_16": "11f9ed126dd5a903",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "136eb53bfd030938",
+   "sample_tokens": [],
+   "note": "US DOL E2 vouchers Apr 2025; airfare lines + TMC ticket issuances; Wayback copy",
+   "country": "US",
+   "text_chars": 25782
+  },
+  {
+   "url": "https://www.hhs.gov/sites/default/files/foia-ppt-23-cv-01348-5th-ir-part-1.pdf",
+   "doc_id": "foia-ppt-23-cv-01348-5th-ir-part-1.pdf",
+   "airline": "Delta Air Lines, American Airlines, Alaska Airlines, Qatar Airways, Singapore Airlines",
+   "year": "2022",
+   "sha256_16": "911931f444c249c2",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "79a294318b5d731a",
+   "sample_tokens": [],
+   "note": "US HHS FOIA (Protect the Public’s Trust releases) Secretary Trip Authorizations 2021-2023: real Trip Itinerary blocks with carriers (Delta/United/American/Alaska/Southwest), flight numbers, TRIP00 ids; OCR-sourced text (minor OCR noise, no double-encoding); 336 pages; Wayback copy",
+   "country": "US",
+   "text_chars": 499088
+  },
+  {
+   "url": "https://www.saltlakecounty.gov/globalassets/1-site-files/auditor/audit-services-division/audit-reports/2024/library-travel.pdf",
+   "doc_id": "library-travel.pdf",
+   "airline": "Unspecified",
+   "year": "2022",
+   "sha256_16": "8567909f3132ac08",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "324f0ffda59a30b1",
+   "sample_tokens": [],
+   "note": "US Salt Lake County Auditor travel audit (library, 2022 period, pub 2024): airfare invoice / Airline Ticket Arrangement findings",
+   "country": "US",
+   "text_chars": 18264
+  },
+  {
+   "url": "https://auditors.nebraska.gov/APA_Reports/2024/SA9-11202024-November_20_2024_Secretary_of_State_Letter.pdf",
+   "doc_id": "SA9-11202024-November_20_2024_Secretary_of_State_Letter.pdf",
+   "airline": "American Airlines",
+   "year": "2024",
+   "sha256_16": "02dc8c3daa5926fb",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "a1068b3d71c069d2",
+   "sample_tokens": [],
+   "note": "US Nebraska Auditor of Public Accounts, Secretary of State Kenya trade mission (2024): American Airlines fare classes and quote emails",
+   "country": "US",
+   "text_chars": 61830
+  },
+  {
+   "url": "https://portal.sao.wa.gov/ReportSearch/Home/ViewReportFile?arn=1040700&isFinding=false&sp=false",
+   "doc_id": "ViewReportFile",
+   "airline": "Delta Air Lines, Alaska Airlines",
+   "year": "2025",
+   "sha256_16": "d17b343c8a51cca1",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "dc804f0a3d7ff06c",
+   "sample_tokens": [],
+   "note": "US Washington State Auditor report 1040700 (pub 2026): airfare via travel agents vs contracted airlines (Alaska Airlines); direct fetch",
+   "country": "US",
+   "text_chars": 44090
+  },
+  {
+   "url": "https://cdn.environment.sa.gov.au/environment/docs/ce-domestic-regional-travel-january-2020-gen.pdf",
+   "doc_id": "PNKM85",
+   "airline": "Qantas Airways, Regional Express, Jetstar",
+   "year": "2020",
+   "sha256_16": "d32b2582566f3949",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "127fdc96cae333e8",
+   "sample_tokens": [],
+   "note": "AU SA Dept for Environment and Water domestic/regional travel Jan 2020: embedded Qantas e-ticket itineraries (TKT 081-3362982729), Regional Express + Jetstar references, tax invoices; Wayback copy",
+   "country": "AU",
+   "text_chars": 15978
+  },
+  {
+   "url": "https://dhs.sa.gov.au/__data/assets/pdf_file/0003/124653/2021-10-Domestic-Travel-Minister.pdf",
+   "doc_id": "2021-10-Domestic-Travel-Minister.pdf",
+   "airline": "Regional Express",
+   "year": "2021",
+   "sha256_16": "57138d8b1dba5e02",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "dc99f4293d1dafe1",
+   "sample_tokens": [],
+   "note": "AU SA Dept for Human Services minister travel Oct 2021: Regional Express (ZL4512) e-ticket itinerary + QBT invoice; Wayback copy",
+   "country": "AU",
+   "text_chars": 4525
+  },
+  {
+   "url": "https://dhs.sa.gov.au/__data/assets/pdf_file/0020/105815/2021-06-Domestic-Travel-Minister.pdf.pdf",
+   "doc_id": "2021-06-Domestic-Travel-Minister.pdf.pdf",
+   "airline": "Regional Express",
+   "year": "2021",
+   "sha256_16": "80c7bf82a5072677",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "f3a2ddfb1d84b161",
+   "sample_tokens": [],
+   "note": "AU SA DHS minister travel Jun 2021: REX ZL4631/ZL4632 e-tickets; Wayback copy",
+   "country": "AU",
+   "text_chars": 8409
+  },
+  {
+   "url": "https://dit.sa.gov.au/__data/assets/pdf_file/0011/613883/Min_Knoll_Domestic_Travel_Nov_2019.pdf",
+   "doc_id": "Min_Knoll_Domestic_Travel_Nov_2019.pdf",
+   "airline": "Qantas Airways",
+   "year": "2019",
+   "sha256_16": "b12e2bea20bd6c98",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "124eaa97260c3191",
+   "sample_tokens": [],
+   "note": "AU SA DIT minister Knoll travel Nov 2019: Qantas e-ticket itinerary/receipts with ticket numbers; Wayback copy; 2019 (older than preferred range)",
+   "country": "AU",
+   "text_chars": 7046
+  },
+  {
+   "url": "https://dit.sa.gov.au/__data/assets/pdf_file/0016/614320/Min_Knoll_Domestic_travel_Dec_2019.pdf",
+   "doc_id": "Min_Knoll_Domestic_travel_Dec_2019.pdf",
+   "airline": "Qantas Airways, Virgin Australia",
+   "year": "2019",
+   "sha256_16": "11014f0796d0c840",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "ceff51cb5519f595",
+   "sample_tokens": [],
+   "note": "AU SA DIT Knoll Dec 2019: QBT tax invoices, Qantas ticket nos; Wayback copy; 2019",
+   "country": "AU",
+   "text_chars": 8569
+  },
+  {
+   "url": "https://dhs.sa.gov.au/__data/assets/pdf_file/0020/81353/2019-06-Domestic-Travel-Minister.pdf",
+   "doc_id": "TJEXSW",
+   "airline": "Qantas Airways, Jetstar",
+   "year": "2019",
+   "sha256_16": "2b492d83e2c19035",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "497d09bbec35011c",
+   "sample_tokens": [],
+   "note": "AU SA DHS minister Lensink Jun 2019: full Qantas e-ticket ITINERARY (TKT 3657323404), Air Fare breakdown; Wayback copy; 2019",
+   "country": "AU",
+   "text_chars": 21447
+  },
+  {
+   "url": "https://dit.sa.gov.au/__data/assets/pdf_file/0009/539433/Min_Knoll_Domestic_Travel_Feb_2019.pdf",
+   "doc_id": "PUPL2P",
+   "airline": "Qantas Airways",
+   "year": "2019",
+   "sha256_16": "9340f625a7a27dc5",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "8f119c8235592ca6",
+   "sample_tokens": [],
+   "note": "AU SA DIT Knoll Feb 2019: Qantas AIR/RAIL/BUS itinerary tables + e-ticket; Wayback copy; 2019",
+   "country": "AU",
+   "text_chars": 15192
+  },
+  {
+   "url": "https://www.ipea.gov.au/sites/default/files/2023-12/FOI23-24-20%20-%20Document_0.pdf",
+   "doc_id": "FOI23-24-20%20-%20Document_0.pdf",
+   "airline": "Qantas Airways",
+   "year": "2023",
+   "sha256_16": "de1c44a80c791577",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "7128649d7e9b2c90",
+   "sample_tokens": [],
+   "note": "AU IPEA FOI 23-24-20: flight list for Senate committee — QANTAS / VIRGIN AUSTRALIA / SINGAPORE AIRLINES per-flight amounts; U+2010 hyphens (would read as mojibake if double-encoded; they are not); Wayback copy",
+   "country": "AU",
+   "text_chars": 17187
+  },
+  {
+   "url": "https://www.nsw.gov.au/sites/default/files/2023-11/PD_A5904333%20-%20Disclosure%20Log.pdf",
+   "doc_id": "PD_A5904333",
+   "airline": "Qantas Airways, Jetstar",
+   "year": "2023",
+   "sha256_16": "8dc6460cfbb2a23f",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "6c743d0c5134042d",
+   "sample_tokens": [],
+   "note": "AU NSW Premier’s Dept disclosure log (Sept 2023): airline per flight (Qantas Airways, Regional Express Airlines), route/cabin/amounts",
+   "country": "AU",
+   "text_chars": 116511
+  },
+  {
+   "url": "https://www.infrastructure.gov.au/sites/default/files/documents/foi-25-073-documents-released.pdf",
+   "doc_id": "foi-25-073-documents-released.pdf",
+   "airline": "Unspecified",
+   "year": "2023",
+   "sha256_16": "a7feb7dc383d1608",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "127dc84ba6520156",
+   "sample_tokens": [],
+   "note": "AU Dept of Infrastructure FOI 25-073 (2024 UK/Europe ministerial entourage): airfare totals per official; no carrier itemized; Wayback copy",
+   "country": "AU",
+   "text_chars": 55692
+  },
+  {
+   "url": "https://www.health.gov.au/sites/default/files/2024-09/foi-5264-documents-regarding-cop-28-delegates.pdf",
+   "doc_id": "FOI 5264",
+   "airline": "Qantas Airways, Singapore Airlines",
+   "year": "2024",
+   "sha256_16": "96e3d876e9d1b2d4",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "10cb9d441f2eab19",
+   "sample_tokens": [],
+   "note": "AU Dept of Health FOI 5264 COP28 Dubai: flight itinerary QF8409 business class + cost estimates; Wayback copy",
+   "country": "AU",
+   "text_chars": 54179
+  },
+  {
+   "url": "https://www.ipea.gov.au/sites/default/files/2026-05/FOI25-26-24%20-%20Documents.pdf",
+   "doc_id": "FOI25-26-24%20-%20Documents.pdf",
+   "airline": "Unspecified",
+   "year": "2026",
+   "sha256_16": "207a082436879aa9",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "0d8486ed46ff8277",
+   "sample_tokens": [],
+   "note": "AU IPEA FOI 25-26-24: family-reunion travel determinations with airfare values; narrative; Wayback copy",
+   "country": "AU",
+   "text_chars": 66164
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-jun22-nov22-hogan-j.pdf",
+   "doc_id": "TCMS1165296",
+   "airline": "Unspecified",
+   "year": "2022",
+   "sha256_16": "23b42f47355a3e15",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "c0935e757a43dec5",
+   "sample_tokens": [],
+   "note": "CA Newfoundland and Labrador Executive Council ministerial Expenses Detail Report (Jun-Nov 2022): Travel Claim Details with Airfare From/To lines, TCMS ids, Recap nos; carrier not listed (GTS/STS booking)",
+   "country": "CA",
+   "text_chars": 9499
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-Dec22-may23-hogan-j.pdf",
+   "doc_id": "TCMS1195438",
+   "airline": "Unspecified",
+   "year": "2023",
+   "sha256_16": "b6a9abbe6b38a9e3",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "733a4b7bed68b419",
+   "sample_tokens": [],
+   "note": "CA NL expense report Dec22-May23: airfare lines incl. St John’s to Ottawa + travel agency fees; carrier not listed",
+   "country": "CA",
+   "text_chars": 8110
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-june23-nov23-osborne-t.pdf",
+   "doc_id": "TCMS1209083",
+   "airline": "Unspecified",
+   "year": "2023",
+   "sha256_16": "23da9920ae2efd93",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "c4d79b3a7a5f023d",
+   "sample_tokens": [],
+   "note": "CA NL expense report Jun-Nov23: airfare lines incl. Boston international trip; carrier not listed",
+   "country": "CA",
+   "text_chars": 9835
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-Dec22-may23-bragg-d.pdf",
+   "doc_id": "TCMS1191966",
+   "airline": "Unspecified",
+   "year": "2023",
+   "sha256_16": "7dceba54107f4e23",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "2b565c89ca9540d6",
+   "sample_tokens": [],
+   "note": "CA NL expense report Dec22-May23: airfare St John’s to Winnipeg etc.; carrier not listed",
+   "country": "CA",
+   "text_chars": 29486
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-jun22-nov22-bragg-d.pdf",
+   "doc_id": "TCMS1165343",
+   "airline": "Unspecified",
+   "year": "2022",
+   "sha256_16": "73eff0040de73391",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "4e3b29ea0c95122a",
+   "sample_tokens": [],
+   "note": "CA NL expense report Jun22-Nov22: airfare lines, charter references; carrier not listed",
+   "country": "CA",
+   "text_chars": 35714
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-june21-nov21-Furey-A.pdf",
+   "doc_id": "TCMS1138065",
+   "airline": "Unspecified",
+   "year": "2021",
+   "sha256_16": "ce529439baedca10",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "51243dfbe614db95",
+   "sample_tokens": [],
+   "note": "CA NL Premier expense report Jun-Nov 2021: airfare incl. COP26 Glasgow trip; carrier not listed",
+   "country": "CA",
+   "text_chars": 4723
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/conseil-executif/acces-information/frais-depense/2024-2025/2425_t2-art17_deplacement-ministres-tes-quebec.pdf",
+   "doc_id": "2425_t2-art17_deplacement-ministres-tes-quebec.pdf",
+   "airline": "Unspecified",
+   "year": "2024",
+   "sha256_16": "cbdd3957650b1597",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "2d28a6f3bf3e5f2b",
+   "sample_tokens": [],
+   "note": "CA Québec Conseil exécutif quarterly travel-cost disclosure (2024-25 T2): per-trip transport fees incl. flights; well-formed UTF-8 accents (no double-encoding)",
+   "country": "CA",
+   "text_chars": 9207
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/culture-communications/publications-adm/acces-information/frais-depenses/2025-2026/18_-_Rens_relatifs_frais_deplacement_hors_Qc_-_ministre_titulaire_emploi_sup-avril-juin_2026.pdf",
+   "doc_id": "18_-_Rens_relatifs_frais_deplacement_hors_Qc_-_ministre_titu",
+   "airline": "Unspecified",
+   "year": "2025",
+   "sha256_16": "1441162f5940929b",
+   "mojibake_count": 0,
+   "mechacut_verdict": "valid utf-8 without BOM",
+   "mechacut_sha": "b8e58157e622b4af",
+   "sample_tokens": [],
+   "note": "CA Québec Ministère de la Culture hors-Québec disclosure (avril-juin 2026): explicit Billets d’avion line items (Cannes/Paris mission); first bench call returned a body without verdict, retry OK",
+   "country": "CA",
+   "text_chars": 7909
+  }
+ ],
+ "per_airline_tally": {
+  "Unspecified": {
+   "docs": 17,
+   "dirty": 0,
+   "clean": 17
+  },
+  "Delta Air Lines": {
+   "docs": 2,
+   "dirty": 0,
+   "clean": 2
+  },
+  "American Airlines": {
+   "docs": 2,
+   "dirty": 0,
+   "clean": 2
+  },
+  "Alaska Airlines": {
+   "docs": 2,
+   "dirty": 0,
+   "clean": 2
+  },
+  "Qatar Airways": {
+   "docs": 1,
+   "dirty": 0,
+   "clean": 1
+  },
+  "Singapore Airlines": {
+   "docs": 2,
+   "dirty": 0,
+   "clean": 2
+  },
+  "Qantas Airways": {
+   "docs": 8,
+   "dirty": 0,
+   "clean": 8
+  },
+  "Regional Express": {
+   "docs": 3,
+   "dirty": 0,
+   "clean": 3
+  },
+  "Jetstar": {
+   "docs": 3,
+   "dirty": 0,
+   "clean": 3
+  },
+  "Virgin Australia": {
+   "docs": 1,
+   "dirty": 0,
+   "clean": 1
+  }
+ },
+ "all_urls_recorded": [
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202110-voucher.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202204-voucher.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202206-voucher.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202209-voucher-js.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202301-voucher.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202504-voucher-lcd.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202507-voucher-lcd.pdf",
+   "status": "download-failed",
+   "channel": "direct with full browser headers"
+  },
+  {
+   "url": "https://www.dol.gov/sites/dolgov/files/general/foia/travelvouchers/202604-voucher-lcd.pdf",
+   "status": "download-failed",
+   "channel": "direct with full browser headers"
+  },
+  {
+   "url": "https://www.hhs.gov/sites/default/files/foia-ppt-23-cv-01348-5th-ir-part-1.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.saltlakecounty.gov/globalassets/1-site-files/auditor/audit-services-division/audit-reports/2024/library-travel.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://auditors.nebraska.gov/APA_Reports/2024/SA9-11202024-November_20_2024_Secretary_of_State_Letter.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://portal.sao.wa.gov/ReportSearch/Home/ViewReportFile?arn=1040700&isFinding=false&sp=false",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://cdn.environment.sa.gov.au/environment/docs/ce-domestic-regional-travel-january-2020-gen.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://dhs.sa.gov.au/__data/assets/pdf_file/0003/124653/2021-10-Domestic-Travel-Minister.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://dhs.sa.gov.au/__data/assets/pdf_file/0020/105815/2021-06-Domestic-Travel-Minister.pdf.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://dit.sa.gov.au/__data/assets/pdf_file/0011/613883/Min_Knoll_Domestic_Travel_Nov_2019.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://dit.sa.gov.au/__data/assets/pdf_file/0016/614320/Min_Knoll_Domestic_travel_Dec_2019.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://dhs.sa.gov.au/__data/assets/pdf_file/0020/81353/2019-06-Domestic-Travel-Minister.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://dit.sa.gov.au/__data/assets/pdf_file/0009/539433/Min_Knoll_Domestic_Travel_Feb_2019.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.ipea.gov.au/sites/default/files/2023-12/FOI23-24-20%20-%20Document_0.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.nsw.gov.au/sites/default/files/2023-11/PD_A5904333%20-%20Disclosure%20Log.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://www.infrastructure.gov.au/sites/default/files/documents/foi-25-073-documents-released.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.health.gov.au/sites/default/files/2024-09/foi-5264-documents-regarding-cop-28-delegates.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.ipea.gov.au/sites/default/files/2026-05/FOI25-26-24%20-%20Documents.pdf",
+   "status": "analyzed",
+   "channel": "web.archive.org raw mirror (origin WAF 403 / connection reset)"
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-jun22-nov22-hogan-j.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-Dec22-may23-hogan-j.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-june23-nov23-osborne-t.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-Dec22-may23-bragg-d.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-jun22-nov22-bragg-d.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://www.gov.nl.ca/exec/files/cabinet-expenseclaims-june21-nov21-Furey-A.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/conseil-executif/acces-information/frais-depense/2025-2026/2526_t1-art17_deplacement-ministres-tes-quebec.pdf",
+   "status": "excluded-no-explicit-air-evidence",
+   "channel": "direct"
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/conseil-executif/acces-information/frais-depense/2024-2025/2425_t2-art17_deplacement-ministres-tes-quebec.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/culture-communications/publications-adm/acces-information/frais-depenses/2025-2026/18_-_Rens_relatifs_frais_deplacement_hors_Qc_-_ministre_titulaire_emploi_sup-avril-juin_2026.pdf",
+   "status": "analyzed",
+   "channel": "direct"
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/affaires-municipales/publications/documents_administratifs/acces_information/frais_depenses/2024-2025/juillet_septembre/GAB_frais_deplacement_quebec.pdf",
+   "status": "excluded-no-explicit-air-evidence",
+   "channel": "direct"
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/secretariat-du-conseil-du-tresor/acces-information/frais-depenses/2024-2025/2425_t4-art17_deplacement-ministres-tes-quebec.pdf",
+   "status": "excluded-no-explicit-air-evidence",
+   "channel": "direct"
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/conseil-executif/acces-information/frais-depense/2024-2025/art-18-deplacement-horsqc/t1_dep-hors-qc-art-18.pdf",
+   "status": "download-failed",
+   "channel": "direct with full browser headers"
+  },
+  {
+   "url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/conseil-executif/acces-information/frais-depense/2025-2026/2526_T2_art17_deplacement-ministres-tes-quebec.pdf",
+   "status": "excluded-no-explicit-air-evidence",
+   "channel": "direct (replacement for 404 sibling)"
+  }
+ ],
+ "worst_examples_note": "mojibake_count is 0 for every file - corpus is fully clean; worst_examples rank by encoding-adjacent risk (U+2010 dashes, OCR-sourced text, scanned-attachment pipeline), not actual corruption"
+}
