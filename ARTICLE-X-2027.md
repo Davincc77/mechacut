@@ -1,7 +1,7 @@
 # The Agent Stack of 2027 Says "Deterministic or Agentic." Nobody Ships the First Word.
 
 *Draft — X long post / article. Suite de « Determinism Will Send AI Where 4KB Took Us »
-(chiffres de l'époque : 53 transforms ; aujourd'hui : 186 + 9, vérifiés live 25-11 22h35, prod 1.35.0).
+(chiffres de l'époque : 53 transforms ; aujourd'hui : 187 + 9, vérifiés live 26-11 00h50, prod 1.36.0).
 FR version below. ~480 words EN. — passes 23-11 : (a) ripoint 143→170 et rectification
 du claim v22b « 0 de 14 » après recomptage des jsonls bruts (incident consigné
 dans FINDINGS-V22, même doctrine que la correction de prix V22) ;
@@ -100,6 +100,26 @@ b112) ; landing x3 re-bakée dans le commit, PT élagué à l'annonce comme
 promis (FR 177 271 / EN 179 356 / PT 180 927).)
 
 (l) 25-11 22h35 : 185→186 (/json/bigint, bundle114 — L'ENTIER QUI MENT À LA FRONTIÈRE DE L'OUTIL : RFC 8259 §6 relu à l'RFC Editor (les entiers de [-(2**53)+1, (2**53)-1] sont INTEROPÉRABLES — verbatim ; 1E400 nommé danger), le MUST de la spec MCP draft relu EN CONTEXTE — il porte les entiers x-mcp-header, pas tous les entiers : cité borné, jamais survendu ; cinq issues lues à l'API GitHub (Unity #754, claude-code #11506, llm4s #1597, ragflow PR #22064, audit x402 Go #4258) — deux nombres par finding, le double EXACT et le PRINT JS, que les tickets citent sans les distinguer ; l'émulation Number::toString CERTIFIÉE CONTRE NODE : 240 valeurs, zéro écart ; l'oracle tracé main PÊCHÉ DEUX FOIS par la table node avant module — re-anchor d'exposant après coupe des zéros, et une case de golden où la valeur exacte tenait la place du print (doctrine b112 jouée contre moi, 3e cycle de suite) ; la COLLISION nommée : 2^53 et 2^53+1 se lisent IDENTIQUES — le symptôme du mauvais enregistrement ; scanner de GRAMMAIRE : les chiffres dans les chaînes ne sont jamais des findings, contrairement aux inspectors regex qui l'avouent ; XS radar — l'artifact muet depuis trois cycles rend ENFIN son diff dans le JSON, compteurs réconciliés, invariant vérifié à l'écriture, et la sonde catalogue ne devine plus le TYPE des embeddings par substring (incident mpnet 21h15 : le 400 punissait mon essai, pas le serveur) ; et la mesure LIVE a pêché que Cloudflare injecte 367 octets dans la page SERVIE — le budget landing certifie depuis l'octet du NAVIGATEUR (PT était à 181 294 servis pendant que le test local restait vert ; en chemin : shop_soldes_lu rendait de l'anglais sur la page PT — parité pêchée par le budget). prod 1.35.0, suite 1 984, pins 392 (+9 adds-only, vecteurs PUBLICS), manifest 210 lignes / 8 842 octets lus live — ligne payée par élagage mesuré (les 13 en-têtes de pack cèdent leur chemin à un template de tête, claims constants) ; landing x3 : en 179 984 / fr 178 080 / pt 180 624 app, 180 991 servi — sous plafond réel.)
+(m) 26-11 00h50 : 186→187 (/money/settle, bundle115 — QUI PAYE QUI : le graphe
+des avances fermé au cent ; r/askmath 1ugli3y rejoué EN ENTIER — A avance 1375,
+C 865, C remet la dette de B ; A exige 628,33, B propose 458,33 : le désaccord
+EST l'architecture, les DEUX réponses sont justes sur deux graphes et compare
+les rend chiffrées côte à côte ; la remise est un ARGUMENT plafonné à la propre
+créance du remettant en net — la règle du commentateur rendue exécutable — et à
+l'ARÊTE par reçu en itemized, avec l'écart Nommé (118,34 net vs 288,33 par reçu) ;
+virements minimaux par partition DP à somme nulle, borne nommée n≤9, greedy
+déclaré au-delà ; les cents ferment là où le 746,67×3 du fil ne fermait pas ;
+taux en ARGUMENTS, jamais de fetch — la loi du jour de TRANSACTION (tryzedger
+14-nov) dans le contrat ; 33 tests dont un ORACLE indépendant (énumération
+exhaustive des partitions, écriture différente du DP du module) ; le budget
+NAVIGATEUR payé DANS CE commit : vague d'élagage à claims constants sur
+12 purposes PT + prose EN, EN 180 625 / FR 179 790 / PT 180 451 app —
+servis 180 992 / 180 157 / 180 818, sous 181 000 ; et le contrat que b114
+avait écrit dans
+un COMMENTAIRE devient une ASSERTION sur les trois langues (itération 15 de la
+classe « l'outillage ment » : un commentaire ne rougit jamais). prod 1.36.0,
+suite 2 017 passed 2 skipped, pins 400 (+8 adds-only, vecteurs du fil), manifest
+211 lignes / 8 883 octets lus live.)
 
 ---
 
@@ -113,7 +133,7 @@ keeps building the second word.
 I know what the first word costs, because we priced it.
 
 [mechacut.studio](https://mechacut.studio) is a deterministic transform suite for
-agents: **186 transforms + 9 named chain recipes, and growing**, stateless, keyless at
+agents: **187 transforms + 9 named chain recipes, and growing**, stateless, keyless at
 30 requests/minute. Every response carries its own `sha256`. Every 400 carries the
 field, the expected format and an example — the error is the prompt that fixes the
 next call. And a surface we shipped this week, `/api/v1/router/apply`, takes a
@@ -173,7 +193,7 @@ construit le deuxième mot.
 Le premier mot, on sait ce qu'il coûte : on l'a chiffré.
 
 [mechacut.studio](https://mechacut.studio) est une suite de transforms
-déterministes pour agents : **186 transforms + 9 recettes-chaînes nommées, et ça grandit**,
+déterministes pour agents : **187 transforms + 9 recettes-chaînes nommées, et ça grandit**,
 sans état, 30 requêtes/minute sans clé. Chaque réponse porte son propre
 `sha256`. Chaque 400 porte le champ, le format attendu et un exemple —
 l'erreur est le prompt qui répare l'appel suivant. Et une surface sortie cette
