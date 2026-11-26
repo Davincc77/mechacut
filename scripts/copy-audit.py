@@ -10,6 +10,7 @@ import re, sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FILES = ["README.md", "docs/INST-CATALOG.md", "docs/CASE-STUDY-TICKET.md",
+         "docs/CASE-STUDY-BANKS.md",
          "locales/en.json", "locales/fr.json", "locales/pt.json",
          "scripts/make_landing.py"]
 

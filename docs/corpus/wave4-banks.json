@@ -2,7 +2,7 @@
  "wave": 4,
  "column": "banks-xbrl",
  "generated": "2026-11-26",
- "method": "SEC companyfacts (us-gaap), latest 10-K instant per concept; equation Assets == LiabilitiesAndStockholdersEquity (86 with both tags) audited via POST /api/v1/batch tool=invoice_validate_totals — one call, 86 payloads, exact Decimal, sha256 per receipt. 42 of 100 sample excluded: no 10-K Assets fact (foreign filers 20-F) or missing LASHE tag — named, not hidden.",
+ "method": "SEC companyfacts (us-gaap), latest 10-K instant per concept; equation Assets == LiabilitiesAndStockholdersEquity (86 with both tags) audited via POST /api/v1/batch tool=invoice_validate_totals — one call, 86 payloads, exact Decimal, sha256 per receipt. 14 of 100 sample excluded: no 10-K Assets instant or neither LASHE nor (Liabilities+Equity incl. NCI) at matching end date — named, not hidden.",
  "first_pass_finding": "a naive Assets==Liabilities+StockholdersEquity pass flagged 28/54 CONTRADICTED; every gap was the parent-only SE tag excluding non-controlling interests (gap direction positive, magnitude tracked NCI size). Attribution before publication — the door's refusal was the audit's correction of ITSELF.",
  "headline": {
   "verified_ok": 86,
@@ -962,5 +962,77 @@
   "values are as-filed XBRL instants, not restated",
   "batch tier: cap (free <32KB) — one call replaced 86",
   "no PII: all data is issuer-public by construction"
+ ],
+ "excluded_companies": [
+  {
+   "cik": 818972,
+   "title": "BNY MELLON STRATEGIC MUNICIPALS, INC.",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 855887,
+   "title": "BNY MELLON STRATEGIC MUNICIPAL BOND FUND, INC.",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 904112,
+   "title": "MORGAN STANLEY EMERGING MARKETS DEBT FUND INC",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 916618,
+   "title": "MORGAN STANLEY INDIA INVESTMENT FUND, INC.",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 1057861,
+   "title": "BNY MELLON HIGH YIELD STRATEGIES FUND",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 1116578,
+   "title": "PRUDENTIAL PLC",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 1368493,
+   "title": "Morgan Stanley China A Share Fund, Inc.",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 1388141,
+   "title": "Morgan Stanley Emerging Markets Domestic Debt Fund, Inc.",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 1565381,
+   "title": "BNY Mellon Municipal Bond Infrastructure Fund, Inc.",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 1708646,
+   "title": "Goldman Sachs Physical Gold ETF",
+   "reason": "no matching-end equation tags"
+  },
+  {
+   "cik": 2103547,
+   "title": "Morgan Stanley Solana Trust",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 2103612,
+   "title": "Morgan Stanley Bitcoin Trust",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 2103976,
+   "title": "Morgan Stanley Ethereum Trust",
+   "reason": "no 10-K Assets instant"
+  },
+  {
+   "cik": 910631,
+   "title": "COCA COLA FEMSA SAB DE CV",
+   "reason": "no 10-K Assets instant"
+  }
  ]
 }
