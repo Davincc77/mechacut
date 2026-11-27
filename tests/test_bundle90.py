@@ -71,7 +71,7 @@ def test_l1_listed_in_file_order_with_said_dates():
     # pdf_provenance, text_mojibake shipped + text_claimsweep d'abord en-banc puis SHIPPED 27-11 (127_hermes). Pin aligne sur le fichier ;
     # date_civil/address_parse flips accepted->shipped (outils reels
     # dans le manifest, le statut mentait). Pin aligne sur le fichier.
-    assert b["counts"]["status"] == {'shipped': 34, 'accepted': 16, 'en-banc': 1, 'refuse': 17, 'proposed': 1}  # flip 132
+    assert b["counts"]["status"] == {'shipped': 36, 'accepted': 14, 'en-banc': 1, 'refuse': 17, 'proposed': 1}  # flip 132
     assert b["counts"]["total"] == 69
     for e in b["entries"]:
         assert len(e["arrival"]) == 10 and e["arrival"][4] == "-"
