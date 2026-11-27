@@ -47,7 +47,7 @@ def test_manifest_token_budget():
     # per tool; the real ceiling is the byte budget + dense fold in the
     # routing module — line count is only a proxy, resized here as the
     # catalogue grows past its original 95-tool shape
-    assert len(lines) < 218   # b113 MESURE : 209 lignes / 8 989 octets avec la ligne agent_mcplist — payée par élagage mesuré à claims constants (note b113 dans routing.py) ; precedent b112 208/8 994.
+    assert len(lines) < 221   # b132 MESURE : 220 lignes / 8 738 octets — +3 lignes dates payées par la gouttière ; resize assumé, le test dit lui-même que le compte est un proxy (« resized here as the catalogue grows ») — le vrai plafond est le budget octets + le dense-fold du module. Précédents : b113 209, b110 206. par élagage mesuré à claims constants (note b113 dans routing.py) ; precedent b112 208/8 994.
     # b105 elague DES L'ANNONCE (consigne b104 tenue, marge FR 23 octets) : ligne de POINTEURS « detail: » FUSIONNEE dans la ligne de tete, contenu preserve — 217 lignes / 8 997 octets MESURES avec +shop_soldes_be ; precedents 217/8 953 (b104), 217/8 972 (b103), 217/8 966 (b102)
     # : 216 lignes MESUREES, 8 864 octets < 9 000 — le budget serre a
     # 136 octets : LE PROCHAIN OUTIL debranchera le dense-fold, a resizer

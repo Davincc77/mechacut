@@ -460,7 +460,7 @@ def test_onze_pins_soldeslu_adds_only():
     # b130_hermes relève à 453 : +6 id_checkdigit mrn (valid TCP,
     # ucc_decode, remainder10, annex_example_fail, generate,
     # autodetect), adds-only zéro suppression
-    assert len(g) == 453
+    assert len(g) == 456
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 
