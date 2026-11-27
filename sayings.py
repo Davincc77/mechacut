@@ -484,7 +484,7 @@ SAY = {
         "pt": "quando vence o certificado TLS deste site?"},
     "/api/v1/id/checkdigit": {
         "en": "is this ISBN a real check digit or a bad copy-paste?",
-        "fr": "ce code-barres a-t-il le bon chiffre de contrôle ?",
+        "fr": "la douane a rejeté mon MRN — quel caractère est faux ?",
         "pt": "meu boleto caiu no banco: qual dígito da linha "
               "digitável está errado?"},
     "/api/v1/image/rightsize": {

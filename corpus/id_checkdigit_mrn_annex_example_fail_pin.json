@@ -1,0 +1,9 @@
+{
+ "body": {
+  "mode": "check",
+  "value": "06RO9876AB88901235",
+  "scheme": "mrn"
+ },
+ "name": "id_checkdigit_mrn_annex_example_fail_pin",
+ "path": "/api/v1/id/checkdigit"
+}

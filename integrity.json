@@ -3286,6 +3286,71 @@
   },
   {
    "body": {
+    "mode": "check",
+    "scheme": "mrn",
+    "value": "06RO9876AB88901235"
+   },
+   "name": "id_checkdigit_mrn_annex_example_fail_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "0db601e236d14a0851e6c3ccfc7cef2247ac91a28d69e92d63a16d18efa94748",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "check",
+    "value": "24FR1234AB567890B2"
+   },
+   "name": "id_checkdigit_mrn_autodetect_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "08f9a17d848bb83dc1c6116c0ac71b29c7d86ea1edc13db7c7be05fca5255adf",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "generate",
+    "scheme": "mrn",
+    "value": "24FR1234AB567890B"
+   },
+   "name": "id_checkdigit_mrn_generate_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "ede9b47cd2475de6a5d532da4d4ee57afef171c471cfc13e9f6bd6b990ea5b65",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "check",
+    "scheme": "mrn",
+    "value": "26GB00000000003130"
+   },
+   "name": "id_checkdigit_mrn_remainder10_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "555963b5998490d4534ea25682e712e26e69403841bed90020f5ca233a9b7f94",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "check",
+    "scheme": "mrn",
+    "value": "24FR1234AB567890B2"
+   },
+   "name": "id_checkdigit_mrn_ucc_decode_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "97a397e4b41ba32ed9867e0f3ce3aa83e6faaed9350bb5e3322d321485b9ccc7",
+   "status": 200
+  },
+  {
+   "body": {
+    "mode": "check",
+    "scheme": "mrn",
+    "value": "99IT9876AB88901209"
+   },
+   "name": "id_checkdigit_mrn_valid_pin",
+   "path": "/api/v1/id/checkdigit",
+   "sha256": "cba86ed622a25f70331b13a70f263e2a903719f048fb88911503ab7d5a6ec238",
+   "status": 200
+  },
+  {
+   "body": {
     "text": "Caf\u00e9 Cr\u00e8me \u2014 2026 !"
    },
    "name": "id_slug_cafe",

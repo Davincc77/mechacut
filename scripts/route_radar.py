@@ -638,6 +638,18 @@ CASES = [
      "id_checkdigit"),
     ("mon boleto febraban est rejeté quel chiffre de contrôle",
      "id_checkdigit"),
+    # CLASSE b130 — mrn (REVISION id_checkdigit, rails installment 2a,
+    # loi TCP/ISO 6346 lue au source 27-11). Douleur : la douane rejette
+    # un MRN recopie et le declarant ne sait pas QUEL caractere ment ;
+    # les champs (annee, pays, caractere de procedure UCC) restent muets.
+    ("customs rejected my MRN which check character is wrong",
+     "id_checkdigit"),
+    ("la douane a rejeté mon MRN — quel caractère est faux ?",
+     "id_checkdigit"),
+    ("meu MRN aduaneiro foi rejeitado qual dígito está errado",
+     "id_checkdigit"),
+    ("transit declaration MRN check digit fails at the border",
+     "id_checkdigit"),
     # leurre SANS DONNEE — etape PECHÉ par l'oracle local (lecon b122) :
     # ma premiere phrase portait « settle », mot du hay de money_settle,
     # et le radar l'a volée — un leurre qui route est une promesse

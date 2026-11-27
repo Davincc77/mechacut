@@ -2,7 +2,7 @@
 CONFIDENTLY (veridigit bench, Nov 2025: a frontier model, tool-free,
 missed the check digit 91 % of the time on non-memorised identifiers).
 
-16 schemes, each cited to its published spec — no table here is written
+17 schemes, each cited to its published spec — no table here is written
 from memory:
   isbn10   ISO 2108: weights 10..1, sum mod 11, 'X' = 10
   isbn13   ISO 2108 (Bookland 978/979) + GS1 mod-10
@@ -48,6 +48,19 @@ from memory:
            example 001900000 -> 9), macoratti.net/boleto.htm (BB
            campo composition), github.com/micdog22/confere-boleto
            (barcode reassembly + weight statements).
+  mrn      EU/UK customs Movement Reference Number (18 chars): Reg
+           414/2009 Annex VII field table — YY (n2) + country (a2) +
+           unique identifier (an13) + check (an1); under the UCC,
+           2015/2447 Annex B splits field 3 as an12 + procedure (a1)
+           + check (an1). The check digit is the ISO 6346 method read
+           in the TCP working-party decision "Berekening controlecijfer
+           MRN-GRN" (27-11): char values 0-9 own, letters A=10, B=12,
+           C=13, D=14, E=15, F=16, G=17, H=18, I=19, J=20, K=21, L=23,
+           M=24, N=25, O=26, P=27, Q=28, R=29, S=30, T=31, U=32, V=34,
+           W=35, X=36, Y=37, Z=38 (multiples of 11 never issued: no
+           11/22/33), weight 2^i on char i+1 from the LEFT, sum mod 11;
+           TCP Table 2 renders remainder 10 as the character '0'.
+           Printed as Code 128 character set B (cited in the annex).
 
 Closed design decisions, said out loud (this is the product):
 - check with no scheme returns EVERY scheme whose format matches, each
@@ -69,6 +82,17 @@ Closed design decisions, said out loud (this is the product):
   discontinuity) — never to one date by reading the wall clock. scan
   finds a dot-separated linha inside one token; a space-separated
   printed linha arrives as separate fields by design and needs check.
+- MRN: the regulation's own FIELD-TABLE examples (06RO9876AB8890123 /
+  check 5 and 14DE9876AB889012X / check 1) are per-field illustrations
+  and FAIL the published algorithm — traced by hand 27-11 (06RO…123
+  gives '0', 14DE…12X gives '2'). They are refused as golds and the
+  divergence is rendered in the verdict; the only vector carrying the
+  full arithmetic is the TCP worked example (99IT9876AB8890120 ->
+  154031 -> remainder 9 -> MRN 99IT9876AB88901209), replayed in the
+  suite against the PUBLISHED sub-products, not against this module.
+  A digit in UCC position 17 is rendered procedure=null with the
+  pre-2016 grammar named — a letter outside the 2015/2447 table is
+  said as NOT_IN_PUBLISHED_TABLE, never invented a meaning for.
 - ISBN hyphenation is NOT attempted: it needs the registration-group
   range tables, and getting them from memory is how wrong books get
   shelved. issn/orcid/cas have algorithmic hyphenation, we render it.
@@ -209,6 +233,79 @@ def _cusip_check(payload):
     return str((10 - total % 10) % 10)
 
 
+# ------------------------------------------- MRN (EU/UK customs, 18)
+# ISO 6346 char values transcribed verbatim from Table 1 of the TCP
+# working-party decision (read 27-11) — note which values are NEVER
+# issued (11, 22, 33): the letter series skips multiples of 11, so
+# A=10, B=12, K=21, L=23, U=32, V=34, Z=38. A hand-computed value
+# table written from memory is how containers used to mis-check.
+_ISO6346_VALUES = {
+    "0": 0, "1": 1, "2": 2, "3": 3, "4": 4,
+    "5": 5, "6": 6, "7": 7, "8": 8, "9": 9,
+    "A": 10, "B": 12, "C": 13, "D": 14, "E": 15, "F": 16, "G": 17,
+    "H": 18, "I": 19, "J": 20, "K": 21, "L": 23, "M": 24, "N": 25,
+    "O": 26, "P": 27, "Q": 28, "R": 29, "S": 30, "T": 31, "U": 32,
+    "V": 34, "W": 35, "X": 36, "Y": 37, "Z": 38,
+}
+
+
+def _iso6346_check(payload):
+    """TCP WP decision (MRN/GRN), ISO 6346 method: value x 2^position
+    from the LEFT, sum, mod 11; remainder 10 renders as '0' (Table 2).
+    Weights stop at 2^16: the check is over the first 17 characters."""
+    s = sum(_ISO6346_VALUES[ch] << i for i, ch in enumerate(payload))
+    r = s % 11
+    return "0" if r == 10 else str(r)
+
+
+# 2015/2447 Annex B (UCC), field 4 procedure identifier — closed table,
+# read verbatim 27-11 (15 codes; F-H, N-Q, X-Z are NOT issued).
+_MRN_PROC = {
+    "A": "export only",
+    "B": "export and exit summary declaration",
+    "C": "exit summary declaration only",
+    "D": "re-export notification",
+    "E": "dispatch of goods in relation with special fiscal territories",
+    "J": "transit declaration only",
+    "K": "transit declaration and exit summary declaration",
+    "L": "transit declaration and entry summary declaration",
+    "M": "proof of the customs status of Union goods/customs manifest",
+    "R": "import declaration only",
+    "S": "import declaration and entry summary declaration",
+    "T": "entry summary declaration only",
+    "U": "temporary storage declaration",
+    "V": "introduction of goods in relation with special fiscal territories",
+    "W": "temporary storage declaration and entry summary declaration",
+}
+
+
+def _mrn_decoded(n):
+    """Fields as the annexes name them; the procedure slot renders the
+    grammar it belongs to instead of inventing a reading."""
+    p = n[16]
+    if p in _MRN_PROC:
+        proc = _MRN_PROC[p]
+        note = ("UCC structure (2015/2447 Annex B): n2 country-year, a2, "
+                "an12, procedure a1, check an1")
+    elif p.isdigit():
+        proc = None
+        note = ("position 17 is a digit: no UCC procedure character — "
+                "2009 field-table grammar (an13 body, Reg 414/2009 "
+                "Annex VII) or a non-UCC issuer; which one is not ours "
+                "to guess")
+    else:
+        proc = None
+        note = ("NOT_IN_PUBLISHED_TABLE: position 17 is a letter the "
+                "2015/2447 procedure table does not issue — rendered "
+                "as-is, no meaning invented")
+    return {"year_pair": n[0:2], "country": n[2:4],
+            "body_an13": n[4:17], "procedure_char": p,
+            "procedure": proc, "procedure_note": note,
+            "barcode_note": ("the annex requires Code 128 character "
+                             "set B for printing the MRN (Reg 414/2009 "
+                             "Annex VII, read 27-11)")}
+
+
 _SCHEMES = {
     "isbn10": dict(
         spec="ISO 2108 (mod 11, weights 10..1, X=10)",
@@ -306,6 +403,18 @@ _SCHEMES = {
              "verdicts — see module docstring for the cited layout)",
         rx=r"\d{47}", check_n=0, custom=True, dotless=True,
         pos_charsets=lambda i, n: _DIGITS),
+    "mrn": dict(
+        spec="EU/UK customs MRN (18 chars; Reg 414/2009 Annex VII "
+             "field table + 2015/2447 Annex B; ISO 6346 check over "
+             "chars 1-17, weights 2^0..2^16 from the left, mod 11, "
+             "remainder 10 -> '0' — TCP WP decision, read 27-11)",
+        rx=r"\d{2}[A-Z]{2}[A-Z0-9]{13}[0-9A-Z]", check_n=1,
+        split=_last1, check_fn=_iso6346_check,
+        decoded_fn=_mrn_decoded,
+        pos_charsets=lambda i, n: (
+            _DIGITS if i < 2 else
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" if i < 4 else
+            _DIGITS + "ABCDEFGHIJKLMNOPQRSTUVWXYZ")),
     "verhoeff": dict(
         spec="Verhoeff 1969 (dihedral group D5; published tables)",
         rx=r"\d{2,}", check_n=1, split=_last1,
@@ -459,6 +568,7 @@ _RX = {name: re.compile("^(?:" + s["rx"] + ")$")
        for name, s in _SCHEMES.items()}
 
 
+
 def scheme_names():
     return list(_SCHEMES)
 
@@ -484,10 +594,16 @@ def _match_entry(scheme, value, norm):
         return _boleto_verdict(n)
     payload, given = s["split"](n)
     expected = s["check_fn"](payload)
-    return {"scheme": scheme, "spec": s["spec"],
-            "checksum_valid": given == expected,
-            "given_check_char": given, "expected_check_char": expected,
-            "normalized": n}
+    entry = {"scheme": scheme, "spec": s["spec"],
+             "checksum_valid": given == expected,
+             "given_check_char": given, "expected_check_char": expected,
+             "normalized": n}
+    # add-only: schemes that publish field semantics (mrn) return them;
+    # every other entry keeps its exact previous shape.
+    dfn = s.get("decoded_fn")
+    if dfn:
+        entry["decoded"] = dfn(n)
+    return entry
 
 
 def _check(value, scheme=None):
@@ -578,6 +694,9 @@ def _generate(scheme, value):
     out = {"mode": "generate", "scheme": scheme, "spec": s["spec"],
            "payload": n, "check_char": chk, "value": value_out,
            "normalized": normalize(value_out)}
+    dfn = s.get("decoded_fn")
+    if dfn:
+        out["decoded"] = dfn(value_out)
     p = _pretty(value_out, scheme)
     if p:
         out["pretty"] = p

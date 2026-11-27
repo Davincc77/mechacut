@@ -1,0 +1,9 @@
+{
+ "body": {
+  "mode": "check",
+  "value": "26GB00000000003130",
+  "scheme": "mrn"
+ },
+ "name": "id_checkdigit_mrn_remainder10_pin",
+ "path": "/api/v1/id/checkdigit"
+}

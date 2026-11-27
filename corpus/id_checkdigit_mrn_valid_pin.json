@@ -1,0 +1,9 @@
+{
+ "body": {
+  "mode": "check",
+  "value": "99IT9876AB88901209",
+  "scheme": "mrn"
+ },
+ "name": "id_checkdigit_mrn_valid_pin",
+ "path": "/api/v1/id/checkdigit"
+}

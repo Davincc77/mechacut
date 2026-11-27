@@ -399,7 +399,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.52.0",
+    version="1.53.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -9401,9 +9401,10 @@ MCP_TOOLS = [
     {
         "name": "id_checkdigit",
         "description": "Check digits for the identifiers a model guesses: "
-                       "16 published schemes (ISBN-10/13, EAN-8/13, UPC-A, "
+                       "17 published schemes (ISBN-10/13, EAN-8/13, UPC-A, "
                        "GTIN-14, ISSN, ISIN, CUSIP, SEDOL, ABA, LEI, ORCID, "
-                       "CAS, boleto, Luhn-family via ISIN, Verhoeff, Damm), "
+                       "CAS, boleto, EU/UK customs MRN, "
+                       "Luhn-family via ISIN, Verhoeff, Damm), "
                        "each "
                        "cited to its spec. check: auto-detect returns EVERY "
                        "format that matches with its own verdict — a valid "
@@ -9419,7 +9420,13 @@ MCP_TOOLS = [
                        "digitável, 47): verdict PER DIGITO — which campo "
                        "DV fails, fator decoded to BOTH cycle dates (floor "
                        "1000, cycle restart 2025-02-22); a 48-digit linha "
-                       "is refused by name. Free.",
+                       "is refused by name. mrn (EU/UK customs movement "
+                       "reference, 18): ISO 6346 check over chars 1-17 "
+                       "(weights 2^0..2^16, mod 11, remainder 10 -> '0'); "
+                       "year pair, country and UCC procedure character "
+                       "decoded with the closed table; the regulation's "
+                       "own field-table examples fail its algorithm and "
+                       "are refused as golds — named, not hidden. Free.",
         "inputSchema": {"type": "object", "properties": {
             "mode": {"type": "string",
                      "enum": ["check", "generate", "repair", "scan"]},
@@ -9430,7 +9437,8 @@ MCP_TOOLS = [
                        "description": "closed list: isbn10 isbn13 ean8 "
                                       "ean13 upca gtin14 issn isin cusip "
                                       "sedol aba lei orcid cas boleto "
-                                      "verhoeff damm; omit to auto-detect"},
+                                      "mrn verhoeff damm; omit to "
+                                      "auto-detect"},
             "text": {"type": "string",
                      "description": "scan mode: free text up to 20 000 "
                                     "chars"}},

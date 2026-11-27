@@ -1,0 +1,8 @@
+{
+ "body": {
+  "mode": "check",
+  "value": "24FR1234AB567890B2"
+ },
+ "name": "id_checkdigit_mrn_autodetect_pin",
+ "path": "/api/v1/id/checkdigit"
+}

@@ -457,7 +457,10 @@ def test_onze_pins_soldeslu_adds_only():
     # notpdf-refuse), adds-only zéro suppression
     # b125_hermes relève à 447 : +2 text_mojibake (serão-clean +
     # familles), adds-only zéro suppression
-    assert len(g) == 447
+    # b130_hermes relève à 453 : +6 id_checkdigit mrn (valid TCP,
+    # ucc_decode, remainder10, annex_example_fail, generate,
+    # autodetect), adds-only zéro suppression
+    assert len(g) == 453
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

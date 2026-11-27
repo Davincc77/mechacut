@@ -1,0 +1,9 @@
+{
+ "body": {
+  "mode": "generate",
+  "scheme": "mrn",
+  "value": "24FR1234AB567890B"
+ },
+ "name": "id_checkdigit_mrn_generate_pin",
+ "path": "/api/v1/id/checkdigit"
+}
