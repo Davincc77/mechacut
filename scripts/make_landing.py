@@ -1703,6 +1703,12 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "compte long 5 positions + corrélation NOMMÉE (584283 / 584285) → jours, JDN, les deux calendriers ; uinal roule à 18, jamais en silence ; le désaccord 2012 devient auditable",
         "pep440_sort":
             "tri par précédence PEP 440 (epochs N!, a/b/rc alias, .post, .dev, labels locaux) — forme canonique et normalisations RENDUES ; semver_sort refuse ces jetons 7/7, ici ils sont triés",
+        "geodesic_wgs84_inverse":
+            "distance et azimut sur l'ellipsoïde WGS84 — Vincenty 1975, constantes NOMMÉES ; la sphère geo_distance dérive de −23,072 km (SCL-MEL, mesuré)",
+        "horizon_hidden_height":
+            "tangente ET arc rendus, R et k arguments dits : 6 ft à 20 mi cache 193 ft (k=0) ou 163 ft (k=0,13) — la règle « 8 in/mi² » en revendique 267",
+        "shadow_length_sun_elevation":
+            "ombre = hauteur / tan(élévation en degrés), HALF_UP à digits nommé ; soleil à l'horizon ou dessous refuse PAR LE NOM",
 "pdf_provenance":
             "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON — null nommé, jamais deviné",
         "text_mojibake":
@@ -2131,6 +2137,12 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "contagem longa de 5 posições + correlação NOMEADA (584283 / 584285) → dias, JDN, os dois calendários; uinal vira em 18, nunca em silêncio; a divergência 2012 fica auditável",
         "pep440_sort":
             "ordenada por precedência PEP 440 (épocas N!, aliases a/b/rc, .post, .dev, rótulos locais) — forma canônica e normalizações RENDERizadas; o semver_sort recusa esses tokens 7/7, aqui eles são ordenados",
+        "geodesic_wgs84_inverse":
+            "distância e azimute no ELIPSOIDE WGS84 — Vincenty 1975, constantes NOMES; a esfera geo_distance erra −23,072 km (SCL-MEL, medido)",
+        "horizon_hidden_height":
+            "tangente E arco renderizados, R e k ditos: olho de 6 ft a 20 mi esconde 193 ft (k=0) ou 163 ft (k=0,13) — a regra «8 in/mi²» alega 267",
+        "shadow_length_sun_elevation":
+            "sombra = altura / tan(elevação em graus), HALF_UP com dígitos nomeado; sol no horizonte ou abaixo recusa PELO NOME",
 "pdf_provenance":
             "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido — null nomeado, nunca inventado",
         "text_mojibake":

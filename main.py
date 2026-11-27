@@ -291,6 +291,7 @@ import spdxkit
 import cvsskit
 import computuskit
 import mayakit
+import geokit
 import rules as rules_mod
 import htmltext
 import context
@@ -408,7 +409,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.58.0",
+    version="1.59.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5268,6 +5269,111 @@ def api_maya_long_count(req: MayaLongCountRequest):
     return err if err else body
 
 
+# -------------------------------- bundle 137_hermes: pack geodesie
+# Admissions 27-11, registre L56/L60/L61 (recus 6b592587, 4de2e8f2,
+# 3e025c90). Consigne owner : modele et constantes NOMMES dans chaque
+# reponse — R et k de refraction declares, table = version + sha.
+# geo_distance est le voisin sphere, nomme dans les tests et designe
+# dans la reponse ; il rend son rayon depuis B17 mais ne remplace pas
+# l'ellipse (mesure campagne : -23,072 km SCL-MEL, 0/9 routes).
+
+class GeodesicWgs84InverseRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+    frm: Optional[dict] = Field(default=None, alias="from")
+    to: Optional[dict] = None
+    digits: Optional[int] = Field(default=None, ge=0, le=9)
+
+
+def run_geodesic_wgs84_inverse(args: dict):
+    try:
+        req = GeodesicWgs84InverseRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="geodesic_wgs84_inverse")
+    try:
+        out = geokit.vincenty_inverse(frm=req.frm, to=req.to,
+                                      digits=req.digits)
+    except geokit.GeoKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="geodesic_wgs84_inverse")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/geo/wgs84")
+def api_geodesic_wgs84_inverse(req: GeodesicWgs84InverseRequest):
+    body, err = run_geodesic_wgs84_inverse(req.model_dump())
+    return err if err else body
+
+
+class HorizonHiddenHeightRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    mode: Optional[str] = None
+    observer_height_m: Optional[Any] = None
+    distance_m: Optional[Any] = None
+    target_height_m: Optional[Any] = None
+    R_m: Optional[Any] = None
+    k: Optional[Any] = None
+    digits: Optional[int] = Field(default=None, ge=0, le=9)
+
+
+def run_horizon_hidden_height(args: dict):
+    try:
+        req = HorizonHiddenHeightRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="horizon_hidden_height")
+    try:
+        out = geokit.horizon_height(
+            mode=req.mode, observer_height_m=req.observer_height_m,
+            distance_m=req.distance_m, target_height_m=req.target_height_m,
+            R_m=req.R_m, k=req.k, digits=req.digits)
+    except geokit.GeoKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="horizon_hidden_height")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/geo/horizon")
+def api_horizon_hidden_height(req: HorizonHiddenHeightRequest):
+    body, err = run_horizon_hidden_height(req.model_dump())
+    return err if err else body
+
+
+class ShadowLengthSunElevationRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    height_m: Optional[Any] = None
+    elevation_deg: Optional[Any] = None
+    digits: Optional[int] = Field(default=None, ge=0, le=12)
+
+
+def run_shadow_length_sun_elevation(args: dict):
+    try:
+        req = ShadowLengthSunElevationRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="shadow_length_sun_elevation")
+    try:
+        out = geokit.shadow_length(
+            height_m=req.height_m, elevation_deg=req.elevation_deg,
+            digits=req.digits)
+    except geokit.GeoKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="shadow_length_sun_elevation")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/geo/shadow")
+def api_shadow_length_sun_elevation(req: ShadowLengthSunElevationRequest):
+    body, err = run_shadow_length_sun_elevation(req.model_dump())
+    return err if err else body
+
+
 # ------------------------------------------- bundle 136: spdx + cvss
 # Arrivees 26-11 consignees au registre, ADMIS 27-11 apres audit
 # contrat-contre-contrat : aucun outil apparie ne parse une expression
@@ -8110,6 +8216,9 @@ TOOL_RUN = {
            "cvss_base_score": run_cvss_base_score,
            "easter_computus": run_easter_computus,
            "maya_long_count": run_maya_long_count,
+           "geodesic_wgs84_inverse": run_geodesic_wgs84_inverse,
+           "horizon_hidden_height": run_horizon_hidden_height,
+           "shadow_length_sun_elevation": run_shadow_length_sun_elevation,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -14180,6 +14289,126 @@ MCP_TOOLS = [
                                               "13.0.0.0.0"},
                 "correlation": {"type": "string",
                                 "enum": ["gmt-584283", "gmt-584285"]},
+            },
+        },
+    },
+    {
+        "name": "geodesic_wgs84_inverse",
+        "description": (
+            "Inverse geodesic on the ELLIPSOID the campaigns name: "
+            "Vincenty (1975), Bulletin Geodesique 115:87-93, on WGS84 "
+            "(a=6378137 m, f=1/298.257223563 — both rendered in every "
+            "answer, with the method version + sha). Two points "
+            "{lat,lon} in decimal degrees -> distance in m/km at the "
+            "HALF_UP digits you name (default 4, said) plus initial "
+            "and final azimuth. geo_distance is the SPHERE neighbour "
+            "(R=6371008.8 m, now echoed): measured 0/9 real routes "
+            "agree with WGS84 — Santiago-Melbourne drifts -23.072 km. "
+            "Same point -> 0 with azimuths null (never guessed); a "
+            "near-antipodal pair is refused by name "
+            "(vincenty_non_convergence), never a fabricated number. "
+            "Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["from", "to"],
+            "properties": {
+                "from": {"type": "object",
+                         "properties": {
+                             "lat": {"type": ["number", "string"],
+                                     "description": "-90..90 deg"},
+                             "lon": {"type": ["number", "string"],
+                                     "description": "-180..180 deg"}},
+                         "required": ["lat", "lon"]},
+                "to": {"type": "object",
+                       "properties": {
+                           "lat": {"type": ["number", "string"]},
+                           "lon": {"type": ["number", "string"]}},
+                       "required": ["lat", "lon"]},
+                "digits": {"type": "integer", "minimum": 0,
+                           "maximum": 9,
+                           "description": "meters, HALF_UP "
+                                          "(default 4, said)"},
+            },
+        },
+    },
+    {
+        "name": "horizon_hidden_height",
+        "description": (
+            "The flat-earth corpus's own maths with BOTH definitions "
+            "rendered, never one guessed for the other: horizon "
+            "tangent sqrt(2Rh+h^2) AND surface arc R.acos(R/(R+h)) "
+            "(the measured artefacts: 517 vs 518 km at 21 000 m, 368 "
+            "vs 369 km at 35 000 ft); hidden height at a distance "
+            "(exact arc formula); curvature drop exact / secant / "
+            "parabolic; vanish distance = sum of arcs. The sphere "
+            "radius R and the refraction coefficient k are ARGUMENTS, "
+            "declared in every answer with R_eff = R/(1-k) (defaults "
+            "6371000 m and k=0, said in applied_defaults). 6 ft eye, "
+            "20 mi: 193 ft hidden at k=0, 163 ft at k=0.13 — while "
+            "the '8 inches per mile squared' rule claims 267 ft: the "
+            "rule is a drop approximation, NOT a hidden height. "
+            "Objects at or inside the observer's arc horizon are "
+            "refused by name (distance_within_horizon). Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["mode"],
+            "properties": {
+                "mode": {"type": "string",
+                         "enum": ["horizon", "drop", "hidden_height",
+                                  "vanish_distance"]},
+                "observer_height_m": {
+                    "type": ["number", "string"],
+                    "description": "eye height, > 0"},
+                "distance_m": {"type": ["number", "string"],
+                               "description": "D for hidden_height "
+                                              "(must be > arc "
+                                              "horizon) or drop"},
+                "target_height_m": {
+                    "type": ["number", "string"],
+                    "description": "object height for "
+                                   "vanish_distance"},
+                "R_m": {"type": ["number", "string"],
+                        "description": "sphere radius argument "
+                                       "(default 6371000 m, said)"},
+                "k": {"type": ["number", "string"],
+                      "description": "refraction, 0 <= k < 1 "
+                                     "(default 0, said)"},
+                "digits": {"type": "integer", "minimum": 0,
+                           "maximum": 9,
+                           "description": "meters, HALF_UP "
+                                          "(default 3, said)"},
+            },
+        },
+    },
+    {
+        "name": "shadow_length_sun_elevation",
+        "description": (
+            "Shadow length on level ground: height / tan(elevation), "
+            "elevation in DEGREES as an argument, result quantized "
+            "HALF_UP at the digits you name (default 2, said in "
+            "applied_defaults). The Sun at or below the horizon is "
+            "refused by name (sun_at_or_below_horizon — a printed "
+            "'shadow' there is an artefact), > 90 deg refused too. "
+            "math_calc's closed language has no trig and refuses tan "
+            "by name: this is the angle-to-length contract the "
+            "Apollo-11 shadow checks (35.01 / 25.38 / 35.05 m for a "
+            "7.04 m LM) needed by hand. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["height_m", "elevation_deg"],
+            "properties": {
+                "height_m": {"type": ["number", "string"],
+                             "description": "object height, > 0"},
+                "elevation_deg": {
+                    "type": ["number", "string"],
+                    "description": "solar elevation, 0 < e <= 90"},
+                "digits": {"type": "integer", "minimum": 0,
+                           "maximum": 12,
+                           "description": "meters, HALF_UP "
+                                          "(default 2, said)"},
             },
         },
     },

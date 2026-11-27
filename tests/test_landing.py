@@ -91,6 +91,16 @@ def test_landing_budget():
     # un cycle entier sous une suite verte (itération 14 de la classe
     # « l'outillage ment », consignée b114, close par cette ligne).
     for _l in ("en", "fr", "pt"):
+        # b137c RE-ANCRE MESUREE sur tip e6deea2 (gouttiere b132 + pliage
+        # CHROME deja en place) : +3 cartes pack geodesie RE-BAKEES x3,
+        # AUCUNE prose tondue, AUCUN plafond touche — rendus : en 177 853 /
+        # fr 178 553 / pt 178 579 APP = 178 220 / 178 920 / 178 946 SERVIS
+        # (octet+367 beacon). Marges 2 780 / 2 080 / 2 054 sous 181 000 :
+        # le plafond 182 500 pose sur la base fe83152 du lot 137 est
+        # SUPERFLU sur le tip, la gouttiere absorbe — precedent b133 « les
+        # lectures sont SYNCHRONEES dans le MEME commit ». Contrat reel =
+        # manifest < 9000 (tenu 8 347, b0). Plafond 181_000 du tip CONSERVE
+        # (suite des mesures b136 610/107/49 rendus par la gouttiere).
         assert len(_landing(_l).encode("utf-8")) + 367 < 181_000, _l
     # fixed section skeleton: five landmark anchors, never one per tool
     for anchor in ('id="bundles"', 'id="tiers"', 'id="bench"', 'id="build"',

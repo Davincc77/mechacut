@@ -731,6 +731,20 @@ TABLE = (
      "geohash encode decode with bounding box, published alphabet",
      "geohash location grid cell lat lon box nearby "
      "geohash localisation cellule geolocalizacion"),
+    # 137_hermes — pack geodesie (registre L56/L60/L61) ; R et k sont
+    # des arguments NOMMES, l'ellipse est designee par sa formule.
+    ("geodesic_wgs84_inverse", "/api/v1/geo/wgs84", "extract",
+     "WGS84 ellipsoid distance + azimuth, Vincenty 1975 named",
+     "geodesic geodesy wgs84 ellipsoid vincenty inverse haversine "
+     "distance coordinates azimuth elipsoide distancia geodesica"),
+    ("horizon_hidden_height", "/api/v1/geo/horizon", "extract",
+     "horizon tangent AND arc, hidden height, drop, vanish distance",
+     "horizon curvature drop hidden height refraction coefficient "
+     "tangent arc earth visible vanish distance ligne d horizon"),
+    ("shadow_length_sun_elevation", "/api/v1/geo/shadow", "numbers",
+     "shadow on level ground: height / tan(elevation degrees)",
+     "shadow length sun elevation angle tangent cosine trigonometry "
+     "degrees projection sundial hauteur ombre soleil"),
     ("file_identify", "/api/v1/file/identify", "extract",
      "what is this blob really: magic bytes, not the file extension",
      "file type magic identify binary what is this blob extension mime "
@@ -1661,6 +1675,13 @@ CONF_FLOOR = 4
 # heurte jamais « ça » plié « ca » — collision vérée avant patch, pas
 # après.
 SCHEME_NAMES = {
+    # b137 — les requetes NOMMEES des segments campagne (entree-tax :
+    # six mots qui ne routaient AUCUN outil ; §spatiale : shadow/tangent) —
+    # un mot seul doit passer le plancher 4, donc il vit dans les SEGMENTS
+    # de nom, pas seulement dans les tags.
+    "geodesic_wgs84_inverse": "haversine wgs84 vincenty geodesic",
+    "horizon_hidden_height": "horizon curvature refraction vanishing",
+    "shadow_length_sun_elevation": "shadow sundial elevation",
     "validate_taxid": "cnpj cpf siren siret nif vat",
     "id_checkdigit": "isbn isbn10 isbn13 ean ean8 ean13 upca gtin "
                      "gtin14 issn isin cusip sedol aba lei orcid cas "

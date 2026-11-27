@@ -1,0 +1,9 @@
+{
+ "name": "shadow_length_sun_elevation_alsj_pin",
+ "path": "/api/v1/geo/shadow",
+ "body": {
+  "height_m": "7.04",
+  "elevation_deg": "11.37",
+  "digits": 2
+ }
+}

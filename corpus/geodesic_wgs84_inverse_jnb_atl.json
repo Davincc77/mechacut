@@ -1,0 +1,9 @@
+{
+ "name": "geodesic_wgs84_inverse_jnb_atl_pin",
+ "path": "/api/v1/geo/wgs84",
+ "body": {
+  "from": {"lat": "-26.140081", "lon": "28.246801"},
+  "to": {"lat": "33.6367", "lon": "-84.428101"},
+  "digits": 0
+ }
+}

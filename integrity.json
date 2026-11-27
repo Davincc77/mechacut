@@ -3223,6 +3223,23 @@
   },
   {
    "body": {
+    "digits": 0,
+    "from": {
+     "lat": "-26.140081",
+     "lon": "28.246801"
+    },
+    "to": {
+     "lat": "33.6367",
+     "lon": "-84.428101"
+    }
+   },
+   "name": "geodesic_wgs84_inverse_jnb_atl_pin",
+   "path": "/api/v1/geo/wgs84",
+   "sha256": "68d562368975c39d19982c72d4048644f80b6de2f6cf78c791114967d416f264",
+   "status": 200
+  },
+  {
+   "body": {
     "paths": [
      "src/a/test_x.py",
      "src/test_y.py",
@@ -3266,6 +3283,18 @@
    "name": "hash_sha256_abc",
    "path": "/api/v1/hash/digest",
    "sha256": "23f9c7d373a415b7435d3377b1f2d03f884ba74833ea89ed3536083fcca2b130",
+   "status": 200
+  },
+  {
+   "body": {
+    "digits": 3,
+    "distance_m": "32186.88",
+    "mode": "hidden_height",
+    "observer_height_m": "1.8288"
+   },
+   "name": "horizon_hidden_height_6ft_20mi_k0_pin",
+   "path": "/api/v1/geo/horizon",
+   "sha256": "05d9e46ba4459fa550c7d506a2c188bfb2ec7b06acbacdf35f6be3daca72947a",
    "status": 200
   },
   {
@@ -5822,6 +5851,17 @@
    "name": "semver_sort_chain",
    "path": "/api/v1/semver/sort",
    "sha256": "e5db741e8dd3285ac3927028b4587d1346dca0de20eff21a869f5eff727b8a7a",
+   "status": 200
+  },
+  {
+   "body": {
+    "digits": 2,
+    "elevation_deg": "11.37",
+    "height_m": "7.04"
+   },
+   "name": "shadow_length_sun_elevation_alsj_pin",
+   "path": "/api/v1/geo/shadow",
+   "sha256": "68f681bdcaa21693eb31d5adaf5bc580d8dc61ce0611406dbb6dc3beac54ace6",
    "status": 200
   },
   {

@@ -1,0 +1,10 @@
+{
+ "name": "horizon_hidden_height_6ft_20mi_k0_pin",
+ "path": "/api/v1/geo/horizon",
+ "body": {
+  "mode": "hidden_height",
+  "observer_height_m": "1.8288",
+  "distance_m": "32186.88",
+  "digits": 3
+ }
+}
