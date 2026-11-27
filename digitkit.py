@@ -554,7 +554,23 @@ def _generate(scheme, value):
         # cas payload arrives as the hyphenated body, e.g. 7732-18
         if not re.match(r"^\d{1,7}-\d{2}$", n):
             raise DigitError("cas generate needs body 'NNNNNNN-NN'")
-    elif not re.match("^(?:" + s["rx"] + ")$", n + "0" * s["check_n"]):
+    elif re.match("^(?:" + s["rx"] + ")$", n + "0" * s["check_n"]):
+        pass
+    elif re.match("^(?:" + s["rx"] + ")$", n):
+        # B3 (vague Grok 27-11) : « 9780306406150 » etait refuse en
+        # generate en citant le regex 13 chiffres QU'IL SATISFAIT — le
+        # message se contredisait lui-meme. Desormais la verite nommee :
+        # le regex cite est celui du FULL value ; generate veut le BODY
+        # sans le caractere de cle. Garde-fou paye a la suite :
+        # l'ordre est inverse (payload valide D'ABORD, sinon le regex
+        # souple des schemes generiques « \\d{2,} » reclamait un body
+        # plus court que la duree du monde).
+        raise DigitError("value %r is a FULL %s id — the cited format %s "
+                         "matches it WITH its check char; generate wants "
+                         "the payload WITHOUT it: send the first %d "
+                         "characters" % (value, scheme, s["rx"],
+                                         len(n) - s["check_n"]))
+    else:
         raise DigitError("payload %r is not a valid %s payload "
                          "(format %s)" % (value, scheme, s["rx"]))
     chk = s["check_fn"](n)

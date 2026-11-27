@@ -79,6 +79,13 @@ def _ok_datetime(v):
         datetime.fromisoformat(v.replace("Z", "+00:00").replace(
             "z", "+00:00"))
     except ValueError:
+        # B11 (vague Grok 27-11, Host) : la vraie seconde intercalaire
+        # 23:59:60 etait refusee sous un « calendar/zone values out of
+        # range » nu — alors que la carte du contrat promet le leap
+        # second. RFC 3339 l'autorise (grammar) ; POSIX ne la rend pas
+        # (scale). Le FORMAT juge la grammar — le cas est NOMMEE.
+        if len(v) >= 19 and v[11:19] == "23:59:60":
+            return None, "leap-second"
         return "calendar/zone values out of range", None
     return None, None
 
@@ -90,6 +97,8 @@ def _ok_time(v):
     s = int(v[6:8])
     if h > 23 or m > 59 or s > 60:      # 60 = leap second, permis
         return "hour/min/sec out of range (leap second :ss=60 ok)", None
+    if s == 60:
+        return None, "leap-second"  # B11 : la grammar passe, le cas se dit
     return None, None
 
 
@@ -153,6 +162,7 @@ def check_format(payload, formats):
                           % (", ".join(repr(u) for u in unknown),
                              ", ".join(sorted(CHECKS))))
     violations = []
+    leap_paths = []
     checked = 0
     for path, fmt in sorted(formats.items()):
         try:
@@ -174,13 +184,26 @@ def check_format(payload, formats):
                            "cannot say this, which is exactly the trap"
                            % (fmt, type(v).__name__)})
                 continue
-            why, _ = CHECKS[fmt](v)
+            why, _note = CHECKS[fmt](v)
+            if _note == "leap-second":
+                leap_paths.append(hit["path"])
             if why:
                 violations.append({"path": hit["path"], "format": fmt,
                                    "value": v, "why": why,
                                    "expected": fmt})
-    return {"formats_checked": checked,
-            "rules": sorted("%s → %s" % kv for kv in formats.items()),
-            "valid": not violations,
-            "violations": violations,
-            "closed_format_set": sorted(CHECKS)}
+    out = {"formats_checked": checked,
+           "rules": sorted("%s → %s" % kv for kv in formats.items()),
+           "valid": not violations,
+           "violations": violations,
+           "closed_format_set": sorted(CHECKS)}
+    if leap_paths:
+        # B11 : la seconde valide est DITE, pas muette — RFC 3339 autorise
+        # :60 ; aucune table de leap seconds n'est embarquee ici (ce
+        # serait inventer le calendrier — c'est la proposition
+        # utc_tt_offset_named_table qui voudrait porter cette table).
+        out["leap_second_paths"] = sorted(set(leap_paths))
+        out["leap_second_note"] = ("grammar-valid RFC 3339; POSIX/ISO "
+                                   "civil time cannot render this instant "
+                                   "— existence of the insertion is NOT "
+                                   "judged here, never certified")
+    return out

@@ -123,7 +123,13 @@ def _check_cond(cond, facts, depth):
     if lop == "exists":
         return not found if want is False else found
     if not found:
-        return False
+        # B8 (vague Grok 27-11) : un fait inconnu evaluait False en
+        # silence — la presence d'un « when » typographique decide du
+        # sort d'un audit. L'ABSENCE a un operateur (exists), pas un
+        # defaut. Le typon est desormais refuse PAR SON NOM.
+        raise RulesError("fact %r is not in facts — absence is tested "
+                         "with op \"exists\", never guessed by silence"
+                         % leaf["fact"])
     if lop == "eq":
         return value == want
     if lop == "ne":
@@ -167,6 +173,20 @@ def logic_rules(facts, rules):
         name = rule.get("name", "rule_%d" % i)
         if not isinstance(name, str) or not name:
             raise RulesError("rule name must be a non-empty string")
+        _extra = sorted(set(rule) - {"name", "when", "require", "forbid",
+                                      "set"})
+        if _extra:
+            # B8 (vague Grok 27-11) : une regle portee par des cles
+            # inconnues (if/then…) passait VERT en silence. La grammaire
+            # est fermee ; la cle fautive est nommee.
+            # (Lecon payee 2 fois dans la nuit : ma premiere liste
+            # OUBLIAIT « set », publie par la grammaire ligne 208 — un
+            # durcissement qui tue le chemin legitime est une faute de
+            # plus, pas une reparation. La liste est alignee sur le
+            # code, pas sur la memoire.)
+            raise RulesError("rule %r carries unknown key(s): %s — "
+                             "closed grammar: name, when, require, "
+                             "forbid, set" % (name, ", ".join(_extra)))
         when = rule.get("when")
         try:
             fired = True if when is None else _check_cond(when, out_facts, 1)

@@ -3186,7 +3186,7 @@
    },
    "name": "hash_sha256_abc",
    "path": "/api/v1/hash/digest",
-   "sha256": "6d495267cf42052f27d011d052d8c68a4faa0b0939e35ada8f7ddb0abad230fb",
+   "sha256": "23f9c7d373a415b7435d3377b1f2d03f884ba74833ea89ed3536083fcca2b130",
    "status": 200
   },
   {
@@ -6959,7 +6959,7 @@
    },
    "name": "units_km_to_mi",
    "path": "/api/v1/units/convert",
-   "sha256": "52cdab9e46573596e4d60689134a9030333cca3b7549aac4341b76ae00665d53",
+   "sha256": "212273b2aa3a0f30d6ce8c9d8a34d4e5412642e26fc4bf370b68798dbe69f496",
    "status": 200
   },
   {

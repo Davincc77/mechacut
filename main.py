@@ -399,7 +399,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.50.0",
+    version="1.51.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -1597,7 +1597,11 @@ class UnitsConvertRequest(BaseModel):
     value: Any
     from_unit: str = Field(alias="from")
     to_unit: str = Field(alias="to")
-    places: int = Field(default=10, ge=0, le=30)
+    places: Optional[int] = Field(default=None, ge=0, le=30)
+    # B12 (vague Grok) : le defaut du MODELE remplissait 10 avant que
+    # quiconque puisse distinguer « muet » de « declare » — l'option est
+    # Optionnelle des l'entree ; muet = None = garde-fout interne (10,
+    # normalise) ; declare = rendu tel quel, zeros compris.
 
 
 def run_units_convert(args: dict):
@@ -3262,7 +3266,10 @@ def run_hash_digest(args: dict):
         out = identity.hash_digest(req.data, req.algo, req.input_kind)
     except identity.IdentityError as e:
         return None, bad_request([{"field": "data", "message": str(e)}])
-    out["sha256"] = out["hex"]
+    out["sha256"] = canon(out)  # B1 (vague Grok 27-11, hash/digest) : la
+    # queue etait LE DIGEST (un md5 etait rendu dans un champ sha256 — le
+    # champ mentait sur l'algo et volait le canon). Desormais : le digest
+    # vit dans « hex »/« base64 », la cle sha256 est le canon maison.
     return out, None
 
 
@@ -4317,6 +4324,17 @@ class GeoGeohashRequest(BaseModel):
 
 
 def run_geo_geohash(args: dict):
+    # B3 (vague Grok) : le 400 nommait « precision » pour une lat/lon hors
+    # plage. Desormais chaque champ coupable est nomme AVANT l'appel.
+    if args.get("geohash") is None:
+        for k, lo, hi in (("lat", -90.0, 90.0), ("lon", -180.0, 180.0)):
+            v = args.get(k)
+            if v is not None and not (lo <= float(v) <= hi):
+                return None, bad_request(
+                    [{"field": k,
+                      "message": "geo/geohash: %s %s out of range "
+                                 "(%g..%g)" % (k, v, lo, hi),
+                      "expected": "%s in %g..%g" % (k, lo, hi)}])
     try:
         out = geo.geo_geohash(args.get("lat"), args.get("lon"),
                               args.get("geohash"),
@@ -4469,6 +4487,16 @@ class NumFxRequest(BaseModel):
 
 
 def run_num_fx(args: dict):
+    from decimal import Decimal as _Dec  # meme loi que recipe_invoice (5421)
+    # B3 (vague Grok) : « rate: abc » etait refuse sous le champ « amount ».
+    for k in ("amount", "rate"):
+        try:
+            _Dec(str(args.get(k)))
+        except Exception:
+            return None, bad_request([
+                {"field": k,
+                 "message": "num/fx: %s must be a numeric string" % k,
+                 "expected": "a decimal literal as string, e.g. \"100.00\""}])
     try:
         out = money.num_fx(args.get("amount"), args.get("rate"),
                            args.get("to"), args.get("precision"))

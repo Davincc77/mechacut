@@ -32,6 +32,7 @@ def geo_distance(a, b=None, route=None):
             total += d
         return {"mode": "route", "legs_m": legs,
                 "total_m": round(total, 1),
+                "model": "sphere", "radius_m": EARTH_RADIUS_M,
                 "total_km": round(total / 1000.0, 3),
                 "points": len(pts)}
     if not b:
@@ -40,7 +41,11 @@ def geo_distance(a, b=None, route=None):
     la2, lo2 = _pt(b, "b")
     d = _hav(la1, lo1, la2, lo2)
     return {"mode": "pair", "meters": round(d, 1),
-            "km": round(d / 1000.0, 3), "miles": round(d / 1609.344, 3)}
+            "km": round(d / 1000.0, 3), "miles": round(d / 1609.344, 3),
+            # B17 (vague Grok 27-11, Flux) : la sphere ne le disait pas.
+            # Desormais le modele et le RAYON REELLEMENT UTILISE sont
+            # rendus — l'ecart WGS84 est nommable par l'appelant.
+            "model": "sphere", "radius_m": EARTH_RADIUS_M}
 
 
 def _hav(la1, lo1, la2, lo2):

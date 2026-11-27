@@ -91,6 +91,18 @@ def parse_date(text, prefer=None, tz=None):
                              int(h or 0), int(mi or 0), int(se or 0),
                              int((fr or "").ljust(6, "0") or 0))
         except ValueError as e:
+            if se == "60":
+                # B11 (vague Grok 27-11) : un « 0..59 » nu parlait de
+                # l'ecart, pas de la chose. La seconde intercalaire est
+                # NOMMEE, la scale dite, la porte attendue aussi.
+                raise DateError(
+                    "invalid ISO date: second :60 is the UTC LEAP SECOND "
+                    "— real on the IERS table, absent from POSIX civil "
+                    "time, which is the scale this tool renders. "
+                    "Expected: 00..59 here; the leap-second existence "
+                    "question belongs to a named table "
+                    "(utc_tt_offset_named_table, at the door). Never "
+                    "silently coerced to :59")
             raise DateError("invalid ISO date: %s" % e)
         if off:
             if off in ("Z", "z"):
@@ -298,12 +310,28 @@ def date_calc(base, op, params=None, tz=None):
     ops: add | business_days | diff | boundary | age
     """
     params = params or {}
+    # B16 (vague Grok 27-11) : « calendar » etait AVALE en
+    # silence — le refus dit vaut mieux que le faux calcul.
+    _cal = params.get("calendar")
+    if _cal is not None and str(_cal).lower() != "gregorian":
+        raise DateError(
+            "calendar=%r is refused, not ignored: this tool counts on "
+            "the proleptic-Gregorian scale only — 1582-10-15 minus "
+            "1582-10-04 = -11d HERE is a fact about this tool, NOT the "
+            "historical 10-day jump. Expected: calendar omitted or "
+            "\"gregorian\"; a true julian<->gregorian conversion is a "
+            "different contract (date_julian_gregorian, at the door "
+            "with the registry)" % _cal)
     dt = _parse_instant(base, tz=tz)
     if op == "add":
         m = _ADD_RE.match(params.get("duration", ""))
         if not m or not params.get("duration"):
-            raise DateError('add needs params.duration ISO-8601-ish '
-                            '(e.g. "1y2m3d", "P3D" accepted without P)')
+            # B7 (vague Grok 27-11) : l'exemple « "P3D" accepted without
+            # P » se lisait comme une invitation. La grammaire est dite,
+            # la forme exacte rendue.
+            raise DateError('add needs params.duration in the closed '
+                            'grammar: 1y2m3d (w for weeks), no leading '
+                            'P — the ISO form "P3D" must be sent as "3D"')
         y, mo, w, d, h, mi, s = (int(g) if g else 0 for g in m.groups())
         out = _add_calendar(dt, y, mo, w, d, h, mi, s)
         return {"result": out.isoformat(),
@@ -327,7 +355,13 @@ def date_calc(base, op, params=None, tz=None):
             raise DateError("diff needs both instants aware or both naive")
         td = other - dt
         if unit == "days":
-            return {"days": td.days, "seconds_iso": _duration_iso(td)}
+            # B7 (Git, vague Grok) : +143 s → 0, -143 s → -1. C'est la
+            # loi du floor — legitime, mais jusqu'ici TU. Desormais DITE.
+            return {"days": td.days, "seconds_iso": _duration_iso(td),
+                    "days_basis": "floor(total_seconds/86400); the "
+                                  "remainder lives in seconds_iso — "
+                                  "asymmetric signs are this law, "
+                                  "said, not guessed"}
         if unit == "business_days":
             weekend = params.get("weekend", _WEEKEND_DEFAULT)
             hol = {str(_parse_instant(h).date())
@@ -407,8 +441,18 @@ def date_calc(base, op, params=None, tz=None):
         return {"result": out.isoformat(),
                 "weekday": _DOW_CANON[out.weekday()]}
     if op == "age":
-        other = _parse_instant(params.get("on"), tz=tz) if params.get("on") \
-            else datetime.now(timezone.utc)
+        # Septieme faute trouvee en relisant le code (27-11) : sans « on »,
+        # age lisait datetime.now() — l'horloge murale DU SERVEUR dans une
+        # reponse censee dire le meme pour tous, partout. Contraire du
+        # claim maison « the clock is always an argument, never a
+        # surprise ». Refusee, nommee, la forme attendue rendue.
+        if not params.get("on"):
+            raise DateError("age needs params.on — this tool never "
+                            "reads its own wall clock: an unshipped "
+                            "age is a fact about YOUR query time, not "
+                            "a number we invent. Expected: "
+                            "params.on=<ISO instant> to age against")
+        other = _parse_instant(params["on"], tz=tz)
         if other < dt:
             raise DateError("age.on must not be before base")
         years = other.year - dt.year

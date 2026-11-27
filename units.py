@@ -126,7 +126,13 @@ def _resolve(unit):
     return fam, key
 
 
-def units_convert(value, from_unit, to_unit, places=10):
+def units_convert(value, from_unit, to_unit, places=None):
+    # B12 (vague Grok 27-11) : « places » DECLARE ou reste muet.
+    # Muet = quantize interne a 10 (garde-fout des floats) puis
+    # normalize — comportement historique, golds inchanges.
+    # Declare = l'echelle dite est l'echelle rendue, zeros compris.
+    _declared = places is not None
+    _p = places if _declared else 10
     fam_a, a = _resolve(from_unit)
     fam_b, b = _resolve(to_unit)
     if fam_a == "temperature" or fam_b == "temperature":
@@ -136,11 +142,11 @@ def units_convert(value, from_unit, to_unit, places=10):
         out = _from_c(_to_c(Decimal(str(a if isinstance(a, Decimal) else 0)),
                              a), b) if False else _from_c(
             _to_c(Decimal(str(value)), a), b)
-        q = out.quantize(Decimal(1).scaleb(-places))
-        return {"value": format(q.normalize(), "f"),
+        q = out.quantize(Decimal(1).scaleb(-_p))
+        return {"value": format(q if _declared else q.normalize(), "f"),
                 "float": float(out),
                 "from": (from_unit, a, fam_a), "to": (to_unit, b, fam_b),
-                "base": "C", "places": places}
+                "base": "C", "places": _p}
     if fam_a != fam_b:
         raise UnitError("cross-family conversion refused: %r is %s, %r is "
                         "%s" % (from_unit, fam_a, to_unit, fam_b))
@@ -154,9 +160,9 @@ def units_convert(value, from_unit, to_unit, places=10):
         with localcontext() as ctx:
             ctx.prec = 50
             out = d * (na / da) * (db / nb)
-    q = out.quantize(Decimal(1).scaleb(-places)) if places is not None \
-        else out
-    qs = q.normalize()
+    q = out.quantize(Decimal(1).scaleb(-_p))
+    qs = q if _declared else q.normalize()  # l'echelle demandee est
+    # l'echelle rendue ; muet = normalize historique.
     return {"value": format(qs, "f") if "E" not in format(qs, "f").upper()
             else format(qs, "f"),
             "float": float(out),

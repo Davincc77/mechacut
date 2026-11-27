@@ -146,8 +146,15 @@ def calc(expr, digits=None):
                             "exact long-unit math is the known gap "
                             "(erc20_raw_units, registry 26-11)")
     else:
-        raw = str(value.normalize()) if value.copy_abs() >= 1 or \
-            value == 0 else str(value)
+        if "round(" in expr:
+            # B12 (vague Grok 27-11) : round(x, n) DECLARE une echelle ;
+            # normalize() la niait (« 2.50 » rendu « 2.5 ») pendant que
+            # digits= la gardait. Une seule loi : l'echelle dite est
+            # rendue. Sans round dans l'expression, rien ne change.
+            raw = format(value, "f")
+        else:
+            raw = str(value.normalize()) if value.copy_abs() >= 1 or \
+                value == 0 else str(value)
     out = {"expr": expr, "value": raw, "digits_context": 50,
            "language": "closed: + - * / // % ** ( ) round/2, sqrt, "
                        "abs; Decimal literals from SOURCE text, never "
