@@ -1,0 +1,9 @@
+{
+ "name": "stats_chi2_critical_nist_pin",
+ "path": "/api/v1/stats/chi2",
+ "body": {
+  "mode": "critical",
+  "df": 89,
+  "alpha": "0.05"
+ }
+}

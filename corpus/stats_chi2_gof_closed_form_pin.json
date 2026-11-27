@@ -1,0 +1,8 @@
+{
+ "name": "stats_chi2_gof_closed_form_pin",
+ "path": "/api/v1/stats/chi2",
+ "body": {
+  "mode": "gof",
+  "counts": [14, 6, 10, 10, 10]
+ }
+}

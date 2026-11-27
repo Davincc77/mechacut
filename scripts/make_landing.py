@@ -1682,6 +1682,10 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
     "fr": {
         "stats_rate_ci":
             "k sur n → taux OBSERVÉ et centre WILSON séparés et nommés, intervalle 95 % — le 65,2 % seul est un mensonge de précision",
+        "stats_chi2":
+            "deux sorties NOMMÉES sous un nom : gof (comptes → chi2, ddl, p de queue en FORMES FERMÉES df pairs, impair refusé nommé) et critical (ddl × alpha lus dans la table NIST FERMÉE versionnée + hashée, hors table refusé)",
+        "benford_digit_test":
+            "comptes de chiffres fermés (9/90/10/100) + emprise → chi2, MAD, bande Nigrini, verdict à SIX noms fermés — table BENFORD-NIGRINI2012-v1 versionnée, R-N1 et R-SPAN en précendance DITE",
         "text_claimsweep":
             "sweep d'opinion à liste FERMÉE : auto-aveu, quantifieurs sans corpus, compteurs morts — citation exemptée, ton jamais deviné",
                 "date_edtf_interval":
@@ -2093,6 +2097,10 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
     },    "pt": {
         "stats_rate_ci":
             "k de n → taxa OBSERVADA e centro WILSON separados e nomeados, intervalo 95 % — 65,2% sozinho é mentira de precisão",
+        "stats_chi2":
+            "duas saídas NOMEDAS sob um nome: gof (contagens → chi2, gl, p de cauda em FORMAS FECHADAS gl pares, ímpar recusado pelo nome) e critical (gl × alpha lidos da tabela NIST FECHADA, versionada e hash, fora da tabela recusado)",
+        "benford_digit_test":
+            "contagens de dígitos FECHADAS (9/90/10/100) + extensão → chi2, MAD, banda Nigrini, veredito de SEIS nomes fechados — tabela BENFORD-NIGRINI2012-v1 versionada, R-N1 e R-SPAN com precedência DITA",
         "text_claimsweep":
             "varredura de opinião com lista FECHADA: confissão, quantificador sem corpus, contador morto — citação isenta, tom nunca adivinhado",
                 "date_edtf_interval":

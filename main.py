@@ -209,7 +209,7 @@ import threading
 import time
 from collections import deque
 from pathlib import Path
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional, Union
 
 from fastapi import FastAPI, Query, Request
 from fastapi.exceptions import RequestValidationError
@@ -283,6 +283,8 @@ import cache
 import micro
 import claimsweep
 import edtfkit
+import chi2kit
+import benfordkit
 import rules as rules_mod
 import htmltext
 import context
@@ -400,7 +402,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.54.0",
+    version="1.55.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5004,6 +5006,110 @@ def api_marc008_date_range(req: Marc008DateRangeRequest):
     return err if err else body
 
 
+# --------------------------- bundle 134_hermes: paquet chi2 + benford (amas P-C)
+# Arbitrage Vince 27-11 : stats_chi2_gof et stats_chi2_critical ne sont
+# qu'UN SEUL OUTIL, DEUX SORTIES NOMMEES (mode gof | critical) — un seul
+# contrat d'enregistrement, les deux credits conserves hors depot (rapport
+# de campagne). benford_digit_test est l'outil separate : il relit la meme
+# table critique fermee et la NOMME dans sa reponse. Tables fermees,
+# versionnees, hashees : CHI2-CRIT-NISTEH-1.3.6.7.4-v1 (NIST e-Handbook)
+# et BENFORD-NIGRINI2012-v1. Hors table : refuse par son nom.
+
+class StatsChi2Request(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    mode: Literal["gof", "critical"]
+    counts: Optional[List[int]] = None
+    expected: Optional[List[Union[int, str]]] = None
+    df: Optional[int] = None
+    alpha: Optional[str] = None
+
+
+def run_stats_chi2(args: dict):
+    try:
+        req = StatsChi2Request(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e), tool="stats_chi2")
+    if req.mode == "critical":
+        if req.counts is not None or req.expected is not None:
+            return None, bad_request(
+                [{"field": "counts",
+                  "message": "mode=critical reads the closed table by "
+                             "(df, alpha) — counts and expected belong "
+                             "to mode=gof, the other named output of "
+                             "this same tool"}],
+                tool="stats_chi2")
+        if req.df is None or req.alpha is None:
+            return None, bad_request(
+                [{"field": "df" if req.df is None else "alpha",
+                  "message": "mode=critical requires df (1..100) and "
+                             "alpha (0.10, 0.05, 0.025, 0.01, 0.001) — "
+                             "the closed table is indexed by both"}],
+                tool="stats_chi2")
+        call, field = (lambda: chi2kit.critical(req.df, req.alpha)), "df"
+    else:
+        if req.df is not None or req.alpha is not None:
+            return None, bad_request(
+                [{"field": "df",
+                  "message": "mode=gof computes from counts (and the "
+                             "optional exact expected) — df and alpha "
+                             "belong to mode=critical, the other named "
+                             "output of this same tool"}],
+                tool="stats_chi2")
+        if req.counts is None:
+            return None, bad_request(
+                [{"field": "counts",
+                  "message": "mode=gof requires the observed counts "
+                             "vector (>= 2 bins); expected may be "
+                             "absent — then the uniform n/k default is "
+                             "applied and said back"}],
+                tool="stats_chi2")
+        call, field = (lambda: chi2kit.gof(req.counts, req.expected)), \
+            "counts"
+    try:
+        out = call()
+    except chi2kit.Chi2KitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e)}], tool="stats_chi2")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/stats/chi2")
+def api_stats_chi2(req: StatsChi2Request):
+    body, err = run_stats_chi2(req.model_dump())
+    return err if err else body
+
+
+class BenfordDigitTestRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    test: Literal["first_digit", "first_two", "last_digit", "last_two"]
+    counts: List[int]
+    min: Union[int, str]
+    max: Union[int, str]
+
+
+def run_benford_digit_test(args: dict):
+    try:
+        req = BenfordDigitTestRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="benford_digit_test")
+    try:
+        out = benfordkit.test_run(req.test, req.counts, req.min, req.max)
+    except benfordkit.BenfordKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": str(e)}],
+            tool="benford_digit_test")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/stats/benford")
+def api_benford_digit_test(req: BenfordDigitTestRequest):
+    body, err = run_benford_digit_test(req.model_dump())
+    return err if err else body
+
+
 # --------------------------------------------- bundle 7.1: text tools
 
 class TextCountRequest(BaseModel):
@@ -7770,6 +7876,8 @@ TOOL_RUN = {
            "date_edtf_interval": run_date_edtf_interval,
            "date_interval_within": run_date_interval_within,
            "marc008_date_range": run_marc008_date_range,
+           "stats_chi2": run_stats_chi2,
+           "benford_digit_test": run_benford_digit_test,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -13548,6 +13656,92 @@ MCP_TOOLS = [
                              "description": "echoed label only, "
                                             "never converted, "
                                             "never fetched"},
+            },
+        },
+    },
+    {
+        "name": "stats_chi2",
+        "description": (
+            "Chi-square as ONE tool with two named outputs (closed "
+            "mode). gof: counts vector + optional exact expected "
+            "(absent = uniform n/k, said back as applied_defaults) -> "
+            "chi2 at 6 dp, df, upper-tail p in the declared closed "
+            "form p = e^(-x/2)*sum(i<df/2)(x/2)^i/i! — EVEN df only; "
+            "odd df is refused by name and the critical output of the "
+            "same tool is pointed to. critical: (df, alpha) -> the "
+            "upper-tail value from the CLOSED table "
+            "CHI2-CRIT-NISTEH-1.3.6.7.4-v1 (NIST e-Handbook 1.3.6.7.4, "
+            "df 1..100 x 0.10/0.05/0.025/0.01/0.001, version+sha said "
+            "back); off-table df or alpha refused by name, never "
+            "extrapolated. Exact Decimal/Fraction, half-up named. "
+            "Campaign golds replay: [10,20,30] -> 10.000000 p "
+            "0.006738; [14,6,10,10,10] -> 3.2 p 0.524931; [0,10,20] -> "
+            "20 p 0.000045. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["mode"],
+            "properties": {
+                "mode": {"type": "string", "enum": ["gof", "critical"],
+                         "description": "gof = statistic + closed-form "
+                                        "upper-tail p; critical = "
+                                        "closed-table threshold read"},
+                "counts": {"type": "array", "items": {"type": "integer"},
+                           "description": "mode=gof: observed counts, "
+                                          ">= 2 bins, all >= 0"},
+                "expected": {"type": "array", "items": {"type": "string"},
+                             "description": "mode=gof optional: exact "
+                                            "decimal strings, one per "
+                                            "bin; absent = uniform n/k "
+                                            "(said back)"},
+                "df": {"type": "integer",
+                       "description": "mode=critical: degrees of "
+                                      "freedom, closed rows 1..100"},
+                "alpha": {"type": "string",
+                          "enum": ["0.10", "0.05", "0.025", "0.01",
+                                   "0.001"],
+                          "description": "mode=critical: upper-tail "
+                                         "probability, closed set"},
+            },
+        },
+    },
+    {
+        "name": "benford_digit_test",
+        "description": (
+            "Closed digit-test counts -> the conformity verdict from "
+            "the versioned table BENFORD-NIGRINI2012-v1 (16-decimal "
+            "log10(1+1/d) expected literals, version+sha said back). "
+            "test first_digit (9 bins) / first_two (90) / last_digit "
+            "(10) / last_two (100), exact bin count or the surplus "
+            "bin is refused by name; plus span min/max. Returns n, df "
+            "(8/89/9/99), chi2 at 2 dp, chi2_crit_05 read from the "
+            "chi2 critical table NAMED in the answer, MAD at 4 dp, "
+            "the Nigrini band (upper-inclusive, v1 convention), and a "
+            "verdict from the closed six: CONFORMS NONCONFORMITY "
+            "UNIFORM_REJECTED UNIFORM_NOT_REJECTED SAMPLE_TOO_SMALL "
+            "SPAN_TOO_NARROW. Precedence R-N1 (n>=1000) > R-SPAN "
+            "(max/min>=10^4, first_* only) > statistic; last_* carries "
+            "no published band — MAD shown as info. Digit extraction "
+            "stays caller-side (rules R-FT/R-POS/R-L2 are the "
+            "campaign's own, said here, never silently applied). Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["test", "counts", "min", "max"],
+            "properties": {
+                "test": {"type": "string",
+                         "enum": ["first_digit", "first_two",
+                                  "last_digit", "last_two"],
+                         "description": "the closed test name"},
+                "counts": {"type": "array", "items": {"type": "integer"},
+                           "description": "one count per bin, exact "
+                                          "length per test: 9 / 90 / "
+                                          "10 / 100"},
+                "min": {"type": ["integer", "string"],
+                        "description": "series minimum (> 0), for the "
+                                       "span rule R-SPAN"},
+                "max": {"type": ["integer", "string"],
+                        "description": "series maximum (>= min)"},
             },
         },
     },

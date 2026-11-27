@@ -1,0 +1,10 @@
+{
+ "name": "benford_digit_test_first_digit_pin",
+ "path": "/api/v1/stats/benford",
+ "body": {
+  "test": "first_digit",
+  "counts": [301, 176, 125, 97, 79, 67, 58, 51, 46],
+  "min": 1,
+  "max": 10000
+ }
+}

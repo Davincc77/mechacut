@@ -1663,6 +1663,28 @@
   },
   {
    "body": {
+    "counts": [
+     301,
+     176,
+     125,
+     97,
+     79,
+     67,
+     58,
+     51,
+     46
+    ],
+    "max": 10000,
+    "min": 1,
+    "test": "first_digit"
+   },
+   "name": "benford_digit_test_first_digit_pin",
+   "path": "/api/v1/stats/benford",
+   "sha256": "facef3d7be6ea17375570e686315b239e77c14461000b03c605e2dfcfc73e25c",
+   "status": 200
+  },
+  {
+   "body": {
     "value": "eip155:8453"
    },
    "name": "caip_base",
@@ -6854,6 +6876,33 @@
    "name": "ssh_fingerprint_ed25519",
    "path": "/api/v1/ssh/fingerprint",
    "sha256": "f0ea52d5248fdad1cc0bdba4d66cb85457c9168bad135ada3626a5a26be597de",
+   "status": 200
+  },
+  {
+   "body": {
+    "alpha": "0.05",
+    "df": 89,
+    "mode": "critical"
+   },
+   "name": "stats_chi2_critical_nist_pin",
+   "path": "/api/v1/stats/chi2",
+   "sha256": "e3557fa47d983a34a4b9914f0baec8006d5f3742c40ab0e9d4d5e69d6777b19a",
+   "status": 200
+  },
+  {
+   "body": {
+    "counts": [
+     14,
+     6,
+     10,
+     10,
+     10
+    ],
+    "mode": "gof"
+   },
+   "name": "stats_chi2_gof_closed_form_pin",
+   "path": "/api/v1/stats/chi2",
+   "sha256": "c3d902b7f0ac12d6b4a67d3d4be99192047e2f4c5a73d209937db1fe366973ef",
    "status": 200
   },
   {

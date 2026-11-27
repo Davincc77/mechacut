@@ -807,6 +807,20 @@ TABLE = (
      "Wilson 95% interval for k of n",
      "wilson confidence interval rate proportion percent k of n taxa "
      "taux intervalle sondage pourcentage"),
+    ("stats_chi2", "/api/v1/stats/chi2", "numbers",
+     "chi-square, one tool two named outputs: gof (counts -> chi2, df, "
+     "closed-form upper-tail p, even df) and critical (df x alpha from "
+     "the closed NIST table, off-table refused by name)",
+     "chi chi-square chi2 square statistic p-value upper tail critical "
+     "threshold goodness of fit degrees of freedom ddl seuil valeur "
+     "critique adequation chiisme seuil test"),
+    ("benford_digit_test", "/api/v1/stats/benford", "numbers",
+     "closed digit-test counts (9/90/10/100 bins) + span -> chi2 2 dp, "
+     "MAD 4 dp, Nigrini band, six-name verdict (R-N1 > R-SPAN > "
+     "statistic), table BENFORD-NIGRINI2012-v1 versioned and hashed",
+     "benford first digit last digit digits fraud conformity mad "
+     "nigrini leading trailing chiffre premiers derniers digits fraude "
+     "conformite frequencia algarismo"),
     ("text_count", "/api/v1/text/count", "text",
      "words/sentences/lines/bytes exact",
      "count words characters lines sentences bytes text measure how long "
