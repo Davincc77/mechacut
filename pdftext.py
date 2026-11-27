@@ -15,6 +15,7 @@ machine, forever — verifiable by the sha256 in every response.
 """
 import re
 import zlib
+import hashlib  # bundle 129 : le recu est lie aux octets recus (Probe #3)
 
 _MAGIC_RE = re.compile(rb"^%PDF-(\d\.\d)")
 _OBJ_RE = re.compile(rb"(\d+)\s+(\d+)\s+obj\b")
@@ -409,31 +410,106 @@ def _unescape_pdf_string(s):
 
 
 def _pdf_strings(raw, key):
-    """All (...) values for /key, in file order."""
+    """All (...) AND <hex> values for /key, in file order, as BYTES."""
     vals = []
-    pat = re.compile(rb"/" + key.encode() + rb"\s*\(")
+    pat = re.compile(rb"/" + key.encode() + rb"\s*[(<]")
     for m in pat.finditer(raw):
-        i = m.end()
-        depth = 1
-        buf = []
-        while i < len(raw) and depth:
-            c = raw[i:i + 1]
-            if c == b"\\":
-                buf.append(raw[i:i + 2])
+        if raw[m.end() - 1:m.end()] == b"(":
+            i = m.end()
+            depth = 1
+            buf = []
+            while i < len(raw) and depth:
+                c = raw[i:i + 1]
+                if c == b"\\":
+                    buf.append(raw[i:i + 2])
+                    i += 2
+                    continue
+                if c == b"(":
+                    depth += 1
+                elif c == b")":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                buf.append(c)
+                i += 1
+            if depth == 0:
+                vals.append(_unescape_pdf_bytes(b"".join(buf)))
+        else:
+            j = m.end()
+            k = raw.find(b">", j)
+            if k < 0:
+                continue
+            h = re.sub(rb"\s", b"", raw[j:k])
+            try:
+                vals.append(bytes.fromhex(h.decode("ascii")))
+            except ValueError:
+                continue  # hex malforme : absent, pas devine
+    return vals
+
+
+def _unescape_pdf_bytes(s):
+    """PDF literal-string escapes, at BYTE level (bundle 129 : la chaine
+    reste des octets jusqu'au decodage, sinon UTF-16BE devient du latin-1
+    — la moitie des 33/55 de Probe)."""
+    out, i = bytearray(), 0
+    while i < len(s):
+        c = s[i:i + 1]
+        if c == b"\\" and i + 1 < len(s):
+            n = s[i + 1:i + 2]
+            if n in (b"(", b")", b"\\"):
+                out += n
                 i += 2
                 continue
-            if c == b"(":
-                depth += 1
-            elif c == b")":
-                depth -= 1
-                if depth == 0:
-                    break
-            buf.append(c)
-            i += 1
-        if depth == 0:
-            vals.append(_unescape_pdf_string(
-                b"".join(buf).decode("latin-1", "replace")))
-    return vals
+            mm = {b"n": b"\n", b"r": b"\r", b"t": b"\t", b"b": b"\b",
+                  b"f": b"\f"}
+            if n in mm:
+                out += mm[n]
+                i += 2
+                continue
+            if n.isdigit():
+                j = i + 1
+                oct_ = b""
+                while j < len(s) and s[j:j + 1].isdigit() and len(oct_) < 3:
+                    oct_ += s[j:j + 1]
+                    j += 1
+                try:
+                    out.append(int(oct_, 8) & 0xFF)
+                    i = j
+                    continue
+                except ValueError:
+                    pass
+            out += n
+            i += 2
+            continue
+        out += c
+        i += 1
+    return bytes(out)
+
+
+def _pdf_text(b):
+    """§7.9.2.2 : BOM FEFF = UTF-16BE, FFFE = UTF-16LE ; sinon bytes
+    bas — latin-1, qui ne rate jamais et ne devine jamais."""
+    if b[:2] == b"\xfe\xff":
+        try:
+            return b[2:].decode("utf-16-be")
+        except Exception:
+            return None
+    if b[:2] == b"\xff\xfe":
+        try:
+            return b[2:].decode("utf-16-le")
+        except Exception:
+            return None
+    return b.decode("latin-1")
+
+
+def _is_garbage(t):
+    """Ciphertext rendu comme chaine = le septieme peche (Probe: 1 cas,
+    Host: le kit de presse). Une valeur illisible est NOMMEE, pas rit."""
+    if t is None or t == "":
+        return True
+    ok = sum(1 for ch in t if 0x20 <= ord(ch) < 0x7F or ord(ch) >= 0xA0
+             or ch in "\n\r\t")
+    return ok / len(t) < 0.8
 
 
 def _pdf_date(s):
@@ -443,6 +519,8 @@ def _pdf_date(s):
     they are refused as unreadable, named null. Missing time parts pad
     with zeros (the spec truncates; we do not invent beyond that)."""
     if not s:
+        return None
+    if not isinstance(s, str):
         return None
     t = s.strip()
     if t.startswith("D:") or t.startswith("d:"):
@@ -469,11 +547,16 @@ def _pdf_date(s):
     rest = t[i:]
     if rest.startswith("Z"):
         return iso + "Z"
-    if rest[:1] in "+-":
-        mm = re.match(r"([+-])(\d{2})'?(\d{2})?", rest)
-        if not mm or mm.group(3) is None:
+    if rest[:1] in ("+", "-"):
+        # B9/Probe (vague Grok 27-11, Zenodo) : « OHH » seul est un
+        # offset PDF LEGAL (la grammaire rend les minutes optionnelles) ;
+        # le renvoyer null etait notre cecite. Minutes absentes = zero,
+        # la meme loi de padding que les heures absentes — dite.
+        mm = re.match(r"([+-])(\d{2})[':]?(\d{2})?", rest)
+        if not mm:
             return None
-        return iso + "%s%s:%s" % (mm.group(1), mm.group(2), mm.group(3))
+        return iso + "%s%s:%s" % (mm.group(1), mm.group(2),
+                                  mm.group(3) if mm.group(3) else "00")
     return iso  # naive date-time: said as such, no invented offset
 
 
@@ -499,6 +582,103 @@ def _iso_comparable(s):
     return None
 
 
+def _all_streams(raw):
+    out = []
+    for m in re.finditer(rb"stream\r?\n(.*?)endstream", raw, re.S):
+        try:
+            out.append(zlib.decompress(m.group(1)))
+        except Exception:
+            continue
+    return out
+
+
+def _trailer_dicts(raw, streams):
+    """Textes <<...>> des trailers, en ordre de fichier. Le DERNIER gagne
+    (mise a jour incrementale : le trailer du bas est la loi) — la doctrine
+    last-wins, mais au BON niveau (§14.3.3)."""
+    tds = [m.group(1) for m in
+           re.finditer(rb"trailer\s*<<(.*?)>>", raw, re.S)]
+    for z in streams:
+        tds += [m.group(1) for m in
+                re.finditer(rb"/Trailer\s*<<(.*?)>>", z, re.S)]
+    return tds
+
+
+def _info_ref(trailer_dicts):
+    for td in reversed(trailer_dicts):
+        m = re.search(rb"/Info\s+(\d+)\s+(\d+)\s+R", td)
+        if m:
+            return int(m.group(1)), int(m.group(2))
+    return None
+
+
+def _plain_obj(raw, num):
+    best = None
+    for m in re.finditer(
+            rb"(?<![0-9])%d\s+\d+\s+obj\b" % num, raw):
+        en = raw.find(b"endobj", m.end())
+        if en > 0:
+            best = raw[m.end():en]
+    return best
+
+
+def _objstm_lookup(raw):
+    """num -> corps, dans les Flux ObjStm, scies PAR /N /First (§7.5.7).
+    v1.48.0 gonflait puis grepait tout le flux ; un dictionnaire Info
+    embarque dans le meme flux parlait alors a la place du vrai — c'est
+    la classe des 5 retournements de Probe."""
+    table = {}
+    for m in re.finditer(
+            rb"(?<![0-9])(\d+)\s+\d+\s+obj\s*<<(.*?)>>\s*stream\r?\n",
+            raw, re.S):
+        dic = m.group(2)
+        if b"/ObjStm" not in dic:
+            continue
+        mn = re.search(rb"/N\s+(\d+)", dic)
+        mf = re.search(rb"/First\s+(\d+)", dic)
+        en = raw.find(b"endstream", m.end())
+        if not (mn and mf and en > 0):
+            continue
+        try:
+            z = zlib.decompress(raw[m.end():en])
+        except Exception:
+            continue
+        try:
+            n = int(mn.group(1))
+            first = int(mf.group(1))
+            pairs = z[:first].split()
+            nums = [int(pairs[i]) for i in range(0, 2 * n, 2)]
+            offs = [int(pairs[i]) for i in range(1, 2 * n, 2)]
+        except Exception:
+            continue
+        body = z[first:]
+        for i, num in enumerate(nums):
+            e = offs[i + 1] if i + 1 < len(offs) else len(body)
+            table[num] = body[offs[i]:e]
+    return table
+
+
+def _dt_kind(s):
+    return "naive" if s is not None and len(s) == 19 else "zoned"
+
+
+def _dt_comparable(s):
+    base = s[:19]
+    try:
+        from datetime import datetime, timedelta
+        naive = datetime.strptime(base, "%Y-%m-%dT%H:%M:%S")
+    except ValueError:
+        return None
+    tz = s[19:]
+    if tz in ("", "Z"):
+        return naive
+    if re.match(r"^[+-]\d{2}:\d{2}$", tz):
+        sign = 1 if tz[0] == "+" else -1
+        return naive - sign * timedelta(hours=int(tz[1:3]),
+                                        minutes=int(tz[4:6]))
+    return None
+
+
 def provenance(pdf_b64):
     import base64 as _b64
     if not isinstance(pdf_b64, str) or not pdf_b64.strip():
@@ -511,43 +691,103 @@ def provenance(pdf_b64):
         raise PdfError("PDF exceeds the 16 MB cap")
     if not raw.lstrip().startswith(b"%PDF-"):
         raise PdfError("missing %PDF header — not a PDF, refusing to guess")
-    prods = _pdf_strings(raw, "Producer")
-    cre = _pdf_strings(raw, "CreationDate")
-    mod = _pdf_strings(raw, "ModDate")
-    # v1.48.0 REVISION (wave-6, 27-11 — le meme jour que le v1 :
-    # l'audit par la porte a rendu null sur les attestations Circle dont
-    # l'Info vit dans des Flux COMPRESSES (ObjStm/FlateDecode). null
-    # n'etait pas un aveu du document, c'etait notre cecite : un scan
-    # octet nu ne voit pas ce qui est inflate-a-l'interieur. Desormais
-    # on decompresse aussi, et l'ENDROIT est nomme — les trois etats
-    # (plain / object_stream / none) ne sont jamais fondus.)
-    location = "plain" if (prods or cre or mod) else None
-    if location is None:
-        for m in re.finditer(rb"stream\r?\n(.*?)endstream", raw, re.S):
-            try:
-                z = zlib.decompress(m.group(1))
-            except Exception:
-                continue
-            if not (b"/Producer" in z or b"/CreationDate" in z
-                    or b"/ModDate" in z):
-                continue
-            location = "object_stream"
-            prods = prods + _pdf_strings(z, "Producer")
-            cre = cre + _pdf_strings(z, "CreationDate")
-            mod = mod + _pdf_strings(z, "ModDate")
-    if location is None:
-        location = "none"
-    created = _pdf_date(cre[-1]) if cre else None
-    modified = _pdf_date(mod[-1]) if mod else None
-    if created is not None and modified is not None:
-        a, b = _iso_comparable(created), _iso_comparable(modified)
-        order = (a <= b) if (a is not None and b is not None) else None
+    src_sha = hashlib.sha256(raw).hexdigest()
+    streams = _all_streams(raw)
+    ref = _info_ref(_trailer_dicts(raw, streams))
+    encrypted = bool(re.search(rb"/Encrypt\s+\d+\s+0\s+R", raw))
+    prods_raw = _pdf_strings(raw, "Producer")
+    cre_raw = _pdf_strings(raw, "CreationDate")
+    mod_raw = _pdf_strings(raw, "ModDate")
+    prods_s, cre_s, mod_s = [], [], []
+    for z in streams:
+        prods_s += _pdf_strings(z, "Producer")
+        cre_s += _pdf_strings(z, "CreationDate")
+        mod_s += _pdf_strings(z, "ModDate")
+    # BUNDLE 129 (B9, vague Grok 27-11 — Probe 33/55, Scout 2/3 ANJ) :
+    # la valeur vient desormais du DICTIONNAIRE QUE LE TRAILER NOMME
+    # (§14.3.3), plus du dernier octet gagne du tout-venant ; les chaines
+    # hex et UTF-16BE a BOM sont DECODEES (§7.9.2.2) ; les corps ObjStm
+    # sont SCIES par /N /First (§7.5.7) ; un offset « +01 » et une date
+    # sans offset sont DITS, pas rates ; « equal » n'est plus « before ».
+    # La doctrine last-wins reste VRAIE — au bon niveau : dernier
+    # trailer, puis derniere generation de l'objet nomme. Le COMPTE
+    # global survit intact (rangee 16 du dossier MiCA : la preuve des
+    # generations coexistantes ne doit jamais disparaitre).
+    info_body = None
+    location = resolution = None
+    if ref is not None:
+        info_body = _plain_obj(raw, ref[0])
+        if info_body is not None:
+            location, resolution = "plain", "trailer"
+        else:
+            found = _objstm_lookup(raw).get(ref[0])
+            if found is not None:
+                info_body = found
+                location, resolution = "object_stream", "trailer"
+            else:
+                resolution = "fallback_object_not_found"
+    if resolution is None:
+        resolution = "fallback_global_scan"
+    if info_body is not None:
+        prods = _pdf_strings(info_body, "Producer")
+        cre = _pdf_strings(info_body, "CreationDate")
+        mod = _pdf_strings(info_body, "ModDate")
     else:
-        order = None  # the dossier's bug, named: nothing to compare
-    return {"producer": prods[-1] if prods else None,
-            "producer_count": len(prods),
-            "info_location": location,
-            "created": created,
-            "modified": modified,
-            "created_before_modified": order,
-            "encrypted": bool(re.search(rb"/Encrypt\s+\d+\s+0\s+R", raw))}
+        prods = prods_raw + prods_s
+        cre = cre_raw + cre_s
+        mod = mod_raw + mod_s
+        if prods_raw or cre_raw or mod_raw:
+            location = "plain"
+        elif prods_s or cre_s or mod_s:
+            location = "object_stream"
+        else:
+            location = "none"
+
+    def _read_last(vals):
+        if not vals:
+            return None, False
+        t = _pdf_text(vals[-1])
+        if _is_garbage(t):
+            # un chiffrement rendu comme producteur = le peche numero 7
+            return None, True
+        return t, False
+
+    prod_t, prod_garbage = _read_last(prods)
+    cre_t, _ = _read_last(cre)
+    mod_t, _ = _read_last(mod)
+    created = _pdf_date(cre_t)
+    modified = _pdf_date(mod_t)
+    dates_naive = [lbl for lbl, v in (("created", created),
+                                      ("modified", modified))
+                   if v is not None and _dt_kind(v) == "naive"]
+    order = None
+    before = None
+    if created is not None and modified is not None:
+        if _dt_kind(created) == _dt_kind(modified):
+            a, b = _dt_comparable(created), _dt_comparable(modified)
+            if a is not None and b is not None:
+                if a == b:
+                    # Scout : l'ordre « <= » appelait equal « before » ;
+                    # desormais equal est equal, et le bool dit NON.
+                    order, before = "equal", False
+                else:
+                    before = a < b
+                    order = "before" if before else "after"
+            else:
+                order = "unreadable"
+        else:
+            order = "unknown_mixed_naive_zoned"
+    out = {"producer": prod_t,
+           "producer_count": len(prods_raw) + len(prods_s),
+           "info_location": location,
+           "info_resolution": resolution,
+           "created": created,
+           "modified": modified,
+           "date_order": order,
+           "dates_naive": dates_naive,
+           "created_before_modified": before,
+           "source_sha256": src_sha,
+           "encrypted": encrypted}
+    if encrypted and prod_garbage:
+        out["producer_unreadable_encrypted"] = True
+    return out

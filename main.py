@@ -399,7 +399,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.51.0",
+    version="1.52.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -10027,8 +10027,10 @@ MCP_TOOLS = [
     {
         "name": "pdf_provenance",
         "description": (
-            "PDF bytes -> provenance the file confesses: last /Producer "
-            "(counted), dates, order — and WHERE the info lived "
+            "PDF bytes -> provenance the file confesses: the /Producer THE "
+            "TRAILER NAMES (count stays global — cohabiting generations "
+            "stay provable), dates (hex <...> and UTF-16BE strings "
+            "decoded per §7.9.2.2), strict order — and WHERE the info lived "
             "(plain | object_stream | none: an invisible Info is not "
             "an absent Info; inflate-included since v1.48.0). HTTP gate: "
             "file <= 3.9 MB (5 MB body cap) — over it the 413 "
@@ -10038,7 +10040,9 @@ MCP_TOOLS = [
             "and created_before_modified as a NAMED comparison: null when "
             "a date is absent or unreadable, never defaulted. The dossier "
             "gold that claimed true-vs-null is fixed here and the fix is "
-            "in VERDICTS. Encrypted files answer; locks are not broken. "
+            "in VERDICTS. Encrypted files answer; locks are not broken; "
+            "ciphertext is never returned as a producer. source_sha256 "
+            "ties the receipt to the bytes given. "
             "Free."
         ),
         "inputSchema": {
