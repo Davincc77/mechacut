@@ -2966,6 +2966,26 @@
   },
   {
    "body": {
+    "kind": "foia_log",
+    "lines": [
+     "000 All Documents, Reports, and Findings Provided by \nCrowdStrike in Relation to the DNC Hack\n13-Oct-20201478175",
+     "000 Kraken10-Dec-20191453952",
+     "000 Braden, Anne03-Feb-20151321099",
+     "001 All Files Released to Gerald Posner Regarding the \nSackler Family\n03-Jan-20201453204",
+     "000 All Contracts and MOU Between the FBI and \nCrowdStrike, Inc.\n26-Jan-20171365700"
+    ],
+    "window": {
+     "from": "2020-01-01",
+     "to": "2020-12-31"
+    }
+   },
+   "name": "foia_sheet_audit_log2020_pin",
+   "path": "/api/v1/foia/sheet-audit",
+   "sha256": "1cb5a44c0380d12a1f3d0416068a9d8e21c4d9f575e65447007dda9112cd429c",
+   "status": 200
+  },
+  {
+   "body": {
     "as_of": "2026-11-27",
     "category": "turkey",
     "cooked_at": "2026-11-22T18:00",
@@ -5724,6 +5744,18 @@
    "name": "recipe_schedule_mon",
    "path": "/api/v1/recipe/schedule",
    "sha256": "f148b3688ad1f4d9d3442113a30a26490dcc2aa127366267492d2ab85f7a9a02",
+   "status": 200
+  },
+  {
+   "body": {
+    "refs": [
+     "Catenacci DVT, Liao W-L, Thyparambil S, Henderson L, Xu P, et al. (2014) Absolute Quantitation of Met Using Mass Spectrometry for Clinical Application: Assay Precision, Stability, and Correlation with MET Gene Amplification in FFPE Tumor Tissue. PLoS ONE 9(7): e100586. doi:10.1371/journal.pone.0100586",
+     "PLOS ONE \u2014 ISSN 1932-6203 (ISSN Portal record 1932-6203, consulte 27-11) ; variante 1932-6204 citee dans le meme fil."
+    ]
+   },
+   "name": "refs_biblio_scan_plos_pin",
+   "path": "/api/v1/refs/biblio-scan",
+   "sha256": "63b981504526219abc7d3ff54e4b32654b2da5cde753408e0c9d410d19ca677d",
    "status": 200
   },
   {

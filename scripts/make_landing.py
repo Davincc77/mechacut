@@ -1692,34 +1692,48 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
     # citation ToolFailBench, le positionnement survit dans vision.p3).
     # Mesure apres re-bake : en 179 607 / fr 180 482 / pt 180 557 APP
     # = 179 974 / 180 849 / 180 924 SERVIS, marges 1 026 / 151 / 76.
+    # b147_hermes ELAGAGE MESURE (budget 181 k SERVE x3, marge du tip
+    # 1026/151/76 ne payait PAS 2 cartes ~750) — MEME mecanique b136/
+    # b146, classe « ce qui vit deux fois ne paie qu'une fois » : les
+    # queues de purposes FR/PT des lots precedents tombent clause par
+    # clause, CHAQUE fait coupe survit MOT A MOT dans le /tools/<nom>.
+    # .json du MEME outil (joue par le serveur dans le panneau de la
+    # carte : tables R-N1/R-SPAN dites, shortDOI §6.5, 2**256 wrap
+    # refuse, spans > 2 siecles, pics divergents + « bruit 10 »,
+    # semver_sort 7/7, fill melange, bornes ouvertes, E/CR/M*, impair
+    # refuse — verifie clause par clause contre MCP_TOOLS au build de
+    # ce lot) ; « les deux calendriers » de maya vit deja sur easter
+    # et julian de la MEME page. Purposes FR/PT du lot SERRES sous la
+    # longueur du repli EN. Mesure apres re-bake : voir commentaire
+    # tests/test_landing.py (b147).
     "fr": {
         "stats_rate_ci":
-            "k sur n → taux OBSERVÉ et centre WILSON séparés et nommés, intervalle 95 % — le 65,2 % seul est un mensonge de précision",
+            "k sur n → taux OBSERVÉ et centre WILSON séparés et nommés, intervalle 95 %",
         "stats_chi2":
-            "deux sorties NOMMÉES sous un nom : gof (comptes → chi2, ddl, p de queue en FORMES FERMÉES df pairs, impair refusé nommé) et critical (ddl × alpha lus dans la table NIST FERMÉE versionnée + hashée, hors table refusé)",
+            "deux sorties NOMMÉES sous un nom : gof (comptes → chi2, ddl, p de queue en FORMES FERMÉES) et critical (ddl × alpha lus dans la table NIST FERMÉE versionnée + hashée)",
         "benford_digit_test":
-            "comptes de chiffres fermés (9/90/10/100) + emprise → chi2, MAD, bande Nigrini, verdict à SIX noms fermés — table BENFORD-NIGRINI2012-v1 versionnée, R-N1 et R-SPAN en précendance DITE",
+            "comptes de chiffres fermés (9/90/10/100) + emprise → chi2, MAD, bande Nigrini, verdict à SIX noms fermés — table BENFORD-NIGRINI2012-v1 versionnée",
         "spdx_expression":
             "expressions SPDX AND OR WITH selon l'Annexe D, ids vs License List 3.29.0 nommée+hashée — inconnu = VERDICT did-you-mean, grammaire = 400 par nom",
         "cvss_base_score":
-            "vecteur CVSS v3.1/v4.0 → score + bande, tables FERMÉES version+sha dites, arrondi NOMMÉ par vintage — E/CR/M* refusés par nom",
+            "vecteur CVSS v3.1/v4.0 → score + bande, tables FERMÉES version+sha dites, arrondi NOMMÉ par vintage",
         "text_claimsweep":
             "sweep d'opinion à liste FERMÉE : auto-aveu, quantifieurs sans corpus, compteurs morts — citation exemptée, ton jamais deviné",
                 "date_edtf_interval":
             "EDTF (ISO 8601-2) → bornes earliest/latest, précision et qualificateurs ~ ? X nommés ; borne ouverte = null + flag, jamais la sentinelle 2100 volée",
         "date_interval_within":
-            "deux intervalles DONNÉS : INSIDE STARTS_BEFORE ENDS_AFTER OUTSIDE_BOTH UNDATED, écarts en jours signés — bornes ouvertes NOMMÉES, jamais remplies",
+            "deux intervalles DONNÉS : INSIDE STARTS_BEFORE ENDS_AFTER OUTSIDE_BOTH UNDATED, écarts en jours signés — bornes ouvertes NOMMÉES",
         "marc008_date_range":
-            "champ 008 MARC21 (06-14) → plage de dates selon la table FERMÉE LOC : chiffres u élargis, 9999 = encore publié, rôles dits, fill mélangé refusé",
+            "champ 008 MARC21 (06-14) → plage de dates selon la table FERMÉE LOC : chiffres u élargis, 9999 = encore publié, rôles dits",
         "date_julian_gregorian":
-            "jour civil + calendrier NOMMÉ → le même jour en julien et grégorien, pont JDN, table centurielle des décalages versionnée et hachée ; style 25 mars dit ; compte de jours exact là où date_calc diff proleptique ment",
+            "jour civil + calendrier NOMMÉ → le même jour en julien et grégorien, pont JDN, table centurielle versionnée et hachée ; style 25 mars dit",
 
         "easter_computus":
             "année + computus publié NOMMÉ → le dimanche de Pâques dans les deux calendriers, pont JDN 135 ; 2012 : 08 avril vs 15 ; 2100 lit +14",
         "maya_long_count":
-            "compte long 5 positions + corrélation NOMMÉE (584283 / 584285) → jours, JDN, les deux calendriers ; uinal roule à 18, jamais en silence ; le désaccord 2012 devient auditable",
+            "compte long 5 positions + corrélation NOMMÉE (584283 / 584285) → jours, JDN ; uinal roule à 18, jamais en silence ; le désaccord 2012 devient auditable",
         "pep440_sort":
-            "tri par précédence PEP 440 (epochs N!, a/b/rc alias, .post, .dev, labels locaux) — forme canonique et normalisations RENDUES ; semver_sort refuse ces jetons 7/7, ici ils sont triés",
+            "tri par précédence PEP 440 (epochs N!, a/b/rc alias, .post, .dev, labels locaux) — forme canonique et normalisations RENDUES",
         "geodesic_wgs84_inverse":
             "distance et azimut sur l'ellipsoïde WGS84 — Vincenty 1975, constantes NOMMÉES ; la sphère geo_distance dérive de −23,072 km (SCL-MEL, mesuré)",
         "horizon_hidden_height":
@@ -1727,21 +1741,25 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "shadow_length_sun_elevation":
             "ombre = hauteur / tan(élévation en degrés), HALF_UP à digits nommé ; soleil à l'horizon ou dessous refuse PAR LE NOM",
         "astro_precess_equatorial":
-            "précession équatoriale au 1er ordre B1950 → J2000 — formule d'Ehman (Big Ear 30th) et constantes IAU 1976 DITES ; le Wow! publié 19h25m31s est reproduit, pôles et spans > 2 siècles refusés PAR LE NOM",
+            "précession équatoriale au 1er ordre B1950 → J2000 — formule d'Ehman (Big Ear 30th) et constantes IAU 1976 DITES ; le Wow! publié 19h25m31s est reproduit",
         "units_freq_wavelength":
-            "λ = c/f avec c = 299 792 458 m/s EXACT (SI 1983) — la raie HI 1420,405751768 MHz → 21,106114054160 cm reproduite au dernier chiffre publié ; units_convert refuse MHz par le nom, cette paire fermée est la sienne",
+            "λ = c/f avec c = 299 792 458 m/s EXACT (SI 1983) — la raie HI 1420,405751768 MHz → 21,106114054160 cm reproduite ; units_convert refuse MHz par le nom",
         "bigear_snr_decode":
-            "6EQUJ5 décodé en intervalles sur l'échelle publiée A–Z = 10–35 (entier tronqué) ; 72 s dit comme Ehman (6×12 s), les pics divergents cités chacun leur source, le « bruit 10 » rendu ABSENT",
+            "6EQUJ5 décodé en intervalles sur l'échelle publiée A–Z = 10–35 (entier tronqué) ; 72 s dit comme Ehman (6×12 s)",
         "doi_name_equivalence":
-            "deux DOI cités : même nom (Handbook 2025 §4.3.4) — pli ASCII seul, zéro normalisation ; Á/á distincts ; shortDOI refusé COMME NOM",
+            "deux DOI cités : même nom (Handbook 2025 §4.3.4) — pli ASCII seul, zéro normalisation ; Á/á distincts",
         "xbrl_decimals_calc_consistency":
-            "somme XBRL sous decimals déclarés : intervalles + verdicts Calculations 1.1 ET 2.1 NOMMÉS — SCBSM dit l'écart",
+            "somme XBRL sous decimals déclarés : intervalles + verdicts Calculations 1.1 ET 2.1 NOMMÉS",
         "erc20_raw_units":
-            "uint256 brut + decimals 0..77 en argument → chaîne exacte ; MOG rendu au dernier wei, 2**256 refusé PAR LE NOM",
+            "uint256 brut + decimals 0..77 en argument → chaîne exacte ; MOG rendu au dernier wei",
+        "refs_biblio_scan":
+            "références brutes → champs + ids, règles publiées",
+        "foia_sheet_audit":
+            "total vs lignes vs numéros vs codes 5 U.S.C. 552(b)",
 "pdf_provenance":
-            "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON — null nommé, jamais deviné",
+            "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON",
         "text_mojibake":
-            "scan deux couches SANS réparer : familles d'encodage comptées, needles de contexte nommés — serão ne compte JAMAIS comme serã",
+            "scan deux couches SANS réparer : familles d'encodage comptées, needles de contexte nommés",
         "address_parse":
             "adresse postale → pays, code postal validé contre 50 grammaires, lignes restantes ; ambiguïté NOMMÉE, jamais devinée",
         "date_civil":
@@ -2140,32 +2158,32 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "qui paye qui après les avances : solde NET (remise plafonnée à la propre créance, NOMMÉE) ou graphe PAR REÇUS — compare rend les DEUX réponses du fil, écart chiffré ; avance en NATURE (points, carte cadeaux) comptée à TA lecture, face|cash|none, jamais devinée ; virements minimaux PROUVÉS (DP ≤9) ; taux en ARGUMENTS, jamais fetchés",
     },    "pt": {
         "stats_rate_ci":
-            "k de n → taxa OBSERVADA e centro WILSON separados e nomeados, intervalo 95 % — 65,2% sozinho é mentira de precisão",
+            "k de n → taxa OBSERVADA e centro WILSON separados e nomeados, intervalo 95 %",
         "stats_chi2":
-            "duas saídas NOMEDAS sob um nome: gof (contagens → chi2, gl, p de cauda em FORMAS FECHADAS gl pares, ímpar recusado pelo nome) e critical (gl × alpha lidos da tabela NIST FECHADA, versionada e hash, fora da tabela recusado)",
+            "duas saídas NOMEDAS sob um nome: gof (contagens → chi2, gl, p de cauda em FORMAS FECHADAS) e critical (gl × alpha lidos da tabela NIST FECHADA versionada e hash)",
         "benford_digit_test":
-            "contagens de dígitos FECHADAS (9/90/10/100) + extensão → chi2, MAD, banda Nigrini, veredito de SEIS nomes fechados — tabela BENFORD-NIGRINI2012-v1 versionada, R-N1 e R-SPAN com precedência DITA",
+            "contagens de dígitos FECHADAS (9/90/10/100) + extensão → chi2, MAD, banda Nigrini, veredito de SEIS nomes fechados — tabela BENFORD-NIGRINI2012-v1 versionada",
         "spdx_expression":
             "expressões SPDX AND OR WITH pela Annex D, ids vs License List 3.29.0 nomeada+hash — desconhecida = VEREDITO did-you-mean, gramática = 400 pelo nome",
         "cvss_base_score":
-            "vetor CVSS v3.1/v4.0 → pontuação + faixa, tabelas FECHADAS versão+hash ditas, arredondamento NOMADO por versão — E/CR/M* recusados pelo nome",
+            "vetor CVSS v3.1/v4.0 → pontuação + faixa, tabelas FECHADAS versão+hash ditas, arredondamento NOMADO por versão",
         "text_claimsweep":
             "varredura de opinião com lista FECHADA: confissão, quantificador sem corpus, contador morto — citação isenta, tom nunca adivinhado",
                 "date_edtf_interval":
             "EDTF (ISO 8601-2) → limites earliest/latest, precisão e qualificadores ~ ? X nomeados; limite aberta = null + marca, nunca sentinela 2100 roubada",
         "date_interval_within":
-            "dois intervalos DADOS: INSIDE STARTS_BEFORE ENDS_AFTER OUTSIDE_BOTH UNDATED, diferenças em dias com sinal — bordas abertas NOMEDAS, nunca preenchidas",
+            "dois intervalos DADOS: INSIDE STARTS_BEFORE ENDS_AFTER OUTSIDE_BOTH UNDATED, diferenças em dias com sinal — bordas abertas NOMEDAS",
         "marc008_date_range":
-            "campo 008 MARC21 (06-14) → faixa de datas pela tabela FECHADA LOC: dígitos u alargados, 9999 = ainda publicado, papéis ditos, fill misturado recusado",
+            "campo 008 MARC21 (06-14) → faixa de datas pela tabela FECHADA LOC: dígitos u alargados, 9999 = ainda publicado, papéis ditos",
         "date_julian_gregorian":
-            "dia civil + calendário NOMEADO → o mesmo dia em juliano e gregoriano, ponte JDN, tabela centurial de deslocamentos versionada e com hash; estilo 25 de março dito; contagem exata onde a diferença proléptica do date_calc mente",
+            "dia civil + calendário NOMEADO → o mesmo dia em juliano e gregoriano, ponte JDN, tabela centurial com hash; estilo 25 de março dito",
 
         "easter_computus":
             "ano + computus publicado NOMEADO → o domingo de Páscoa nos dois calendários, ponte JDN 135; 2012: 8 de abril vs 15; 2100 lê +14",
         "maya_long_count":
-            "contagem longa de 5 posições + correlação NOMEADA (584283 / 584285) → dias, JDN, os dois calendários; uinal vira em 18, nunca em silêncio; a divergência 2012 fica auditável",
+            "contagem longa de 5 posições + correlação NOMEADA (584283 / 584285) → dias, JDN; uinal vira em 18, nunca em silêncio; a divergência 2012 fica auditável",
         "pep440_sort":
-            "ordenada por precedência PEP 440 (épocas N!, aliases a/b/rc, .post, .dev, rótulos locais) — forma canônica e normalizações RENDERizadas; o semver_sort recusa esses tokens 7/7, aqui eles são ordenados",
+            "ordenada por precedência PEP 440 (épocas N!, aliases a/b/rc, .post, .dev, rótulos locais) — forma canônica e normalizações RENDERizadas",
         "geodesic_wgs84_inverse":
             "distância e azimute no ELIPSOIDE WGS84 — Vincenty 1975, constantes NOMES; a esfera geo_distance erra −23,072 km (SCL-MEL, medido)",
         "horizon_hidden_height":
@@ -2173,21 +2191,25 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
         "shadow_length_sun_elevation":
             "sombra = altura / tan(elevação em graus), HALF_UP com dígitos nomeado; sol no horizonte ou abaixo recusa PELO NOME",
         "astro_precess_equatorial":
-            "precessão equatorial de 1ª ordem B1950 → J2000 — fórmula de Ehman (Big Ear 30th), constantes IAU 1976 DITAS; o Wow! publicado 19h25m31s é reproduzido, polos e spans > 2 séculos recusados PELO NOME",
+            "precessão equatorial de 1ª ordem B1950 → J2000 — fórmula de Ehman (Big Ear 30th), constantes IAU 1976 DITAS; o Wow! publicado 19h25m31s é reproduzido",
         "units_freq_wavelength":
-            "λ = c/f com c = 299 792 458 m/s EXATO (SI 1983) — a linha HI 1420,405751768 MHz → 21,106114054160 cm reproduz o último dígito publicado; o units_convert recusa MHz pelo nome, este par fechado é o dele",
+            "λ = c/f com c = 299 792 458 m/s EXATO (SI 1983) — a linha HI 1420,405751768 MHz → 21,106114054160 cm; o units_convert recusa MHz pelo nome",
         "bigear_snr_decode":
-            "6EQUJ5 decodificado em intervalos na escala publicada A–Z = 10–35 (inteiro truncado); 72 s dito como Ehman (6×12 s), picos divergentes citados cada um com a fonte, «ruído 10» renderizado AUSENTE",
+            "6EQUJ5 decodificado em intervalos na escala publicada A–Z = 10–35 (inteiro truncado); 72 s dito como Ehman (6×12 s)",
         "doi_name_equivalence":
-            "dois DOI citados: mesmo nome (Handbook 2025 §4.3.4) — dobra só ASCII, zero normalização; Á/á distintos; shortDOI recusado COMO NOME",
+            "dois DOI citados: mesmo nome (Handbook 2025 §4.3.4) — dobra só ASCII, zero normalização; Á/á distintos",
         "xbrl_decimals_calc_consistency":
-            "soma XBRL sob decimals declarados: intervalos + vereditos Calculations 1.1 E 2.1 NOMeados — SCBSM mostra o desvio",
+            "soma XBRL sob decimals declarados: intervalos + vereditos Calculations 1.1 E 2.1 NOMeados",
         "erc20_raw_units":
-            "uint256 bruto + decimals 0..77 como argumento → string exata; MOG até o último wei, 2**256 recusado PELO NOME",
+            "uint256 bruto + decimals 0..77 como argumento → string exata; MOG até o último wei",
+        "refs_biblio_scan":
+            "referências brutas → campos + ids, regras publicadas",
+        "foia_sheet_audit":
+            "total vs linhas vs números vs códigos 5 U.S.C. 552(b)",
 "pdf_provenance":
-            "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido — null nomeado, nunca inventado",
+            "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido",
         "text_mojibake":
-            "varredura em duas camadas SEM consertar: famílias de codificação contadas, agulhas de contexto nomeadas — serão nunca conta como serã",
+            "varredura em duas camadas SEM consertar: famílias de codificação contadas, agulhas de contexto nomeadas",
         "address_parse":
             "endereço postal → país, CEP validado contra 50 gramáticas, linhas restantes; ambiguidade NOMEADA, nunca adivinhada",
         "date_civil":

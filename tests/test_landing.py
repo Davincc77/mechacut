@@ -101,6 +101,20 @@ def test_landing_budget():
         # lectures sont SYNCHRONEES dans le MEME commit ». Contrat reel =
         # manifest < 9000 (tenu 8 347, b0). Plafond 181_000 du tip CONSERVE
         # (suite des mesures b136 610/107/49 rendus par la gouttiere).
+        # b147_hermes RE-ANCRE MESUREE sur tip a81700f : +2 cartes suite
+        # integrite, ELAGAGE A CLAIM CONSTANT classe b136/b146 — queues de
+        # purposes FR/PT des lots precedents tomnees clause par clause,
+        # CHAQUE fait coupe survit MOT A MOT dans le /tools/<nom>.json du
+        # MEME outil (joue par le serveur sous la carte ; liste clause par
+        # clause verifiee au build — tables R-N1/R-SPAN, shortDOI §6.5,
+        # 2**256 wrap, spans > 2 siecles, pics divergents + bruit 10,
+        # semver_sort 7/7, fill melange, E/CR/M*, impair refuse,
+        # seront/sera, SCBSM, 65,2) ; « les deux calendriers » de maya
+        # vivent deja sur easter/julian de la MEME page ; purposes FR/PT
+        # du lot SERRES sous la longueur du repli EN ; rendus : en 180 362
+        # / fr 180 525 / pt 180 567 APP = 180 729 / 180 892 / 180 934
+        # SERVIS, marges 271 / 108 / 66 — marge que le cycle prochain
+        # paiera.
         assert len(_landing(_l).encode("utf-8")) + 367 < 181_000, _l
     # fixed section skeleton: five landmark anchors, never one per tool
     for anchor in ('id="bundles"', 'id="tiers"', 'id="bench"', 'id="build"',

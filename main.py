@@ -296,6 +296,8 @@ import celestekit
 import doikit
 import xbrlkit
 import rawunitskit
+import refskit
+import foiakit
 import rules as rules_mod
 import htmltext
 import context
@@ -413,7 +415,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.61.0",
+    version="1.62.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5601,6 +5603,99 @@ def api_erc20_raw_units(req: Erc20RawUnitsRequest):
     return err if err else body
 
 
+# ---------------------- bundle 147_hermes: suite integrite (L68/L69)
+# Admissions 27-11, registre L68 (recu f4a7a9904e766db6) + L69 (recu
+# bb06eabd7aceefd3). refs_biblio_scan = le maillon absent que le lot
+# 146 DESIGNAIT sans le devorer : chaine brute -> champs + ids avec le
+# controle publie de chaque id (ISBN mod-10/mod-11, ISSN mod-11 X, DOI
+# grammaire 10./ — check digit JAMAIS invente, §4.3.5 ; arXiv
+# YYMM.NNNNN | arch-ive). Le dossier doi extrait est le record de
+# doikit.parse_doi — marie a doi_name_equivalence (SHIPPED, tip), pas
+# duplique ; la resolution reseau (Crossref) n'est le job d'aucune des
+# deux portes. foia_sheet_audit = l'arithmetique de la campagne Vault
+# rendue par porte : total declare vs lignes a marqueurs vs numeros vs
+# codes, l'ensemble ferme LU DANS LE STATUTE (5 U.S.C. § 552(b), loi
+# maison 27-11 — b7E DEDANS, l'erreur initiale de la salle consignee
+# sans etre reproduite), codes hors statute NOMMES un par un, jamais
+# fondus ; variante foia_log : fenetre en ARGUMENT (jamais l'horloge
+# murale), DATE OPENED comme seule colonne date dite a cote du
+# chiffre ; verdicts MATCH/MISMATCH/GAP seulement — le mot
+# verite/fraude n'existe pas ici.
+
+class RefsBiblioScanRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    refs: Optional[Any] = None
+
+
+def run_refs_biblio_scan(args: dict):
+    try:
+        req = RefsBiblioScanRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e), tool="refs_biblio_scan")
+    if req.refs is None:
+        return None, bad_request(
+            [{"field": "refs",
+              "message": "refs: pass the list of raw reference "
+                         "strings (1..100) — this door parses cited "
+                         "text, it never fetches a document"}],
+            tool="refs_biblio_scan")
+    try:
+        out = refskit.scan(req.refs)
+    except refskit.RefsKitError as e:
+        return None, bad_request([{"field": e.field, "message": e.msg}],
+                                 tool="refs_biblio_scan")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/refs/biblio-scan")
+def api_refs_biblio_scan(req: RefsBiblioScanRequest):
+    body, err = run_refs_biblio_scan(req.model_dump())
+    return err if err else body
+
+
+class FoiaSheetAuditRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    kind: Optional[Any] = None
+    declared_total: Optional[Any] = None
+    lines: Optional[Any] = None
+    window: Optional[Any] = None
+
+
+def run_foia_sheet_audit(args: dict):
+    try:
+        req = FoiaSheetAuditRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e), tool="foia_sheet_audit")
+    if req.kind is None:
+        return None, bad_request(
+            [{"field": "kind",
+              "message": "kind: deleted_page_sheet or foia_log — the "
+                         "two sheet grammars are named, never sniffed "
+                         "from the text"}],
+            tool="foia_sheet_audit")
+    if req.lines is None:
+        return None, bad_request(
+            [{"field": "lines",
+              "message": "lines: the enumerated rows exactly as "
+                         "rendered (1..2000 strings) — the sheet is "
+                         "pasted, never fetched"}],
+            tool="foia_sheet_audit")
+    try:
+        out = foiakit.audit(req.model_dump())
+    except foiakit.FoiaKitError as e:
+        return None, bad_request([{"field": e.field, "message": e.msg}],
+                                 tool="foia_sheet_audit")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/foia/sheet-audit")
+def api_foia_sheet_audit(req: FoiaSheetAuditRequest):
+    body, err = run_foia_sheet_audit(req.model_dump())
+    return err if err else body
+
+
 # ------------------------------------------- bundle 136: spdx + cvss
 # Arrivees 26-11 consignees au registre, ADMIS 27-11 apres audit
 # contrat-contre-contrat : aucun outil apparie ne parse une expression
@@ -8453,6 +8548,8 @@ TOOL_RUN = {
            "xbrl_decimals_calc_consistency":
                run_xbrl_decimals_calc_consistency,
            "erc20_raw_units": run_erc20_raw_units,
+           "refs_biblio_scan": run_refs_biblio_scan,
+           "foia_sheet_audit": run_foia_sheet_audit,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -14873,6 +14970,91 @@ MCP_TOOLS = [
                                             "decimals() as an "
                                             "argument (USDC 6, "
                                             "cbBTC 8, MOG 18)"},
+            },
+        },
+    },
+    {
+        "name": "refs_biblio_scan",
+        "description": (
+            "Parse raw bibliographic reference strings into fields "
+            "(authors, year, title, venue, volume, issue, locator) "
+            "and every identifier they carry, each tested by its own "
+            "PUBLISHED rule: ISBN-10 mod-11 weights 10..1 with X "
+            "final and ISBN-13 mod-10 alternating weights 1,3 "
+            "(ISO 2108); ISSN mod-11 weights 8..2 with X final "
+            "(ISO 3297 — the PLOS ONE gold 1932-6203 passes, the "
+            "mutated 1932-6204 fails naming expected check 3); DOI "
+            "by the Handbook grammar 10.PREFIX/SUFFIX (§4.3 — NO "
+            "check digit is ever computed, §4.3.5, and the extracted "
+            "record is the same parse object the shipped "
+            "doi_name_equivalence door judges); arXiv new "
+            "YYMM.NNNNN and legacy arch-ive/YYMMNNN over the closed "
+            "published archive list. A failed check ships the "
+            "EXPECTED digit — a repair contract, never a silent fix; "
+            "an unlabelled digit soup is never claimed as an ISBN. "
+            "No network: Crossref resolution belongs to neither this "
+            "door nor its DOI sibling. The real PLOS ONE citation is "
+            "replayed verbatim (journals.plos.org, e100586, "
+            "doi:10.1371/journal.pone.0100586, consulted 27-11). "
+            "Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["refs"],
+            "properties": {
+                "refs": {"type": "array",
+                         "description": "1..100 raw reference "
+                                        "strings as cited",
+                         "items": {"type": "string"}},
+            },
+        },
+    },
+    {
+        "name": "foia_sheet_audit",
+        "description": (
+            "Audit a FOIA disclosure sheet's own arithmetic: total "
+            "declared vs enumerated Page markers vs page numbers vs "
+            "exemption codes — and a FOIA log's printed window vs its "
+            "lines (kind foia_log: case_rev 3 digits, subject, "
+            "DATE OPENED dd-Mmm-yyyy, foia number 7 digits, glued "
+            "native-text grammar; the window is an ARGUMENT, never a "
+            "wall clock). The CLOSED code set is read from the "
+            "statute: 5 U.S.C. § 552(b) — b1..b6, b7A, b7B, b7C, "
+            "b7D, b7E, b8, b9, plus the DOJ-published sub-codes "
+            "b6-1..b6-4 — named in every answer. b7E is INSIDE the "
+            "statute: the campaign's earlier observed-set error is "
+            "recorded, not reproduced. Out-of-statute codes are "
+            "NAMED one by one with occurrences (b6-5, b7C-5, "
+            "b3-1, bare b7 as under-specified, OTHER kept as sheet "
+            "vocabulary), never merged. Duplicates and gaps in the "
+            "numbering are listed; max page beyond the declared "
+            "total is said. Verdicts are MATCH/MISMATCH/GAP only — "
+            "an ecart renders as an ecart — the answer never "
+            "judges honesty. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["kind", "lines"],
+            "properties": {
+                "kind": {"type": "string",
+                         "enum": ["deleted_page_sheet", "foia_log"],
+                         "description": "the sheet grammar, named"},
+                "declared_total": {
+                    "type": "integer",
+                    "description": "the sheet's stated 'Total "
+                                   "Deleted Page(s) = N' (required "
+                                   "for deleted_page_sheet)"},
+                "lines": {"type": "array",
+                          "description": "1..2000 rows exactly as "
+                                         "rendered",
+                          "items": {"type": "string"}},
+                "window": {"type": "object",
+                           "description": "{from, to} ISO — the "
+                                          "printed reporting period "
+                                          "(required for foia_log)",
+                           "properties": {
+                               "from": {"type": "string"},
+                               "to": {"type": "string"}}},
             },
         },
     },

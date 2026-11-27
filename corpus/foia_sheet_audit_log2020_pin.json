@@ -1,0 +1,15 @@
+{
+ "name": "foia_sheet_audit_log2020_pin",
+ "path": "/api/v1/foia/sheet-audit",
+ "body": {
+  "kind": "foia_log",
+  "window": {"from": "2020-01-01", "to": "2020-12-31"},
+  "lines": [
+   "000 All Documents, Reports, and Findings Provided by \nCrowdStrike in Relation to the DNC Hack\n13-Oct-20201478175",
+   "000 Kraken10-Dec-20191453952",
+   "000 Braden, Anne03-Feb-20151321099",
+   "001 All Files Released to Gerald Posner Regarding the \nSackler Family\n03-Jan-20201453204",
+   "000 All Contracts and MOU Between the FBI and \nCrowdStrike, Inc.\n26-Jan-20171365700"
+  ]
+ }
+}

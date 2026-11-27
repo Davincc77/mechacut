@@ -778,6 +778,16 @@ TABLE = (
      "raw uint256 + decimals -> exact string, no rounding",
      "erc20 uint256 raw decimals token supply balance human exact "
      "wei scale echelle montant brut"),
+    ("refs_biblio_scan", "/api/v1/refs/biblio-scan", "extract",
+     "raw reference strings -> fields + ids, published checks",
+     "bibliography citation reference parse isbn issn doi arxiv "
+     "check digit locator elocator authors year venue bibliographie "
+     "verif reference identifiant validate validation"),
+    ("foia_sheet_audit", "/api/v1/foia/sheet-audit", "checks",
+     "declared total vs lines vs numbers vs 5 USC 552(b) codes",
+     "foia deleted page withheld sheet exemption statute codes "
+     "uscs552 window log entries b6 b7c b7e other arithmetique "
+     "exemption declared total"),
     ("file_identify", "/api/v1/file/identify", "extract",
      "what is this blob really: magic bytes, not the file extension",
      "file type magic identify binary what is this blob extension mime "
@@ -1742,6 +1752,12 @@ SCHEME_NAMES = {
     "doi_name_equivalence": "doi",
     "xbrl_decimals_calc_consistency": "xbrl esef",
     "erc20_raw_units": "erc20 uint256",
+    # b147 — suite integrite : « isbn » / « foia » ne designaient
+    # aucun outil a l'admission (douleurs lues au registre L68/L69) ;
+    # « doi » reste la propriete de la porte 146, cette sœur lui est
+    # mariee via le record doikit — pas un mot-seul en trop ici.
+    "refs_biblio_scan": "isbn issn arxiv bibliography",
+    "foia_sheet_audit": "foia withheld",
 }
 
 # T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le

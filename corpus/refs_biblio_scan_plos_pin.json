@@ -1,0 +1,10 @@
+{
+ "name": "refs_biblio_scan_plos_pin",
+ "path": "/api/v1/refs/biblio-scan",
+ "body": {
+  "refs": [
+   "Catenacci DVT, Liao W-L, Thyparambil S, Henderson L, Xu P, et al. (2014) Absolute Quantitation of Met Using Mass Spectrometry for Clinical Application: Assay Precision, Stability, and Correlation with MET Gene Amplification in FFPE Tumor Tissue. PLoS ONE 9(7): e100586. doi:10.1371/journal.pone.0100586",
+   "PLOS ONE — ISSN 1932-6203 (ISSN Portal record 1932-6203, consulte 27-11) ; variante 1932-6204 citee dans le meme fil."
+  ]
+ }
+}
