@@ -1,0 +1,7 @@
+{
+ "name": "marc008_date_range_questionable_pin",
+ "path": "/api/v1/date/marc008",
+ "body": {
+  "field008": "      q18uu19uu                         "
+ }
+}

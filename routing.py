@@ -205,6 +205,28 @@ TABLE = (
      "window interval bounds clause deadline not less nor more "
      "range days before after event fenetre intervalle clause "
      "prazo janela limite intervalo clausula"),
+    ("date_edtf_interval", "/api/v1/date/edtf-interval", "dates",
+     "ISO 8601-2 level 0 + the named level-1 selectors (~ ? X ..) -> "
+     "earliest/latest day bounds, precision, qualifiers; an open end is "
+     "latest:null with the flag — never a stolen 2100-12-31; inverted "
+     "intervals refused by name",
+     "edtf iso8601 interval precision uncertain approximate unspecified "
+     "open end century decade finding aid carton intervalle borne "
+     "ouverte incertaine approximative non specifiee"),
+    ("date_interval_within", "/api/v1/date/interval-within", "dates",
+     "one GIVEN interval inside another: INSIDE STARTS_BEFORE ENDS_AFTER "
+     "OUTSIDE_BOTH UNDATED with signed day gaps and open ends flagged, "
+     "never defaulted — finding-aids parent/child without reformatting",
+     "within containment child parent range INSIDE STARTS_BEFORE "
+     "ENDS_AFTER undated gap days contient enfant parent intervalle "
+     "ecart jours fourchette"),
+    ("marc008_date_range", "/api/v1/date/marc008", "dates",
+     "MARC21 field 008 positions 06-14 -> the publication date range per "
+     "the CLOSED LOC table (bd008a, edition 2026-05-27): u-digits, 9999 "
+     "ongoing, mmdd detail, roles named; a mix of fill and characters is "
+     "refused, never repaired",
+     "marc marc008 opac catalog library date uuuu bc reprint copyright "
+     "loc fixed positional champ fixe bibliotheque plage"),
     ("date_deemed", "/api/v1/date/deemed", "dates",
      "dispatch date + method -> deemed receipt date; no method, no "
      "date (closed table named, argument overrides are said)",
@@ -1363,9 +1385,16 @@ def manifest_text(version):
             # template de tete « packs: /SKILL-<pack>.md » — 212 octets
             # rendus au budget, claim constant.
             for name, path, purpose in by_pack[pack]:
+                # b132 elagage MESURE (+3 lignes = 155 octets sur une
+                # marge de 6 ; la tete n'a plus de mot a couper sans
+                # casser un claim) : le DOUBLE ESPACE de colonne devient
+                # SIMPLE — precedent b107 (les lignes vides), format
+                # uniquement, les trois colonnes names+paths+tiers
+                # voyagent intactes (le contrat des modeles faibles est
+                # le CONTENU des colonnes, pas leur gouttiere).
                 t = tier(path).split()[0]
-                ls.append("%s  %s  %s  %s" % (name, path, t, purpose)
-                          if with_purpose else "%s  %s  %s"
+                ls.append("%s %s %s %s" % (name, path, t, purpose)
+                          if with_purpose else "%s %s %s"
                           % (name, path, t))
         return "\n".join(ls) + "\n"
 

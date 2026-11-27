@@ -282,6 +282,7 @@ import redlines
 import cache
 import micro
 import claimsweep
+import edtfkit
 import rules as rules_mod
 import htmltext
 import context
@@ -399,7 +400,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.53.0",
+    version="1.54.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -4916,6 +4917,93 @@ def api_text_claimsweep(req: TextClaimsweepRequest):
     return err if err else body
 
 
+# -------------------------------- bundle 132_hermes: amas dates (1/2)
+# Admissions Gate (reçus 848f1a94, a8ce4696) + Lineage (692467fa),
+# arbitrage Vince 27-11. Une grammaire fermée par foyer, edtfkit.py :
+# ce qui est hors scope meurt NOMMÉ, la précision réduite est DITE,
+# la borne ouverte est null+flag — jamais la sentinelle volée.
+
+class DateEdtfIntervalRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    text: str
+
+
+def run_date_edtf_interval(args: dict):
+    try:
+        req = DateEdtfIntervalRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="date_edtf_interval")
+    try:
+        out = edtfkit.parse_edtf(req.text)
+    except edtfkit.DateKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="date_edtf_interval")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/edtf-interval")
+def api_date_edtf_interval(req: DateEdtfIntervalRequest):
+    body, err = run_date_edtf_interval(req.model_dump())
+    return err if err else body
+
+
+class DateIntervalWithinRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    outer: str
+    inner: str
+
+
+def run_date_interval_within(args: dict):
+    try:
+        req = DateIntervalWithinRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="date_interval_within")
+    try:
+        out = edtfkit.interval_within(req.outer, req.inner)
+    except edtfkit.DateKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="date_interval_within")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/interval-within")
+def api_date_interval_within(req: DateIntervalWithinRequest):
+    body, err = run_date_interval_within(req.model_dump())
+    return err if err else body
+
+
+class Marc008DateRangeRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    field008: str
+
+
+def run_marc008_date_range(args: dict):
+    try:
+        req = Marc008DateRangeRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e), tool="marc008_date_range")
+    try:
+        out = edtfkit.marc008_range(req.field008)
+    except edtfkit.DateKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="marc008_date_range")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/marc008")
+def api_marc008_date_range(req: Marc008DateRangeRequest):
+    body, err = run_marc008_date_range(req.model_dump())
+    return err if err else body
+
+
 # --------------------------------------------- bundle 7.1: text tools
 
 class TextCountRequest(BaseModel):
@@ -7679,6 +7767,9 @@ TOOL_RUN = {
            "doc_text": run_doc_text,
            "text_mojibake": run_text_mojibake,
            "text_claimsweep": run_text_claimsweep,
+           "date_edtf_interval": run_date_edtf_interval,
+           "date_interval_within": run_date_interval_within,
+           "marc008_date_range": run_marc008_date_range,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -10101,6 +10192,72 @@ MCP_TOOLS = [
             "properties": {
                 "text": {"type": "string",
                          "description": "the copy to sweep, as-is"},
+            },
+        },
+    },
+    {
+        "name": "date_edtf_interval",
+        "description": (
+            "EDTF (ISO 8601-2) date or interval -> the earliest and "
+            "latest CALENDAR DAYS it can mean, with the precision and "
+            "the qualifiers ~ ? X .. NAMED. Reduced precision is said "
+            "(1985 -> 1985-01-01..1985-12-31), an open end stays open "
+            "(latest:null + open_end:true — the 2100 sentinel of the "
+            "finding aids dies here), inverted intervals and "
+            "out-of-scope forms (seasons, quarters, y-form, time) are "
+            "refused BY NAME. Scale: proleptic-Gregorian, said. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["text"],
+            "properties": {
+                "text": {"type": "string",
+                         "description": "one EDTF date or interval, e.g. "
+                                        "1757/1861, 198X, 2004/.."},
+            },
+        },
+    },
+    {
+        "name": "date_interval_within",
+        "description": (
+            "Two GIVEN EDTF intervals (a parent finding aid and its "
+            "child, say) -> the containment verdict INSIDE, "
+            "STARTS_BEFORE, ENDS_AFTER, OUTSIDE_BOTH or UNDATED with "
+            "signed day gaps; open ends are FLAGGED, never filled with "
+            "a stolen bound. date_window builds one window from an "
+            "event; this judges two given spans against each other — "
+            "no reformatting, the doctrine's own batch-01 pain. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["outer", "inner"],
+            "properties": {
+                "outer": {"type": "string",
+                          "description": "the containing span (EDTF)"},
+                "inner": {"type": "string",
+                          "description": "the span to place (EDTF)"},
+            },
+        },
+    },
+    {
+        "name": "marc008_date_range",
+        "description": (
+            "MARC21 field 008, positions 06-14 -> the publication date "
+            "range per the CLOSED Library of Congress table (bd008a, "
+            "edition 2026-05-27): u-digits widen to their decade or "
+            "century, 9999 says still-published (ongoing:true, no "
+            "fake latest), code e reads date2 as mmdd, the roles "
+            "reprint/original and publication/copyright are NAMED. A "
+            "mix of fill and characters is refused, never repaired; "
+            "B.C. dates live in 046 — out of scope, said. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["field008"],
+            "properties": {
+                "field008": {"type": "string",
+                             "description": "the whole 40-char 008 or "
+                                            "exactly positions 06-14"},
             },
         },
     },

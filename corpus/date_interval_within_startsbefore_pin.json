@@ -1,0 +1,8 @@
+{
+ "name": "date_interval_within_startsbefore_pin",
+ "path": "/api/v1/date/interval-within",
+ "body": {
+  "outer": "1992-12-29/2000-12-31",
+  "inner": "1984-12-29/1990-01-01"
+ }
+}

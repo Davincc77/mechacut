@@ -1,0 +1,7 @@
+{
+ "name": "date_edtf_interval_openend_pin",
+ "path": "/api/v1/date/edtf-interval",
+ "body": {
+  "text": "2004/.."
+ }
+}

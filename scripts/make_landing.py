@@ -1684,7 +1684,13 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "k sur n → taux OBSERVÉ et centre WILSON séparés et nommés, intervalle 95 % — le 65,2 % seul est un mensonge de précision",
         "text_claimsweep":
             "sweep d'opinion à liste FERMÉE : auto-aveu, quantifieurs sans corpus, compteurs morts — citation exemptée, ton jamais deviné",
-        "pdf_provenance":
+                "date_edtf_interval":
+            "EDTF (ISO 8601-2) → bornes earliest/latest, précision et qualificateurs ~ ? X nommés ; borne ouverte = null + flag, jamais la sentinelle 2100 volée",
+        "date_interval_within":
+            "deux intervalles DONNÉS : INSIDE STARTS_BEFORE ENDS_AFTER OUTSIDE_BOTH UNDATED, écarts en jours signés — bornes ouvertes NOMMÉES, jamais remplies",
+        "marc008_date_range":
+            "champ 008 MARC21 (06-14) → plage de dates selon la table FERMÉE LOC : chiffres u élargis, 9999 = encore publié, rôles dits, fill mélangé refusé",
+"pdf_provenance":
             "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON — null nommé, jamais deviné",
         "text_mojibake":
             "scan deux couches SANS réparer : familles d'encodage comptées, needles de contexte nommés — serão ne compte JAMAIS comme serã",
@@ -2089,7 +2095,13 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "k de n → taxa OBSERVADA e centro WILSON separados e nomeados, intervalo 95 % — 65,2% sozinho é mentira de precisão",
         "text_claimsweep":
             "varredura de opinião com lista FECHADA: confissão, quantificador sem corpus, contador morto — citação isenta, tom nunca adivinhado",
-        "pdf_provenance":
+                "date_edtf_interval":
+            "EDTF (ISO 8601-2) → limites earliest/latest, precisão e qualificadores ~ ? X nomeados; limite aberta = null + marca, nunca sentinela 2100 roubada",
+        "date_interval_within":
+            "dois intervalos DADOS: INSIDE STARTS_BEFORE ENDS_AFTER OUTSIDE_BOTH UNDATED, diferenças em dias com sinal — bordas abertas NOMEDAS, nunca preenchidas",
+        "marc008_date_range":
+            "campo 008 MARC21 (06-14) → faixa de datas pela tabela FECHADA LOC: dígitos u alargados, 9999 = ainda publicado, papéis ditos, fill misturado recusado",
+"pdf_provenance":
             "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido — null nomeado, nunca inventado",
         "text_mojibake":
             "varredura em duas camadas SEM consertar: famílias de codificação contadas, agulhas de contexto nomeadas — serão nunca conta como serã",
