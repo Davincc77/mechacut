@@ -421,7 +421,7 @@ def test_ten_new_pins_are_replayable():
     # golden continuity prouve les 418 hash-à-hash)
     # matrice #97622 rejouée, les portes codex/bionic/rakazo/vscode,
     # la notice hermes calculée à la main, le mode all-rows).
-    assert len(g) == 473  # b145 : +3 pack celeste pins (adds-only VERIFIEE diff-a-diff contre le golden du tip) ; b137 : +3 pack geodesie pins (adds-only zero suppression VERIFIEE diff-a-diff contre le tip e6deea2) ; b133_hermes : +2 easter/maya pins (adds-only) ; b136 : +4 spdx/cvss = 465 ; b135 : +2 = 461
+    assert len(g) == 476  # b146 : +3 pack verification pins (adds-only VERIFIEE diff-a-diff contre le golden du tip 1554d85) ; b145 : +3 pack celeste pins (adds-only VERIFIEE diff-a-diff contre le golden du tip) ; b137 : +3 pack geodesie pins (adds-only zero suppression VERIFIEE diff-a-diff contre le tip e6deea2) ; b133_hermes : +2 easter/maya pins (adds-only) ; b136 : +4 spdx/cvss = 465 ; b135 : +2 = 461
 
 
 def test_fr_response_byte_contract():

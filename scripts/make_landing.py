@@ -531,18 +531,18 @@ TR =   {
   'everyday.e24.name': 'Puis-je jeter ce dossier ? — QUATRE horloges dans le carton',
   'everyday.e24.say': "« Six ans » = QUATRE dates : TVA depuis la date ÉCRITE (événement futur compris — HMRC l'écrit), limited company depuis CLÔTURE, s.388 : TROIS si private, SIX si plc depuis CRÉATION, SA cinq ans depuis le 31/01. Exemple officiel 2022-23 : gardé jusqu'au 31-01-2029. Les « ou plus si » reviennent BLOCKED ; CH15400 : la PLUS LONGUE gouverne.",
   'everyday.e25.name': "Carte cadeau « périmée » ? Peut-être vivante — l'ACHAT ancre",
-  'everyday.e25.say': "Irlande — Gift Vouchers Act 2019 : date imprimée < cinq ans depuis l'achat = REMPLACÉE — le légal couvre le papier (66B(1)(b)+(c)). JD Sports : ≈250 000 € rendus en juillet. Le porteur tient tous les droits (66B(10)). Solde ≥ 1 € : dû. France : AUCUNE durée ; « 30 ans » = immobilier (refusé).",
+  'everyday.e25.say': "Irlande — Gift Vouchers Act 2019 : date imprimée < cinq ans depuis l'achat = REMPLACÉE — le légal couvre le papier (66B(1)(b)+(c)). JD Sports : ≈250 000 € rendus en juillet. Le porteur tient tous les droits (66B(10)). Le solde et le mythe « 30 ans » vivent sur la carte gift-voucher.",
   'everyday.e26.name': 'Les soldes sont UNE LOI : trois tables, deux formules, zéro au Luxembourg',
-  'everyday.e26.say': 'France (arrêté 27-05-2019) : hiver = 2ᵉ mercredi janv. 8 h, avancé si le 2ᵉ > 12 (2027 : 6 janv. — « 9 février » = clause ratée) ; été = dernier merc. juin, avant-dernier si > 28 (2027 : 23 juin) ; 4 semaines, début compté ; sept dérogations verbatim, dont Guadeloupe jeudi 7 oct. 2021 et canicules 2023/2026 cinq semaines ; « ouvré » non défini : lundi 4 premier, samedi 2 nommé. Belgique (VI.25 CDE) : clause dimanche DU 2 SI — vécu 2016, 2027 ; été 1–31 juil., 30 JUIN si dimanche — vécu 2018 ; corona : été 2020 1er-31 août, hiver 2021 REPORTÉ lundi 4 — clause écrasée — prolongé 15 février par LOI (titres : 14). Luxembourg (loi 23-déc-2016, art. 1er § 4) : AUCUNE formule — un règlement date CHAQUE ANNÉE ; dix actes 2018-2027 (hiver 2026/27 : sam. 2 → 30 janv.) ; rectificatifs 2017 et 2023 nommés. CE 20-05-2026 : amendes annulées, dates tenues. (détails : cartes soldes-window/-be/-lu)',
+  'everyday.e26.say': 'France (arrêté 27-05-2019) : hiver 2027 avancé au 6 janvier (« 9 février » = clause ratée) ; été = dernier merc. juin, avant-dernier si > 28 (2027 : 23 juin) ; 4 semaines, début compté ; dont Guadeloupe jeudi 7 oct. 2021 et canicules 2023/2026 cinq semaines ; « ouvré » non défini : lundi 4 premier, samedi 2 nommé. Belgique (VI.25 CDE) : dimanche DU 2 — vécu 2016, 2027 ; été 1–31 juil., 30 JUIN si dimanche — vécu 2018 ; corona : été 2020 1er-31 août, hiver 2021 REPORTÉ lundi 4, prolongé 15 février par LOI (titres : 14). Luxembourg (loi 23-déc-2016, art. 1er § 4) : AUCUNE formule — un règlement date CHAQUE ANNÉE ; rectificatifs 2017 et 2023 nommés. CE 20-05-2026 : amendes annulées, dates tenues. (détails : cartes soldes-window/-be/-lu)',
   'everyday.e27.name': "Colis reçu mardi — jusqu'à QUAND changer d'avis",
-  'everyday.e27.say': 'Section 6 legifrance rejouée verbatim : L221-18 nomme le départ (bien reçu, service conclu) ; L221-19 : lendemain = jour 1, fin minuit du 14ᵉ jour, samedi/dimanche/férié au premier ouvrable (table L3133-1 maison). Reçu 24 nov → 8 déc ; samedi 5 → lundi 7 ; 8 mai férié → lundi 11. Info manquante → +12 mois ; retard → 14 jours nouveaux. 13 exceptions verbatim (personnalisé, scellé hygiène, enchère). Soldes, occasion : droit court (F10485). Magasin : AUCUN droit, refusé par nom. Fenêtre enseigne : autre horloge.',
+  'everyday.e27.say': 'Section 6 legifrance rejouée verbatim : L221-18 nomme le départ (bien reçu, service conclu) ; L221-19 : lendemain = jour 1, fin minuit du 14ᵉ jour, samedi/dimanche/férié au premier ouvrable (table L3133-1 maison). Reçu 24 nov → 8 déc ; samedi 5 → lundi 7 ; 8 mai férié → lundi 11. Retard → 14 jours nouveaux. 13 exceptions verbatim (personnalisé, scellé hygiène, enchère). Soldes, occasion : droit court (F10485). Magasin : AUCUN droit, refusé par nom. Fenêtre enseigne : autre horloge.',
   'everyday.e28.name': "Ils se sont disputés sur le calcul — ils "
                            "avaient deux graphes",
   'everyday.e28.say': "A avance 1 375,00 €, C 865,00 €, B rien ; parts égales ; C remet sa part à B. A exige 628,33, B propose 458,33 — le désaccord EST l'architecture : C ne remet que les 118,34 qu'on lui doit → B vire 628,33 à A, un virement, minimum prouvé ; par reçu, la remise tue l'arête B→C → B paye 458,33, C porte 288,33. compare rend les deux, chiffre l'écart ; les cents ferment là où le 746,67×3 du fil ne fermait pas.",
   'everyday.e29.name': 'Un même loyer, quatre conventions — aucun calculateur ne choisit pour vous',
-  'everyday.e29.say': "Sortie le 18, loyer 1 000 € : publié : « 1000/30 = 33,33 × 18 = 600 » — DEUX arrondis silencieux, la voie du bailleur donne 599,94 (9sqw2j). Entrée le 15 janvier, mois de 31 : l'office divise « par 30, REGARDLESS of actual number of days » — 566,67 ; le voisin par 31 — 548,39 (1hitzjq). Bail finit MIDI le 12 : 12 facturés, 11,5 plaidés, 12-ou-11 publiés (cevz6l). prorate nomme basis cycle|month30|year365, ordre, borne ; compare rend les DEUX, écart signé ; un instant dans une date est refusé — les deux jours entiers montrés. Jamais la loi locale.",
+  'everyday.e29.say': "Sortie le 18, loyer 1 000 € : la calculette publiée (1000/30)×18 arrondit DEUX fois — la puce ci-dessous joue 600,00 contre 599,94 du bailleur (9sqw2j). Entrée le 15 janvier, mois de 31 : l'office divise « par 30, REGARDLESS of actual number of days » — 566,67 ; le voisin par 31 — 548,39 (1hitzjq). Bail finit MIDI le 12 : 12 facturés, 11,5 plaidés, 12-ou-11 publiés (cevz6l). Un instant dans une date est refusé — les deux jours entiers montrés. La carte prorate nomme base, ordre, écart — tout nommé. Jamais la loi locale.",
   'everyday.e30.name': 'Un salaire, plusieurs taux horaires — la fiche ne dit jamais lequel',
-  'everyday.e30.say': "52 000 par an : ÷2 080 = 25,00 (le « typically » de r/Payroll — écrit dans tous les fils, nommé par aucun calculateur) ; ÷2 087 = 24,92 — c'est la loi fédérale US mot pour mot (5 USC 5504(b) : « divide the annual rate by 2,087 », « nearest cent, counting one-half and over ») ; le bulletin « 20 cents off » de r/ATC, c'est elle. L'ordre mord : arrondir le taux d'abord, ×80 = 1 993,60 ; diviser l'année par 26 = 2 000,00 — −6,40 par paie, −166,40 par an, rendus en paire signée. Bihebdo ÷26 contre semi-mensuel ÷24 : DEUX horloges (2 000,00 contre 2 166,67). Et 2027 compte 53 vendredis : 27 paies tous les 15 jours (r/IRS_Source) — comptées, pas prophétisées. payscale nomme chaque diviseur et sa citation ; 365 refusé par le nom ; TON diviseur reste un argument (1 820, 2 640 — jamais la loi locale) ; jamais de moyenne, jamais de fetch.",
+  'everyday.e30.say': "52 000 par an : ÷2 080 = 25,00 (le « typically » de r/Payroll — nommé par aucun calculateur) ; ÷2 087 = 24,92 — la loi fédérale US mot pour mot (5 USC 5504(b) : « divide the annual rate by 2,087 », « nearest cent, counting one-half and over »). L'ordre mord : arrondir le taux d'abord — −6,40 par paie, −166,40 par an, rendus en paire signée. Bihebdo ÷26 contre semi-mensuel ÷24 : DEUX horloges (2 000,00 contre 2 166,67). Et 2027 compte 53 vendredis : 27 paies tous les 15 jours (r/IRS_Source). payscale nomme chaque diviseur ; 365 refusé par le nom ; le tien reste un argument (1 820, 2 640).",
   'nav.kit': 'Kit',
   'kit.h2': 'La suite sur votre disque',
   'kit.creed': "Le protocole n'est pas le transport — c'est l'acte de naissance de l'outil.",
@@ -783,15 +783,15 @@ TR =   {
   'everyday.e25.name': 'Vale-presente « vencido » pode estar vivo — a Irlanda conta da COMPRA',
   'everyday.e25.say': "Irlanda, Gift Vouchers Act 2019 rejogado: validade impressa menor que CINCO ANS desde a compra é SUBSTITUÍDA — a data legal COBRE o papel (66B(1)(b)+(c)). JD Sports: ≈€250.000 devolvidos em julho (call-in CCPC 20/nov). Âncora: o contrato; o portador tem TODOS os direitos (66B(10)). Saldo ≥ €1 devido. França: nenhuma duração legal; «30 anos» = prescrição imobiliária, recusado.",
   'everyday.e26.name': 'Saldos: três tabelas — duas regras, nenhuma no Luxemburgo',
-  'everyday.e26.say': "Três calendários. França (arrêté 27-05-2019): inverno = 2ª quarta de jan. 8h, avançada se a 2ª passa o 12 (2027: 6/jan); verão = última quarta/junho, penúltima se passa o 28 (2027: 23/jun); 4 semanas, começo contado; 7 derrogações verbatim. Bélgica (VI.25 CDE): cláusula do DIA 2 se o 3 cai domingo — vivido 2016, 2027; 30/JUNHO se o 1º cai domingo — 2018; corona: verão 2020 1–31/08; inverno 2021 ADIADO seg. 4 — cláusula anulada — PROLONGADO a 15/02 por LEI; manchetes: 14. Luxemburgo (lei 23-dez-2016, art. 1º § 4): NENHUMA fórmula — decreto data A CADA ANO; dez atos 2018-2027 (inverno 2026/2027: sáb. 2 → 30/jan); retificativos 2017 e 2023 nomeados. (detalhes: cartões soldes-window/-be/-lu)",
+  'everyday.e26.say': "Três calendários. França (arrêté 27-05-2019): a fórmula avança na 2ª quarta após o 12 (2027: 6/jan); verão = última quarta/junho, penúltima se passa o 28 (2027: 23/jun); 4 semanas, começo contado; 7 derrogações verbatim (o cartão as nomeia). Bélgica (VI.25 CDE): cláusula do DIA 2 — vivido 2016, 2027; 30/JUNHO se o 1º cai domingo — 2018; corona: verão 2020 1–31/08; inverno 2021 ADIADO seg. 4, PROLONGADO a 15/02 por LEI; manchetes: 14. Luxemburgo (lei 23-dez-2016, art. 1º § 4): NENHUMA fórmula — decreto data A CADA ANO; retificativos 2017 e 2023 nomeados (o cartão -lu conta os dez atos). (detalhes: cartões soldes-window/-be/-lu)",
   'everyday.e27.name': 'Recebeu terça — até QUANDO pode desistir',
-  'everyday.e27.say': "A lei dá o calendário — seção 6 legifrance verbatim: L221-18 nomeia a partida (recebimento, fim serviço); L221-19: dia seguinte = dia 1, meia-noite fecha o 14; sáb/dom/feriado → primeiro útil (L3133-1 NOSSA). Recebido 24/nov → 8/dez; sábado 5 → 7; 8/mai → 11. Falta a informação: +12 meses; atraso: 14 dias novos. 13 exceções citam a cláusula; Promoção e usado: direito corre (F10485). Loja física: NENHUM direito — recusado pelo nome. Janela da loja: outro relógio.",
+  'everyday.e27.say': "A lei dá o calendário — seção 6 legifrance verbatim: L221-18 nomeia a partida (recebimento, fim serviço); L221-19: dia seguinte = dia 1, meia-noite fecha o 14; sáb/dom/feriado → primeiro útil (L3133-1 NOSSA). Recebido 24/nov → 8/dez; sábado 5 → 7; 8/mai → 11. Atraso: 14 dias novos. 13 exceções citam a cláusula; Promoção e usado: direito corre (F10485). Loja física: NENHUM direito — recusado pelo nome. Janela da loja: outro relógio.",
   'everyday.e28.name': 'Brigaram na conta — eram dois gráficos',
   'everyday.e28.say': "A adiantou 1.375, C 865, B nada; partes iguais; C perdoa a parte de B — A cobra 628,33, B oferece 458,33: a briga É a arquitetura. No saldo, C só perdoa os 118,34 que lhe devem → PIX de 628,33 B→A, mínimo provado; nota a nota, o perdão mata a aresta B→C → B paga 458,33, C carrega 288,33. compare numera o vão.",
   'everyday.e29.name': 'Aluguel: quatro convenções — nenhuma calculadora escolhe',
-  'everyday.e29.say': "Saída dia 18, aluguel R$ 1.000: postado « 1000/30 = 33,33 × 18 = 600 » — DUAS rodadas caladas, a via do locador dá 599,94 (9sqw2j). Entrada 15/jan, mês 31: o escritório divide « por 30, REGARDLESS » — 566,67; o vizinho por 31 — 548,39 (1hitzjq). Contrato termina ao MEIODIA do 12: 12 dias cobrados, 11,5 alegados, 12-ou-11 publicados (cevz6l). prorate nomeia basis cycle|month30|year365, ordem, marco; compare mostra as DUAS com a diferença; instante recusado — os dois dias inteiros ditos. Nunca a lei local.",
+  'everyday.e29.say': "Saída dia 18, aluguel R$ 1.000: a conta pública (1000/30)×18 roda DUAS vezes — o chip joga 600,00 contra 599,94 do locador (9sqw2j). Entrada 15/jan, mês 31: o escritório divide « por 30, REGARDLESS » — 566,67; o vizinho por 31 — 548,39 (1hitzjq). Contrato termina ao MEIODIA do 12: 12 dias cobrados, 11,5 alegados, 12-ou-11 publicados (cevz6l). Instante recusado — os dois dias inteiros ditos. O cartão rateio nomeia base, ordem, diferença — tudo. Nunca a lei local.",
   'everyday.e30.name': 'Um salário, várias taxas por hora — o contracheque nunca diz qual',
-  'everyday.e30.say': "52.000 por ano: ÷2.080 = 25,00 (o “typically” do r/Payroll — em todo comentário, em nenhuma calculadora); ÷2.087 = 24,92 — é a lei federal dos EUA palavra por palavra (5 USC 5504(b): « divide the annual rate by 2,087 », « nearest cent, counting one-half and over »); o contracheque “20 cents off” do r/ATC é essa lei. A ordem morde: arredondar a taxa antes, ×80 = 1.993,60; dividir o ano por 26 = 2.000,00 — −6,40 por pagamento, −166,40 por ano, no par com sinal. Quinzenal ÷26 contra semimensal ÷24: DOIS relógios (2.000,00 contra 2.166,67). E 2027 tem 53 sextas: 27 pagamentos quinzenais (r/IRS_Source) — contados, não profetizados. payscale nomeia cada divisor e sua citação; 365 recusado pelo nome; o SEU divisor fica como argumento (1.820, 2.640 — nunca a lei local); nunca média, nunca fetch.",
+  'everyday.e30.say': "52.000 por ano: ÷2.080 = 25,00 (o “typically” do r/Payroll — em nenhuma calculadora); ÷2.087 = 24,92 — a lei federal dos EUA literal (5 USC 5504(b): « divide the annual rate by 2,087 »). A ordem morde: arredondar a taxa antes — −6,40 por pagamento, −166,40 por ano, no par com sinal. Quinzenal ÷26 contra semimensal ÷24: DOIS relógios (2.000,00 contra 2.166,67). E 2027 tem 53 sextas: 27 pagamentos quinzenais (r/IRS_Source). payscale nomeia cada divisor; 365 recusado pelo nome; o seu fica como argumento (1.820, 2.640).",
   'nav.kit': 'Kit',
   'kit.h2': 'A suíte no seu disco',
   'kit.creed': 'O protocolo não é o transporte — é a certidão de nascimento da ferramenta.',
@@ -1675,6 +1675,23 @@ CAT_TOP10 = {"en": "\u2605 Top 10", "fr": "\u2605 Le top 10",
 
 PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
                 # validés nom par nom + chiffres par chiffres au merge
+    # b146_hermes ELAGAGE MESURE (budget landing 181 k SERVE x3, marge
+    # du tip 495/480 ne payait PAS 3 cartes ~1,5 k) — classe b136,
+    # chaque fait survit ailleurs SUR LA MEME PAGE : purposes du lot
+    # serrés a claim constant ; e26 FR/PT — la formule hiver et les
+    # exemples 2027 vivent dans la PUCE jouée par le serveur sous
+    # l'item, « sept dérogations verbatim » et « dix actes 2018-2027 »
+    # vivent mot a mot sur les cartes soldes-window/-lu, « douze mois
+    # si info absente » sur la carte withdrawal ; e29 — base|ordre|
+    # écart vivent sur la carte prorate ; e27 — solde 1 € et mythe
+    # 30 ans vivent sur la carte gift-voucher ; e30 — 1 993,60 /
+    # 2 000,00 / −6,40 vivent dans la puce, l'anecdote r/ATC et la
+    # redite « jamais la loi locale » tombent ; MARKET — les sept
+    # gloses de maison apres le second tiret tombent (citation,
+    # source, date, URL gardées mot a mot ; 86,33 % survit DANS la
+    # citation ToolFailBench, le positionnement survit dans vision.p3).
+    # Mesure apres re-bake : en 179 607 / fr 180 482 / pt 180 557 APP
+    # = 179 974 / 180 849 / 180 924 SERVIS, marges 1 026 / 151 / 76.
     "fr": {
         "stats_rate_ci":
             "k sur n → taux OBSERVÉ et centre WILSON séparés et nommés, intervalle 95 % — le 65,2 % seul est un mensonge de précision",
@@ -1715,6 +1732,12 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "λ = c/f avec c = 299 792 458 m/s EXACT (SI 1983) — la raie HI 1420,405751768 MHz → 21,106114054160 cm reproduite au dernier chiffre publié ; units_convert refuse MHz par le nom, cette paire fermée est la sienne",
         "bigear_snr_decode":
             "6EQUJ5 décodé en intervalles sur l'échelle publiée A–Z = 10–35 (entier tronqué) ; 72 s dit comme Ehman (6×12 s), les pics divergents cités chacun leur source, le « bruit 10 » rendu ABSENT",
+        "doi_name_equivalence":
+            "deux DOI cités : même nom (Handbook 2025 §4.3.4) — pli ASCII seul, zéro normalisation ; Á/á distincts ; shortDOI refusé COMME NOM",
+        "xbrl_decimals_calc_consistency":
+            "somme XBRL sous decimals déclarés : intervalles + verdicts Calculations 1.1 ET 2.1 NOMMÉS — SCBSM dit l'écart",
+        "erc20_raw_units":
+            "uint256 brut + decimals 0..77 en argument → chaîne exacte ; MOG rendu au dernier wei, 2**256 refusé PAR LE NOM",
 "pdf_provenance":
             "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON — null nommé, jamais deviné",
         "text_mojibake":
@@ -2155,6 +2178,12 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "λ = c/f com c = 299 792 458 m/s EXATO (SI 1983) — a linha HI 1420,405751768 MHz → 21,106114054160 cm reproduz o último dígito publicado; o units_convert recusa MHz pelo nome, este par fechado é o dele",
         "bigear_snr_decode":
             "6EQUJ5 decodificado em intervalos na escala publicada A–Z = 10–35 (inteiro truncado); 72 s dito como Ehman (6×12 s), picos divergentes citados cada um com a fonte, «ruído 10» renderizado AUSENTE",
+        "doi_name_equivalence":
+            "dois DOI citados: mesmo nome (Handbook 2025 §4.3.4) — dobra só ASCII, zero normalização; Á/á distintos; shortDOI recusado COMO NOME",
+        "xbrl_decimals_calc_consistency":
+            "soma XBRL sob decimals declarados: intervalos + vereditos Calculations 1.1 E 2.1 NOMeados — SCBSM mostra o desvio",
+        "erc20_raw_units":
+            "uint256 bruto + decimals 0..77 como argumento → string exata; MOG até o último wei, 2**256 recusado PELO NOME",
 "pdf_provenance":
             "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido — null nomeado, nunca inventado",
         "text_mojibake":
@@ -3024,8 +3053,7 @@ MARKET = [
     ("When we launched Claude's web search tool, we identified that Claude "
      "was needlessly appending 2025 to the tool's query parameter, biasing "
      "search results and degrading performance.",
-     "Anthropic Engineering", "same article — mechanics the model kept "
-     "re-inventing",
+     "Anthropic Engineering", "same article",
      "https://www.anthropic.com/engineering/writing-tools-for-agents"),
     ("Orchestrating via code makes tasks more deterministic and predictable, "
      "in terms of speed, cost and performance.",
@@ -3037,37 +3065,31 @@ MARKET = [
      "mar 2026", "https://developers.openai.com/blog/skills-agents-sdk"),
     ("When you push deterministic work through an LLM, things break in "
      "unpredictable ways and you stop trusting the system.",
-     "Peter Steinberger", "creator of OpenClaw — LLMs judge, scripts do "
-     "the deterministic work",
+     "Peter Steinberger", "creator of OpenClaw",
      "https://www.coldmountain.ai/wiki/people/peter-steinberger"),
     ("Grok @Bot can do your accounting.",
-     "Elon Musk", "@elonmusk on X, nov 2026 — while ToolFailBench "
-     "measures Grok-4.3 at 86.33% faithful tool use",
+     "Elon Musk", "@elonmusk on X, nov 2026",
      "https://finance.yahoo.com/technology/ai/articles/elon-musk-says-"
      "grok-accounting-043007297.html"),
     ("Bots are AI teammates that do real work for you. They sign in to "
      "your tools, use them just like you do, and come back with finished "
      "work.",
-     "xAI, Grok Bot launch", "@bot on X, aug 2026 — the promise; the "
-     "arithmetic it leans on is exactly what we make exact",
+     "xAI, Grok Bot launch", "@bot on X, aug 2026",
      "https://interestingengineering.com/ai-robotics/xai-grok-bot-"
      "computer-agent"),
     ("We don't store memories; we generate them. That's what memory is "
      "like in large language models, and that's why they can confabulate.",
-     "Geoffrey Hinton", "AI4 conference, 2026 — why the answer to an "
-     "invoice total is generated, never retrieved",
+     "Geoffrey Hinton", "AI4 conference, 2026",
      "https://www.rdworldonline.com/hinton-ai4-conference-language-"
      "model-insights-rd-impact/"),
     ("Traditional computers automate what you can specify in code. This "
      "latest round of LLMs can automate what you can verify.",
-     "Andrej Karpathy", "Sequoia Ascent 2026 — and what can be verified "
-     "deserves to be specified once, exactly",
+     "Andrej Karpathy", "Sequoia Ascent 2026",
      "https://karpathy.bearblog.dev/sequoia-ascent-2026/"),
     ("Faithful tool use is not saturated: even the best of 19 headline "
      "models — Grok-4.3 at 86.33%, Claude, GPT, Qwen behind — still "
      "fumbles a meaningful fraction of tool-required tasks.",
-     "ToolFailBench", "arXiv 2607.04686, 2026 — the field measuring what "
-     "we sell", "https://arxiv.org/abs/2607.04686"),
+     "ToolFailBench", "arXiv 2607.04686, 2026", "https://arxiv.org/abs/2607.04686"),
 ]
 
 

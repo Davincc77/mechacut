@@ -2691,6 +2691,16 @@
   },
   {
    "body": {
+    "a": "https://doi.org/10.7554/eLife.12095",
+    "b": "doi:10.7554/ELIFE.12095"
+   },
+   "name": "doi_name_equivalence_elife_pin",
+   "path": "/api/v1/id/doi-equivalence",
+   "sha256": "dbde8dff8c84ee0a6eb0e1588385775dda4b7d961a95cbe3024c6758d79dfc6a",
+   "status": 200
+  },
+  {
+   "body": {
     "algorithm": "gregorian_meeus_butcher",
     "year": 1961
    },
@@ -2720,6 +2730,16 @@
    "name": "env_interp_defaults",
    "path": "/api/v1/env/interpolate",
    "sha256": "9837339c6ec7ef7f2409da4119f0026d6197b23f1985b5a4f4d4ca9e9b67abf1",
+   "status": 200
+  },
+  {
+   "body": {
+    "decimals": 18,
+    "raw": "116162348802077343159857936548537"
+   },
+   "name": "erc20_raw_units_mog_pin",
+   "path": "/api/v1/eth/raw-units",
+   "sha256": "1925b3f1aa256ee8b085e4776f17603383e472ca7b2ae33b429bdff2404eecc5",
    "status": 200
   },
   {
@@ -7373,6 +7393,28 @@
    "name": "web_cert_leaf",
    "path": "/api/v1/web/cert",
    "sha256": "4984d20c746ff61b7e19d5fbc2af08e0babafe891296662ed418b96becb0c6c5",
+   "status": 200
+  },
+  {
+   "body": {
+    "parts": [
+     {
+      "decimals": "-3",
+      "value": "13828000"
+     },
+     {
+      "decimals": "-3",
+      "value": "6000"
+     }
+    ],
+    "total": {
+     "decimals": "-3",
+     "value": "13833000"
+    }
+   },
+   "name": "xbrl_decimals_calc_scbsm_pin",
+   "path": "/api/v1/xbrl/calc-consistency",
+   "sha256": "6db1b273ea622605576e7a429e2c9a93df468e8a75463d3472aee69b4eaf0585",
    "status": 200
   },
   {

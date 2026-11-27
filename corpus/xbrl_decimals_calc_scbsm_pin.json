@@ -1,0 +1,11 @@
+{
+ "name": "xbrl_decimals_calc_scbsm_pin",
+ "path": "/api/v1/xbrl/calc-consistency",
+ "body": {
+  "total": {"value": "13833000", "decimals": "-3"},
+  "parts": [
+   {"value": "13828000", "decimals": "-3"},
+   {"value": "6000", "decimals": "-3"}
+  ]
+ }
+}

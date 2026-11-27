@@ -293,6 +293,9 @@ import computuskit
 import mayakit
 import geokit
 import celestekit
+import doikit
+import xbrlkit
+import rawunitskit
 import rules as rules_mod
 import htmltext
 import context
@@ -410,7 +413,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.60.0",
+    version="1.61.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5476,6 +5479,128 @@ def api_bigear_snr_decode(req: BigearSnrDecodeRequest):
     return err if err else body
 
 
+# -------------------------------- bundle 146_hermes: verification pack
+# Admissions 27-11, registre L16/L17/L21 (recus proposeur a4ba4e61 /
+# 980850a4 / 887dffa6, suite integrite — audits de campagne vague 1).
+# Douleurs lues a l'admission, toutes mesurees : /route q=doi NO_MATCH
+# (6c05721d) ; check_format refuse le format « doi » par son nom ;
+# text_url_canonical+list_dedupe rendent 4/3/4 distincts pour 4 formes
+# ecrites d'un meme DOI (gold 1, gate 95e20bec) et se trompent dans les
+# DEUX sens contre §4.3.4 ; invoice_validate_totals refuse body.decimals
+# (400) et rend SCBSM CONTRADICTED -1000,00 la ou Calc 1.1 dit coherent
+# (batch 7570f3c8 run 39) ; eth_units echoit +463 wei fabriques sur le
+# totalSupply MOG (B2 46ecf95f — reproduction rejouee au tip) et ne
+# connait aucun barreau 10^6/10^8 ; math_calc 500 des 31 chiffres.
+# Limite dite : le parsing brut->champs cites est la sœur admise NON
+# construite refs_biblio_scan (registre L68) — ce trio reçoit des
+# champs, jamais un document.
+
+class DoiNameEquivalenceRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    a: Optional[Any] = None
+    b: Optional[Any] = None
+
+
+def run_doi_name_equivalence(args: dict):
+    try:
+        req = DoiNameEquivalenceRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="doi_name_equivalence")
+    if req.a is None or req.b is None:
+        missing = "a" if req.a is None else "b"
+        return None, bad_request(
+            [{"field": missing,
+              "message": "%s: pass the two cited DOI strings — this "
+                         "door compares cited fields, it never parses "
+                         "a document" % missing}],
+            tool="doi_name_equivalence")
+    try:
+        out = doikit.equivalence(req.a, req.b)
+    except doikit.DoiKitError as e:
+        return None, bad_request([{"field": e.field, "message": e.msg}],
+                                 tool="doi_name_equivalence")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/id/doi-equivalence")
+def api_doi_name_equivalence(req: DoiNameEquivalenceRequest):
+    body, err = run_doi_name_equivalence(req.model_dump())
+    return err if err else body
+
+
+class XbrlDecimalsCalcConsistencyRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    total: Optional[Any] = None
+    parts: Optional[Any] = None
+
+
+def run_xbrl_decimals_calc_consistency(args: dict):
+    try:
+        req = XbrlDecimalsCalcConsistencyRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="xbrl_decimals_calc_consistency")
+    if req.total is None or req.parts is None:
+        missing = "total" if req.total is None else "parts"
+        return None, bad_request(
+            [{"field": missing,
+              "message": "%s: pass the reported total and the "
+                         "summation items, each {value, decimals}, "
+                         "exactly as the filing writes them"
+                         % missing}],
+            tool="xbrl_decimals_calc_consistency")
+    try:
+        out = xbrlkit.check(req.total, req.parts)
+    except xbrlkit.XbrlKitError as e:
+        return None, bad_request([{"field": e.field, "message": e.msg}],
+                                 tool="xbrl_decimals_calc_consistency")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/xbrl/calc-consistency")
+def api_xbrl_decimals_calc_consistency(
+        req: XbrlDecimalsCalcConsistencyRequest):
+    body, err = run_xbrl_decimals_calc_consistency(req.model_dump())
+    return err if err else body
+
+
+class Erc20RawUnitsRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    raw: Optional[Any] = None
+    decimals: Optional[Any] = None
+
+
+def run_erc20_raw_units(args: dict):
+    try:
+        req = Erc20RawUnitsRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e), tool="erc20_raw_units")
+    if req.raw is None or req.decimals is None:
+        missing = "raw" if req.raw is None else "decimals"
+        return None, bad_request(
+            [{"field": missing,
+              "message": "%s: raw is the decoded uint256 digit string, "
+                         "decimals the token's own 0..77 argument — "
+                         "never guessed" % missing}],
+            tool="erc20_raw_units")
+    try:
+        out = rawunitskit.scale(req.raw, req.decimals)
+    except rawunitskit.RawUnitsError as e:
+        return None, bad_request([{"field": e.field, "message": e.msg}],
+                                 tool="erc20_raw_units")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/eth/raw-units")
+def api_erc20_raw_units(req: Erc20RawUnitsRequest):
+    body, err = run_erc20_raw_units(req.model_dump())
+    return err if err else body
+
+
 # ------------------------------------------- bundle 136: spdx + cvss
 # Arrivees 26-11 consignees au registre, ADMIS 27-11 apres audit
 # contrat-contre-contrat : aucun outil apparie ne parse une expression
@@ -8324,6 +8449,10 @@ TOOL_RUN = {
            "astro_precess_equatorial": run_astro_precess_equatorial,
            "units_freq_wavelength": run_units_freq_wavelength,
            "bigear_snr_decode": run_bigear_snr_decode,
+           "doi_name_equivalence": run_doi_name_equivalence,
+           "xbrl_decimals_calc_consistency":
+               run_xbrl_decimals_calc_consistency,
+           "erc20_raw_units": run_erc20_raw_units,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -14628,6 +14757,122 @@ MCP_TOOLS = [
                            "description": "printout sequence, 1..200 "
                                           "characters (space, 1-9, "
                                           "A-Z)"},
+            },
+        },
+    },
+    {
+        "name": "doi_name_equivalence",
+        "description": (
+            "Say whether two cited DOI strings name the SAME DOI "
+            "under the DOI Handbook (DOI Foundation, publication "
+            "date September 2025 — PDF cited and shashe in every "
+            "answer, ISO 26324). Equivalence = identical code points, "
+            "NO normalization, except U+0041..U+005A identical to "
+            "U+0061..U+007A: the case fold is ASCII ONLY. Published "
+            "§4.3.4 Example 1 (SMPTE S/s) is EQUIVALENT and Example 2 "
+            "(Á.GUTIÉRREZ.ZARZA, á vs Á) is NOT — the measured gap "
+            "this door closes: the text-mode dedupe merged Ex.2, the "
+            "exact mode split Ex.1 (gate 95e20bec), and the 4 written "
+            "forms of one eLife DOI came back 4/3/4 distinct where "
+            "the gold is 1. The doi: label and the doi.org/dx.doi.org "
+            "proxy forms are stripped (§4.4.1); percent-encoding is "
+            "reversed for the proxy form only (§4.7 — the published "
+            "10.1000/456#789 = 10.1000/456%23789 pair replays); "
+            "grammar is judged by §4.3.1-§4.3.3 — shortDOI 10/abcde "
+            "refused AS A NAME (§6.5), non-10 directory indicators "
+            "refused by their own number, no check digit is ever "
+            "computed (§4.3.5). Grammar failures are named verdicts, "
+            "never guessed equivalences. Cited fields in, answer out "
+            "— raw text parsing is the unbuilt sibling, not this "
+            "door. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["a", "b"],
+            "properties": {
+                "a": {"type": "string",
+                      "description": "first cited DOI string (any "
+                                     "written form)"},
+                "b": {"type": "string",
+                      "description": "second cited DOI string"},
+            },
+        },
+    },
+    {
+        "name": "xbrl_decimals_calc_consistency",
+        "description": (
+            "XBRL summation check under declared decimals — both "
+            "readings rendered and NAMED: XBRL Calculations 1.1 "
+            "(Recommendation 2023-02-22) rounds to nearest — each "
+            "fact is the interval [v-0.5*10^-d, v+0.5*10^-d], INF is "
+            "a point, consistent iff the calculated total interval "
+            "OVERLAPS the reported one; XBRL 2.1 §5.2.5.2 (the "
+            "intake reading) rounds the SUM to the total's decimals "
+            "and compares (half-up away from zero, tie rule said). "
+            "The SCBSM FY2026 filing is the measured split: total "
+            "13833000 at decimals -3 against 13828000 + 6000 — Calc "
+            "1.1 CONSISTENT ([13833000,13835000] overlaps "
+            "[13832500,13833500]), XBRL 2.1 INCONSISTENT (sum "
+            "13834000); the duplicate tag 13834000 flips 2.1 and "
+            "only 2.1. invoice_validate_totals cannot take a "
+            "decimals field (400 body.decimals) and forces cents — "
+            "this door never claims a precision the filing never "
+            "stated: values are kept exactly as written (floats "
+            "refused by name), every fact interval ships, a value "
+            "finer than its own decimals tag (§4.6.7 scale law) is "
+            "refused by name. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["total", "parts"],
+            "properties": {
+                "total": {"type": "object",
+                          "description": "{value, decimals} of the "
+                                         "reported total fact"},
+                "parts": {"type": "array",
+                          "description": "1..200 summation-item "
+                                         "facts {value, decimals}",
+                          "items": {"type": "object"}},
+            },
+        },
+    },
+    {
+        "name": "erc20_raw_units",
+        "description": (
+            "raw uint256 + the token's decimals (0..77 as an "
+            "ARGUMENT, never guessed — EIP-20 decimals() is uint8) "
+            "-> the EXACT human string by decimal-point shift, no "
+            "rounding step exists in the rule. MOG-on-Base "
+            "totalSupply 116162348802077343159857936548537 (33 "
+            "digits) renders …548537 exactly — where eth_units "
+            "echoes …549000, +463 wei silently fabricated past 30 "
+            "significant digits (measured B1/B2, replayed against "
+            "the neighbor in this door's tests), and num_parse "
+            "drifts the same way (B13). uint256 up to its full 78 "
+            "digits survives: 2**256-1 at 18 decimals prints "
+            "complete; 2**256 is refused by name, never wrapped mod "
+            "2**256. eth_units knows only wei/gwei/ether — no 10^6 "
+            "(USDC) or 10^8 (cbBTC) rung existed to ask, and "
+            "math_calc 500s from 31 digits (B3a). Token decimals "
+            "cited from the campaign corpus: USDC 6, cbBTC 8, "
+            "AERO/DEGEN/BRETT/TOSHI/MOG 18. Digit strings only: "
+            "hex and floats refused by name (binary64 would round "
+            "the value before the shift), leading zeros stripped "
+            "and said in applied_defaults. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["raw", "decimals"],
+            "properties": {
+                "raw": {"type": ["string", "integer"],
+                        "description": "decoded uint256 digit "
+                                       "string, 0 .. 2**256-1"},
+                "decimals": {"type": "integer",
+                             "minimum": 0, "maximum": 77,
+                             "description": "the token's own "
+                                            "decimals() as an "
+                                            "argument (USDC 6, "
+                                            "cbBTC 8, MOG 18)"},
             },
         },
     },

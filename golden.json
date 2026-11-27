@@ -148,9 +148,11 @@
   "digit_check_bookland": "200:8f2d14f465c5ed09d343f3c743d371848741c4aba19d31e809d737bd6122ab9e",
   "digit_repair_ean13": "200:d7a21e15d52d2576ef753ccb2e9803b5ab2f81cb43613d18c4c8679eae027c44",
   "doc_text_pin": "200:6691b3a85b079c634b436dba21f1a2e605e2c1ca7f279aa0afdba4a97af034d7",
+  "doi_name_equivalence_elife_pin": "200:dbde8dff8c84ee0a6eb0e1588385775dda4b7d961a95cbe3024c6758d79dfc6a",
   "easter_computus_1961_pin": "200:e946122811f46188d04fda0a82ff3dabdf84438a4ac6535a6f8d341672c13a0f",
   "enc_b64_hello": "200:ad6f14e4319ff5ce617710db77c08b4a6a29d6777279d8e57f2a76d6109ead32",
   "env_interp_defaults": "200:9837339c6ec7ef7f2409da4119f0026d6197b23f1985b5a4f4d4ca9e9b67abf1",
+  "erc20_raw_units_mog_pin": "200:1925b3f1aa256ee8b085e4776f17603383e472ca7b2ae33b429bdff2404eecc5",
   "eth_abi_encode_transfer": "200:f3821dc02cb03243d5fbf7cefec6f65fe900ab764b7f1d3a919ce8e2abc12c42",
   "eth_address_eip55": "200:291e9ff855946ab30bfc6f78f4bb0f64bddc4211ea79c5331722a2182ca86074",
   "eth_eip712_mail": "200:6c87166b0853a5f541d34ca655f674ed44be1ff877ca412df5174974211e29c4",
@@ -470,6 +472,7 @@
   "validate_taxid_cnpj": "200:a67be4ae814ba3e72182ba0913d12d4ca108c5ba88c376ffd7140b851e202531",
   "validate_url_idn": "200:b6dc6acdd69e6c1b76692afba39d5e8741fc1274b39c339f00d828167f56bec7",
   "web_cert_leaf": "200:4984d20c746ff61b7e19d5fbc2af08e0babafe891296662ed418b96becb0c6c5",
+  "xbrl_decimals_calc_scbsm_pin": "200:6db1b273ea622605576e7a429e2c9a93df468e8a75463d3472aee69b4eaf0585",
   "xml_to_json_rss": "200:79666b450af6179297b88b6aad05d2c3cca0457a7c0ad443f93683b56b9b6728",
   "zip_verify_ok": "200:6c7aeaa7c4a0ac30c3a5afe4d5c9d70cdaecf87d9f35b147441bcb8d828c1371"
 }

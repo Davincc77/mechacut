@@ -1,0 +1,8 @@
+{
+ "name": "doi_name_equivalence_elife_pin",
+ "path": "/api/v1/id/doi-equivalence",
+ "body": {
+  "a": "https://doi.org/10.7554/eLife.12095",
+  "b": "doi:10.7554/ELIFE.12095"
+ }
+}

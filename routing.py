@@ -765,6 +765,19 @@ TABLE = (
      "Big Ear printout letters -> SNR intervals, named scale",
      "big ear wow signal snr printout decode intensity seti "
      "hydrogen alphabet sequence lettres signal bruit echelle"),
+    ("doi_name_equivalence", "/api/v1/id/doi-equivalence", "checks",
+     "same DOI name? ASCII-only fold, zero normalization",
+     "doi syntax validate parse prefix suffix registrant solidus "
+     "identifiant casse grammaire normalisation citation"),
+    ("xbrl_decimals_calc_consistency", "/api/v1/xbrl/calc-consistency",
+     "checks",
+     "XBRL sum under declared decimals: both verdicts named",
+     "xbrl esef filing decimals consistency interval overlap rounded "
+     "sum rapport somme declaree intervalle precision"),
+    ("erc20_raw_units", "/api/v1/eth/raw-units", "numbers",
+     "raw uint256 + decimals -> exact string, no rounding",
+     "erc20 uint256 raw decimals token supply balance human exact "
+     "wei scale echelle montant brut"),
     ("file_identify", "/api/v1/file/identify", "extract",
      "what is this blob really: magic bytes, not the file extension",
      "file type magic identify binary what is this blob extension mime "
@@ -1720,6 +1733,15 @@ SCHEME_NAMES = {
     "astro_precess_equatorial": "precess precession equinox",
     "units_freq_wavelength": "lambda hertz",
     "bigear_snr_decode": "snr printout",
+    # b146 — pack verification : les mots-seuls des douleurs nommees
+    # a l'admission (route q=doi NO_MATCH 6c05721d ; « xbrl fact
+    # check » ne designait aucun outil ; « uint256 », « erc20
+    # decimals » silencieux). « doi » vit AUSSI dans le nom — le
+    # plancher des mots-seuls est passe par SCHEME_NAMES, doctrine
+    # b137.
+    "doi_name_equivalence": "doi",
+    "xbrl_decimals_calc_consistency": "xbrl esef",
+    "erc20_raw_units": "erc20 uint256",
 }
 
 # T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le

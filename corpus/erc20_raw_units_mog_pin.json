@@ -1,0 +1,8 @@
+{
+ "name": "erc20_raw_units_mog_pin",
+ "path": "/api/v1/eth/raw-units",
+ "body": {
+  "raw": "116162348802077343159857936548537",
+  "decimals": 18
+ }
+}
