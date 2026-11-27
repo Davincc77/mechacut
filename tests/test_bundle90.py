@@ -81,7 +81,7 @@ def test_l1_listed_in_file_order_with_said_dates():
 def test_l2_latest_is_a_window_not_a_promise():
     s, b = _q({"latest": 3})
     assert [e["name"] for e in b["entries"]] == ['bigear_snr_decode', 'refs_biblio_scan', 'foia_sheet_audit']  # 3 derniers du fichier (fenetre, pas promesse)  # 3 derniers du fichier (fenetre, pas promesse) du fichier (arrivages vague-3 celeste)
-    assert b["counts"] == {"shown": 3, "total": 67}
+    assert b["counts"] == {"shown": 3, "total": 69}
     s, b = _q({"latest": 64})
     assert [e["name"] for e in b["entries"]] == ORDER[-64:]  # clamp 64 = les 64 derniers
     s, b = _q({"latest": 65})
