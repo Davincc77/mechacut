@@ -71,7 +71,7 @@ def test_l1_listed_in_file_order_with_said_dates():
     # pdf_provenance, text_mojibake shipped + text_claimsweep d'abord en-banc puis SHIPPED 27-11 (127_hermes). Pin aligne sur le fichier ;
     # date_civil/address_parse flips accepted->shipped (outils reels
     # dans le manifest, le statut mentait). Pin aligne sur le fichier.
-    assert b["counts"]["status"] == {'shipped': 13, 'accepted': 0, 'en-banc': 1, 'refuse': 1, 'proposed': 49}
+    assert b["counts"]["status"] == {'shipped': 16, 'accepted': 0, 'en-banc': 1, 'refuse': 1, 'proposed': 46}  # flip 132
     assert b["counts"]["total"] == 64
     for e in b["entries"]:
         assert len(e["arrival"]) == 10 and e["arrival"][4] == "-"
@@ -106,8 +106,8 @@ def test_l4_refused_carries_the_why_and_the_empty_is_a_fact():
     s, b = _q({"status": "en-banc"})
     assert [e["name"] for e in b["entries"]] == ["money_tip"]  # text_claimsweep shipped (flip b127)
     s, b = _q({"status": "proposed"})
-    assert [e["name"] for e in b["entries"]] == ['doi_name_equivalence', 'xbrl_decimals_calc_consistency', 'fx_cross_named_direction', 'fx_quote_cross', 'seat_allocation', 'erc20_raw_units', 'eu_vat_rate_table', 'json_canonical_rfc8785', 'date_julian_gregorian', 'sec_due_date_rule_0_3', 'standings_tiebreak_named', 'cvss_base_score', 'ecb_target_reference_day', 'ecb_rates_history', 'pep440_sort', 'spdx_expression', 'display_eei_eu', 'energy_class_eu', 'series_date_order', 'weighted_mean_exact', 'sec_13f_value_unit', 'marc008_date_range', 'lcc_main_class', 'wayback_timestamp', 'warc_payload_digest', 'pdf_pdfa_claim', 'scholarly_preprint_id', 'date_edtf_interval', 'date_interval_within', 'date_partial', 'rounded_figure_consistency', 'theory_fit_sigma', 'els_scan_expected', 'benford_digit_test', 'stats_chi2_critical', 'eu_ccd_apr_annex', 'stats_chi2_gof', 'swhid_compute', 'forge_repo_url_equivalence', 'utc_tt_offset_named_table', 'shadow_length_sun_elevation', 'euro_legacy_convert', 'price_index_adjust', 'public_domain_status', 'geodesic_wgs84_inverse', 'horizon_hidden_height', 'median_time_past', 'easter_computus', 'maya_long_count']
-    assert b["counts"]["shown"] == 49  # maree Grok vagues 1+2 consignees (21+28), blobs au fil des GO
+    assert [e["name"] for e in b["entries"]] == ['doi_name_equivalence', 'xbrl_decimals_calc_consistency', 'fx_cross_named_direction', 'fx_quote_cross', 'seat_allocation', 'erc20_raw_units', 'eu_vat_rate_table', 'json_canonical_rfc8785', 'date_julian_gregorian', 'sec_due_date_rule_0_3', 'standings_tiebreak_named', 'cvss_base_score', 'ecb_target_reference_day', 'ecb_rates_history', 'pep440_sort', 'spdx_expression', 'display_eei_eu', 'energy_class_eu', 'series_date_order', 'weighted_mean_exact', 'sec_13f_value_unit', 'lcc_main_class', 'wayback_timestamp', 'warc_payload_digest', 'pdf_pdfa_claim', 'scholarly_preprint_id', 'date_partial', 'rounded_figure_consistency', 'theory_fit_sigma', 'els_scan_expected', 'benford_digit_test', 'stats_chi2_critical', 'eu_ccd_apr_annex', 'stats_chi2_gof', 'swhid_compute', 'forge_repo_url_equivalence', 'utc_tt_offset_named_table', 'shadow_length_sun_elevation', 'euro_legacy_convert', 'price_index_adjust', 'public_domain_status', 'geodesic_wgs84_inverse', 'horizon_hidden_height', 'median_time_past', 'easter_computus', 'maya_long_count']
+    assert b["counts"]["shown"] == 46  # flip 132 : 49-3  # maree Grok vagues 1+2 consignees (21+28), blobs au fil des GO
 
 def test_l5_grammars_are_named():
     s, b = _q({"latest": 0})
