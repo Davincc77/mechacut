@@ -71,7 +71,7 @@ def test_l1_listed_in_file_order_with_said_dates():
     # pdf_provenance, text_mojibake shipped + text_claimsweep d'abord en-banc puis SHIPPED 27-11 (127_hermes). Pin aligne sur le fichier ;
     # date_civil/address_parse flips accepted->shipped (outils reels
     # dans le manifest, le statut mentait). Pin aligne sur le fichier.
-    assert b["counts"]["status"] == {'shipped': 16, 'accepted': 17, 'en-banc': 1, 'refuse': 14, 'proposed': 16}  # flip 132
+    assert b["counts"]["status"] == {'shipped': 19, 'accepted': 26, 'en-banc': 1, 'refuse': 17, 'proposed': 1}  # flip 132
     assert b["counts"]["total"] == 64
     for e in b["entries"]:
         assert len(e["arrival"]) == 10 and e["arrival"][4] == "-"
@@ -101,13 +101,13 @@ def test_l3_search_one_named_proposal():
 def test_l4_refused_carries_the_why_and_the_empty_is_a_fact():
     s, b = _q({"status": "refuse"})
     assert s == 200 and b["verdict"] == "FILTERED"
-    assert [e["name"] for e in b["entries"]] == ['money_split', 'fx_quote_cross', 'json_canonical_rfc8785', 'sec_due_date_rule_0_3', 'ecb_target_reference_day', 'ecb_rates_history', 'wayback_timestamp', 'pdf_pdfa_claim', 'date_partial', 'theory_fit_sigma', 'els_scan_expected', 'forge_repo_url_equivalence', 'price_index_adjust', 'median_time_past']
+    assert [e["name"] for e in b["entries"]] == ['money_split', 'fx_quote_cross', 'json_canonical_rfc8785', 'sec_due_date_rule_0_3', 'ecb_target_reference_day', 'ecb_rates_history', 'lcc_main_class', 'wayback_timestamp', 'pdf_pdfa_claim', 'scholarly_preprint_id', 'date_partial', 'theory_fit_sigma', 'els_scan_expected', 'eu_ccd_apr_annex', 'forge_repo_url_equivalence', 'price_index_adjust', 'median_time_past']
     assert "sha256" in next(e["reason"] for e in b["entries"] if e["name"]=='money_split')
     s, b = _q({"status": "en-banc"})
     assert [e["name"] for e in b["entries"]] == ["money_tip"]  # text_claimsweep shipped (flip b127)
     s, b = _q({"status": "proposed"})
-    assert [e["name"] for e in b["entries"]] == ['doi_name_equivalence', 'xbrl_decimals_calc_consistency', 'fx_cross_named_direction', 'seat_allocation', 'erc20_raw_units', 'eu_vat_rate_table', 'standings_tiebreak_named', 'display_eei_eu', 'energy_class_eu', 'series_date_order', 'weighted_mean_exact', 'sec_13f_value_unit', 'lcc_main_class', 'scholarly_preprint_id', 'eu_ccd_apr_annex', 'public_domain_status']
-    assert b["counts"]["shown"] == 16  # tri lot2 27-11 : 33-17# maree Grok vagues 1+2 consignees (21+28), blobs au fil des GO
+    assert [e["name"] for e in b["entries"]] == ['public_domain_status']
+    assert b["counts"]["shown"] == 1  # tri vague1 27-11 : 16-15
 
 def test_l5_grammars_are_named():
     s, b = _q({"latest": 0})
