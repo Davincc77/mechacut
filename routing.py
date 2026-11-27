@@ -227,6 +227,22 @@ TABLE = (
      "refused, never repaired",
      "marc marc008 opac catalog library date uuuu bc reprint copyright "
      "loc fixed positional champ fixe bibliotheque plage"),
+    ("date_julian_gregorian", "/api/v1/date/julian-gregorian", "dates",
+     "calendar day + named calendar (required) -> the same day in "
+     "julian and gregorian, the JDN bridge, the closed century offset "
+     "table versioned and hashed; march25 Lady-Day style named; exact "
+     "cross-calendar day counts where date_calc's proleptic diff lies",
+     "julian gregorian calendar reform style old new date "
+     "conversion jdn julian day number lady day calendarium "
+     "conversion calendrier julien gregorien ecart jours"),
+    ("pep440_sort", "/api/v1/version/pep440-sort", "code",
+     "sort versions by PEP 440 precedence (epochs N!, a/b/rc aliases, "
+     ".post, .dev, local labels) with canonical form and applied "
+     "normalizations rendered; semver_sort refuses these 7/7 PyPI "
+     "tokens by name — the contract it cannot serve",
+     "pep440 python version sort pypi prerelease post dev epoch "
+     "canonical trier versions release candidate tri classement "
+     "ordenar versoes"),
     ("date_deemed", "/api/v1/date/deemed", "dates",
      "dispatch date + method -> deemed receipt date; no method, no "
      "date (closed table named, argument overrides are said)",

@@ -2342,6 +2342,16 @@
   },
   {
    "body": {
+    "calendar": "gregorian",
+    "date": "1582-10-15"
+   },
+   "name": "date_julian_gregorian_reform_pin",
+   "path": "/api/v1/date/julian-gregorian",
+   "sha256": "4ba5906e50643cb2770842de4d99c2241b533d0c77b5c89b72a8ed920dcfc7bc",
+   "status": 200
+  },
+  {
+   "body": {
     "text": "Sun, 29 Mar 2026 02:30:00 GMT"
    },
    "name": "date_parse_rfc",
@@ -5485,6 +5495,19 @@
    "path": "/api/v1/pdf/provenance",
    "sha256": "c1163d4195dbcbb3973aa28105995fed61364bf49f6a83a038266eb920a80aae",
    "status": 400
+  },
+  {
+   "body": {
+    "versions": [
+     "2.31.0",
+     "1!2.0",
+     "2.32.0.dev1"
+    ]
+   },
+   "name": "pep440_sort_pypi_pin",
+   "path": "/api/v1/version/pep440-sort",
+   "sha256": "25cbd34691a0dee3150057634e6e50eedfe5cdfe18cf942da6a82e3d19292555",
+   "status": 200
   },
   {
    "body": {

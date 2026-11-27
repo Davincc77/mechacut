@@ -1,0 +1,8 @@
+{
+ "name": "date_julian_gregorian_reform_pin",
+ "path": "/api/v1/date/julian-gregorian",
+ "body": {
+  "date": "1582-10-15",
+  "calendar": "gregorian"
+ }
+}

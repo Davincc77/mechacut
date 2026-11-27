@@ -284,6 +284,8 @@ import micro
 import claimsweep
 import edtfkit
 import chi2kit
+import juliankit
+import pep440kit
 import benfordkit
 import rules as rules_mod
 import htmltext
@@ -402,7 +404,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.55.0",
+    version="1.56.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5110,6 +5112,83 @@ def api_benford_digit_test(req: BenfordDigitTestRequest):
     return err if err else body
 
 
+# -------------------------------- bundle 135_hermes: date_julian_gregorian
+# Admission 27-11, registre L24 (reçu 56dc427d). date_calc refuse
+# calendar=julian PAR SON NOM et désigne ce contrat (B16) ; ici le
+# calendrier est un argument obligatoire, la conversion passe par le
+# JDN, le décalage centuriel 10/11/13 jours est une table fermée dont
+# la version et le sha voyagent dans la réponse, et le style « année
+# commence le 25 mars » est nommé, jamais deviné.
+
+class DateJulianGregorianRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    date: Optional[str] = None
+    calendar: Optional[str] = None
+    year_start: Optional[str] = None
+    jdn: Optional[int] = None
+    to_date: Optional[str] = None
+    to_calendar: Optional[str] = None
+
+
+def run_date_julian_gregorian(args: dict):
+    try:
+        req = DateJulianGregorianRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="date_julian_gregorian")
+    try:
+        out = juliankit.convert(date=req.date, calendar=req.calendar,
+                                year_start=req.year_start, jdn=req.jdn,
+                                to_date=req.to_date,
+                                to_calendar=req.to_calendar)
+    except juliankit.DateKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="date_julian_gregorian")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/julian-gregorian")
+def api_date_julian_gregorian(req: DateJulianGregorianRequest):
+    body, err = run_date_julian_gregorian(req.model_dump())
+    return err if err else body
+
+
+# -------------------------------- bundle 135_hermes: pep440_sort
+# Admission 27-11, registre L30 (reçu 6aaf2824). semver_sort valide la
+# grammaire semver.org et refuse les tokens PEP 440 par leur nom
+# (mesure registre : 7/7 listes PyPI) ; ce contrat trie selon la
+# grammaire PEP 440 publiée (epochs N!, a/b/rc et leurs alias, .post,
+# .dev, labels locaux), normalise visiblement, et rend les équivalences.
+
+class Pep440SortRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    versions: list
+    descending: Optional[bool] = None
+
+
+def run_pep440_sort(args: dict):
+    try:
+        req = Pep440SortRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e), tool="pep440_sort")
+    try:
+        out = pep440kit.sort_versions(req.versions,
+                                      descending=req.descending)
+    except pep440kit.PepError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}], tool="pep440_sort")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/version/pep440-sort")
+def api_pep440_sort(req: Pep440SortRequest):
+    body, err = run_pep440_sort(req.model_dump())
+    return err if err else body
+
+
 # --------------------------------------------- bundle 7.1: text tools
 
 class TextCountRequest(BaseModel):
@@ -7878,6 +7957,8 @@ TOOL_RUN = {
            "marc008_date_range": run_marc008_date_range,
            "stats_chi2": run_stats_chi2,
            "benford_digit_test": run_benford_digit_test,
+           "date_julian_gregorian": run_date_julian_gregorian,
+           "pep440_sort": run_pep440_sort,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -10369,6 +10450,8 @@ MCP_TOOLS = [
             },
         },
     },
+
+
     {
         "name": "text_mojibake",
         "description": (
@@ -13745,6 +13828,76 @@ MCP_TOOLS = [
             },
         },
     },
+    {
+        "name": "date_julian_gregorian",
+        "description": (
+            "One calendar day + the calendar you name (gregorian or "
+            "julian — REQUIRED, never guessed) -> the same day in both "
+            "calendars, the shared Julian Day Number, and the closed "
+            "century offset table (10 days at 1582-10-15, 13 days "
+            "1900-2099, version + sha in the answer). jdn instead of "
+            "date reads the bridge directly; to_date answers the EXACT "
+            "day count across calendars — where date_calc counts "
+            "1582-10-15 minus 1582-10-04 as 11 proleptic days, they "
+            "were adjacent: 1. The Lady-Day year opening (march25, "
+            "English civil years to 1752) is a named style, applied "
+            "defaults rendered. Proleptic scale said, time-of-day "
+            "refused by name (date_parse is that contract). Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "date": {"type": "string",
+                         "description": "YYYY-MM-DD (astronomical "
+                                        "year numbering, -0044 allowed)"},
+                "calendar": {"type": "string",
+                             "enum": ["gregorian", "julian"]},
+                "year_start": {"type": "string",
+                               "enum": ["jan01", "march25"],
+                               "description": "civil year opening "
+                                              "(default jan01, said)"},
+                "jdn": {"type": "integer",
+                        "description": "Julian Day Number instead of "
+                                       "a date — give one, not both"},
+                "to_date": {"type": "string",
+                            "description": "second day for an exact "
+                                           "cross-calendar count"},
+                "to_calendar": {"type": "string",
+                                "enum": ["gregorian", "julian"]},
+            },
+        },
+    },
+    {
+        "name": "pep440_sort",
+        "description": (
+            "Sort version strings by PEP 440 precedence — the closed "
+            "published grammar (epoch N!, release, a/b/rc with the "
+            "alpha/beta/c/pre/preview aliases, .postN incl. the "
+            "implicit -N form, .devN, +local labels): 1.0.dev456 < "
+            "1.0a1 < 1.0b2 < 1.0rc1 < 1.0 < 1.0.post1 < 1.0.15, "
+            "2013.10 < 1!1.0. Each string returns with its canonical "
+            "form and the normalizations APPLIED (case, separators, "
+            "v prefix, aliases) — nothing is silently rewritten; "
+            "sort-equivalent spellings (1.0 vs 1.0.0 vs v1.0.0) are "
+            "GROUPED, not deduped. semver_sort refuses every PEP 440 "
+            "token by name (7/7 PyPI lists measured) — this is the "
+            "contract it points at; grammar version + sha travel in "
+            "the answer. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["versions"],
+            "properties": {
+                "versions": {"type": "array",
+                             "items": {"type": "string"},
+                             "description": "1..2000 PEP 440 strings"},
+                "descending": {"type": "boolean",
+                               "description": "default false, said "
+                                              "(applied_defaults)"},
+            },
+        },
+    },
+
 ]
 
 

@@ -1694,6 +1694,10 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "deux intervalles DONNÉS : INSIDE STARTS_BEFORE ENDS_AFTER OUTSIDE_BOTH UNDATED, écarts en jours signés — bornes ouvertes NOMMÉES, jamais remplies",
         "marc008_date_range":
             "champ 008 MARC21 (06-14) → plage de dates selon la table FERMÉE LOC : chiffres u élargis, 9999 = encore publié, rôles dits, fill mélangé refusé",
+        "date_julian_gregorian":
+            "jour civil + calendrier NOMMÉ → le même jour en julien et grégorien, pont JDN, table centurielle des décalages versionnée et hachée ; style 25 mars dit ; compte de jours exact là où date_calc diff proleptique ment",
+        "pep440_sort":
+            "tri par précédence PEP 440 (epochs N!, a/b/rc alias, .post, .dev, labels locaux) — forme canonique et normalisations RENDUES ; semver_sort refuse ces jetons 7/7, ici ils sont triés",
 "pdf_provenance":
             "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON — null nommé, jamais deviné",
         "text_mojibake":
@@ -2109,6 +2113,10 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "dois intervalos DADOS: INSIDE STARTS_BEFORE ENDS_AFTER OUTSIDE_BOTH UNDATED, diferenças em dias com sinal — bordas abertas NOMEDAS, nunca preenchidas",
         "marc008_date_range":
             "campo 008 MARC21 (06-14) → faixa de datas pela tabela FECHADA LOC: dígitos u alargados, 9999 = ainda publicado, papéis ditos, fill misturado recusado",
+        "date_julian_gregorian":
+            "dia civil + calendário NOMEADO → o mesmo dia em juliano e gregoriano, ponte JDN, tabela centurial de deslocamentos versionada e com hash; estilo 25 de março dito; contagem exata onde a diferença proléptica do date_calc mente",
+        "pep440_sort":
+            "ordenada por precedência PEP 440 (épocas N!, aliases a/b/rc, .post, .dev, rótulos locais) — forma canônica e normalizações RENDERizadas; o semver_sort recusa esses tokens 7/7, aqui eles são ordenados",
 "pdf_provenance":
             "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido — null nomeado, nunca inventado",
         "text_mojibake":

@@ -421,7 +421,7 @@ def test_ten_new_pins_are_replayable():
     # golden continuity prouve les 418 hash-à-hash)
     # matrice #97622 rejouée, les portes codex/bionic/rakazo/vscode,
     # la notice hermes calculée à la main, le mode all-rows).
-    assert len(g) == 459  # b134 : +3 chi2/benford (adds-only ; b132 : +3 dates ; b130h : +6 mrn ; b125h : 447)
+    assert len(g) == 461  # b135 : +2 julian+pep440 (adds-only ; b134 : +3 chi2/benford)
 
 
 def test_fr_response_byte_contract():
