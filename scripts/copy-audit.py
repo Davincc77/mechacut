@@ -19,6 +19,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 FILES = ["README.md", "docs/INST-CATALOG.md", "docs/CASE-STUDY-TICKET.md",
          "docs/CASE-STUDY-BANKS.md",
          "docs/CASE-STUDY-GOVERNMENTS.md",
+         "docs/CASE-STUDY-GEIPAN.md",
+         "docs/CASE-STUDY-ARTEMIS.md",
          "locales/en.json", "locales/fr.json", "locales/pt.json",
          "scripts/make_landing.py"]
 
