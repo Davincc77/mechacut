@@ -292,6 +292,7 @@ import cvsskit
 import computuskit
 import mayakit
 import geokit
+import celestekit
 import rules as rules_mod
 import htmltext
 import context
@@ -409,7 +410,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.59.0",
+    version="1.60.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5374,6 +5375,107 @@ def api_shadow_length_sun_elevation(req: ShadowLengthSunElevationRequest):
     return err if err else body
 
 
+# -------------------------------- bundle 145_hermes: pack celeste
+# Admissions 27-11, registre L65/L66/L67 (payloads maison sha
+# ed7e5fc9 / 423b030c / 813dcb95, campagne releveur celeste segment
+# Wow!/SETI). Chaque gold porte sa reference publiee nommee : IAU 1976
+# + Ehman Big Ear 30th (precession), SI 1983 + ITU art. 1 + Wikipedia
+# « Hydrogen line » (paire c/f), page Ehman 5 etapes (echelle Big Ear).
+# Douleurs lues a l'admission : route [] FR+EN pour la precession,
+# units_convert refuse MHz par le nom, aucun outil ne connait c.
+
+class AstroPrecessEquatorialRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ra: Optional[Any] = None
+    dec: Optional[Any] = None
+    from_epoch: Optional[Any] = None
+    to_epoch: Optional[Any] = None
+    digits: Optional[int] = Field(default=None, ge=0, le=9)
+
+
+def run_astro_precess_equatorial(args: dict):
+    try:
+        req = AstroPrecessEquatorialRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="astro_precess_equatorial")
+    try:
+        out = celestekit.precess_equatorial(
+            ra=req.ra, dec=req.dec, from_epoch=req.from_epoch,
+            to_epoch=req.to_epoch, digits=req.digits)
+    except celestekit.CelesteKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="astro_precess_equatorial")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/astro/precess")
+def api_astro_precess_equatorial(req: AstroPrecessEquatorialRequest):
+    body, err = run_astro_precess_equatorial(req.model_dump())
+    return err if err else body
+
+
+class UnitsFreqWavelengthRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    value: Optional[Any] = None
+    unit: Optional[Any] = None
+    out: Optional[Any] = None
+    digits: Optional[int] = Field(default=None, ge=0, le=20)
+
+
+def run_units_freq_wavelength(args: dict):
+    try:
+        req = UnitsFreqWavelengthRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="units_freq_wavelength")
+    try:
+        out = celestekit.freq_wavelength(
+            value=req.value, unit=req.unit, out=req.out,
+            digits=req.digits)
+    except celestekit.CelesteKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="units_freq_wavelength")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/units/freq-wavelength")
+def api_units_freq_wavelength(req: UnitsFreqWavelengthRequest):
+    body, err = run_units_freq_wavelength(req.model_dump())
+    return err if err else body
+
+
+class BigearSnrDecodeRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    string: Optional[str] = None
+
+
+def run_bigear_snr_decode(args: dict):
+    try:
+        req = BigearSnrDecodeRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="bigear_snr_decode")
+    try:
+        out = celestekit.bigear_decode(string=req.string)
+    except celestekit.CelesteKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="bigear_snr_decode")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/radio/bigear-snr")
+def api_bigear_snr_decode(req: BigearSnrDecodeRequest):
+    body, err = run_bigear_snr_decode(req.model_dump())
+    return err if err else body
+
+
 # ------------------------------------------- bundle 136: spdx + cvss
 # Arrivees 26-11 consignees au registre, ADMIS 27-11 apres audit
 # contrat-contre-contrat : aucun outil apparie ne parse une expression
@@ -8219,6 +8321,9 @@ TOOL_RUN = {
            "geodesic_wgs84_inverse": run_geodesic_wgs84_inverse,
            "horizon_hidden_height": run_horizon_hidden_height,
            "shadow_length_sun_elevation": run_shadow_length_sun_elevation,
+           "astro_precess_equatorial": run_astro_precess_equatorial,
+           "units_freq_wavelength": run_units_freq_wavelength,
+           "bigear_snr_decode": run_bigear_snr_decode,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -14409,6 +14514,120 @@ MCP_TOOLS = [
                            "maximum": 12,
                            "description": "meters, HALF_UP "
                                           "(default 2, said)"},
+            },
+        },
+    },
+    {
+        "name": "astro_precess_equatorial",
+        "description": (
+            "First-order equatorial precession between epochs, the "
+            "published formula from the Big Ear 30th-anniversary "
+            "report (Ehman): Delta_RA = m + (n/15)*sin(RA)*tan(Dec) "
+            "seconds of time, Delta_Dec = n*cos(RA) arcseconds, "
+            "m = 3.07234 + 0.00186*T, n = 20.0468 - 0.0085*T, T "
+            "tropical centuries from 1900 — IAU 1976 constants "
+            "(Lieske 1977, Explanatory Supplement), model versioned "
+            "+ shashe in every answer. B1950 -> J2000 of the Wow! "
+            "band replays the published corrections to the printed "
+            "digit (19h22m25s -> +185.615s -> 19h25m30.615s, rounding "
+            "to the second gives the published 19h25m31s). Nutation "
+            "and aberration are NAMED as neglected, as the source "
+            "warns: the poles (tan diverges), RA >= 24h, epochs "
+            "outside 1500..2500, spans > 200 years and mixed-sign "
+            "DMS are all refused by name, never folded into a "
+            "fabricated number. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["ra", "dec", "from_epoch", "to_epoch"],
+            "properties": {
+                "ra": {"type": ["string", "number"],
+                       "description": "hours: '19:22:25.64', "
+                                      "'19h22m25.64s' or decimal "
+                                      "hours, 0 <= RA < 24"},
+                "dec": {"type": ["string", "number"],
+                        "description": "degrees: '-27:03' or "
+                                       "-27.05, -90..90"},
+                "from_epoch": {"type": ["number", "string"],
+                               "description": "e.g. 1950 (B1950)"},
+                "to_epoch": {"type": ["number", "string"],
+                             "description": "e.g. 2000 (J2000)"},
+                "digits": {"type": "integer", "minimum": 0,
+                           "maximum": 9,
+                           "description": "seconds fields, HALF_UP "
+                                          "(default 3, said)"},
+            },
+        },
+    },
+    {
+        "name": "units_freq_wavelength",
+        "description": (
+            "The electromagnetic pair lambda = c/f with c = "
+            "299792458 m/s EXACT (SI definition, 17th CGPM 1983) — "
+            "closed tables Hz kHz MHz GHz THz (names from ITU Radio "
+            "Regulations Art. 1) crossed with km m cm mm um µm nm, "
+            "BOTH directions, and the whole opposite family rendered "
+            "in other_units. units_convert refuses MHz by name (its "
+            "families are closed and never contain frequency) — this "
+            "is the pair it cannot reach. Gold: the HI line "
+            "1420.405751768 MHz -> 21.106114054160 cm reproduces the "
+            "published 21.106114054160(30) cm (Wikipedia 'Hydrogen "
+            "line') at the last digit, and 21.106114054160 cm "
+            "returns 1420.405751768 MHz at nine digits. Zero and "
+            "negative are refused by name, as are out-of-table "
+            "units (case-sensitive), same-family out units and any "
+            "answer below the digits printed. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["value", "unit"],
+            "properties": {
+                "value": {"type": ["number", "string"],
+                          "description": "> 0"},
+                "unit": {"type": "string",
+                         "description": "Hz kHz MHz GHz THz | km m "
+                                        "cm mm um µm nm"},
+                "out": {"type": "string",
+                        "description": "unit of the OPPOSITE family "
+                                       "(default m, or Hz when a "
+                                       "wavelength is given, said "
+                                       "in applied_defaults)"},
+                "digits": {"type": "integer", "minimum": 0,
+                           "maximum": 20,
+                           "description": "HALF_UP (default 12, "
+                                          "said)"},
+            },
+        },
+    },
+    {
+        "name": "bigear_snr_decode",
+        "description": (
+            "Decode a Big Ear printout sequence into SNR intervals "
+            "on the PUBLISHED closed scale: space = 0-1, digits 1-9 "
+            "= themselves, letters A-Z = 10-35, the integer "
+            "TRUNCATION of signal-to-noise (Ehman's 5-step coding, "
+            "Big Ear 30th-anniversary report — table named, "
+            "versioned, shasheed). '6EQUJ5' renders [6,7) [14,15) "
+            "[26,27) [30,31) [19,20) [5,6), the published best-"
+            "estimate row 6.5 14.5 26.5 30.5 19.5 5.5, peak U = "
+            "30.5 +/- 0.5, and the duration as the report says it: "
+            "6 rows x 12 s = 72 s (the 37 s HPBW is named NOT the "
+            "duration). Published peak divergences ship side by side "
+            "with their sources (Ehman 30.5, Mendez 30.1 arXiv "
+            "2508.10657, Wikipedia 'between 30 and 31', Kraus 30 "
+            "sigma) and the 'background noise of 10' is rendered "
+            "ABSENT — no published source, the metric normalizes "
+            "noise to 1 sigma. '0', lowercase and unknown "
+            "characters are refused by name, never folded. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["string"],
+            "properties": {
+                "string": {"type": "string",
+                           "description": "printout sequence, 1..200 "
+                                          "characters (space, 1-9, "
+                                          "A-Z)"},
             },
         },
     },

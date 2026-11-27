@@ -1,0 +1,10 @@
+{
+ "name": "astro_precess_equatorial_wow_pin",
+ "path": "/api/v1/astro/precess",
+ "body": {
+  "ra": "19:22:25",
+  "dec": "-27:03",
+  "from_epoch": "1950",
+  "to_epoch": "2000"
+ }
+}

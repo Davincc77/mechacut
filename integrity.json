@@ -1642,6 +1642,18 @@
   },
   {
    "body": {
+    "dec": "-27:03",
+    "from_epoch": "1950",
+    "ra": "19:22:25",
+    "to_epoch": "2000"
+   },
+   "name": "astro_precess_equatorial_wow_pin",
+   "path": "/api/v1/astro/precess",
+   "sha256": "8427258d61c83ee7b9e074feb16a857d5f423085d9242588fb93c40485ce4eeb",
+   "status": 200
+  },
+  {
+   "body": {
     "payloads": [
      {
       "mode": "half_even",
@@ -1681,6 +1693,15 @@
    "name": "benford_digit_test_first_digit_pin",
    "path": "/api/v1/stats/benford",
    "sha256": "facef3d7be6ea17375570e686315b239e77c14461000b03c605e2dfcfc73e25c",
+   "status": 200
+  },
+  {
+   "body": {
+    "string": "6EQUJ5"
+   },
+   "name": "bigear_snr_decode_6equj5_pin",
+   "path": "/api/v1/radio/bigear-snr",
+   "sha256": "df7660a67a63cec73e7cbaefd5c20ee21413280f3b84b298c437f7a009fd08f3",
    "status": 200
   },
   {
@@ -7210,6 +7231,18 @@
    "name": "text_url_canonical_rfc",
    "path": "/api/v1/text/url_canonical",
    "sha256": "43ced4fdcd55d70b62fd9f9886554f369795941a9a4d4215b69a421aac84d43d",
+   "status": 200
+  },
+  {
+   "body": {
+    "digits": 12,
+    "out": "cm",
+    "unit": "MHz",
+    "value": "1420.405751768"
+   },
+   "name": "units_freq_wavelength_hi_pin",
+   "path": "/api/v1/units/freq-wavelength",
+   "sha256": "be9c6e89961cfce08b0f5010d527e6174b14035409930d00c4ce078e1bf900e4",
    "status": 200
   },
   {

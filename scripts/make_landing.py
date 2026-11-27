@@ -1709,6 +1709,12 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "tangente ET arc rendus, R et k arguments dits : 6 ft à 20 mi cache 193 ft (k=0) ou 163 ft (k=0,13) — la règle « 8 in/mi² » en revendique 267",
         "shadow_length_sun_elevation":
             "ombre = hauteur / tan(élévation en degrés), HALF_UP à digits nommé ; soleil à l'horizon ou dessous refuse PAR LE NOM",
+        "astro_precess_equatorial":
+            "précession équatoriale au 1er ordre B1950 → J2000 — formule d'Ehman (Big Ear 30th) et constantes IAU 1976 DITES ; le Wow! publié 19h25m31s est reproduit, pôles et spans > 2 siècles refusés PAR LE NOM",
+        "units_freq_wavelength":
+            "λ = c/f avec c = 299 792 458 m/s EXACT (SI 1983) — la raie HI 1420,405751768 MHz → 21,106114054160 cm reproduite au dernier chiffre publié ; units_convert refuse MHz par le nom, cette paire fermée est la sienne",
+        "bigear_snr_decode":
+            "6EQUJ5 décodé en intervalles sur l'échelle publiée A–Z = 10–35 (entier tronqué) ; 72 s dit comme Ehman (6×12 s), les pics divergents cités chacun leur source, le « bruit 10 » rendu ABSENT",
 "pdf_provenance":
             "ce que les octets d'un PDF avouent : outil qui l'a écrit, dates prétendues, ordre possible ou NON — null nommé, jamais deviné",
         "text_mojibake":
@@ -2143,6 +2149,12 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "tangente E arco renderizados, R e k ditos: olho de 6 ft a 20 mi esconde 193 ft (k=0) ou 163 ft (k=0,13) — a regra «8 in/mi²» alega 267",
         "shadow_length_sun_elevation":
             "sombra = altura / tan(elevação em graus), HALF_UP com dígitos nomeado; sol no horizonte ou abaixo recusa PELO NOME",
+        "astro_precess_equatorial":
+            "precessão equatorial de 1ª ordem B1950 → J2000 — fórmula de Ehman (Big Ear 30th), constantes IAU 1976 DITAS; o Wow! publicado 19h25m31s é reproduzido, polos e spans > 2 séculos recusados PELO NOME",
+        "units_freq_wavelength":
+            "λ = c/f com c = 299 792 458 m/s EXATO (SI 1983) — a linha HI 1420,405751768 MHz → 21,106114054160 cm reproduz o último dígito publicado; o units_convert recusa MHz pelo nome, este par fechado é o dele",
+        "bigear_snr_decode":
+            "6EQUJ5 decodificado em intervalos na escala publicada A–Z = 10–35 (inteiro truncado); 72 s dito como Ehman (6×12 s), picos divergentes citados cada um com a fonte, «ruído 10» renderizado AUSENTE",
 "pdf_provenance":
             "o que os bytes do PDF confessam: qual ferramenta o escreveu, que datas alega, se a ordem ao menos faz sentido — null nomeado, nunca inventado",
         "text_mojibake":

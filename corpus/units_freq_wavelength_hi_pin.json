@@ -1,0 +1,10 @@
+{
+ "name": "units_freq_wavelength_hi_pin",
+ "path": "/api/v1/units/freq-wavelength",
+ "body": {
+  "value": "1420.405751768",
+  "unit": "MHz",
+  "out": "cm",
+  "digits": 12
+ }
+}

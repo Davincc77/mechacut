@@ -745,6 +745,26 @@ TABLE = (
      "shadow on level ground: height / tan(elevation degrees)",
      "shadow length sun elevation angle tangent cosine trigonometry "
      "degrees projection sundial hauteur ombre soleil"),
+    # 145_hermes — pack celeste (registre L65/L66/L67, campagne
+    # releveur celeste Wow!/SETI) ; chaque gold porte sa reference
+    # publiee nommee (IAU 1976 / Ehman Big Ear 30th / ITU art. 1 /
+    # Wikipedia Hydrogen line). Les mots-seuls du segment vivent en
+    # SCHEME_NAMES, pas en chiffres nus dans les tags (garde b81).
+    ("astro_precess_equatorial", "/api/v1/astro/precess", "numbers",
+     "equatorial precession first order B1950 -> J2000 epochs",
+     "precess precession equinox epoch b1950 j2000 fk4 fk5 icrs right "
+     "ascension declination coordinates conversion sidereal ascension "
+     "declinaison coordonnees equatoriales conversion d'epoch"),
+    ("units_freq_wavelength", "/api/v1/units/freq-wavelength",
+     "numbers",
+     "frequency <-> wavelength via exact c, closed units pair",
+     "wavelength frequency hertz lambda centimeters radio hydrogen line "
+     "mhz ghz khz nm um cm exact light speed onde frequence longueur "
+     "conversion ondes radio"),
+    ("bigear_snr_decode", "/api/v1/radio/bigear-snr", "extract",
+     "Big Ear printout letters -> SNR intervals, named scale",
+     "big ear wow signal snr printout decode intensity seti "
+     "hydrogen alphabet sequence lettres signal bruit echelle"),
     ("file_identify", "/api/v1/file/identify", "extract",
      "what is this blob really: magic bytes, not the file extension",
      "file type magic identify binary what is this blob extension mime "
@@ -1693,6 +1713,13 @@ SCHEME_NAMES = {
     # par la table closee de ses correlations nommees.
     "easter_computus": "paschal paschalion",
     "maya_long_count": "gmt lounsbury",
+    # b145 — pack celeste : les mots-seuls du segment campagne (route
+    # [] FR+EN lue a l'admission — « epoch/precess : 0 occurrence au
+    # manifest ») ; les chiffres 1420/6EQUJ5 vivent dans tags/purpose,
+    # jamais en mot-nombre nu (garde b81).
+    "astro_precess_equatorial": "precess precession equinox",
+    "units_freq_wavelength": "lambda hertz",
+    "bigear_snr_decode": "snr printout",
 }
 
 # T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le

@@ -1,0 +1,7 @@
+{
+ "name": "bigear_snr_decode_6equj5_pin",
+ "path": "/api/v1/radio/bigear-snr",
+ "body": {
+  "string": "6EQUJ5"
+ }
+}
