@@ -2301,6 +2301,25 @@
   },
   {
    "body": {
+    "text": "2004/.."
+   },
+   "name": "date_edtf_interval_openend_pin",
+   "path": "/api/v1/date/edtf-interval",
+   "sha256": "d2efb141ad7a5c74a9059465a898b479c707c29bb823fc2ea3b4facef7f01d47",
+   "status": 200
+  },
+  {
+   "body": {
+    "inner": "1984-12-29/1990-01-01",
+    "outer": "1992-12-29/2000-12-31"
+   },
+   "name": "date_interval_within_startsbefore_pin",
+   "path": "/api/v1/date/interval-within",
+   "sha256": "eee977921f98b48a28cfbccb916516304f5e74fccfc23c899f58dad18602a401",
+   "status": 200
+  },
+  {
+   "body": {
     "text": "Sun, 29 Mar 2026 02:30:00 GMT"
    },
    "name": "date_parse_rfc",
@@ -4041,6 +4060,15 @@
    "name": "loop_doom_check_basic",
    "path": "/api/v1/loop/doom-check",
    "sha256": "9fc889b377d2ded3df0a3a8a31bcfa5121537f7fa88fcdf57b24e200f7a3fb5a",
+   "status": 200
+  },
+  {
+   "body": {
+    "field008": "      q18uu19uu                         "
+   },
+   "name": "marc008_date_range_questionable_pin",
+   "path": "/api/v1/date/marc008",
+   "sha256": "13b37dca1d5fb31d1b0b56880e2bd47332a15d172c344386102b62f582faa57c",
    "status": 200
   },
   {
