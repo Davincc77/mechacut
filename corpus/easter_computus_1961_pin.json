@@ -1,0 +1,8 @@
+{
+ "name": "easter_computus_1961_pin",
+ "path": "/api/v1/date/easter-computus",
+ "body": {
+  "year": 1961,
+  "algorithm": "gregorian_meeus_butcher"
+ }
+}

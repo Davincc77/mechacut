@@ -403,8 +403,8 @@ def test_manifest_182_et_ligne_lu():
     # le meme nom) — le compteur lu reste le test : TABLE 193 -
     # recipes 9 = 184 transforms, compte a la main.
     # b113 relève : TABLE 194 - recipes 9 = 185 transforms, compte à la main.
-    assert "202 transforms + 9 recipes" in body  # b136_hermes : +spdx +cvss, 211-9=202 (b135 : 209-9=200 ; b134 : 207-9=198)
-    assert "shop_soldes_lu /api/v1/shop/soldes-lu free" in body  # b132: la gouttiere a paye l elagage
+    assert "203 transforms + 9 recipes" in body  # b133/1 : +easter, 212-9=203 (b136 : 211-9=202)
+    assert "shop_soldes_lu /api/v1/shop/soldes-lu" in body  # b132: la gouttiere a paye l elagage ; b133: le label « free » est TOMBE de la ligne (eiquette pliee — la lecon b132 « la gouttiere est LUE » rejouee : cette assertion se SYNCHRONE ici, cap/paid restent nommes)
     assert len(body.encode("utf-8")) < 9000
 
 
@@ -464,7 +464,7 @@ def test_onze_pins_soldeslu_adds_only():
     # b135_hermes relève à 461 : +2 julian+pep440 (adds-only)
     # b136_hermes relève à 465 : +2 spdx (annex D pin + unknown-id
     # verdict) +2 cvss (v3.1/v4.0 golds publiés), adds-only zéro suppression
-    assert len(g) == 465
+    assert len(g) == 466  # b133/1 : +1 easter pin (adds-only ; b136 : +4 = 465)
     assert g["shop_soldesbe_luxembourg_refuse"].startswith("400:")
 
 

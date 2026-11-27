@@ -87,13 +87,13 @@
   .catgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 10px; max-height: 30rem; overflow-y: auto; padding-right: 6px;
     scrollbar-width: thin; scrollbar-color: #333 transparent; }
-  .tcard { text-align: left; background: var(--card);
+  .k { text-align: left; background: var(--card);
     border: 1px solid var(--line); border-radius: 11px;
     padding: 12px 13px; color: var(--fg); font: inherit; cursor: pointer;
     display: flex; flex-direction: column; gap: 5px; }
-  .tcard:hover, .tcard:focus-visible { border-color: #3a3320; }
-  .tcard code { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
-  .tcard .tp { font-size: 12px; color: var(--muted);
+  .k:hover, .k:focus-visible { border-color: #3a3320; }
+  .k code { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  .k i { font-size: 12px; color: var(--muted);
     display: -webkit-box; -webkit-line-clamp: 2;
     -webkit-box-orient: vertical; overflow: hidden; }
   /* b125_hermes elagage STRUCTUREL : le span .tierdot (28 octets x 200
@@ -101,11 +101,11 @@
      meme badge, meme taille, zero repetition dans le markup. Precents :
      b110 (lignes vides), b119 (name hors hay), b124 (packlinks repliees).
      Le budget d'un outil neuf devient ~negatif pour la landing. */
-  .tcard::before { font-size: 10px; margin-right: 2px; }
-  .tcard[data-tier="free"]::before { content: "F7E2 "; }
-  .tcard[data-tier="cap"]::before { content: "F7E1 "; }
-  .tcard[data-tier="paid"]::before { content: "F534 "; }
-  .tcard.hide { display: none; }
+  .k::before { font-size: 10px; margin-right: 2px; }
+  .k[data-tier="free"]::before { content: "F7E2 "; }
+  .k[data-tier="cap"]::before { content: "F7E1 "; }
+  .k[data-tier="paid"]::before { content: "F534 "; }
+  .k.hide { display: none; }
   #tptry { margin: 0 0 10px; }
   #tptry .tsay { font-size: 14px; margin: 0 0 6px; color: var(--fg); }
   #tptry .tsay b { color: var(--muted); font-weight: 500; font-size: 12px;
@@ -217,7 +217,7 @@
     font-weight: 600; font-size: 14px; padding: 10px 18px; min-height: 40px; cursor: pointer; }
   .demo pre { margin: 0; border: 0; border-top: 1px solid var(--line);
     border-radius: 0 0 12px 12px; min-height: 64px; }
-  .tcard .tp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .k i{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .mgrid{display:grid;grid-template-columns:1fr;gap:12px;max-width:860px}
   .mcard{border-left:2px solid var(--gold);padding:16px 22px;background:var(--card);border-radius:0 10px 10px 0}
   .mcard q{display:block;color:var(--fg);font-size:14.5px;line-height:1.55;font-style:italic}
@@ -636,7 +636,7 @@
 </div>
 <script>
 (function () {
-  var cards = Array.prototype.slice.call(document.querySelectorAll(".tcard"));
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".k"));
   var hits = document.getElementById("cathits");
   var search = document.getElementById("catsearch");
   var tray = document.getElementById("cattray");
@@ -683,7 +683,7 @@
       apply();
       return;
     }
-    var card = e.target.closest(".tcard");
+    var card = e.target.closest(".k");
     if (card) {
       last = card;
       pname.textContent = card.dataset.tool;

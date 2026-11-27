@@ -965,13 +965,13 @@ TEMPLATE = """<!DOCTYPE html>
   .catgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 10px; max-height: 30rem; overflow-y: auto; padding-right: 6px;
     scrollbar-width: thin; scrollbar-color: #333 transparent; }
-  .tcard { text-align: left; background: var(--card);
+  .k { text-align: left; background: var(--card);
     border: 1px solid var(--line); border-radius: 11px;
     padding: 12px 13px; color: var(--fg); font: inherit; cursor: pointer;
     display: flex; flex-direction: column; gap: 5px; }
-  .tcard:hover, .tcard:focus-visible { border-color: #3a3320; }
-  .tcard code { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
-  .tcard .tp { font-size: 12px; color: var(--muted);
+  .k:hover, .k:focus-visible { border-color: #3a3320; }
+  .k code { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  .k i { font-size: 12px; color: var(--muted);
     display: -webkit-box; -webkit-line-clamp: 2;
     -webkit-box-orient: vertical; overflow: hidden; }
   /* b125_hermes elagage STRUCTUREL : le span .tierdot (28 octets x 200
@@ -979,11 +979,11 @@ TEMPLATE = """<!DOCTYPE html>
      meme badge, meme taille, zero repetition dans le markup. Precents :
      b110 (lignes vides), b119 (name hors hay), b124 (packlinks repliees).
      Le budget d'un outil neuf devient ~negatif pour la landing. */
-  .tcard::before { font-size: 10px; margin-right: 2px; }
-  .tcard[data-tier="free"]::before { content: "\1F7E2 "; }
-  .tcard[data-tier="cap"]::before { content: "\1F7E1 "; }
-  .tcard[data-tier="paid"]::before { content: "\1F534 "; }
-  .tcard.hide { display: none; }
+  .k::before { font-size: 10px; margin-right: 2px; }
+  .k[data-tier="free"]::before { content: "\1F7E2 "; }
+  .k[data-tier="cap"]::before { content: "\1F7E1 "; }
+  .k[data-tier="paid"]::before { content: "\1F534 "; }
+  .k.hide { display: none; }
   #tptry { margin: 0 0 10px; }
   #tptry .tsay { font-size: 14px; margin: 0 0 6px; color: var(--fg); }
   #tptry .tsay b { color: var(--muted); font-weight: 500; font-size: 12px;
@@ -1095,7 +1095,7 @@ TEMPLATE = """<!DOCTYPE html>
     font-weight: 600; font-size: 14px; padding: 10px 18px; min-height: 40px; cursor: pointer; }
   .demo pre { margin: 0; border: 0; border-top: 1px solid var(--line);
     border-radius: 0 0 12px 12px; min-height: 64px; }
-  .tcard .tp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .k i{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .mgrid{display:grid;grid-template-columns:1fr;gap:12px;max-width:860px}
   .mcard{border-left:2px solid var(--gold);padding:16px 22px;background:var(--card);border-radius:0 10px 10px 0}
   .mcard q{display:block;color:var(--fg);font-size:14.5px;line-height:1.55;font-style:italic}
@@ -1509,7 +1509,7 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 <script>
 (function () {
-  var cards = Array.prototype.slice.call(document.querySelectorAll(".tcard"));
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".k"));
   var hits = document.getElementById("cathits");
   var search = document.getElementById("catsearch");
   var tray = document.getElementById("cattray");
@@ -1556,7 +1556,7 @@ TEMPLATE = """<!DOCTYPE html>
       apply();
       return;
     }
-    var card = e.target.closest(".tcard");
+    var card = e.target.closest(".k");
     if (card) {
       last = card;
       pname.textContent = card.dataset.tool;
@@ -1696,6 +1696,11 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "champ 008 MARC21 (06-14) → plage de dates selon la table FERMÉE LOC : chiffres u élargis, 9999 = encore publié, rôles dits, fill mélangé refusé",
         "date_julian_gregorian":
             "jour civil + calendrier NOMMÉ → le même jour en julien et grégorien, pont JDN, table centurielle des décalages versionnée et hachée ; style 25 mars dit ; compte de jours exact là où date_calc diff proleptique ment",
+
+        "easter_computus":
+            "année + computus publié NOMMÉ → le dimanche de Pâques dans les deux calendriers, pont JDN 135 ; 2012 : 08 avril vs 15 ; 2100 lit +14",
+        "maya_long_count":
+            "compte long 5 positions + corrélation NOMMÉE (584283 / 584285) → jours, JDN, les deux calendriers ; uinal roule à 18, jamais en silence ; le désaccord 2012 devient auditable",
         "pep440_sort":
             "tri par précédence PEP 440 (epochs N!, a/b/rc alias, .post, .dev, labels locaux) — forme canonique et normalisations RENDUES ; semver_sort refuse ces jetons 7/7, ici ils sont triés",
 "pdf_provenance":
@@ -2119,6 +2124,11 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "campo 008 MARC21 (06-14) → faixa de datas pela tabela FECHADA LOC: dígitos u alargados, 9999 = ainda publicado, papéis ditos, fill misturado recusado",
         "date_julian_gregorian":
             "dia civil + calendário NOMEADO → o mesmo dia em juliano e gregoriano, ponte JDN, tabela centurial de deslocamentos versionada e com hash; estilo 25 de março dito; contagem exata onde a diferença proléptica do date_calc mente",
+
+        "easter_computus":
+            "ano + computus publicado NOMEADO → o domingo de Páscoa nos dois calendários, ponte JDN 135; 2012: 8 de abril vs 15; 2100 lê +14",
+        "maya_long_count":
+            "contagem longa de 5 posições + correlação NOMEADA (584283 / 584285) → dias, JDN, os dois calendários; uinal vira em 18, nunca em silêncio; a divergência 2012 fica auditável",
         "pep440_sort":
             "ordenada por precedência PEP 440 (épocas N!, aliases a/b/rc, .post, .dev, rótulos locais) — forma canônica e normalizações RENDERizadas; o semver_sort recusa esses tokens 7/7, aqui eles são ordenados",
 "pdf_provenance":
@@ -3148,9 +3158,14 @@ def catalog_grid(lang):
         purp = PURPOSES.get(lang, {}).get(name, purpose)
         purp = purp.replace("&", "&amp;").replace("<", "&lt;")
         cards.append(
-            '<button class="tcard" data-pack="%s" data-tier="%s"%s'
+            # b133 pliage CHROME (precedents b124 liens packs,
+            # b132/b133 gouttiere du manifeste — « chrome, pas
+            # claim ») : class tcard->k, span.tp->i. ~4,1 k rendus
+            # PAR page ; selectors suitent dans TEMPLATE ; la
+            # batterie b114 lit le NOUVEAU motif (b112).
+            '<button class="k" data-pack="%s" data-tier="%s"%s'
             ' data-tool="%s" data-hay="%s"> <code>%s</code>'
-            '<span class="tp">%s</span></button>'
+            '<i>%s</i></button>'
             % (pack, tier, ' data-top="1"' if name in TOP10 else '', name, hay, name, purp))
     # b124_hermes elagage MESURE (+pdf_provenance, budget PT a 8 octets
     # de marge) : les 13 liens packs sont REPLIES en un gabarit —

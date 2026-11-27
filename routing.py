@@ -1286,6 +1286,13 @@ TABLE = (
      "saldos luxemburgo datas verao inverno "
      "luxemburger luxembourgish "
      "esch diekirch wiltz vianden groussherzogtum"),
+    ("easter_computus", "/api/v1/date/easter-computus", "dates",
+     "year + NAMED published computus -> Easter Sunday in both "
+     "calendars over the bundle-135 JDN bridge; century offset read "
+     "from the versioned table; pre-1583 refused by name",
+     "easter computus pascha paschal orthodox western gregorian "
+     "julian meeus butcher sunday golden number paques orthodoxe "
+     "pascua ortodoxa"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)
@@ -1368,7 +1375,7 @@ def manifest_text(version):
           # +26 au pointeur, marge 10 -> ~160.
           "packs: /SKILL-<pack>.md; "
           "POSTs sha256; 400s name+expected; "
-          "error=repair;"
+          "error=repair;plain line=free;"
           # b105 elagage MESURE (consigne b104 « FR a 23 octets du
           # plafond : le lot suivant HUMAIN paie prose + elagage ») :
           # la ligne de POINTEURS « detail: » est FUSIONNEE dans la
@@ -1448,6 +1455,17 @@ def manifest_text(version):
             # rendus au budget, claim constant.
             for name, path, purpose in by_pack[pack]:
                 t = tier(path).split()[0]
+                # b133 GOUTTIERE MESUREE (classe b132 — « le contrat
+                # des modeles faibles est le CONTENU des trois
+                # colonnes, jamais leur separateur », pousse jusqu'a
+                # l'etiquette) : la reserve de tete etait a 9 octets au
+                # tip 136, aucune coupe de prose ne payait 2 lignes.
+                # Le label « free » TOMBE des lignes ; cap/paid RESTENT
+                # NOMMES sur la leur ; l'absence est DITE dans la tete
+                # (« plain line=free », doctrine b128 « l'absence a son
+                # operateur »). Les lectures sont SYNCHRONEES dans le
+                # MEME commit (b110 soldes-lu, b114 json_bigint — lecon
+                # b132 « la gouttiere est LUE »).
                 # b132 elagage MESURE (+3 lignes = 155 octets sur une marge
                 # de 6) : la GOUTTIERE double devient simple. Le contrat des
                 # modeles faibles est le CONTENU des trois colonnes, jamais
@@ -1455,8 +1473,9 @@ def manifest_text(version):
                 # lui-meme) et b107 (les lignes vides rendues). Les deux
                 # lectures qui testaient l'espace ont-syncronees avec.
                 ls.append("%s %s %s %s" % (name, path, t, purpose)
-                          if with_purpose else "%s %s %s"
-                          % (name, path, t))
+                          if with_purpose else
+                          ("%s %s" % (name, path) if t == "free"
+                           else "%s %s %s" % (name, path, t)))
         return "\n".join(ls) + "\n"
 
     body = render(True, None)
@@ -1638,6 +1657,12 @@ SCHEME_NAMES = {
     "id_checkdigit": "isbn isbn10 isbn13 ean ean8 ean13 upca gtin "
                      "gtin14 issn isin cusip sedol aba lei orcid cas "
                      "boleto febraban verhoeff damm mrn",
+    # b133 — meme classe (test_scheme_routing : « dont le domaine EST
+    # la liste fermee des schemas qu'ils nomment ») : le computus
+    # pascal PORTE ces deux noms publies (computus paschalis /
+    # paschalion, page Date of Easter), et le compte long est defini
+    # par la table closee de ses correlations nommees.
+    "easter_computus": "paschal paschalion",
 }
 
 # T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le

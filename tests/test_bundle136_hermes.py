@@ -429,8 +429,12 @@ def test_route_names_tools_and_manifest():
         assert r.status_code == 200
         assert tool in str(r.json()), (q, r.json())
     m = client.get("/agent/manifest").text
-    assert "spdx_expression /api/v1/license/spdx-expression free" in m
-    assert "cvss_base_score /api/v1/security/cvss-base free" in m
+    # b133_hermes : la gouttiere de l'etiquette — le label « free »
+    # est TOMBE des lignes (cap/paid restent nommes, absence dite
+    # « plain line=free » dans la tete). Lecture SYCHRONEE dans le
+    # commit de la coupe, sinon la batterie ment sur sa porte.
+    assert "spdx_expression /api/v1/license/spdx-expression" in m
+    assert "cvss_base_score /api/v1/security/cvss-base" in m
     t1 = client.get("/tools/spdx_expression.json")
     t2 = client.get("/tools/cvss_base_score.json")
     assert t1.status_code == 200 and t2.status_code == 200

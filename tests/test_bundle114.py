@@ -316,8 +316,8 @@ def test_landing_catalog_card_present_three_languages():
         # b125_hermes : badge passe en CSS ::before (pilote data-tier)
         # — la batterie suit le texte, pas ce qu'il disait (b112).
         m = re.search(r'data-tool="json_bigint" data-hay="([^"]*)"'
-                      r'[^>]*> <code>json_bigint</code><span class="tp">(.*?)'
-                      r'</span>', grid)
+                      r'[^>]*> <code>json_bigint</code><i>(.*?)'
+                      r'</i>', grid)
         assert m, page
         hay, tp = m.group(1), m.group(2)
         for stem in ("bigint", "int64", "snowflake"):
@@ -332,7 +332,7 @@ def test_manifest_line_and_fold():
     body = client.get("/agent/manifest").text
     line = [l for l in body.splitlines()
             if l.startswith("json_bigint ")][0]
-    assert "/api/v1/json/bigint" in line and " free" in line
+    assert "/api/v1/json/bigint" in line and " cap" not in line and " paid" not in line  # b133 : ligne nue = free (dite dans la tete)
     assert len(body.encode()) < 9000
     assert body.count("\n[") == sum(
         1 for p in routing.PACKS if any(t[2] == p for t in routing.TABLE))

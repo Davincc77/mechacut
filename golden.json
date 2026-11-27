@@ -146,6 +146,7 @@
   "digit_check_bookland": "200:8f2d14f465c5ed09d343f3c743d371848741c4aba19d31e809d737bd6122ab9e",
   "digit_repair_ean13": "200:d7a21e15d52d2576ef753ccb2e9803b5ab2f81cb43613d18c4c8679eae027c44",
   "doc_text_pin": "200:6691b3a85b079c634b436dba21f1a2e605e2c1ca7f279aa0afdba4a97af034d7",
+  "easter_computus_1961_pin": "200:e946122811f46188d04fda0a82ff3dabdf84438a4ac6535a6f8d341672c13a0f",
   "enc_b64_hello": "200:ad6f14e4319ff5ce617710db77c08b4a6a29d6777279d8e57f2a76d6109ead32",
   "env_interp_defaults": "200:9837339c6ec7ef7f2409da4119f0026d6197b23f1985b5a4f4d4ca9e9b67abf1",
   "eth_abi_encode_transfer": "200:f3821dc02cb03243d5fbf7cefec6f65fe900ab764b7f1d3a919ce8e2abc12c42",

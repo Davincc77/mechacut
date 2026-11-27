@@ -2670,6 +2670,16 @@
   },
   {
    "body": {
+    "algorithm": "gregorian_meeus_butcher",
+    "year": 1961
+   },
+   "name": "easter_computus_1961_pin",
+   "path": "/api/v1/date/easter-computus",
+   "sha256": "e946122811f46188d04fda0a82ff3dabdf84438a4ac6535a6f8d341672c13a0f",
+   "status": 200
+  },
+  {
+   "body": {
     "text": "mecha-cut determinism",
     "variant": "base64url"
    },

@@ -289,6 +289,7 @@ import pep440kit
 import benfordkit
 import spdxkit
 import cvsskit
+import computuskit
 import rules as rules_mod
 import htmltext
 import context
@@ -406,7 +407,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.57.0",
+    version="1.58.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5191,6 +5192,43 @@ def api_pep440_sort(req: Pep440SortRequest):
     return err if err else body
 
 
+# -------------------------------- bundle 133_hermes: easter_computus
+# Admission 27-11, registre L63 (reçu 30b0983b). La douleur mesurée :
+# « date_parse refuses Easter 2012 », /route?q=easter+computus vide.
+# Les deux computus publiés sont des ALGORITHMES nommés en entrée
+# (gregorian_meeus_butcher, julian_meeus — jamais devinés), l'année est
+# un argument, et le visage civil de chaque dimanche passe par le pont
+# JDN de juliankit (bundle 135) : une table centurielle, une fenêtre,
+# un 2100 à +14 jours lu dans la version+sha déclarée.
+
+class EasterComputusRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    year: Optional[object] = None
+    algorithm: Optional[str] = None
+
+
+def run_easter_computus(args: dict):
+    try:
+        req = EasterComputusRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="easter_computus")
+    try:
+        out = computuskit.easter(year=req.year, algorithm=req.algorithm)
+    except computuskit.ComputusError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="easter_computus")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/easter-computus")
+def api_easter_computus(req: EasterComputusRequest):
+    body, err = run_easter_computus(req.model_dump())
+    return err if err else body
+
+
 # ------------------------------------------- bundle 136: spdx + cvss
 # Arrivees 26-11 consignees au registre, ADMIS 27-11 apres audit
 # contrat-contre-contrat : aucun outil apparie ne parse une expression
@@ -8031,6 +8069,7 @@ TOOL_RUN = {
            "pep440_sort": run_pep440_sort,
            "spdx_expression": run_spdx_expression,
            "cvss_base_score": run_cvss_base_score,
+           "easter_computus": run_easter_computus,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -14035,6 +14074,39 @@ MCP_TOOLS = [
                                    "AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/"
                                    "SC:N/SI:N/SA:N'",
                 },
+            },
+        },
+    },
+    {
+        "name": "easter_computus",
+        "description": (
+            "Easter Sunday of a year by the PUBLISHED computus you "
+            "name — algorithm is REQUIRED, never guessed: "
+            "gregorian_meeus_butcher (anonymous Gregorian computus, "
+            "Nature 1876 / Butcher / Meeus AA 1991; Western date, in "
+            "use since 1583 — 2025-04-20, 2012-04-08, latest "
+            "2038-04-25) or julian_meeus (Meeus AA 1991 p.69; the "
+            "Paschalion of most Eastern churches — returns the Julian "
+            "date AND its civil Gregorian face read on the versioned "
+            "century table: 2012 Julian 04-02 = Gregorian 04-15 (+13); "
+            "2100 reads +14). Every Sunday comes with its JDN, "
+            "weekday, golden number and the published intermediates "
+            "(the Nature table's own letters) — date_parse refuses "
+            "'Easter 2012' by name: this is the contract it cannot "
+            "serve. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["year", "algorithm"],
+            "properties": {
+                "year": {"type": "integer",
+                         "description": "civil year of the liturgical "
+                                        "era (1583..9999 Gregorian, "
+                                        "1..9999 Julian — windows "
+                                        "named on refusal)"},
+                "algorithm": {"type": "string",
+                              "enum": ["gregorian_meeus_butcher",
+                                       "julian_meeus"]},
             },
         },
     },
