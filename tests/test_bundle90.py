@@ -71,7 +71,7 @@ def test_l1_listed_in_file_order_with_said_dates():
     # pdf_provenance, text_mojibake shipped + text_claimsweep d'abord en-banc puis SHIPPED 27-11 (127_hermes). Pin aligne sur le fichier ;
     # date_civil/address_parse flips accepted->shipped (outils reels
     # dans le manifest, le statut mentait). Pin aligne sur le fichier.
-    assert b["counts"]["status"] == {'shipped': 21, 'accepted': 24, 'en-banc': 1, 'refuse': 17, 'proposed': 4}  # flip 132
+    assert b["counts"]["status"] == {'shipped': 21, 'accepted': 27, 'en-banc': 1, 'refuse': 17, 'proposed': 1}  # flip 132
     assert b["counts"]["total"] == 67
     for e in b["entries"]:
         assert len(e["arrival"]) == 10 and e["arrival"][4] == "-"
@@ -80,7 +80,7 @@ def test_l1_listed_in_file_order_with_said_dates():
 
 def test_l2_latest_is_a_window_not_a_promise():
     s, b = _q({"latest": 3})
-    assert [e["name"] for e in b["entries"]] == ['astro_precess_equatorial', 'units_freq_wavelength', 'bigear_snr_decode']  # 3 derniers du fichier (arrivages vague-3 celeste)
+    assert [e["name"] for e in b["entries"]] == ['astro_precess_equatorial', 'units_freq_wavelength', 'bigear_snr_decode']  # 3 derniers du fichier (fenetre, pas promesse) du fichier (arrivages vague-3 celeste)
     assert b["counts"] == {"shown": 3, "total": 67}
     s, b = _q({"latest": 64})
     assert [e["name"] for e in b["entries"]] == ORDER[-64:]  # clamp 64 = les 64 derniers
@@ -104,8 +104,8 @@ def test_l4_refused_carries_the_why_and_the_empty_is_a_fact():
     s, b = _q({"status": "en-banc"})
     assert [e["name"] for e in b["entries"]] == ["money_tip"]  # text_claimsweep shipped (flip b127)
     s, b = _q({"status": "proposed"})
-    assert [e["name"] for e in b["entries"]] == ['public_domain_status', 'astro_precess_equatorial', 'units_freq_wavelength', 'bigear_snr_decode']
-    assert b["counts"]["shown"] == 4  # arrivals vague-3 celeste 27-11 : 1+3
+    assert [e["name"] for e in b["entries"]] == ['public_domain_status']
+    assert b["counts"]["shown"] == 1  # tri celeste 27-11 : 4-3
 
 def test_l5_grammars_are_named():
     s, b = _q({"latest": 0})
