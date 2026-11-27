@@ -290,6 +290,7 @@ import benfordkit
 import spdxkit
 import cvsskit
 import computuskit
+import mayakit
 import rules as rules_mod
 import htmltext
 import context
@@ -5229,6 +5230,44 @@ def api_easter_computus(req: EasterComputusRequest):
     return err if err else body
 
 
+# -------------------------------- bundle 133_hermes: maya_long_count
+# Admission 27-11, registre L64 (reçu b3026c7c). date_parse refuse
+# 13.0.0.0.0, date_calc ne remonte aucune durée négative, text_count
+# compte cinq mots : la corrélation est ici NOMMÉE (table fermée
+# 584283 / 584285, version + sha), les cinq positions sont fermées avec
+# le carry 18 publié (uinal ne roule jamais en silence), et les jours
+# civils voyagent par le même pont 135 dont le gold JDN 584283 est
+# rejoué porte à porte.
+
+class MayaLongCountRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    long_count: Optional[object] = None
+    correlation: Optional[str] = None
+
+
+def run_maya_long_count(args: dict):
+    try:
+        req = MayaLongCountRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e),
+                                 tool="maya_long_count")
+    try:
+        out = mayakit.long_count_to_day(long_count=req.long_count,
+                                        correlation=req.correlation)
+    except mayakit.MayaKitError as e:
+        return None, bad_request(
+            [{"field": e.field, "message": e.msg}],
+            tool="maya_long_count")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/date/long-count")
+def api_maya_long_count(req: MayaLongCountRequest):
+    body, err = run_maya_long_count(req.model_dump())
+    return err if err else body
+
+
 # ------------------------------------------- bundle 136: spdx + cvss
 # Arrivees 26-11 consignees au registre, ADMIS 27-11 apres audit
 # contrat-contre-contrat : aucun outil apparie ne parse une expression
@@ -8070,6 +8109,7 @@ TOOL_RUN = {
            "spdx_expression": run_spdx_expression,
            "cvss_base_score": run_cvss_base_score,
            "easter_computus": run_easter_computus,
+           "maya_long_count": run_maya_long_count,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -14107,6 +14147,39 @@ MCP_TOOLS = [
                 "algorithm": {"type": "string",
                               "enum": ["gregorian_meeus_butcher",
                                        "julian_meeus"]},
+            },
+        },
+    },
+    {
+        "name": "maya_long_count",
+        "description": (
+            "A Mesoamerican Long Count (baktun.katun.tun.uinal.kin, "
+            "closed five places, uinal rolls at 18 — 18 uinal = 1 "
+            "tun, never a silent carry) under a NAMED correlation "
+            "from the closed table {gmt-584283 "
+            "Goodman-Martinez-Thompson, gmt-584285 "
+            "Thompson/Lounsbury GMT+2}: days, JDN and the civil date "
+            "in both calendars over the bundle-135 JDN bridge. The "
+            "2012 split becomes auditable: 13.0.0.0.0 is 2012-12-21 "
+            "Friday under 584283 and 2012-12-23 Sunday under 584285; "
+            "the epoch 0.0.0.0.0 = JDN 584283 = -3113-08-11 is the "
+            "same gold date_julian_gregorian already pins. Correlation "
+            "REQUIRED (a bare number is refused — the choice is "
+            "typed); unknown correlations, bad digits and dates "
+            "outside the closed -9999..9999 window die by their "
+            "names. date_parse refuses these strings; text_count "
+            "counts words. Free."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["long_count", "correlation"],
+            "properties": {
+                "long_count": {"type": "string",
+                               "description": "five dot-separated "
+                                              "places, e.g. "
+                                              "13.0.0.0.0"},
+                "correlation": {"type": "string",
+                                "enum": ["gmt-584283", "gmt-584285"]},
             },
         },
     },

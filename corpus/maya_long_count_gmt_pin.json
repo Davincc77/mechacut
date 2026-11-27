@@ -1,0 +1,8 @@
+{
+ "name": "maya_long_count_gmt_pin",
+ "path": "/api/v1/date/long-count",
+ "body": {
+  "long_count": "13.0.0.0.0",
+  "correlation": "gmt-584283"
+ }
+}

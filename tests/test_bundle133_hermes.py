@@ -31,6 +31,10 @@ def easter(body):
     return client.post("/api/v1/date/easter-computus", json=body)
 
 
+def maya(body):
+    return client.post("/api/v1/date/long-count", json=body)
+
+
 def julian(body):
     return client.post("/api/v1/date/julian-gregorian", json=body)
 
@@ -239,6 +243,181 @@ def test_e_d4_no_silent_default():
     assert d["applied_defaults"] == []
 
 
+# ============ maya_long_count — golds consignés + table publiée ============
+
+def test_m1_epoch_584283_bridge_replay():
+    # « 0.0.0.0.0 sous 584283 = JDN 584283 = -3113-08-11 (proleptic
+    # Gregorian) = 6 September 3114 BCE Julian » (COMPIL, item maya) —
+    # c'EST le gold G5 de bundle 135, rejoué par l'autre porte.
+    d = maya({"long_count": "0.0.0.0.0", "correlation": "gmt-584283"}).json()
+    assert d["jdn"] == 584283
+    assert d["gregorian"] == "-3113-08-11"
+    assert d["julian"] == "-3113-09-06"
+    j = julian({"jdn": 584283}).json()
+    assert d["gregorian"] == j["gregorian"]
+    assert d["julian"] == j["julian"]
+
+
+def test_m2_13_0_0_0_0_gmt_friday():
+    # « 13.0.0.0.0 under GMT 584283 = JDN 2456283 = 2012-12-21, a
+    # Friday » (COMPIL §3, tracé à la main).
+    d = maya({"long_count": "13.0.0.0.0", "correlation": "gmt-584283"}).json()
+    assert d["days"] == 1872000
+    assert d["jdn"] == 2456283
+    assert d["gregorian"] == "2012-12-21"
+    assert d["weekday"]["name"] == "Friday"
+    assert d["places"][0] == {"place": "baktun", "digit": 13,
+                              "value_days": 144000}
+
+
+def test_m3_13_0_0_0_0_lounsbury_sunday():
+    # « Same Long Count under 584285 = JDN 2456285 = 2012-12-23, a
+    # Sunday » — le désaccord public des claims 2012 est NOMMABLE ici.
+    d = maya({"long_count": "13.0.0.0.0", "correlation": "gmt-584285"}).json()
+    assert d["jdn"] == 2456285
+    assert d["gregorian"] == "2012-12-23"
+    assert d["weekday"]["name"] == "Sunday"
+    assert d["weekday"]["iso"] == 7
+
+
+def test_m4_last_day_of_13th_baktun():
+    # 12.19.19.17.19 — chaîne citée par la campagne (B2 refus date_parse)
+    # et par la page publiée (« occurred on December 20, 2012 (Gregorian
+    # Calendar), followed by the start of the 14th b'ak'tun, 13.0.0.0.0 »).
+    d = maya({"long_count": "12.19.19.17.19",
+              "correlation": "gmt-584283"}).json()
+    assert d["days"] == 1871999
+    assert d["jdn"] == 2456282
+    assert d["gregorian"] == "2012-12-20"
+    assert d["weekday"]["name"] == "Thursday"
+
+
+def test_m5_place_values_published_identity():
+    # 1 kin=1, 1 uinal=20 kin, 1 tun=360 (18×20, le base-18 publié),
+    # 1 katun=7200, 1 baktun=144000 (COMPIL, « Named algorithms »).
+    d = maya({"long_count": "1.1.1.1.1", "correlation": "gmt-584283"}).json()
+    assert d["days"] == 144000 + 7200 + 360 + 20 + 1
+    got = {p["place"]: p["value_days"] for p in d["places"]}
+    assert got == {"baktun": 144000, "katun": 7200, "tun": 360,
+                   "uinal": 20, "kin": 1}
+
+
+# ============ maya_long_count — refus nommés ============
+
+def test_m_r1_unknown_correlation_refused_by_name():
+    # douleur mesurée §4.2 : « no Maya Long Count or NAMED correlation ».
+    r = maya({"long_count": "13.0.0.0.0", "correlation": "spinden"})
+    assert r.status_code == 400
+    e = r.json()["errors"][0]
+    assert e["field"] == "correlation"
+    assert "gmt-584283" in e["message"] and "gmt-584285" in e["message"]
+
+
+def test_m_r2_bare_number_correlation_refused():
+    r = maya({"long_count": "13.0.0.0.0", "correlation": "584283"})
+    assert r.status_code == 400
+    assert "gmt-584283" in r.json()["errors"][0]["message"]
+
+
+def test_m_r3_correlation_required_never_guessed():
+    r = maya({"long_count": "13.0.0.0.0"})
+    assert r.status_code == 400
+    assert r.json()["errors"][0]["field"] == "correlation"
+
+
+def test_m_r4_uinal_carry_refused_by_name():
+    # Écart consigné en tete : la règle PUBLIÉE borne uinal a 17
+    # (18 uinal = 1 tun). Le refus « uinal 20 » de la matière est
+    # couvert, et 18/19 meurent aussi — le report n'est JAMAIS silencieux.
+    for bad in ("13.0.0.18.0", "13.0.0.20.0", "13.0.0.19.0"):
+        r = maya({"long_count": bad, "correlation": "gmt-584283"})
+        assert r.status_code == 400, bad
+        e = r.json()["errors"][0]
+        assert "uinal" in e["message"] and "tun" in e["message"]
+
+
+def test_m_r5_kin_carry_refused_by_name():
+    r = maya({"long_count": "13.0.0.0.20", "correlation": "gmt-584283"})
+    assert r.status_code == 400
+    assert "uinal" in r.json()["errors"][0]["message"]
+
+
+def test_m_r6_wrong_position_count_names_the_five_places():
+    # précédent B2 : « 13.0.0.0.0 » refusait chez date_parse (unparsable)
+    # et text_count comptait 5 mots (B6c). Ici le contrat NOMME ses cinq
+    # positions et designe ses voisins.
+    r = maya({"long_count": "13.0.0.0", "correlation": "gmt-584283"})
+    assert r.status_code == 400
+    msg = json.dumps(r.json())
+    assert "baktun" in msg and "kin" in msg
+    assert "date_parse" in msg or "text_count" in msg
+    assert maya({"long_count": "1.13.0.0.0.0",
+                 "correlation": "gmt-584283"}).status_code == 400
+
+
+def test_m_r7_negative_digit_refused():
+    r = maya({"long_count": "-1.0.0.0.0", "correlation": "gmt-584283"})
+    assert r.status_code == 400
+
+
+def test_m_r8_out_of_reach_refused_by_range():
+    # portée closee : le pont 135 rend -9999..9999 ; au-dela, refus NOMMÉ
+    # (doctrine « refus nommes pour dates hors portee »), jamais de
+    # silencieuse truncature.
+    r = maya({"long_count": "99999.0.0.0.0", "correlation": "gmt-584283"})
+    assert r.status_code == 400
+    assert "-9999..9999" in r.json()["errors"][0]["message"]
+
+
+def test_m_r9_unknown_key_refused_by_name():
+    r = maya({"long_count": "13.0.0.0.0", "correlation": "gmt-584283",
+              "calendar_round": "4 Ahau 8 Cumku"})
+    assert r.status_code == 400
+    assert "calendar_round" in json.dumps(r.json())
+
+
+def test_m_r10_not_a_string_refused():
+    # 13.0.0.0.0 en JSON sans guillemets = nombre flottant, pas un
+    # compte long — precedent b135 « not a string ».
+    r = client.post("/api/v1/date/long-count",
+                    json={"long_count": 13.0, "correlation": "gmt-584283"})
+    assert r.status_code == 400
+    assert "not a string" in json.dumps(r.json())
+
+
+# ============ maya_long_count — rendu ============
+
+def test_m_d1_correlation_table_vintage_declared():
+    d = maya({"long_count": "0.0.0.0.0", "correlation": "gmt-584283"}).json()
+    t = d["correlation_table"]
+    assert t["name"] == "maya-long-count-correlations"
+    assert "584283" in t["version"] and len(t["sha256"]) == 64
+    assert d["correlation"]["days"] == 584283
+    assert "Goodman" in d["correlation"]["label"]
+    d2 = maya({"long_count": "1.0.0.0.0", "correlation": "gmt-584285"}).json()
+    assert d2["correlation_table"]["sha256"] == t["sha256"]  # stable
+    assert "Lounsbury" in d2["correlation"]["label"]
+
+
+def test_m_d2_jdn_identity_said():
+    d = maya({"long_count": "13.0.0.0.0", "correlation": "gmt-584283"}).json()
+    assert d["jdn_identity"] == "JDN = 584283 + 1872000 = 2456283"
+    assert d["applied_defaults"] == []
+    assert d["scale"].startswith("proleptic")  # la meme echelle dite
+
+
+def test_m_d3_century_span_coherence_with_135():
+    # Un long count loin de 2012 : 9.9.9.9.9 = 1 364 229 j -> JDN
+    # 1 948 512. Le pont 135 et maya_long_count doivent RENDRE les
+    # memes jours civils (une seule implémentation, pas deux copies).
+    lc = "9.9.9.9.9"
+    d = maya({"long_count": lc, "correlation": "gmt-584283"}).json()
+    assert d["days"] == 9 * 144000 + 9 * 7200 + 9 * 360 + 9 * 20 + 9
+    j = julian({"jdn": d["jdn"]}).json()
+    assert d["gregorian"] == j["gregorian"]
+    assert d["julian"] == j["julian"]
+
+
 # ============ porte : routes vides de campagne, batch, routeur ============
 
 def test_door_empty_routes_now_answer():
@@ -249,6 +428,10 @@ def test_door_empty_routes_now_answer():
     assert "easter_computus" in json.dumps(r)
     r2 = client.get("/route?q=paschal").json()
     assert "easter_computus" in json.dumps(r2)
+    r3 = client.get("/route?q=maya+long+baktun").json()
+    assert "maya_long_count" in json.dumps(r3)
+    r4 = client.get("/route?q=correlation+constant").json()
+    assert "maya_long_count" in json.dumps(r4)
 
 
 def test_batch_easter_and_maya():
@@ -260,8 +443,20 @@ def test_batch_easter_and_maya():
     rs = r.json()["results"]
     assert rs[0]["result"]["easter_gregorian"] == "2025-04-20"
     assert rs[1]["ok"] is False
+    r2 = client.post("/api/v1/batch", json={
+        "tool": "maya_long_count",
+        "payloads": [{"long_count": "13.0.0.0.0",
+                      "correlation": "gmt-584283"},
+                     {"long_count": "13.0.0.0.0",
+                      "correlation": "gmt+2"}]})
+    assert r2.status_code == 200
+    rs2 = r2.json()["results"]
+    assert rs2[0]["result"]["gregorian"] == "2012-12-21"
+    assert rs2[1]["ok"] is False
+
+
 def test_tool_specs_resolve():
-    for name in ("easter_computus",):
+    for name in ("easter_computus", "maya_long_count"):
         r = client.get("/tools/%s.json" % name)
         assert r.status_code == 200, name
         b = r.json()
@@ -272,7 +467,10 @@ def test_tool_specs_resolve():
 def test_no_internal_names_in_answers():
     # la porte ne nomme jamais une instance interne ; les golds citent
     # l'algorithme publie, pas un releveur.
-    r = client.post("/api/v1/date/easter-computus",
-                    json={"year": 2025, "algorithm": "julian_meeus"})
-    assert "licky" not in r.text.lower()
-    assert "grok" not in r.text.lower()
+    for body in ({"year": 2025, "algorithm": "julian_meeus"},
+                 {"long_count": "13.0.0.0.0", "correlation": "gmt-584283"}):
+        url = ("/api/v1/date/easter-computus" if "year" in body
+               else "/api/v1/date/long-count")
+        r = client.post(url, json=body)
+        assert "licky" not in r.text.lower()
+        assert "grok" not in r.text.lower()

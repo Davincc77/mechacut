@@ -1293,6 +1293,14 @@ TABLE = (
      "easter computus pascha paschal orthodox western gregorian "
      "julian meeus butcher sunday golden number paques orthodoxe "
      "pascua ortodoxa"),
+    ("maya_long_count", "/api/v1/date/long-count", "dates",
+     "five places baktun.katun.tun.uinal.kin + NAMED closed "
+     "correlation gmt-584283 / gmt-584285 -> days, JDN, both "
+     "calendars over the bundle-135 bridge; 18-uinal carry refused "
+     "by name; 2012 split auditable",
+     "maya long count baktun katun tun uinal kin gmt lounsbury "
+     "correlation constant mesoamerican doomsday epoch jdn maia "
+     "calendrier contagem longa"),
 )
 
 TOOL_NAMES = tuple(t[0] for t in TABLE)
@@ -1663,6 +1671,7 @@ SCHEME_NAMES = {
     # paschalion, page Date of Easter), et le compte long est defini
     # par la table closee de ses correlations nommees.
     "easter_computus": "paschal paschalion",
+    "maya_long_count": "gmt lounsbury",
 }
 
 # T7 — le pli d'écriture (bundle 95, douleur mesurée en prod le
