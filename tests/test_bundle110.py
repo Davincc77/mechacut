@@ -403,8 +403,8 @@ def test_manifest_182_et_ligne_lu():
     # le meme nom) — le compteur lu reste le test : TABLE 193 -
     # recipes 9 = 184 transforms, compte a la main.
     # b113 relève : TABLE 194 - recipes 9 = 185 transforms, compte à la main.
-    assert "193 transforms + 9 recipes" in body  # b127 : +text_claimsweep, 202-9=193 (b123 : 199-9=190)
-    assert "shop_soldes_lu  /api/v1/shop/soldes-lu  free" in body
+    assert "196 transforms + 9 recipes" in body  # b132 : +3 dates, 205-9=196 (b127 : 202-9=193)
+    assert "shop_soldes_lu /api/v1/shop/soldes-lu free" in body  # b132: la gouttiere a paye l elagage
     assert len(body.encode("utf-8")) < 9000
 
 

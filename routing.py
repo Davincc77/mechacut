@@ -1385,14 +1385,13 @@ def manifest_text(version):
             # template de tete « packs: /SKILL-<pack>.md » — 212 octets
             # rendus au budget, claim constant.
             for name, path, purpose in by_pack[pack]:
-                # b132 elagage MESURE (+3 lignes = 155 octets sur une
-                # marge de 6 ; la tete n'a plus de mot a couper sans
-                # casser un claim) : le DOUBLE ESPACE de colonne devient
-                # SIMPLE — precedent b107 (les lignes vides), format
-                # uniquement, les trois colonnes names+paths+tiers
-                # voyagent intactes (le contrat des modeles faibles est
-                # le CONTENU des colonnes, pas leur gouttiere).
                 t = tier(path).split()[0]
+                # b132 elagage MESURE (+3 lignes = 155 octets sur une marge
+                # de 6) : la GOUTTIERE double devient simple. Le contrat des
+                # modeles faibles est le CONTENU des trois colonnes, jamais
+                # leur separateur — precedent b110 (le drapeau se nomme
+                # lui-meme) et b107 (les lignes vides rendues). Les deux
+                # lectures qui testaient l'espace ont-syncronees avec.
                 ls.append("%s %s %s %s" % (name, path, t, purpose)
                           if with_purpose else "%s %s %s"
                           % (name, path, t))

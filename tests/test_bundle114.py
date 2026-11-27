@@ -331,7 +331,7 @@ def test_landing_catalog_card_present_three_languages():
 def test_manifest_line_and_fold():
     body = client.get("/agent/manifest").text
     line = [l for l in body.splitlines()
-            if l.startswith("json_bigint  ")][0]
+            if l.startswith("json_bigint ")][0]
     assert "/api/v1/json/bigint" in line and " free" in line
     assert len(body.encode()) < 9000
     assert body.count("\n[") == sum(

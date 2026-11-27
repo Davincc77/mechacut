@@ -337,7 +337,7 @@ def test_d3_leurre_sans_donnees():
 def test_e1_manifest_porte_la_ligne():
     body = client.get("/agent/manifest").text
     line = [l for l in body.splitlines()
-            if l.startswith("agent_mcplist  ")]
+            if l.startswith("agent_mcplist ")]
     assert line and "/api/v1/agent/mcp-list-completeness" in line[0]
 
 
