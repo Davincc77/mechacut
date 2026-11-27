@@ -533,7 +533,7 @@ TR =   {
   'everyday.e25.name': "Carte cadeau « périmée » ? Peut-être vivante — l'ACHAT ancre",
   'everyday.e25.say': "Irlande — Gift Vouchers Act 2019 : date imprimée < cinq ans depuis l'achat = REMPLACÉE — le légal couvre le papier (66B(1)(b)+(c)). JD Sports : ≈250 000 € rendus en juillet. Le porteur tient tous les droits (66B(10)). Solde ≥ 1 € : dû. France : AUCUNE durée ; « 30 ans » = immobilier (refusé).",
   'everyday.e26.name': 'Les soldes sont UNE LOI : trois tables, deux formules, zéro au Luxembourg',
-  'everyday.e26.say': 'France (arrêté 27-05-2019) : hiver = 2ᵉ mercredi janv. 8 h, avancé si le 2ᵉ > 12 (2027 : 6 janv. — « 9 février » = clause ratée) ; été = dernier merc. juin, avant-dernier si > 28 (2027 : 23 juin) ; 4 semaines, début compté ; 7 dérogations verbatim (Moselle 26 juin 2021 ; hiver 2021 SIX SEMAINES ; Guadeloupe 7 oct. ; canicules 2023/2026 5 semaines) ; « ouvré » non défini : lundi 4 premier, samedi 2 nommé. Belgique (VI.25 CDE) : hiver 3–31 janv., DU 2 SI dimanche — 2016, 2027 ; attente « du 2 décembre au 1ᵉʳ janvier » (SPF — presse : 3) ; été 1–31 juil., 30 JUIN si dimanche — 2018 ; corona : été 2020 1er-31 août, hiver 2021 REPORTÉ lundi 4 — clause écrasée — 15 FÉVRIER par LOI (titres : 14). Luxembourg (loi 23-déc-2016, art. 1er § 4) : AUCUNE formule — un règlement date CHAQUE ANNÉE ; dix actes 2018-2027 (hiver 2026/27 : sam. 2 → 30 janv.) ; deux rectificatifs — 2017 : nom de jour seul, 2023 : la borne (Mémorial : dimanche jamais donné par la presse) ; chaîne 2021 : trois actes, un mort ; au-delà : refus, jamais prophétie. CE 20-05-2026 : amendes annulées, dates tenues.',
+  'everyday.e26.say': 'France (arrêté 27-05-2019) : hiver = 2ᵉ mercredi janv. 8 h, avancé si le 2ᵉ > 12 (2027 : 6 janv. — « 9 février » = clause ratée) ; été = dernier merc. juin, avant-dernier si > 28 (2027 : 23 juin) ; 4 semaines, début compté ; sept dérogations verbatim, dont Guadeloupe jeudi 7 oct. 2021 et canicules 2023/2026 cinq semaines ; « ouvré » non défini : lundi 4 premier, samedi 2 nommé. Belgique (VI.25 CDE) : clause dimanche DU 2 SI — vécu 2016, 2027 ; été 1–31 juil., 30 JUIN si dimanche — vécu 2018 ; corona : été 2020 1er-31 août, hiver 2021 REPORTÉ lundi 4 — clause écrasée — prolongé 15 février par LOI (titres : 14). Luxembourg (loi 23-déc-2016, art. 1er § 4) : AUCUNE formule — un règlement date CHAQUE ANNÉE ; dix actes 2018-2027 (hiver 2026/27 : sam. 2 → 30 janv.) ; rectificatifs 2017 et 2023 nommés. CE 20-05-2026 : amendes annulées, dates tenues. (détails : cartes soldes-window/-be/-lu)',
   'everyday.e27.name': "Colis reçu mardi — jusqu'à QUAND changer d'avis",
   'everyday.e27.say': 'Section 6 legifrance rejouée verbatim : L221-18 nomme le départ (bien reçu, service conclu) ; L221-19 : lendemain = jour 1, fin minuit du 14ᵉ jour, samedi/dimanche/férié au premier ouvrable (table L3133-1 maison). Reçu 24 nov → 8 déc ; samedi 5 → lundi 7 ; 8 mai férié → lundi 11. Info manquante → +12 mois ; retard → 14 jours nouveaux. 13 exceptions verbatim (personnalisé, scellé hygiène, enchère). Soldes, occasion : droit court (F10485). Magasin : AUCUN droit, refusé par nom. Fenêtre enseigne : autre horloge.',
   'everyday.e28.name': "Ils se sont disputés sur le calcul — ils "
@@ -783,13 +783,13 @@ TR =   {
   'everyday.e25.name': 'Vale-presente « vencido » pode estar vivo — a Irlanda conta da COMPRA',
   'everyday.e25.say': "Irlanda, Gift Vouchers Act 2019 rejogado: validade impressa menor que CINCO ANS desde a compra é SUBSTITUÍDA — a data legal COBRE o papel (66B(1)(b)+(c)). JD Sports: ≈€250.000 devolvidos em julho (call-in CCPC 20/nov). Âncora: o contrato; o portador tem TODOS os direitos (66B(10)). Saldo ≥ €1 devido. França: nenhuma duração legal; «30 anos» = prescrição imobiliária, recusado.",
   'everyday.e26.name': 'Saldos: três tabelas — duas regras, nenhuma no Luxemburgo',
-  'everyday.e26.say': "Três calendários. França (arrêté 27-05-2019): inverno = 2ª quarta de jan. 8h, adiantada se a 2ª passa o dia 12 (2027: 6/jan); verão = última quarta de junho, penúltima se a última passa o 28 (2027: 23/jun); 4 semanas, começo contado; 7 derrogações (Mosela 26/06/2021; inverno 2021 SEIS SEMANAS). Bélgica (VI.25 CDE): inverno 3–31/01, do DIA 2 se o 3 cai domingo — vivido 2016, 2027; a espera é NOMEADA «2/dez a 1º/jan» — imprensa: 3; verão 1–31/07, 30 de JUNHO se o 1º cai domingo — vivido 2018; corona: verão 2020 1–31/08; inverno 2021 ADIADO seg. 4 — cláusula anulada — PROLONGADO a 15/02 por LEI; manchetes: 14. Luxemburgo (lei 23-dez-2016, art. 1º § 4): NENHUMA fórmula — decreto data A CADA ANO; dez atos 2018-2027 (inverno 2026/2027: sáb. 2 → 30/jan); dois retificativos — 2017: só o DIA DA SEMANA, 2023: a BORDE (o JO deu domingo que a imprensa nunca deu); cadeia 2021: três atos, um morto; após o último: recusado, nunca profecia.",
+  'everyday.e26.say': "Três calendários. França (arrêté 27-05-2019): inverno = 2ª quarta de jan. 8h, avançada se a 2ª passa o 12 (2027: 6/jan); verão = última quarta/junho, penúltima se passa o 28 (2027: 23/jun); 4 semanas, começo contado; 7 derrogações verbatim. Bélgica (VI.25 CDE): cláusula do DIA 2 se o 3 cai domingo — vivido 2016, 2027; 30/JUNHO se o 1º cai domingo — 2018; corona: verão 2020 1–31/08; inverno 2021 ADIADO seg. 4 — cláusula anulada — PROLONGADO a 15/02 por LEI; manchetes: 14. Luxemburgo (lei 23-dez-2016, art. 1º § 4): NENHUMA fórmula — decreto data A CADA ANO; dez atos 2018-2027 (inverno 2026/2027: sáb. 2 → 30/jan); retificativos 2017 e 2023 nomeados. (detalhes: cartões soldes-window/-be/-lu)",
   'everyday.e27.name': 'Recebeu terça — até QUANDO pode desistir',
-  'everyday.e27.say': "A lei entrega o calendário: seção 6 legifrance rejogada verbatim — L221-18 nomeia a partida (recebimento, fim do serviço); L221-19: dia seguinte = dia 1, meia-noite fecha o 14; sáb/dom/feriado → primeiro útil (L3133-1 NOSSA). Recebido 24/nov → 8/dez; sábado 5 → 7; 8/mai → 11. Falta a informação: +12 meses; atraso: 14 dias novos. As 13 exceções citam a cláusula. Promoção e usado: direito corre (F10485). Loja física: NENHUM direito — recusado pelo nome. Janela da loja: outro relógio.",
+  'everyday.e27.say': "A lei dá o calendário — seção 6 legifrance verbatim: L221-18 nomeia a partida (recebimento, fim serviço); L221-19: dia seguinte = dia 1, meia-noite fecha o 14; sáb/dom/feriado → primeiro útil (L3133-1 NOSSA). Recebido 24/nov → 8/dez; sábado 5 → 7; 8/mai → 11. Falta a informação: +12 meses; atraso: 14 dias novos. 13 exceções citam a cláusula; Promoção e usado: direito corre (F10485). Loja física: NENHUM direito — recusado pelo nome. Janela da loja: outro relógio.",
   'everyday.e28.name': 'Brigaram na conta — eram dois gráficos',
   'everyday.e28.say': "A adiantou 1.375, C 865, B nada; partes iguais; C perdoa a parte de B — A cobra 628,33, B oferece 458,33: a briga É a arquitetura. No saldo, C só perdoa os 118,34 que lhe devem → PIX de 628,33 B→A, mínimo provado; nota a nota, o perdão mata a aresta B→C → B paga 458,33, C carrega 288,33. compare numera o vão.",
   'everyday.e29.name': 'Aluguel: quatro convenções — nenhuma calculadora escolhe',
-  'everyday.e29.say': "Saída dia 18, aluguel R$ 1.000: postado « 1000/30 = 33,33 × 18 = 600 » — DUAS rodadas em silêncio, o caminho do locador dá 599,94 (9sqw2j). Entrada 15 de janeiro, mês de 31: o escritório divide « por 30, REGARDLESS » — 566,67; o vizinho por 31 — 548,39 (1hitzjq). Contrato termina ao MEIODIA do 12: 12 dias cobrados, 11,5 alegados, 12-ou-11 publicados (cevz6l). prorate nomeia basis cycle|month30|year365, ordem, marco; compare mostra as DUAS com a diferença; instante numa data é recusado — os dois dias inteiros mostrados. Nunca a lei local.",
+  'everyday.e29.say': "Saída dia 18, aluguel R$ 1.000: postado « 1000/30 = 33,33 × 18 = 600 » — DUAS rodadas caladas, a via do locador dá 599,94 (9sqw2j). Entrada 15/jan, mês 31: o escritório divide « por 30, REGARDLESS » — 566,67; o vizinho por 31 — 548,39 (1hitzjq). Contrato termina ao MEIODIA do 12: 12 dias cobrados, 11,5 alegados, 12-ou-11 publicados (cevz6l). prorate nomeia basis cycle|month30|year365, ordem, marco; compare mostra as DUAS com a diferença; instante recusado — os dois dias inteiros ditos. Nunca a lei local.",
   'everyday.e30.name': 'Um salário, várias taxas por hora — o contracheque nunca diz qual',
   'everyday.e30.say': "52.000 por ano: ÷2.080 = 25,00 (o “typically” do r/Payroll — em todo comentário, em nenhuma calculadora); ÷2.087 = 24,92 — é a lei federal dos EUA palavra por palavra (5 USC 5504(b): « divide the annual rate by 2,087 », « nearest cent, counting one-half and over »); o contracheque “20 cents off” do r/ATC é essa lei. A ordem morde: arredondar a taxa antes, ×80 = 1.993,60; dividir o ano por 26 = 2.000,00 — −6,40 por pagamento, −166,40 por ano, no par com sinal. Quinzenal ÷26 contra semimensal ÷24: DOIS relógios (2.000,00 contra 2.166,67). E 2027 tem 53 sextas: 27 pagamentos quinzenais (r/IRS_Source) — contados, não profetizados. payscale nomeia cada divisor e sua citação; 365 recusado pelo nome; o SEU divisor fica como argumento (1.820, 2.640 — nunca a lei local); nunca média, nunca fetch.",
   'nav.kit': 'Kit',
@@ -962,10 +962,6 @@ TEMPLATE = """<!DOCTYPE html>
     background: var(--card); border-radius: 999px; padding: 5px 11px;
     cursor: pointer; }
   .chip.on { color: var(--gold); border-color: #3a3320; background: #14110a; }
-  .tierlegend { font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
-    color: var(--muted); margin: -6px 0 14px; line-height: 1.8; }
-  .tierlegend .lg { white-space: nowrap; }
-  @media (max-width: 640px) { .tierlegend .lg { white-space: normal; } }
   .catgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 10px; max-height: 30rem; overflow-y: auto; padding-right: 6px;
     scrollbar-width: thin; scrollbar-color: #333 transparent; }
@@ -1686,6 +1682,10 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "deux sorties NOMMÉES sous un nom : gof (comptes → chi2, ddl, p de queue en FORMES FERMÉES df pairs, impair refusé nommé) et critical (ddl × alpha lus dans la table NIST FERMÉE versionnée + hashée, hors table refusé)",
         "benford_digit_test":
             "comptes de chiffres fermés (9/90/10/100) + emprise → chi2, MAD, bande Nigrini, verdict à SIX noms fermés — table BENFORD-NIGRINI2012-v1 versionnée, R-N1 et R-SPAN en précendance DITE",
+        "spdx_expression":
+            "expressions SPDX AND OR WITH selon l'Annexe D, ids vs License List 3.29.0 nommée+hashée — inconnu = VERDICT did-you-mean, grammaire = 400 par nom",
+        "cvss_base_score":
+            "vecteur CVSS v3.1/v4.0 → score + bande, tables FERMÉES version+sha dites, arrondi NOMMÉ par vintage — E/CR/M* refusés par nom",
         "text_claimsweep":
             "sweep d'opinion à liste FERMÉE : auto-aveu, quantifieurs sans corpus, compteurs morts — citation exemptée, ton jamais deviné",
                 "date_edtf_interval":
@@ -2105,6 +2105,10 @@ PURPOSES = {  # catalogue FR/PT — traduits 24-11 par trois enfants,
             "duas saídas NOMEDAS sob um nome: gof (contagens → chi2, gl, p de cauda em FORMAS FECHADAS gl pares, ímpar recusado pelo nome) e critical (gl × alpha lidos da tabela NIST FECHADA, versionada e hash, fora da tabela recusado)",
         "benford_digit_test":
             "contagens de dígitos FECHADAS (9/90/10/100) + extensão → chi2, MAD, banda Nigrini, veredito de SEIS nomes fechados — tabela BENFORD-NIGRINI2012-v1 versionada, R-N1 e R-SPAN com precedência DITA",
+        "spdx_expression":
+            "expressões SPDX AND OR WITH pela Annex D, ids vs License List 3.29.0 nomeada+hash — desconhecida = VEREDITO did-you-mean, gramática = 400 pelo nome",
+        "cvss_base_score":
+            "vetor CVSS v3.1/v4.0 → pontuação + faixa, tabelas FECHADAS versão+hash ditas, arredondamento NOMADO por versão — E/CR/M* recusados pelo nome",
         "text_claimsweep":
             "varredura de opinião com lista FECHADA: confissão, quantificador sem corpus, contador morto — citação isenta, tom nunca adivinhado",
                 "date_edtf_interval":
@@ -3086,6 +3090,19 @@ def everyday_html(lang, cat):
 
 
 def catalog_grid(lang):
+    # b136_hermes elagage MESURE (budget landing 181 k SERVE, b114/b115) :
+    # la ligne « tierlegend » est SUPPRIMEE — le badge+mot vivent DANS les
+    # chips (data-f=tier=X, meme texte), et les trois REGLES (« gratuite
+    # sans cle », « plafonnee sous 32 Ko, sinon 402 », « x402 USDC sur
+    # Base ») vivent mot a mot dans « tiers.intro » de la page elle-meme.
+    # Doctrine b123 : ce qui vit deux fois ne paie qu'une fois. Les 4
+    # regles CSS .tierlegend suivent (mortes avec le paragraphe). Les
+    # purposes FR/PT des deux outils du lot sont SERRES a claim constant
+    # (priorite, License List, verdicts nommes voyagent) ; la carte
+    # everyday e26 est RATISSEE : les clauses duplicant les purposes des
+    # trois cartes soldes de la MEME page tombent, chaque fait survit
+    # sur la page (precedent b114 « e18/e19/e20 ratisses »). Mesure des
+    # pages apres re-bake : voir tests/test_landing.py (commentaire).
     """Click-first catalogue: chips (pack x tier) + search + compact cards.
     The grid has a fixed max-height, so the page budget cannot grow with
     len(TABLE): 90 tools fit the same three screens as 53. All text is
@@ -3106,9 +3123,6 @@ def catalog_grid(lang):
         # ailleurs » : ce qui vit deux fois ne paie qu'une fois.
         chips.append('<span class="chip" data-f="tier=%s">%s %s</span>'
                      % (t, BADGE[t], word))
-    legend = " · ".join('<span class="lg">%s %s — %s</span>'
-                        % (BADGE[t], TIER_CHIP[lang][t], TIER_RULE[lang][t])
-                        for t in ("free", "cap", "paid"))
     cards = []
     for name, path, pack, purpose, tags in routing.TABLE:
         tier = path_tier[name]
@@ -3147,10 +3161,9 @@ def catalog_grid(lang):
     packs = "/SKILL-&lt;pack&gt;.md" 
     return (
         '<div class="chips">%s</div>\n'
-        '<p class="tierlegend">%s</p>\n'
         '<div class="catgrid">%s</div>\n'
         '<p class="packlinks">%s %s</p>'
-        % ("".join(chips), legend, "".join(cards),
+        % ("".join(chips), "".join(cards),
            PACK_LABEL_EXTRA[lang], packs))
 
 

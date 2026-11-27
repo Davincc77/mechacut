@@ -1,0 +1,7 @@
+{
+  "name": "cvss_base_score_v40_pin",
+  "path": "/api/v1/security/cvss-base",
+  "body": {
+    "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+  }
+}

@@ -287,6 +287,8 @@ import chi2kit
 import juliankit
 import pep440kit
 import benfordkit
+import spdxkit
+import cvsskit
 import rules as rules_mod
 import htmltext
 import context
@@ -404,7 +406,7 @@ def record_miss(path: str, kind: str) -> None:
 
 app = FastAPI(
     title="MechaCut",
-    version="1.56.0",
+    version="1.57.0",
     # Agent-first surface: the docs endpoints are fingerprintable extra doors
     # and the contract is already public at /openapi.json.
     docs_url=None,
@@ -5189,6 +5191,74 @@ def api_pep440_sort(req: Pep440SortRequest):
     return err if err else body
 
 
+# ------------------------------------------- bundle 136: spdx + cvss
+# Arrivees 26-11 consignees au registre, ADMIS 27-11 apres audit
+# contrat-contre-contrat : aucun outil apparie ne parse une expression
+# de licence, et la porte ne rejoue aucun vecteur CVSS publie. Gram-
+# maires PUBLIEES CLOSES : SPDX spec v2.3.1 Annex D + License List
+# 3.29.0 (vintage nomme, sha declare) ; FIRST CVSS v3.1/v4.0 (tables
+# fermees versionnees+hashees, fonction d'arrondi NOMMEE par vintage —
+# elles different). Un id inconnu est un VERDICT (UNKNOWN_ID +
+# did-you-mean), une grammaire cassee est un 400 PAR LE NOM ; les
+# metrics hors Base sont refuses par le nom du metric, en designant
+# l'autre contract (non construit ici).
+
+class SpdxExpressionRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    expression: str
+    list_version: Optional[str] = None
+
+
+def run_spdx_expression(args: dict):
+    try:
+        req = SpdxExpressionRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e), tool="spdx_expression")
+    try:
+        out = spdxkit.parse_expression(req.expression,
+                                       list_version=req.list_version)
+    except spdxkit.SpdxError as e:
+        return None, bad_request(
+            [{"field": e.field, "reason": e.reason,
+              "message": e.message,
+              "expected": e.expected}], tool="spdx_expression")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/license/spdx-expression")
+def api_spdx_expression(req: SpdxExpressionRequest):
+    body, err = run_spdx_expression(req.model_dump())
+    return err if err else body
+
+
+class CvssBaseScoreRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    vector: str
+
+
+def run_cvss_base_score(args: dict):
+    try:
+        req = CvssBaseScoreRequest(**args)
+    except Exception as e:
+        return None, bad_request(_pyd_errors(e), tool="cvss_base_score")
+    try:
+        out = cvsskit.base_score(req.vector)
+    except cvsskit.CvssError as e:
+        return None, bad_request(
+            [{"field": e.field, "reason": e.reason,
+              "message": e.message,
+              "expected": e.expected}], tool="cvss_base_score")
+    out["sha256"] = canon(out)
+    return out, None
+
+
+@app.post("/api/v1/security/cvss-base")
+def api_cvss_base_score(req: CvssBaseScoreRequest):
+    body, err = run_cvss_base_score(req.model_dump())
+    return err if err else body
+
+
 # --------------------------------------------- bundle 7.1: text tools
 
 class TextCountRequest(BaseModel):
@@ -7959,6 +8029,8 @@ TOOL_RUN = {
            "benford_digit_test": run_benford_digit_test,
            "date_julian_gregorian": run_date_julian_gregorian,
            "pep440_sort": run_pep440_sort,
+           "spdx_expression": run_spdx_expression,
+           "cvss_base_score": run_cvss_base_score,
            "pdf_provenance": run_pdf_provenance,
            "money_amortize": run_amortize,
            "money_interest": run_interest,
@@ -13898,6 +13970,74 @@ MCP_TOOLS = [
         },
     },
 
+    {
+        "name": "spdx_expression",
+        "description": (
+            "SPDX license expressions parsed against a NAMED, PINNED "
+            "vintage: grammar = SPDX spec v2.3.1 Annex D (AND OR WITH "
+            "case-SENSITIVE, + > WITH > AND > OR precedence, parens, "
+            "LicenseRef, NONE/NOASSERTION are tag values not tokens) "
+            "and ids check against the SPDX License List 3.29.0 (740 "
+            "licenses + 86 exceptions, release 2026-09-16) with "
+            "version and sha256 DECLARED in every response. An id "
+            "off the list is a VERDICT (UNKNOWN_ID + did-you-mean at "
+            "distance <= 2), a broken grammar is refused BY NAME; "
+            "case and deprecation are named verdicts, never silent "
+            "fixes. Returns tree, term flags, canonical string, sha."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["expression"],
+            "properties": {
+                "expression": {
+                    "type": "string",
+                    "description": "one SPDX license expression, e.g. "
+                                   "'MIT AND (Apache-2.0 OR "
+                                   "GPL-2.0-only)'",
+                },
+                "list_version": {
+                    "type": "string",
+                    "description": "the SPDX License List vintage; "
+                                   "only '3.29.0' is embedded — any "
+                                   "other value is refused by name, "
+                                   "the applied default is said back",
+                },
+            },
+        },
+    },
+    {
+        "name": "cvss_base_score",
+        "description": (
+            "CVSS vector -> base score + severity band, two CLOSED "
+            "vintages: v3.1 (FIRST spec 7.1 equations, Roundup NAMED, "
+            "exact Decimal) and v4.0 (FIRST reference tables "
+            "cvss_lookup.js/max_severity/max_composed, BSD-2-Clause, "
+            "interpolation in the reference operation order, "
+            "round-half-up — the vintages round DIFFERENTLY and the "
+            "response says which). Table vintage + sha256 declared "
+            "per response; Table 23 strict order enforced for v4.0, "
+            "while the v3.1 spec's own non-preferred-order vector is "
+            "accepted, normalized and said back. Threat/"
+            "Environmental/Supplemental metrics refused BY NAME — "
+            "other contracts, not built here; E:X/CR:X worst-case "
+            "defaults RENDERED as applied_defaults. Golds: 25 v3.1 + "
+            "28 v4.0 published vectors replayed (31 pairs de-duped)."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "required": ["vector"],
+            "properties": {
+                "vector": {
+                    "type": "string",
+                    "description": "full vector string, e.g. 'CVSS:"
+                                   "3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/"
+                                   "I:H/A:H' or 'CVSS:4.0/AV:N/AC:L/"
+                                   "AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/"
+                                   "SC:N/SI:N/SA:N'",
+                },
+            },
+        },
+    },
 ]
 
 

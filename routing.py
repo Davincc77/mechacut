@@ -837,6 +837,18 @@ TABLE = (
      "benford first digit last digit digits fraud conformity mad "
      "nigrini leading trailing chiffre premiers derniers digits fraude "
      "conformite frequencia algarismo"),
+    ("spdx_expression", "/api/v1/license/spdx-expression", "checks",
+     "SPDX expressions AND/OR/WITH parsed, ids vs License List 3.29.0 "
+     "(vintage + sha declared)",
+     "license spdx expression AND OR WITH identifier OSI copyleft "
+     "licence expire deprecated license-ref permissiva expressao "
+     "licenca"),
+    ("cvss_base_score", "/api/v1/security/cvss-base", "checks",
+     "CVSS v3.1/v4.0 vector -> base score + severity band, FIRST "
+     "closed tables, rounding NAMED",
+     "cvss vector vulnerability score severity band critical high "
+     "medium roundup first base rating agent severite "
+     "vulnerabilite nota gravidade"),
     ("text_count", "/api/v1/text/count", "text",
      "words/sentences/lines/bytes exact",
      "count words characters lines sentences bytes text measure how long "
@@ -1328,7 +1340,12 @@ def manifest_text(version):
         (version,
          sum(1 for e in TABLE if not e[0].startswith("recipe_")),
          sum(1 for e in TABLE if e[0].startswith("recipe_")))
-        + "keyless 30/min; <32KB; x402 from 1. "
+        # b136_hermes elagage MESURE n°2 : « <32KB; » COUPE — le mot
+        # tier « cap » vit sur chaque ligne plafonnee et LE NOMBRE se
+        # dit dans la reponse du gate elle-meme (« (free <=32 KB) »,
+        # message 413/402 maison) — argument reutilise mot pour mot
+        # par b127 quand il a coupe « cap » de la tete.
+        + "keyless 30/min; x402 from 1. "
           # b127 elagage MESURE (+text_claimsweep, 45 octets a payer ;
           # marge relevee a 8 988, jamais de memoire) : « cap » et
           # « paid= » coupes — le plafond se dit dans le 413 nomme et
@@ -1393,8 +1410,23 @@ def manifest_text(version):
           # Mesure b112 : 208 lignes / 8 99x octets — marge relevee
           # a l'annonce, jamais de memoire.
           "/api/v1/pipeline; "
-        "proposals: /api/v1/agent/proposals; "
-        "storyboards->moovicut.studio",
+        # b136_hermes elagage MESURE (+2 lignes = 101 octets sur une
+        # marge de 79) : trois coupes a claim constant. n°1 : le label
+        # « proposals: » COUPE — le chemin /api/v1/agent/proposals se
+        # nomme lui-meme (precedent b111 « detail: » ; le pin b90
+        # teste LE CHEMIN, pas le label). n°3 : « storyboards-> »
+        # COUPE, la POINTEUSE SOEUR « moovicut.studio » RESTE (pin
+        # b0:154 honore — le manifeste porte la pointeuse pour les
+        # bots qui ne jouent jamais /route) ; les MOTS du trio vivent
+        # dans le rail elsewhere de /route, nomme dans la tete
+        # elle-meme, et dans SKILL.md (« Not here — Moovicut ») —
+        # deplaces, jamais coupes en claim (precedent b127). Avec la
+        # coupe n°2 (« <32KB; », see above) : 31 octets rendus.
+        # Mesure LIVE apres les trois coupes : 226 lignes / 8 991
+        # octets (splitlines — methode des cycles precedents),
+        # marge 9 avant 9 000 ; precedents de marge 5 (b110), 6
+        # (b132), 12 (b127) — le lot suivant paie encore.
+        "/api/v1/agent/proposals; moovicut.studio",
         # b102 elagage MESURE (consigne b101 « le prochain outil
         # debranche le dense-fold ou elague une ligne de tete ») :
         # la ligne soeur est FUSIONNEE dans discovery, pas coupee —

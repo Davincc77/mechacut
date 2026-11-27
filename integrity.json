@@ -2323,6 +2323,24 @@
   },
   {
    "body": {
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+   },
+   "name": "cvss_base_score_v31_pin",
+   "path": "/api/v1/security/cvss-base",
+   "sha256": "ca5f7bbb816751839605a54ed7b4f910a62152ffbd21c3e6e11b43c6132676ec",
+   "status": 200
+  },
+  {
+   "body": {
+    "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+   },
+   "name": "cvss_base_score_v40_pin",
+   "path": "/api/v1/security/cvss-base",
+   "sha256": "75feac6526d6d1038b57ffb7f28888b81aaa2a35cc4cf603480494d224d3523f",
+   "status": 200
+  },
+  {
+   "body": {
     "text": "2004/.."
    },
    "name": "date_edtf_interval_openend_pin",
@@ -6890,6 +6908,24 @@
    "name": "sort_natural_files",
    "path": "/api/v1/sort/natural",
    "sha256": "e6f5c80948e1115aa2dacf9d2c91061ba85b770b060f3472b73d600cc2dc6f94",
+   "status": 200
+  },
+  {
+   "body": {
+    "expression": "MIT AND (Apache-2.0 OR GPL-2.0-only)"
+   },
+   "name": "spdx_expression_annex_d_pin",
+   "path": "/api/v1/license/spdx-expression",
+   "sha256": "d8a6127ac6e3fc880c9e9d5d739bd5d7a8b22b1b44805ae6b717f650dab9c5d2",
+   "status": 200
+  },
+  {
+   "body": {
+    "expression": "MIT OR NotALicenseName"
+   },
+   "name": "spdx_unknown_id_verdict_pin",
+   "path": "/api/v1/license/spdx-expression",
+   "sha256": "a2c74b1ad36ae88ca2661d504b46e690e6e127a1504d3d66ec59491f68fdd1bd",
    "status": 200
   },
   {

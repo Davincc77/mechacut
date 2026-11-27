@@ -1,0 +1,7 @@
+{
+  "name": "spdx_expression_annex_d_pin",
+  "path": "/api/v1/license/spdx-expression",
+  "body": {
+    "expression": "MIT AND (Apache-2.0 OR GPL-2.0-only)"
+  }
+}

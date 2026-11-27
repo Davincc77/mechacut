@@ -40,6 +40,18 @@ def test_landing_budget():
     # le manifest < 9000 octets (test_bundle0) — la landing est une
     # vitrine navigateur, pas un artefact de contexte de modèle.
     assert len(html.encode("utf-8")) < 181_000  # resize 24-11 bundle100 :
+    # b136_hermes elague MESURE (le lot franchissait 181 k comme annonce
+    # b114 — prose serree, JAMAIS re-resize) : purposes FR/PT des deux
+    # novos serres a claim constant, ligne tierlegend SUPPRIMEE (badge +
+    # mot vivent dans les chips, les trois regles vivent dans tiers.intro
+    # de la page — doctrine b123 « ce qui vit deux fois ne paie qu'une
+    # fois »), CSS .tierlegend rendu (4 regles mortes), carte everyday e26
+    # FR/PT ratismee : clauses duplicant les purposes des trois cartes
+    # soldes-window/-be/-lu de la MEME page, chaque fait survit sur la
+    # page (precedent b114 « e18/e19/e20 ratisses »). Mesure apres re-bake
+    # : en 180 022 / fr 180 525 / pt 180 583 APP, soit +367 beacon
+    # Cloudflare = 180 389 / 180 892 / 180 950 SERVIS — marge servie en
+    # 610 / fr 107 / pt 49 (precedent de marge 9 : pt sous b114).
     # b114 LEÇON (classe outillage, itération ~14, pêchée PAR LA PROD) :
     # le VRAI contrat est l'octet que le NAVIGATEUR reçoit — Cloudflare
     # injecte un beacon de 367 octets dans la page SERVIE, invisible au

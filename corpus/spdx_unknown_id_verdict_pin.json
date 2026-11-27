@@ -1,0 +1,7 @@
+{
+  "name": "spdx_unknown_id_verdict_pin",
+  "path": "/api/v1/license/spdx-expression",
+  "body": {
+    "expression": "MIT OR NotALicenseName"
+  }
+}
